@@ -15,11 +15,20 @@ class ChapterPlayerScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
 
+  /// Stage to start at. Null → resume from saved progress.
+  final int? startStage;
+
+  /// Replay a single stage (from the chapter map) without touching saved
+  /// progress: no stage advance, no chapter completion — just play and return.
+  final bool freePlay;
+
   const ChapterPlayerScreen({
     super.key,
     required this.chapter,
     required this.library,
     required this.save,
+    this.startStage,
+    this.freePlay = false,
   });
 
   @override
@@ -35,10 +44,16 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    _stage = widget.save.stageOf(ch.id).clamp(0, ch.stages.length - 1);
+    _stage = (widget.startStage ?? widget.save.stageOf(ch.id))
+        .clamp(0, ch.stages.length - 1);
   }
 
   Future<void> _advance() async {
+    // Free-play (replay): never mutate progress — just return to the map.
+    if (widget.freePlay) {
+      if (mounted) Navigator.of(context).pop();
+      return;
+    }
     if (_stage < ch.stages.length - 1) {
       setState(() => _stage++);
       await widget.save.setChapterStage(ch.id, _stage);

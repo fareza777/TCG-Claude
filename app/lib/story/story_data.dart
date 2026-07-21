@@ -167,6 +167,41 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
+      artAsset: 'SF001-083',
+      title: 'Deeper Into the Rot',
+      dialogue: [
+        DialogueLine.narrate(
+            'The border thins the further south you press. Carrion bats wheel '
+            'over ground that was fern and flower a week ago and is grey mud '
+            'now. The Hollow does not conquer land. It forgets it into '
+            'nothing.'),
+        DialogueLine('Thornmaw',
+            'A swarm gathers ahead. Small things, each of them — but the '
+            'Hollow has never needed its pieces to be large.'),
+        DialogueLine('You', 'Then I will not let them add up.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
+      enemyName: 'The Carrion Swarm',
+      objective: 'Clear the swarm before it overruns the treeline.',
+      specialRules: [
+        'They come in numbers — the swarm opens with a Carrion Bat already '
+            'circling.',
+      ],
+      enemyBoardIds: ['SF001-083'],
+      preBattle: [
+        DialogueLine.narrate(
+            'They do not fear you. Nothing that has already been hollowed out '
+            'has anything left to fear with.'),
+      ],
+      victory: [
+        DialogueLine('You',
+            'A hundred small deaths, and not one of them looked up. What '
+            'sends soldiers who cannot be afraid?'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
       artAsset: 'SF001-221',
       title: 'Fire on the Horizon',
       dialogue: [
@@ -206,6 +241,113 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
+      artAsset: 'SF001-027',
+      title: 'Ash on the Wind',
+      dialogue: [
+        DialogueLine.narrate(
+            'The vanguard breaks, but the main column still marches. Their '
+            'outriders peel off to flank the grove through the eastern ferns '
+            '— fast, and angry at having been made to wait.'),
+        DialogueLine('Thornmaw',
+            'The fire tests every seam of us before it commits. Hold the '
+            'east, and the column will think the whole forest is a wall.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'PYRE',
+      enemyName: 'Emberpack Outriders',
+      objective: 'Turn back the flanking raiders in the eastern ferns.',
+      specialRules: [
+        'They ride ahead of their supply — the enemy opens with an Ashblade '
+            'Raider already loosed.',
+      ],
+      enemyBoardIds: ['SF001-022'],
+      preBattle: [
+        DialogueLine('Outrider',
+            'Slow tree-things. We are through you before your roots even '
+            'wake.'),
+      ],
+      victory: [
+        DialogueLine('You', 'The forest woke a thousand years before you '
+            'were born. It simply chose not to hurry.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-045',
+      title: 'The Poisoned Spring',
+      dialogue: [
+        DialogueLine.narrate(
+            'Between the two armies lies the Silverfen — a spring the grove '
+            'has drunk from since the first root. Something has fouled it. '
+            'The water runs black and patient.'),
+        DialogueLine('Thornmaw',
+            'The Hollow uses the Emberborn as cover. While fire draws your '
+            'eye west, rot creeps up through the water. Cleanse the spring, '
+            'Caller, or the grove drinks its own ending.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
+      enemyName: 'The Mireborn Ambush',
+      objective: 'Drive the rot out of the Silverfen.',
+      specialRules: [
+        'It fights from hiding — the enemy opens with a Venom Stalker coiled '
+            'in the reeds.',
+      ],
+      enemyHealth: 26,
+      enemyBoardIds: ['SF001-084'],
+      preBattle: [
+        DialogueLine.narrate(
+            'The water does not ripple where the ambush waits. Still water is '
+            'the Hollow\'s favourite kind.'),
+      ],
+      victory: [
+        DialogueLine('You',
+            'The spring runs clear again — for now. But clear water remembers '
+            'nothing. Only I will remember what tried to poison it.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-063',
+      title: 'The Concord\'s Envoy',
+      dialogue: [
+        DialogueLine.narrate(
+            'A third banner enters the wood — white and gold, unhurried. The '
+            'Concord of Dawn has come to "witness" the waking Shard. Their '
+            'witnesses arrive in armour.'),
+        DialogueLine('Aurelian Envoy',
+            'Stand aside, wilding. The Concord will take the Heartshard into '
+            'protective keeping. A wild thing cannot be trusted with a holy '
+            'one.'),
+        DialogueLine('You',
+            'The grove has kept it holy for a thousand years without your '
+            'permission. Turn around.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'DAWN',
+      enemyName: 'Dawn\'s Trespass',
+      objective: 'Refuse the Concord\'s "protection".',
+      specialRules: [
+        'They fight in disciplined ranks — the enemy begins at 27 Health.',
+        'They form a wall — the enemy opens with a Bastion Wall in play.',
+      ],
+      enemyHealth: 27,
+      enemyBoardIds: ['SF001-063'],
+      preBattle: [
+        DialogueLine('Aurelian Envoy',
+            'We do this for your own good, wilding. One day you will thank '
+            'the hand that took the burden from you.'),
+        DialogueLine('You', 'It is not a burden. It is a trust. You have '
+            'never once been able to tell the difference.'),
+      ],
+      victory: [
+        DialogueLine('Aurelian Envoy',
+            'You refuse the Concord\'s mercy. Remember that you chose this, '
+            'when the dark comes for you and no white banner answers.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
       artAsset: 'SF001-211',
       title: 'The Grove Answers',
       dialogue: [
@@ -228,16 +370,89 @@ const _chapter1 = StoryChapter(
     )),
     StoryStage.fight(StoryBattle(
       enemyDominion: 'GLOOM',
+      enemyName: 'The Hollow Chorus',
+      objective: 'Silence the wraith-song gathering at the World-Oak.',
+      specialRules: [
+        'The chorus sings in ranks — the enemy opens with a Nyxhollow Reaper '
+            'leading the hymn.',
+        'The song wears at resolve — the enemy begins at 27 Health.',
+      ],
+      enemyHealth: 27,
+      enemyBoardIds: ['SF001-085'],
+      preBattle: [
+        DialogueLine.narrate(
+            'They do not speak. They harmonise — a low chord of everyone the '
+            'Hollow has ever kept, singing the same forgetting.'),
+      ],
+      victory: [
+        DialogueLine('Thornmaw',
+            'You held the chord. Good. The last thing before the Queen is '
+            'always her patience made into soldiers. She is close now.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-086',
+      title: 'The Dusk Vanguard',
+      dialogue: [
+        DialogueLine.narrate(
+            'The grove goes quiet in the way a room goes quiet when someone '
+            'important has entered it. Ravenna\'s honour guard forms between '
+            'you and the World-Oak — dread-wraiths with a queen\'s discipline.'),
+        DialogueLine('Dusk Captain',
+            'Her Majesty asks only for a moment alone with the seal. Give her '
+            'the moment, warden, and you may keep your life and your ignorance '
+            'both.'),
+        DialogueLine('You',
+            'Keep them yourself. I am done being spared the truth.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
+      enemyName: 'The Dusk Vanguard',
+      objective: 'Break through the Queen\'s honour guard.',
+      specialRules: [
+        'The guard holds formation — the enemy opens with a Dread Wraith at '
+            'the front.',
+        'They fight to delay, not to win — the enemy begins at 28 Health.',
+      ],
+      enemyHealth: 28,
+      enemyBoardIds: ['SF001-086'],
+      preBattle: [
+        DialogueLine('Dusk Captain',
+            'You will not reach her in time. You were never meant to.'),
+      ],
+      victory: [
+        DialogueLine.narrate(
+            'The last wraith folds into mist, and beyond it — unhurried, '
+            'waiting, as if she had all the time in the world — stands the '
+            'Queen herself.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-091',
+      title: 'The Queen of Nyxhollow',
+      dialogue: [
+        DialogueLine('Thornmaw',
+            'This is the one, Caller. Not a scout. Not a herald. Her. '
+            'Whatever she says down here — and she will say true things — do '
+            'not set down your guard to listen.'),
+        DialogueLine('You', 'Then I will listen with my shield up.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
       enemyName: 'Ravenna Duskveil',
       objective: 'Defeat the Queen of Nyxhollow.',
       hardAi: true,
       specialRules: [
-        'Ravenna comes prepared — she opens with a Dread Wraith and a Hollow '
-            'Rat already in play.',
-        'The Queen is resolute — she begins at 30 Health.',
+        'You have fought through her whole vanguard to reach her — you begin '
+            'at 28 Health.',
+        'She fights alone, unhurried — the Queen opens with a single Hollow '
+            'Rat at her side.',
       ],
-      enemyHealth: 30,
-      enemyBoardIds: ['SF001-086', 'SF001-081'],
+      playerHealth: 28,
+      enemyHealth: 26,
+      enemyBoardIds: ['SF001-081'],
       preBattle: [
         DialogueLine.narrate(
             'She steps from the shadow of the World-Oak unhurried, as though '

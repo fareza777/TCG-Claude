@@ -45,6 +45,11 @@ class DuelController extends ChangeNotifier {
   /// Card in hand waiting for the player to pick a target.
   int? targetingId;
 
+  /// While the enemy resolves a spell, the UI shows a "casting" banner and a
+  /// reticle on [enemyCastTargetId]. Both are null when nothing is being cast.
+  String? enemyCastName;
+  int? enemyCastTargetId;
+
   /// While the enemy is attacking, the player assigns blockers.
   List<int> incomingAttackers = [];
   Map<int, List<int>> blockPlan = {}; // attackerId -> [blockerIds]
@@ -562,21 +567,81 @@ class DuelController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Runs one enemy main phase as a paced sequence: resources → deploy units
+  /// one by one (pop-in) → cast spells one by one, each spell announced with a
+  /// banner + reticle on its target BEFORE it resolves. This is what makes
+  /// enemy removal readable ("card out, then target") instead of a unit
+  /// silently vanishing.
+  Future<void> _enemyMainPhaseStaged(
+      Future<void> Function([int]) beat) async {
+    // 1. Resources (no visible play).
+    state = enemyAi.playResources(state, enemy);
+
+    // 2. Deploy units one at a time — the arena pop-in keys off the new id.
+    while (true) {
+      final r = enemyAi.deployNextUnit(state, enemy);
+      if (r == null) break;
+      final unit =
+          r.state.player(enemy).arena.firstWhere((c) => c.instanceId == r.deployedId);
+      state = r.state;
+      _log('Enemy deploys ${unit.def.name}.');
+      await beat(500);
+      if (_gameOverNow()) return;
+    }
+
+    // 3. Cast spells one at a time, with a visible aim step.
+    while (true) {
+      final sp = enemyAi.nextSpell(state, enemy);
+      if (sp == null) break;
+      final card =
+          foe.hand.firstWhere((c) => c.instanceId == sp.cardId);
+
+      // Announce: card leaves hand to the board, reticle lands on the target.
+      enemyCastName = card.def.name;
+      enemyCastTargetId = sp.unitTargetId;
+      _emit(DuelEvent('play'));
+      _log(sp.unitTargetId != null
+          ? 'Enemy casts ${card.def.name}, aiming at your unit.'
+          : 'Enemy casts ${card.def.name}.');
+      await beat(820); // let the player read the aim before it resolves
+
+      // Snapshot to detect who dies / discards from the effect.
+      final myUnitsBefore = {for (final c in me.arena) c.instanceId};
+      final foeUnitsBefore = {for (final c in foe.arena) c.instanceId};
+      final myHandBefore = me.hand.length;
+      try {
+        state = Chain.resolveAll(
+            Chain.cast(state, enemy, sp.cardId, targets: sp.targets));
+      } on StateError {
+        enemyCastName = null;
+        enemyCastTargetId = null;
+        break;
+      }
+
+      // Emit a death float for every unit the spell removed (either side).
+      final myUnitsAfter = {for (final c in me.arena) c.instanceId};
+      final foeUnitsAfter = {for (final c in foe.arena) c.instanceId};
+      final died = myUnitsBefore.difference(myUnitsAfter).length +
+          foeUnitsBefore.difference(foeUnitsAfter).length;
+      for (var i = 0; i < died; i++) {
+        _emit(const DuelEvent('death'));
+      }
+      for (var i = 0; i < myHandBefore - me.hand.length; i++) {
+        _emit(DuelEvent('discard', player: human));
+      }
+
+      enemyCastName = null;
+      enemyCastTargetId = null;
+      await beat(480);
+      if (_gameOverNow()) return;
+      if (state.winner != null) return;
+    }
+  }
+
   Future<void> _runEnemyTurnStaged() async {
     Future<void> beat([int ms = 420]) async {
       notifyListeners();
       await Future<void>.delayed(Duration(milliseconds: ms));
-    }
-
-    Set<int> arenaIds() => {for (final c in foe.arena) c.instanceId};
-
-    void logNewPlays(Set<int> before) {
-      for (final c in foe.arena) {
-        if (!before.contains(c.instanceId) &&
-            c.def.type != CardType.wellspring) {
-          _log('Enemy deployed ${c.def.name}.');
-        }
-      }
     }
 
     if (isGameOver) return;
@@ -592,15 +657,8 @@ class DuelController extends ChangeNotifier {
       await beat(300);
     }
 
-    var before = arenaIds();
-    var myHandBefore = me.hand.length;
-    state = enemyAi.playMainPhase(state, enemy); // Main 1
-    logNewPlays(before);
-    for (var i = 0; i < myHandBefore - me.hand.length; i++) {
-      _emit(DuelEvent('discard', player: human));
-    }
+    await _enemyMainPhaseStaged(beat); // Main 1
     if (_gameOverNow()) return;
-    await beat(520);
     await _awaitResponse(); // instant-speed after enemy Main 1
     if (_gameOverNow()) return;
 
@@ -628,15 +686,8 @@ class DuelController extends ChangeNotifier {
     }
 
     state = Game.nextPhase(state); // -> main2
-    before = arenaIds();
-    myHandBefore = me.hand.length;
-    state = enemyAi.playMainPhase(state, enemy);
-    logNewPlays(before);
-    for (var i = 0; i < myHandBefore - me.hand.length; i++) {
-      _emit(DuelEvent('discard', player: human));
-    }
+    await _enemyMainPhaseStaged(beat);
     if (_gameOverNow()) return;
-    await beat(420);
     await _awaitResponse(); // instant-speed after enemy Main 2
     if (_gameOverNow()) return;
 

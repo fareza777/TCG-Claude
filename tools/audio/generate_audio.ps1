@@ -91,18 +91,23 @@ $d = Mix $d (Tone 349 0.45 0.25 5) ([int]($sr * 0.18))
 $d = Mix $d (Tone 294 0.8 0.28 3) ([int]($sr * 0.36))
 Write-Wav $d "$out\defeat.wav"
 
-# ambient: soft loopable pad, 12s, root+fifth+octave with slow LFO
+# ambient: warm loopable pad, 12s. Frequencies are exact integer-cycle
+# multiples of 1/dur so the clip loops seamlessly (no click). Amplitude is
+# lifted well above the old ~0.10 placeholder and the tremolo never fully
+# mutes, so it is actually audible over device speakers.
 $dur = 12.0
 $count = [int]($sr * $dur)
 $amb = New-Object double[] $count
-$freqs = @(110.0, 164.81, 220.0, 329.63)
+$freqs = @(110.0, 165.0, 220.0, 330.0) # A minor bed, all integer cycles/12s
 for ($i = 0; $i -lt $count; $i++) {
   $t = $i / $sr
-  # 2 full LFO cycles across the clip so start==end (seamless loop)
-  $lfo = 0.5 + 0.5 * [math]::Sin(2 * [math]::PI * (2.0 / $dur) * $t)
+  # 2 full tremolo cycles across the clip; stays in [0.55, 1.0] (never silent)
+  $lfo = 0.55 + 0.45 * (0.5 + 0.5 * [math]::Sin(2 * [math]::PI * (2.0 / $dur) * $t))
   $s = 0.0
   foreach ($f in $freqs) { $s += [math]::Sin(2 * [math]::PI * $f * $t) }
-  $amb[$i] = 0.10 * $lfo * ($s / $freqs.Length)
+  $s = $s / $freqs.Length
+  $sub = 0.4 * [math]::Sin(2 * [math]::PI * 55.0 * $t) # sub-octave warmth
+  $amb[$i] = 0.30 * $lfo * ($s + $sub)
 }
 Write-Wav $amb "$out\ambient.wav"
 

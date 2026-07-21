@@ -22,77 +22,110 @@ class AiPlayer {
   const AiPlayer({this.tier = AiTier.greedy});
 
   /// Play out the main phase: wellspring, generate aether, deploy units.
+  ///
+  /// Composed from the step-wise helpers below so the PvE UI can replay the
+  /// exact same decisions one action at a time (with animation) while the
+  /// engine keeps a single source of truth.
   GameState playMainPhase(GameState s, PlayerId me) {
-    var state = s;
+    var state = playResources(s, me);
 
-    // 1. Play a wellspring if we have one.
+    while (true) {
+      final r = deployNextUnit(state, me);
+      if (r == null) break;
+      state = r.state;
+    }
+
+    while (true) {
+      final sp = nextSpell(state, me);
+      if (sp == null) break;
+      try {
+        state = Chain.resolveAll(
+            Chain.cast(state, me, sp.cardId, targets: sp.targets));
+      } on StateError {
+        break; // should not happen — nextSpell dry-runs — but stay safe
+      }
+      if (state.winner != null) return state;
+    }
+    return state;
+  }
+
+  /// Step 1–2: play a wellspring (if any) and exert every wellspring for
+  /// aether. Produces no visible "play" — pure resource setup.
+  GameState playResources(GameState s, PlayerId me) {
+    var state = s;
     final p = state.player(me);
     final wellsprings =
         p.hand.where((c) => c.def.type == CardType.wellspring).toList();
     if (wellsprings.isNotEmpty && !p.playedWellspringThisTurn) {
       state = Game.playWellspring(state, me, wellsprings.first.instanceId);
     }
-
-    // 2. Exert every untapped wellspring for aether.
     for (final c in state.player(me).arena.toList()) {
       if (c.def.type == CardType.wellspring && !c.exerted) {
         state = Game.exertForAether(state, me, c.instanceId);
       }
     }
-
-    // 3. Deploy units, most expensive affordable first.
-    var deployed = true;
-    while (deployed) {
-      deployed = false;
-      final hand = state
-          .player(me)
-          .hand
-          .where((c) => c.def.type == CardType.unit)
-          .toList()
-        ..sort((a, b) => b.def.totalCost.compareTo(a.def.totalCost));
-      for (final card in hand) {
-        try {
-          state = Game.playUnit(state, me, card.instanceId,
-              chosen: chooseTargets(state, me, card.def));
-          deployed = true;
-          break;
-        } on StateError {
-          continue; // cannot afford — try a cheaper one
-        }
-      }
-    }
-
-    // 4. Cast affordable spells (rites & rituals), cheapest first so more
-    // resources convert into effects.
-    var casted = true;
-    while (casted) {
-      casted = false;
-      final spells = state
-          .player(me)
-          .hand
-          .where((c) =>
-              c.def.type == CardType.rite || c.def.type == CardType.ritual)
-          .toList()
-        ..sort((a, b) => a.def.totalCost.compareTo(b.def.totalCost));
-      for (final card in spells) {
-        final targets = chooseTargets(state, me, card.def);
-        if (_requiresUnitTarget(card.def) &&
-            targets.every((t) => t.instanceId == null)) {
-          continue; // removal with no board — hold it
-        }
-        try {
-          var next = Chain.cast(state, me, card.instanceId, targets: targets);
-          next = Chain.resolveAll(next);
-          state = next;
-          casted = true;
-          break;
-        } on StateError {
-          continue;
-        }
-      }
-      if (state.winner != null) return state;
-    }
     return state;
+  }
+
+  /// Step 3 (one iteration): deploy the single most-expensive affordable unit.
+  /// Returns the new state and the deployed unit's instance id, or null when
+  /// no unit can be played.
+  ({GameState state, int deployedId})? deployNextUnit(GameState s, PlayerId me) {
+    final hand = s
+        .player(me)
+        .hand
+        .where((c) => c.def.type == CardType.unit)
+        .toList()
+      ..sort((a, b) => b.def.totalCost.compareTo(a.def.totalCost));
+    for (final card in hand) {
+      try {
+        final next = Game.playUnit(s, me, card.instanceId,
+            chosen: chooseTargets(s, me, card.def));
+        return (state: next, deployedId: card.instanceId);
+      } on StateError {
+        continue; // cannot afford — try a cheaper one
+      }
+    }
+    return null;
+  }
+
+  /// Step 4 (one iteration): pick the next spell to cast (cheapest first) and
+  /// its targets, dry-run-validated as castable. Returns null when nothing is
+  /// worth casting. [unitTargetId] is the aimed-at unit for UI targeting FX.
+  ({int cardId, List<EffectTarget> targets, int? unitTargetId})? nextSpell(
+      GameState s, PlayerId me) {
+    final spells = s
+        .player(me)
+        .hand
+        .where((c) =>
+            c.def.type == CardType.rite || c.def.type == CardType.ritual)
+        .toList()
+      ..sort((a, b) => a.def.totalCost.compareTo(b.def.totalCost));
+    for (final card in spells) {
+      final targets = chooseTargets(s, me, card.def);
+      if (requiresUnitTarget(card.def) &&
+          targets.every((t) => t.instanceId == null)) {
+        continue; // removal with no board — hold it
+      }
+      try {
+        Chain.cast(s, me, card.instanceId, targets: targets); // dry run
+      } on StateError {
+        continue; // not affordable / illegal — skip
+      }
+      int? unitTargetId;
+      for (final t in targets) {
+        if (t.instanceId != null) {
+          unitTargetId = t.instanceId;
+          break;
+        }
+      }
+      return (
+        cardId: card.instanceId,
+        targets: targets,
+        unitTargetId: unitTargetId
+      );
+    }
+    return null;
   }
 
   /// Supply targets for every CHOOSE selector in [def]'s effects, in order.
@@ -158,7 +191,7 @@ class AiPlayer {
     return targets;
   }
 
-  bool _requiresUnitTarget(CardDef def) {
+  bool requiresUnitTarget(CardDef def) {
     final anyTarget = def.text.toLowerCase().contains('any target');
     for (final block in def.effects) {
       for (final raw in (block['effects'] as List? ?? const [])) {

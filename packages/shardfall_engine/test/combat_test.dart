@@ -6,6 +6,7 @@ CardDef unitDef(
   int might = 2,
   int guard = 2,
   Set<Keyword> keywords = const {},
+  int aegis = 0,
 }) =>
     CardDef(
       id: id,
@@ -15,6 +16,7 @@ CardDef unitDef(
       might: might,
       guard: guard,
       keywords: keywords,
+      aegisValue: aegis,
     );
 
 /// Build a minimal mid-game state with given arenas.
@@ -89,6 +91,22 @@ void main() {
       final ok = Combat.resolveDamage(s, PlayerId.p1,
           [const AttackDeclaration(attackerId: 1, blockerIds: [2, 3])]);
       expect(ok.winner, isNull);
+    });
+
+    test('Aegis N prevents N combat damage', () {
+      // 3/3 attacker vs 3/3 blocker with Aegis 2: blocker takes 3-2=1 and
+      // survives; attacker takes full 3 and dies. Without Aegis both die.
+      final s = arenaState(p1Arena: [
+        inst(1, unitDef('Atk', might: 3, guard: 3), PlayerId.p1),
+      ], p2Arena: [
+        inst(2, unitDef('Warded', might: 3, guard: 3, aegis: 2), PlayerId.p2),
+      ]);
+      final after = Combat.resolveDamage(s, PlayerId.p1,
+          [const AttackDeclaration(attackerId: 1, blockerIds: [2])]);
+      // Warded blocker survived with 1 damage; attacker died.
+      expect(after.p2.arena.where((c) => c.instanceId == 2), isNotEmpty);
+      expect(after.p2.arena.firstWhere((c) => c.instanceId == 2).damage, 1);
+      expect(after.p1.arena.where((c) => c.instanceId == 1), isEmpty);
     });
   });
 

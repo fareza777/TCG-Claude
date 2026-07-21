@@ -149,6 +149,7 @@ class _DuelScreenState extends State<DuelScreen>
                   children: [
                     _enemyBar(),
                     _phaseBar(),
+                    if (c.enemyCastName != null) _enemyCastBanner(),
                     if (c.isTargeting) _targetingBanner(),
                     if (c.ui == DuelUiState.playerBlocking) _blockingBanner(),
                     if (c.ui == DuelUiState.playerResponse) _responseBanner(),
@@ -727,6 +728,8 @@ class _DuelScreenState extends State<DuelScreen>
     final blocking = c.ui == DuelUiState.playerBlocking;
     final selected = c.selectedAttackers.contains(u.instanceId);
     final aiming = c.isTargeting && u.def.type == CardType.unit;
+    // The enemy is casting a spell aimed at this unit — show a red reticle.
+    final beingTargeted = c.enemyCastTargetId == u.instanceId;
     final selectable = !aiming &&
         !blocking &&
         !enemySide &&
@@ -833,6 +836,37 @@ class _DuelScreenState extends State<DuelScreen>
                 damage: u.damage,
               ),
             ),
+          // enemy spell targeting reticle
+          if (beingTargeted) ...[
+            Positioned.fill(
+              child: IgnorePointer(
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0.3, end: 1),
+                  duration: const Duration(milliseconds: 460),
+                  curve: Curves.easeOut,
+                  builder: (context, t, _) => DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                          color: AppTheme.danger.withValues(alpha: t),
+                          width: 2.5),
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppTheme.danger.withValues(alpha: 0.5 * t),
+                            blurRadius: 18,
+                            spreadRadius: 1),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const Positioned(
+              top: -12,
+              right: -8,
+              child: Icon(Icons.gps_fixed, size: 22, color: AppTheme.danger),
+            ),
+          ],
           // attacker index tag / blocker-target tag
           if (blocking && isIncomingAttacker)
             Positioned(
@@ -845,6 +879,53 @@ class _DuelScreenState extends State<DuelScreen>
               top: -6,
               left: -4,
               child: _tag('▶A$attackerIndex', const Color(0xFF2E6B2A)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Banner shown while the enemy is resolving a spell, so the play is
+  /// legible instead of a unit silently disappearing.
+  Widget _enemyCastBanner() {
+    return TweenAnimationBuilder<double>(
+      key: ValueKey('cast${c.enemyCastName}${c.enemyCastTargetId}'),
+      tween: Tween(begin: 0, end: 1),
+      duration: const Duration(milliseconds: 260),
+      curve: Curves.easeOut,
+      builder: (context, t, child) => Opacity(
+        opacity: t,
+        child: Transform.translate(offset: Offset(0, (1 - t) * -8), child: child),
+      ),
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(14, 2, 14, 2),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            AppTheme.danger.withValues(alpha: 0.28),
+            AppTheme.danger.withValues(alpha: 0.12),
+          ]),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: AppTheme.danger.withValues(alpha: 0.75)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.auto_fix_high, size: 15, color: AppTheme.danger),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                c.enemyCastTargetId != null
+                    ? 'Enemy casts ${c.enemyCastName}  →  aiming'
+                    : 'Enemy casts ${c.enemyCastName}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: Color(0xFFFFD9D2),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.4),
+              ),
             ),
           ],
         ),

@@ -170,7 +170,13 @@ class Combat {
       final alive = <CardInstance>[];
       final dead = <CardInstance>[];
       for (final c in p.arena) {
-        final dmg = c.damage + (damageToUnit[c.instanceId] ?? 0);
+        // Aegis N prevents up to N of this combat's incoming damage.
+        final incoming = damageToUnit[c.instanceId] ?? 0;
+        final aegis = c.def.aegisValue;
+        final prevented = aegis <= 0
+            ? 0
+            : (incoming < aegis ? incoming : aegis);
+        final dmg = c.damage + (incoming - prevented);
         final killed = (c.def.type == CardType.unit) &&
             (dmg >= c.guard || venomHit.contains(c.instanceId));
         if (killed) {

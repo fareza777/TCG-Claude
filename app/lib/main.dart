@@ -11,6 +11,7 @@ import 'duel/coin_flip.dart';
 import 'duel/duel_controller.dart';
 import 'duel/duel_screen.dart';
 import 'forge/forge_screen.dart';
+import 'opening_cinematic.dart';
 import 'packs/booster_screen.dart';
 import 'quests/quests_screen.dart';
 import 'services/audio_manager.dart';
@@ -81,10 +82,22 @@ class _MenuScreenState extends State<MenuScreen> {
     if (!save.tutorialSeen && mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         await Navigator.of(context).push(MaterialPageRoute<void>(
+            builder: (ctx) =>
+                OpeningCinematic(onDone: () => Navigator.of(ctx).pop())));
+        if (!mounted) return;
+        await Navigator.of(context).push(MaterialPageRoute<void>(
             builder: (_) => const TutorialScreen()));
         await save.markTutorialSeen();
       });
     }
+  }
+
+  /// Replay the opening lore cinematic from the menu.
+  Future<void> _playCinematic() async {
+    AudioManager.instance.tap();
+    await Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (ctx) =>
+            OpeningCinematic(onDone: () => Navigator.of(ctx).pop())));
   }
 
   void _showSettings() {
@@ -156,6 +169,32 @@ class _MenuScreenState extends State<MenuScreen> {
                 },
               ),
               const Divider(color: AppTheme.panelBorder),
+              ListTile(
+                leading: const Icon(Icons.movie_creation_outlined,
+                    color: Color(0xFFC9A86A)),
+                title: const Text('Watch opening cinematic',
+                    style: TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
+                subtitle: const Text('Replay the story of the Sundering',
+                    style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                onTap: () {
+                  Navigator.pop(context);
+                  _playCinematic();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.school_outlined,
+                    color: Color(0xFF9FB2BC)),
+                title: const Text('How to play',
+                    style: TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
+                subtitle: const Text('Replay the onboarding guide',
+                    style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                onTap: () {
+                  Navigator.pop(context);
+                  AudioManager.instance.tap();
+                  Navigator.of(context).push(MaterialPageRoute<void>(
+                      builder: (_) => const TutorialScreen()));
+                },
+              ),
               ListTile(
                 leading: const Icon(Icons.backup, color: Color(0xFF9FB2BC)),
                 title: const Text('Back up / restore progress',
