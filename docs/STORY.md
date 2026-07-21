@@ -8,13 +8,13 @@
 cosmic accident. Its five Shards fell to Aethyr and gave rise to the five
 Dominions. Whoever claims the awakening **Heartshard** will rewrite reality.
 
-**What is actually true:** Vael was not a star. Vael was a god — a vast,
-singular mind that loved its creations so much it wished to *become* them,
+**What is actually true:** Vael was not a star. Vael was a fallen power — a
+vast, singular mind that loved its creations so much it wished to *become* them,
 to dissolve every border between self and self until nothing was alone,
 because nothing was separate. Union, total and eternal.
 
 Five mortals — the **First Callers** — understood what that love would do:
-erase every individual voice in the world-song. They could not kill a god.
+erase every individual voice in the world-song. They could not unmake it.
 So they *sundered* it. The star was broken into five Shards and a core, the
 Heartshard, and each Caller bound one Shard with everything they were. The
 "gift" of Aether that powers all magic is, in truth, **leakage from a
@@ -38,7 +38,7 @@ cold. She marches to take the Heartshard to relight it — a hero's errand.
 leaking through the crimson Shard's seal. It cools because the First
 Caller's binding is finally working as intended. To relight the forge is to
 tear the seal open. Kaelis learns her people's whole culture was built
-around worshiping the prison's wound.
+around revering the prison's wound.
 
 ### III. Tide — "The Erased Archive"
 Archivist Numen discovers pages missing from the Immutable Archive — records
@@ -51,7 +51,7 @@ sanity, or finish the erasure and become the liar he despises.
 ### IV. Dawn — "The Hollow Halo"
 Seraphel's order, the Aurelian Concord, was founded "to guard the dawn."
 Guard it *from what* was never written. **Twist:** Seraphel is not a person.
-She is the **mercy of Vael** — the one fragment of the god that agreed with
+She is the **mercy of Vael** — the one fragment of Vael that agreed with
 its imprisonment — given form and amnesia by the First Callers as a living
 seal. Her halo is the lock. If she ever remembers herself, she must choose
 between existing as a person or functioning as a door.
@@ -72,7 +72,7 @@ polite.
 ## Set 2 hook
 The five champions, enemies by every law and history, stand in the same
 room for the first time — around Ravenna's deathbed. Her last words name
-the only thing that can hold a god: not chains, but *a choice, freely
+the only thing that can hold a power like Vael: not chains, but *a choice, freely
 renewed*. Five hands on the Heartshard. Set 2: "The Five Vows."
 
 ## Tone rules for card flavor text

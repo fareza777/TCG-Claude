@@ -318,7 +318,7 @@
                                        "VERDANCE"
                                    ],
                       "type":  "UNIT",
-                      "subtype":  "Elk God",
+                      "subtype":  "Elk Elder",
                       "cost":  {
                                    "generic":  3,
                                    "VERDANCE":  2
@@ -1194,7 +1194,7 @@
                                    ],
                       "rarity":  "COMMON",
                       "text":  "",
-                      "flavor":  "She worships the warmth. She has never asked what is warming."
+                      "flavor":  "She loves the warmth. She has never asked what is warming."
                   },
                   {
                       "id":  "SF001-228",
@@ -4734,7 +4734,7 @@
                                                       ]
                                       }
                                   ],
-                      "flavor":  "She shaped the mercy of a god into a guardian, then made herself forget she had. Seraphel wears her face and her forgetting both."
+                      "flavor":  "She shaped the mercy of the fallen power into a guardian, then made herself forget she had. Seraphel wears her face and her forgetting both."
                   },
                   {
                       "id":  "SF001-381",

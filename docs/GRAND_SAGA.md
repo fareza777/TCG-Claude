@@ -15,9 +15,10 @@
 
 Every great card-game saga has a single engine under the hood. Ours:
 
-**Vael is a god of love whose love would erase everyone. The war to stop it can
-only be won with the exact thing that would free it: union. The heroes' greatest
-strength is the enemy's victory condition.**
+**Vael is a fallen, singular will that loves so completely its love would erase
+everyone into itself. The war to stop it can only be won with the exact thing
+that would free it: union. The heroes' greatest strength is the enemy's victory
+condition.**
 
 That paradox is the whole cycle. It lets us do what MTG's story rarely commits
 to: an antagonist who is never wrong, only unbearable — and heroes whose triumph
@@ -37,8 +38,9 @@ heroes' magic are the same colour.
 - **Vael** — not a star; a singular mind that loved creation so much it wished to
   *become* it. Union, total and eternal. It is not malicious. It is the loneliness
   at the bottom of every warmth, given a will.
-- **The Sundering** — five mortals, the **First Callers**, could not kill a god,
-  so they broke it into five **Shards** + a core (**the Heartshard**) and each
+- **The Sundering** — five mortals, the **First Callers**, could not unmake a
+  will so vast, so they broke it into five **Shards** + a core (**the
+  Heartshard**) and each
   bound one Shard with everything they were.
 - **Aether** (the game's mana) — leakage from that prison. Every spell cast is a
   hairline crack. *Playing the game is, thematically, thinning the seal.*
@@ -70,8 +72,8 @@ deathbed and realize the truth she carried alone. Full detail: [STORY.md](STORY.
 - **Debut mechanics:** the Dominion identities; Rite (instant) vs Ritual
   (sorcery); the 12 keywords; **Attune** (anti-mana-screw: a card you may play
   face-down as a Wellspring instead — thematically, *choosing to feed the leak*).
-- **Sets up:** Vael is awake. Ravenna's dying words: what holds a god is *not
-  chains but a choice, freely renewed*. Five hands on the Heartshard.
+- **Sets up:** Vael is awake. Ravenna's dying words: what holds a power like
+  Vael is *not chains but a choice, freely renewed*. Five hands on the Heartshard.
 
 ### Set 2 — THE FIVE VOWS
 The champions attempt what no one has: a seal made of living choice instead of
@@ -109,15 +111,16 @@ The seals fail in sequence; the map itself is contested. Reality takes damage
 that does not heal.
 
 - **Debut mechanics:** **Sunder** (cards that split into two lesser halves, or
-  are cast as either half — echoing the First Callers breaking the god); a
+  are cast as either half — echoing the First Callers breaking the Unity); a
   **Reality track** separate from Health (some effects damage the *world*, and
   it is permanent for the match); more irreversible, exile-style effects.
 - **Twist (the big one):** the Heartshard was a lure. Vael's true core is **the
   bond between the five champions** — the love the First Callers' descendants
   rebuilt. Vael did not need to break the seals; it needed the heroes to *unite*,
   and has been quietly engineering their friendship since Set 2. The one thing
-  that can seal a god — a freely-renewed choice among equals — is mechanically
-  and morally indistinguishable from the union that frees it. Darkest hour.
+  that can seal a power like Vael — a freely-renewed choice among equals — is
+  mechanically and morally indistinguishable from the union that would free it.
+  Darkest hour.
 
 ### Set 5 — THE LONELIEST WAR
 The finale. Vael cannot be destroyed (killing union just scatters it) nor
@@ -130,7 +133,7 @@ option nobody has tried in a thousand years: **they convince it.**
   — the First Callers' price, now the player's; **Bond** — payoffs for having all
   five Dominions/champions committed, the mechanical face of the freely-chosen
   union that is *not* assimilation.
-- **Resolution:** they teach a god the distinction it was built without —
+- **Resolution:** they teach the Unity the distinction it was built without —
   *separate is not the same as alone; love that keeps its distance is still
   love*. Vael, for the first time, **chooses** — accepts a seal of its own making
   and becomes a sixth, dim, warm light that stays far on purpose.

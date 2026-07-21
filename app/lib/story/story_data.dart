@@ -317,10 +317,10 @@ const _chapter1 = StoryChapter(
             'witnesses arrive in armour.'),
         DialogueLine('Aurelian Envoy',
             'Stand aside, wilding. The Concord will take the Heartshard into '
-            'protective keeping. A wild thing cannot be trusted with a holy '
-            'one.'),
+            'protective keeping. A wild thing cannot be trusted with something '
+            'so precious.'),
         DialogueLine('You',
-            'The grove has kept it holy for a thousand years without your '
+            'The grove has kept it safe for a thousand years without your '
             'permission. Turn around.'),
       ],
     )),
@@ -459,7 +459,8 @@ const _chapter1 = StoryChapter(
             'she has walked this grove a thousand times before. Perhaps she '
             'has.'),
         DialogueLine('Ravenna',
-            'So. The Grove sends a child to do a god\'s work. Hate me if it '
+            'So. The Grove sends a child to do the First Callers\' work. Hate '
+            'me if it '
             'helps you swing harder, little Caller. It keeps you far from the '
             'door I am trying to reach.'),
         DialogueLine('You', 'You will not touch the Shard.'),
@@ -526,7 +527,7 @@ const _chapter2 = StoryChapter(
         DialogueLine('You', 'Your forge... the flame is guttering.'),
         DialogueLine('Kaelis',
             'Every night a little lower. My people warm themselves at a '
-            'dying god\'s pulse and call it home. I will relight it with the '
+            'dying power\'s pulse and call it home. I will relight it with the '
             'Heartshard or I will bury Ashmar beside it. But first — my own '
             'house is not in order.'),
       ],
@@ -624,7 +625,7 @@ const _chapter2 = StoryChapter(
             'It cools because the seal is finally, at long last, working.'),
         DialogueLine('You', 'Then relighting it...'),
         DialogueLine('Numen',
-            '...tears the seal open. Yes. Your whole people worship the wound '
+            '...tears the seal open. Yes. Your whole people revere the wound '
             'of a prison. I have spent a lifetime hiding that so no one would '
             'do what she is about to do.'),
         DialogueLine('Kaelis',
@@ -965,7 +966,7 @@ const _chapter3 = StoryChapter(
       dialogue: [
         DialogueLine.narrate(
             'The restored pages spell out what every champion has learned '
-            'alone: Vael is no dead star, but a living god of union, '
+            'alone: Vael is no dead star, but a living power of union, '
             'imprisoned by five who loved the world enough to keep it '
             'separate. And the seals are failing.'),
         DialogueLine('Archivist Numen',
@@ -1288,7 +1289,7 @@ const _chapter5 = StoryChapter(
       objective: 'Hold back Vael while Ravenna spends the last of her name.',
       hardAi: true,
       specialRules: [
-        'The god itself pushes through the failing seal — it begins at 33 '
+        'Vael itself pushes through the failing seal — it begins at 33 '
             'Health with a Hollow Titan already risen.',
         'You are wounded from the long descent — you begin at 24 Health.',
         'This is the end of the Sundering. Endure.',
@@ -1332,7 +1333,8 @@ const _chapter5 = StoryChapter(
             'tired of being the grave. Five of you, now. Five hands. Do not '
             'do what I did. Do not carry it alone.'),
         DialogueLine('Ravenna',
-            'You asked me once what holds a god. Not chains. Not silence. Not '
+            'You asked me once what holds a power like Vael. Not chains. Not '
+            'silence. Not '
             'sacrifice — I tried them all. Only this: a choice, made together, '
             'and *renewed*. Every day. Forever. Now let me rest. I have '
             'earned the dark I kept.'),
