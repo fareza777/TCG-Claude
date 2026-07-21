@@ -1,0 +1,42 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+**/doctor_output.txt
+
+# Android
+app/android/.gradle/
+app/android/local.properties
+app/android/key.properties
+app/android/app/upload-keystore.jks
+*.keystore
+*.jks
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts / large binaries
+*.apk
+*.aab
+*.app.symbols
+
+# Secrets — never commit API keys
+.env
+.env.*
+**/secrets.dart
+tools/**/replicate_key.txt
+
+# Generated art cache (large binaries kept out of repo history)
+# NOTE: shipped card art under app/assets/art/ IS committed; this excludes raw scratch renders
+tools/art_cache/
+scratch/

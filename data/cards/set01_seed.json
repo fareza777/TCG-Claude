@@ -1,0 +1,114 @@
+{
+  "set": { "code": "SF001", "name": "Shardfall", "release": "TBD", "totalPlanned": 180 },
+  "cards": [
+    {
+      "id": "SF001-001", "name": "Grovewarden Stag", "dominion": ["VERDANCE"], "type": "UNIT",
+      "subtype": "Elk Guardian", "cost": { "generic": 2, "VERDANCE": 1 }, "might": 3, "guard": 4,
+      "keywords": ["RAMPAGE"],
+      "effects": [{ "trigger": "ON_ENTER_ARENA", "effects": [{ "op": "ADD_COUNTER", "counter": "PLUS1", "amount": 1, "target": { "select": "ALL", "zone": "ARENA", "owner": "SELF", "filter": { "type": "UNIT", "excludeSelf": true } } }] }],
+      "rarity": "RARE",
+      "text": "Rampage. When {name} enters, put a +1/+1 counter on each other Unit you control.",
+      "flavor": "\"The old forest does not fear the dark. It simply grows through it.\"",
+      "art_prompt": "majestic elk guardian spirit with glowing branching antlers, moonlit ancient forest clearing, mist between colossal trees",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-002", "name": "Sylvaris Sproutling", "dominion": ["VERDANCE"], "type": "UNIT",
+      "subtype": "Sprite", "cost": { "generic": 0, "VERDANCE": 1 }, "might": 1, "guard": 1,
+      "keywords": [],
+      "effects": [{ "trigger": "ON_DEATH", "effects": [{ "op": "GAIN_AETHER", "amount": 1, "note": "this turn only" }] }],
+      "rarity": "COMMON",
+      "text": "When {name} dies, gain 1 Aether this turn.",
+      "flavor": "Every ending in Sylvaris is a seed.",
+      "art_prompt": "tiny cute forest sprite made of leaves and glowing sap, sitting on a giant mushroom, dappled green light",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-003", "name": "Verdant Surge", "dominion": ["VERDANCE"], "type": "RITUAL",
+      "subtype": "Growth", "cost": { "generic": 1, "VERDANCE": 1 },
+      "effects": [{ "trigger": "ON_CAST", "effects": [{ "op": "SEARCH_DECK", "filter": { "type": "WELLSPRING" }, "destination": "ARENA_EXERTED" }, { "op": "DRAW", "amount": 1 }] }],
+      "rarity": "UNCOMMON",
+      "text": "Search your deck for a Wellspring, put it into the Arena exerted. Draw a card.",
+      "flavor": "The land answers those who listen.",
+      "art_prompt": "burst of magical green energy erupting from forest soil, roots and flowers growing in fast motion, luminous spores",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-021", "name": "Emberfang Raptor", "dominion": ["PYRE"], "type": "UNIT",
+      "subtype": "Lizard Beast", "cost": { "generic": 1, "PYRE": 2 }, "might": 3, "guard": 2,
+      "keywords": ["RUSH"],
+      "effects": [{ "trigger": "ON_ATTACK", "effects": [{ "op": "DEAL_DAMAGE", "amount": 1, "target": { "select": "CHOOSE", "zone": "ANY", "owner": "ANY", "filter": { "type": "ANY_TARGET" } } }] }],
+      "rarity": "UNCOMMON",
+      "text": "Rush. Whenever {name} attacks, it deals 1 damage to any target.",
+      "flavor": "\"It hunts where the ash still glows.\"",
+      "art_prompt": "fierce raptor-like lizard beast with ember-orange scales and flame crest, volcanic badlands at dusk, glowing lava cracks",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-022", "name": "Cinder Bolt", "dominion": ["PYRE"], "type": "RITE",
+      "subtype": "Flame", "cost": { "generic": 0, "PYRE": 1 },
+      "effects": [{ "trigger": "ON_CAST", "effects": [{ "op": "DEAL_DAMAGE", "amount": 2, "target": { "select": "CHOOSE", "zone": "ANY", "owner": "ANY", "filter": { "type": "ANY_TARGET" } } }] }],
+      "rarity": "COMMON",
+      "text": "Deal 2 damage to any target.",
+      "flavor": "Ashmar diplomacy.",
+      "art_prompt": "crackling bolt of orange fire streaking across dark volcanic sky, sparks and embers trailing",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-041", "name": "Abyssal Tidewyrm", "dominion": ["TIDE"], "type": "UNIT",
+      "subtype": "Serpent Leviathan", "cost": { "generic": 4, "TIDE": 3 }, "might": 6, "guard": 6,
+      "keywords": ["AEGIS_2"],
+      "effects": [
+        { "trigger": "STATIC", "effects": [{ "op": "UNCOUNTERABLE" }] },
+        { "trigger": "ON_ENTER_ARENA", "effects": [{ "op": "RETURN_TO_HAND", "target": { "select": "CHOOSE", "zone": "ARENA", "owner": "OPPONENT", "filter": { "type": "UNIT" } } }] }
+      ],
+      "rarity": "LEGENDARY",
+      "text": "This spell can't be countered. Aegis 2. When {name} enters, return target Unit an opponent controls to its owner's hand.",
+      "flavor": "\"The deep keeps its own counsel.\"",
+      "art_prompt": "colossal sea serpent leviathan with glowing cyan fins breaching from stormy ocean waves, arcane light beneath the water",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-042", "name": "Tidecaller's Rebuke", "dominion": ["TIDE"], "type": "RITE",
+      "subtype": "Counterspell", "cost": { "generic": 1, "TIDE": 1 },
+      "effects": [{ "trigger": "ON_CAST", "effects": [{ "op": "COUNTER_SPELL", "unlessPay": 3, "target": { "select": "CHOOSE", "zone": "CHAIN" } }, { "op": "DRAW", "amount": 1 }] }],
+      "rarity": "RARE",
+      "text": "Counter target spell unless its controller pays 3. Draw a card.",
+      "flavor": "\"Every tide returns what the shore tried to keep.\"",
+      "art_prompt": "arcane circle of glowing water runes suspended above dark ocean, wave curling around dissolving magical energy",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-061", "name": "Aurelian Shieldmaiden", "dominion": ["DAWN"], "type": "UNIT",
+      "subtype": "Knight", "cost": { "generic": 1, "DAWN": 1 }, "might": 2, "guard": 3,
+      "keywords": ["ALERT"],
+      "effects": [{ "trigger": "ON_ENTER_ARENA", "effects": [{ "op": "HEAL", "amount": 2, "target": { "select": "SELF_PLAYER" } }] }],
+      "rarity": "COMMON",
+      "text": "Alert. When {name} enters, restore 2 Health to you.",
+      "flavor": "Dawn holds the line so others may see it.",
+      "art_prompt": "female knight in ivory and gold armor holding radiant tower shield, sunrise light over marble fortress walls, banners",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-081", "name": "Nyxhollow Reaper", "dominion": ["GLOOM"], "type": "UNIT",
+      "subtype": "Wraith", "cost": { "generic": 2, "GLOOM": 2 }, "might": 4, "guard": 2,
+      "keywords": ["VENOM", "DREAD"],
+      "effects": [{ "trigger": "ON_ENTER_ARENA", "effects": [{ "op": "DISCARD", "amount": 1, "target": { "select": "OPPONENT_PLAYER" } }] }],
+      "rarity": "RARE",
+      "text": "Venom, Dread. When {name} enters, target opponent discards a card.",
+      "flavor": "\"What the Hollow takes, it keeps.\"",
+      "art_prompt": "spectral wraith with tattered violet shroud and pale glowing scythe, thorned shadow tendrils, misty moonlit hollow",
+      "artStatus": "PENDING"
+    },
+    {
+      "id": "SF001-101", "name": "Verdant Wellspring", "dominion": ["VERDANCE"], "type": "WELLSPRING",
+      "subtype": "Wellspring", "cost": {},
+      "effects": [{ "trigger": "ACTIVATED", "cost": "EXERT", "effects": [{ "op": "GAIN_AETHER", "dominion": "VERDANCE", "amount": 1 }] }],
+      "rarity": "COMMON",
+      "text": "Exert: Add 1 Verdance Aether.",
+      "flavor": "",
+      "art_prompt": "ancient stone basin overflowing with luminous green aether energy, forest roots embracing it, fireflies",
+      "artStatus": "PENDING"
+    }
+  ]
+}

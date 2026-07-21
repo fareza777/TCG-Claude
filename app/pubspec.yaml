@@ -1,0 +1,54 @@
+name: shardfall
+description: "SHARDFALL - trading card game."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shardfall_engine:
+    path: ../packages/shardfall_engine
+  shared_preferences: ^2.3.0
+  audioplayers: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.3
+
+flutter_native_splash:
+  color: "#0B0D12"
+  image: assets/ui/app_icon.png
+  android_12:
+    color: "#0B0D12"
+    image: assets/ui/app_icon.png
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/ui/app_icon.png"
+  adaptive_icon_background: "#0B0D12"
+  adaptive_icon_foreground: "assets/ui/app_icon.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/art/
+    - assets/data/
+    - assets/ui/
+    - assets/audio/
+
+  fonts:
+    - family: Cinzel
+      fonts:
+        - asset: assets/fonts/Cinzel.ttf
+    - family: EBGaramond
+      fonts:
+        - asset: assets/fonts/EBGaramond.ttf
+        - asset: assets/fonts/EBGaramond-Italic.ttf
+          style: italic
