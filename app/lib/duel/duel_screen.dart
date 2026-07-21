@@ -65,6 +65,18 @@ class _DuelScreenState extends State<DuelScreen>
         case 'death':
           audio.damage();
           _spawnFloat('✕', 0.5, const Color(0xFFB03A3A));
+        case 'unitDamaged':
+          audio.damage();
+          final id = e.instanceId;
+          if (id != null) {
+            _hitUnits.add(id);
+            Future.delayed(const Duration(milliseconds: 520), () {
+              if (mounted) setState(() => _hitUnits.remove(id));
+            });
+          }
+          _spawnFloat('-${e.amount}',
+              e.player == DuelController.enemy ? 0.28 : 0.66,
+              AppTheme.danger);
         case 'discard':
           _spawnDiscard(e.player == DuelController.enemy);
         case 'damagePlayer':
@@ -90,6 +102,7 @@ class _DuelScreenState extends State<DuelScreen>
 
   bool _endSoundPlayed = false;
   final Set<int> _lunging = {};
+  final Set<int> _hitUnits = {}; // units flashing from spell damage
   final List<_DiscardFly> _discards = [];
   int _discardSeq = 0;
 
@@ -836,6 +849,21 @@ class _DuelScreenState extends State<DuelScreen>
                 damage: u.damage,
               ),
             ),
+          // brief red flash when this unit is hit by a spell
+          if (_hitUnits.contains(u.instanceId))
+            Positioned.fill(
+              child: IgnorePointer(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppTheme.danger.withValues(alpha: 0.3),
+                    border: Border.all(
+                        color: AppTheme.danger.withValues(alpha: 0.9),
+                        width: 2),
+                  ),
+                ),
+              ),
+            ),
           // enemy spell targeting reticle
           if (beingTargeted) ...[
             Positioned.fill(
@@ -917,8 +945,10 @@ class _DuelScreenState extends State<DuelScreen>
             Flexible(
               child: Text(
                 c.enemyCastTargetId != null
-                    ? 'Enemy casts ${c.enemyCastName}  →  aiming'
-                    : 'Enemy casts ${c.enemyCastName}',
+                    ? 'Enemy casts ${c.enemyCastName}  →  your unit'
+                    : c.enemyCastAtPlayer
+                        ? 'Enemy casts ${c.enemyCastName}  →  YOU'
+                        : 'Enemy casts ${c.enemyCastName}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     color: Color(0xFFFFD9D2),
@@ -963,9 +993,10 @@ class _DuelScreenState extends State<DuelScreen>
                 ? () => c.selectPlayerTarget(DuelController.human)
                 : null,
             child: _healthOrb(me.health, AppTheme.health,
-                targetable: c.isTargeting &&
-                    c.targetingDef != null &&
-                    c.targetSpec(c.targetingDef!).players),
+                targetable: c.enemyCastAtPlayer ||
+                    (c.isTargeting &&
+                        c.targetingDef != null &&
+                        c.targetSpec(c.targetingDef!).players)),
           ),
           const SizedBox(width: 8),
           Text('Deck ${me.deck.length}',

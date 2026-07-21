@@ -91,24 +91,44 @@ $d = Mix $d (Tone 349 0.45 0.25 5) ([int]($sr * 0.18))
 $d = Mix $d (Tone 294 0.8 0.28 3) ([int]($sr * 0.36))
 Write-Wav $d "$out\defeat.wav"
 
-# ambient: warm loopable pad, 12s. Frequencies are exact integer-cycle
-# multiples of 1/dur so the clip loops seamlessly (no click). Amplitude is
-# lifted well above the old ~0.10 placeholder and the tremolo never fully
-# mutes, so it is actually audible over device speakers.
-$dur = 12.0
+# ambient: a rich, evolving A-minor pad, 16s seamless loop. Each voice has
+# its OWN slow tremolo at an integer number of cycles across the clip, so the
+# timbre drifts and breathes (feels alive) while start==end (no click). Every
+# frequency is an exact multiple of 1/16 Hz so all voices loop seamlessly.
+# Overall level is pushed high (RMS-normalised toward ~0.5 peak) so it is
+# clearly audible on phone speakers.
+$dur = 16.0
 $count = [int]($sr * $dur)
 $amb = New-Object double[] $count
-$freqs = @(110.0, 165.0, 220.0, 330.0) # A minor bed, all integer cycles/12s
+
+# (freq, baseAmp, lfoCyclesPerLoop, lfoDepth) — A minor add9 + sub + shimmer.
+$voices = @(
+  @(55.0,   0.55, 1, 0.35),  # sub-octave body
+  @(110.0,  1.00, 1, 0.40),  # root A2
+  @(165.0,  0.80, 2, 0.45),  # E3 (fifth)
+  @(220.0,  0.85, 1, 0.40),  # A3 octave
+  @(275.0,  0.45, 3, 0.55),  # C#? tension shimmer (5/4 * 220)
+  @(330.0,  0.60, 2, 0.50),  # E4
+  @(440.0,  0.35, 3, 0.60),  # A4 airy shimmer
+  @(660.0,  0.18, 4, 0.70)   # E5 sparkle
+)
+$maxAbs = 0.0
 for ($i = 0; $i -lt $count; $i++) {
   $t = $i / $sr
-  # 2 full tremolo cycles across the clip; stays in [0.55, 1.0] (never silent)
-  $lfo = 0.55 + 0.45 * (0.5 + 0.5 * [math]::Sin(2 * [math]::PI * (2.0 / $dur) * $t))
   $s = 0.0
-  foreach ($f in $freqs) { $s += [math]::Sin(2 * [math]::PI * $f * $t) }
-  $s = $s / $freqs.Length
-  $sub = 0.4 * [math]::Sin(2 * [math]::PI * 55.0 * $t) # sub-octave warmth
-  $amb[$i] = 0.30 * $lfo * ($s + $sub)
+  foreach ($v in $voices) {
+    $f = $v[0]; $amp = $v[1]; $cyc = $v[2]; $depth = $v[3]
+    # per-voice tremolo in [1-depth, 1], seamless (integer cycles across loop)
+    $lfo = (1.0 - $depth) + $depth * (0.5 + 0.5 * [math]::Sin(2 * [math]::PI * ($cyc / $dur) * $t))
+    $s += $amp * $lfo * [math]::Sin(2 * [math]::PI * $f * $t)
+  }
+  $amb[$i] = $s
+  $a = [math]::Abs($s)
+  if ($a -gt $maxAbs) { $maxAbs = $a }
 }
+# Normalise to a strong, consistent level (peak ~0.62 full scale).
+$gain = 0.62 / $maxAbs
+for ($i = 0; $i -lt $count; $i++) { $amb[$i] = $amb[$i] * $gain }
 Write-Wav $amb "$out\ambient.wav"
 
 Get-ChildItem $out | Select-Object Name, @{n='KB';e={[math]::Round($_.Length/1KB)}}

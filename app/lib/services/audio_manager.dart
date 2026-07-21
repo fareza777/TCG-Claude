@@ -28,7 +28,7 @@ class AudioManager {
   Future<void> startMusic() async {
     if (_musicPlaying) return;
     try {
-      await _music.setVolume(0.8);
+      await _music.setVolume(1.0);
       await _music.play(AssetSource('audio/ambient.wav'));
       _musicPlaying = true;
     } catch (_) {

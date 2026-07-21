@@ -47,8 +47,10 @@ class DuelController extends ChangeNotifier {
 
   /// While the enemy resolves a spell, the UI shows a "casting" banner and a
   /// reticle on [enemyCastTargetId]. Both are null when nothing is being cast.
+  /// [enemyCastAtPlayer] is true when the spell aims at the human's face.
   String? enemyCastName;
   int? enemyCastTargetId;
+  bool enemyCastAtPlayer = false;
 
   /// While the enemy is attacking, the player assigns blockers.
   List<int> incomingAttackers = [];
@@ -596,29 +598,48 @@ class DuelController extends ChangeNotifier {
       final card =
           foe.hand.firstWhere((c) => c.instanceId == sp.cardId);
 
-      // Announce: card leaves hand to the board, reticle lands on the target.
+      // Does this spell aim at the human player's face (vs a unit)?
+      final atPlayer = sp.targets.any((t) => t.playerId == human);
+
+      // Step A — announce: the spell card is played to the board.
       enemyCastName = card.def.name;
       enemyCastTargetId = sp.unitTargetId;
+      enemyCastAtPlayer = atPlayer;
       _emit(DuelEvent('play'));
-      _log(sp.unitTargetId != null
-          ? 'Enemy casts ${card.def.name}, aiming at your unit.'
-          : 'Enemy casts ${card.def.name}.');
-      await beat(820); // let the player read the aim before it resolves
+      _log('Enemy casts ${card.def.name}.');
+      await beat(620);
 
-      // Snapshot to detect who dies / discards from the effect.
+      // Step B — the aim lands (reticle on your unit, or a pulse on your
+      // face) and is held long enough to read before anything resolves.
+      if (sp.unitTargetId != null) {
+        _log('${card.def.name} targets your unit.');
+      } else if (atPlayer) {
+        _log('${card.def.name} targets you.');
+      }
+      await beat(760);
+
+      // Snapshot to detect exactly what the effect did.
       final myUnitsBefore = {for (final c in me.arena) c.instanceId};
       final foeUnitsBefore = {for (final c in foe.arena) c.instanceId};
+      final dmgBefore = <int, int>{
+        for (final c in [...me.arena, ...foe.arena]) c.instanceId: c.damage,
+      };
       final myHandBefore = me.hand.length;
+      final foeHandBefore = foe.hand.length;
+      final myHpBefore = me.health;
+      final foeHpBefore = foe.health;
       try {
         state = Chain.resolveAll(
             Chain.cast(state, enemy, sp.cardId, targets: sp.targets));
       } on StateError {
         enemyCastName = null;
         enemyCastTargetId = null;
+        enemyCastAtPlayer = false;
         break;
       }
 
-      // Emit a death float for every unit the spell removed (either side).
+      // Step C — show the effect. Deaths, unit damage, face damage, discards
+      // and draws each get their own readable callout so nothing is silent.
       final myUnitsAfter = {for (final c in me.arena) c.instanceId};
       final foeUnitsAfter = {for (final c in foe.arena) c.instanceId};
       final died = myUnitsBefore.difference(myUnitsAfter).length +
@@ -626,13 +647,39 @@ class DuelController extends ChangeNotifier {
       for (var i = 0; i < died; i++) {
         _emit(const DuelEvent('death'));
       }
+      // Surviving units that took damage flash + float their loss, so a
+      // non-lethal hit is never silent either.
+      for (final c in [...me.arena, ...foe.arena]) {
+        final d = c.damage - (dmgBefore[c.instanceId] ?? c.damage);
+        if (d > 0) {
+          _emit(DuelEvent('unitDamaged',
+              instanceId: c.instanceId, amount: d, player: c.owner));
+        }
+      }
+      // Face damage — this was the silent case: an "any target" spell hitting
+      // the player now flashes and floats a damage number like combat does.
+      final myHpLost = myHpBefore - me.health;
+      if (myHpLost > 0) {
+        _log('You take $myHpLost damage.');
+        _emit(DuelEvent('damagePlayer', amount: myHpLost, player: human));
+      }
+      final foeHpLost = foeHpBefore - foe.health;
+      if (foeHpLost > 0) {
+        _emit(DuelEvent('damagePlayer', amount: foeHpLost, player: enemy));
+      }
       for (var i = 0; i < myHandBefore - me.hand.length; i++) {
         _emit(DuelEvent('discard', player: human));
       }
+      if (myHandBefore > me.hand.length) {
+        _log('You discard ${myHandBefore - me.hand.length} card(s).');
+      }
+      final foeDrew = foe.hand.length - foeHandBefore;
+      if (foeDrew > 0) _log('Enemy draws $foeDrew card(s).');
 
       enemyCastName = null;
       enemyCastTargetId = null;
-      await beat(480);
+      enemyCastAtPlayer = false;
+      await beat(620);
       if (_gameOverNow()) return;
       if (state.winner != null) return;
     }

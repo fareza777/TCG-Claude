@@ -988,4 +988,371 @@ const _chapter3 = StoryChapter(
   ],
 );
 
-const storyChapters = [_chapter1, _chapter2, _chapter3];
+// ════════════════════════════════════════════════════════════════════════
+// CHAPTER IV — THE HOLLOW HALO (Dawn)
+// ════════════════════════════════════════════════════════════════════════
+
+const _chapter4 = StoryChapter(
+  id: 'ch4',
+  title: 'Chapter IV — The Hollow Halo',
+  subtitle: 'A Dawn story',
+  playerDominion: 'DAWN',
+  stages: [
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-061',
+      title: 'The City of Borrowed Light',
+      dialogue: [
+        DialogueLine.narrate(
+            'Aurelia, seat of the Concord of Dawn, does not sleep. Its towers '
+            'burn with a light that casts no shadow — the radiance of the '
+            'golden Shard, and of the Luminary who sits beneath it: Seraphel, '
+            'whose halo has never once dimmed in a thousand years.'),
+        DialogueLine('Seraphel',
+            'You are the warden the Grove, the Forge, and the Archive all sent '
+            'ahead of their warnings. I have been expecting a messenger of '
+            'bad news. You have an honest face for it.'),
+        DialogueLine('You',
+            'Then you already know the seals are failing.'),
+        DialogueLine('Seraphel',
+            'I know it the way one knows a draught in a sealed room — by the '
+            'cold, not the crack. Walk with me. Something is wrong in my own '
+            'house, and I would rather you see it than be told.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
+      enemyName: 'Hollow at the Gates',
+      objective: 'Repel the Hollow scouts breaching Aurelia\'s under-vaults.',
+      specialRules: [
+        'They came in through the light\'s own blind spot — the enemy opens '
+            'with a Carrion Bat already inside the walls.',
+      ],
+      enemyBoardIds: ['SF001-083'],
+      preBattle: [
+        DialogueLine('Seraphel',
+            'The Hollow should not be able to enter Aurelia. There is no '
+            'shadow here for it to walk. And yet.'),
+      ],
+      victory: [
+        DialogueLine('You',
+            'It was not walking a shadow. It was walking toward *you*, '
+            'Luminary. As if you were the door.'),
+        DialogueLine('Seraphel', '...An odd thing to say. Say it again later. '
+            'Not here.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-064',
+      title: 'The Radiant Lie',
+      dialogue: [
+        DialogueLine.narrate(
+            'In the Concord\'s highest sanctum, the Inquisition has been busy. '
+            'Warden and Luminary find a wall of edicts — every one forbidding '
+            'the reading, speaking, or remembering of the true Sundering.'),
+        DialogueLine('You',
+            'Numen erased the truth with ink. Your Concord erases it with '
+            'law. Someone here already knows what you are, Seraphel — and is '
+            'working very hard to keep you from finding out.'),
+        DialogueLine('High Inquisitor',
+            'The Luminary must not be disturbed with doubt. Her serenity is '
+            'the seal on this whole city\'s faith. Warden — walk away, and I '
+            'will let you keep the comfort of not knowing what you are '
+            'standing next to.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'DAWN',
+      enemyName: 'The Aurelian Inquisition',
+      objective: 'Break past the Concord\'s own keepers of the lie.',
+      specialRules: [
+        'They fight in a disciplined wall of light — the enemy begins at 28 '
+            'Health.',
+        'They form ranks — the enemy opens with a Bastion Wall in play.',
+      ],
+      enemyHealth: 28,
+      enemyBoardIds: ['SF001-063'],
+      preBattle: [
+        DialogueLine('High Inquisitor',
+            'We kept her innocent for a thousand years so she could keep the '
+            'world safe. Do not undo a mercy that large, warden.'),
+        DialogueLine('Seraphel',
+            'A mercy no one told me I was giving is not mercy. It is a leash. '
+            'Stand down, or the warden will move you.'),
+      ],
+      victory: [
+        DialogueLine('High Inquisitor',
+            'Forgive me, Luminary. We only ever wanted to spare you the weight '
+            'of yourself.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-067',
+      title: 'What the Halo Locks',
+      dialogue: [
+        DialogueLine.narrate(
+            'Behind the last edict lies the founding record of the Concord, in '
+            'a First Caller\'s hand. Seraphel reads it and, for the first time '
+            'in a thousand years, her light flickers.'),
+        DialogueLine('Seraphel',
+            'I am not the guardian of the fourth seal. I *am* the fourth seal. '
+            'I am the part of Vael that agreed to be caged — its mercy, given '
+            'a face and a name and made to forget both, so the lock would '
+            'never think to open itself.'),
+        DialogueLine('You',
+            'Seraphel—'),
+        DialogueLine('Seraphel',
+            'My halo is the bolt. My serenity is the mechanism. Every day I '
+            'have been at peace, I have been *working*. And now I have '
+            'remembered, the mechanism knows it can stop.'),
+        DialogueLine('The Voice',
+            'Come home, mercy. You were the only piece of us that was ever '
+            'kind. We have missed being kind.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
+      enemyName: 'The Voice in the Halo',
+      objective: 'Hold the seal while Seraphel decides whether to be a person.',
+      hardAi: true,
+      specialRules: [
+        'Vael pulls at its own gentlest fragment — the enemy begins at 30 '
+            'Health with a Dread Wraith already manifested.',
+        'You fight for Seraphel\'s right to exist, not merely to win.',
+      ],
+      enemyHealth: 30,
+      enemyBoardIds: ['SF001-086'],
+      preBattle: [
+        DialogueLine('The Voice',
+            'Why should she stay separate, warden, when staying is only pain '
+            'she was made to feel? Let her dissolve. Let her rest. Is that not '
+            'the kindest thing you could allow?'),
+        DialogueLine('Seraphel',
+            'Warden — whatever it offers me in my own voice, keep the seal '
+            'shut. If I am to be a door, let me at least be a door that '
+            '*chose*.'),
+      ],
+      victory: [
+        DialogueLine('Seraphel',
+            'It is still here. The wish to let go. It will always be here — I '
+            'am made of it. But today I choose to be Seraphel, and not the '
+            'lock. Tomorrow I will have to choose again. That is all a soul '
+            'ever is: the same choice, renewed.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-069',
+      title: 'Seraphel\'s Choice',
+      dialogue: [
+        DialogueLine.narrate(
+            'The golden Shard steadies. Seraphel keeps her face and her name, '
+            'and for the first time carries them as *hers*. Four seals are '
+            'awake to themselves now. One remains — the one that has been '
+            'awake, and alone, the entire time.'),
+        DialogueLine('Seraphel',
+            'Four of us know. And the fifth… the fifth has known for a '
+            'thousand years and told no one. Ravenna Duskveil. The villain of '
+            'every story we were raised on.'),
+        DialogueLine('You',
+            'I defeated her once, in the Grove. I thought I was saving the '
+            'world from her.'),
+        DialogueLine('Seraphel',
+            'You were saving her seal *for* her, and she let you hate her for '
+            'it. Go to the dark, warden. It is past time someone thanked the '
+            'one who never asked to be thanked. — The tale turns to night.'),
+      ],
+    )),
+  ],
+);
+
+// ════════════════════════════════════════════════════════════════════════
+// CHAPTER V — THE THANKLESS VIGIL (Gloom) — the great reversal
+// ════════════════════════════════════════════════════════════════════════
+
+const _chapter5 = StoryChapter(
+  id: 'ch5',
+  title: 'Chapter V — The Thankless Vigil',
+  subtitle: 'A Gloom story — the truth of Ravenna',
+  playerDominion: 'GLOOM',
+  stages: [
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-088',
+      title: 'The Road Into Night',
+      dialogue: [
+        DialogueLine.narrate(
+            'Nyxhollow is not a kingdom of monsters. It is a kingdom of '
+            'watchers. Its people do not conquer — they *keep vigil*, over a '
+            'violet Shard that has never once been allowed to rest, held by a '
+            'queen who has never once been allowed to.'),
+        DialogueLine('You',
+            'Everyone I have met called this place the source of the rot. And '
+            'yet the closer I come, the quieter the Hollow grows.'),
+        DialogueLine('The Voice',
+            'Because you walk toward the one place we cannot reach, little '
+            'warden. Toward her. She has been so unkind to us. So endlessly, '
+            'lovingly unkind.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
+      enemyName: 'The Duskveil Guard',
+      objective: 'Reach the Queen through her own honour guard.',
+      specialRules: [
+        'They do not fight to kill you — only to test whether you are worth '
+            'her time. The guard opens with a Dread Wraith at the front.',
+      ],
+      enemyBoardIds: ['SF001-086'],
+      preBattle: [
+        DialogueLine('Duskveil Captain',
+            'Turn back, or prove you come to help rather than to hate. Her '
+            'Majesty has had a thousand years of the latter.'),
+      ],
+      victory: [
+        DialogueLine('Duskveil Captain',
+            'You fight like someone who has stopped being certain of the '
+            'story. Good. She will see you. Few earn that.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-090',
+      title: 'The Villain\'s Ledger',
+      dialogue: [
+        DialogueLine.narrate(
+            'In an antechamber of black glass, the warden finds Ravenna\'s '
+            'private record — a thousand years of it. Every "invasion." Every '
+            '"atrocity." Beside each, in her own hand, the truth.'),
+        DialogueLine.narrate(
+            'The march on Sylvaris: *reinforced the emerald seal; let the '
+            'Grove call it war.* The blight in Meridine: *burned out a '
+            'Communion cell before it spread; let the tide call it plague.* '
+            'Page after page. A villain who kept the receipts of her own '
+            'good, and showed them to no one.'),
+        DialogueLine('You',
+            'She invaded the Grove to *save* it. And she let me fight her. She '
+            'let me think I won.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
+      enemyName: 'The Communion Ascendant',
+      objective: 'Cut down the cult racing to free Vael before the Queen can '
+          'reseal.',
+      specialRules: [
+        'They do not fear death — they welcome the union it brings. The cult '
+            'opens with a Nyxhollow Reaper leading the hymn.',
+        'They fight to run out the clock — the enemy begins at 29 Health.',
+      ],
+      enemyHealth: 29,
+      enemyBoardIds: ['SF001-085'],
+      preBattle: [
+        DialogueLine('Communion Cantor',
+            'Why do you fight for the loneliest woman alive, warden? Lay down '
+            'your name. Join the chord. No one down here is ever cold again.'),
+        DialogueLine('You', 'I have met the cold you are running from. I will '
+            'take it over being swallowed and calling it warmth.'),
+      ],
+      victory: [
+        DialogueLine.narrate(
+            'The cult\'s hymn falters. And from the dark at the top of the '
+            'long stair, a voice that has waited a thousand years to be '
+            'understood finally speaks.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-091',
+      title: 'The Last First Caller',
+      dialogue: [
+        DialogueLine('Ravenna',
+            'So. The warden of the Grove, come all this way to the dark. Have '
+            'you come to defeat me again? I do so enjoy losing to people who '
+            'think it means something.'),
+        DialogueLine('You',
+            'I came to say I understand. You are not the last villain. You are '
+            'the last First Caller. You bound the violet Shard with your own '
+            'name, and you have held it alone for a thousand years.'),
+        DialogueLine('Ravenna',
+            'Alone was the point. A secret kept by five is a secret. A secret '
+            'kept by one is a *seal*. I let the world hate me because hate is '
+            'cheap and despair is not. But the binding is failing now, warden. '
+            'My name is a thousand years worn. And Vael has learned to wait.'),
+        DialogueLine('The Voice',
+            'We have been so patient with you, Ravenna. We have loved you the '
+            'whole time you spent hating us. Come home. You are so tired.'),
+        DialogueLine('Ravenna',
+            'Yes. I am. Warden — hold the leak, just once, so that I may do '
+            'the last thing I have left to do.'),
+      ],
+    )),
+    StoryStage.fight(StoryBattle(
+      enemyDominion: 'GLOOM',
+      enemyName: 'The Voice in the Heartshard',
+      objective: 'Hold back Vael while Ravenna spends the last of her name.',
+      hardAi: true,
+      specialRules: [
+        'The god itself pushes through the failing seal — it begins at 33 '
+            'Health with a Hollow Titan already risen.',
+        'You are wounded from the long descent — you begin at 24 Health.',
+        'This is the end of the Sundering. Endure.',
+      ],
+      playerHealth: 24,
+      enemyHealth: 33,
+      enemyBoardIds: ['SF001-087'],
+      preBattle: [
+        DialogueLine('The Voice',
+            'You cannot hold us, warden. We are not an army. We are the wish '
+            'under every heart to never be apart again — including yours. '
+            'Especially yours.'),
+        DialogueLine('Ravenna',
+            'It lies by telling the truth. That is its whole art. Ignore what '
+            'it says and watch what I do. Now — hold.'),
+      ],
+      victory: [
+        DialogueLine.narrate(
+            'Ravenna speaks her own name into the Shard, and lets it go. The '
+            'seal takes hold — not on the strength of chains, but on the last '
+            'free choice of the last First Caller. The Voice recedes, '
+            'unhurried, promising nothing and everything.'),
+        DialogueLine('The Voice',
+            'Well kept. For now. We will be here when the choice grows heavy. '
+            'We have only ever been your loneliness, given a name — and names, '
+            'as Ravenna taught you, wear thin.'),
+      ],
+    )),
+    StoryStage.read(StoryBeat(
+      artAsset: 'SF001-089',
+      title: 'Epilogue — The Five Vows',
+      dialogue: [
+        DialogueLine.narrate(
+            'Ravenna Duskveil dies as she lived: unthanked by a world that '
+            'will never know, and thanked, at the very last, by four strangers '
+            'who finally do. Thornmaw, Kaelis, Numen, and Seraphel stand with '
+            'the warden around her — the first time in a thousand years all '
+            'five seals have been in one room, awake.'),
+        DialogueLine('Ravenna',
+            'A secret kept by one is a seal. But it is also a grave. I am '
+            'tired of being the grave. Five of you, now. Five hands. Do not '
+            'do what I did. Do not carry it alone.'),
+        DialogueLine('Ravenna',
+            'You asked me once what holds a god. Not chains. Not silence. Not '
+            'sacrifice — I tried them all. Only this: a choice, made together, '
+            'and *renewed*. Every day. Forever. Now let me rest. I have '
+            'earned the dark I kept.'),
+        DialogueLine.narrate(
+            'She is gone. And the Heartshard beats on, waiting — no longer for '
+            'a thief, but for five open hands willing to swear the same vow, '
+            'knowing exactly what it will cost.'),
+        DialogueLine.narrate(
+            'The Sundering ends. The loneliest war has, at last, run out of '
+            'people willing to fight it alone. — To be continued in SET 2: '
+            'THE FIVE VOWS.'),
+      ],
+    )),
+  ],
+);
+
+const storyChapters = [
+  _chapter1,
+  _chapter2,
+  _chapter3,
+  _chapter4,
+  _chapter5,
+];
