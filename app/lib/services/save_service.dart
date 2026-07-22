@@ -36,6 +36,20 @@ class SaveService extends ChangeNotifier {
   bool colorblind;
   bool reduceMotion;
 
+  // Progression (#6): daily login streak + lifetime stats + achievements.
+  int loginStreak = 0;
+  String lastLoginDate = '';
+  int totalWins = 0;
+  int totalPacks = 0;
+  Set<String> achievements = {};
+
+  /// Set once on load when a new day's login bonus is granted (gold amount);
+  /// the menu shows it, then calls [clearPendingDailyBonus].
+  int pendingDailyBonus = 0;
+
+  /// Achievement ids unlocked this session (for a one-time toast).
+  final List<String> pendingAchievements = [];
+
   // Crafting economy (Shards).
   static const craftCost = {
     Rarity.common: 20,
@@ -116,7 +130,14 @@ class SaveService extends ChangeNotifier {
       colorblind: prefs.getBool('colorblind') ?? false,
       reduceMotion: prefs.getBool('reduceMotion') ?? false,
     );
+    service.loginStreak = prefs.getInt('loginStreak') ?? 0;
+    service.lastLoginDate = prefs.getString('lastLoginDate') ?? '';
+    service.totalWins = prefs.getInt('totalWins') ?? 0;
+    service.totalPacks = prefs.getInt('totalPacks') ?? 0;
+    service.achievements =
+        (prefs.getStringList('achievements') ?? const []).toSet();
     service._rollDailyQuestsIfNeeded();
+    service._checkLogin();
 
     if (firstLaunch) {
       final starter = library.starterDecks['VERDANCE'];
@@ -163,6 +184,8 @@ class SaveService extends ChangeNotifier {
         q['progress'] = (q['progress'] as int) + 1;
       }
     }
+    totalPacks += 1;
+    _checkAchievements();
     await _persist();
     notifyListeners();
     return true;
@@ -191,6 +214,7 @@ class SaveService extends ChangeNotifier {
     if (chaptersDone.contains(chapterId)) return 0;
     chaptersDone.add(chapterId);
     gold += chapterClearGold;
+    _checkAchievements();
     await _persist();
     notifyListeners();
     return chapterClearGold;
@@ -243,6 +267,10 @@ class SaveService extends ChangeNotifier {
       'clearedBattles': clearedBattles.toList(),
       'decks': decks,
       'tutorialSeen': tutorialSeen,
+      'totalWins': totalWins,
+      'totalPacks': totalPacks,
+      'achievements': achievements.toList(),
+      'loginStreak': loginStreak,
     };
     return 'SFSAVE-${base64Url.encode(utf8.encode(json.encode(data)))}';
   }
@@ -265,6 +293,11 @@ class SaveService extends ChangeNotifier {
       decks = (data['decks'] as Map<String, dynamic>? ?? {}).map((k, v) =>
           MapEntry(k, [for (final id in v as List) id as String]));
       tutorialSeen = data['tutorialSeen'] as bool? ?? tutorialSeen;
+      totalWins = data['totalWins'] as int? ?? totalWins;
+      totalPacks = data['totalPacks'] as int? ?? totalPacks;
+      achievements =
+          (data['achievements'] as List? ?? const []).cast<String>().toSet();
+      loginStreak = data['loginStreak'] as int? ?? loginStreak;
       await _persist();
       notifyListeners();
       return true;
@@ -351,6 +384,12 @@ class SaveService extends ChangeNotifier {
         changed = true;
       }
     }
+    // Lifetime win stat drives achievements.
+    if (event.endsWith('_win')) {
+      totalWins += 1;
+      _checkAchievements();
+      changed = true;
+    }
     if (changed) {
       await _persist();
       notifyListeners();
@@ -375,6 +414,73 @@ class SaveService extends ChangeNotifier {
   int get claimableQuests =>
       quests.where(questClaimable).length;
 
+  // ── progression: login streak + achievements (#6) ─────────────────────
+
+  /// Yesterday's date string, for streak continuity.
+  static String _yesterday() {
+    final n = DateTime.now().subtract(const Duration(days: 1));
+    return '${n.year}-${n.month}-${n.day}';
+  }
+
+  /// Update the login streak once per calendar day and grant a scaling bonus.
+  void _checkLogin() {
+    final today = _today();
+    if (lastLoginDate == today) return; // already counted today
+    if (lastLoginDate == _yesterday()) {
+      loginStreak += 1;
+    } else {
+      loginStreak = 1; // reset (missed a day, or first ever)
+    }
+    lastLoginDate = today;
+    final bonus = (20 + (loginStreak - 1) * 10).clamp(20, 100);
+    gold += bonus;
+    pendingDailyBonus = bonus;
+    // Persist synchronously-ish; load() awaits nothing after this but the
+    // firstLaunch branch persists, and normal flow persists on first action.
+    _prefs.setInt('loginStreak', loginStreak);
+    _prefs.setString('lastLoginDate', lastLoginDate);
+    _prefs.setInt('gold', gold);
+  }
+
+  void clearPendingDailyBonus() => pendingDailyBonus = 0;
+
+  /// Achievement catalogue: id → (title, description, one-time reward gold).
+  static const achievementCatalogue = <String, (String, String, int)>{
+    'first_blood': ('First Blood', 'Win your first battle', 50),
+    'veteran': ('Veteran', 'Win 25 battles', 300),
+    'warlord': ('Warlord', 'Win 100 battles', 1000),
+    'collector_50': ('Collector', 'Own 50 different cards', 150),
+    'collector_100': ('Archivist', 'Own 100 different cards', 400),
+    'full_set': ('Completionist', 'Own all 190 cards', 2000),
+    'chapter_one': ('The Waking Grove', 'Clear Chapter I', 100),
+    'saga_done': ('Loneliest War', 'Clear all 5 chapters of Set 1', 1500),
+    'pack_rat': ('Pack Rat', 'Open 10 Shard Packs', 200),
+  };
+
+  bool hasAchievement(String id) => achievements.contains(id);
+
+  /// Re-evaluate achievements against current stats; unlock + reward any newly
+  /// earned ones. Safe to call after any progress event.
+  void _checkAchievements() {
+    void unlock(String id, bool earned) {
+      if (earned && !achievements.contains(id)) {
+        achievements.add(id);
+        gold += achievementCatalogue[id]!.$3;
+        pendingAchievements.add(id);
+      }
+    }
+
+    unlock('first_blood', totalWins >= 1);
+    unlock('veteran', totalWins >= 25);
+    unlock('warlord', totalWins >= 100);
+    unlock('collector_50', uniqueOwned >= 50);
+    unlock('collector_100', uniqueOwned >= 100);
+    unlock('full_set', uniqueOwned >= 190);
+    unlock('chapter_one', chaptersDone.contains('ch1'));
+    unlock('saga_done', chaptersDone.length >= 5);
+    unlock('pack_rat', totalPacks >= 10);
+  }
+
   Future<void> _persist() async {
     await _prefs.setInt('gold', gold);
     await _prefs.setInt('shards', shards);
@@ -390,5 +496,10 @@ class SaveService extends ChangeNotifier {
     await _prefs.setBool('sfxOn', sfxOn);
     await _prefs.setBool('colorblind', colorblind);
     await _prefs.setBool('reduceMotion', reduceMotion);
+    await _prefs.setInt('loginStreak', loginStreak);
+    await _prefs.setString('lastLoginDate', lastLoginDate);
+    await _prefs.setInt('totalWins', totalWins);
+    await _prefs.setInt('totalPacks', totalPacks);
+    await _prefs.setStringList('achievements', achievements.toList());
   }
 }

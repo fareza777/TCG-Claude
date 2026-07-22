@@ -13,6 +13,7 @@ import 'duel/duel_screen.dart';
 import 'forge/forge_screen.dart';
 import 'opening_cinematic.dart';
 import 'packs/booster_screen.dart';
+import 'progress/achievements_screen.dart';
 import 'quests/quests_screen.dart';
 import 'services/audio_manager.dart';
 import 'services/save_service.dart';
@@ -88,8 +89,37 @@ class _MenuScreenState extends State<MenuScreen> {
         await Navigator.of(context).push(MaterialPageRoute<void>(
             builder: (_) => const TutorialScreen()));
         await save.markTutorialSeen();
+        _showProgressToasts();
       });
+    } else if (mounted) {
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => _showProgressToasts());
     }
+  }
+
+  /// Surface the daily login bonus and any freshly-unlocked achievements.
+  void _showProgressToasts() {
+    if (!mounted || _save == null) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final bonus = _save!.pendingDailyBonus;
+    if (bonus > 0) {
+      _save!.clearPendingDailyBonus();
+      messenger.showSnackBar(SnackBar(
+        content: Text(
+            'Daily login: +$bonus gold  ·  ${_save!.loginStreak}-day streak 🔥'),
+        duration: const Duration(seconds: 3),
+      ));
+    }
+    for (final id in _save!.pendingAchievements) {
+      final a = SaveService.achievementCatalogue[id];
+      if (a != null) {
+        messenger.showSnackBar(SnackBar(
+          content: Text('🏆 ${a.$1} unlocked — +${a.$3} gold'),
+          duration: const Duration(seconds: 3),
+        ));
+      }
+    }
+    _save!.pendingAchievements.clear();
   }
 
   /// Replay the opening lore cinematic from the menu.
@@ -654,6 +684,16 @@ class _MenuScreenState extends State<MenuScreen> {
                               ),
                             ),
                             _tile(
+                              icon: Icons.emoji_events,
+                              label: 'AWARDS',
+                              color: const Color(0xFFE3B341),
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                    builder: (_) =>
+                                        AchievementsScreen(save: _save!)),
+                              ),
+                            ),
+                            _tile(
                               icon: Icons.school,
                               label: 'HOW TO PLAY',
                               color: DominionStyle.of(Dominion.dawn).glow,
@@ -665,7 +705,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        const Text('v0.12 — PvE',
+                        const Text('Set 1: The Sundering — PvE',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Color(0x779A97A8), fontSize: 10)),

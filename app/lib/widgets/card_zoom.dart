@@ -16,12 +16,72 @@ const Map<String, String> keywordGlossary = {
   'Leech': 'Damage this deals also restores that much Health to you.',
   'Dread': 'Cannot be blocked by fewer than two Units.',
   'Bulwark': 'Cannot attack.',
-  'Aegis': 'Aegis N — enemy spells targeting this cost N more.',
+  'Ambush': 'May block even while exerted (after it has attacked).',
+  'Aegis': 'Aegis N — prevents N combat damage dealt to this Unit each combat.',
+  'Attune': 'Turn any hand card face-down into a generic Wellspring (once/turn).',
   'Exert': 'Turn a card sideways to pay a cost. It refreshes on your next turn.',
   'Rite': 'Instant spell (⚡). Cast at any time — even on the enemy\'s turn, in response.',
   'Ritual': 'Slow spell (hourglass). Cast only in your own Main phase, when the chain is empty.',
   'Wellspring': 'Your Aether source. You may place one per turn.',
 };
+
+String _titleCase(String s) =>
+    s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);
+
+/// Codex meta + flavour lore panel shown under the zoomed card.
+Widget _codexPanel(CardDef def) {
+  final doms = def.dominions
+      .where((d) => d != Dominion.neutral)
+      .map((d) => _titleCase(d.name))
+      .join('/');
+  final meta = [
+    _titleCase(def.rarity.name),
+    if (doms.isNotEmpty) doms else 'Neutral',
+    _titleCase(def.type.name),
+    if (def.type == CardType.unit) '${def.might ?? 0}/${def.guard ?? 0}',
+  ].join('  ·  ');
+
+  return Container(
+    width: 300,
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: AppTheme.panel.withValues(alpha: 0.96),
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(
+          color: rarityColor(def.rarity).withValues(alpha: 0.6)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(def.name,
+            style: const TextStyle(
+                color: AppTheme.textPrimary,
+                fontSize: 15,
+                fontWeight: FontWeight.w800)),
+        const SizedBox(height: 2),
+        Text(meta,
+            style: TextStyle(
+                color: rarityColor(def.rarity), fontSize: 11, letterSpacing: 0.4)),
+        if (def.text.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          Text(def.text,
+              style: const TextStyle(
+                  color: AppTheme.textPrimary, fontSize: 12, height: 1.35)),
+        ],
+        if (def.flavor.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          Text(def.flavor,
+              style: const TextStyle(
+                  fontFamily: 'EBGaramond',
+                  color: AppTheme.textMuted,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 12,
+                  height: 1.4)),
+        ],
+      ],
+    ),
+  );
+}
 
 /// Show a card enlarged with tap-to-reveal keyword explanations.
 void showCardZoom(BuildContext context, CardDef def) {
@@ -58,6 +118,8 @@ void showCardZoom(BuildContext context, CardDef def) {
                       Transform.scale(scale: v, child: child),
                   child: CardWidget(def: def, width: 290),
                 ),
+                const SizedBox(height: 12),
+                _codexPanel(def),
                 if (found.isNotEmpty) ...[
                   const SizedBox(height: 14),
                   Container(
