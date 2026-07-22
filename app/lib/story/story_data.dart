@@ -1,6 +1,6 @@
 // Story campaign — dialogue-driven, RPG-style, with battle scenarios that
 // carry objectives, special rules, and pre-set board states.
-// Art references reuse card art ids (assets/art/ID.webp).
+// Each beat has dedicated storyboard art at assets/art/STORY-<id>.webp.
 
 class DialogueLine {
   final String speaker; // '' for narration
@@ -87,7 +87,7 @@ const _chapter1 = StoryChapter(
   playerDominion: 'VERDANCE',
   stages: [
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-004',
+      artAsset: 'STORY-ch1-01',
       title: 'The Old Forest Stirs',
       dialogue: [
         DialogueLine.narrate(
@@ -125,7 +125,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-085',
+      artAsset: 'STORY-ch1-02',
       title: 'The Herald\'s Warning',
       dialogue: [
         DialogueLine.narrate(
@@ -167,7 +167,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-083',
+      artAsset: 'STORY-ch1-03',
       title: 'Deeper Into the Rot',
       dialogue: [
         DialogueLine.narrate(
@@ -202,7 +202,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-221',
+      artAsset: 'STORY-ch1-04',
       title: 'Fire on the Horizon',
       dialogue: [
         DialogueLine.narrate(
@@ -241,7 +241,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-027',
+      artAsset: 'STORY-ch1-05',
       title: 'Ash on the Wind',
       dialogue: [
         DialogueLine.narrate(
@@ -273,7 +273,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-045',
+      artAsset: 'STORY-ch1-06',
       title: 'The Poisoned Spring',
       dialogue: [
         DialogueLine.narrate(
@@ -308,7 +308,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-063',
+      artAsset: 'STORY-ch1-07',
       title: 'The Concord\'s Envoy',
       dialogue: [
         DialogueLine.narrate(
@@ -348,7 +348,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-211',
+      artAsset: 'STORY-ch1-08',
       title: 'The Grove Answers',
       dialogue: [
         DialogueLine.narrate(
@@ -391,7 +391,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-086',
+      artAsset: 'STORY-ch1-09',
       title: 'The Dusk Vanguard',
       dialogue: [
         DialogueLine.narrate(
@@ -429,7 +429,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-091',
+      artAsset: 'STORY-ch1-10',
       title: 'The Queen of Nyxhollow',
       dialogue: [
         DialogueLine('Thornmaw',
@@ -478,7 +478,7 @@ const _chapter1 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-101',
+      artAsset: 'STORY-ch1-11',
       title: 'Epilogue — Roots and Embers',
       dialogue: [
         DialogueLine.narrate(
@@ -512,7 +512,7 @@ const _chapter2 = StoryChapter(
   playerDominion: 'PYRE',
   stages: [
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-231',
+      artAsset: 'STORY-ch2-01',
       title: 'The Cooling Heart',
       dialogue: [
         DialogueLine.narrate(
@@ -559,7 +559,7 @@ const _chapter2 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-027',
+      artAsset: 'STORY-ch2-02',
       title: 'The Long March West',
       dialogue: [
         DialogueLine.narrate(
@@ -607,7 +607,7 @@ const _chapter2 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-241',
+      artAsset: 'STORY-ch2-03',
       title: 'The Editor of Truth',
       dialogue: [
         DialogueLine.narrate(
@@ -661,7 +661,7 @@ const _chapter2 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-229',
+      artAsset: 'STORY-ch2-04',
       title: 'The Descent',
       dialogue: [
         DialogueLine.narrate(
@@ -718,7 +718,7 @@ const _chapter2 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-233',
+      artAsset: 'STORY-ch2-05',
       title: 'Kaelis\' Choice',
       dialogue: [
         DialogueLine.narrate(
@@ -759,7 +759,7 @@ const _chapter3 = StoryChapter(
   playerDominion: 'TIDE',
   stages: [
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-253',
+      artAsset: 'STORY-ch3-01',
       title: 'The Missing Pages',
       dialogue: [
         DialogueLine.narrate(
@@ -803,7 +803,7 @@ const _chapter3 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-241',
+      artAsset: 'STORY-ch3-02',
       title: 'The Vandal\'s Hand',
       dialogue: [
         DialogueLine.narrate(
@@ -856,7 +856,7 @@ const _chapter3 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-247',
+      artAsset: 'STORY-ch3-03',
       title: 'The Drowned Truth',
       dialogue: [
         DialogueLine.narrate(
@@ -903,7 +903,7 @@ const _chapter3 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-241',
+      artAsset: 'STORY-ch3-04',
       title: 'The Archivist\'s Reflection',
       dialogue: [
         DialogueLine.narrate(
@@ -961,7 +961,7 @@ const _chapter3 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-251',
+      artAsset: 'STORY-ch3-05',
       title: 'Numen\'s Choice',
       dialogue: [
         DialogueLine.narrate(
@@ -1000,7 +1000,7 @@ const _chapter4 = StoryChapter(
   playerDominion: 'DAWN',
   stages: [
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-061',
+      artAsset: 'STORY-ch4-01',
       title: 'The City of Borrowed Light',
       dialogue: [
         DialogueLine.narrate(
@@ -1043,7 +1043,7 @@ const _chapter4 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-064',
+      artAsset: 'STORY-ch4-02',
       title: 'The Radiant Lie',
       dialogue: [
         DialogueLine.narrate(
@@ -1087,7 +1087,7 @@ const _chapter4 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-067',
+      artAsset: 'STORY-ch4-03',
       title: 'What the Halo Locks',
       dialogue: [
         DialogueLine.narrate(
@@ -1141,7 +1141,7 @@ const _chapter4 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-069',
+      artAsset: 'STORY-ch4-04',
       title: 'Seraphel\'s Choice',
       dialogue: [
         DialogueLine.narrate(
@@ -1176,7 +1176,7 @@ const _chapter5 = StoryChapter(
   playerDominion: 'GLOOM',
   stages: [
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-088',
+      artAsset: 'STORY-ch5-01',
       title: 'The Road Into Night',
       dialogue: [
         DialogueLine.narrate(
@@ -1214,7 +1214,7 @@ const _chapter5 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-090',
+      artAsset: 'STORY-ch5-02',
       title: 'The Villain\'s Ledger',
       dialogue: [
         DialogueLine.narrate(
@@ -1259,7 +1259,7 @@ const _chapter5 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-091',
+      artAsset: 'STORY-ch5-03',
       title: 'The Last First Caller',
       dialogue: [
         DialogueLine('Ravenna',
@@ -1319,7 +1319,7 @@ const _chapter5 = StoryChapter(
       ],
     )),
     StoryStage.read(StoryBeat(
-      artAsset: 'SF001-089',
+      artAsset: 'STORY-ch5-04',
       title: 'Epilogue — The Five Vows',
       dialogue: [
         DialogueLine.narrate(

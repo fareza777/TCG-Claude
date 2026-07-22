@@ -357,7 +357,7 @@ class DuelController extends ChangeNotifier {
         enemyCastAtPlayer = resp.targets.any((t) => t.playerId == human);
         _log('Enemy responds with ${rc.def.name}.');
         _emit(const DuelEvent('play'));
-        await beat(780);
+        await beat(1050);
         try {
           state = Chain.cast(state, enemy, resp.cardId, targets: resp.targets);
         } on StateError {
@@ -407,6 +407,8 @@ class DuelController extends ChangeNotifier {
       _emit(DuelEvent('discard', player: enemy));
     }
 
+    // Hold on the result so the resolution reads before the board settles.
+    await beat(1000);
     _checkGameOver();
     _pruneDeadAttackers();
     notifyListeners();
@@ -727,7 +729,7 @@ class DuelController extends ChangeNotifier {
           r.state.player(enemy).arena.firstWhere((c) => c.instanceId == r.deployedId);
       state = r.state;
       _log('Enemy deploys ${unit.def.name}.');
-      await beat(500);
+      await beat(760);
       if (_gameOverNow()) return;
     }
 
@@ -747,7 +749,7 @@ class DuelController extends ChangeNotifier {
       enemyCastAtPlayer = atPlayer;
       _emit(DuelEvent('play'));
       _log('Enemy casts ${card.def.name}.');
-      await beat(620);
+      await beat(950);
 
       // Step B — the aim lands (reticle on your unit, or a pulse on your
       // face) and is held long enough to read before anything resolves.
@@ -756,7 +758,7 @@ class DuelController extends ChangeNotifier {
       } else if (atPlayer) {
         _log('${card.def.name} targets you.');
       }
-      await beat(760);
+      await beat(1150);
 
       // Snapshot to detect exactly what the effect did.
       final myUnitsBefore = {for (final c in me.arena) c.instanceId};
@@ -816,10 +818,13 @@ class DuelController extends ChangeNotifier {
       final foeDrew = foe.hand.length - foeHandBefore;
       if (foeDrew > 0) _log('Enemy draws $foeDrew card(s).');
 
+      // Hold on the result — banner + damage/death floats still visible — so
+      // the player clearly sees what happened before the board settles.
+      await beat(1250);
       enemyCastName = null;
       enemyCastTargetId = null;
       enemyCastAtPlayer = false;
-      await beat(620);
+      await beat(450);
       if (_gameOverNow()) return;
       if (state.winner != null) return;
     }
@@ -860,7 +865,7 @@ class DuelController extends ChangeNotifier {
       for (final id in attackerIds) {
         _emit(DuelEvent('attack', instanceId: id));
       }
-      await beat(560);
+      await beat(720);
       final blocks = await _awaitPlayerBlocks(attackerIds);
       final beforeHp = me.health;
       _resolveCombat(enemy, blocks);
@@ -870,7 +875,7 @@ class DuelController extends ChangeNotifier {
         _emit(DuelEvent('damagePlayer', amount: dealt, player: human));
       }
       if (_gameOverNow()) return;
-      await beat(420);
+      await beat(1000);
     }
 
     state = Game.nextPhase(state); // -> main2
