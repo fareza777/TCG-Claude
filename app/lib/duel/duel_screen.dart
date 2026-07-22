@@ -180,6 +180,7 @@ class _DuelScreenState extends State<DuelScreen>
                     _enemyBar(),
                     _phaseBar(),
                     if (c.enemyCastName != null) _enemyCastBanner(),
+                    if (c.playerCastName != null) _playerCastBanner(),
                     if (c.attuneMode) _attuneBanner(),
                     if (c.isTargeting) _targetingBanner(),
                     if (c.ui == DuelUiState.playerBlocking) _blockingBanner(),
@@ -762,6 +763,8 @@ class _DuelScreenState extends State<DuelScreen>
     final aiming = c.isTargeting && u.def.type == CardType.unit;
     // The enemy is casting a spell aimed at this unit — show a red reticle.
     final beingTargeted = c.enemyCastTargetId == u.instanceId;
+    // The player is casting a spell aimed at this unit — gold reticle.
+    final beingPlayerTargeted = c.playerCastTargetId == u.instanceId;
     final selectable = !aiming &&
         !blocking &&
         !enemySide &&
@@ -883,6 +886,38 @@ class _DuelScreenState extends State<DuelScreen>
                 ),
               ),
             ),
+          // player spell targeting reticle (gold)
+          if (beingPlayerTargeted) ...[
+            Positioned.fill(
+              child: IgnorePointer(
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0.3, end: 1),
+                  duration: const Duration(milliseconds: 420),
+                  curve: Curves.easeOut,
+                  builder: (context, t, _) => DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                          color: const Color(0xFFE3B341).withValues(alpha: t),
+                          width: 2.5),
+                      boxShadow: [
+                        BoxShadow(
+                            color: const Color(0xFFE3B341)
+                                .withValues(alpha: 0.5 * t),
+                            blurRadius: 16,
+                            spreadRadius: 1),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const Positioned(
+              top: -12,
+              right: -8,
+              child: Icon(Icons.gps_fixed, size: 22, color: Color(0xFFE3B341)),
+            ),
+          ],
           // enemy spell targeting reticle
           if (beingTargeted) ...[
             Positioned.fill(
@@ -974,6 +1009,50 @@ class _DuelScreenState extends State<DuelScreen>
                     fontSize: 13,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 0.4),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _playerCastBanner() {
+    return TweenAnimationBuilder<double>(
+      key: ValueKey('pcast${c.playerCastName}${c.playerCastTargetId}'),
+      tween: Tween(begin: 0, end: 1),
+      duration: const Duration(milliseconds: 240),
+      curve: Curves.easeOut,
+      builder: (context, t, child) => Opacity(
+        opacity: t,
+        child: Transform.translate(offset: Offset(0, (1 - t) * 8), child: child),
+      ),
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(14, 2, 14, 2),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            const Color(0xFFC9A86A).withValues(alpha: 0.26),
+            const Color(0xFFC9A86A).withValues(alpha: 0.10),
+          ]),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: const Color(0xFFC9A86A).withValues(alpha: 0.8)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.auto_fix_high, size: 15, color: Color(0xFFE6CE96)),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                c.playerCastTargetId != null
+                    ? 'You cast ${c.playerCastName}  →  target'
+                    : 'You cast ${c.playerCastName}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: Color(0xFFF0E4C0),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800),
               ),
             ),
           ],

@@ -54,6 +54,11 @@ class DuelController extends ChangeNotifier {
   int? enemyCastTargetId;
   bool enemyCastAtPlayer = false;
 
+  /// While the player's own spell is resolving — mirrors the enemy banner in a
+  /// friendly colour with a gold reticle on the target.
+  String? playerCastName;
+  int? playerCastTargetId;
+
   /// While the enemy is attacking, the player assigns blockers.
   List<int> incomingAttackers = [];
   Map<int, List<int>> blockPlan = {}; // attackerId -> [blockerIds]
@@ -320,14 +325,32 @@ class DuelController extends ChangeNotifier {
         _checkGameOver();
         _pruneDeadAttackers();
       } else {
-        // Spell (Rite/Ritual): cast onto the chain, then give the enemy an
-        // instant-speed response before the chain resolves.
+        // Responding to an enemy spell sitting on the chain (two-sided
+        // priority): stack this Rite on top and let the enemy's staged turn
+        // resolve the chain — do NOT resolve here.
+        final respondingToChain =
+            ui == DuelUiState.playerResponse && state.chain.isNotEmpty;
         _ensureAether(card.def);
         state = Chain.cast(state, human, card.instanceId, targets: targets);
+        if (respondingToChain) {
+          _log('You respond with ${card.def.name}.');
+          _emit(DuelEvent('play', instanceId: card.instanceId));
+          notifyListeners();
+          passResponse(); // hands control back to the enemy staging
+          return;
+        }
         _log(targetLabel == null
             ? 'You cast ${card.def.name}.'
             : 'You cast ${card.def.name} at $targetLabel.');
         _emit(DuelEvent('play', instanceId: card.instanceId));
+        playerCastName = card.def.name;
+        playerCastTargetId = null;
+        for (final t in targets) {
+          if (t.instanceId != null) {
+            playerCastTargetId = t.instanceId;
+            break;
+          }
+        }
         notifyListeners();
         unawaited(_resolvePlayerSpellChain());
         return;
@@ -346,6 +369,10 @@ class DuelController extends ChangeNotifier {
       notifyListeners();
       await Future<void>.delayed(Duration(milliseconds: ms));
     }
+
+    // Hold on the player's cast (banner + gold reticle) so the spell reads as
+    // it leaves the hand, before it resolves.
+    await beat(700);
 
     // Enemy instant-speed response (one level deep).
     final resp = isGameOver ? null : enemyAi.chooseResponse(state, enemy);
@@ -409,6 +436,8 @@ class DuelController extends ChangeNotifier {
 
     // Hold on the result so the resolution reads before the board settles.
     await beat(1000);
+    playerCastName = null;
+    playerCastTargetId = null;
     _checkGameOver();
     _pruneDeadAttackers();
     notifyListeners();
@@ -718,8 +747,15 @@ class DuelController extends ChangeNotifier {
   /// silently vanishing.
   Future<void> _enemyMainPhaseStaged(
       Future<void> Function([int]) beat) async {
-    // 1. Resources (no visible play).
+    // 1. Resources (wellspring or Attune).
+    final wellsBefore =
+        foe.arena.where((c) => c.def.id == 'ATTUNED').length;
     state = enemyAi.playResources(state, enemy);
+    final wellsAfter = foe.arena.where((c) => c.def.id == 'ATTUNED').length;
+    if (wellsAfter > wellsBefore) {
+      _log('Enemy Attunes a card into a Wellspring.');
+      await beat(600);
+    }
 
     // 2. Deploy units one at a time — the arena pop-in keys off the new id.
     while (true) {
@@ -760,7 +796,22 @@ class DuelController extends ChangeNotifier {
       }
       await beat(1150);
 
-      // Snapshot to detect exactly what the effect did.
+      // Cast onto the chain but DON'T resolve yet — give the player instant-
+      // speed priority to respond (e.g. a counter) before the spell resolves.
+      try {
+        state = Chain.cast(state, enemy, sp.cardId, targets: sp.targets);
+      } on StateError {
+        enemyCastName = null;
+        enemyCastTargetId = null;
+        enemyCastAtPlayer = false;
+        break;
+      }
+      _log('Respond, or pass to let it resolve.');
+      await _awaitResponse(); // player may counter/trick; no-op if they can't
+      if (_gameOverNow()) return;
+
+      // Snapshot right before the chain resolves (after any player response),
+      // so the diff reflects the true net result.
       final myUnitsBefore = {for (final c in me.arena) c.instanceId};
       final foeUnitsBefore = {for (final c in foe.arena) c.instanceId};
       final dmgBefore = <int, int>{
@@ -770,15 +821,7 @@ class DuelController extends ChangeNotifier {
       final foeHandBefore = foe.hand.length;
       final myHpBefore = me.health;
       final foeHpBefore = foe.health;
-      try {
-        state = Chain.resolveAll(
-            Chain.cast(state, enemy, sp.cardId, targets: sp.targets));
-      } on StateError {
-        enemyCastName = null;
-        enemyCastTargetId = null;
-        enemyCastAtPlayer = false;
-        break;
-      }
+      state = Chain.resolveAll(state);
 
       // Step C — show the effect. Deaths, unit damage, face damage, discards
       // and draws each get their own readable callout so nothing is silent.

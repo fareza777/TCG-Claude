@@ -49,7 +49,8 @@ class AiPlayer {
     return state;
   }
 
-  /// Step 1–2: play a wellspring (if any) and exert every wellspring for
+  /// Step 1–2: play a wellspring (if any) — or Attune a spare card when
+  /// mana-light and holding no wellspring — then exert every wellspring for
   /// aether. Produces no visible "play" — pure resource setup.
   GameState playResources(GameState s, PlayerId me) {
     var state = s;
@@ -58,6 +59,9 @@ class AiPlayer {
         p.hand.where((c) => c.def.type == CardType.wellspring).toList();
     if (wellsprings.isNotEmpty && !p.playedWellspringThisTurn) {
       state = Game.playWellspring(state, me, wellsprings.first.instanceId);
+    } else {
+      final attuneId = chooseAttune(state, me);
+      if (attuneId != null) state = Game.attune(state, me, attuneId);
     }
     for (final c in state.player(me).arena.toList()) {
       if (c.def.type == CardType.wellspring && !c.exerted) {
@@ -65,6 +69,32 @@ class AiPlayer {
       }
     }
     return state;
+  }
+
+  /// Decide whether to Attune (anti-mana-screw), returning the hand card to
+  /// convert into a Wellspring, or null to hold. The AI attunes only when it
+  /// is behind on Aether for the turn, holds no Wellspring to play, and has
+  /// spare cards — sacrificing its cheapest card to keep developing.
+  int? chooseAttune(GameState s, PlayerId me) {
+    final p = s.player(me);
+    if (p.playedWellspringThisTurn) return null;
+    if (p.hand.any((c) => c.def.type == CardType.wellspring)) return null;
+    final wells =
+        p.arena.where((c) => c.def.type == CardType.wellspring).length;
+    // Only a genuine safety valve: attune when 2+ Wellsprings behind the turn
+    // count (real mana-screw), never as a ramp accelerant, and keep a couple
+    // of cards in hand rather than attuning the last resources.
+    if (wells >= s.turnNumber - 1 || p.hand.length <= 2) return null;
+    // Also require that we actually have an unaffordable card worth the mana.
+    final maxCost = p.hand
+        .where((c) => c.def.type != CardType.wellspring)
+        .fold(0, (m, c) => c.def.totalCost > m ? c.def.totalCost : m);
+    if (maxCost <= wells) return null;
+    final spares = p.hand
+        .where((c) => c.def.type != CardType.wellspring)
+        .toList()
+      ..sort((a, b) => a.def.totalCost.compareTo(b.def.totalCost));
+    return spares.isEmpty ? null : spares.first.instanceId;
   }
 
   /// Step 3 (one iteration): deploy the single most-expensive affordable unit.
@@ -102,6 +132,10 @@ class AiPlayer {
         .toList()
       ..sort((a, b) => a.def.totalCost.compareTo(b.def.totalCost));
     for (final card in spells) {
+      // Counters are reactive only — never cast them proactively in a main
+      // phase (the chain is empty, so they would just fizzle). Held for
+      // chooseResponse instead.
+      if (_hasOp(card.def, 'COUNTER_SPELL')) continue;
       final targets = chooseTargets(s, me, card.def);
       if (requiresUnitTarget(card.def) &&
           targets.every((t) => t.instanceId == null)) {

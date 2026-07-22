@@ -1380,7 +1380,7 @@
         "TIDE": 1
       },
       "might": 2,
-      "guard": 2,
+      "guard": 3,
       "keywords": [],
       "rarity": "COMMON",
       "text": "When {name} enters, draw a card.",
@@ -1409,8 +1409,8 @@
         "generic": 1,
         "TIDE": 1
       },
-      "might": 0,
-      "guard": 5,
+      "might": 1,
+      "guard": 6,
       "keywords": [
         "BULWARK",
         "INTERCEPT"
@@ -1475,9 +1475,11 @@
       },
       "might": 5,
       "guard": 7,
-      "keywords": [],
+      "keywords": [
+        "SOAR"
+      ],
       "rarity": "UNCOMMON",
-      "text": "",
+      "text": "Soar.",
       "flavor": "The harbor chain was built to keep it out. It thinks the chain is jewelry."
     },
     {
@@ -2148,7 +2150,7 @@
         "DAWN": 2
       },
       "might": 4,
-      "guard": 5,
+      "guard": 4,
       "keywords": [
         "SOAR",
         "LEECH"
@@ -5449,8 +5451,7 @@
         "SF001-045",
         "SF001-046",
         "SF001-048",
-        "SF001-049",
-        "SF001-354"
+        "SF001-049"
       ]
     },
     "DAWN": {
@@ -5476,8 +5477,7 @@
         "SF001-085",
         "SF001-086",
         "SF001-087",
-        "SF001-088",
-        "SF001-394"
+        "SF001-088"
       ]
     }
   }

@@ -5,6 +5,7 @@ CardDef unit(String id,
         {int might = 2,
         int guard = 2,
         Set<Keyword> kw = const {},
+        Map<Dominion, int> cost = const {},
         List<Map<String, dynamic>> effects = const []}) =>
     CardDef(
       id: id,
@@ -14,6 +15,7 @@ CardDef unit(String id,
       might: might,
       guard: guard,
       keywords: kw,
+      costDominion: cost,
       effects: effects,
     );
 
@@ -139,6 +141,43 @@ void main() {
         p1: PlayerState(id: PlayerId.p1, arena: [pinger]), phase: Phase.combat);
     s = Combat.declareAttackers(s, PlayerId.p1, [1]);
     expect(s.p2.health, 24, reason: 'ON_ATTACK pinged the opponent for 1');
+  });
+
+  test('AI never casts a counter proactively in its main phase', () {
+    final counter = rite('Nullwater', [
+      {'op': 'COUNTER_SPELL'}
+    ], cost: const {Dominion.tide: 1});
+    final s = state(
+      p2: PlayerState(
+          id: PlayerId.p2,
+          hand: [ci(1, counter, PlayerId.p2)],
+          aetherPool: const {Dominion.tide: 3}),
+      active: PlayerId.p2,
+    );
+    const ai = AiPlayer(tier: AiTier.tactician);
+    expect(ai.nextSpell(s, PlayerId.p2), isNull,
+        reason: 'a counter must be held for a response, not wasted');
+  });
+
+  test('AI Attunes when mana-light and holding no Wellspring', () {
+    // Turn 3, no wellsprings in play, no wellspring in hand, spare cards.
+    final hand = [
+      ci(1, unit('Cheap', might: 1, guard: 1, cost: const {Dominion.gloom: 2}),
+          PlayerId.p2),
+      ci(2, unit('Big', might: 5, guard: 5, cost: const {Dominion.gloom: 5}),
+          PlayerId.p2),
+      ci(3, unit('Mid', might: 3, guard: 3, cost: const {Dominion.gloom: 3}),
+          PlayerId.p2),
+    ];
+    var s = state(p2: PlayerState(id: PlayerId.p2, hand: hand), active: PlayerId.p2);
+    s = s.copyWith(turnNumber: 3);
+    const ai = AiPlayer(tier: AiTier.tactician);
+    expect(ai.chooseAttune(s, PlayerId.p2), 1,
+        reason: 'attunes the cheapest spare card');
+    // After playResources it becomes a Wellspring that taps for aether.
+    final after = ai.playResources(s, PlayerId.p2);
+    expect(after.p2.arena.any((c) => c.def.type == CardType.wellspring), isTrue);
+    expect(after.p2.aetherPool[Dominion.neutral], 1);
   });
 
   test('AI chooseResponse counters a spell on the chain', () {
