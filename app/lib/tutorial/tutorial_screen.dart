@@ -22,6 +22,7 @@ const _pages = [
     'Wellsprings are your power source. Place ONE per turn from your hand — it\'s free.',
     'Cards cost Aether, shown as symbols in their top-right corner. Playing a card exerts your Wellsprings automatically to pay.',
     'Exerted Wellsprings refresh at the start of your next turn.',
+    'Short on Wellsprings? Use Attune to turn any hand card face-down into a generic Wellspring — your safety valve against a slow start.',
   ], art: 'SF001-043'),
   _TutorialPage(Icons.style, 'Playing cards', [
     'Tap a glowing card in your hand to play it.',
@@ -57,6 +58,8 @@ const _keywords = <(String, IconData, String)>[
   ('Leech', Icons.favorite_outline, 'You heal for the damage it deals.'),
   ('Dread', Icons.warning_amber, 'Must be blocked by two or more Units, or none.'),
   ('Bulwark', Icons.security, 'Cannot attack — a pure defender.'),
+  ('Ambush', Icons.night_shelter_outlined,
+      'May block even while exerted (has already attacked).'),
   ('Aegis N', Icons.gpp_good_outlined, 'Prevents N combat damage each combat.'),
 ];
 

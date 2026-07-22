@@ -15,12 +15,14 @@ enum DuelUiState {
 }
 
 class DuelEvent {
-  final String kind; // 'attack' | 'damagePlayer' | 'draw' | 'play'
+  final String kind; // 'attack' | 'damagePlayer' | 'draw' | 'play' | 'proc' ...
   final int? instanceId;
   final int? amount;
   final PlayerId? player;
+  final String? label; // e.g. keyword name for a 'proc' flash, turn banner text
 
-  const DuelEvent(this.kind, {this.instanceId, this.amount, this.player});
+  const DuelEvent(this.kind,
+      {this.instanceId, this.amount, this.player, this.label});
 }
 
 /// What a pending spell/ability is allowed to aim at.
@@ -106,6 +108,10 @@ class DuelController extends ChangeNotifier {
     awaitingMulligan = false;
     notifyListeners();
     await begin();
+    if (firstPlayer == human && !isGameOver) {
+      _emit(DuelEvent('turnStart', player: human));
+      notifyListeners();
+    }
   }
 
   /// Called after the mulligan. If the enemy is on the play, run its opening
@@ -196,8 +202,41 @@ class DuelController extends ChangeNotifier {
         .any((c) => c.def.type == CardType.unit);
   }
 
+  /// Attune mode: the next hand card tapped is turned face-down into a
+  /// generic Wellspring (anti-mana-screw). Toggled from the action bar.
+  bool attuneMode = false;
+
+  bool get canAttune =>
+      ui == DuelUiState.playerMain &&
+      !busy &&
+      !me.playedWellspringThisTurn &&
+      me.hand.isNotEmpty;
+
+  void toggleAttuneMode() {
+    if (!canAttune && !attuneMode) return;
+    attuneMode = !attuneMode;
+    targetingId = null;
+    lastError = null;
+    notifyListeners();
+  }
+
   void playHandCard(int instanceId) {
     if (isGameOver) return;
+
+    // Attune consumes the tapped card into a Wellspring instead of playing it.
+    if (attuneMode) {
+      attuneMode = false;
+      try {
+        state = Game.attune(state, human, instanceId);
+        _log('You Attune a card into a generic Wellspring.');
+        _emit(const DuelEvent('play'));
+      } on StateError catch (e) {
+        lastError = e.message;
+      }
+      notifyListeners();
+      return;
+    }
+
     // Instant-speed: during the enemy's attack, only Rites may be cast in
     // response. Otherwise normal main-phase rules (and never while busy).
     final responding = ui == DuelUiState.playerBlocking ||
@@ -262,37 +301,114 @@ class DuelController extends ChangeNotifier {
 
   void _resolvePlay(CardInstance card, List<EffectTarget> targets,
       {String? targetLabel}) {
-    final foeHandBefore = foe.hand.length;
     try {
       if (card.def.type == CardType.wellspring) {
         state = Game.playWellspring(state, human, card.instanceId);
         _log('You placed ${card.def.name}.');
-      } else {
+        _emit(DuelEvent('play', instanceId: card.instanceId));
+      } else if (card.def.type == CardType.unit) {
+        final foeHandBefore = foe.hand.length;
         _ensureAether(card.def);
-        if (card.def.type == CardType.unit) {
-          state =
-              Game.playUnit(state, human, card.instanceId, chosen: targets);
-          _log(targetLabel == null
-              ? 'You summoned ${card.def.name}.'
-              : 'You summoned ${card.def.name}, targeting $targetLabel.');
-        } else {
-          state = Chain.cast(state, human, card.instanceId, targets: targets);
-          state = Chain.resolveAll(state);
-          _log(targetLabel == null
-              ? 'You cast ${card.def.name}.'
-              : 'You cast ${card.def.name} at $targetLabel.');
+        state = Game.playUnit(state, human, card.instanceId, chosen: targets);
+        _log(targetLabel == null
+            ? 'You summoned ${card.def.name}.'
+            : 'You summoned ${card.def.name}, targeting $targetLabel.');
+        _emit(DuelEvent('play', instanceId: card.instanceId));
+        for (var i = 0; i < foeHandBefore - foe.hand.length; i++) {
+          _emit(DuelEvent('discard', player: enemy));
         }
+        _checkGameOver();
+        _pruneDeadAttackers();
+      } else {
+        // Spell (Rite/Ritual): cast onto the chain, then give the enemy an
+        // instant-speed response before the chain resolves.
+        _ensureAether(card.def);
+        state = Chain.cast(state, human, card.instanceId, targets: targets);
+        _log(targetLabel == null
+            ? 'You cast ${card.def.name}.'
+            : 'You cast ${card.def.name} at $targetLabel.');
+        _emit(DuelEvent('play', instanceId: card.instanceId));
+        notifyListeners();
+        unawaited(_resolvePlayerSpellChain());
+        return;
       }
-      _emit(DuelEvent('play', instanceId: card.instanceId));
-      final discarded = foeHandBefore - foe.hand.length;
-      for (var i = 0; i < discarded; i++) {
-        _emit(DuelEvent('discard', player: enemy));
-      }
-      _checkGameOver();
-      _pruneDeadAttackers();
     } on StateError catch (e) {
       lastError = e.message;
     }
+    notifyListeners();
+  }
+
+  /// Resolve a spell the human just put on the chain: the enemy may respond at
+  /// instant speed (counter or snipe), then the whole chain resolves with the
+  /// same readable feedback used on the enemy's turn.
+  Future<void> _resolvePlayerSpellChain() async {
+    Future<void> beat([int ms = 360]) async {
+      notifyListeners();
+      await Future<void>.delayed(Duration(milliseconds: ms));
+    }
+
+    // Enemy instant-speed response (one level deep).
+    final resp = isGameOver ? null : enemyAi.chooseResponse(state, enemy);
+    if (resp != null) {
+      final rc = foe.hand.where((c) => c.instanceId == resp.cardId).firstOrNull;
+      if (rc != null) {
+        enemyCastName = rc.def.name;
+        enemyCastTargetId = resp.unitTargetId;
+        enemyCastAtPlayer = resp.targets.any((t) => t.playerId == human);
+        _log('Enemy responds with ${rc.def.name}.');
+        _emit(const DuelEvent('play'));
+        await beat(780);
+        try {
+          state = Chain.cast(state, enemy, resp.cardId, targets: resp.targets);
+        } on StateError {
+          // ignore — could not afford after all
+        }
+        enemyCastName = null;
+        enemyCastTargetId = null;
+        enemyCastAtPlayer = false;
+      }
+    }
+
+    // Snapshot, resolve the chain, then surface every effect.
+    final myUnitsBefore = {for (final c in me.arena) c.instanceId};
+    final foeUnitsBefore = {for (final c in foe.arena) c.instanceId};
+    final dmgBefore = <int, int>{
+      for (final c in [...me.arena, ...foe.arena]) c.instanceId: c.damage,
+    };
+    final myHpBefore = me.health;
+    final foeHpBefore = foe.health;
+    final foeHandBefore = foe.hand.length;
+
+    state = Chain.resolveAll(state);
+
+    final myUnitsAfter = {for (final c in me.arena) c.instanceId};
+    final foeUnitsAfter = {for (final c in foe.arena) c.instanceId};
+    final died = myUnitsBefore.difference(myUnitsAfter).length +
+        foeUnitsBefore.difference(foeUnitsAfter).length;
+    for (var i = 0; i < died; i++) {
+      _emit(const DuelEvent('death'));
+    }
+    for (final c in [...me.arena, ...foe.arena]) {
+      final d = c.damage - (dmgBefore[c.instanceId] ?? c.damage);
+      if (d > 0) {
+        _emit(DuelEvent('unitDamaged',
+            instanceId: c.instanceId, amount: d, player: c.owner));
+      }
+    }
+    final foeHpLost = foeHpBefore - foe.health;
+    if (foeHpLost > 0) {
+      _emit(DuelEvent('damagePlayer', amount: foeHpLost, player: enemy));
+    }
+    final myHpLost = myHpBefore - me.health;
+    if (myHpLost > 0) {
+      _emit(DuelEvent('damagePlayer', amount: myHpLost, player: human));
+    }
+    for (var i = 0; i < foeHandBefore - foe.hand.length; i++) {
+      _emit(DuelEvent('discard', player: enemy));
+    }
+
+    _checkGameOver();
+    _pruneDeadAttackers();
     notifyListeners();
   }
 
@@ -411,7 +527,31 @@ class DuelController extends ChangeNotifier {
       for (final c in me.arena) c.instanceId: c,
       for (final c in foe.arena) c.instanceId: c,
     };
+
+    // Collect the "flashy" keywords among combatants for proc callouts.
+    const flashy = {
+      Keyword.swiftstrike,
+      Keyword.venom,
+      Keyword.leech,
+      Keyword.rampage,
+    };
+    final procs = <Keyword>{};
+    for (final b in blocks) {
+      final atk = before[b.attackerId];
+      if (atk != null) procs.addAll(atk.keywords.where(flashy.contains));
+      if (b.blockerIds.isNotEmpty) {
+        for (final bid in b.blockerIds) {
+          final bl = before[bid];
+          if (bl != null) procs.addAll(bl.keywords.where(flashy.contains));
+        }
+      }
+    }
+
     state = Combat.resolveDamage(state, attacker, blocks);
+
+    for (final kw in procs) {
+      _emit(DuelEvent('proc', label: kw.name.toUpperCase()));
+    }
     final after = <int>{
       for (final c in me.arena) c.instanceId,
       for (final c in foe.arena) c.instanceId,
@@ -692,7 +832,8 @@ class DuelController extends ChangeNotifier {
     }
 
     if (isGameOver) return;
-    await beat(350);
+    _emit(DuelEvent('turnStart', player: enemy));
+    await beat(650);
 
     // Normalize to the enemy's Main 1. Handles both the post-endTurn start
     // (enemy at refresh) and the enemy-on-the-play opening (already at main1,
@@ -747,6 +888,7 @@ class DuelController extends ChangeNotifier {
       state = Game.nextPhase(state);
     }
     _log('Your turn.');
+    _emit(DuelEvent('turnStart', player: human));
     _emit(const DuelEvent('draw', player: human));
     if (_gameOverNow()) return;
     ui = DuelUiState.playerMain;

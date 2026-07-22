@@ -77,6 +77,21 @@ class _DuelScreenState extends State<DuelScreen>
           _spawnFloat('-${e.amount}',
               e.player == DuelController.enemy ? 0.28 : 0.66,
               AppTheme.danger);
+        case 'proc':
+          if (e.label != null) {
+            _spawnFloat(e.label!, 0.42, const Color(0xFFE6CE96));
+          }
+        case 'turnStart':
+          _turnBanner = e.player == DuelController.human
+              ? 'YOUR TURN'
+              : 'ENEMY TURN';
+          _turnBannerSeq++;
+          final seq = _turnBannerSeq;
+          Future.delayed(const Duration(milliseconds: 1200), () {
+            if (mounted && seq == _turnBannerSeq) {
+              setState(() => _turnBanner = null);
+            }
+          });
         case 'discard':
           _spawnDiscard(e.player == DuelController.enemy);
         case 'damagePlayer':
@@ -103,6 +118,8 @@ class _DuelScreenState extends State<DuelScreen>
   bool _endSoundPlayed = false;
   final Set<int> _lunging = {};
   final Set<int> _hitUnits = {}; // units flashing from spell damage
+  String? _turnBanner; // "YOUR TURN" / "ENEMY TURN" sweep
+  int _turnBannerSeq = 0;
   final List<_DiscardFly> _discards = [];
   int _discardSeq = 0;
 
@@ -163,6 +180,7 @@ class _DuelScreenState extends State<DuelScreen>
                     _enemyBar(),
                     _phaseBar(),
                     if (c.enemyCastName != null) _enemyCastBanner(),
+                    if (c.attuneMode) _attuneBanner(),
                     if (c.isTargeting) _targetingBanner(),
                     if (c.ui == DuelUiState.playerBlocking) _blockingBanner(),
                     if (c.ui == DuelUiState.playerResponse) _responseBanner(),
@@ -174,6 +192,7 @@ class _DuelScreenState extends State<DuelScreen>
                 _hitFlash(),
                 ..._floats.map(_floatWidget),
                 ..._discards.map(_discardWidget),
+                if (_turnBanner != null) _turnBannerOverlay(),
                 if (c.awaitingMulligan) _mulliganOverlay(),
                 if (c.isGameOver) _gameOverOverlay(),
               ],
@@ -963,6 +982,24 @@ class _DuelScreenState extends State<DuelScreen>
     );
   }
 
+  Widget _attuneBanner() {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(14, 2, 14, 2),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFFB48AD1).withValues(alpha: 0.16),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFFB48AD1).withValues(alpha: 0.7)),
+      ),
+      child: const Text(
+        'Tap a card to Attune it into a generic Wellspring (uses your land drop)',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            color: Color(0xFFE0CCF2), fontSize: 12, fontWeight: FontWeight.w700),
+      ),
+    );
+  }
+
   Widget _tag(String text, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -1011,6 +1048,12 @@ class _DuelScreenState extends State<DuelScreen>
                       const TextStyle(color: AppTheme.danger, fontSize: 11)),
             ),
           if (c.ui == DuelUiState.playerMain) ...[
+            if (c.attuneMode)
+              _btn('✕ Cancel', AppTheme.textMuted, c.toggleAttuneMode)
+            else if (c.canAttune) ...[
+              _btn('⤓ Attune', const Color(0xFFB48AD1), c.toggleAttuneMode),
+              const SizedBox(width: 8),
+            ],
             _btn('⚔ Combat', AppTheme.danger, c.enterCombat),
             const SizedBox(width: 8),
             _btn('End Turn', const Color(0xFF6FB0DC), () => c.endTurn()),
@@ -1269,6 +1312,65 @@ class _DuelScreenState extends State<DuelScreen>
                         Shadow(color: Colors.black, blurRadius: 8)
                       ])),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _turnBannerOverlay() {
+    final isYou = _turnBanner == 'YOUR TURN';
+    final color = isYou ? const Color(0xFF7FE0A8) : AppTheme.danger;
+    return Positioned.fill(
+      child: IgnorePointer(
+        child: Center(
+          child: TweenAnimationBuilder<double>(
+            key: ValueKey(_turnBannerSeq),
+            tween: Tween(begin: 0, end: 1),
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeOut,
+            builder: (context, t, _) {
+              // slide in from the left, hold, fade near the end
+              final dx = (1 - t) * -120;
+              final op = t < 0.85 ? 1.0 : (1 - (t - 0.85) / 0.15);
+              return Opacity(
+                opacity: op.clamp(0.0, 1.0),
+                child: Transform.translate(
+                  offset: Offset(dx, 0),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Colors.transparent,
+                        color.withValues(alpha: 0.22),
+                        color.withValues(alpha: 0.22),
+                        Colors.transparent,
+                      ]),
+                      border: Border(
+                        top: BorderSide(color: color.withValues(alpha: 0.7)),
+                        bottom: BorderSide(color: color.withValues(alpha: 0.7)),
+                      ),
+                    ),
+                    child: Text(
+                      _turnBanner!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Cinzel',
+                        color: Colors.white,
+                        fontSize: 26,
+                        letterSpacing: 8,
+                        fontWeight: FontWeight.w900,
+                        shadows: [
+                          Shadow(color: color, blurRadius: 18),
+                          const Shadow(color: Colors.black, blurRadius: 6),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),

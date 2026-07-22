@@ -193,6 +193,27 @@ class EffectInterpreter {
       case 'UNCOUNTERABLE':
         return s; // static marker, checked by the chain resolver
 
+      case 'GRANT_KEYWORD':
+        // Give a target Unit a keyword until end of turn (cleared in _endTurn).
+        return _forEachTarget(s, targets, (state, t) {
+          if (t.instanceId == null) return state;
+          final kw = Keyword.values
+              .byName((effect['keyword'] as String).toLowerCase());
+          return _mapUnit(state, t.instanceId!,
+              (c) => c.copyWith(tempKeywords: {...c.tempKeywords, kw}));
+        });
+
+      case 'COUNTER_SPELL':
+        // Counter the spell directly beneath this one on the chain. This op
+        // runs while the counter itself has already been popped by resolveTop,
+        // so chain.last is its target. Respects UNCOUNTERABLE.
+        if (s.chain.isEmpty) return s;
+        final idx = s.chain.length - 1;
+        if (s.chain[idx].uncounterable) return s;
+        final chain = [...s.chain];
+        chain[idx] = chain[idx].copyWith(countered: true);
+        return s.copyWith(chain: chain);
+
       case 'SEARCH_DECK':
         // Find the first Unit/card matching a filter and move it to hand
         // (default) or the Arena. Simplified: takes the first match.

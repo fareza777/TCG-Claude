@@ -62,6 +62,29 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
     return def.rarity == Rarity.legendary ? 1 : 3;
   }
 
+  /// Non-Wellspring spell/unit count by total Aether cost (index 7 = 7+).
+  List<int> get _manaCurve {
+    final buckets = List<int>.filled(8, 0);
+    _deck.forEach((id, count) {
+      final def = widget.library.card(id);
+      if (def.type == CardType.wellspring) return;
+      final cost = def.totalCost.clamp(0, 7);
+      buckets[cost] += count;
+    });
+    return buckets;
+  }
+
+  /// The non-neutral Dominions present in the deck (identity check).
+  Set<Dominion> get _deckDominions {
+    final doms = <Dominion>{};
+    _deck.forEach((id, _) {
+      for (final d in widget.library.card(id).dominions) {
+        if (d != Dominion.neutral) doms.add(d);
+      }
+    });
+    return doms;
+  }
+
   bool _canAdd(CardDef def) {
     if (_size >= maxDeck) return false;
     final inDeck = _deck[def.id] ?? 0;
@@ -281,6 +304,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
           child: Column(
             children: [
               _header(valid),
+              _curveStrip(),
               _filterBar(),
               Expanded(
                 child: Row(
@@ -350,6 +374,67 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                       letterSpacing: 1)),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  /// Compact mana curve + legality hints (deck-identity focus).
+  Widget _curveStrip() {
+    final curve = _manaCurve;
+    final peak = curve.fold(1, (a, b) => b > a ? b : a);
+    final doms = _deckDominions;
+    final splashy = doms.length > 2; // 1–2 Dominions is the intended identity
+    return Container(
+      margin: const EdgeInsets.fromLTRB(12, 2, 12, 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.25),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppTheme.panelBorder.withValues(alpha: 0.6)),
+      ),
+      child: Row(
+        children: [
+          const Text('Curve',
+              style: TextStyle(color: AppTheme.textMuted, fontSize: 10)),
+          const SizedBox(width: 8),
+          for (var i = 0; i < curve.length; i++) ...[
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(curve[i] == 0 ? '' : '${curve[i]}',
+                      style: const TextStyle(
+                          color: AppTheme.textMuted, fontSize: 8)),
+                  Container(
+                    height: 22 * (curve[i] / peak),
+                    margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFC9A86A).withValues(alpha: 0.75),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  Text(i == 7 ? '7+' : '$i',
+                      style: const TextStyle(
+                          color: AppTheme.textMuted, fontSize: 8)),
+                ],
+              ),
+            ),
+          ],
+          const SizedBox(width: 8),
+          // Dominion identity dots + warning if over-splashed.
+          for (final d in doms)
+            Padding(
+              padding: const EdgeInsets.only(left: 3),
+              child: Icon(DominionStyle.of(d).icon,
+                  size: 13, color: DominionStyle.of(d).glow),
+            ),
+          if (splashy)
+            const Padding(
+              padding: EdgeInsets.only(left: 6),
+              child: Icon(Icons.warning_amber,
+                  size: 14, color: Color(0xFFE0A84A)),
+            ),
         ],
       ),
     );

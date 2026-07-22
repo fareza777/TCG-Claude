@@ -191,6 +191,84 @@ class AiPlayer {
     return targets;
   }
 
+  /// Choose an instant-speed (Rite) response to the spell currently on the
+  /// chain, or null to pass. Gives the AI real counterplay on the human's
+  /// turn: it will counter an incoming spell when it can, and — on the hardest
+  /// tier — snipe a genuine threat with instant burn.
+  ({int cardId, List<EffectTarget> targets, int? unitTargetId})? chooseResponse(
+      GameState s, PlayerId me) {
+    if (s.chain.isEmpty) return null;
+    final topCounterable = !s.chain.last.uncounterable;
+    final rites = s
+        .player(me)
+        .hand
+        .where((c) => c.def.type == CardType.rite)
+        .toList()
+      ..sort((a, b) => a.def.totalCost.compareTo(b.def.totalCost));
+
+    // 1) Counter the incoming spell if we hold a counter and it is legal.
+    for (final card in rites) {
+      if (!_hasOp(card.def, 'COUNTER_SPELL') || !topCounterable) continue;
+      if (_castable(s, me, card.instanceId, const [])) {
+        return (cardId: card.instanceId, targets: const [], unitTargetId: null);
+      }
+    }
+
+    // 2) Strategist only: respond by killing a real threat with instant burn.
+    if (tier == AiTier.strategist) {
+      for (final card in rites) {
+        if (!_hasOp(card.def, 'DEAL_DAMAGE')) continue;
+        final targets = chooseTargets(s, me, card.def);
+        int? unitId;
+        for (final t in targets) {
+          if (t.instanceId != null) {
+            unitId = t.instanceId;
+            break;
+          }
+        }
+        if (unitId == null) continue;
+        CardInstance? u;
+        for (final c in s.player(me.opponent).arena) {
+          if (c.instanceId == unitId) u = c;
+        }
+        if (u == null) continue;
+        final amount = _firstDamageAmount(card.def);
+        final killable = u.guard - u.damage <= amount && (u.might + u.guard) >= 4;
+        if (killable && _castable(s, me, card.instanceId, targets)) {
+          return (cardId: card.instanceId, targets: targets, unitTargetId: unitId);
+        }
+      }
+    }
+    return null;
+  }
+
+  bool _hasOp(CardDef def, String op) {
+    for (final block in def.effects) {
+      for (final e in (block['effects'] as List? ?? const [])) {
+        if ((e as Map)['op'] == op) return true;
+      }
+    }
+    return false;
+  }
+
+  int _firstDamageAmount(CardDef def) {
+    for (final block in def.effects) {
+      for (final e in (block['effects'] as List? ?? const [])) {
+        if ((e as Map)['op'] == 'DEAL_DAMAGE') return (e['amount'] as int?) ?? 0;
+      }
+    }
+    return 0;
+  }
+
+  bool _castable(GameState s, PlayerId me, int cardId, List<EffectTarget> t) {
+    try {
+      Chain.cast(s, me, cardId, targets: t);
+      return true;
+    } on StateError {
+      return false;
+    }
+  }
+
   bool requiresUnitTarget(CardDef def) {
     final anyTarget = def.text.toLowerCase().contains('any target');
     for (final block in def.effects) {
@@ -331,7 +409,9 @@ class AiPlayer {
     final available = s
         .player(me)
         .arena
-        .where((c) => c.def.type == CardType.unit && !c.exerted)
+        .where((c) =>
+            c.def.type == CardType.unit &&
+            (!c.exerted || c.keywords.contains(Keyword.ambush)))
         .toList();
     final attackers = [
       for (final id in incomingAttackerIds)

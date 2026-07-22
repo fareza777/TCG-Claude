@@ -1,3 +1,4 @@
+import '../effects/interpreter.dart';
 import '../model/enums.dart';
 import '../model/game_state.dart';
 
@@ -20,6 +21,8 @@ class AttackDeclaration {
 /// - Venom: any damage dealt to a Unit destroys it.
 /// - Rampage: excess damage over blockers' guard hits the defending player.
 /// - Leech: controller heals for damage dealt.
+/// - Ambush: may block even while exerted (defensive vigilance).
+/// - Aegis N: prevents N combat damage each combat.
 class Combat {
   /// Validate and mark attackers (exert unless Alert).
   static GameState declareAttackers(
@@ -34,13 +37,27 @@ class Combat {
       if (i < 0) throw StateError('Attacker $id not in arena');
       final c = arena[i];
       if (!c.canAttack) throw StateError('${c.def.name} cannot attack');
-      if (c.def.keywords.contains(Keyword.bulwark)) {
+      if (c.keywords.contains(Keyword.bulwark)) {
         throw StateError('${c.def.name} has Bulwark and cannot attack');
       }
-      final exerts = !c.def.keywords.contains(Keyword.alert);
+      final exerts = !c.keywords.contains(Keyword.alert);
       arena[i] = c.copyWith(exerted: exerts ? true : c.exerted);
     }
-    return s.withPlayer(p.copyWith(arena: arena));
+    var out = s.withPlayer(p.copyWith(arena: arena));
+
+    // Fire ON_ATTACK triggers for each attacker. Untargeted selectors resolve;
+    // CHOOSE selectors with no supplied target are skipped (like death triggers).
+    for (final id in attackerIds) {
+      final unit =
+          out.player(attacker).arena.firstWhere((c) => c.instanceId == id);
+      for (final block in unit.def.effects) {
+        if (block['trigger'] == 'ON_ATTACK') {
+          out = EffectInterpreter.applyTrigger(out, unit, block);
+          if (out.winner != null) return out;
+        }
+      }
+    }
+    return out;
   }
 
   /// Validate a block assignment against keyword constraints.
@@ -55,18 +72,18 @@ class Combat {
       final attacker =
           attArena.firstWhere((c) => c.instanceId == atk.attackerId);
       if (atk.blockerIds.isEmpty) continue;
-      if (attacker.def.keywords.contains(Keyword.dread) &&
+      if (attacker.keywords.contains(Keyword.dread) &&
           atk.blockerIds.length < 2) {
         throw StateError('${attacker.def.name} has Dread: needs 2+ blockers');
       }
       for (final bid in atk.blockerIds) {
         final blocker = defArena.firstWhere((c) => c.instanceId == bid);
-        if (blocker.exerted) {
+        if (blocker.exerted && !blocker.keywords.contains(Keyword.ambush)) {
           throw StateError('${blocker.def.name} is exerted and cannot block');
         }
-        if (attacker.def.keywords.contains(Keyword.soar) &&
-            !blocker.def.keywords.contains(Keyword.soar) &&
-            !blocker.def.keywords.contains(Keyword.intercept)) {
+        if (attacker.keywords.contains(Keyword.soar) &&
+            !blocker.keywords.contains(Keyword.soar) &&
+            !blocker.keywords.contains(Keyword.intercept)) {
           throw StateError('${blocker.def.name} cannot block Soar');
         }
       }
@@ -106,13 +123,13 @@ class Combat {
                 venomSnapshot.contains(atk.attackerId);
 
         final attackerStrikesNow =
-            attacker.def.keywords.contains(Keyword.swiftstrike) == swiftWindow;
+            attacker.keywords.contains(Keyword.swiftstrike) == swiftWindow;
 
         if (attackerStrikesNow && !attackerDead) {
           var remaining = attacker.might;
           if (atk.blockerIds.isEmpty) {
             damageToDefender += remaining;
-            if (attacker.def.keywords.contains(Keyword.leech)) {
+            if (attacker.keywords.contains(Keyword.leech)) {
               attackerHeal += remaining;
             }
           } else {
@@ -121,21 +138,21 @@ class Combat {
               final blocker = find(attackerPid.opponent, bid);
               final lethal = blocker.guard - (damageToUnit[bid] ?? 0);
               final assign =
-                  attacker.def.keywords.contains(Keyword.venom) ? 1 : lethal;
+                  attacker.keywords.contains(Keyword.venom) ? 1 : lethal;
               final dealt = remaining < assign ? remaining : assign;
               damageToUnit[bid] = (damageToUnit[bid] ?? 0) + dealt;
-              if (attacker.def.keywords.contains(Keyword.venom) && dealt > 0) {
+              if (attacker.keywords.contains(Keyword.venom) && dealt > 0) {
                 venomHit.add(bid);
               }
-              if (attacker.def.keywords.contains(Keyword.leech)) {
+              if (attacker.keywords.contains(Keyword.leech)) {
                 attackerHeal += dealt;
               }
               remaining -= dealt;
             }
             if (remaining > 0 &&
-                attacker.def.keywords.contains(Keyword.rampage)) {
+                attacker.keywords.contains(Keyword.rampage)) {
               damageToDefender += remaining;
-              if (attacker.def.keywords.contains(Keyword.leech)) {
+              if (attacker.keywords.contains(Keyword.leech)) {
                 attackerHeal += remaining;
               }
             }
@@ -148,15 +165,15 @@ class Combat {
           final blockerDead = (dmgSnapshot[bid] ?? 0) >= blocker.guard ||
               venomSnapshot.contains(bid);
           final blockerStrikesNow =
-              blocker.def.keywords.contains(Keyword.swiftstrike) == swiftWindow;
+              blocker.keywords.contains(Keyword.swiftstrike) == swiftWindow;
           if (!blockerStrikesNow || blockerDead) continue;
           damageToUnit[atk.attackerId] =
               (damageToUnit[atk.attackerId] ?? 0) + blocker.might;
-          if (blocker.def.keywords.contains(Keyword.venom) &&
+          if (blocker.keywords.contains(Keyword.venom) &&
               blocker.might > 0) {
             venomHit.add(atk.attackerId);
           }
-          if (blocker.def.keywords.contains(Keyword.leech)) {
+          if (blocker.keywords.contains(Keyword.leech)) {
             defenderHeal += blocker.might;
           }
         }
