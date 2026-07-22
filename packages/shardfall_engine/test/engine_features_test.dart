@@ -52,28 +52,6 @@ GameState state({
     );
 
 void main() {
-  group('Attune', () {
-    test('turns a hand card into a neutral Wellspring, using the land drop', () {
-      final card = ci(1, unit('Grunt'), PlayerId.p1);
-      var s = state(p1: PlayerState(id: PlayerId.p1, hand: [card]));
-      s = Game.attune(s, PlayerId.p1, 1);
-      expect(s.p1.hand, isEmpty);
-      expect(s.p1.arena.single.def.type, CardType.wellspring);
-      expect(s.p1.playedWellspringThisTurn, isTrue);
-      // A second placement (real Wellspring or Attune) is now illegal.
-      expect(() => Game.attune(s, PlayerId.p1, 1), throwsStateError);
-    });
-
-    test('attuned Wellspring taps for generic Aether', () {
-      final card = ci(1, unit('Grunt'), PlayerId.p1);
-      var s = state(p1: PlayerState(id: PlayerId.p1, hand: [card]));
-      s = Game.attune(s, PlayerId.p1, 1);
-      final wellId = s.p1.arena.single.instanceId;
-      s = Game.exertForAether(s, PlayerId.p1, wellId);
-      expect(s.p1.aetherPool[Dominion.neutral], 1);
-    });
-  });
-
   test('GRANT_KEYWORD gives a keyword combat actually honours', () {
     final u = ci(1, unit('Flyer'), PlayerId.p1);
     var s = state(p1: PlayerState(id: PlayerId.p1, arena: [u]));
@@ -157,27 +135,6 @@ void main() {
     const ai = AiPlayer(tier: AiTier.tactician);
     expect(ai.nextSpell(s, PlayerId.p2), isNull,
         reason: 'a counter must be held for a response, not wasted');
-  });
-
-  test('AI Attunes when mana-light and holding no Wellspring', () {
-    // Turn 3, no wellsprings in play, no wellspring in hand, spare cards.
-    final hand = [
-      ci(1, unit('Cheap', might: 1, guard: 1, cost: const {Dominion.gloom: 2}),
-          PlayerId.p2),
-      ci(2, unit('Big', might: 5, guard: 5, cost: const {Dominion.gloom: 5}),
-          PlayerId.p2),
-      ci(3, unit('Mid', might: 3, guard: 3, cost: const {Dominion.gloom: 3}),
-          PlayerId.p2),
-    ];
-    var s = state(p2: PlayerState(id: PlayerId.p2, hand: hand), active: PlayerId.p2);
-    s = s.copyWith(turnNumber: 3);
-    const ai = AiPlayer(tier: AiTier.tactician);
-    expect(ai.chooseAttune(s, PlayerId.p2), 1,
-        reason: 'attunes the cheapest spare card');
-    // After playResources it becomes a Wellspring that taps for aether.
-    final after = ai.playResources(s, PlayerId.p2);
-    expect(after.p2.arena.any((c) => c.def.type == CardType.wellspring), isTrue);
-    expect(after.p2.aetherPool[Dominion.neutral], 1);
   });
 
   test('AI chooseResponse counters a spell on the chain', () {

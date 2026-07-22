@@ -145,38 +145,6 @@ class Game {
     );
   }
 
-  /// The face-down Wellspring produced by Attune. Taps for one *generic*
-  /// Aether (Dominion.neutral), which pays generic costs but not coloured pips.
-  static const attunedWellDef = CardDef(
-    id: 'ATTUNED',
-    name: 'Attuned Shard',
-    dominions: [Dominion.neutral],
-    type: CardType.wellspring,
-    subtype: 'Attuned',
-    text: 'Attuned. Taps for 1 generic Aether.',
-  );
-
-  /// Attune: turn any hand card face-down into an Attuned Wellspring. Uses your
-  /// one Wellspring placement for the turn (so it cannot be combined with a
-  /// real Wellspring drop). This is the anti-mana-screw safety valve.
-  static GameState attune(GameState s, PlayerId pid, int instanceId) {
-    final p = s.player(pid);
-    if (p.playedWellspringThisTurn) {
-      throw StateError('Already placed a Wellspring or Attuned this turn');
-    }
-    if (!p.hand.any((c) => c.instanceId == instanceId)) {
-      throw StateError('Card $instanceId not in hand');
-    }
-    final well =
-        CardInstance(instanceId: instanceId, def: attunedWellDef, owner: pid);
-    return s.withPlayer(p.copyWith(
-      hand: [...p.hand]..removeWhere((c) => c.instanceId == instanceId),
-      arena: [...p.arena, well],
-      playedWellspringThisTurn: true,
-      usedAttuneThisTurn: true,
-    ));
-  }
-
   /// Play a Wellspring from hand (max 1 per turn).
   static GameState playWellspring(GameState s, PlayerId pid, int instanceId) {
     final p = s.player(pid);

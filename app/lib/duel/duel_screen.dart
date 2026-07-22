@@ -34,6 +34,8 @@ class _DuelScreenState extends State<DuelScreen>
     _shake = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 360));
     c.addListener(_onUpdate);
+    // Duels get their own, more driving ambient bed.
+    AudioManager.instance.enterSection('battle_ambient');
     // begin() is triggered after the mulligan (see _mulliganOverlay).
   }
 
@@ -44,6 +46,8 @@ class _DuelScreenState extends State<DuelScreen>
   void dispose() {
     c.removeListener(_onUpdate);
     _shake.dispose();
+    // Restore the calm ambient bed when leaving the duel.
+    AudioManager.instance.enterSection('ambient');
     super.dispose();
   }
 
@@ -181,7 +185,6 @@ class _DuelScreenState extends State<DuelScreen>
                     _phaseBar(),
                     if (c.enemyCastName != null) _enemyCastBanner(),
                     if (c.playerCastName != null) _playerCastBanner(),
-                    if (c.attuneMode) _attuneBanner(),
                     if (c.isTargeting) _targetingBanner(),
                     if (c.ui == DuelUiState.playerBlocking) _blockingBanner(),
                     if (c.ui == DuelUiState.playerResponse) _responseBanner(),
@@ -191,6 +194,7 @@ class _DuelScreenState extends State<DuelScreen>
                   ],
                 ),
                 _hitFlash(),
+                if (c.enemyCastCard != null) _castCardReveal(),
                 ..._floats.map(_floatWidget),
                 ..._discards.map(_discardWidget),
                 if (_turnBanner != null) _turnBannerOverlay(),
@@ -1061,24 +1065,6 @@ class _DuelScreenState extends State<DuelScreen>
     );
   }
 
-  Widget _attuneBanner() {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(14, 2, 14, 2),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      decoration: BoxDecoration(
-        color: const Color(0xFFB48AD1).withValues(alpha: 0.16),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFB48AD1).withValues(alpha: 0.7)),
-      ),
-      child: const Text(
-        'Tap a card to Attune it into a generic Wellspring (uses your land drop)',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            color: Color(0xFFE0CCF2), fontSize: 12, fontWeight: FontWeight.w700),
-      ),
-    );
-  }
-
   Widget _tag(String text, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -1127,12 +1113,6 @@ class _DuelScreenState extends State<DuelScreen>
                       const TextStyle(color: AppTheme.danger, fontSize: 11)),
             ),
           if (c.ui == DuelUiState.playerMain) ...[
-            if (c.attuneMode)
-              _btn('✕ Cancel', AppTheme.textMuted, c.toggleAttuneMode)
-            else if (c.canAttune) ...[
-              _btn('⤓ Attune', const Color(0xFFB48AD1), c.toggleAttuneMode),
-              const SizedBox(width: 8),
-            ],
             _btn('⚔ Combat', AppTheme.danger, c.enterCombat),
             const SizedBox(width: 8),
             _btn('End Turn', const Color(0xFF6FB0DC), () => c.endTurn()),
@@ -1390,6 +1370,44 @@ class _DuelScreenState extends State<DuelScreen>
                       shadows: const [
                         Shadow(color: Colors.black, blurRadius: 8)
                       ])),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Reveal the enemy's actual spell card in the centre while it is cast, so
+  /// the player sees the card itself — not just its name.
+  Widget _castCardReveal() {
+    final def = c.enemyCastCard!;
+    return Positioned.fill(
+      child: IgnorePointer(
+        child: Align(
+          alignment: const Alignment(0, -0.22),
+          child: TweenAnimationBuilder<double>(
+            key: ValueKey('reveal${def.id}'),
+            tween: Tween(begin: 0, end: 1),
+            duration: const Duration(milliseconds: 340),
+            curve: Curves.easeOutBack,
+            builder: (context, t, child) => Transform.translate(
+              offset: Offset(0, (1 - t) * -40),
+              child: Transform.scale(
+                scale: 0.7 + 0.3 * t.clamp(0.0, 1.0),
+                child: Opacity(opacity: t.clamp(0.0, 1.0), child: child),
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                      color: AppTheme.danger.withValues(alpha: 0.55),
+                      blurRadius: 34,
+                      spreadRadius: 4),
+                ],
+              ),
+              child: CardWidget(def: def, width: 150),
             ),
           ),
         ),

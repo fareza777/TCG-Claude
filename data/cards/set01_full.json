@@ -115,7 +115,7 @@
           ]
         }
       ],
-      "flavor": "\"The old forest does not fear the dark. It simply grows through it.\" ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Thornmaw"
+      "flavor": "\"The old forest does not fear the dark. It simply grows through it.\" — Thornmaw"
     },
     {
       "id": "SF001-005",
@@ -431,7 +431,7 @@
           ]
         }
       ],
-      "flavor": "Her arrows return to the soil. Eventually, so does everything."
+      "flavor": "Their arrows return to the soil. Eventually, so does everything."
     },
     {
       "id": "SF001-205",
@@ -612,7 +612,7 @@
       ],
       "rarity": "RARE",
       "text": "Rampage.",
-      "flavor": "\"We remember when you were one voice. We miss you.\" ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the Voice, to no one"
+      "flavor": "\"We remember when you were one voice. We miss you.\" — the Voice, to no one"
     },
     {
       "id": "SF001-212",
@@ -812,7 +812,7 @@
       ],
       "rarity": "UNCOMMON",
       "text": "Swiftstrike.",
-      "flavor": "She was fast before the fire. Now the fire runs to keep up."
+      "flavor": "He was fast before the fire. Now the fire runs to keep up."
     },
     {
       "id": "SF001-026",
@@ -1174,7 +1174,7 @@
       "keywords": [],
       "rarity": "COMMON",
       "text": "",
-      "flavor": "She loves the warmth. She has never asked what is warming."
+      "flavor": "He loves the warmth. He has never asked what is warming."
     },
     {
       "id": "SF001-228",
@@ -1216,7 +1216,7 @@
       ],
       "rarity": "RARE",
       "text": "Rampage.",
-      "flavor": "\"We dreamed of holding the world. Some of our fingers still twitch.\" ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the Voice"
+      "flavor": "\"We dreamed of holding the world. Some of our fingers still twitch.\" — the Voice"
     },
     {
       "id": "SF001-230",
@@ -1700,7 +1700,7 @@
           ]
         }
       ],
-      "flavor": "She copies everything twice: once for the Archive, once for the tide."
+      "flavor": "He copies everything twice: once for the Archive, once for the tide."
     },
     {
       "id": "SF001-243",
@@ -2480,7 +2480,7 @@
       ],
       "rarity": "COMMON",
       "text": "Bulwark.",
-      "flavor": "Her post is a door that has never been opened. Her orders: never."
+      "flavor": "His post is a door that has never been opened. His orders: never."
     },
     {
       "id": "SF001-268",
@@ -3153,7 +3153,7 @@
       ],
       "rarity": "RARE",
       "text": "Dread.",
-      "flavor": "\"We felt them build it from our shed skin. We were flattered.\" ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the Voice"
+      "flavor": "\"We felt them build it from our shed skin. We were flattered.\" — the Voice"
     },
     {
       "id": "SF001-289",
@@ -3313,7 +3313,7 @@
           ]
         }
       ],
-      "flavor": "\"A small price. We are patient about the rest.\" ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the Voice"
+      "flavor": "\"A small price. We are patient about the rest.\" — the Voice"
     },
     {
       "id": "SF001-301",
@@ -4138,7 +4138,7 @@
           ]
         }
       ],
-      "flavor": "For every truth she learns, she chooses one for you to lose."
+      "flavor": "For every truth they learn, they choose one for you to lose."
     },
     {
       "id": "SF001-346",
@@ -4204,7 +4204,7 @@
           ]
         }
       ],
-      "flavor": "She reads the deep the way others read a face."
+      "flavor": "He reads the deep the way others read a face."
     },
     {
       "id": "SF001-348",
@@ -4464,7 +4464,7 @@
       ],
       "rarity": "UNCOMMON",
       "text": "Leech.",
-      "flavor": "Every wound she gives feels, to her, like forgiveness."
+      "flavor": "Every wound he gives feels, to him, like forgiveness."
     },
     {
       "id": "SF001-366",
@@ -4960,7 +4960,7 @@
           ]
         }
       ],
-      "flavor": "\"Come closer. We have so much of you to give back.\" ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the Voice"
+      "flavor": "\"Come closer. We have so much of you to give back.\" — the Voice"
     },
     {
       "id": "SF001-391",
@@ -5035,7 +5035,7 @@
           ]
         }
       ],
-      "flavor": "The Grove lends its strength to those who stand for it Ã¢â‚¬â€ briefly, and completely."
+      "flavor": "The Grove lends its strength to those who stand for it — briefly, and completely."
     },
     {
       "id": "SF001-332",

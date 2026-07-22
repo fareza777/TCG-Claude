@@ -15,6 +15,10 @@ class AudioManager {
   bool sfxOn = true;
   bool _musicPlaying = false;
 
+  /// The ambient track for the current section — 'ambient' (menu/story/collection)
+  /// or 'battle_ambient' (duels). Falls back to 'ambient' if a file is missing.
+  String _currentTrack = 'ambient';
+
   Future<void> init({required bool music, required bool sfx}) async {
     musicOn = music;
     sfxOn = sfx;
@@ -25,14 +29,48 @@ class AudioManager {
     if (musicOn) await startMusic();
   }
 
-  Future<void> startMusic() async {
-    if (_musicPlaying) return;
+  /// Switch the ambient bed for a section. Menus/story use the calm pad; the
+  /// battle screen uses a more driving bed. No-op if already on that track.
+  Future<void> playTrack(String track) async {
+    _currentTrack = track;
+    if (!musicOn) return;
     try {
       await _music.setVolume(1.0);
-      await _music.play(AssetSource('audio/ambient.wav'));
+      await _music.play(AssetSource('audio/$track.wav'));
       _musicPlaying = true;
     } catch (_) {
-      // audio is non-essential; never let it crash gameplay
+      // Missing track? Fall back to the base ambient.
+      try {
+        await _music.play(AssetSource('audio/ambient.wav'));
+        _musicPlaying = true;
+      } catch (_) {}
+    }
+  }
+
+  Future<void> startMusic() async {
+    if (_musicPlaying) return;
+    await playTrack(_currentTrack);
+  }
+
+  /// Re-assert playback — call when entering any screen. Handles the case where
+  /// the OS paused the player (audio-focus loss) but our flag says "playing".
+  Future<void> ensurePlaying() async {
+    if (!musicOn) return;
+    if (!_musicPlaying) {
+      await playTrack(_currentTrack);
+    } else {
+      try {
+        await _music.resume();
+      } catch (_) {}
+    }
+  }
+
+  /// Enter a section and make sure the right bed is playing.
+  Future<void> enterSection(String track) async {
+    if (track != _currentTrack) {
+      await playTrack(track);
+    } else {
+      await ensurePlaying();
     }
   }
 

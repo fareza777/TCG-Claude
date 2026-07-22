@@ -11,6 +11,7 @@ import 'duel/coin_flip.dart';
 import 'duel/duel_controller.dart';
 import 'duel/duel_screen.dart';
 import 'forge/forge_screen.dart';
+import 'arena/arena_screen.dart';
 import 'opening_cinematic.dart';
 import 'packs/booster_screen.dart';
 import 'progress/achievements_screen.dart';
@@ -47,7 +48,7 @@ class MenuScreen extends StatefulWidget {
   State<MenuScreen> createState() => _MenuScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   CardLibrary? _library;
   SaveService? _save;
 
@@ -62,7 +63,22 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _load();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Resume the ambient bed when the app comes back to the foreground.
+    if (state == AppLifecycleState.resumed) {
+      AudioManager.instance.ensurePlaying();
+    }
   }
 
   Future<void> _load() async {
@@ -680,6 +696,16 @@ class _MenuScreenState extends State<MenuScreen> {
                               onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                     builder: (_) => BoosterScreen(
+                                        library: _library!, save: _save!)),
+                              ),
+                            ),
+                            _tile(
+                              icon: Icons.military_tech,
+                              label: 'ARENA',
+                              color: AppTheme.danger,
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                    builder: (_) => ArenaScreen(
                                         library: _library!, save: _save!)),
                               ),
                             ),

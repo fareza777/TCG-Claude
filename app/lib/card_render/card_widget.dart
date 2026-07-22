@@ -3,6 +3,12 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../theme.dart';
 
+/// Show flavour on the card face only when the rules text is short enough to
+/// leave room — otherwise the rules take the space and stay un-truncated. The
+/// full rules + flavour are always available in the card zoom / codex.
+bool _showFlavor(CardDef def) =>
+    def.flavor.isNotEmpty && def.text.length <= 70;
+
 /// Premium card face. Layered frame: black bevel → gold trim → dominion
 /// gradient → parchment panels. Aether costs render as iconic dominion
 /// symbols (never letters). Stats render as sword/shield gem badges.
@@ -530,17 +536,22 @@ class CardWidget extends StatelessWidget {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // Rules text takes priority. Flavor is only shown when the
+                    // rules are short enough to leave room — the full text and
+                    // flavor are always available in the card zoom / codex.
                     if (def.text.isNotEmpty)
-                      Text(
-                        def.text.replaceAll('{name}', def.name),
-                        maxLines: def.flavor.isEmpty ? 5 : 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: _bodyFont.copyWith(
-                            color: Parchment.ink,
-                            fontSize: 8.2 * r,
-                            height: 1.25),
+                      Flexible(
+                        child: Text(
+                          def.text.replaceAll('{name}', def.name),
+                          maxLines: _showFlavor(def) ? 3 : 7,
+                          overflow: TextOverflow.ellipsis,
+                          style: _bodyFont.copyWith(
+                              color: Parchment.ink,
+                              fontSize: 8.2 * r,
+                              height: 1.25),
+                        ),
                       ),
-                    if (def.text.isNotEmpty && def.flavor.isNotEmpty)
+                    if (_showFlavor(def))
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 3 * r),
                         child: Container(
@@ -554,7 +565,17 @@ class CardWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                    if (def.flavor.isNotEmpty)
+                    if (_showFlavor(def))
+                      Expanded(
+                        child: Text(def.flavor,
+                            overflow: TextOverflow.fade,
+                            style: _bodyFont.copyWith(
+                                color: Parchment.inkSoft,
+                                fontSize: 7.4 * r,
+                                fontStyle: FontStyle.italic,
+                                height: 1.28)),
+                      )
+                    else if (def.text.isEmpty && def.flavor.isNotEmpty)
                       Expanded(
                         child: Text(def.flavor,
                             overflow: TextOverflow.fade,

@@ -51,6 +51,7 @@ class DuelController extends ChangeNotifier {
   /// reticle on [enemyCastTargetId]. Both are null when nothing is being cast.
   /// [enemyCastAtPlayer] is true when the spell aims at the human's face.
   String? enemyCastName;
+  CardDef? enemyCastCard; // the actual spell being cast, shown as a real card
   int? enemyCastTargetId;
   bool enemyCastAtPlayer = false;
 
@@ -207,40 +208,8 @@ class DuelController extends ChangeNotifier {
         .any((c) => c.def.type == CardType.unit);
   }
 
-  /// Attune mode: the next hand card tapped is turned face-down into a
-  /// generic Wellspring (anti-mana-screw). Toggled from the action bar.
-  bool attuneMode = false;
-
-  bool get canAttune =>
-      ui == DuelUiState.playerMain &&
-      !busy &&
-      !me.playedWellspringThisTurn &&
-      me.hand.isNotEmpty;
-
-  void toggleAttuneMode() {
-    if (!canAttune && !attuneMode) return;
-    attuneMode = !attuneMode;
-    targetingId = null;
-    lastError = null;
-    notifyListeners();
-  }
-
   void playHandCard(int instanceId) {
     if (isGameOver) return;
-
-    // Attune consumes the tapped card into a Wellspring instead of playing it.
-    if (attuneMode) {
-      attuneMode = false;
-      try {
-        state = Game.attune(state, human, instanceId);
-        _log('You Attune a card into a generic Wellspring.');
-        _emit(const DuelEvent('play'));
-      } on StateError catch (e) {
-        lastError = e.message;
-      }
-      notifyListeners();
-      return;
-    }
 
     // Instant-speed: during the enemy's attack, only Rites may be cast in
     // response. Otherwise normal main-phase rules (and never while busy).
@@ -391,6 +360,7 @@ class DuelController extends ChangeNotifier {
           // ignore — could not afford after all
         }
         enemyCastName = null;
+        enemyCastCard = null;
         enemyCastTargetId = null;
         enemyCastAtPlayer = false;
       }
@@ -747,15 +717,8 @@ class DuelController extends ChangeNotifier {
   /// silently vanishing.
   Future<void> _enemyMainPhaseStaged(
       Future<void> Function([int]) beat) async {
-    // 1. Resources (wellspring or Attune).
-    final wellsBefore =
-        foe.arena.where((c) => c.def.id == 'ATTUNED').length;
+    // 1. Resources (no visible play).
     state = enemyAi.playResources(state, enemy);
-    final wellsAfter = foe.arena.where((c) => c.def.id == 'ATTUNED').length;
-    if (wellsAfter > wellsBefore) {
-      _log('Enemy Attunes a card into a Wellspring.');
-      await beat(600);
-    }
 
     // 2. Deploy units one at a time — the arena pop-in keys off the new id.
     while (true) {
@@ -779,13 +742,14 @@ class DuelController extends ChangeNotifier {
       // Does this spell aim at the human player's face (vs a unit)?
       final atPlayer = sp.targets.any((t) => t.playerId == human);
 
-      // Step A — announce: the spell card is played to the board.
+      // Step A — announce: reveal the actual spell card on the board.
       enemyCastName = card.def.name;
+      enemyCastCard = card.def;
       enemyCastTargetId = sp.unitTargetId;
       enemyCastAtPlayer = atPlayer;
       _emit(DuelEvent('play'));
       _log('Enemy casts ${card.def.name}.');
-      await beat(950);
+      await beat(1150);
 
       // Step B — the aim lands (reticle on your unit, or a pulse on your
       // face) and is held long enough to read before anything resolves.
@@ -802,6 +766,7 @@ class DuelController extends ChangeNotifier {
         state = Chain.cast(state, enemy, sp.cardId, targets: sp.targets);
       } on StateError {
         enemyCastName = null;
+        enemyCastCard = null;
         enemyCastTargetId = null;
         enemyCastAtPlayer = false;
         break;
@@ -865,6 +830,7 @@ class DuelController extends ChangeNotifier {
       // the player clearly sees what happened before the board settles.
       await beat(1250);
       enemyCastName = null;
+      enemyCastCard = null;
       enemyCastTargetId = null;
       enemyCastAtPlayer = false;
       await beat(450);

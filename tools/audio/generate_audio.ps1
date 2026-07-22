@@ -131,4 +131,37 @@ $gain = 0.62 / $maxAbs
 for ($i = 0; $i -lt $count; $i++) { $amb[$i] = $amb[$i] * $gain }
 Write-Wav $amb "$out\ambient.wav"
 
+# battle_ambient: a darker, more driving 16s bed for duels — same seamless-loop
+# construction (integer cycles) but a lower, tenser chord + a rhythmic pulse
+# (a gated low tone at 2 beats/sec) for tension without being distracting.
+$bat = New-Object double[] $count
+$bvoices = @(
+  @(55.0,   0.90, 1, 0.30),  # sub drone
+  @(82.5,   0.70, 2, 0.40),  # low E (tension)
+  @(110.0,  0.85, 1, 0.35),  # root A2
+  @(165.0,  0.55, 3, 0.50),  # E3
+  @(220.0,  0.45, 2, 0.55),  # A3
+  @(330.0,  0.30, 4, 0.65)   # E4 shimmer
+)
+$maxB = 0.0
+for ($i = 0; $i -lt $count; $i++) {
+  $t = $i / $sr
+  $s = 0.0
+  foreach ($v in $bvoices) {
+    $f = $v[0]; $amp = $v[1]; $cyc = $v[2]; $depth = $v[3]
+    $lfo = (1.0 - $depth) + $depth * (0.5 + 0.5 * [math]::Sin(2 * [math]::PI * ($cyc / $dur) * $t))
+    $s += $amp * $lfo * [math]::Sin(2 * [math]::PI * $f * $t)
+  }
+  # Pulse: 32 beats across 16s (2/sec), a soft gated low thump for drive.
+  $ph = ($t * 2.0) - [math]::Floor($t * 2.0)   # 0..1 each beat
+  $pulseEnv = [math]::Exp(-8.0 * $ph)
+  $s += 0.5 * $pulseEnv * [math]::Sin(2 * [math]::PI * 60.0 * $t)
+  $bat[$i] = $s
+  $a = [math]::Abs($s)
+  if ($a -gt $maxB) { $maxB = $a }
+}
+$gainB = 0.62 / $maxB
+for ($i = 0; $i -lt $count; $i++) { $bat[$i] = $bat[$i] * $gainB }
+Write-Wav $bat "$out\battle_ambient.wav"
+
 Get-ChildItem $out | Select-Object Name, @{n='KB';e={[math]::Round($_.Length/1KB)}}

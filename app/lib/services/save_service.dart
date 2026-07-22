@@ -43,6 +43,9 @@ class SaveService extends ChangeNotifier {
   int totalPacks = 0;
   Set<String> achievements = {};
 
+  // Arena — best win streak in the Proving Gauntlet.
+  int arenaBestWins = 0;
+
   /// Set once on load when a new day's login bonus is granted (gold amount);
   /// the menu shows it, then calls [clearPendingDailyBonus].
   int pendingDailyBonus = 0;
@@ -136,6 +139,7 @@ class SaveService extends ChangeNotifier {
     service.totalPacks = prefs.getInt('totalPacks') ?? 0;
     service.achievements =
         (prefs.getStringList('achievements') ?? const []).toSet();
+    service.arenaBestWins = prefs.getInt('arenaBestWins') ?? 0;
     service._rollDailyQuestsIfNeeded();
     service._checkLogin();
 
@@ -501,5 +505,23 @@ class SaveService extends ChangeNotifier {
     await _prefs.setInt('totalWins', totalWins);
     await _prefs.setInt('totalPacks', totalPacks);
     await _prefs.setStringList('achievements', achievements.toList());
+    await _prefs.setInt('arenaBestWins', arenaBestWins);
+  }
+
+  /// Record a finished Arena run, updating the best streak and paying a
+  /// milestone Shard bonus. Returns the bonus granted.
+  Future<int> recordArenaRun(int wins) async {
+    if (wins > arenaBestWins) arenaBestWins = wins;
+    final bonus = wins >= 7
+        ? 300
+        : wins >= 5
+            ? 150
+            : wins >= 3
+                ? 60
+                : 0;
+    shards += bonus;
+    await _persist();
+    notifyListeners();
+    return bonus;
   }
 }

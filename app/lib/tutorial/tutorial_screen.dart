@@ -22,7 +22,6 @@ const _pages = [
     'Wellsprings are your power source. Place ONE per turn from your hand — it\'s free.',
     'Cards cost Aether, shown as symbols in their top-right corner. Playing a card exerts your Wellsprings automatically to pay.',
     'Exerted Wellsprings refresh at the start of your next turn.',
-    'Short on Wellsprings? Use Attune to turn any hand card face-down into a generic Wellspring — your safety valve against a slow start.',
   ], art: 'SF001-043'),
   _TutorialPage(Icons.style, 'Playing cards', [
     'Tap a glowing card in your hand to play it.',

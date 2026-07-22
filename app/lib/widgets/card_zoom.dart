@@ -18,7 +18,6 @@ const Map<String, String> keywordGlossary = {
   'Bulwark': 'Cannot attack.',
   'Ambush': 'May block even while exerted (after it has attacked).',
   'Aegis': 'Aegis N — prevents N combat damage dealt to this Unit each combat.',
-  'Attune': 'Turn any hand card face-down into a generic Wellspring (once/turn).',
   'Exert': 'Turn a card sideways to pay a cost. It refreshes on your next turn.',
   'Rite': 'Instant spell (⚡). Cast at any time — even on the enemy\'s turn, in response.',
   'Ritual': 'Slow spell (hourglass). Cast only in your own Main phase, when the chain is empty.',
