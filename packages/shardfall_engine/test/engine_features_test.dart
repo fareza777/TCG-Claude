@@ -141,6 +141,40 @@ void main() {
     expect(s.p2.health, 24, reason: 'ON_ATTACK pinged the opponent for 1');
   });
 
+  test('AI chooseResponse counters a spell on the chain', () {
+    final burn = rite('Burn', [
+      {
+        'op': 'DEAL_DAMAGE',
+        'amount': 5,
+        'target': {'select': 'OPPONENT_PLAYER'}
+      }
+    ]);
+    final counter = rite('Nullwater', [
+      {'op': 'COUNTER_SPELL'}
+    ], cost: const {Dominion.tide: 2});
+    var s = state(
+      p1: PlayerState(
+          id: PlayerId.p1,
+          hand: [ci(1, burn, PlayerId.p1)],
+          aetherPool: const {Dominion.tide: 3}),
+      p2: PlayerState(
+          id: PlayerId.p2,
+          hand: [ci(2, counter, PlayerId.p2)],
+          aetherPool: const {Dominion.tide: 3}),
+    );
+    // p1 casts Burn at p2 — now a spell sits on the chain.
+    s = Chain.cast(s, PlayerId.p1, 1,
+        targets: [const EffectTarget.player(PlayerId.p2)]);
+    const ai = AiPlayer(tier: AiTier.tactician);
+    final resp = ai.chooseResponse(s, PlayerId.p2);
+    expect(resp, isNotNull, reason: 'AI should counter the incoming Burn');
+    expect(resp!.cardId, 2);
+    // Play it out: the counter resolves first and nullifies the Burn.
+    s = Chain.cast(s, PlayerId.p2, resp.cardId, targets: resp.targets);
+    s = Chain.resolveAll(s);
+    expect(s.p2.health, 25);
+  });
+
   test('Ambush lets an exerted Unit still block', () {
     final attacker = ci(1, unit('Atk', might: 3, guard: 3), PlayerId.p1);
     final guard = ci(2, unit('Sentry', might: 2, guard: 4, kw: {Keyword.ambush}),

@@ -451,7 +451,7 @@ class SaveService extends ChangeNotifier {
     'warlord': ('Warlord', 'Win 100 battles', 1000),
     'collector_50': ('Collector', 'Own 50 different cards', 150),
     'collector_100': ('Archivist', 'Own 100 different cards', 400),
-    'full_set': ('Completionist', 'Own all 190 cards', 2000),
+    'full_set': ('Completionist', 'Own all 192 cards', 2000),
     'chapter_one': ('The Waking Grove', 'Clear Chapter I', 100),
     'saga_done': ('Loneliest War', 'Clear all 5 chapters of Set 1', 1500),
     'pack_rat': ('Pack Rat', 'Open 10 Shard Packs', 200),
@@ -475,7 +475,7 @@ class SaveService extends ChangeNotifier {
     unlock('warlord', totalWins >= 100);
     unlock('collector_50', uniqueOwned >= 50);
     unlock('collector_100', uniqueOwned >= 100);
-    unlock('full_set', uniqueOwned >= 190);
+    unlock('full_set', uniqueOwned >= 192);
     unlock('chapter_one', chaptersDone.contains('ch1'));
     unlock('saga_done', chaptersDone.length >= 5);
     unlock('pack_rat', totalPacks >= 10);
