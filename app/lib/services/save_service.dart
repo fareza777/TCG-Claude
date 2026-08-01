@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
+import 'purchase_catalog.dart';
+
 /// Persistent player profile: gold, card ownership, story progress, decks.
 ///
 /// Economy (v0.5):
@@ -52,6 +54,9 @@ class SaveService extends ChangeNotifier {
 
   /// Achievement ids unlocked this session (for a one-time toast).
   final List<String> pendingAchievements = [];
+
+  /// Google Play purchase identifiers already delivered to the local profile.
+  final Set<String> processedPurchaseIds = {};
 
   // Crafting economy (Shards).
   static const craftCost = {
@@ -139,6 +144,8 @@ class SaveService extends ChangeNotifier {
     service.totalPacks = prefs.getInt('totalPacks') ?? 0;
     service.achievements =
         (prefs.getStringList('achievements') ?? const []).toSet();
+    service.processedPurchaseIds
+        .addAll(prefs.getStringList('processedPurchaseIds') ?? const []);
     service.arenaBestWins = prefs.getInt('arenaBestWins') ?? 0;
     service._rollDailyQuestsIfNeeded();
     service._checkLogin();
@@ -167,6 +174,23 @@ class SaveService extends ChangeNotifier {
     gold += amount;
     await _persist();
     notifyListeners();
+  }
+
+  Future<bool> grantPurchasedGold({
+    required String productId,
+    required String purchaseId,
+  }) async {
+    final normalizedId = purchaseId.trim();
+    if (productId != PurchaseCatalog.gold500Id ||
+        normalizedId.isEmpty ||
+        processedPurchaseIds.contains(normalizedId)) {
+      return false;
+    }
+    gold += PurchaseCatalog.gold500Amount;
+    processedPurchaseIds.add(normalizedId);
+    await _persist();
+    notifyListeners();
+    return true;
   }
 
   Future<bool> buyPack(List<CardDef> cards) async {
@@ -488,6 +512,8 @@ class SaveService extends ChangeNotifier {
   Future<void> _persist() async {
     await _prefs.setInt('gold', gold);
     await _prefs.setInt('shards', shards);
+    await _prefs.setStringList(
+        'processedPurchaseIds', processedPurchaseIds.toList());
     await _prefs.setString('quests', json.encode(quests));
     await _prefs.setString('questDate', questDate);
     await _prefs.setString('owned', json.encode(owned));
