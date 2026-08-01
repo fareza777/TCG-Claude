@@ -87,7 +87,11 @@ class GoldPurchaseService extends ChangeNotifier {
   StreamSubscription<List<PurchaseDetails>>? _purchaseSubscription;
   bool _initialized = false;
 
-  bool get canBuy => state == GoldPurchaseState.ready && product != null;
+  bool get canBuy =>
+      product != null &&
+      (state == GoldPurchaseState.ready ||
+          state == GoldPurchaseState.success ||
+          state == GoldPurchaseState.error);
 
   String get priceLabel => product?.price ?? 'Price unavailable';
 

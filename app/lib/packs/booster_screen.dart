@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,8 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../card_render/card_widget.dart';
 import '../services/audio_manager.dart';
+import '../services/gold_purchase_service.dart';
+import '../services/purchase_catalog.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
 import '../widgets/card_zoom.dart';
@@ -15,9 +18,13 @@ import '../widgets/card_zoom.dart';
 class BoosterScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
+  final GoldPurchaseService purchaseService;
 
   const BoosterScreen(
-      {super.key, required this.library, required this.save});
+      {super.key,
+      required this.library,
+      required this.save,
+      required this.purchaseService});
 
   @override
   State<BoosterScreen> createState() => _BoosterScreenState();
@@ -143,32 +150,159 @@ class _BoosterScreenState extends State<BoosterScreen>
 
   // ── the foil pack ──────────────────────────────────────────────────────
   Widget _sealedPack() {
-    return Center(
-      child: GestureDetector(
-        onTap: _openPack,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0, end: 1),
-              duration: const Duration(seconds: 3),
-              curve: Curves.easeInOut,
-              builder: (context, t, child) => Transform.translate(
-                offset: Offset(0, math.sin(t * math.pi * 2) * 6),
-                child: child,
-              ),
-              child: _packBody(),
+    return ListenableBuilder(
+      listenable: widget.save,
+      builder: (context, _) => LayoutBuilder(
+        builder: (context, constraints) => SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(18, 12, 18, 26),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: math.max(0, constraints.maxHeight - 38),
             ),
-            const SizedBox(height: 22),
-            Text(
-                widget.save.canBuyPack
-                    ? 'Tap to tear open'
-                    : 'Not enough gold — win battles to earn more',
-                style: const TextStyle(
-                    color: AppTheme.textMuted, fontSize: 13)),
-          ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: _openPack,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0, end: 1),
+                        duration: const Duration(seconds: 3),
+                        curve: Curves.easeInOut,
+                        builder: (context, t, child) => Transform.translate(
+                          offset: Offset(0, math.sin(t * math.pi * 2) * 6),
+                          child: child,
+                        ),
+                        child: _packBody(),
+                      ),
+                      const SizedBox(height: 22),
+                      Text(
+                          widget.save.canBuyPack
+                              ? 'Tap to tear open'
+                              : 'Not enough gold — win battles to earn more',
+                          style: const TextStyle(
+                              color: AppTheme.textMuted, fontSize: 13)),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                _goldPurchasePanel(),
+              ],
+            ),
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _goldPurchasePanel() {
+    return ListenableBuilder(
+      listenable: widget.purchaseService,
+      builder: (context, _) {
+        final purchases = widget.purchaseService;
+        final isBusy = purchases.state == GoldPurchaseState.loading ||
+            purchases.state == GoldPurchaseState.purchasing ||
+            purchases.state == GoldPurchaseState.pending;
+        final buttonLabel = switch (purchases.state) {
+          GoldPurchaseState.loading => 'Loading store...',
+          GoldPurchaseState.purchasing => 'Opening Google Play...',
+          GoldPurchaseState.pending => 'Waiting for confirmation...',
+          _ => 'Buy ${PurchaseCatalog.gold500Amount} Gold · ${purchases.priceLabel}',
+        };
+
+        return ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 470),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(16, 15, 16, 14),
+            decoration: BoxDecoration(
+              color: AppTheme.panel.withValues(alpha: 0.92),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                  color: const Color(0xFFC9A86A).withValues(alpha: 0.45)),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF000000).withValues(alpha: 0.22),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE3B341).withValues(alpha: 0.14),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.monetization_on,
+                          color: Color(0xFFE3B341), size: 24),
+                    ),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Need more Gold?',
+                              style: TextStyle(
+                                  color: AppTheme.textPrimary,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w800)),
+                          SizedBox(height: 3),
+                          Text('Open five Shard Packs instantly.',
+                              style: TextStyle(
+                                  color: AppTheme.textMuted, fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 13),
+                SizedBox(
+                  height: 44,
+                  child: ElevatedButton.icon(
+                    onPressed: purchases.canBuy && !isBusy
+                        ? () {
+                            AudioManager.instance.tap();
+                            unawaited(purchases.buyGold());
+                          }
+                        : null,
+                    icon: Icon(isBusy
+                        ? Icons.hourglass_top
+                        : Icons.shopping_bag_outlined),
+                    label: Text(buttonLabel),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFC9A86A),
+                      foregroundColor: const Color(0xFF1C1508),
+                      disabledBackgroundColor:
+                          const Color(0xFF6D654F).withValues(alpha: 0.55),
+                      disabledForegroundColor:
+                          const Color(0xFFDDD5C2).withValues(alpha: 0.65),
+                      textStyle: const TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.w900),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(9)),
+                    ),
+                  ),
+                ),
+                if (purchases.message != null) ...[
+                  const SizedBox(height: 8),
+                  Text(purchases.message!,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: AppTheme.textMuted, fontSize: 11)),
+                ],
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

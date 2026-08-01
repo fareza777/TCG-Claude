@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import 'packs/booster_screen.dart';
 import 'progress/achievements_screen.dart';
 import 'quests/quests_screen.dart';
 import 'services/audio_manager.dart';
+import 'services/gold_purchase_service.dart';
 import 'services/save_service.dart';
 import 'splash_screen.dart';
 import 'story/story_screen.dart';
@@ -51,6 +53,7 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   CardLibrary? _library;
   SaveService? _save;
+  GoldPurchaseService? _purchases;
 
   static const _dominionKeys = [
     ('VERDANCE', Dominion.verdance),
@@ -69,6 +72,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
 
   @override
   void dispose() {
+    _purchases?.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -92,10 +96,13 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
         .init(music: save.musicOn, sfx: save.sfxOn);
     CardWidget.colorblindLabels = save.colorblind;
     MotionPrefs.reduce = save.reduceMotion;
+    final purchases = GoldPurchaseService(save: save);
     setState(() {
       _library = library;
       _save = save;
+      _purchases = purchases;
     });
+    unawaited(purchases.initialize());
     if (!save.tutorialSeen && mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         await Navigator.of(context).push(MaterialPageRoute<void>(
@@ -696,7 +703,9 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                               onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                     builder: (_) => BoosterScreen(
-                                        library: _library!, save: _save!)),
+                                        library: _library!,
+                                        save: _save!,
+                                        purchaseService: _purchases!)),
                               ),
                             ),
                             _tile(
