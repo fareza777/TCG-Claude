@@ -6,6 +6,7 @@ Supabase project **Shardfall** (`vqssjwewtjgekuyzzggo`), region `ap-southeast-1`
 | --- | --- | --- |
 | `public.profiles`, `public.purchases`, RLS, triggers | `supabase/migrations/` | applied |
 | `verify-purchase` Edge Function | `supabase/functions/verify-purchase/` | deployed, `verify_jwt = true` |
+| `sync-voided-purchases` Edge Function | `supabase/functions/sync-voided-purchases/` | deployed; **needs a schedule** |
 | Google service account for receipt checks | Play Console + Google Cloud | **you must create** |
 | Google Sign-In OAuth clients | Google Cloud + Supabase Auth | **you must create** |
 
@@ -19,6 +20,12 @@ the backend.
 confirms, keyed on the purchase token. That survives reinstall and device
 changes, cannot be replayed onto a second account, and gives you a row to claw
 back on a refund.
+
+**Disclosed.** Paid Gold buys randomised Shard Packs, which Play policy treats
+as loot boxes, so the pull rates are shown before purchase via **View pack odds**
+on the Shard Pack screen. The numbers come from
+[`pack_odds.dart`](../app/lib/packs/pack_odds.dart), the same constants the pack
+generator draws from, so the disclosure cannot drift from the behaviour.
 
 **Not protected.** The single-player economy is still simulated on the device,
 so `profiles.save_data` is client-asserted — a rooted device can still edit its
@@ -93,13 +100,52 @@ Check the function's own log if step 2 records nothing:
 npx supabase functions logs verify-purchase --project-ref vqssjwewtjgekuyzzggo
 ```
 
+## 5. Scheduling the refund job
+
+`sync-voided-purchases` asks Google which purchases were refunded or charged
+back and flips those rows to `state = 'refunded'`. The app takes the Gold back
+on its next sync, flooring the balance at zero.
+
+Nothing calls it yet — it needs a daily schedule. This step is left to you
+because it means putting the **service role key** into the database, and that
+key must not pass through anyone else's hands. Run this in the SQL editor:
+
+```sql
+create extension if not exists pg_cron;
+create extension if not exists pg_net;
+
+-- Paste your own service role key (Dashboard → Project Settings → API keys).
+select vault.create_secret('<service-role-key>', 'service_role_key');
+
+select cron.schedule(
+  'sync-voided-purchases',
+  '0 3 * * *',
+  $$
+  select net.http_post(
+    url := 'https://vqssjwewtjgekuyzzggo.supabase.co/functions/v1/sync-voided-purchases',
+    headers := jsonb_build_object(
+      'Content-Type', 'application/json',
+      'Authorization', 'Bearer ' || (
+        select decrypted_secret from vault.decrypted_secrets
+        where name = 'service_role_key'
+      )
+    ),
+    body := '{}'::jsonb
+  );
+  $$
+);
+```
+
+The function rejects anything that is not the service role key with `403`, so a
+player's token cannot trigger it. Google keeps voided purchases queryable for 30
+days and the job looks back that far by default, so missing a few nights is
+harmless.
+
 ## Still open before production rollout
 
-- Refund handling. `purchases.state` has a `refunded` value but nothing sets it
-  yet; wiring Google's Voided Purchases API (or Real-time Developer
-  Notifications) is what makes a chargeback actually remove the Gold.
-- Loot box odds disclosure. Paid Gold buys randomised Shard Packs, so Play
-  policy requires the pull rates to be shown. Not present in the app yet.
 - Play Console: Data safety form, content rating, a publicly hosted privacy
   policy, and — for a new personal developer account — 12 testers for 14 days
   before production access can be requested.
+- The Android build itself has never been compiled against these changes; the
+  machine this was written on has no Android SDK. Run `flutter build appbundle`
+  somewhere that does before trusting it.
