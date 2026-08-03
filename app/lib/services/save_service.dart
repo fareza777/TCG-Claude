@@ -58,6 +58,14 @@ class SaveService extends ChangeNotifier {
   /// Google Play purchase identifiers already delivered to the local profile.
   final Set<String> processedPurchaseIds = {};
 
+  /// Purchases delivered on this device but not yet recorded by the backend,
+  /// kept as "productId|purchaseToken".
+  ///
+  /// Retried until the backend confirms them, so a payment made while the
+  /// backend is unreachable still becomes durable rather than silently
+  /// existing only on this device.
+  final Set<String> unverifiedPurchases = {};
+
   // Crafting economy (Shards).
   static const craftCost = {
     Rarity.common: 20,
@@ -146,6 +154,8 @@ class SaveService extends ChangeNotifier {
         (prefs.getStringList('achievements') ?? const []).toSet();
     service.processedPurchaseIds
         .addAll(prefs.getStringList('processedPurchaseIds') ?? const []);
+    service.unverifiedPurchases
+        .addAll(prefs.getStringList('unverifiedPurchases') ?? const []);
     service.arenaBestWins = prefs.getInt('arenaBestWins') ?? 0;
     service._rollDailyQuestsIfNeeded();
     service._checkLogin();
@@ -176,18 +186,58 @@ class SaveService extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Queues a delivered purchase for backend verification.
+  static String unverifiedKey(String productId, String purchaseToken) =>
+      '$productId|$purchaseToken';
+
+  Future<void> markPurchaseUnverified(
+    String productId,
+    String purchaseToken,
+  ) async {
+    if (purchaseToken.isEmpty) return;
+    if (unverifiedPurchases.add(unverifiedKey(productId, purchaseToken))) {
+      await _persist();
+    }
+  }
+
+  Future<void> markPurchaseVerified(
+    String productId,
+    String purchaseToken,
+  ) async {
+    if (unverifiedPurchases.remove(unverifiedKey(productId, purchaseToken))) {
+      await _persist();
+    }
+  }
+
+  /// Delivers a paid Gold grant exactly once.
+  ///
+  /// The same purchase reaches this method under different identifiers: Play
+  /// reports an order ID, while the backend ledger is keyed on the purchase
+  /// token. Passing every known identifier in [aliasIds] lets one grant be
+  /// recognised no matter which one arrives first.
   Future<bool> grantPurchasedGold({
     required String productId,
     required String purchaseId,
+    Set<String> aliasIds = const {},
   }) async {
-    final normalizedId = purchaseId.trim();
-    if (productId != PurchaseCatalog.gold500Id ||
-        normalizedId.isEmpty ||
-        processedPurchaseIds.contains(normalizedId)) {
+    final ids = {purchaseId, ...aliasIds}
+        .map((id) => id.trim())
+        .where((id) => id.isNotEmpty)
+        .toSet();
+
+    if (productId != PurchaseCatalog.gold500Id || ids.isEmpty) return false;
+
+    if (ids.any(processedPurchaseIds.contains)) {
+      // Already delivered under one identifier. Record the rest so a later
+      // delivery keyed on a different one still resolves to this same grant.
+      final known = processedPurchaseIds.length;
+      processedPurchaseIds.addAll(ids);
+      if (processedPurchaseIds.length != known) await _persist();
       return false;
     }
+
     gold += PurchaseCatalog.gold500Amount;
-    processedPurchaseIds.add(normalizedId);
+    processedPurchaseIds.addAll(ids);
     await _persist();
     notifyListeners();
     return true;
@@ -284,7 +334,94 @@ class SaveService extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ── save export / import (local backup; cloud sync is future work) ────
+  // ── cloud save snapshot ───────────────────────────────────────────────
+
+  /// True when this device holds progress a cloud restore would destroy.
+  ///
+  /// A fresh install has none of this, which is the only case where adopting a
+  /// cloud save outright is safe.
+  bool get hasLocalProgress =>
+      totalWins > 0 ||
+      totalPacks > 0 ||
+      chaptersDone.isNotEmpty ||
+      clearedBattles.isNotEmpty ||
+      achievements.isNotEmpty;
+
+  /// Complete profile snapshot for cloud save.
+  ///
+  /// Wider than [exportCode], which is a portable share code: this keeps device
+  /// settings and the purchase ledger so a restored install resumes exactly
+  /// where it left off and cannot re-grant Gold it already delivered.
+  Map<String, dynamic> toSnapshot() => {
+        'gold': gold,
+        'shards': shards,
+        'owned': owned,
+        'chapterStage': chapterStage,
+        'chaptersDone': chaptersDone.toList(),
+        'clearedBattles': clearedBattles.toList(),
+        'decks': decks,
+        'quests': quests,
+        'questDate': questDate,
+        'tutorialSeen': tutorialSeen,
+        'musicOn': musicOn,
+        'sfxOn': sfxOn,
+        'colorblind': colorblind,
+        'reduceMotion': reduceMotion,
+        'loginStreak': loginStreak,
+        'lastLoginDate': lastLoginDate,
+        'totalWins': totalWins,
+        'totalPacks': totalPacks,
+        'achievements': achievements.toList(),
+        'arenaBestWins': arenaBestWins,
+        'processedPurchaseIds': processedPurchaseIds.toList(),
+        'unverifiedPurchases': unverifiedPurchases.toList(),
+      };
+
+  /// Replaces the local profile with [data]. Fields missing from the snapshot
+  /// keep their current value, so an older snapshot never blanks newer state.
+  Future<void> applySnapshot(Map<String, dynamic> data) async {
+    gold = data['gold'] as int? ?? gold;
+    shards = data['shards'] as int? ?? shards;
+    owned = (data['owned'] as Map<String, dynamic>? ?? {})
+        .map((k, v) => MapEntry(k, v as int));
+    chapterStage = (data['chapterStage'] as Map<String, dynamic>? ?? {})
+        .map((k, v) => MapEntry(k, v as int));
+    chaptersDone =
+        (data['chaptersDone'] as List? ?? const []).cast<String>().toSet();
+    clearedBattles =
+        (data['clearedBattles'] as List? ?? const []).cast<String>().toSet();
+    decks = (data['decks'] as Map<String, dynamic>? ?? {}).map(
+        (k, v) => MapEntry(k, [for (final id in v as List) id as String]));
+    quests = [
+      for (final q in data['quests'] as List? ?? const [])
+        Map<String, dynamic>.from(q as Map),
+    ];
+    questDate = data['questDate'] as String? ?? questDate;
+    tutorialSeen = data['tutorialSeen'] as bool? ?? tutorialSeen;
+    musicOn = data['musicOn'] as bool? ?? musicOn;
+    sfxOn = data['sfxOn'] as bool? ?? sfxOn;
+    colorblind = data['colorblind'] as bool? ?? colorblind;
+    reduceMotion = data['reduceMotion'] as bool? ?? reduceMotion;
+    loginStreak = data['loginStreak'] as int? ?? loginStreak;
+    lastLoginDate = data['lastLoginDate'] as String? ?? lastLoginDate;
+    totalWins = data['totalWins'] as int? ?? totalWins;
+    totalPacks = data['totalPacks'] as int? ?? totalPacks;
+    achievements =
+        (data['achievements'] as List? ?? const []).cast<String>().toSet();
+    arenaBestWins = data['arenaBestWins'] as int? ?? arenaBestWins;
+    // Union, never replace: an identifier this device already delivered must
+    // stay known even if the snapshot predates it.
+    processedPurchaseIds.addAll(
+      (data['processedPurchaseIds'] as List? ?? const []).cast<String>(),
+    );
+    unverifiedPurchases.addAll(
+      (data['unverifiedPurchases'] as List? ?? const []).cast<String>(),
+    );
+    await _persist();
+    notifyListeners();
+  }
+
+  // ── save export / import (local backup) ───────────────────────────────
   String exportCode() {
     final data = {
       'gold': gold,
@@ -514,6 +651,8 @@ class SaveService extends ChangeNotifier {
     await _prefs.setInt('shards', shards);
     await _prefs.setStringList(
         'processedPurchaseIds', processedPurchaseIds.toList());
+    await _prefs.setStringList(
+        'unverifiedPurchases', unverifiedPurchases.toList());
     await _prefs.setString('quests', json.encode(quests));
     await _prefs.setString('questDate', questDate);
     await _prefs.setString('owned', json.encode(owned));

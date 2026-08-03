@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'card_render/card_widget.dart';
 import 'collection/collection_screen.dart';
@@ -18,6 +19,9 @@ import 'packs/booster_screen.dart';
 import 'progress/achievements_screen.dart';
 import 'quests/quests_screen.dart';
 import 'services/audio_manager.dart';
+import 'services/auth_service.dart';
+import 'services/backend_config.dart';
+import 'services/cloud_sync_service.dart';
 import 'services/gold_purchase_service.dart';
 import 'services/save_service.dart';
 import 'splash_screen.dart';
@@ -25,7 +29,22 @@ import 'story/story_screen.dart';
 import 'theme.dart';
 import 'tutorial/tutorial_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // The backend is an enhancement, never a gate: a failure here leaves the
+  // game running exactly as it did before, straight from local storage.
+  if (BackendConfig.hasBackend) {
+    try {
+      await Supabase.initialize(
+        url: BackendConfig.url,
+        publishableKey: BackendConfig.publishableKey,
+      );
+    } catch (error) {
+      debugPrint('Backend unavailable, continuing offline: $error');
+    }
+  }
+
   runApp(const ShardfallApp());
 }
 
@@ -54,6 +73,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   CardLibrary? _library;
   SaveService? _save;
   GoldPurchaseService? _purchases;
+  AuthService? _auth;
+  CloudSyncService? _cloud;
 
   static const _dominionKeys = [
     ('VERDANCE', Dominion.verdance),
@@ -73,6 +94,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   @override
   void dispose() {
     _purchases?.dispose();
+    _cloud?.dispose();
+    _auth?.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -82,6 +105,13 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     // Resume the ambient bed when the app comes back to the foreground.
     if (state == AppLifecycleState.resumed) {
       AudioManager.instance.ensurePlaying();
+    } else if (state == AppLifecycleState.paused) {
+      // Leaving the app is the natural moment to back the profile up. An
+      // unresolved conflict is left alone so it cannot silently pick a winner.
+      final cloud = _cloud;
+      if (cloud != null && !cloud.cloudSaveConflict) {
+        unawaited(cloud.pushSave());
+      }
     }
   }
 
@@ -96,13 +126,21 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
         .init(music: save.musicOn, sfx: save.sfxOn);
     CardWidget.colorblindLabels = save.colorblind;
     MotionPrefs.reduce = save.reduceMotion;
-    final purchases = GoldPurchaseService(save: save);
+    final auth = AuthService();
+    final cloud = CloudSyncService(save: save, auth: auth);
+    final purchases = GoldPurchaseService(
+      save: save,
+      verifier: cloud.verifyPurchase,
+    );
     setState(() {
       _library = library;
       _save = save;
       _purchases = purchases;
+      _auth = auth;
+      _cloud = cloud;
     });
     unawaited(purchases.initialize());
+    unawaited(_syncBackend(auth, cloud));
     if (!save.tutorialSeen && mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         await Navigator.of(context).push(MaterialPageRoute<void>(
@@ -118,6 +156,96 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       WidgetsBinding.instance
           .addPostFrameCallback((_) => _showProgressToasts());
     }
+  }
+
+  /// Re-establishes a previous session and pulls back anything paid for.
+  Future<void> _syncBackend(AuthService auth, CloudSyncService cloud) async {
+    await auth.restoreSession();
+    if (!auth.isSignedIn || !mounted) return;
+
+    await cloud.syncOnSignIn();
+    if (!mounted) return;
+    setState(() {});
+    _reportSync(cloud);
+  }
+
+  /// Signs in, or signs out after saving one last time.
+  Future<void> _toggleAccount() async {
+    final auth = _auth;
+    final cloud = _cloud;
+    if (auth == null || cloud == null) return;
+
+    if (auth.isSignedIn) {
+      await cloud.pushSave();
+      await auth.signOut();
+      if (mounted) setState(() {});
+      return;
+    }
+
+    final signedIn = await auth.signIn();
+    if (!mounted) return;
+
+    if (!signedIn) {
+      final failure = auth.message;
+      if (failure != null) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(failure)));
+      }
+      return;
+    }
+
+    await cloud.syncOnSignIn();
+    if (!mounted) return;
+    setState(() {});
+    _reportSync(cloud);
+  }
+
+  void _reportSync(CloudSyncService cloud) {
+    if (cloud.cloudSaveConflict) {
+      _showCloudConflict(cloud);
+      return;
+    }
+    if (cloud.recoveredGold > 0) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content:
+              Text('${cloud.recoveredGold} Gold restored to your balance.')));
+    }
+  }
+
+  /// Both the account and this device hold progress. Never choose for the
+  /// player — whichever side loses, someone loses a collection.
+  void _showCloudConflict(CloudSyncService cloud) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: AppTheme.panel,
+        title: const Text('Two saves found',
+            style: TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
+        content: const Text(
+            'Your account already has a save, and this device has progress of '
+            'its own. Keeping one replaces the other.',
+            style: TextStyle(color: AppTheme.textMuted, fontSize: 12)),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(dialogContext);
+              await cloud.resolveWithLocalSave();
+              if (mounted) setState(() {});
+            },
+            child: const Text('Keep this device'),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(dialogContext);
+              await cloud.resolveWithCloudSave();
+              if (mounted) setState(() {});
+            },
+            child: const Text('Use my account save'),
+          ),
+        ],
+      ),
+    );
   }
 
   /// Surface the daily login bonus and any freshly-unlocked achievements.
@@ -259,6 +387,30 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                   _showSaveBackup();
                 },
               ),
+              if (BackendConfig.hasGoogleSignIn) ...[
+                const Divider(color: AppTheme.panelBorder),
+                ListTile(
+                  leading: Icon(
+                      _auth!.isSignedIn ? Icons.cloud_done : Icons.cloud_off,
+                      color: _auth!.isSignedIn
+                          ? const Color(0xFF7FBF7F)
+                          : const Color(0xFF9FB2BC)),
+                  title: Text(
+                      _auth!.isSignedIn ? 'Sign out' : 'Sign in with Google',
+                      style: const TextStyle(
+                          color: AppTheme.textPrimary, fontSize: 14)),
+                  subtitle: Text(
+                      _auth!.isSignedIn
+                          ? _auth!.displayName ?? 'Signed in'
+                          : 'Keeps purchased Gold if you reinstall',
+                      style: const TextStyle(
+                          color: AppTheme.textMuted, fontSize: 11)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    unawaited(_toggleAccount());
+                  },
+                ),
+              ],
             ],
           ),
         ),

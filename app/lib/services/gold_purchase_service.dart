@@ -6,6 +6,12 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'purchase_catalog.dart';
 import 'save_service.dart';
 
+/// Records a receipt with the backend. Returns true once it is durable.
+typedef PurchaseVerifier = Future<bool> Function({
+  required String productId,
+  required String purchaseToken,
+});
+
 /// The UI-facing state of the Google Play Gold purchase flow.
 enum GoldPurchaseState {
   loading,
@@ -29,6 +35,8 @@ abstract interface class GoldStore {
   Future<bool> buyConsumable({required PurchaseParam purchaseParam});
 
   Future<void> completePurchase(PurchaseDetails purchase);
+
+  Future<void> restorePurchases();
 }
 
 /// Production adapter for the Flutter in-app purchase plugin.
@@ -63,6 +71,9 @@ class FlutterGoldStore implements GoldStore {
   Future<void> completePurchase(PurchaseDetails purchase) {
     return _instance.completePurchase(purchase);
   }
+
+  @override
+  Future<void> restorePurchases() => _instance.restorePurchases();
 }
 
 /// Loads the Gold product and delivers completed purchases to [SaveService].
@@ -75,10 +86,15 @@ class GoldPurchaseService extends ChangeNotifier {
   GoldPurchaseService({
     required this.save,
     GoldStore? store,
+    this.verifier,
   }) : store = store ?? FlutterGoldStore();
 
   final SaveService save;
   final GoldStore store;
+
+  /// Optional backend recorder. When absent the game still works, but a
+  /// purchase only exists on this device.
+  final PurchaseVerifier? verifier;
 
   GoldPurchaseState state = GoldPurchaseState.loading;
   ProductDetails? product;
@@ -140,8 +156,25 @@ class GoldPurchaseService extends ChangeNotifier {
       state = GoldPurchaseState.ready;
       message = null;
       notifyListeners();
+
+      await _recoverStrandedPurchases();
     } catch (error) {
       _setError('Unable to load Google Play billing: $error');
+    }
+  }
+
+  /// Re-delivers Gold that was paid for but never consumed.
+  ///
+  /// If the app dies between payment and [GoldStore.completePurchase], Google
+  /// still holds the purchase as owned, so the player can neither receive the
+  /// Gold nor buy it again. Querying past purchases pushes those back through
+  /// [GoldStore.purchaseStream] as [PurchaseStatus.restored]. A failure here is
+  /// not fatal: the catalog is already loaded and the player can still buy.
+  Future<void> _recoverStrandedPurchases() async {
+    try {
+      await store.restorePurchases();
+    } catch (_) {
+      // Leave the ready state intact; delivery retries on the next launch.
     }
   }
 
@@ -183,11 +216,10 @@ class GoldPurchaseService extends ChangeNotifier {
           message = purchase.error?.message ?? 'Google Play purchase failed.';
           notifyListeners();
         case PurchaseStatus.restored:
-          // Gold is consumable. Restored purchases are not delivered again;
-          // the local profile already records any purchase that was delivered.
-          state = GoldPurchaseState.ready;
-          message = null;
-          notifyListeners();
+          // A consumable only stays restorable while Google still owns it, so
+          // this is a purchase that was paid for but never delivered. The
+          // purchase ID ledger keeps a second delivery from granting twice.
+          await _deliverPurchase(purchase);
         case PurchaseStatus.purchased:
           await _deliverPurchase(purchase);
       }
@@ -195,9 +227,11 @@ class GoldPurchaseService extends ChangeNotifier {
   }
 
   Future<void> _deliverPurchase(PurchaseDetails purchase) async {
-    final purchaseId = (purchase.purchaseID ?? '').trim().isNotEmpty
-        ? purchase.purchaseID!.trim()
-        : purchase.verificationData.serverVerificationData.trim();
+    // The token is preferred over the order ID because the backend ledger is
+    // keyed on it; the order ID rides along so either one resolves the grant.
+    final token = purchase.verificationData.serverVerificationData.trim();
+    final orderId = (purchase.purchaseID ?? '').trim();
+    final purchaseId = token.isNotEmpty ? token : orderId;
 
     if (purchaseId.isEmpty) {
       _setError('Google Play returned a purchase without an ID.');
@@ -208,6 +242,7 @@ class GoldPurchaseService extends ChangeNotifier {
       final granted = await save.grantPurchasedGold(
         productId: purchase.productID,
         purchaseId: purchaseId,
+        aliasIds: {if (orderId.isNotEmpty) orderId},
       );
 
       if (purchase.pendingCompletePurchase) {
@@ -217,8 +252,32 @@ class GoldPurchaseService extends ChangeNotifier {
       state = granted ? GoldPurchaseState.success : GoldPurchaseState.ready;
       message = granted ? '500 Gold added to your balance.' : null;
       notifyListeners();
+
+      if (granted && token.isNotEmpty) {
+        await _recordWithBackend(purchase.productID, token);
+      }
     } catch (error) {
       _setError('Gold could not be added: $error');
+    }
+  }
+
+  /// Makes a delivered purchase durable.
+  ///
+  /// The Gold is already in the player's balance by this point. If the backend
+  /// cannot be reached the purchase stays queued and the next sync retries it —
+  /// nothing is ever taken back.
+  Future<void> _recordWithBackend(String productId, String token) async {
+    await save.markPurchaseUnverified(productId, token);
+
+    final verify = verifier;
+    if (verify == null) return;
+
+    try {
+      if (await verify(productId: productId, purchaseToken: token)) {
+        await save.markPurchaseVerified(productId, token);
+      }
+    } catch (error) {
+      debugPrint('Purchase verification deferred: $error');
     }
   }
 
