@@ -146,6 +146,26 @@ harmless.
 - Play Console: Data safety form, content rating, a publicly hosted privacy
   policy, and — for a new personal developer account — 12 testers for 14 days
   before production access can be requested.
-- The Android build itself has never been compiled against these changes; the
-  machine this was written on has no Android SDK. Run `flutter build appbundle`
-  somewhere that does before trusting it.
+
+## Building
+
+`ANDROID_HOME` is not set in the shell, which makes `flutter doctor` claim
+there is no Android SDK. There is — at `C:\Android\Sdk`. Export it first:
+
+```bash
+export ANDROID_HOME=/c/Android/Sdk
+export ANDROID_SDK_ROOT=/c/Android/Sdk
+flutter build appbundle --release
+flutter build apk --release
+```
+
+Release signing reads `app/android/key.properties` (alias `shardfall-upload`,
+gitignored). Confirm a build carries the upload key rather than the debug key:
+
+```bash
+$ANDROID_HOME/build-tools/36.1.0/apksigner.bat verify --print-certs build/app/outputs/flutter-apk/app-release.apk
+```
+
+Expect `CN=SHARDFALL, OU=F7 Developer`. The upload key's SHA-1 is
+`B6:94:27:07:FC:09:DD:E5:75:CE:38:4C:5A:16:89:CB:E8:26:CA:59` — add it to the
+Android OAuth client from step 2, alongside the Play App Signing SHA-1.
