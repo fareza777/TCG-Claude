@@ -115,6 +115,81 @@ void main() {
     expect(reloaded.unverifiedPurchases, isEmpty);
   });
 
+  test('a refund takes the Gold back exactly once', () async {
+    final save = await SaveService.load(emptyLibrary);
+    await save.grantPurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-refund',
+    );
+
+    final first = await save.revokePurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-refund',
+    );
+    final second = await save.revokePurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-refund',
+    );
+
+    expect(first, isTrue);
+    expect(second, isFalse);
+    expect(save.gold, SaveService.startGold);
+  });
+
+  test('a refund cannot push the balance negative', () async {
+    final save = await SaveService.load(emptyLibrary);
+    await save.grantPurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-spent',
+    );
+    // The player spent everything before the refund landed.
+    await save.addGold(-save.gold);
+
+    await save.revokePurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-spent',
+    );
+
+    expect(save.gold, 0);
+  });
+
+  test('a refunded purchase is never granted again by a restore', () async {
+    final save = await SaveService.load(emptyLibrary);
+    await save.grantPurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-void',
+    );
+    await save.revokePurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-void',
+    );
+
+    final regranted = await save.grantPurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-void',
+    );
+
+    expect(regranted, isFalse);
+    expect(save.gold, SaveService.startGold);
+  });
+
+  test('a refund from another device blocks a first delivery here', () async {
+    final save = await SaveService.load(emptyLibrary);
+
+    // This device never delivered it; the backend already says refunded.
+    await save.revokePurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-elsewhere',
+    );
+    final granted = await save.grantPurchasedGold(
+      productId: PurchaseCatalog.gold500Id,
+      purchaseId: 'token-elsewhere',
+    );
+
+    expect(granted, isFalse);
+    expect(save.gold, SaveService.startGold);
+  });
+
   test('restores processed purchase ids after reload', () async {
     final firstSave = await SaveService.load(emptyLibrary);
     await firstSave.grantPurchasedGold(

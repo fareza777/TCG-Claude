@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../card_render/card_widget.dart';
+import 'pack_odds.dart';
 import '../services/audio_manager.dart';
 import '../services/gold_purchase_service.dart';
 import '../services/purchase_catalog.dart';
@@ -73,12 +74,13 @@ class _BoosterScreenState extends State<BoosterScreen>
     final legendaries = _pool(Rarity.legendary);
     CardDef pick(List<CardDef> from) => from[_rng.nextInt(from.length)];
 
-    final rareSlot = (_rng.nextInt(12) == 0 && legendaries.isNotEmpty)
-        ? pick(legendaries)
-        : pick(rares);
+    final rareSlot =
+        (_rng.nextInt(PackOdds.legendaryOneIn) == 0 && legendaries.isNotEmpty)
+            ? pick(legendaries)
+            : pick(rares);
     final pack = [
-      for (var i = 0; i < 7; i++) pick(commons),
-      for (var i = 0; i < 3; i++) pick(uncommons),
+      for (var i = 0; i < PackOdds.commonSlots; i++) pick(commons),
+      for (var i = 0; i < PackOdds.uncommonSlots; i++) pick(uncommons),
       rareSlot,
     ];
     final paid = await widget.save.buyPack(pack);
@@ -405,11 +407,12 @@ class _BoosterScreenState extends State<BoosterScreen>
                             letterSpacing: 4,
                             fontWeight: FontWeight.w800)),
                     const Spacer(),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text('11 cards · 1 Rare+ guaranteed',
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                          '${PackOdds.cardsPerPack} cards · 1 Rare+ guaranteed',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color(0xFFB9C2CE), fontSize: 10)),
                     ),
                     const SizedBox(height: 4),
@@ -426,7 +429,24 @@ class _BoosterScreenState extends State<BoosterScreen>
                                 fontWeight: FontWeight.w800)),
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 6),
+                    // Play policy: the odds have to be readable before buying.
+                    GestureDetector(
+                      onTap: () => PackOddsSheet.show(context),
+                      behavior: HitTestBehavior.opaque,
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 4),
+                        child: Text('View pack odds',
+                            style: TextStyle(
+                                color: Color(0xFFC9A86A),
+                                fontSize: 10,
+                                fontWeight: FontWeight.w700,
+                                decoration: TextDecoration.underline,
+                                decorationColor: Color(0xFFC9A86A))),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),

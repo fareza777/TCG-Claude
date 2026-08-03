@@ -58,6 +58,10 @@ class SaveService extends ChangeNotifier {
   /// Google Play purchase identifiers already delivered to the local profile.
   final Set<String> processedPurchaseIds = {};
 
+  /// Purchase identifiers whose Gold has been taken back after Google voided
+  /// the payment. Kept forever so a refund cannot be re-granted by a restore.
+  final Set<String> revokedPurchaseIds = {};
+
   /// Purchases delivered on this device but not yet recorded by the backend,
   /// kept as "productId|purchaseToken".
   ///
@@ -156,6 +160,8 @@ class SaveService extends ChangeNotifier {
         .addAll(prefs.getStringList('processedPurchaseIds') ?? const []);
     service.unverifiedPurchases
         .addAll(prefs.getStringList('unverifiedPurchases') ?? const []);
+    service.revokedPurchaseIds
+        .addAll(prefs.getStringList('revokedPurchaseIds') ?? const []);
     service.arenaBestWins = prefs.getInt('arenaBestWins') ?? 0;
     service._rollDailyQuestsIfNeeded();
     service._checkLogin();
@@ -227,6 +233,12 @@ class SaveService extends ChangeNotifier {
 
     if (productId != PurchaseCatalog.gold500Id || ids.isEmpty) return false;
 
+    // A refunded purchase must never come back through a restore.
+    if (ids.any(revokedPurchaseIds.contains)) {
+      revokedPurchaseIds.addAll(ids);
+      return false;
+    }
+
     if (ids.any(processedPurchaseIds.contains)) {
       // Already delivered under one identifier. Record the rest so a later
       // delivery keyed on a different one still resolves to this same grant.
@@ -238,6 +250,40 @@ class SaveService extends ChangeNotifier {
 
     gold += PurchaseCatalog.gold500Amount;
     processedPurchaseIds.addAll(ids);
+    await _persist();
+    notifyListeners();
+    return true;
+  }
+
+  /// Takes back the Gold from a purchase Google has voided.
+  ///
+  /// The balance floors at zero. A player who already spent refunded Gold is
+  /// not pushed negative — that would leave the profile unable to function,
+  /// and the money side is already settled by Google.
+  Future<bool> revokePurchasedGold({
+    required String productId,
+    required String purchaseId,
+    Set<String> aliasIds = const {},
+  }) async {
+    final ids = {purchaseId, ...aliasIds}
+        .map((id) => id.trim())
+        .where((id) => id.isNotEmpty)
+        .toSet();
+
+    if (productId != PurchaseCatalog.gold500Id || ids.isEmpty) return false;
+    if (ids.any(revokedPurchaseIds.contains)) return false;
+
+    final wasDelivered = ids.any(processedPurchaseIds.contains);
+    revokedPurchaseIds.addAll(ids);
+
+    if (!wasDelivered) {
+      // Refunded on another device before this one ever delivered it. Recording
+      // the id is enough to keep a later restore from granting it.
+      await _persist();
+      return false;
+    }
+
+    gold = (gold - PurchaseCatalog.gold500Amount).clamp(0, gold);
     await _persist();
     notifyListeners();
     return true;
@@ -375,6 +421,7 @@ class SaveService extends ChangeNotifier {
         'arenaBestWins': arenaBestWins,
         'processedPurchaseIds': processedPurchaseIds.toList(),
         'unverifiedPurchases': unverifiedPurchases.toList(),
+        'revokedPurchaseIds': revokedPurchaseIds.toList(),
       };
 
   /// Replaces the local profile with [data]. Fields missing from the snapshot
@@ -416,6 +463,9 @@ class SaveService extends ChangeNotifier {
     );
     unverifiedPurchases.addAll(
       (data['unverifiedPurchases'] as List? ?? const []).cast<String>(),
+    );
+    revokedPurchaseIds.addAll(
+      (data['revokedPurchaseIds'] as List? ?? const []).cast<String>(),
     );
     await _persist();
     notifyListeners();
@@ -653,6 +703,8 @@ class SaveService extends ChangeNotifier {
         'processedPurchaseIds', processedPurchaseIds.toList());
     await _prefs.setStringList(
         'unverifiedPurchases', unverifiedPurchases.toList());
+    await _prefs.setStringList(
+        'revokedPurchaseIds', revokedPurchaseIds.toList());
     await _prefs.setString('quests', json.encode(quests));
     await _prefs.setString('questDate', questDate);
     await _prefs.setString('owned', json.encode(owned));

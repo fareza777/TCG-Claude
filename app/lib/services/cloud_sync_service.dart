@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'auth_service.dart';
 import 'backend_config.dart';
+import 'purchase_catalog.dart';
 import 'save_service.dart';
 
 /// Raised by the save-version guard trigger when a stale device tries to push.
@@ -75,35 +76,47 @@ class CloudSyncService extends ChangeNotifier {
     }
   }
 
-  /// Re-delivers every purchase the backend has verified for this account.
+  /// Reconciles this device against every purchase the backend knows about.
   ///
-  /// Idempotent twice over: the local ledger in [SaveService] skips anything
-  /// already delivered, and the rows themselves are unique per Google purchase
-  /// token.
+  /// Granted rows are re-delivered; rows Google has voided have their Gold
+  /// taken back. Idempotent twice over: the local ledger in [SaveService] skips
+  /// anything already settled, and the rows themselves are unique per Google
+  /// purchase token.
   Future<int> restoreEntitlements() async {
     if (!_enabled) return 0;
 
     try {
       final rows = await _supabase
           .from('purchases')
-          .select('product_id, purchase_token, order_id')
-          .eq('state', 'granted');
+          .select('product_id, purchase_token, order_id, state');
 
       var granted = 0;
       for (final row in rows) {
         final token = (row['purchase_token'] as String?)?.trim() ?? '';
         if (token.isEmpty) continue;
 
+        final productId = row['product_id'] as String;
         final orderId = (row['order_id'] as String?)?.trim() ?? '';
+        final aliases = {if (orderId.isNotEmpty) orderId};
+
+        if (row['state'] == 'refunded') {
+          await save.revokePurchasedGold(
+            productId: productId,
+            purchaseId: token,
+            aliasIds: aliases,
+          );
+          continue;
+        }
+
         final delivered = await save.grantPurchasedGold(
-          productId: row['product_id'] as String,
+          productId: productId,
           purchaseId: token,
-          aliasIds: {if (orderId.isNotEmpty) orderId},
+          aliasIds: aliases,
         );
         if (delivered) granted++;
       }
 
-      recoveredGold = granted * 500;
+      recoveredGold = granted * PurchaseCatalog.gold500Amount;
       if (granted > 0) notifyListeners();
       return granted;
     } catch (error) {
