@@ -1,0 +1,105 @@
+# Backend setup — Shardfall
+
+Supabase project **Shardfall** (`vqssjwewtjgekuyzzggo`), region `ap-southeast-1`.
+
+| Piece | Where | Status |
+| --- | --- | --- |
+| `public.profiles`, `public.purchases`, RLS, triggers | `supabase/migrations/` | applied |
+| `verify-purchase` Edge Function | `supabase/functions/verify-purchase/` | deployed, `verify_jwt = true` |
+| Google service account for receipt checks | Play Console + Google Cloud | **you must create** |
+| Google Sign-In OAuth clients | Google Cloud + Supabase Auth | **you must create** |
+
+Until the two "you must create" rows are done, the app still runs — it just
+stays fully offline, exactly as it did before this change. Nothing is gated on
+the backend.
+
+## What the design does and does not protect
+
+**Protected.** Paid Gold is recorded server-side from a receipt Google itself
+confirms, keyed on the purchase token. That survives reinstall and device
+changes, cannot be replayed onto a second account, and gives you a row to claw
+back on a refund.
+
+**Not protected.** The single-player economy is still simulated on the device,
+so `profiles.save_data` is client-asserted — a rooted device can still edit its
+own earned Gold and collection. Closing that means moving the economy itself
+server-side, which is a much larger change and only really pays off once ranked
+PvP exists. The schema is arranged so that work is additive, not a rewrite.
+
+## 1. Service account for receipt verification
+
+1. Play Console → **Setup → API access** → link a Google Cloud project.
+2. In Google Cloud → **IAM & Admin → Service Accounts** → create one.
+3. Back in Play Console → **Users and permissions** → invite that service
+   account and grant **View financial data, orders, and cancellation survey
+   responses**. Without this permission the API returns 401.
+4. Create a JSON key for the service account and download it.
+5. Supabase Dashboard → **Edge Functions → Secrets**, add:
+
+   | Secret | Value |
+   | --- | --- |
+   | `GOOGLE_SERVICE_ACCOUNT_JSON` | the entire downloaded JSON, pasted as one line |
+   | `ANDROID_PACKAGE_NAME` | `com.shardfall.shardfall` |
+
+Permissions can take a few hours to propagate on Google's side. Until then
+verification returns `503 verification_unavailable`, which the client treats as
+"retry later" — players still get their Gold immediately.
+
+## 2. Google Sign-In
+
+In Google Cloud → **APIs & Services → Credentials**, create **two** OAuth
+client IDs:
+
+- **Android** — package `com.shardfall.shardfall`, plus the SHA-1 fingerprint.
+  Use the SHA-1 from Play Console → **Test and release → App integrity → App
+  signing key certificate**, not just your local upload key. Play re-signs the
+  app, so a build downloaded from Play carries the Play key.
+- **Web** — this one's client ID is what the app and Supabase both need.
+
+Then Supabase Dashboard → **Authentication → Providers → Google**:
+
+- enable it,
+- paste the **Web** client ID and its client secret,
+- add the **Android** client ID to **Authorized Client IDs**.
+
+## 3. Building the app
+
+The Supabase URL and publishable key are already the defaults in
+[`app/lib/services/backend_config.dart`](../app/lib/services/backend_config.dart)
+— they are meant to ship in the client, since RLS is the real boundary. Only
+the Google client ID has to be supplied at build time:
+
+```bash
+flutter build appbundle --dart-define=GOOGLE_SERVER_CLIENT_ID=<web-client-id>.apps.googleusercontent.com
+```
+
+Omit it and the sign-in entry disappears from Settings; the game runs offline.
+
+## 4. Verifying it end to end
+
+Order matters — do these on a real device signed into a Play **closed-test**
+account, since Play Billing does not work in an emulator without a test track.
+
+1. Sign in from **Settings → Sign in with Google**. A row should appear in
+   `public.profiles`.
+2. Buy 500 Gold. A row should appear in `public.purchases` with a real
+   `order_id`, and `save.unverifiedPurchases` should end up empty.
+3. Uninstall, reinstall, sign in again. The Gold should come back, and buying
+   again should still be possible (the consumable was consumed).
+
+Check the function's own log if step 2 records nothing:
+
+```bash
+npx supabase functions logs verify-purchase --project-ref vqssjwewtjgekuyzzggo
+```
+
+## Still open before production rollout
+
+- Refund handling. `purchases.state` has a `refunded` value but nothing sets it
+  yet; wiring Google's Voided Purchases API (or Real-time Developer
+  Notifications) is what makes a chargeback actually remove the Gold.
+- Loot box odds disclosure. Paid Gold buys randomised Shard Packs, so Play
+  policy requires the pull rates to be shown. Not present in the app yet.
+- Play Console: Data safety form, content rating, a publicly hosted privacy
+  policy, and — for a new personal developer account — 12 testers for 14 days
+  before production access can be requested.
