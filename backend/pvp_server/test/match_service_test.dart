@@ -20,6 +20,14 @@ CardDef _wellspring(String id) => CardDef(
       type: CardType.wellspring,
     );
 
+CardLibrary _library() {
+  final cards = [..._deck('p1'), ..._deck('p2')];
+  return CardLibrary(
+    byId: {for (final card in cards) card.id: card},
+    starterDecks: const {},
+  );
+}
+
 List<CardDef> _deck(String prefix) => [
       for (var i = 0; i < 16; i++) _wellspring('$prefix-ws-$i'),
       for (var i = 0; i < 24; i++) _unit('$prefix-unit-$i'),
@@ -163,5 +171,40 @@ void main() {
     expect(first.status, 'finished');
     expect(retry.duplicate, isTrue);
     expect((await repository.getMatch('match-1'))?.session.revision, 1);
+  });
+
+  test('initializes a queued match from validated deck IDs exactly once',
+      () async {
+    final repo = InMemoryPvpRepository();
+    final initService = MatchService(
+      repository: repo,
+      cardLibrary: _library(),
+    );
+    final p1Ids = _deck('p1').map((card) => card.id).toList();
+    final p2Ids = _deck('p2').map((card) => card.id).toList();
+
+    final first = await initService.initialize(
+      matchId: 'match-new',
+      playerOneId: 'user-1',
+      playerTwoId: 'user-2',
+      deckP1Ids: p1Ids,
+      deckP2Ids: p2Ids,
+      seed: 99,
+    );
+    final second = await initService.initialize(
+      matchId: 'match-new',
+      playerOneId: 'user-1',
+      playerTwoId: 'user-2',
+      deckP1Ids: p1Ids,
+      deckP2Ids: p2Ids,
+      seed: 100,
+    );
+
+    expect(first, isTrue);
+    expect(second, isTrue);
+    final match = await repo.getMatch('match-new');
+    expect(match?.session.stage, PvpStage.waitingForReady);
+    expect(match?.session.game.rngSeed, 99);
+    expect(match?.session.game.p1.hand, isNotEmpty);
   });
 }

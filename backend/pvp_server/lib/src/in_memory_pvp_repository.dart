@@ -18,6 +18,11 @@ class InMemoryPvpRepository implements PvpRepository {
   Future<PersistedMatch?> getMatch(String matchId) async => _matches[matchId];
 
   @override
+  Future<void> initializeMatch(PersistedMatch match) async {
+    _matches.putIfAbsent(match.id, () => match);
+  }
+
+  @override
   Future<PvpCommandRecord?> findCommand(
     String matchId,
     String actorUserId,

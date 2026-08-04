@@ -4,14 +4,52 @@ import 'pvp_repository.dart';
 
 class MatchService {
   final PvpRepository repository;
+  final CardLibrary? cardLibrary;
   final String engineVersion;
   final String rulesetVersion;
 
   MatchService({
     required this.repository,
+    this.cardLibrary,
     this.engineVersion = 'pvp-engine-v1',
     this.rulesetVersion = 'set01-v1',
   });
+
+  Future<bool> initialize({
+    required String matchId,
+    required String playerOneId,
+    required String playerTwoId,
+    required List<String> deckP1Ids,
+    required List<String> deckP2Ids,
+    required int seed,
+  }) async {
+    final existing = await repository.getMatch(matchId);
+    if (existing != null) return true;
+    final library = cardLibrary;
+    if (library == null) throw StateError('card library is not configured');
+    final deckP1 = [for (final id in deckP1Ids) library.card(id)];
+    final deckP2 = [for (final id in deckP2Ids) library.card(id)];
+    final session = PvpEngine.create(
+      deckP1: deckP1,
+      deckP2: deckP2,
+      seed: seed,
+    );
+    final projections = {
+      playerOneId: PvpCodec.encodeProjection(session, PlayerId.p1),
+      playerTwoId: PvpCodec.encodeProjection(session, PlayerId.p2),
+    };
+    await repository.initializeMatch(PersistedMatch(
+      id: matchId,
+      playerOneId: playerOneId,
+      playerTwoId: playerTwoId,
+      status: 'starting',
+      engineVersion: engineVersion,
+      rulesetVersion: rulesetVersion,
+      session: session,
+      projectionsByUser: projections,
+    ));
+    return true;
+  }
 
   Future<PvpCommandResponse> command({
     required String matchId,
@@ -81,6 +119,7 @@ class MatchService {
           actorUserId: actorUserId,
           idempotencyKey: command.idempotencyKey,
           commandType: command.type,
+          payload: command.payload,
           result: result.accepted ? 'accepted' : 'rejected',
           response: response,
         );

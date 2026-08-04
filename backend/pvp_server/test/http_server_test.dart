@@ -56,13 +56,52 @@ PersistedMatch _match() => PersistedMatch(
       rulesetVersion: 'rules-test',
     );
 
+CardLibrary _library() => CardLibrary(
+      byId: {
+        for (var i = 0; i < 16; i++)
+          'p1-ws-$i': CardDef(
+            id: 'p1-ws-$i',
+            name: 'Wellspring',
+            dominions: const [Dominion.verdance],
+            type: CardType.wellspring,
+          ),
+        for (var i = 0; i < 24; i++)
+          'p1-u-$i': CardDef(
+            id: 'p1-u-$i',
+            name: 'Unit',
+            dominions: const [Dominion.verdance],
+            type: CardType.unit,
+            might: 2,
+            guard: 2,
+          ),
+        for (var i = 0; i < 16; i++)
+          'p2-ws-$i': CardDef(
+            id: 'p2-ws-$i',
+            name: 'Wellspring',
+            dominions: const [Dominion.verdance],
+            type: CardType.wellspring,
+          ),
+        for (var i = 0; i < 24; i++)
+          'p2-u-$i': CardDef(
+            id: 'p2-u-$i',
+            name: 'Unit',
+            dominions: const [Dominion.verdance],
+            type: CardType.unit,
+            might: 2,
+            guard: 2,
+          ),
+      },
+      starterDecks: const {},
+    );
+
 void main() {
   late PvpHttpServer server;
 
   setUp(() {
     final repository = InMemoryPvpRepository()..putMatch(_match());
     server = PvpHttpServer(
-      service: MatchService(repository: repository),
+      service: MatchService(repository: repository, cardLibrary: _library()),
+      cardLibrary: _library(),
       internalSecret: 'test-secret',
     );
   });
@@ -125,5 +164,33 @@ void main() {
     expect(body['accepted'], isTrue);
     expect(body['projection']['revision'], 1);
     expect(body.toString(), isNot(contains('test-secret')));
+  });
+
+  test('authenticated initializer endpoint is idempotent', () async {
+    final ids = [
+      for (var i = 0; i < 16; i++) 'p1-ws-$i',
+      for (var i = 0; i < 24; i++) 'p1-u-$i',
+    ];
+    final response = await server.handler(
+      Request(
+        'POST',
+        Uri.parse('http://localhost/internal/v1/matches/match-http/initialize'),
+        headers: {
+          'content-type': 'application/json',
+          'x-pvp-internal-secret': 'test-secret',
+        },
+        body: jsonEncode({
+          'matchId': 'match-http',
+          'players': [
+            {'userId': 'user-1', 'seat': 'p1', 'deckSnapshot': ids},
+            {'userId': 'user-2', 'seat': 'p2', 'deckSnapshot': ids},
+          ],
+        }),
+      ),
+    );
+
+    expect(response.statusCode, 200);
+    final body = jsonDecode(await response.readAsString()) as Map;
+    expect(body['initialized'], isTrue);
   });
 }

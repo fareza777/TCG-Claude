@@ -140,6 +140,7 @@ class PvpCommandRecord {
   final String actorUserId;
   final String idempotencyKey;
   final PvpCommandType commandType;
+  final Map<String, dynamic> payload;
   final String result;
   final PvpCommandResponse response;
   final DateTime createdAt;
@@ -149,6 +150,7 @@ class PvpCommandRecord {
     required this.actorUserId,
     required this.idempotencyKey,
     required this.commandType,
+    this.payload = const {},
     required this.result,
     required this.response,
     DateTime? createdAt,
@@ -175,6 +177,8 @@ class PvpEventRecord {
 
 abstract interface class PvpRepository {
   Future<PersistedMatch?> getMatch(String matchId);
+
+  Future<void> initializeMatch(PersistedMatch match);
 
   Future<PvpCommandRecord?> findCommand(
     String matchId,
