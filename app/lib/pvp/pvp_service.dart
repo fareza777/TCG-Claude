@@ -127,13 +127,19 @@ class PvpService implements PvpGateway {
           ),
           callback: refreshProjection,
         )
+        // pvp_match_players is deliberately NOT watched. Reading a projection
+        // stamps connected_at and last_heartbeat_at on that very table, so
+        // refreshing on its changes fed itself: every read triggered a write
+        // that triggered another read, a few times a second, until the match
+        // screen stopped responding. pvp_events already fires for every
+        // accepted command, which is the state the player actually needs.
         .onPostgresChanges(
-          event: PostgresChangeEvent.all,
+          event: PostgresChangeEvent.update,
           schema: 'public',
-          table: 'pvp_match_players',
+          table: 'pvp_matches',
           filter: PostgresChangeFilter(
             type: PostgresChangeFilterType.eq,
-            column: 'match_id',
+            column: 'id',
             value: matchId,
           ),
           callback: refreshProjection,

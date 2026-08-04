@@ -484,16 +484,34 @@ class _PvpMatchScreenState extends State<PvpMatchScreen> {
 
   CardDef _definition(PvpCardView card) => widget.library.card(card.cardId);
 
-  Future<void> _ready() async {
+  /// Sends a command that latches its button while it is in flight.
+  ///
+  /// [PvpController.send] reports failure through `lastError` instead of
+  /// throwing, so a latch that is never released leaves the player staring at
+  /// a dead button with no way to retry and no visible reason. Releasing it on
+  /// failure is what keeps the match recoverable.
+  Future<void> _sendLatched(Future<void> Function() action) async {
     if (_readySent) return;
     setState(() => _readySent = true);
-    await widget.controller.ready();
+
+    widget.controller.clearError();
+    await action();
+    if (!mounted) return;
+
+    final failure = widget.controller.lastError;
+    if (failure != null) {
+      setState(() => _readySent = false);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(failure)));
+      return;
+    }
+    setState(() {});
   }
 
-  Future<void> _redraw() async {
-    await widget.controller.redraw();
-    if (mounted) setState(() {});
-  }
+  Future<void> _ready() => _sendLatched(widget.controller.ready);
+
+  Future<void> _redraw() => _sendLatched(widget.controller.redraw);
 
   Future<void> _playSelected() async {
     final card = _selectedHand;

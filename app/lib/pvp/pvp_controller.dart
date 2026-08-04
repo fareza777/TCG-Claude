@@ -252,6 +252,14 @@ class PvpController extends ChangeNotifier {
         );
   }
 
+  /// Drops a stale failure so the next command's outcome can be read cleanly.
+  void clearError() {
+    if (lastError == null && lastErrorCode == null) return;
+    lastError = null;
+    lastErrorCode = null;
+    notifyListeners();
+  }
+
   void _applyProjection(PvpProjection next) {
     if (projection != null && next.revision < projection!.revision) return;
     projection = next;
