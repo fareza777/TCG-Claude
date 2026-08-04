@@ -72,21 +72,28 @@ Deno.serve(async (req: Request) => {
     "X-Pvp-Internal-Secret": internalSecret,
   };
 
+  if (body.action !== "reconnect" &&
+      (!body.command || typeof body.command !== "object")) {
+    return json({ error: "command_required" }, 400);
+  }
+
   let response: Response;
-  if (body.action === "reconnect") {
-    response = await fetch(
-      `${base}/projection?userId=${encodeURIComponent(actorUserId)}`,
-      { headers: { "X-Pvp-Internal-Secret": internalSecret } },
-    );
-  } else {
-    if (!body.command || typeof body.command !== "object") {
-      return json({ error: "command_required" }, 400);
-    }
-    response = await fetch(`${base}/commands`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ actorUserId, command: body.command }),
-    });
+  try {
+    response = body.action === "reconnect"
+      ? await fetch(
+        `${base}/projection?userId=${encodeURIComponent(actorUserId)}`,
+        { headers: { "X-Pvp-Internal-Secret": internalSecret } },
+      )
+      : await fetch(`${base}/commands`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ actorUserId, command: body.command }),
+      });
+  } catch (error) {
+    // The service scales to zero, so an unreachable or still-waking instance
+    // is expected. Say so plainly instead of surfacing an opaque 500.
+    console.error("pvp server unreachable", error);
+    return json({ error: "pvp_server_unreachable" }, 503);
   }
 
   let payload: unknown;
