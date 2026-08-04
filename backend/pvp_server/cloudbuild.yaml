@@ -1,0 +1,21 @@
+# Builds the PvP server image.
+#
+# The Dockerfile COPYs packages/shardfall_engine and app/assets/data, so the
+# build context has to be the repository root -- not backend/pvp_server. That
+# is awkward to express with a plain `gcloud builds submit --tag`, which is why
+# this config exists.
+#
+#   gcloud builds submit . \
+#     --config=backend/pvp_server/cloudbuild.yaml \
+#     --substitutions=_IMAGE=asia-southeast1-docker.pkg.dev/PROJECT_ID/shardfall/pvp-server:v1
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --file=backend/pvp_server/Dockerfile
+      - --tag=$_IMAGE
+      - .
+images:
+  - $_IMAGE
+options:
+  logging: CLOUD_LOGGING_ONLY
