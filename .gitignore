@@ -43,3 +43,6 @@ scratch/
 
 # Local implementation worktrees
 .worktrees/
+
+# Supabase CLI local link state
+supabase/.temp/
