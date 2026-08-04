@@ -30,6 +30,27 @@ function supabaseForUser(token: string) {
   });
 }
 
+/// Releases a match that could not be started.
+///
+/// pvp_join_queue creates the match row before the engine exists, and it
+/// refuses to queue anyone holding a 'starting' match. Without this, a single
+/// failed initialization locks both players out of PvP permanently. The
+/// pvp-reap-stale-matches cron is the backstop for when this never runs.
+async function abandonMatch(
+  matchId: string,
+  admin: SupabaseClient,
+  reason: string,
+): Promise<void> {
+  const { error } = await admin.rpc("pvp_abandon_match", {
+    p_match_id: matchId,
+    p_reason: reason,
+  });
+  if (error) {
+    // The reaper will still pick it up within a few minutes.
+    console.error("pvp match abandon failed", matchId, error);
+  }
+}
+
 async function initializeMatch(
   matchId: string,
   admin: SupabaseClient,
@@ -37,6 +58,7 @@ async function initializeMatch(
   const serverUrl = Deno.env.get("PVP_SERVER_URL");
   const secret = Deno.env.get("PVP_INTERNAL_AUTH_SECRET");
   if (!serverUrl || !secret) {
+    await abandonMatch(matchId, admin, "pvp_server_not_configured");
     return json({ error: "pvp_server_not_configured", matchId }, 503);
   }
   const { data: players, error: playersError } = await admin
@@ -45,21 +67,34 @@ async function initializeMatch(
     .eq("match_id", matchId);
   if (playersError || !players || players.length !== 2) {
     console.error("pvp match player snapshot lookup failed", playersError);
+    await abandonMatch(matchId, admin, "player_snapshot_missing");
     return json({ error: "match_initialization_unavailable", matchId }, 503);
   }
-  const response = await fetch(
-    `${serverUrl.replace(/\/$/, "")}/internal/v1/matches/${encodeURIComponent(matchId)}/initialize`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Pvp-Internal-Secret": secret,
+
+  let response: Response;
+  try {
+    response = await fetch(
+      `${serverUrl.replace(/\/$/, "")}/internal/v1/matches/${encodeURIComponent(matchId)}/initialize`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Pvp-Internal-Secret": secret,
+        },
+        body: JSON.stringify({ matchId, players }),
       },
-      body: JSON.stringify({ matchId, players }),
-    },
-  );
+    );
+  } catch (error) {
+    // Unreachable or sleeping service: the common case, and the one that used
+    // to strand players.
+    console.error("pvp server unreachable", error);
+    await abandonMatch(matchId, admin, "pvp_server_unreachable");
+    return json({ error: "match_initialization_unavailable", matchId }, 503);
+  }
+
   if (!response.ok) {
     console.error("pvp match initialization failed", response.status);
+    await abandonMatch(matchId, admin, "initialization_rejected");
     return json({ error: "match_initialization_unavailable", matchId }, 503);
   }
   return null;
@@ -114,6 +149,18 @@ Deno.serve(async (req: Request) => {
   });
   if (error) {
     console.error("pvp queue join failed", error);
+    // The RPC rejects illegal decks and double-queueing. Those are the
+    // player's problem to fix, not a backend outage, so say which it is.
+    const message = error.message ?? "";
+    if (message.includes("deck is not legal")) {
+      return json({ error: "deck_not_legal", detail: message }, 400);
+    }
+    if (message.includes("deck must contain")) {
+      return json({ error: "deck_must_contain_40_cards" }, 400);
+    }
+    if (message.includes("already has an active match")) {
+      return json({ error: "already_in_match" }, 409);
+    }
     return json({ error: "queue_unavailable" }, 503);
   }
 
