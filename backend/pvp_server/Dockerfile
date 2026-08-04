@@ -7,6 +7,7 @@ COPY app/assets/data/set01.json /src/app/assets/data/set01.json
 
 WORKDIR /src/backend/pvp_server
 RUN dart pub get
+RUN mkdir -p /out
 RUN dart compile exe bin/server.dart -o /out/shardfall_pvp_server
 
 FROM debian:bookworm-slim
