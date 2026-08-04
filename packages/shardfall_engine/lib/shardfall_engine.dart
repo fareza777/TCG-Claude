@@ -12,4 +12,5 @@ export 'src/rules/combat.dart';
 export 'src/rules/game.dart';
 export 'src/pvp/pvp_command.dart';
 export 'src/pvp/pvp_codec.dart';
+export 'src/pvp/pvp_engine.dart';
 export 'src/pvp/pvp_session.dart';
