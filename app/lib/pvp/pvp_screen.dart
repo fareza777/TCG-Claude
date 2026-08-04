@@ -52,9 +52,55 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.auth.isSignedIn) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _resumeIfInMatch());
+    }
+  }
+
+  @override
   void dispose() {
     _controller?.dispose();
     super.dispose();
+  }
+
+  PvpController _ensureController(String userId) {
+    final controller = _controller ??= PvpController(
+      gateway: PvpService(),
+      userId: userId,
+    );
+    if (!_controllerListening) {
+      controller.addListener(_refresh);
+      _controllerListening = true;
+    }
+    return controller;
+  }
+
+  /// A match survives closing the app, but the id that points at it does not.
+  /// Without this the lobby offers to queue and the server answers
+  /// "already in match", with no way back to the game in progress.
+  Future<void> _resumeIfInMatch() async {
+    final user = widget.auth.user;
+    if (user == null) return;
+
+    final controller = _ensureController(user.id);
+    if (!await controller.resumeActiveMatch()) return;
+    if (!mounted) return;
+
+    setState(() {});
+    _snack('Rejoining your match in progress.');
+    await _openMatch(controller);
+  }
+
+  Future<void> _openMatch(PvpController controller) async {
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute(
+        builder: (_) =>
+            PvpMatchScreen(library: widget.library, controller: controller),
+      ),
+    );
+    if (mounted) setState(() {});
   }
 
   Future<void> _signIn() async {
@@ -63,13 +109,15 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
     setState(() {});
     if (!signedIn && widget.auth.message != null) {
       _snack(widget.auth.message!);
+      return;
     }
+    if (signedIn) await _resumeIfInMatch();
   }
 
   Future<void> _join() async {
     if (!widget.auth.isSignedIn) {
-      await _signIn();
-      if (!mounted || !widget.auth.isSignedIn) return;
+      _snack('Sign in first to play online.');
+      return;
     }
     final options = _options;
     if (options.isEmpty) {
@@ -78,14 +126,7 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
     }
     final user = widget.auth.user;
     if (user == null) return;
-    final controller = _controller ??= PvpController(
-      gateway: PvpService(),
-      userId: user.id,
-    );
-    if (!_controllerListening) {
-      controller.addListener(_refresh);
-      _controllerListening = true;
-    }
+    final controller = _ensureController(user.id);
     setState(() {});
     await controller.join(
       options[_selected.clamp(0, options.length - 1)].cardIds,
@@ -93,13 +134,7 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
     if (!mounted || controller.matchId == null) return;
     if (controller.state == PvpConnectionState.active ||
         controller.state == PvpConnectionState.finished) {
-      await Navigator.of(context).push<void>(
-        MaterialPageRoute(
-          builder: (_) =>
-              PvpMatchScreen(library: widget.library, controller: controller),
-        ),
-      );
-      if (mounted) setState(() {});
+      await _openMatch(controller);
     }
   }
 
@@ -341,16 +376,29 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
     );
   }
 
-  Widget _joinButton(_PvpDeckOption? selected) => SizedBox(
-    height: 48,
-    child: FilledButton.icon(
-      onPressed: selected == null ? null : _join,
-      icon: const Icon(Icons.radar),
-      label: Text(
-        widget.auth.isSignedIn ? 'FIND OPPONENT' : 'SIGN IN & FIND OPPONENT',
+  /// Signing in is its own step. Folding it into "find opponent" meant the
+  /// Google account picker appeared out of nowhere when the player thought
+  /// they were starting a match.
+  Widget _joinButton(_PvpDeckOption? selected) {
+    if (!widget.auth.isSignedIn) {
+      return SizedBox(
+        height: 48,
+        child: FilledButton.icon(
+          onPressed: _signIn,
+          icon: const Icon(Icons.login),
+          label: const Text('SIGN IN WITH GOOGLE'),
+        ),
+      );
+    }
+    return SizedBox(
+      height: 48,
+      child: FilledButton.icon(
+        onPressed: selected == null ? null : _join,
+        icon: const Icon(Icons.radar),
+        label: const Text('FIND OPPONENT'),
       ),
-    ),
-  );
+    );
+  }
 
   Widget _queueCard(PvpController controller) => Container(
     padding: const EdgeInsets.all(14),

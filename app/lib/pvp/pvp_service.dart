@@ -12,6 +12,13 @@ abstract interface class PvpGateway {
 
   Future<void> leaveQueue();
 
+  /// The match this player is already in, or null.
+  ///
+  /// The server refuses to queue anyone holding a live match, so without this
+  /// a player who closed the app mid-match is simply stuck: the lobby offers
+  /// to find an opponent and the server answers "already in match".
+  Future<String?> findActiveMatch();
+
   Future<PvpCommandResponse> sendCommand(String matchId, PvpCommand command);
 
   Future<PvpProjection> reconnect(String matchId);
@@ -54,6 +61,22 @@ class PvpService implements PvpGateway {
   @override
   Future<void> leaveQueue() async {
     await _invoke('pvp-queue', {'action': 'leave'});
+  }
+
+  @override
+  Future<String?> findActiveMatch() async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) return null;
+
+    // Row level security already limits this to matches the caller is in.
+    final rows = await _client
+        .from('pvp_matches')
+        .select('id')
+        .inFilter('status', ['starting', 'active'])
+        .order('created_at', ascending: false)
+        .limit(1);
+
+    return rows.isEmpty ? null : rows.first['id'] as String;
   }
 
   @override

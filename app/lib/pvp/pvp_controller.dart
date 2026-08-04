@@ -23,6 +23,22 @@ class PvpController extends ChangeNotifier {
   StreamSubscription<String>? _queueSubscription;
   Timer? _heartbeat;
 
+  /// Rejoins a match left running by a previous session.
+  ///
+  /// [matchId] only lives in memory, so closing the app loses it while the
+  /// server still holds the match. Returns true once attached.
+  Future<bool> resumeActiveMatch() async {
+    try {
+      final id = await gateway.findActiveMatch();
+      if (id == null) return false;
+      await _attachToMatch(id);
+      return true;
+    } catch (error) {
+      _setError(_messageFor(error));
+      return false;
+    }
+  }
+
   Future<void> join(List<String> deckSnapshot) async {
     if (deckSnapshot.length != 40) {
       _setError('PvP deck must contain exactly 40 cards.');
@@ -43,8 +59,19 @@ class PvpController extends ChangeNotifier {
       }
       _setError(result.message ?? 'The PvP queue returned an unknown state.');
     } catch (error) {
+      // The server refuses to queue while a match is live. That is a signal to
+      // rejoin it, not an error to show the player.
+      if (_isAlreadyInMatch(error) && await resumeActiveMatch()) return;
       _setError(_messageFor(error));
     }
+  }
+
+  bool _isAlreadyInMatch(Object error) {
+    final text = error is PvpServiceException
+        ? '${error.code ?? ''} ${error.message}'
+        : error.toString();
+    return text.contains('already_in_match') ||
+        text.contains('already has an active match');
   }
 
   Future<void> reconnect() async {

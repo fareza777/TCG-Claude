@@ -20,6 +20,53 @@ void main() {
     controller.dispose();
   });
 
+  test('resumes a match left running by a previous session', () async {
+    final gateway = _FakePvpGateway(
+      queueResult: const PvpQueueResult(status: 'queued'),
+      reconnectProjection: _projection(revision: 2, stage: 'main'),
+    )..activeMatchId = 'match-in-progress';
+    final controller = PvpController(gateway: gateway, userId: 'user-1');
+
+    final resumed = await controller.resumeActiveMatch();
+
+    expect(resumed, isTrue);
+    expect(controller.matchId, 'match-in-progress');
+    expect(controller.state, PvpConnectionState.active);
+    controller.dispose();
+  });
+
+  test('reports nothing to resume when no match is live', () async {
+    final gateway = _FakePvpGateway(
+      queueResult: const PvpQueueResult(status: 'queued'),
+    );
+    final controller = PvpController(gateway: gateway, userId: 'user-1');
+
+    expect(await controller.resumeActiveMatch(), isFalse);
+    expect(controller.matchId, isNull);
+    controller.dispose();
+  });
+
+  test('an already-in-match rejection rejoins instead of erroring', () async {
+    final gateway = _FakePvpGateway(
+      queueResult: const PvpQueueResult(status: 'queued'),
+      reconnectProjection: _projection(revision: 3, stage: 'main'),
+    )
+      ..activeMatchId = 'match-in-progress'
+      ..joinError = const PvpServiceException(
+        'already_in_match',
+        code: 'already_in_match',
+      );
+    final controller = PvpController(gateway: gateway, userId: 'user-1');
+
+    await controller.join(List<String>.filled(40, 'sproutling'));
+
+    // The player lands back in their match rather than seeing a dead end.
+    expect(controller.matchId, 'match-in-progress');
+    expect(controller.state, PvpConnectionState.active);
+    expect(controller.lastError, isNull);
+    controller.dispose();
+  });
+
   test('queued player attaches when realtime reports a paired match', () async {
     final gateway = _FakePvpGateway(
       queueResult: const PvpQueueResult(status: 'queued'),
@@ -153,11 +200,20 @@ class _FakePvpGateway implements PvpGateway {
   List<String> joinedDeck = const [];
   String? watchedMatchId;
 
+  /// The match the server still holds for this player, if any.
+  String? activeMatchId;
+  Object? joinError;
+
   @override
   Future<PvpQueueResult> joinQueue(List<String> deckSnapshot) async {
     joinedDeck = deckSnapshot;
+    final error = joinError;
+    if (error != null) throw error;
     return queueResult;
   }
+
+  @override
+  Future<String?> findActiveMatch() async => activeMatchId;
 
   @override
   Future<void> leaveQueue() async {}
