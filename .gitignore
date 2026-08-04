@@ -40,3 +40,6 @@ tools/**/replicate_key.txt
 # NOTE: shipped card art under app/assets/art/ IS committed; this excludes raw scratch renders
 tools/art_cache/
 scratch/
+
+# Local implementation worktrees
+.worktrees/
