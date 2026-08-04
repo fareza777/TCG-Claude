@@ -16,6 +16,7 @@ import 'forge/forge_screen.dart';
 import 'arena/arena_screen.dart';
 import 'opening_cinematic.dart';
 import 'packs/booster_screen.dart';
+import 'pvp/pvp_screen.dart';
 import 'progress/achievements_screen.dart';
 import 'quests/quests_screen.dart';
 import 'services/audio_manager.dart';
@@ -868,6 +869,20 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                 MaterialPageRoute<void>(
                                     builder: (_) => ArenaScreen(
                                         library: _library!, save: _save!)),
+                              ),
+                            ),
+                            _tile(
+                              icon: Icons.sports_esports,
+                              label: 'PVP',
+                              color: const Color(0xFF8FE3FF),
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) => PvpLobbyScreen(
+                                    library: _library!,
+                                    save: _save!,
+                                    auth: _auth!,
+                                  ),
+                                ),
                               ),
                             ),
                             _tile(

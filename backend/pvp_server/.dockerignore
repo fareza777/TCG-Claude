@@ -1,0 +1,13 @@
+.git
+.gitignore
+**/.dart_tool
+**/build
+**/.packages
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+*.apk
+*.aab
+*.jks
+*.keystore
+tools/art_cache
+scratch

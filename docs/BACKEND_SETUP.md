@@ -147,6 +147,38 @@ harmless.
   policy, and — for a new personal developer account — 12 testers for 14 days
   before production access can be requested.
 
+## 6. Realtime PvP closed-test staging
+
+PvP is an additive, non-ranked closed-test service. The rules reducer runs in
+the Dart service; Supabase stores the durable match/runtime boundary and pairs
+players through the authenticated queue RPC. The Flutter client receives only
+the viewer-safe projection, so an opponent's hand, deck order, and server seed
+never cross the service boundary.
+
+Build the backend image from the repository root with
+[`backend/pvp_server/Dockerfile`](../backend/pvp_server/Dockerfile). The image
+expects these runtime values, supplied by Cloud Run/Secret Manager rather than
+the image or the app:
+
+| Variable | Purpose |
+| --- | --- |
+| `SUPABASE_URL` | Supabase project URL |
+| `SHARDFALL_SERVICE_ROLE_KEY` | server-only PostgREST/RPC access |
+| `PVP_INTERNAL_AUTH_SECRET` | Edge Function → Dart service authentication |
+| `SHARDFALL_CARD_DATA` | defaults to the image's bundled Set 1 data |
+| `PORT` | defaults to Cloud Run's `8080` |
+
+The Edge Functions additionally need `PVP_SERVER_URL` and the same internal
+secret. Deploy this only to the staging/closed-test service, then apply the
+PvP migration and run the two-account smoke test in
+[`PVP_CLOSED_TEST_CHECKLIST.md`](PVP_CLOSED_TEST_CHECKLIST.md). Do not put the
+service-role key or internal secret in `--dart-define` values.
+
+The exact SQL migration and functions are ready in this checkout, but applying
+them and deploying Cloud Run are external mutations. They require an
+authenticated Supabase CLI/project session and a Cloud Run project/service
+with permission to set secrets.
+
 ## Building
 
 `ANDROID_HOME` is not set in the shell, which makes `flutter doctor` claim

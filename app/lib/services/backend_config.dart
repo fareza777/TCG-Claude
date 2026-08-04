@@ -27,7 +27,15 @@ abstract final class BackendConfig {
   static const googleServerClientId =
       String.fromEnvironment('GOOGLE_SERVER_CLIENT_ID');
 
+  /// Allows a staged build to ship the PvP client before the non-production
+  /// service is ready. It is deliberately compile-time only: no secret is
+  /// used as a feature flag.
+  static const pvpEnabled =
+      bool.fromEnvironment('PVP_ENABLED', defaultValue: true);
+
   static bool get hasBackend => url.isNotEmpty && publishableKey.isNotEmpty;
+
+  static bool get pvpAvailable => hasBackend && pvpEnabled;
 
   static bool get hasGoogleSignIn =>
       hasBackend && googleServerClientId.isNotEmpty;
