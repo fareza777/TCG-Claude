@@ -10,3 +10,6 @@ export 'src/effects/interpreter.dart';
 export 'src/rules/chain.dart';
 export 'src/rules/combat.dart';
 export 'src/rules/game.dart';
+export 'src/pvp/pvp_command.dart';
+export 'src/pvp/pvp_codec.dart';
+export 'src/pvp/pvp_session.dart';
