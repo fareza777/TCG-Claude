@@ -1,40 +1,96 @@
 # Shardfall: The Sundering Privacy Policy
 
-**Last updated: August 1, 2026**
+**Last updated: August 4, 2026**
 
-Shardfall: The Sundering is an offline, single-player trading card game published by F7 Developer. This policy explains how the app handles information when you use it.
+F7 Developer operates Shardfall: The Sundering ("Shardfall"). This policy
+explains what information Shardfall handles when you use the optional online
+features, Google sign-in, and Google Play purchases.
 
-## Information we collect
+## Information we handle
 
-Shardfall does not collect, transmit, sell, or share personal information. The app does not require an account and does not include advertising, analytics, online multiplayer, cloud services, or third-party sign-in.
+### Information you provide through Google sign-in
 
-Game progress, collection data, decks, settings, and other gameplay preferences may be stored locally on your device so the game can provide its offline experience. This local data is not sent to the developer or to third parties.
+Signing in is optional. If you choose Google sign-in, Shardfall and its
+backend receive the basic account information Google makes available for
+sign-in, such as your email address, display name, and a Google account
+identifier. We use it to create and secure your Shardfall account and to
+associate your cloud save and paid entitlements with that account.
 
-## Information sharing
+### Game and purchase data
 
-We do not share personal information with other companies or organizations. Shardfall does not access contacts, microphone, camera, precise location, health information, or payment information.
+When you sign in, Shardfall can store a cloud save snapshot containing your
+game progress, collection, decks, settings, achievements, quests, and in-game
+currency balances. The backend also stores purchase records such as the Google
+Play product ID, purchase token, order ID, Gold amount, verification result,
+and refund or chargeback state. This is used to deliver purchased Gold,
+restore it after a reinstall, prevent duplicate delivery, and remove an
+entitlement when Google Play reports a voided purchase.
 
-If you choose to share a screenshot or other content using an Android system feature outside the app, that sharing is controlled by you and the receiving service's own privacy policy.
+Google Play processes the payment. Shardfall does not receive or store your
+credit-card number, bank details, or Google Play payment credentials.
 
-## Data retention and deletion
+## How we use information
 
-Because gameplay data is stored locally, you can remove it by clearing the app's storage or uninstalling Shardfall from your device. The app does not maintain a remote copy of your gameplay data.
+We use this information only to:
+
+- provide optional Google sign-in and cloud save;
+- restore progress and paid Gold across supported installations;
+- verify Google Play purchases and handle refunds or chargebacks;
+- protect the purchase ledger from duplicate or replayed receipts; and
+- respond to support requests and maintain the service.
+
+Shardfall does not contain advertising, does not sell personal information,
+and does not use personal information for targeted advertising. We do not use
+contacts, microphone, camera, precise location, health data, or browsing
+history for the game.
+
+## Service providers
+
+The online features rely on third-party infrastructure:
+
+- Google provides Google sign-in, Google Play Billing, and purchase status
+  information under Google's own terms and privacy policy.
+- Supabase provides authentication, database, and server-side functions used
+  to operate the Shardfall backend.
+
+These providers process information only as needed to provide their services,
+secure the account, and operate the game.
+
+## Local storage
+
+Shardfall can run offline. Local game data remains on your device until you
+clear the app's storage or uninstall the app. If you have signed in, a copy of
+the selected save and verified purchase entitlements may remain in the cloud
+until you request deletion.
+
+## Retention and deletion
+
+You can remove local data by clearing Shardfall's app storage or uninstalling
+the app. To request deletion of your Shardfall account and associated cloud
+save data, email **fajar.mreza@gmail.com** from the account you used to sign
+in and include "Shardfall account deletion" in the subject. We will delete the
+account data we control, except information we must retain for security,
+fraud prevention, legal, tax, or payment-record purposes.
 
 ## Children
 
-Shardfall is intended for a general audience of teens and adults and is not directed to children under 13. We do not knowingly collect information from children.
+Shardfall is intended for a general audience and is not directed to children
+under 13. We do not knowingly collect personal information from children under
+13.
 
 ## Security
 
-Since Shardfall does not transmit personal information to our servers, there is no developer-operated personal-data database for the app. You should still use the security features provided by your device and operating system.
+We use access controls and authenticated backend requests to protect cloud
+saves and purchase records. No online service can guarantee absolute security,
+so please protect the Google account and device you use with Shardfall.
 
-## Changes to this policy
+## Changes
 
-We may update this policy when the app's features or data practices change. The revised policy will be published at this URL with a new “Last updated” date.
+We may update this policy when the app or its data practices change. The
+current version will remain available at the public URL where you found this
+policy, with a new "Last updated" date.
 
 ## Contact
 
-If you have questions about this privacy policy or Shardfall's data practices, contact:
-
 **Fajar M Reza**  
-Email: fajar.mreza@gmail.com
+Email: **fajar.mreza@gmail.com**
