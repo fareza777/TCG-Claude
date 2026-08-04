@@ -19,11 +19,13 @@ keeps running (offline) until both are done.
 
 ## Track A — receipt verification
 
-### Step 1 · Link Play Console to Google Cloud
+### Step 1 · Prepare Google Cloud API access
 
-1. Open <https://play.google.com/console> → your Shardfall app.
-2. **Setup → API access**.
-3. Link an existing Google Cloud project, or let it create one. Note the name.
+1. Create or choose a Google Cloud project for Shardfall.
+2. Enable **Google Play Android Developer API** in that project.
+3. The current Play Developer API flow does not require linking the developer
+   account to the Cloud project; access is granted by adding the service
+   account as a Play Console user.
 
 ### Step 2 · Service account with Play permission
 
@@ -34,9 +36,11 @@ keeps running (offline) until both are done.
 3. Back in <https://play.google.com/console> → **Users and permissions →
    Invite new users**, paste the service account email
    (`…@….iam.gserviceaccount.com`).
-4. Grant it **View financial data, orders, and cancellation survey responses**,
-   scoped to the Shardfall app. Without this exact permission Google answers
-   `401` and verification never works.
+4. Grant the service account these two **account permissions**:
+   **View financial data, orders, and cancellation survey responses** and
+   **Manage orders and subscriptions**. Also grant app access to Shardfall.
+   Google’s Billing APIs can answer `401` until both financial and order access
+   are present.
 
 > Permissions can take a few hours to propagate. Until then the app returns
 > `503` internally and simply retries later — players still get their Gold
@@ -45,12 +49,13 @@ keeps running (offline) until both are done.
 ### Step 3 · Give Supabase the credentials
 
 Open <https://supabase.com/dashboard/project/vqssjwewtjgekuyzzggo/functions/secrets>
-and add two secrets:
+and add these secrets:
 
 | Name | Value |
 | --- | --- |
 | `GOOGLE_SERVICE_ACCOUNT_JSON` | the whole downloaded JSON file, pasted as-is |
 | `ANDROID_PACKAGE_NAME` | `com.shardfall.shardfall` |
+| `SHARDFALL_SERVICE_ROLE_KEY` | the Supabase legacy service-role key, used only by the refund scheduler |
 
 Track A is now live. Nothing to rebuild.
 
@@ -121,25 +126,37 @@ Grab your service role key first from
 create extension if not exists pg_cron;
 create extension if not exists pg_net;
 
-select vault.create_secret('<service-role-key>', 'service_role_key');
-
-select cron.schedule(
-  'sync-voided-purchases',
-  '0 3 * * *',
-  $$
-  select net.http_post(
-    url := 'https://vqssjwewtjgekuyzzggo.supabase.co/functions/v1/sync-voided-purchases',
-    headers := jsonb_build_object(
-      'Content-Type', 'application/json',
-      'Authorization', 'Bearer ' || (
-        select decrypted_secret from vault.decrypted_secrets
-        where name = 'service_role_key'
-      )
-    ),
-    body := '{}'::jsonb
-  );
-  $$
+-- Run this once. Store the same key in the Edge Function secret
+-- SHARDFALL_SERVICE_ROLE_KEY; never put it in the app.
+select vault.create_secret(
+  '<service-role-key>',
+  'service_role_key',
+  'Used by the daily voided-purchase synchronization job'
 );
+
+do $outer$
+begin
+  if not exists (select 1 from cron.job where jobname = 'sync-voided-purchases') then
+    perform cron.schedule(
+      'sync-voided-purchases',
+      '0 3 * * *',
+      $job$
+      select net.http_post(
+        url := 'https://vqssjwewtjgekuyzzggo.supabase.co/functions/v1/sync-voided-purchases',
+        headers := jsonb_build_object(
+          'Content-Type', 'application/json',
+          'Authorization', 'Bearer ' || (
+            select decrypted_secret from vault.decrypted_secrets
+            where name = 'service_role_key'
+          )
+        ),
+        body := '{}'::jsonb
+      );
+      $job$
+    );
+  end if;
+end
+$outer$;
 ```
 
 Confirm with `select * from cron.job;`.

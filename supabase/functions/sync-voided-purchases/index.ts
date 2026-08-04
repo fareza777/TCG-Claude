@@ -18,7 +18,9 @@ const TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
 
 /// Google keeps voided purchases queryable for 30 days, so a daily run has a
 /// wide margin even if several are missed.
-const DEFAULT_LOOKBACK_DAYS = 30;
+// Keep a small clock-skew margin: Google's endpoint rejects a start time that
+// falls even slightly beyond its 30-day window.
+const DEFAULT_LOOKBACK_DAYS = 28;
 
 interface VoidedPurchase {
   purchaseToken?: string;
@@ -111,7 +113,14 @@ Deno.serve(async (req: Request) => {
 
   // This job is not for players. A signed-in user's JWT clears the gateway, so
   // the service role key is checked explicitly here.
-  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+  // Supabase's legacy default name is still supported, but keeping an
+  // explicitly configured secret makes scheduled invocations deterministic
+  // across projects that have moved to the newer secret-key names.
+  const serviceKey =
+    Deno.env.get("SHARDFALL_SERVICE_ROLE_KEY") ??
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ??
+    "";
+  if (!serviceKey) return json({ error: "server_key_not_configured" }, 500);
   const bearer = (req.headers.get("Authorization") ?? "").replace(
     /^Bearer\s+/i,
     "",
