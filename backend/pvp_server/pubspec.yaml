@@ -1,0 +1,16 @@
+name: shardfall_pvp_server
+description: Authoritative real-time casual PvP service for SHARDFALL.
+publish_to: none
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  http: ^1.2.2
+  shelf: ^1.4.2
+  shelf_router: ^1.1.4
+  shardfall_engine:
+    path: ../../packages/shardfall_engine
+
+dev_dependencies:
+  test: ^1.25.0
