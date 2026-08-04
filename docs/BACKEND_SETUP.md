@@ -179,6 +179,36 @@ them and deploying Cloud Run are external mutations. They require an
 authenticated Supabase CLI/project session and a Cloud Run project/service
 with permission to set secrets.
 
+## Scheduled jobs
+
+Two `pg_cron` jobs run against this project. Check them with
+`select jobname, schedule, active from cron.job;`.
+
+| Job | Schedule | Purpose |
+| --- | --- | --- |
+| `sync-voided-purchases` | `0 3 * * *` | Asks Google which purchases were refunded and flips those rows to `refunded`. |
+| `pvp-reap-stale-matches` | `* * * * *` | Cancels matches stuck in `starting` whose engine never initialized, and releases both players from the queue. |
+
+The reaper is a safety net, not the main path: `pvp-queue` calls
+`pvp_abandon_match` directly when initialization fails. Without one of the two,
+a failed or unreachable PvP service locks both players out of PvP permanently,
+because `pvp_join_queue` refuses to queue anyone holding a `starting` match.
+
+`pg_cron` only reports whether the SQL ran. For the HTTP job, the real outcome
+is in `net._http_response` — check `status_code` there, not `cron.job_run_details`.
+
+## Card catalog
+
+`public.pvp_card_catalog` mirrors card ids and rarities so queued PvP decks can
+be validated (unknown cards, copy limits, Wellspring cap) before a match is
+created. It is **not** kept in sync automatically: regenerate the seed in
+`supabase/migrations/20260804180000_pvp_integrity_fixes.sql` from
+`app/assets/data/set01.json` whenever the card set changes, or newly printed
+cards will be rejected as `unknown_card`.
+
+Ownership is deliberately not enforced. The collection still lives in
+client-asserted `profiles.save_data`, so checking against it would be theatre.
+
 ## Building
 
 `ANDROID_HOME` is not set in the shell, which makes `flutter doctor` claim
