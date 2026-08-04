@@ -1,5 +1,31 @@
 # Deploying the PvP server to Cloud Run
 
+## Current deployment
+
+| | |
+| --- | --- |
+| GCP project | `shardfall-billing` (729072124482) |
+| Service | `shardfall-pvp-closed`, region `asia-southeast1` |
+| URL | `https://shardfall-pvp-closed-dijw7q6vdq-as.a.run.app` |
+| Image | `asia-southeast1-docker.pkg.dev/shardfall-billing/shardfall/pvp-server:v1` |
+| Secrets | `shardfall-pvp-internal-auth`, `shardfall-supabase-service-key` |
+| Scaling | min 0, max 3, 512Mi / 1 vCPU |
+
+An earlier `europe-west1` copy of the same service still exists. It works, but a
+single Postgres round trip measured ~0.84–1.06 s from there against ~0.32–0.38 s
+from `asia-southeast1`, because the database is in Singapore and a command makes
+several sequential queries. Delete the European service once the Singapore one
+is confirmed end-to-end:
+
+```bash
+gcloud run services delete shardfall-pvp-closed --region=europe-west1
+```
+
+The steps below are the full recipe, kept for rebuilding or moving the service.
+
+---
+
+
 The authoritative PvP service is a stateless Dart HTTP server. All match state
 lives in Postgres, and `pvp_commit_transition` rejects stale writes with a
 revision check, so the service can scale to zero and run multiple instances
