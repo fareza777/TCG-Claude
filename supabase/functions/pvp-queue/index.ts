@@ -61,15 +61,23 @@ async function initializeMatch(
     await abandonMatch(matchId, admin, "pvp_server_not_configured");
     return json({ error: "pvp_server_not_configured", matchId }, 503);
   }
-  const { data: players, error: playersError } = await admin
+  const { data: rows, error: playersError } = await admin
     .from("pvp_match_players")
     .select("user_id,seat,deck_snapshot")
     .eq("match_id", matchId);
-  if (playersError || !players || players.length !== 2) {
+  if (playersError || !rows || rows.length !== 2) {
     console.error("pvp match player snapshot lookup failed", playersError);
     await abandonMatch(matchId, admin, "player_snapshot_missing");
     return json({ error: "match_initialization_unavailable", matchId }, 503);
   }
+
+  // The service speaks camelCase; these are raw Postgres column names. Passing
+  // the rows through unmapped made every initialization fail with 400.
+  const players = rows.map((row) => ({
+    userId: row.user_id,
+    seat: row.seat,
+    deckSnapshot: row.deck_snapshot,
+  }));
 
   let response: Response;
   try {

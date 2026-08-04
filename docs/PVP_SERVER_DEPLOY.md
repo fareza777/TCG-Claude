@@ -177,6 +177,7 @@ gcloud run services logs read shardfall-pvp --region="$REGION" --limit=50
 | `match_initialization_unavailable`, 401 in Cloud Run logs | the two copies of the shared secret differ |
 | `service role required` from the RPC | `SHARDFALL_SERVICE_ROLE_KEY` is not the service role key |
 | `unknown_card` when queueing | `pvp_card_catalog` is stale — regenerate it after a set change |
+| `invalid_payload` on `/initialize` | the player payload is not camelCase. The service expects `userId` / `seat` / `deckSnapshot`; `pvp-queue` maps the Postgres columns before sending. |
 
 A failed start is now safe: `pvp-queue` cancels the match and releases both
 players, and the `pvp-reap-stale-matches` cron catches anything it misses. That
