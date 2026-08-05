@@ -154,6 +154,16 @@ class _Gateway implements PvpGateway {
   void dispose() {}
 }
 
+class _SilentGateway extends _Gateway {
+  _SilentGateway(super.projection);
+
+  @override
+  Future<PvpCommandResponse> sendCommand(String matchId, PvpCommand command) {
+    commands.add(command);
+    return Completer<PvpCommandResponse>().future; // never answers
+  }
+}
+
 Future<PvpDuelController> _attach(PvpProjection projection) async {
   final gateway = _Gateway(projection);
   final pvp = PvpController(gateway: gateway, userId: 'user-1');
@@ -332,6 +342,55 @@ void main() {
     final sent = gateway.commands.map((c) => c.type).toList();
     expect(sent, [PvpCommandType.playUnit],
         reason: 'no client-side Aether chatter before the play');
+  });
+
+  test('a tapped card leaves the hand and animates before the server replies',
+      () async {
+    // Measured, the server answers in about 240ms. That is not slow, but a
+    // silent gap reads as a freeze, so the tap has to show something at once.
+    final unit = _cardView(5, cardId: 'unit-1', type: 'unit');
+    final projection = PvpProjection.fromJson({
+      'version': 1,
+      'activePlayer': 'p1',
+      'phase': 'main1',
+      'turnNumber': 1,
+      'winner': null,
+      'chainCount': 0,
+      'stage': 'main',
+      'priority': 'p1',
+      'pendingAttackers': const [],
+      'revision': 1,
+      'players': {
+        'p1': {
+          ..._player('p1'),
+          'viewer': 'p1',
+          'hand': [unit],
+          'handCount': 1,
+        },
+        'p2': {..._player('p2'), 'viewer': 'p1'},
+      },
+    });
+
+    // A gateway that never answers, so only the immediate feedback is observed.
+    final gateway = _SilentGateway(projection);
+    final pvp = PvpController(gateway: gateway, userId: 'user-1');
+    await pvp.resumeActiveMatch();
+    final duel = PvpDuelController(
+      pvp: pvp,
+      library: _costedLibrary,
+      deck: const [],
+    );
+    expect(duel.me.hand.length, 1, reason: 'the card starts in hand');
+
+    duel.playHandCard(5);
+
+    expect(duel.me.hand, isEmpty, reason: 'the card left the hand on the tap');
+    expect(
+      duel.pendingEvents.where((e) => e.kind == 'play').map((e) => e.instanceId),
+      contains(5),
+      reason: 'the play animation starts on the tap',
+    );
+    duel.dispose();
   });
 
   test('ending the turn keeps going until the seat actually changes', () async {

@@ -63,6 +63,42 @@ class PvpDuelController extends DuelController {
   bool _readySent = false;
   PvpStage? _readyStage;
 
+  /// Cards tapped but not yet confirmed by the server. Hidden from the hand so
+  /// the tap has a visible effect straight away.
+  final Set<int> _inFlight = {};
+
+  /// Cards already animated when they were tapped, so the server's echo of the
+  /// same play does not animate them a second time.
+  final Set<int> _animatedOnTap = {};
+
+  /// The board exactly as the server sent it, before in-flight cards are
+  /// hidden. [state] is the drawn view of this.
+  GameState? _serverState;
+
+  /// Drops in-flight cards from the drawn hand.
+  ///
+  /// Once the server's own hand no longer lists a card, it has landed and the
+  /// entry is retired; anything still listed stays hidden until the answer
+  /// arrives.
+  GameState _hideInFlight(GameState next) {
+    if (_inFlight.isEmpty) return next;
+
+    final viewer = next.p1;
+    _inFlight.removeWhere(
+      (id) => !viewer.hand.any((card) => card.instanceId == id),
+    );
+    if (_inFlight.isEmpty) return next;
+
+    return next.copyWith(
+      p1: viewer.copyWith(
+        hand: [
+          for (final card in viewer.hand)
+            if (!_inFlight.contains(card.instanceId)) card,
+        ],
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _disposed = true;
@@ -78,7 +114,15 @@ class PvpDuelController extends DuelController {
     if (projection == null) return;
 
     _seat = projection.viewer;
-    state = PvpGameState.fromProjection(projection, library);
+
+    // A refusal means nothing is on its way after all; show the cards again.
+    if (pvp.lastError != null) _inFlight.clear();
+
+    // Keep the server's board as sent, and draw a filtered view of it. Without
+    // the raw copy there is nothing to compare against, and a card hidden on
+    // tap could never be retired or restored.
+    _serverState = PvpGameState.fromProjection(projection, library);
+    state = _hideInFlight(_serverState!);
     ui = _uiFor(projection);
     // Two distinct windows share this screen. In waitingForReady both players
     // are only confirming they are present; the mulligan itself does not open
@@ -126,7 +170,11 @@ class PvpDuelController extends DuelController {
       switch (event.type) {
         case 'card_played':
           final id = _asInt(event.payload['instanceId']);
-          pendingEvents.add(DuelEvent('play', instanceId: id));
+          // Our own play already animated on the tap. Replaying it here would
+          // lunge the same card twice; the opponent's plays still animate.
+          if (id == null || !_animatedOnTap.remove(id)) {
+            pendingEvents.add(DuelEvent('play', instanceId: id));
+          }
           _note('${_nameOf(id)} enters play.');
         case 'attack_declared':
           final ids = event.payload['attackerIds'];
@@ -331,7 +379,23 @@ class PvpDuelController extends DuelController {
     CardInstance card,
     List<Map<String, dynamic>> targets,
   ) async {
+    // Answer the tap now, not in a quarter of a second.
+    //
+    // Measured, the server replies in about 240ms on a warm connection. That is
+    // not slow — but nothing moved during it, and a silent gap reads as a
+    // freeze. So the card leaves the hand and its play animation starts
+    // immediately, and the server's answer lands mid-animation.
+    //
+    // This is deliberately not a local rules simulation: no board state is
+    // guessed, only "this card is on its way". The next projection is still the
+    // only authority, and a refusal simply puts the card back.
+    _inFlight.add(card.instanceId);
+    _animatedOnTap.add(card.instanceId);
+    pendingEvents.add(DuelEvent('play', instanceId: card.instanceId));
+    final board = _serverState;
+    if (board != null) state = _hideInFlight(board);
     notifyListeners();
+
     if (card.def.type == CardType.wellspring) {
       await pvp.playWellspring(card.instanceId);
       return;
