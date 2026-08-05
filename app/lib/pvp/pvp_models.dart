@@ -144,6 +144,12 @@ class PvpProjection {
   final PvpPlayerView self;
   final PvpPlayerView opponent;
 
+  /// When the player who owes the current decision runs out of time.
+  ///
+  /// Decided and enforced by the server; the client only draws it. A locally
+  /// invented clock would disagree with the side doing the enforcing.
+  final DateTime? deadlineAt;
+
   const PvpProjection({
     required this.version,
     required this.viewer,
@@ -158,6 +164,7 @@ class PvpProjection {
     required this.revision,
     required this.self,
     required this.opponent,
+    this.deadlineAt,
   });
 
   factory PvpProjection.fromJson(Map<String, dynamic> json) {
@@ -172,6 +179,7 @@ class PvpProjection {
     );
     final winner = json['winner'];
     return PvpProjection(
+      deadlineAt: DateTime.tryParse(json['deadlineAt'] as String? ?? '')?.toUtc(),
       version: _asInt(json['version'], 'version'),
       viewer: viewer,
       activePlayer: _enum(

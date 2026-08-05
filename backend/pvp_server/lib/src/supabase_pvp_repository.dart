@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:shardfall_engine/shardfall_engine.dart';
@@ -38,7 +39,7 @@ class SupabasePvpRepository implements PvpRepository {
   Future<PersistedMatch?> getMatch(String matchId) async {
     final matchRows = await _getList('/pvp_matches', {
       'select':
-          'id,player_one_id,player_two_id,status,engine_version,ruleset_version,revision,public_state,updated_at',
+          'id,player_one_id,player_two_id,status,engine_version,ruleset_version,revision,public_state,updated_at,turn_deadline',
       'id': 'eq.$matchId',
       'limit': '1',
     });
@@ -89,6 +90,8 @@ class SupabasePvpRepository implements PvpRepository {
       projectionsByUser: projections,
       lastHeartbeatByUser: heartbeats,
       updatedAt: DateTime.tryParse(row['updated_at'] as String? ?? '')?.toUtc(),
+      turnDeadline:
+          DateTime.tryParse(row['turn_deadline'] as String? ?? '')?.toUtc(),
     );
   }
 
@@ -197,6 +200,22 @@ class SupabasePvpRepository implements PvpRepository {
     // typed response; decoding is intentionally only a protocol sanity check.
     if (response is Map && response['matchId'] != before.id) {
       throw const FormatException('transition response match mismatch');
+    }
+
+    // The commit RPC does not carry the clock, so it is written alongside.
+    // A failure here must not undo an applied move: the worst case is a window
+    // that keeps the previous deadline and expires a little late.
+    try {
+      await _request(
+        'PATCH',
+        '/pvp_matches',
+        query: {'id': 'eq.${after.id}'},
+        body: {
+          'turn_deadline': after.turnDeadline?.toIso8601String(),
+        },
+      );
+    } catch (error) {
+      stderr.writeln('turn deadline not stored for ${after.id}: $error');
     }
   }
 

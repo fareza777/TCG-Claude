@@ -1,6 +1,14 @@
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import 'pvp_repository.dart';
+import 'turn_clock.dart';
+
+/// A session advanced past decision windows whose clock has run out.
+class _OverdueResult {
+  const _OverdueResult(this.session, this.events);
+  final PvpSession session;
+  final List<PvpEvent> events;
+}
 
 class MatchService {
   final PvpRepository repository;
@@ -84,11 +92,24 @@ class MatchService {
         }
 
         final actor = match.seatOf(actorUserId);
-        final result = PvpEngine.apply(match.session, actor, command);
-        final projection = PvpCodec.encodeProjection(result.session, actor);
+
+        // Anyone who has run out of time forfeits their decision before this
+        // command is looked at. Enforcement lives here, inside the match lock,
+        // because the waiting player's own traffic is what drives it -- a
+        // stalling opponent cannot decline to run the clock on themselves.
+        final overdue = _applyExpiredWindows(match.session, match.turnDeadline);
+        final baseSession = overdue.session;
+
+        final result = PvpEngine.apply(baseSession, actor, command);
+        final nextDeadline =
+            TurnClock.deadlineFor(result.session, DateTime.now().toUtc());
+        final projection = _withClock(
+          PvpCodec.encodeProjection(result.session, actor),
+          nextDeadline,
+        );
+        final allEvents = [...overdue.events, ...result.events];
         final eventJson = [
-          for (final event in result.events)
-            {'type': event.type, ...event.payload},
+          for (final event in allEvents) {'type': event.type, ...event.payload},
         ];
         final status = _statusFor(match.status, result.session);
         final response = PvpCommandResponse(
@@ -113,6 +134,7 @@ class MatchService {
           session: result.session,
           status: status,
           projectionsByUser: projections,
+          turnDeadline: nextDeadline,
         );
         final commandRecord = PvpCommandRecord(
           matchId: matchId,
@@ -124,7 +146,7 @@ class MatchService {
           response: response,
         );
         final events = [
-          for (final event in result.events)
+          for (final event in allEvents)
             PvpEventRecord(
               matchId: matchId,
               revision: result.session.revision,
@@ -140,6 +162,64 @@ class MatchService {
         );
         return response;
       });
+
+
+  /// Forfeits any decision whose deadline has passed.
+  ///
+  /// Only one window is resolved per call. A player who has simply walked away
+  /// therefore loses their windows one at a time as the opponent's traffic
+  /// arrives, rather than having a whole game played out for them in a single
+  /// burst. Total absence is handled separately by the stale-match reaper.
+  _OverdueResult _applyExpiredWindows(PvpSession session, DateTime? deadline) {
+    if (deadline == null) return _OverdueResult(session, const []);
+    if (!DateTime.now().toUtc().isAfter(deadline)) {
+      return _OverdueResult(session, const []);
+    }
+
+    final action = TurnClock.forfeitActionFor(session.stage);
+    if (action == null) return _OverdueResult(session, const []);
+
+    final payload = TurnClock.forfeitPayloadFor(session.stage);
+    var current = session;
+    final events = <PvpEvent>[];
+
+    for (final seat in TurnClock.owedBy(session)) {
+      final forfeit = PvpEngine.apply(
+        current,
+        seat,
+        PvpCommand(
+          type: action,
+          idempotencyKey: 'clock-${current.revision}-${seat.name}',
+          revision: current.revision,
+          payload: payload,
+        ),
+      );
+      // A refusal here is not worth failing the player's real command over;
+      // the next pass will try again.
+      if (!forfeit.accepted) continue;
+      current = forfeit.session;
+      events
+        ..add(PvpEvent('turn_clock_expired', payload: {'player': seat.name}))
+        ..addAll(forfeit.events);
+    }
+
+    return _OverdueResult(current, events);
+  }
+
+
+  /// Adds the live deadline to a projection.
+  ///
+  /// The clock has to come from the server: a client that invented its own
+  /// would disagree with the side actually enforcing it, and the player would
+  /// watch a countdown that means nothing.
+  Map<String, dynamic> _withClock(
+    Map<String, dynamic> projection,
+    DateTime? deadline,
+  ) =>
+      {
+        ...projection,
+        'deadlineAt': deadline?.toIso8601String(),
+      };
 
   Future<PvpReconnectResponse> reconnect({
     required String matchId,
@@ -163,8 +243,11 @@ class MatchService {
         }
         await repository.touchPlayer(matchId, actorUserId);
         final seat = match.seatOf(actorUserId);
-        final projection = match.projectionsByUser[actorUserId] ??
-            PvpCodec.encodeProjection(match.session, seat);
+        final projection = _withClock(
+          match.projectionsByUser[actorUserId] ??
+              PvpCodec.encodeProjection(match.session, seat),
+          match.turnDeadline,
+        );
         return PvpReconnectResponse(
           matchId: matchId,
           revision: match.session.revision,

@@ -12,6 +12,11 @@ class PersistedMatch {
   final Map<String, DateTime> lastHeartbeatByUser;
   final DateTime updatedAt;
 
+  /// When the player who owes the current decision runs out of time.
+  ///
+  /// Null while nothing is being waited on, or once the match is over.
+  final DateTime? turnDeadline;
+
   PersistedMatch({
     required this.id,
     required this.playerOneId,
@@ -23,6 +28,7 @@ class PersistedMatch {
     Map<String, Map<String, dynamic>> projectionsByUser = const {},
     Map<String, DateTime> lastHeartbeatByUser = const {},
     DateTime? updatedAt,
+    this.turnDeadline,
   })  : projectionsByUser = {
           for (final entry in projectionsByUser.entries)
             entry.key: Map<String, dynamic>.from(entry.value),
@@ -36,6 +42,7 @@ class PersistedMatch {
     Map<String, Map<String, dynamic>>? projectionsByUser,
     Map<String, DateTime>? lastHeartbeatByUser,
     DateTime? updatedAt,
+    DateTime? turnDeadline,
   }) =>
       PersistedMatch(
         id: id,
@@ -48,6 +55,7 @@ class PersistedMatch {
         projectionsByUser: projectionsByUser ?? this.projectionsByUser,
         lastHeartbeatByUser: lastHeartbeatByUser ?? this.lastHeartbeatByUser,
         updatedAt: updatedAt ?? DateTime.now().toUtc(),
+        turnDeadline: turnDeadline ?? this.turnDeadline,
       );
 
   bool hasPlayer(String userId) =>

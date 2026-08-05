@@ -57,7 +57,12 @@ class _PvpStatusStripState extends State<_PvpStatusStrip> {
     widget.controller.addListener(_refresh);
     // The countdown has to move on its own; the controller only speaks when
     // the server does.
-    _tick = Timer.periodic(const Duration(seconds: 1), (_) => _refresh());
+    _tick = Timer.periodic(const Duration(seconds: 1), (_) {
+      // Settling an expired window is the server's job, but somebody has to
+      // ask. The waiting player is the one who cares, so they do the asking.
+      widget.controller.nudgeExpiredClock();
+      _refresh();
+    });
   }
 
   @override

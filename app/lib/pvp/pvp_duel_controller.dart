@@ -88,11 +88,43 @@ class PvpDuelController extends DuelController {
   /// it runs out, it exists so both players can see the match is still moving.
   static const turnBudget = Duration(minutes: 2);
 
+  /// Time left on the server's clock for the current decision.
+  ///
+  /// Falls back to a local estimate only if the server has not sent one, so an
+  /// older service does not leave the strip blank.
   Duration get turnRemaining {
+    final deadline = pvp.projection?.deadlineAt;
+    if (deadline != null) {
+      final left = deadline.difference(DateTime.now().toUtc());
+      return left.isNegative ? Duration.zero : left;
+    }
     final started = turnStartedAt;
     if (started == null) return turnBudget;
     final left = turnBudget - DateTime.now().difference(started);
     return left.isNegative ? Duration.zero : left;
+  }
+
+  /// True while this player is the one the clock is running against.
+  bool get onMyClock => !busy && !isGameOver;
+
+  DateTime? _nudgedFor;
+
+  /// Asks the server to settle a deadline that has passed.
+  ///
+  /// The heartbeat would do this anyway, but only on its next 20-second tick,
+  /// which is a long time to sit watching a clock that already read zero. Sent
+  /// once per deadline so a stuck window cannot turn into a request loop.
+  void nudgeExpiredClock() {
+    final deadline = pvp.projection?.deadlineAt;
+    if (deadline == null || isGameOver) return;
+    if (DateTime.now().toUtc().isBefore(deadline)) return;
+    if (_nudgedFor == deadline) return;
+    _nudgedFor = deadline;
+    unawaited(pvp.send(PvpCommand(
+      type: PvpCommandType.heartbeat,
+      idempotencyKey: newPvpIdempotencyKey(),
+      revision: pvp.projection?.revision ?? 0,
+    )));
   }
 
   String _phaseLine(String phase, PlayerId? seat) {
