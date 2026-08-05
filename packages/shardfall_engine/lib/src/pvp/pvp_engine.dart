@@ -105,9 +105,10 @@ abstract final class PvpEngine {
           _declareBlocks(session, actor, command.payload),
         PvpCommandType.passPriority => _passPriority(session, actor),
         PvpCommandType.concede => _concede(session, actor),
+        // Presence only: no event, so it does not wake both clients into a
+        // full projection refetch every 20 seconds for no state change.
         PvpCommandType.heartbeat => _Transition(
             session: session,
-            event: const PvpEvent('heartbeat'),
             incrementsRevision: false,
           ),
       };
@@ -124,7 +125,7 @@ abstract final class PvpEngine {
       return PvpCommandResult(
         session: next,
         events: [
-          result.event,
+          if (result.event != null) result.event!,
           if (result.incrementsRevision)
             PvpEvent('state_changed', payload: {
               'command': command.type.name,
@@ -618,12 +619,18 @@ abstract final class PvpEngine {
 
 class _Transition {
   final PvpSession? session;
-  final PvpEvent event;
+
+  /// What to publish, or null when there is nothing worth telling anyone.
+  ///
+  /// Every published event lands in pvp_events, which Realtime pushes to both
+  /// clients, each of which then refetches the whole projection. That is the
+  /// right cost for a real move and pure waste for presence traffic.
+  final PvpEvent? event;
   final bool incrementsRevision;
 
   const _Transition({
     required this.session,
-    required this.event,
+    this.event,
     this.incrementsRevision = true,
   });
 }

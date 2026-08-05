@@ -194,6 +194,37 @@ void main() {
     }
   });
 
+  test('a heartbeat publishes nothing and changes nothing', () {
+    // Heartbeats were 38% of all commands in real matches. Every published
+    // event lands in pvp_events, which Realtime pushes to both clients, each
+    // of which then refetches the whole projection. Presence must not cost
+    // that.
+    final session = _mainSession();
+
+    final result = PvpEngine.apply(
+      session,
+      PlayerId.p1,
+      _command(session, PvpCommandType.heartbeat, key: 'beat'),
+    );
+
+    expect(result.accepted, isTrue);
+    expect(result.events, isEmpty, reason: 'no Realtime fan-out for presence');
+    expect(result.session.revision, session.revision);
+  });
+
+  test('a real move still publishes its events', () {
+    final session = _mainSession();
+
+    final result = PvpEngine.apply(
+      session,
+      PlayerId.p1,
+      _command(session, PvpCommandType.nextPhase, key: 'advance'),
+    );
+
+    expect(result.events, isNotEmpty);
+    expect(result.session.revision, session.revision + 1);
+  });
+
   test('wrong actor and stale revision are rejected without changing state',
       () {
     final session = _mainSession();
