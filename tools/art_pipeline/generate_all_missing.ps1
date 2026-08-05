@@ -1,6 +1,7 @@
 # Generate art for all cards lacking assets. FLUX schnell, 3:2, direct to app assets.
 $ErrorActionPreference = "Continue"
 $env:REPLICATE_API_TOKEN = (Get-ItemProperty "HKCU:\Environment").REPLICATE_API_TOKEN
+. "$PSScriptRoot\ArtProvider.ps1"
 $anchor = "epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean composition with clear focal subject, atmospheric depth, no text, no watermark, no border, no frame"
 $pal = @{
   V = "verdant forest tones, emerald and moss green palette, bioluminescent accents, moonlit canopy"
@@ -70,15 +71,9 @@ foreach ($c in $cards) {
   if (Test-Path $dest) { continue }
   $prompt = "$anchor, $($c.p), $($pal[$c.d])"
   $body = @{ input = @{ prompt = $prompt; aspect_ratio = "3:2"; num_outputs = 1; output_format = "webp"; output_quality = 90 } } | ConvertTo-Json -Depth 5
-  $done = $false
-  for ($try = 1; $try -le 3 -and -not $done; $try++) {
-    try {
-      $r = Invoke-RestMethod -Uri "https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions" -Method Post -Headers $headers -Body $body -TimeoutSec 120
-      $url = $r.output | Select-Object -First 1
-      if ($url) { Invoke-WebRequest -Uri $url -OutFile $dest | Out-Null; $done = $true }
-      else { Start-Sleep -Seconds 2 }
-    } catch { Start-Sleep -Seconds 3 }
-  }
+  # Replicate first; ArtProvider falls back to fal.ai on a quota refusal.
+  $provider = Invoke-CardArt -Prompt $prompt -OutFile $dest -Model schnell
+  $done = $null -ne $provider
   if ($done) { $ok++; Write-Output "$($c.id) OK" } else { $fail++; Write-Output "$($c.id) FAILED" }
 }
 Write-Output "DONE ok=$ok fail=$fail"

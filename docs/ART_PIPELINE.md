@@ -15,6 +15,43 @@ Frame & UI = vector (widget Flutter, sudah dirancang via SVG). Ilustrasi kartu =
 2. **Kandidat final** — 20× dev (±$0.50): 4 kartu ikonik × 5 seed.
 3. **Sisa (±$4.4)** — cadangan produksi awal: ±170 render dev → cukup untuk **~60–80 kartu jadi** (asumsi 2–3 render per kartu terpakai 1).
 
+## 1a. Provider & kunci API
+
+Dokumen ini semula ditulis untuk fal.ai, tetapi skrip produksinya berjalan di
+**Replicate**. Sekarang keduanya dipakai: Replicate sebagai provider utama, dan
+**fal.ai sebagai cadangan otomatis ketika kuota Replicate habis** — supaya
+render batch panjang tidak mati di tengah jalan dan meninggalkan folder aset
+setengah terisi.
+
+Semua skrip generator memanggil `Invoke-CardArt` dari
+[`tools/art_pipeline/ArtProvider.ps1`](../tools/art_pipeline/ArtProvider.ps1).
+Helper itu mencoba Replicate lebih dulu, dan berpindah ke fal.ai hanya kalau
+kegagalannya memang soal kuota (HTTP 402/429, atau pesan yang menyebut
+quota/billing/credit/rate limit). Kegagalan sesaat seperti timeout tetap
+di-retry di provider yang sama, bukan langsung membakar kuota cadangan.
+
+Ukuran dan format gambar dicerminkan antar provider (3:2 → 1024×683), jadi
+batch yang berpindah provider di tengah jalan tidak berubah bentuk.
+
+### Menyetel kunci
+
+**Kunci tidak pernah disimpan di dalam repo.** Keduanya dibaca dari environment
+variable, mengikuti pola yang sudah dipakai `REPLICATE_API_TOKEN`. Setel sekali
+per mesin, lalu buka PowerShell baru:
+
+```powershell
+[Environment]::SetEnvironmentVariable('FAL_KEY', '<id>:<secret>', 'User')
+```
+
+Verifikasi tanpa membocorkan nilainya:
+
+```powershell
+[bool][Environment]::GetEnvironmentVariable('FAL_KEY','User')
+```
+
+Kalau `FAL_KEY` tidak ada, skrip tetap berjalan penuh dengan Replicate saja dan
+hanya memberi peringatan bahwa tidak ada cadangan.
+
 ## 1b. ATURAN KONTEN WAJIB (non-negotiable — nilai agama pemilik proyek)
 
 Pemilik proyek menganut manhaj salaf. SETIAP art WAJIB:

@@ -1,5 +1,6 @@
 # SHARDFALL art pipeline - seed batch (FLUX schnell drafts)
 # Requires: $env:REPLICATE_API_TOKEN
+. "$PSScriptRoot\ArtProvider.ps1"
 $ErrorActionPreference = "Stop"
 $anchor = "epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean composition with clear focal subject, atmospheric depth, no text, no watermark, no border, no frame"
 $pal = @{
@@ -25,14 +26,10 @@ $outDir = "C:\TCG Claude\tools\art_pipeline\review"
 foreach ($c in $cards) {
   $prompt = "$anchor, $($c.p), $($pal[$c.dom])"
   $body = @{ input = @{ prompt = $prompt; aspect_ratio = "3:2"; num_outputs = 1; output_format = "webp"; output_quality = 90 } } | ConvertTo-Json -Depth 5
-  try {
-    $r = Invoke-RestMethod -Uri "https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions" -Method Post -Headers $headers -Body $body -TimeoutSec 120
-    $url = $r.output | Select-Object -First 1
-    if ($url) {
-      $file = Join-Path $outDir "$($c.id)_schnell_s1.webp"
-      Invoke-WebRequest -Uri $url -OutFile $file
-      Write-Output "$($c.id): OK"
-    } else { Write-Output "$($c.id): NO OUTPUT ($($r.status))" }
-  } catch { Write-Output "$($c.id): ERROR $($_.Exception.Message)" }
+  $file = Join-Path $outDir "$($c.id)_schnell_s1.webp"
+  # Replicate first; ArtProvider falls back to fal.ai on a quota refusal.
+  $provider = Invoke-CardArt -Prompt $prompt -OutFile $file -Model schnell
+  if ($provider) { Write-Output "$($c.id): OK ($provider)" }
+  else { Write-Output "$($c.id): FAILED" }
 }
 Write-Output "DONE"

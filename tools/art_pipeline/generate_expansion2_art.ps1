@@ -1,6 +1,7 @@
 # Art for the 55 expansion-2 cards. Modesty rules enforced for humanoids.
 $ErrorActionPreference = "Continue"
 $env:REPLICATE_API_TOKEN = (Get-ItemProperty "HKCU:\Environment").REPLICATE_API_TOKEN
+. "$PSScriptRoot\ArtProvider.ps1"
 $headers = @{ "Authorization" = "Token $env:REPLICATE_API_TOKEN"; "Content-Type" = "application/json"; "Prefer" = "wait" }
 $anchor = "epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean composition with clear focal subject, atmospheric depth, no text, no watermark, no border, no frame"
 $CONCEAL = "the figure is deeply hooded or in a full helmet with the face entirely hidden in shadow or seen from behind, fully clothed in heavy modest armor and robes, no exposed skin, no visible face"
@@ -82,14 +83,9 @@ foreach ($card in $cards) {
   $prompt = "$anchor, $($card.p)$concl, $($pal[$card.d])"
   $model = if ($card.m -eq "d") { "black-forest-labs/flux-dev" } else { "black-forest-labs/flux-schnell" }
   $body = @{ input = @{ prompt = $prompt; aspect_ratio = "3:2"; num_outputs = 1; output_format = "webp"; output_quality = 90 } } | ConvertTo-Json -Depth 5
-  $done=$false
-  for ($t=1; $t -le 3 -and -not $done; $t++) {
-    try {
-      $r = Invoke-RestMethod -Uri "https://api.replicate.com/v1/models/$model/predictions" -Method Post -Headers $headers -Body $body -TimeoutSec 220
-      $u = $r.output | Select-Object -First 1
-      if ($u) { Invoke-WebRequest $u -OutFile $dest | Out-Null; $done=$true } else { Start-Sleep 4 }
-    } catch { Start-Sleep 5 }
-  }
+  # Replicate first; ArtProvider falls back to fal.ai on a quota refusal.
+  $tier = if ($card.m -eq "d") { "dev" } else { "schnell" }
+  $done = $null -ne (Invoke-CardArt -Prompt $prompt -OutFile $dest -Model $tier)
   if ($done) { $ok++ } else { $fail++; Write-Output "$($card.id) FAIL" }
 }
 Write-Output "DONE ok=$ok fail=$fail"

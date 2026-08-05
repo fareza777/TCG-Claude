@@ -2,6 +2,7 @@
 # faces, no female aurat). Overwrites app/assets/art directly.
 $ErrorActionPreference = "Continue"
 $env:REPLICATE_API_TOKEN = (Get-ItemProperty "HKCU:\Environment").REPLICATE_API_TOKEN
+. "$PSScriptRoot\ArtProvider.ps1"
 $anchor = "epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean composition with clear focal subject, atmospheric depth, no text, no watermark, no border, no frame"
 # Modesty clauses appended to any card featuring a humanoid figure.
 $HOOD  = "the figure is deeply hooded, face entirely hidden in shadow beneath the hood, fully robed in heavy concealing cloth, no visible face, no exposed skin"
@@ -87,15 +88,9 @@ foreach ($card in $cards) {
   $concl = if ($card.ContainsKey('c')) { ", $($card.c)" } else { "" }
   $prompt = "$anchor, $($card.p)$concl, $($pal[$card.d])"
   $body = @{ input = @{ prompt = $prompt; aspect_ratio = "3:2"; num_outputs = 1; output_format = "webp"; output_quality = 95 } } | ConvertTo-Json -Depth 5
-  $done = $false
-  for ($try = 1; $try -le 3 -and -not $done; $try++) {
-    try {
-      $r = Invoke-RestMethod -Uri "https://api.replicate.com/v1/models/black-forest-labs/flux-dev/predictions" -Method Post -Headers $headers -Body $body -TimeoutSec 200
-      $url = $r.output | Select-Object -First 1
-      if ($url) { Invoke-WebRequest -Uri $url -OutFile (Join-Path $outDir "$($card.id).webp") | Out-Null; $done = $true }
-      else { Start-Sleep 3 }
-    } catch { Start-Sleep 4 }
-  }
+  # Replicate first; ArtProvider falls back to fal.ai on a quota refusal.
+  $provider = Invoke-CardArt -Prompt $prompt -OutFile (Join-Path $outDir "$($card.id).webp") -Model dev
+  $done = $null -ne $provider
   if ($done) { $ok++ } else { $fail++; Write-Output "$($card.id) FAILED" }
 }
 Write-Output "DONE ok=$ok fail=$fail"
