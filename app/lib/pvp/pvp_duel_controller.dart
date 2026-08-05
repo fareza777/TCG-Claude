@@ -347,7 +347,28 @@ class PvpDuelController extends DuelController {
   @override
   Future<void> endTurn() async {
     if (isGameOver) return;
-    await pvp.nextPhase();
+
+    // "End turn" means the turn passes, not "advance one phase". The
+    // single-player controller loops until the seat changes; online it takes a
+    // sequence, because leaving combat needs an explicit attack declaration.
+    // Sending one nextPhase would have walked the player into Combat instead
+    // of ending anything.
+    final seat = pvp.projection?.viewer;
+    for (var guard = 0; guard < 8; guard++) {
+      final current = pvp.projection;
+      if (current == null || current.activePlayer != seat) return;
+      if (current.stage == PvpStage.finished) return;
+
+      if (current.stage == PvpStage.attackDeclaration) {
+        await pvp.declareAttackers(const []);
+      } else if (current.stage == PvpStage.main) {
+        await pvp.nextPhase();
+      } else {
+        // Someone else holds the decision; nothing to push.
+        return;
+      }
+      if (pvp.lastError != null) return;
+    }
   }
 
   @override

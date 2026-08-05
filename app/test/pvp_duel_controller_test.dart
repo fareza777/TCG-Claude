@@ -112,18 +112,23 @@ class _Gateway implements PvpGateway {
   @override
   Future<PvpProjection> reconnect(String matchId) async => projection;
 
+  /// Projections handed back in order, so a multi-step action can be followed.
+  List<PvpProjection> replies = const [];
+  int _reply = 0;
+
   @override
   Future<PvpCommandResponse> sendCommand(
     String matchId,
     PvpCommand command,
   ) async {
     commands.add(command);
+    final next = _reply < replies.length ? replies[_reply++] : projection;
     return PvpCommandResponse(
       accepted: true,
       duplicate: false,
       status: 'active',
       revision: command.revision + 1,
-      projection: projection,
+      projection: next,
     );
   }
 
@@ -326,6 +331,36 @@ void main() {
       lessThan(sent.indexOf(PvpCommandType.playUnit)),
       reason: 'Aether must be raised before the unit is played',
     );
+  });
+
+  test('ending the turn keeps going until the seat actually changes', () async {
+    // One nextPhase from Main 1 lands in Combat. Stopping there would leave the
+    // player mid-turn having pressed "end turn", and combat cannot be left
+    // without declaring attackers.
+    final main1 = _projection(viewer: 'p1', activePlayer: 'p1');
+    final combat = _projection(
+      viewer: 'p1',
+      activePlayer: 'p1',
+      stage: 'attackDeclaration',
+    );
+    final opponent = _projection(viewer: 'p1', activePlayer: 'p2');
+
+    final gateway = _Gateway(main1)..replies = [combat, main1, opponent];
+    final pvp = PvpController(gateway: gateway, userId: 'user-1');
+    await pvp.resumeActiveMatch();
+    final duel = PvpDuelController(
+      pvp: pvp,
+      library: _library,
+      deck: const [],
+    );
+
+    await duel.endTurn();
+    duel.dispose();
+
+    final sent = gateway.commands.map((c) => c.type).toList();
+    expect(sent, contains(PvpCommandType.declareAttackers),
+        reason: 'combat has to be cleared to leave it');
+    expect(pvp.projection?.activePlayer, PlayerId.p2);
   });
 
   test('conceding sends the command rather than ending locally', () async {
