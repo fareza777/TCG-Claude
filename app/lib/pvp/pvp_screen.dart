@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
-import '../duel/duel_screen.dart';
 import '../services/auth_service.dart';
 import '../services/backend_config.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
 import 'pvp_controller.dart';
+import 'pvp_battle_screen.dart';
 import 'pvp_duel_controller.dart';
 import 'pvp_models.dart';
 import 'pvp_service.dart';
@@ -116,7 +116,7 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
 
     await Navigator.of(context).push<void>(
       MaterialPageRoute(
-        builder: (_) => DuelScreen(controller: duel, enemyName: 'Opponent'),
+        builder: (_) => PvpBattleScreen(controller: duel),
       ),
     );
     duel.dispose();

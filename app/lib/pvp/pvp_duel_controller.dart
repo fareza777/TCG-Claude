@@ -75,6 +75,41 @@ class PvpDuelController extends DuelController {
   /// hidden. [state] is the drawn view of this.
   GameState? _serverState;
 
+  /// Whose turn the banner last announced, so it only sweeps on a real change.
+  PlayerId? _bannerSeat;
+  PlayerId? _turnSeat;
+
+  /// When the current turn began, for the countdown the PvP overlay draws.
+  /// Anchored on the seat changing rather than on any single event, so it
+  /// survives a reconnect mid-turn.
+  DateTime? turnStartedAt;
+
+  /// How long a turn is expected to take. Advisory: nothing is forfeited when
+  /// it runs out, it exists so both players can see the match is still moving.
+  static const turnBudget = Duration(minutes: 2);
+
+  Duration get turnRemaining {
+    final started = turnStartedAt;
+    if (started == null) return turnBudget;
+    final left = turnBudget - DateTime.now().difference(started);
+    return left.isNegative ? Duration.zero : left;
+  }
+
+  String _phaseLine(String phase, PlayerId? seat) {
+    final who = seat == null
+        ? ''
+        : (_toLocalSeat(seat) == DuelController.human ? 'Your ' : "Opponent's ");
+    const names = {
+      'refresh': 'untap',
+      'draw': 'draw',
+      'main1': 'first main phase',
+      'combat': 'combat',
+      'main2': 'second main phase',
+      'end': 'end step',
+    };
+    return '$who${names[phase] ?? phase}.';
+  }
+
   /// Drops in-flight cards from the drawn hand.
   ///
   /// Once the server's own hand no longer lists a card, it has landed and the
@@ -123,6 +158,17 @@ class PvpDuelController extends DuelController {
     // tap could never be retired or restored.
     _serverState = PvpGameState.fromProjection(projection, library);
     state = _hideInFlight(_serverState!);
+
+    // Restart the countdown when the seat actually changes, so reconnecting
+    // mid-turn does not hand the player a fresh two minutes.
+    if (projection.activePlayer != _turnSeat) {
+      _turnSeat = projection.activePlayer;
+      turnStartedAt = DateTime.now();
+    }
+
+    // Seed the banner from the board we arrive on. Without this, the first
+    // phase event of an ongoing turn is mistaken for a change of turn.
+    _bannerSeat ??= projection.activePlayer;
     ui = _uiFor(projection);
     // Two distinct windows share this screen. In waitingForReady both players
     // are only confirming they are present; the mulligan itself does not open
@@ -199,14 +245,18 @@ class PvpDuelController extends DuelController {
           _note('The match is over.');
         case 'phase_changed':
           final active = event.payload['activePlayer'];
-          if (active is String) {
-            // Drawn from the viewer's chair, so the banner names the right side.
-            final seat = PlayerId.values.asNameMap()[active];
-            if (seat != null) {
-              pendingEvents.add(
-                DuelEvent('turnStart', player: _toLocalSeat(seat)),
-              );
-            }
+          final seat =
+              active is String ? PlayerId.values.asNameMap()[active] : null;
+          final phase = event.payload['phase'];
+          if (phase is String) _note(_phaseLine(phase, seat));
+          // The banner announces a new turn, not a new phase. Firing it on
+          // every phase change swept "YOUR TURN" across the screen several
+          // times per turn, which read as the match glitching.
+          if (seat != null && seat != _bannerSeat) {
+            _bannerSeat = seat;
+            pendingEvents.add(
+              DuelEvent('turnStart', player: _toLocalSeat(seat)),
+            );
           }
       }
     }

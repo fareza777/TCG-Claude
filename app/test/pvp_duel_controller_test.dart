@@ -393,6 +393,35 @@ void main() {
     duel.dispose();
   });
 
+  test('the turn banner announces turns, not every phase', () async {
+    // Emitting it on each phase_changed swept "YOUR TURN" across the screen
+    // several times per turn, which read as the match glitching.
+    final gateway = _Gateway(_projection(viewer: 'p1'))
+      ..events = const [
+        PvpMatchEvent(seq: 1, type: 'phase_changed',
+            payload: {'phase': 'combat', 'activePlayer': 'p1'}),
+        PvpMatchEvent(seq: 2, type: 'phase_changed',
+            payload: {'phase': 'main2', 'activePlayer': 'p1'}),
+        PvpMatchEvent(seq: 3, type: 'phase_changed',
+            payload: {'phase': 'main1', 'activePlayer': 'p2'}),
+      ];
+    final pvp = PvpController(gateway: gateway, userId: 'user-1');
+    await pvp.resumeActiveMatch();
+    final duel = PvpDuelController(
+      pvp: pvp,
+      library: _library,
+      deck: const [],
+    );
+    await Future<void>.delayed(Duration.zero);
+    duel.dispose();
+
+    final banners =
+        duel.pendingEvents.where((e) => e.kind == 'turnStart').length;
+    expect(banners, 1, reason: 'three phase changes, one change of turn');
+    expect(duel.history.length, greaterThanOrEqualTo(3),
+        reason: 'each phase is still named in the log');
+  });
+
   test('ending the turn keeps going until the seat actually changes', () async {
     // One nextPhase from Main 1 lands in Combat. Stopping there would leave the
     // player mid-turn having pressed "end turn", and combat cannot be left
