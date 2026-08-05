@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../duel/duel_controller.dart';
@@ -231,7 +233,7 @@ class PvpDuelController extends DuelController {
       notifyListeners();
       return;
     }
-    _send(card, const []);
+    unawaited(_send(card, const []));
   }
 
   @override
@@ -239,9 +241,9 @@ class PvpDuelController extends DuelController {
     final card = _aimingCard();
     if (card == null) return;
     targetingId = null;
-    _send(card, [
+    unawaited(_send(card, [
       {'kind': 'unit', 'instanceId': unitInstanceId},
-    ]);
+    ]));
   }
 
   @override
@@ -250,9 +252,9 @@ class PvpDuelController extends DuelController {
     if (card == null) return;
     if (!targetSpec(card.def).players) return;
     targetingId = null;
-    _send(card, [
+    unawaited(_send(card, [
       {'kind': 'player', 'playerId': _toServerSeat(pid).name},
-    ]);
+    ]));
   }
 
   CardInstance? _aimingCard() {
@@ -266,18 +268,52 @@ class PvpDuelController extends DuelController {
     return card;
   }
 
-  void _send(CardInstance card, List<Map<String, dynamic>> targets) {
+  Future<void> _send(
+    CardInstance card,
+    List<Map<String, dynamic>> targets,
+  ) async {
     notifyListeners();
+    if (card.def.type == CardType.wellspring) {
+      await pvp.playWellspring(card.instanceId);
+      return;
+    }
+
+    await _payFor(card.def);
     switch (card.def.type) {
-      case CardType.wellspring:
-        pvp.playWellspring(card.instanceId);
       case CardType.unit:
-        pvp.playUnit(card.instanceId, targets: targets);
+        await pvp.playUnit(card.instanceId, targets: targets);
+      case CardType.wellspring:
+        break;
       case CardType.rite:
       case CardType.ritual:
       case CardType.sigil:
       case CardType.relic:
-        pvp.cast(card.instanceId, targets: targets);
+        await pvp.cast(card.instanceId, targets: targets);
+    }
+  }
+
+  /// Exerts Wellsprings until the cost can be paid.
+  ///
+  /// The duel screen has no "tap for Aether" control because the single-player
+  /// controller quietly does this inside its own play routine. The online rules
+  /// have no such shortcut: they reject a play the pool cannot cover, and
+  /// exerting is a separate command. Without this the player could see an
+  /// affordable card, tap it, and simply be refused.
+  Future<void> _payFor(CardDef def) async {
+    for (var guard = 0; guard < 20; guard++) {
+      try {
+        Game.payCost(def, me.aetherPool);
+        return;
+      } on StateError {
+        final ready = me.arena
+            .where((c) => c.def.type == CardType.wellspring && !c.exerted)
+            .firstOrNull;
+        // Nothing left to tap: let the server answer with the real reason
+        // rather than inventing one here.
+        if (ready == null) return;
+        await pvp.exertForAether(ready.instanceId);
+        if (pvp.lastError != null) return;
+      }
     }
   }
 

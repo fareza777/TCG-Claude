@@ -11,6 +11,48 @@ import 'package:shardfall/pvp/pvp_service.dart';
 
 const _library = CardLibrary(byId: {}, starterDecks: {});
 
+/// A unit that costs Aether, so paying for it is not a no-op.
+const _costedLibrary = CardLibrary(
+  byId: {
+    'unit-1': CardDef(
+      id: 'unit-1',
+      name: 'Costed Unit',
+      dominions: [Dominion.verdance],
+      type: CardType.unit,
+      costGeneric: 1,
+      might: 2,
+      guard: 2,
+    ),
+    'ws-1': CardDef(
+      id: 'ws-1',
+      name: 'Wellspring',
+      dominions: [Dominion.verdance],
+      type: CardType.wellspring,
+    ),
+  },
+  starterDecks: {},
+);
+
+Map<String, dynamic> _cardView(
+  int instanceId, {
+  required String cardId,
+  required String type,
+}) =>
+    {
+      'instanceId': instanceId,
+      'cardId': cardId,
+      'name': 'Card $instanceId',
+      'type': type,
+      'subtype': '',
+      'dominions': const ['verdance'],
+      'might': 2,
+      'guard': 2,
+      'exerted': false,
+      'damage': 0,
+      'plusCounters': 0,
+      'summonedThisTurn': false,
+    };
+
 Map<String, dynamic> _player(String id, {int health = 25}) => {
       'id': id,
       'health': health,
@@ -229,6 +271,60 @@ void main() {
           .where((e) => e.kind == 'attack')
           .map((e) => e.instanceId),
       containsAll(<int>[3, 4]),
+    );
+  });
+
+  test('a card is paid for before it is played', () async {
+    // The duel screen has no "tap for Aether" control -- the single-player
+    // controller does it silently. The online rules do not, so without this the
+    // player taps an affordable unit and the server simply refuses it.
+    final unit = _cardView(5, cardId: 'unit-1', type: 'unit');
+    final well = _cardView(9, cardId: 'ws-1', type: 'wellspring');
+    final projection = PvpProjection.fromJson({
+      'version': 1,
+      'activePlayer': 'p1',
+      'phase': 'main1',
+      'turnNumber': 1,
+      'winner': null,
+      'chainCount': 0,
+      'stage': 'main',
+      'priority': 'p1',
+      'pendingAttackers': const [],
+      'revision': 1,
+      'players': {
+        'p1': {
+          ..._player('p1'),
+          'viewer': 'p1',
+          'hand': [unit],
+          'handCount': 1,
+          'arena': [well],
+        },
+        'p2': {..._player('p2'), 'viewer': 'p1'},
+      },
+    });
+
+    final gateway = _Gateway(projection);
+    final pvp = PvpController(gateway: gateway, userId: 'user-1');
+    await pvp.resumeActiveMatch();
+    final duel = PvpDuelController(
+      pvp: pvp,
+      library: _costedLibrary,
+      deck: const [],
+    );
+
+    duel.playHandCard(5);
+    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(Duration.zero);
+    duel.dispose();
+
+    final sent = gateway.commands.map((c) => c.type).toList();
+    expect(sent, contains(PvpCommandType.exertForAether),
+        reason: 'the Wellspring has to be tapped for the cost');
+    expect(sent, contains(PvpCommandType.playUnit));
+    expect(
+      sent.indexOf(PvpCommandType.exertForAether),
+      lessThan(sent.indexOf(PvpCommandType.playUnit)),
+      reason: 'Aether must be raised before the unit is played',
     );
   });
 
