@@ -56,6 +56,7 @@ class PvpDuelController extends DuelController {
   PlayerId _seat = PlayerId.p1;
 
   bool _disposed = false;
+  bool _redrawSent = false;
 
   @override
   void dispose() {
@@ -76,7 +77,7 @@ class PvpDuelController extends DuelController {
     ui = _uiFor(projection);
     awaitingMulligan = projection.stage == PvpStage.waitingForReady ||
         projection.stage == PvpStage.mulligan;
-    mulliganUsed = projection.stage == PvpStage.mulligan && !awaitingMulligan;
+    mulliganUsed = _redrawSent;
     lastError = pvp.lastError;
 
     // The screen disables input while busy. Anything that is not this player's
@@ -230,8 +231,12 @@ class PvpDuelController extends DuelController {
 
   @override
   void redrawHand() {
-    if (!awaitingMulligan) return;
-    pvp.redraw();
+    if (!awaitingMulligan || _redrawSent) return;
+    // The projection does not report whether this player has already used
+    // their mulligan, so remember it here. Otherwise the button stays lit and
+    // the only feedback is the server refusing the second press.
+    _redrawSent = true;
+    unawaited(pvp.redraw());
   }
 
   @override
