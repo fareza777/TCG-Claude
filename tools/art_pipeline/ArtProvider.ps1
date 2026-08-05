@@ -90,17 +90,45 @@ function Invoke-FalArt {
     '16:9' { @{ width = 1024; height = 576 } }
     default { @{ width = 1024; height = 683 } }
   }
+  # fal only encodes jpeg or png -- asking it for webp is rejected outright.
+  # Take png (lossless) and re-encode, so a fallback asset is byte-for-byte the
+  # same kind of file as one from the primary provider.
+  $falFormat = if ($OutputFormat -eq 'webp') { 'png' } else { $OutputFormat }
+
   $body = @{
     prompt        = $Prompt
     image_size    = $size
     num_images    = 1
-    output_format = $OutputFormat
+    output_format = $falFormat
   } | ConvertTo-Json -Depth 5
 
   $response = Invoke-RestMethod -Uri "https://fal.run/$slug" -Method Post -Headers $headers -Body $body -TimeoutSec 180
   $url = $response.images | Select-Object -First 1 -ExpandProperty url
   if (-not $url) { throw 'fal.ai returned no image' }
-  Invoke-WebRequest -Uri $url -OutFile $OutFile | Out-Null
+
+  if ($falFormat -eq $OutputFormat) {
+    Invoke-WebRequest -Uri $url -OutFile $OutFile | Out-Null
+    return 'fal'
+  }
+
+  $staging = Join-Path ([IO.Path]::GetTempPath()) ("fal-" + [Guid]::NewGuid().ToString('N') + ".png")
+  try {
+    Invoke-WebRequest -Uri $url -OutFile $staging | Out-Null
+    $ffmpeg = Get-Command ffmpeg -ErrorAction SilentlyContinue
+    if ($ffmpeg) {
+      & $ffmpeg.Source -y -loglevel error -i $staging -c:v libwebp -quality 90 $OutFile
+      if (-not (Test-Path $OutFile)) { throw 'webp conversion produced no file' }
+    }
+    else {
+      # Better a working PNG under a .webp name than no art at all: Flutter
+      # decodes by content, not by extension.
+      Copy-Item $staging $OutFile -Force
+      Write-Warning "ffmpeg not found, so $OutFile holds PNG bytes under a .webp name."
+    }
+  }
+  finally {
+    Remove-Item $staging -Force -ErrorAction SilentlyContinue
+  }
   return 'fal'
 }
 
