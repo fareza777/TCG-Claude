@@ -133,7 +133,11 @@ class _Gateway implements PvpGateway {
   }
 
   @override
-  Stream<PvpProjection> watchMatch(String id, String userId) =>
+  Stream<PvpProjection> watchMatch(
+    String id,
+    String userId, {
+    int Function()? appliedRevision,
+  }) =>
       const Stream.empty();
 
   @override

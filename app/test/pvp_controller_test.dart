@@ -238,7 +238,11 @@ class _FakePvpGateway implements PvpGateway {
   }
 
   @override
-  Stream<PvpProjection> watchMatch(String matchId, String userId) {
+  Stream<PvpProjection> watchMatch(
+    String matchId,
+    String userId, {
+    int Function()? appliedRevision,
+  }) {
     watchedMatchId = matchId;
     return projections.stream;
   }

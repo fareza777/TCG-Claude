@@ -29,7 +29,11 @@ abstract interface class PvpGateway {
 
   Future<PvpProjection> reconnect(String matchId);
 
-  Stream<PvpProjection> watchMatch(String matchId, String userId);
+  Stream<PvpProjection> watchMatch(
+    String matchId,
+    String userId, {
+    int Function()? appliedRevision,
+  });
 
   Stream<String> watchQueue(String userId);
 
@@ -125,7 +129,11 @@ class PvpService implements PvpGateway {
   }
 
   @override
-  Stream<PvpProjection> watchMatch(String matchId, String userId) {
+  Stream<PvpProjection> watchMatch(
+    String matchId,
+    String userId, {
+    int Function()? appliedRevision,
+  }) {
     final controller = StreamController<PvpProjection>.broadcast();
     final channel = _client.channel('pvp-match:$matchId:$userId');
 
@@ -156,7 +164,15 @@ class PvpService implements PvpGateway {
       }
     }
 
-    void refreshProjection(PostgresChangePayload _) => unawaited(refresh());
+    void refreshProjection(PostgresChangePayload payload) {
+      // Your own move already came back on the command response. The event it
+      // published then arrives here and would fetch the same board again, so a
+      // revision this client has already applied is simply dropped.
+      final seen = appliedRevision?.call();
+      final incoming = payload.newRecord['revision'];
+      if (seen != null && incoming is int && incoming <= seen) return;
+      unawaited(refresh());
+    }
 
     channel
         .onPostgresChanges(

@@ -244,7 +244,7 @@ class PvpController extends ChangeNotifier {
     _queueSubscription = null;
     await _matchSubscription?.cancel();
     _matchSubscription = gateway
-        .watchMatch(id, userId)
+        .watchMatch(id, userId, appliedRevision: () => projection?.revision ?? -1)
         .listen(
           _applyProjection,
           onError: (Object error, StackTrace stack) {
