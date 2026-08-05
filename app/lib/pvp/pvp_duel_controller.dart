@@ -108,18 +108,30 @@ class PvpDuelController extends DuelController {
     for (final event in pvp.takeMatchEvents()) {
       switch (event.type) {
         case 'card_played':
-          pendingEvents.add(
-            DuelEvent('play', instanceId: _asInt(event.payload['instanceId'])),
-          );
+          final id = _asInt(event.payload['instanceId']);
+          pendingEvents.add(DuelEvent('play', instanceId: id));
+          _note('${_nameOf(id)} enters play.');
         case 'attack_declared':
           final ids = event.payload['attackerIds'];
           if (ids is List) {
             for (final id in ids) {
               pendingEvents.add(DuelEvent('attack', instanceId: _asInt(id)));
             }
+            if (ids.isNotEmpty) {
+              _note('${ids.map((id) => _nameOf(_asInt(id))).join(', ')} attack.');
+            }
           }
         case 'redraw':
           pendingEvents.add(const DuelEvent('draw'));
+          _note('A player redraws their opening hand.');
+        case 'match_started':
+          _note('The match begins.');
+        case 'mulligan_started':
+          _note('Both players are ready. Keep or redraw your hand.');
+        case 'combat_resolved':
+          _note('Combat resolves.');
+        case 'match_finished':
+          _note('The match is over.');
         case 'phase_changed':
           final active = event.payload['activePlayer'];
           if (active is String) {
@@ -133,6 +145,24 @@ class PvpDuelController extends DuelController {
           }
       }
     }
+  }
+
+  /// The battle log the duel screen already renders. Empty in PvP until now,
+  /// which read as a missing panel rather than a quiet one.
+  void _note(String line) {
+    if (history.isNotEmpty && history.last == line) return;
+    history.add(line);
+    if (history.length > 60) history.removeAt(0);
+  }
+
+  String _nameOf(int? instanceId) {
+    if (instanceId == null) return 'A card';
+    for (final card in [...me.arena, ...foe.arena, ...me.hand]) {
+      if (card.instanceId == instanceId) {
+        return card.def.name.isEmpty ? 'A card' : card.def.name;
+      }
+    }
+    return 'A card';
   }
 
   static int? _asInt(Object? value) => value is int

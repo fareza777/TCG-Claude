@@ -271,6 +271,8 @@ void main() {
 
     final kinds = duel.pendingEvents.map((e) => e.kind).toList();
     expect(kinds, containsAll(<String>['play', 'attack']));
+    expect(duel.history, isNotEmpty,
+        reason: 'the battle log panel must not sit empty in PvP');
     expect(
       duel.pendingEvents
           .where((e) => e.kind == 'attack')
