@@ -129,11 +129,34 @@ class PvpService implements PvpGateway {
     final controller = StreamController<PvpProjection>.broadcast();
     final channel = _client.channel('pvp-match:$matchId:$userId');
 
-    void refreshProjection(PostgresChangePayload _) {
-      unawaited(
-        reconnect(matchId).then(controller.add).catchError(controller.addError),
-      );
+    // One command publishes more than one event -- a card play emits both
+    // card_played and state_changed -- and each of those would otherwise pull
+    // the whole projection back through the Edge Function, the Dart service
+    // and several Postgres queries. Coalescing means a burst costs one
+    // refresh, with a single follow-up if anything landed while it was in
+    // flight, so nothing is missed and nothing is fetched twice.
+    var refreshing = false;
+    var refreshAgain = false;
+
+    Future<void> refresh() async {
+      if (refreshing) {
+        refreshAgain = true;
+        return;
+      }
+      refreshing = true;
+      try {
+        do {
+          refreshAgain = false;
+          controller.add(await reconnect(matchId));
+        } while (refreshAgain);
+      } catch (error, stack) {
+        controller.addError(error, stack);
+      } finally {
+        refreshing = false;
+      }
     }
+
+    void refreshProjection(PostgresChangePayload _) => unawaited(refresh());
 
     channel
         .onPostgresChanges(
