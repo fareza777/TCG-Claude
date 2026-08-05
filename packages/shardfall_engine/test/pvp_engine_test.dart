@@ -35,6 +35,16 @@ List<CardDef> _deck(String prefix) => [
       for (var i = 0; i < 24; i++) _unit('$prefix-unit-$i'),
     ];
 
+/// A drawable library so a turn change does not deck-out the fixture.
+List<CardInstance> _deckInstances(String prefix, PlayerId owner) => [
+      for (var i = 0; i < 20; i++)
+        CardInstance(
+          instanceId: 900 + i + (owner == PlayerId.p1 ? 0 : 100),
+          def: _unit('$prefix-lib-$i'),
+          owner: owner,
+        ),
+    ];
+
 PvpCommand _command(
   PvpSession session,
   PvpCommandType type, {
@@ -62,11 +72,13 @@ PvpSession _mainSession({
         id: PlayerId.p1,
         hand: p1Hand,
         arena: p1Arena,
+        deck: _deckInstances('p1', PlayerId.p1),
       ),
       p2: PlayerState(
         id: PlayerId.p2,
         hand: p2Hand,
         arena: p2Arena,
+        deck: _deckInstances('p2', PlayerId.p2),
       ),
       activePlayer: activePlayer,
       phase: phase,
@@ -137,6 +149,49 @@ void main() {
     expect(result.accepted, isTrue);
     expect(result.session.stage, PvpStage.main);
     expect(result.session.game.phase, Phase.main1);
+  });
+
+  test('advancing past Main 2 lands on the next player\'s Main 1', () {
+    // Main 2 -> end -> (turn change) refresh -> draw -> Main 1. Stopping on any
+    // of those bookkeeping phases still reported PvpStage.main, so the client
+    // offered card plays that the rules rejected as "not legal in this phase".
+    final session = _mainSession(phase: Phase.main2);
+
+    final result = PvpEngine.apply(
+      session,
+      PlayerId.p1,
+      _command(session, PvpCommandType.nextPhase, key: 'advance'),
+    );
+
+    expect(result.accepted, isTrue);
+    expect(result.session.game.phase, Phase.main1);
+    expect(result.session.game.activePlayer, PlayerId.p2);
+    expect(result.session.stage, PvpStage.main);
+  });
+
+  test('a main action is legal on every phase reported as the main stage', () {
+    // The contract the freeze violated: if the stage says main, the rules must
+    // accept a main action.
+    for (final phase in [Phase.main1, Phase.main2]) {
+      final session = _mainSession(phase: phase);
+      expect(session.stage, PvpStage.main, reason: 'setup for $phase');
+
+      final advanced = PvpEngine.apply(
+        session,
+        PlayerId.p1,
+        _command(session, PvpCommandType.nextPhase, key: 'advance-$phase'),
+      );
+      expect(advanced.accepted, isTrue);
+
+      final next = advanced.session;
+      if (next.stage == PvpStage.main) {
+        expect(
+          next.game.phase == Phase.main1 || next.game.phase == Phase.main2,
+          isTrue,
+          reason: 'stage main must mean a main phase, got ${next.game.phase}',
+        );
+      }
+    }
   });
 
   test('wrong actor and stale revision are rejected without changing state',
@@ -351,15 +406,16 @@ void main() {
     expect(result.accepted, isTrue);
     session = result.session;
 
-    for (final key in ['to-end', 'to-p2-refresh', 'to-p2-draw', 'to-p2-main']) {
-      result = PvpEngine.apply(
-        session,
-        session.game.activePlayer,
-        _command(session, PvpCommandType.nextPhase, key: key),
-      );
-      expect(result.accepted, isTrue, reason: key);
-      session = result.session;
-    }
+    // One press. refresh, draw and end hold no decision, so the engine runs
+    // them through instead of parking the player on a phase where the rules
+    // reject every action.
+    result = PvpEngine.apply(
+      session,
+      session.game.activePlayer,
+      _command(session, PvpCommandType.nextPhase, key: 'to-p2-main'),
+    );
+    expect(result.accepted, isTrue);
+    session = result.session;
 
     expect(session.game.activePlayer, PlayerId.p2);
     expect(session.game.phase, Phase.main1);

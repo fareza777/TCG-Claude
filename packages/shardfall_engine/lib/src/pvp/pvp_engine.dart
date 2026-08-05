@@ -214,7 +214,23 @@ abstract final class PvpEngine {
     if (session.game.chain.isNotEmpty) {
       throw StateError('The Chain must be empty');
     }
-    final nextGame = Game.nextPhase(session.game);
+    var nextGame = Game.nextPhase(session.game);
+
+    // refresh, draw and end carry no player decision. Parking the session on
+    // one of them still reported PvpStage.main, so the client offered main
+    // actions that _requireMainActor then rejected with "Main action is not
+    // legal in this phase" -- the player could see their hand and tap it, and
+    // nothing happened. Run those phases through, exactly as the single-player
+    // controller does. The bound is a guard against a future rules change
+    // making this walk non-terminating on the server.
+    for (var guard = 0;
+        guard < 8 &&
+            nextGame.winner == null &&
+            !_isActionablePhase(nextGame.phase);
+        guard++) {
+      nextGame = Game.nextPhase(nextGame);
+    }
+
     final stage = nextGame.phase == Phase.combat
         ? PvpStage.attackDeclaration
         : PvpStage.main;
@@ -435,6 +451,12 @@ abstract final class PvpEngine {
           'reason': 'concede',
         }),
       );
+
+  /// Phases where a player actually has something to decide.
+  static bool _isActionablePhase(Phase phase) =>
+      phase == Phase.main1 ||
+      phase == Phase.combat ||
+      phase == Phase.main2;
 
   static void _requireMainActor(PvpSession session, PlayerId actor) {
     if (session.stage != PvpStage.main) {
