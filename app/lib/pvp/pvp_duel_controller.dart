@@ -58,6 +58,11 @@ class PvpDuelController extends DuelController {
   bool _disposed = false;
   bool _redrawSent = false;
 
+  /// Confirming twice in the same window is what produced a stream of
+  /// "Player is already ready" rejections during the first live test.
+  bool _readySent = false;
+  PvpStage? _readyStage;
+
   @override
   void dispose() {
     _disposed = true;
@@ -75,9 +80,20 @@ class PvpDuelController extends DuelController {
     _seat = projection.viewer;
     state = PvpGameState.fromProjection(projection, library);
     ui = _uiFor(projection);
+    // Two distinct windows share this screen. In waitingForReady both players
+    // are only confirming they are present; the mulligan itself does not open
+    // until both have. Offering Redraw during the first window meant tapping it
+    // was always refused with "Redraw is only available during mulligan".
     awaitingMulligan = projection.stage == PvpStage.waitingForReady ||
         projection.stage == PvpStage.mulligan;
-    mulliganUsed = _redrawSent;
+    mulliganUsed =
+        _redrawSent || projection.stage == PvpStage.waitingForReady;
+
+    // A fresh window means this player may confirm again.
+    if (projection.stage != _readyStage) {
+      _readyStage = projection.stage;
+      _readySent = false;
+    }
     lastError = pvp.lastError;
 
     // The screen disables input while busy. Anything that is not this player's
@@ -241,8 +257,16 @@ class PvpDuelController extends DuelController {
 
   @override
   Future<void> confirmHand() async {
-    if (!awaitingMulligan) return;
+    if (!awaitingMulligan || _readySent) return;
+    _readySent = true;
+    notifyListeners();
     await pvp.ready();
+    // A refusal means this player is not actually confirmed, so let them try
+    // again rather than stranding them on a dead button.
+    if (pvp.lastError != null) {
+      _readySent = false;
+      notifyListeners();
+    }
   }
 
   @override
@@ -313,7 +337,8 @@ class PvpDuelController extends DuelController {
       return;
     }
 
-    await _payFor(card.def);
+    // No Aether pre-payment here: the server raises it as part of the play,
+    // so one tap is one round trip instead of three or four.
     switch (card.def.type) {
       case CardType.unit:
         await pvp.playUnit(card.instanceId, targets: targets);
@@ -327,30 +352,6 @@ class PvpDuelController extends DuelController {
     }
   }
 
-  /// Exerts Wellsprings until the cost can be paid.
-  ///
-  /// The duel screen has no "tap for Aether" control because the single-player
-  /// controller quietly does this inside its own play routine. The online rules
-  /// have no such shortcut: they reject a play the pool cannot cover, and
-  /// exerting is a separate command. Without this the player could see an
-  /// affordable card, tap it, and simply be refused.
-  Future<void> _payFor(CardDef def) async {
-    for (var guard = 0; guard < 20; guard++) {
-      try {
-        Game.payCost(def, me.aetherPool);
-        return;
-      } on StateError {
-        final ready = me.arena
-            .where((c) => c.def.type == CardType.wellspring && !c.exerted)
-            .firstOrNull;
-        // Nothing left to tap: let the server answer with the real reason
-        // rather than inventing one here.
-        if (ready == null) return;
-        await pvp.exertForAether(ready.instanceId);
-        if (pvp.lastError != null) return;
-      }
-    }
-  }
 
   @override
   void enterCombat() {

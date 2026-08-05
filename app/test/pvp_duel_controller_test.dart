@@ -281,10 +281,11 @@ void main() {
     );
   });
 
-  test('a card is paid for before it is played', () async {
-    // The duel screen has no "tap for Aether" control -- the single-player
-    // controller does it silently. The online rules do not, so without this the
-    // player taps an affordable unit and the server simply refuses it.
+  test('playing a card costs exactly one round trip', () async {
+    // The client used to raise Aether itself, sending one exertForAether per
+    // Wellspring before the play. A two-cost card was therefore three network
+    // round trips, and live testing showed that as visible lag. The server
+    // funds the play now, so one tap must send one command.
     final unit = _cardView(5, cardId: 'unit-1', type: 'unit');
     final well = _cardView(9, cardId: 'ws-1', type: 'wellspring');
     final projection = PvpProjection.fromJson({
@@ -325,14 +326,8 @@ void main() {
     duel.dispose();
 
     final sent = gateway.commands.map((c) => c.type).toList();
-    expect(sent, contains(PvpCommandType.exertForAether),
-        reason: 'the Wellspring has to be tapped for the cost');
-    expect(sent, contains(PvpCommandType.playUnit));
-    expect(
-      sent.indexOf(PvpCommandType.exertForAether),
-      lessThan(sent.indexOf(PvpCommandType.playUnit)),
-      reason: 'Aether must be raised before the unit is played',
-    );
+    expect(sent, [PvpCommandType.playUnit],
+        reason: 'no client-side Aether chatter before the play');
   });
 
   test('ending the turn keeps going until the seat actually changes', () async {

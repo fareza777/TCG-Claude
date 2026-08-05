@@ -280,6 +280,44 @@ abstract final class PvpEngine {
     );
   }
 
+  static CardInstance _handCard(PvpSession session, PlayerId actor, int id) {
+    final card = session.game
+        .player(actor)
+        .hand
+        .where((c) => c.instanceId == id)
+        .firstOrNull;
+    if (card == null) throw StateError('Card is not in hand');
+    return card;
+  }
+
+  /// Exerts Wellsprings until [def] can be paid for.
+  ///
+  /// The single-player controller does this silently before every play, so the
+  /// client used to imitate it by sending one exertForAether command per
+  /// Wellspring. Online that turned playing a single card into three or four
+  /// network round trips, which is what made PvP feel sluggish. Doing it here
+  /// makes a play one command again, and keeps the rule identical in both
+  /// modes. If nothing is left to tap, the play itself refuses, so this never
+  /// invents Aether.
+  static GameState _raiseAether(GameState game, PlayerId actor, CardDef def) {
+    var state = game;
+    for (var guard = 0; guard < 30; guard++) {
+      try {
+        Game.payCost(def, state.player(actor).aetherPool);
+        return state;
+      } on StateError {
+        final ready = state
+            .player(actor)
+            .arena
+            .where((c) => c.def.type == CardType.wellspring && !c.exerted)
+            .firstOrNull;
+        if (ready == null) return state;
+        state = Game.exertForAether(state, actor, ready.instanceId);
+      }
+    }
+    return state;
+  }
+
   static _Transition _playUnit(
     PvpSession session,
     PlayerId actor,
@@ -287,10 +325,15 @@ abstract final class PvpEngine {
   ) {
     _requireMainActor(session, actor);
     final id = _payloadInt(payload, 'instanceId');
+    final funded = _raiseAether(
+      session.game,
+      actor,
+      _handCard(session, actor, id).def,
+    );
     return _Transition(
       session: session.copyWith(
         game: Game.playUnit(
-          session.game,
+          funded,
           actor,
           id,
           chosen: _targets(payload),
@@ -316,7 +359,7 @@ abstract final class PvpEngine {
     }
     final id = _payloadInt(payload, 'instanceId');
     final game = Chain.cast(
-      session.game,
+      _raiseAether(session.game, actor, _handCard(session, actor, id).def),
       actor,
       id,
       targets: _targets(payload),
