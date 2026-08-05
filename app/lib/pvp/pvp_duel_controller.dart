@@ -93,8 +93,54 @@ class PvpDuelController extends DuelController {
       selectedAttackers.clear();
     }
 
+    _queueAnimations();
     notifyListeners();
   }
+
+  /// Turns server events into the cues the battle screen already animates.
+  ///
+  /// The projection alone would leave the board correct but lifeless: no lunge
+  /// on an attack, no sound when a card lands. These are the same event kinds
+  /// the single-player controller emits, so the screen treats both identically.
+  void _queueAnimations() {
+    for (final event in pvp.takeMatchEvents()) {
+      switch (event.type) {
+        case 'card_played':
+          pendingEvents.add(
+            DuelEvent('play', instanceId: _asInt(event.payload['instanceId'])),
+          );
+        case 'attack_declared':
+          final ids = event.payload['attackerIds'];
+          if (ids is List) {
+            for (final id in ids) {
+              pendingEvents.add(DuelEvent('attack', instanceId: _asInt(id)));
+            }
+          }
+        case 'redraw':
+          pendingEvents.add(const DuelEvent('draw'));
+        case 'phase_changed':
+          final active = event.payload['activePlayer'];
+          if (active is String) {
+            // Drawn from the viewer's chair, so the banner names the right side.
+            final seat = PlayerId.values.asNameMap()[active];
+            if (seat != null) {
+              pendingEvents.add(
+                DuelEvent('turnStart', player: _toLocalSeat(seat)),
+              );
+            }
+          }
+      }
+    }
+  }
+
+  static int? _asInt(Object? value) => value is int
+      ? value
+      : value is num
+          ? value.toInt()
+          : null;
+
+  /// Inverse of [_toServerSeat]: a seat named by the server, drawn locally.
+  PlayerId _toLocalSeat(PlayerId server) => _toServerSeat(server);
 
   bool _isMyDecision(PvpProjection projection) {
     switch (projection.stage) {

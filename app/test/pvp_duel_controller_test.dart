@@ -58,6 +58,15 @@ class _Gateway implements PvpGateway {
   @override
   Future<String?> findActiveMatch() async => 'match-1';
 
+  /// Events the match has already emitted; drained once, like the real table.
+  List<PvpMatchEvent> events = const [];
+
+  @override
+  Future<List<PvpMatchEvent>> eventsSince(String matchId, int afterSeq) async {
+    final pending = [for (final e in events) if (e.seq > afterSeq) e];
+    return pending;
+  }
+
   @override
   Future<PvpProjection> reconnect(String matchId) async => projection;
 
@@ -188,6 +197,39 @@ void main() {
 
     expect(duel.awaitingMulligan, isTrue);
     duel.dispose();
+  });
+
+  test('server events become the cues the battle screen animates', () async {
+    // Without this the board would still be correct but lifeless: no lunge on
+    // an attack, no sound when a card lands.
+    final gateway = _Gateway(_projection(viewer: 'p1'))
+      ..events = const [
+        PvpMatchEvent(seq: 1, type: 'card_played', payload: {'instanceId': 7}),
+        PvpMatchEvent(
+          seq: 2,
+          type: 'attack_declared',
+          payload: {'attackerIds': [3, 4]},
+        ),
+      ];
+    final pvp = PvpController(gateway: gateway, userId: 'user-1');
+    await pvp.resumeActiveMatch();
+    final duel = PvpDuelController(
+      pvp: pvp,
+      library: _library,
+      deck: const [],
+    );
+    // The events are fetched off the projection apply, so let it settle.
+    await Future<void>.delayed(Duration.zero);
+    duel.dispose();
+
+    final kinds = duel.pendingEvents.map((e) => e.kind).toList();
+    expect(kinds, containsAll(<String>['play', 'attack']));
+    expect(
+      duel.pendingEvents
+          .where((e) => e.kind == 'attack')
+          .map((e) => e.instanceId),
+      containsAll(<int>[3, 4]),
+    );
   });
 
   test('conceding sends the command rather than ending locally', () async {

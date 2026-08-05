@@ -216,6 +216,10 @@ class _FakePvpGateway implements PvpGateway {
   Future<String?> findActiveMatch() async => activeMatchId;
 
   @override
+  Future<List<PvpMatchEvent>> eventsSince(String matchId, int afterSeq) async =>
+      const [];
+
+  @override
   Future<void> leaveQueue() async {}
 
   @override

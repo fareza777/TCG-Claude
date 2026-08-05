@@ -19,6 +19,33 @@ class PvpController extends ChangeNotifier {
   String? lastErrorCode;
   final Set<String> pendingCommands = {};
 
+  /// Public events the battle screen has not animated yet, oldest first.
+  final List<PvpMatchEvent> pendingMatchEvents = [];
+  int _lastEventSeq = 0;
+
+  /// Hands over the queued events and clears them, mirroring how the
+  /// single-player controller drains its own animation queue.
+  List<PvpMatchEvent> takeMatchEvents() {
+    final events = List<PvpMatchEvent>.of(pendingMatchEvents);
+    pendingMatchEvents.clear();
+    return events;
+  }
+
+  Future<void> _pullMatchEvents() async {
+    final id = matchId;
+    if (id == null) return;
+    try {
+      final events = await gateway.eventsSince(id, _lastEventSeq);
+      if (events.isEmpty) return;
+      _lastEventSeq = events.last.seq;
+      pendingMatchEvents.addAll(events);
+      notifyListeners();
+    } catch (_) {
+      // Animation cues are decoration; the board is already correct without
+      // them, so a failure here must never disturb the match.
+    }
+  }
+
   StreamSubscription<PvpProjection>? _matchSubscription;
   StreamSubscription<String>? _queueSubscription;
   Timer? _heartbeat;
@@ -263,6 +290,7 @@ class PvpController extends ChangeNotifier {
   void _applyProjection(PvpProjection next) {
     if (projection != null && next.revision < projection!.revision) return;
     projection = next;
+    unawaited(_pullMatchEvents());
     lastError = null;
     lastErrorCode = null;
     _setState(

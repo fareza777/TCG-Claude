@@ -298,3 +298,29 @@ T? _enumOrNull<T extends Enum>(List<T> values, Object? value) {
   }
   return null;
 }
+
+/// One public event from the match stream, used to drive battle animations.
+///
+/// The board can be rebuilt from a projection alone, but the duel screen also
+/// animates: a lunge on an attack, a sound on a card hitting the table. Those
+/// cues come from events, so PvP reads them the same way the single-player
+/// duel emits them.
+class PvpMatchEvent {
+  final int seq;
+  final String type;
+  final Map<String, dynamic> payload;
+
+  const PvpMatchEvent({
+    required this.seq,
+    required this.type,
+    this.payload = const {},
+  });
+
+  factory PvpMatchEvent.fromRow(Map<String, dynamic> row) => PvpMatchEvent(
+        seq: _asInt(row['seq'], 'seq'),
+        type: (row['event_type'] ?? 'state_changed').toString(),
+        payload: row['public_payload'] is Map
+            ? _asMap(row['public_payload'], 'public_payload')
+            : const {},
+      );
+}

@@ -12,6 +12,12 @@ abstract interface class PvpGateway {
 
   Future<void> leaveQueue();
 
+  /// Public events newer than [afterSeq], oldest first.
+  ///
+  /// The projection says what the board looks like; these say what just
+  /// happened, which is what the battle screen animates.
+  Future<List<PvpMatchEvent>> eventsSince(String matchId, int afterSeq);
+
   /// The match this player is already in, or null.
   ///
   /// The server refuses to queue anyone holding a live match, so without this
@@ -61,6 +67,20 @@ class PvpService implements PvpGateway {
   @override
   Future<void> leaveQueue() async {
     await _invoke('pvp-queue', {'action': 'leave'});
+  }
+
+  @override
+  Future<List<PvpMatchEvent>> eventsSince(String matchId, int afterSeq) async {
+    // Row level security already limits this to matches the caller is in, and
+    // public_payload never carries hidden state.
+    final rows = await _client
+        .from('pvp_events')
+        .select('seq, event_type, public_payload')
+        .eq('match_id', matchId)
+        .gt('seq', afterSeq)
+        .order('seq')
+        .limit(50);
+    return [for (final row in rows) PvpMatchEvent.fromRow(row)];
   }
 
   @override
