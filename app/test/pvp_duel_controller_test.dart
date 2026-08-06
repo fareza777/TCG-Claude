@@ -73,6 +73,7 @@ PvpProjection _projection({
   String stage = 'main',
   String? winner,
   String? priority,
+  List<int> pendingAttackers = const [],
 }) =>
     PvpProjection.fromJson({
       'version': 1,
@@ -83,7 +84,7 @@ PvpProjection _projection({
       'chainCount': 0,
       'stage': stage,
       'priority': priority ?? activePlayer,
-      'pendingAttackers': const [],
+      'pendingAttackers': pendingAttackers,
       'revision': 1,
       'players': {
         'p1': {..._player('p1', health: 11), 'viewer': viewer},
@@ -96,17 +97,25 @@ class _Gateway implements PvpGateway {
 
   final PvpProjection projection;
   final commands = <PvpCommand>[];
+  final eventStream = StreamController<PvpMatchEvent>.broadcast();
 
   @override
   Future<String?> findActiveMatch() async => 'match-1';
 
-  /// Events the match has already emitted; drained once, like the real table.
+  /// Events the match has already emitted; played into the stream on subscribe.
   List<PvpMatchEvent> events = const [];
 
   @override
-  Future<List<PvpMatchEvent>> eventsSince(String matchId, int afterSeq) async {
-    final pending = [for (final e in events) if (e.seq > afterSeq) e];
-    return pending;
+  Stream<PvpMatchEvent> watchEvents(String matchId) {
+    if (events.isNotEmpty) {
+      final seeded = events;
+      scheduleMicrotask(() {
+        for (final event in seeded) {
+          eventStream.add(event);
+        }
+      });
+    }
+    return eventStream.stream;
   }
 
   @override
@@ -279,7 +288,8 @@ void main() {
       library: _library,
       deck: const [],
     );
-    // The events are fetched off the projection apply, so let it settle.
+    // The events ride the realtime stream, so let it settle.
+    await Future<void>.delayed(Duration.zero);
     await Future<void>.delayed(Duration.zero);
     duel.dispose();
 
@@ -422,19 +432,14 @@ void main() {
         reason: 'each phase is still named in the log');
   });
 
-  test('ending the turn keeps going until the seat actually changes', () async {
-    // One nextPhase from Main 1 lands in Combat. Stopping there would leave the
-    // player mid-turn having pressed "end turn", and combat cannot be left
-    // without declaring attackers.
+  test('ending the turn is one command, expanded on the server', () async {
+    // The client used to walk main, combat and the second main phase itself,
+    // one network round trip per step, so ending a turn took seconds. The
+    // server now expands the composite inside one lock.
     final main1 = _projection(viewer: 'p1', activePlayer: 'p1');
-    final combat = _projection(
-      viewer: 'p1',
-      activePlayer: 'p1',
-      stage: 'attackDeclaration',
-    );
     final opponent = _projection(viewer: 'p1', activePlayer: 'p2');
 
-    final gateway = _Gateway(main1)..replies = [combat, main1, opponent];
+    final gateway = _Gateway(main1)..replies = [opponent];
     final pvp = PvpController(gateway: gateway, userId: 'user-1');
     await pvp.resumeActiveMatch();
     final duel = PvpDuelController(
@@ -446,10 +451,124 @@ void main() {
     await duel.endTurn();
     duel.dispose();
 
-    final sent = gateway.commands.map((c) => c.type).toList();
-    expect(sent, contains(PvpCommandType.declareAttackers),
-        reason: 'combat has to be cleared to leave it');
+    expect(gateway.commands.map((c) => c.type), [PvpCommandType.endTurn]);
     expect(pvp.projection?.activePlayer, PlayerId.p2);
+  });
+
+  test('a confirmed attack lunges on the tap, not on the server echo', () async {
+    final attackWindow = _projection(
+      viewer: 'p1',
+      activePlayer: 'p1',
+      stage: 'attackDeclaration',
+    );
+    final gateway = _Gateway(attackWindow);
+    final pvp = PvpController(gateway: gateway, userId: 'user-1');
+    await pvp.resumeActiveMatch();
+    final duel = PvpDuelController(
+      pvp: pvp,
+      library: _library,
+      deck: const [],
+    );
+    duel.selectedAttackers.add(3);
+
+    await duel.confirmAttack();
+
+    expect(
+      duel.pendingEvents.where((e) => e.kind == 'attack').map((e) => e.instanceId),
+      [3],
+      reason: 'the lunge answers the tap immediately',
+    );
+
+    // The server's echo of the same declaration must not lunge it twice.
+    gateway.eventStream.add(
+      const PvpMatchEvent(
+        seq: 1,
+        type: 'attack_declared',
+        payload: {'attackerIds': [3]},
+      ),
+    );
+    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(Duration.zero);
+
+    expect(
+      duel.pendingEvents.where((e) => e.kind == 'attack').map((e) => e.instanceId),
+      [3],
+      reason: 'the echo of our own attack is deduplicated',
+    );
+    duel.dispose();
+  });
+
+  test('a second confirm is held while the first waits on the server', () async {
+    final attackWindow = _projection(
+      viewer: 'p1',
+      activePlayer: 'p1',
+      stage: 'attackDeclaration',
+    );
+    final gateway = _SilentGateway(attackWindow);
+    final pvp = PvpController(gateway: gateway, userId: 'user-1');
+    await pvp.resumeActiveMatch();
+    final duel = PvpDuelController(
+      pvp: pvp,
+      library: _library,
+      deck: const [],
+    );
+    duel.selectedAttackers.add(3);
+
+    unawaited(duel.confirmAttack());
+    await Future<void>.delayed(Duration.zero);
+    await duel.confirmAttack();
+    duel.dispose();
+
+    expect(
+      gateway.commands.where((c) => c.type == PvpCommandType.declareAttackers).length,
+      1,
+      reason: 'the double tap used to race the server and draw a rejection',
+    );
+  });
+
+  test('confirming blocks declares every attacker, blocked or not', () async {
+    // The server checks the declaration against the full attack. Leaving an
+    // unblocked attacker out of the payload used to bounce the whole thing
+    // back, which read as being forced to assign a blocker and made simply
+    // taking the hit impossible.
+    final blockWindow = _projection(
+      viewer: 'p1',
+      activePlayer: 'p2',
+      stage: 'blockDeclaration',
+      pendingAttackers: const [3, 4],
+    );
+    final gateway = _Gateway(blockWindow);
+    final pvp = PvpController(gateway: gateway, userId: 'user-1');
+    await pvp.resumeActiveMatch();
+    final duel = PvpDuelController(
+      pvp: pvp,
+      library: _library,
+      deck: const [],
+    );
+    // Block attacker 3 with unit 7; let attacker 4 through.
+    duel.blockPlan[3] = [7];
+
+    duel.confirmBlocks();
+    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(Duration.zero);
+    duel.dispose();
+
+    final command = gateway.commands.single;
+    expect(command.type, PvpCommandType.declareBlocks);
+    final blocks =
+        (command.payload['blocks'] as List).cast<Map<String, dynamic>>();
+    expect(blocks, hasLength(2),
+        reason: 'every attacker needs one declaration');
+    expect(
+      blocks.firstWhere((b) => b['attackerId'] == 3)['blockerIds'],
+      [7],
+    );
+    expect(
+      blocks.firstWhere((b) => b['attackerId'] == 4)['blockerIds'],
+      isEmpty,
+      reason: 'an empty entry is how the defender takes the hit',
+    );
   });
 
   test('conceding sends the command rather than ending locally', () async {

@@ -152,6 +152,18 @@ Deno.serve(async (req: Request) => {
     return json({ error: "deck_contains_invalid_card_id" }, 400);
   }
 
+  // Wake the match service while the queue runs. It scales to zero, and a
+  // sleeping instance takes 1-2 seconds to start -- that pause used to land
+  // on match initialization, the first thing both players wait on. A health
+  // ping costs milliseconds and, with request-based billing, an idle warm
+  // instance is free, so this replaces paying for a minimum instance.
+  const warmupUrl = Deno.env.get("PVP_SERVER_URL");
+  if (warmupUrl) {
+    EdgeRuntime.waitUntil(
+      fetch(`${warmupUrl.replace(/\/$/, "")}/health`).catch(() => {}),
+    );
+  }
+
   const { data, error } = await userClient.rpc("pvp_join_queue", {
     p_deck_snapshot: body.deckSnapshot,
   });

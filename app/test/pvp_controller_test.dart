@@ -151,6 +151,148 @@ void main() {
     expect(controller.state, PvpConnectionState.finished);
     controller.dispose();
   });
+
+  test('match events from the realtime stream queue for animation', () async {
+    final gateway = _FakePvpGateway(
+      queueResult: const PvpQueueResult(status: 'matched', matchId: 'match-1'),
+      reconnectProjection: _projection(revision: 1, stage: 'main'),
+    );
+    final controller = PvpController(gateway: gateway, userId: 'user-1');
+    await controller.join(List<String>.filled(40, 'sproutling'));
+
+    gateway.matchEvents.add(
+      const PvpMatchEvent(
+        seq: 1,
+        type: 'card_played',
+        payload: {'instanceId': 7},
+      ),
+    );
+    gateway.matchEvents.add(
+      const PvpMatchEvent(
+        seq: 1,
+        type: 'card_played',
+        payload: {'instanceId': 7},
+      ),
+    );
+    await Future<void>.delayed(Duration.zero);
+
+    expect(
+      controller.pendingMatchEvents.map((event) => event.type),
+      ['card_played'],
+      reason: 'a repeated sequence number is the same event seen twice',
+    );
+    controller.dispose();
+  });
+
+  test('commands leave one at a time, each stamped with the fresh revision',
+      () async {
+    // Two taps in the same beat used to race: both carried the same revision,
+    // and whichever landed second was rejected as stale.
+    final initial = _projection(revision: 2, stage: 'main');
+    final after = _projection(revision: 3, stage: 'main');
+    final gateway = _FakePvpGateway(
+      queueResult: const PvpQueueResult(status: 'matched', matchId: 'match-1'),
+      reconnectProjection: initial,
+      commandResponse: PvpCommandResponse(
+        accepted: true,
+        status: 'active',
+        projection: after,
+      ),
+    );
+    final controller = PvpController(gateway: gateway, userId: 'user-1');
+    await controller.join(List<String>.filled(40, 'sproutling'));
+
+    final first = controller.send(
+      const PvpCommand(
+        type: PvpCommandType.nextPhase,
+        idempotencyKey: 'tap-one',
+        revision: 0,
+      ),
+    );
+    final second = controller.send(
+      const PvpCommand(
+        type: PvpCommandType.nextPhase,
+        idempotencyKey: 'tap-two',
+        revision: 0,
+      ),
+    );
+    await Future.wait([first, second]);
+
+    expect(
+      gateway.commands.map((command) => command.revision),
+      [2, 3],
+      reason: 'the second tap rides the revision the first reply made current',
+    );
+    controller.dispose();
+  });
+
+  test('a stale ready is retried once against the fresh board', () async {
+    // Both players click through the mulligan window at the same time; the
+    // slower click is honest, just early, so the client resyncs and retries
+    // instead of showing an error.
+    final gateway = _FakePvpGateway(
+      queueResult: const PvpQueueResult(status: 'matched', matchId: 'match-1'),
+      reconnectProjection: _projection(revision: 0, stage: 'waitingForReady'),
+    );
+    gateway.replies = [
+      PvpCommandResponse(
+        accepted: false,
+        status: 'active',
+        errorCode: 'stale_revision',
+        message: 'The command was based on an old match revision.',
+        projection: _projection(revision: 1, stage: 'waitingForReady'),
+      ),
+      PvpCommandResponse(
+        accepted: true,
+        status: 'active',
+        projection: _projection(revision: 2, stage: 'main'),
+      ),
+    ];
+    final controller = PvpController(gateway: gateway, userId: 'user-1');
+    await controller.join(List<String>.filled(40, 'sproutling'));
+
+    await controller.ready();
+
+    expect(gateway.commands.length, 2);
+    expect(
+      gateway.commands.last.revision,
+      1,
+      reason: 'the retry carries the revision the rejection delivered',
+    );
+    expect(controller.lastError, isNull);
+    controller.dispose();
+  });
+
+  test('a rejected heartbeat never surfaces as an error', () async {
+    // Presence is retried on the next tick; there is nothing for the player
+    // to act on, so it must not paint the error banner.
+    final gateway = _FakePvpGateway(
+      queueResult: const PvpQueueResult(status: 'matched', matchId: 'match-1'),
+      reconnectProjection: _projection(revision: 1, stage: 'main'),
+    );
+    gateway.replies = [
+      const PvpCommandResponse(
+        accepted: false,
+        status: 'active',
+        errorCode: 'stale_revision',
+        message: 'The command was based on an old match revision.',
+      ),
+    ];
+    final controller = PvpController(gateway: gateway, userId: 'user-1');
+    await controller.join(List<String>.filled(40, 'sproutling'));
+
+    await controller.send(
+      const PvpCommand(
+        type: PvpCommandType.heartbeat,
+        idempotencyKey: 'presence-tick',
+        revision: 1,
+      ),
+    );
+
+    expect(controller.lastError, isNull);
+    expect(controller.state, PvpConnectionState.active);
+    controller.dispose();
+  });
 }
 
 PvpProjection _projection({required int revision, required String stage}) {
@@ -195,6 +337,7 @@ class _FakePvpGateway implements PvpGateway {
   final PvpProjection? reconnectProjection;
   final PvpCommandResponse? commandResponse;
   final projections = StreamController<PvpProjection>.broadcast();
+  final matchEvents = StreamController<PvpMatchEvent>.broadcast();
   final queueMatches = StreamController<String>.broadcast();
   final commands = <PvpCommand>[];
   List<String> joinedDeck = const [];
@@ -216,11 +359,12 @@ class _FakePvpGateway implements PvpGateway {
   Future<String?> findActiveMatch() async => activeMatchId;
 
   @override
-  Future<List<PvpMatchEvent>> eventsSince(String matchId, int afterSeq) async =>
-      const [];
-
-  @override
   Future<void> leaveQueue() async {}
+
+  /// Responses handed out in order, so a stale-then-retry flow can be
+  /// scripted. Falls back to [commandResponse] once the list runs out.
+  List<PvpCommandResponse> replies = const [];
+  int _reply = 0;
 
   @override
   Future<PvpCommandResponse> sendCommand(
@@ -228,6 +372,7 @@ class _FakePvpGateway implements PvpGateway {
     PvpCommand command,
   ) async {
     commands.add(command);
+    if (_reply < replies.length) return replies[_reply++];
     return commandResponse ??
         PvpCommandResponse(accepted: true, status: 'active');
   }
@@ -248,11 +393,15 @@ class _FakePvpGateway implements PvpGateway {
   }
 
   @override
+  Stream<PvpMatchEvent> watchEvents(String matchId) => matchEvents.stream;
+
+  @override
   Stream<String> watchQueue(String userId) => queueMatches.stream;
 
   @override
   void dispose() {
     projections.close();
+    matchEvents.close();
     queueMatches.close();
   }
 }

@@ -65,7 +65,15 @@ class MatchService {
     required PvpCommand command,
   }) =>
       repository.withMatchLock(matchId, () async {
-        final match = await repository.getMatch(matchId);
+        // The two reads do not depend on each other, so they run together and
+        // the command pays one round trip of read latency instead of two.
+        final matchFuture = repository.getMatch(matchId);
+        final previousFuture = repository.findCommand(
+          matchId,
+          actorUserId,
+          command.idempotencyKey,
+        );
+        final match = await matchFuture;
         if (match == null) {
           return _commandError(
             matchId,
@@ -82,11 +90,7 @@ class MatchService {
           );
         }
 
-        final previous = await repository.findCommand(
-          matchId,
-          actorUserId,
-          command.idempotencyKey,
-        );
+        final previous = await previousFuture;
         if (previous != null) {
           return previous.response.copyWith(duplicate: true);
         }
@@ -100,9 +104,15 @@ class MatchService {
         final overdue = _applyExpiredWindows(match.session, match.turnDeadline);
         final baseSession = overdue.session;
 
-        final result = PvpEngine.apply(baseSession, actor, command);
-        final nextDeadline =
-            TurnClock.deadlineFor(result.session, DateTime.now().toUtc());
+        final result = command.type == PvpCommandType.endTurn
+            ? _applyEndTurn(baseSession, actor, command)
+            : PvpEngine.apply(baseSession, actor, command);
+        // A refusal changes nothing, so it must not restart the clock either:
+        // otherwise spamming illegal moves would extend a stall window
+        // indefinitely.
+        final nextDeadline = result.accepted
+            ? TurnClock.deadlineFor(result.session, DateTime.now().toUtc())
+            : match.turnDeadline;
         final projection = _withClock(
           PvpCodec.encodeProjection(result.session, actor),
           nextDeadline,
@@ -123,12 +133,19 @@ class MatchService {
           errorCode: result.error?.code,
           message: result.error?.message,
         );
+        // The stored projections are what the clients' realtime subscriptions
+        // push, so they carry the clock too -- otherwise the pushed board
+        // would show a blank timer until the next command response.
         final projections = {
           ...match.projectionsByUser,
-          match.playerOneId:
-              PvpCodec.encodeProjection(result.session, PlayerId.p1),
-          match.playerTwoId:
-              PvpCodec.encodeProjection(result.session, PlayerId.p2),
+          match.playerOneId: _withClock(
+            PvpCodec.encodeProjection(result.session, PlayerId.p1),
+            nextDeadline,
+          ),
+          match.playerTwoId: _withClock(
+            PvpCodec.encodeProjection(result.session, PlayerId.p2),
+            nextDeadline,
+          ),
         };
         final after = match.copyWith(
           session: result.session,
@@ -160,8 +177,89 @@ class MatchService {
           command: commandRecord,
           events: events,
         );
+        // Presence is what the stale-match reaper reads, and only heartbeat
+        // traffic keeps it fresh during a long match. Without this stamp a
+        // match with two active players looked abandoned after fifteen
+        // minutes and was cancelled out from under them.
+        if (command.type == PvpCommandType.heartbeat && result.accepted) {
+          try {
+            await repository.touchPlayer(matchId, actorUserId);
+          } catch (_) {
+            // Presence is best-effort; never fail a command over it.
+          }
+        }
         return response;
       });
+
+  /// "End turn" expanded into the real sub-commands, inside the one lock.
+  ///
+  /// The client used to walk the phases itself: nextPhase into combat, an
+  /// empty attack declaration to leave it, nextPhase again -- each a full
+  /// network round trip, so ending a turn took seconds of visible waiting.
+  /// Expanding the composite here costs one round trip, and every step still
+  /// goes through the engine, so the rules are identical to pressing the
+  /// buttons by hand.
+  PvpCommandResult _applyEndTurn(
+    PvpSession session,
+    PlayerId actor,
+    PvpCommand command,
+  ) {
+    if (command.revision != session.revision) {
+      return PvpCommandResult(
+        session: session,
+        error: const PvpRuleError(
+          'stale_revision',
+          'The command was based on an old match revision.',
+        ),
+      );
+    }
+    var current = session;
+    final events = <PvpEvent>[];
+    var applied = 0;
+    for (var guard = 0; guard < 8; guard++) {
+      if (current.stage == PvpStage.finished) break;
+      if (current.game.activePlayer != actor) break;
+      final subType = switch (current.stage) {
+        PvpStage.main => PvpCommandType.nextPhase,
+        PvpStage.attackDeclaration => PvpCommandType.declareAttackers,
+        // Chain priority, block declaration, ready windows: the decision
+        // belongs to someone specific, so the turn cannot be pushed further.
+        _ => null,
+      };
+      if (subType == null) break;
+      final step = PvpEngine.apply(
+        current,
+        actor,
+        PvpCommand(
+          type: subType,
+          idempotencyKey: '${command.idempotencyKey}:$guard',
+          revision: current.revision,
+          payload: subType == PvpCommandType.declareAttackers
+              ? const {'attackerIds': <int>[]}
+              : const {},
+        ),
+      );
+      if (!step.accepted) {
+        // A refusal on the first step is the answer to give the player; after
+        // progress has been made it just marks where the walk had to stop.
+        if (applied == 0) return step;
+        break;
+      }
+      current = step.session;
+      events.addAll(step.events);
+      applied++;
+    }
+    if (applied == 0) {
+      return PvpCommandResult(
+        session: session,
+        error: const PvpRuleError(
+          'illegal_stage',
+          'End turn is not available now.',
+        ),
+      );
+    }
+    return PvpCommandResult(session: current, events: events);
+  }
 
 
   /// Forfeits any decision whose deadline has passed.

@@ -59,47 +59,39 @@ PersistedMatch _match() => PersistedMatch(
 void main() {
   test('loads a match, full runtime state, and private projections', () async {
     final match = _match();
-    final responses = <String, http.Response>{
-      '/rest/v1/pvp_matches': http.Response(
-        jsonEncode([
-          {
-            'id': match.id,
-            'player_one_id': match.playerOneId,
-            'player_two_id': match.playerTwoId,
-            'status': match.status,
-            'engine_version': match.engineVersion,
-            'ruleset_version': match.rulesetVersion,
-            'public_state': {},
-            'revision': 0,
-            'updated_at': '2026-08-04T00:00:00.000Z',
-          },
-        ]),
-        200,
-      ),
-      '/rest/v1/pvp_match_runtime': http.Response(
-        jsonEncode([
-          {'engine_state': PvpCodec.encodeSession(match.session)},
-        ]),
-        200,
-      ),
-      '/rest/v1/pvp_match_players': http.Response(
-        jsonEncode([
-          {
-            'user_id': match.playerOneId,
-            'private_state': {'viewer': 'p1'},
-          },
-          {
-            'user_id': match.playerTwoId,
-            'private_state': {'viewer': 'p2'},
-          },
-        ]),
-        200,
-      ),
-    };
     final client = MockClient((request) async {
-      final response = responses[request.url.path];
-      if (response == null) return http.Response('not found', 404);
-      return response;
+      if (request.url.path != '/rest/v1/rpc/pvp_get_match') {
+        return http.Response('not found', 404);
+      }
+      // The whole point of the RPC: one round trip carries everything the
+      // three separate table reads used to.
+      return http.Response(
+        jsonEncode({
+          'id': match.id,
+          'playerOneId': match.playerOneId,
+          'playerTwoId': match.playerTwoId,
+          'status': match.status,
+          'engineVersion': match.engineVersion,
+          'rulesetVersion': match.rulesetVersion,
+          'revision': 0,
+          'updatedAt': '2026-08-04T00:00:00.000Z',
+          'turnDeadline': null,
+          'engineState': PvpCodec.encodeSession(match.session),
+          'players': [
+            {
+              'userId': match.playerOneId,
+              'privateState': {'viewer': 'p1'},
+              'lastHeartbeatAt': null,
+            },
+            {
+              'userId': match.playerTwoId,
+              'privateState': {'viewer': 'p2'},
+              'lastHeartbeatAt': null,
+            },
+          ],
+        }),
+        200,
+      );
     });
     final repository = SupabasePvpRepository(
       baseUrl: 'https://example.supabase.co',
@@ -113,6 +105,48 @@ void main() {
     expect(loaded?.id, match.id);
     expect(loaded?.session.game.rngSeed, 77);
     expect(loaded?.projectionsByUser[match.playerOneId]?['viewer'], 'p1');
+  });
+
+  test('the commit carries the turn deadline inside the transaction', () async {
+    late http.Request captured;
+    final client = MockClient((request) async {
+      captured = request;
+      return http.Response('{"matchId": "match-supa"}', 200);
+    });
+    final match = _match();
+    final repository = SupabasePvpRepository(
+      baseUrl: 'https://example.supabase.co',
+      serviceKey: 'service-secret',
+      cardLibrary: _library(),
+      client: client,
+    );
+    final deadline = DateTime.utc(2026, 8, 6, 12);
+
+    await repository.commitTransition(
+      before: match,
+      after: match.copyWith(turnDeadline: deadline),
+      command: PvpCommandRecord(
+        matchId: match.id,
+        actorUserId: match.playerOneId,
+        idempotencyKey: 'test-idempotency-key',
+        commandType: PvpCommandType.nextPhase,
+        result: 'accepted',
+        response: PvpCommandResponse(
+          matchId: match.id,
+          accepted: true,
+          duplicate: false,
+          revision: 1,
+          status: 'active',
+          projection: const {},
+          events: const [],
+        ),
+      ),
+      events: const [],
+    );
+
+    expect(captured.url.path, '/rest/v1/rpc/pvp_commit_transition');
+    final body = jsonDecode(captured.body) as Map<String, dynamic>;
+    expect(body['p_turn_deadline'], deadline.toIso8601String());
   });
 
   test('initialization uses the service RPC and never puts the key in the body',

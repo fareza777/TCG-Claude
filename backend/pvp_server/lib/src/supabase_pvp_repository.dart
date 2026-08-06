@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:shardfall_engine/shardfall_engine.dart';
@@ -37,61 +36,54 @@ class SupabasePvpRepository implements PvpRepository {
 
   @override
   Future<PersistedMatch?> getMatch(String matchId) async {
-    final matchRows = await _getList('/pvp_matches', {
-      'select':
-          'id,player_one_id,player_two_id,status,engine_version,ruleset_version,revision,public_state,updated_at,turn_deadline',
-      'id': 'eq.$matchId',
-      'limit': '1',
-    });
-    if (matchRows.isEmpty) return null;
-    final row = matchRows.single;
-    final runtimeRows = await _getList('/pvp_match_runtime', {
-      'select': 'engine_state',
-      'match_id': 'eq.$matchId',
-      'limit': '1',
-    });
-    if (runtimeRows.isEmpty || runtimeRows.single['engine_state'] is! Map) {
+    // One RPC joins match, runtime and players inside Postgres. This used to
+    // be three sequential PostgREST reads, and every one of them was a full
+    // round trip on the command path.
+    final data = await _rpc('pvp_get_match', {'p_match_id': matchId});
+    if (data is! Map) return null;
+    final row = Map<String, dynamic>.from(data);
+    final rawState = row['engineState'];
+    if (rawState is! Map || rawState.isEmpty) {
       // Queue pairing creates metadata before the initializer persists the
       // engine. The initializer endpoint can safely call the RPC without a
       // decoded match.
       return null;
     }
-    final rawState = Map<String, dynamic>.from(
-      runtimeRows.single['engine_state'] as Map,
-    );
-    if (rawState.isEmpty) return null;
-    final players = await _getList('/pvp_match_players', {
-      'select': 'user_id,private_state,last_heartbeat_at',
-      'match_id': 'eq.$matchId',
-    });
     final projections = <String, Map<String, dynamic>>{};
     final heartbeats = <String, DateTime>{};
-    for (final player in players) {
-      final userId = player['user_id'];
-      if (userId is! String) continue;
-      final privateState = player['private_state'];
-      if (privateState is Map) {
-        projections[userId] = Map<String, dynamic>.from(privateState);
-      }
-      final heartbeat = player['last_heartbeat_at'];
-      if (heartbeat is String) {
-        final parsed = DateTime.tryParse(heartbeat);
-        if (parsed != null) heartbeats[userId] = parsed.toUtc();
+    final players = row['players'];
+    if (players is List) {
+      for (final player in players) {
+        if (player is! Map) continue;
+        final userId = player['userId'];
+        if (userId is! String) continue;
+        final privateState = player['privateState'];
+        if (privateState is Map) {
+          projections[userId] = Map<String, dynamic>.from(privateState);
+        }
+        final heartbeat = player['lastHeartbeatAt'];
+        if (heartbeat is String) {
+          final parsed = DateTime.tryParse(heartbeat);
+          if (parsed != null) heartbeats[userId] = parsed.toUtc();
+        }
       }
     }
     return PersistedMatch(
       id: row['id'] as String,
-      playerOneId: row['player_one_id'] as String,
-      playerTwoId: row['player_two_id'] as String,
+      playerOneId: row['playerOneId'] as String,
+      playerTwoId: row['playerTwoId'] as String,
       status: row['status'] as String,
-      engineVersion: row['engine_version'] as String,
-      rulesetVersion: row['ruleset_version'] as String,
-      session: PvpCodec.decodeSession(rawState, cardLibrary),
+      engineVersion: row['engineVersion'] as String,
+      rulesetVersion: row['rulesetVersion'] as String,
+      session: PvpCodec.decodeSession(
+        Map<String, dynamic>.from(rawState),
+        cardLibrary,
+      ),
       projectionsByUser: projections,
       lastHeartbeatByUser: heartbeats,
-      updatedAt: DateTime.tryParse(row['updated_at'] as String? ?? '')?.toUtc(),
+      updatedAt: DateTime.tryParse(row['updatedAt'] as String? ?? '')?.toUtc(),
       turnDeadline:
-          DateTime.tryParse(row['turn_deadline'] as String? ?? '')?.toUtc(),
+          DateTime.tryParse(row['turnDeadline'] as String? ?? '')?.toUtc(),
     );
   }
 
@@ -195,27 +187,15 @@ class SupabasePvpRepository implements PvpRepository {
       'p_events': [
         for (final event in events) {'type': event.eventType, ...event.payload},
       ],
+      // The clock travels inside the same transaction as the move it belongs
+      // to. It used to be a separate PATCH afterwards -- one more round trip
+      // per command, and a window where state and clock disagreed.
+      'p_turn_deadline': after.turnDeadline?.toIso8601String(),
     });
     // The RPC returns the stored response. The service already holds the
     // typed response; decoding is intentionally only a protocol sanity check.
     if (response is Map && response['matchId'] != before.id) {
       throw const FormatException('transition response match mismatch');
-    }
-
-    // The commit RPC does not carry the clock, so it is written alongside.
-    // A failure here must not undo an applied move: the worst case is a window
-    // that keeps the previous deadline and expires a little late.
-    try {
-      await _request(
-        'PATCH',
-        '/pvp_matches',
-        query: {'id': 'eq.${after.id}'},
-        body: {
-          'turn_deadline': after.turnDeadline?.toIso8601String(),
-        },
-      );
-    } catch (error) {
-      stderr.writeln('turn deadline not stored for ${after.id}: $error');
     }
   }
 

@@ -71,6 +71,37 @@ class PvpDuelController extends DuelController {
   /// same play does not animate them a second time.
   final Set<int> _animatedOnTap = {};
 
+  /// Attackers already lunged when the attack was confirmed, so the server's
+  /// echo of the same declaration does not lunge them a second time.
+  final Set<int> _attackedOnTap = {};
+
+  /// A phase-changing command (attack, blocks, pass, end turn) still waiting
+  /// on the server. While one is in flight the others stay disabled: a second
+  /// tap would only race the first and come back as a confusing rejection.
+  bool _actionInFlight = false;
+
+  /// Runs [action] with input held, and always lets go -- even on a timeout.
+  Future<void> _guarded(Future<void> Function() action) async {
+    if (_actionInFlight || _disposed || isGameOver) return;
+    _actionInFlight = true;
+    busy = true;
+    notifyListeners();
+    try {
+      await action().timeout(const Duration(seconds: 12));
+    } on TimeoutException {
+      lastError = 'No answer from the server. Please try again.';
+    } finally {
+      _actionInFlight = false;
+      if (!_disposed) {
+        final current = pvp.projection;
+        busy = current != null &&
+            current.stage != PvpStage.finished &&
+            !_isMyDecision(current);
+        notifyListeners();
+      }
+    }
+  }
+
   /// The board exactly as the server sent it, before in-flight cards are
   /// hidden. [state] is the drawn view of this.
   GameState? _serverState;
@@ -183,7 +214,10 @@ class PvpDuelController extends DuelController {
     _seat = projection.viewer;
 
     // A refusal means nothing is on its way after all; show the cards again.
-    if (pvp.lastError != null) _inFlight.clear();
+    if (pvp.lastError != null) {
+      _inFlight.clear();
+      _attackedOnTap.clear();
+    }
 
     // Keep the server's board as sent, and draw a filtered view of it. Without
     // the raw copy there is nothing to compare against, and a card hidden on
@@ -219,9 +253,10 @@ class PvpDuelController extends DuelController {
     lastError = pvp.lastError;
 
     // The screen disables input while busy. Anything that is not this player's
-    // decision is exactly that.
-    busy = projection.stage != PvpStage.finished &&
-        !_isMyDecision(projection);
+    // decision is exactly that -- and so is the gap between confirming a move
+    // and the server answering it.
+    busy = _actionInFlight ||
+        (projection.stage != PvpStage.finished && !_isMyDecision(projection));
 
     incomingAttackers = projection.stage == PvpStage.blockDeclaration
         ? projection.pendingAttackers
@@ -257,11 +292,21 @@ class PvpDuelController extends DuelController {
         case 'attack_declared':
           final ids = event.payload['attackerIds'];
           if (ids is List) {
+            // Our own declaration already lunged on the tap. Replaying it
+            // here would lunge the same units twice; the opponent's still
+            // animate.
+            final fresh = <int>[];
             for (final id in ids) {
-              pendingEvents.add(DuelEvent('attack', instanceId: _asInt(id)));
+              final unitId = _asInt(id);
+              if (unitId == null) continue;
+              if (_attackedOnTap.remove(unitId)) continue;
+              fresh.add(unitId);
             }
-            if (ids.isNotEmpty) {
-              _note('${ids.map((id) => _nameOf(_asInt(id))).join(', ')} attack.');
+            for (final id in fresh) {
+              pendingEvents.add(DuelEvent('attack', instanceId: id));
+            }
+            if (fresh.isNotEmpty) {
+              _note('${fresh.map((id) => _nameOf(id)).join(', ')} attack.');
             }
           }
         case 'redraw':
@@ -502,55 +547,57 @@ class PvpDuelController extends DuelController {
   @override
   void enterCombat() {
     if (ui != DuelUiState.playerMain || isGameOver || isTargeting) return;
-    pvp.nextPhase();
+    unawaited(_guarded(() => pvp.nextPhase()));
   }
 
   @override
   Future<void> confirmAttack() async {
-    if (isGameOver) return;
-    await pvp.declareAttackers(selectedAttackers.toList());
+    if (isGameOver || _actionInFlight) return;
+    final ids = selectedAttackers.toList();
+
+    // The lunge answers the tap now, not after the round trip. The server's
+    // echo of the same declaration is deduplicated in _queueAnimations.
+    _attackedOnTap.addAll(ids);
+    for (final id in ids) {
+      pendingEvents.add(DuelEvent('attack', instanceId: id));
+    }
+    if (ids.isNotEmpty) notifyListeners();
+
+    await _guarded(() => pvp.declareAttackers(ids));
   }
 
   @override
   void confirmBlocks() {
     if (isGameOver) return;
-    pvp.declareBlocks([
-      for (final entry in blockPlan.entries)
-        if (entry.value.isNotEmpty)
-          {'attackerId': entry.key, 'blockerIds': entry.value},
-    ]);
+    // Every attacker needs an entry, even an empty one. The server checks the
+    // declaration against the full attack, so leaving an unblocked attacker
+    // out of the payload bounced the whole thing back with "Every attacker
+    // needs one block declaration" -- which read as being forced to block,
+    // and made simply taking the hit impossible.
+    final blocks = <Map<String, dynamic>>[
+      for (final attackerId in incomingAttackers)
+        {
+          'attackerId': attackerId,
+          'blockerIds': blockPlan[attackerId] ?? const <int>[],
+        },
+    ];
+    unawaited(_guarded(() => pvp.declareBlocks(blocks)));
   }
 
   @override
   void passResponse() {
-    pvp.passPriority();
+    unawaited(_guarded(() => pvp.passPriority()));
   }
 
   @override
   Future<void> endTurn() async {
     if (isGameOver) return;
 
-    // "End turn" means the turn passes, not "advance one phase". The
-    // single-player controller loops until the seat changes; online it takes a
-    // sequence, because leaving combat needs an explicit attack declaration.
-    // Sending one nextPhase would have walked the player into Combat instead
-    // of ending anything.
-    final seat = pvp.projection?.viewer;
-    for (var guard = 0; guard < 8; guard++) {
-      final current = pvp.projection;
-      if (current == null || current.activePlayer != seat) return;
-      if (current.stage == PvpStage.finished) return;
-
-      if (current.stage == PvpStage.attackDeclaration) {
-        await pvp.declareAttackers(const []);
-      } else if (current.stage == PvpStage.main) {
-        await pvp.nextPhase();
-      } else {
-        // Someone else holds the decision; nothing to push.
-        return;
-      }
-      if (pvp.lastError != null) return;
-    }
+    // "End turn" means the turn passes, not "advance one phase". The server
+    // expands the composite inside one lock, so this is a single round trip
+    // instead of the client walking main, combat and the second main phase
+    // one network hop at a time.
+    await _guarded(() => pvp.endTurn());
   }
 
   @override

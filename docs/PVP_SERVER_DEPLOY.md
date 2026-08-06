@@ -213,7 +213,13 @@ out of PvP permanently.
 ## Cost
 
 Scale-to-zero means you pay only while a request is in flight. Closed-test
-traffic realistically lands under a dollar a month. To remove cold starts during
-a scheduled test session, set `--min-instances=1` and put it back to `0`
-afterwards; leaving one instance warm all month is the one setting here that
-turns pennies into roughly $15–20.
+traffic realistically lands under a dollar a month.
+
+Cold starts are handled without paying for a warm instance: `pvp-queue` pings
+`/health` the moment a player joins the queue, so the service is already awake
+by the time a match initializes. Mid-match the instance never idles long
+enough to sleep (commands arrive every few seconds; scale-down needs ~15
+quiet minutes), and with request-based billing an idle warm instance costs
+nothing anyway. `--min-instances=1` remains available for scheduled showcase
+sessions, but leaving it on all month is the one setting here that turns
+pennies into roughly $15–20.

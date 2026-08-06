@@ -173,6 +173,129 @@ void main() {
     expect((await repository.getMatch('match-1'))?.session.revision, 1);
   });
 
+  test('end turn walks the phases in one command until the seat changes',
+      () async {
+    // The client used to send nextPhase, an empty attack declaration and
+    // another nextPhase itself -- a full network round trip each. The
+    // composite resolves the same engine steps inside one lock.
+    var revision = 0;
+    for (final user in const ['user-1', 'user-2', 'user-1', 'user-2']) {
+      final response = await service.command(
+        matchId: 'match-1',
+        actorUserId: user,
+        command: _command(revision, 'ready-$user-$revision', PvpCommandType.ready),
+      );
+      expect(response.accepted, isTrue);
+      revision = response.revision;
+    }
+    expect(
+      (await repository.getMatch('match-1'))?.session.stage,
+      PvpStage.main,
+    );
+
+    final response = await service.command(
+      matchId: 'match-1',
+      actorUserId: 'user-1',
+      command: _command(revision, 'end-turn-1', PvpCommandType.endTurn),
+    );
+
+    expect(response.accepted, isTrue);
+    expect(response.revision, greaterThan(revision),
+        reason: 'several engine steps resolved inside the one command');
+    final persisted = await repository.getMatch('match-1');
+    expect(persisted?.session.game.activePlayer, PlayerId.p2);
+    expect(
+      response.events.where((e) => e['type'] == 'phase_changed'),
+      isNotEmpty,
+    );
+  });
+
+  test('end turn outside your own turn is refused, not walked', () async {
+    var revision = 0;
+    for (final user in const ['user-1', 'user-2', 'user-1', 'user-2']) {
+      final response = await service.command(
+        matchId: 'match-1',
+        actorUserId: user,
+        command: _command(revision, 'ready-$user-$revision', PvpCommandType.ready),
+      );
+      revision = response.revision;
+    }
+
+    final response = await service.command(
+      matchId: 'match-1',
+      actorUserId: 'user-2',
+      command: _command(revision, 'end-turn-intruder', PvpCommandType.endTurn),
+    );
+
+    expect(response.accepted, isFalse);
+    expect(response.errorCode, 'illegal_stage');
+    expect((await repository.getMatch('match-1'))?.session.revision, revision);
+  });
+
+  test('a heartbeat stamps presence for the stale-match reaper', () async {
+    // Without this, a match lasting longer than the reaper's window looked
+    // abandoned with both players still at the table.
+    final response = await service.command(
+      matchId: 'match-1',
+      actorUserId: 'user-1',
+      command: _command(0, 'heartbeat-1', PvpCommandType.heartbeat),
+    );
+
+    expect(response.accepted, isTrue);
+    final persisted = await repository.getMatch('match-1');
+    expect(persisted?.lastHeartbeatByUser['user-1'], isNotNull);
+  });
+
+  test('a heartbeat is never stale, even after the board moved', () async {
+    // Presence ticks every 20 seconds and races real moves constantly. Every
+    // race it lost used to surface a phantom "old match revision" error.
+    final moved = await service.command(
+      matchId: 'match-1',
+      actorUserId: 'user-1',
+      command: _command(0, 'ready-before-heartbeat', PvpCommandType.ready),
+    );
+    expect(moved.accepted, isTrue);
+    expect(moved.revision, greaterThan(0));
+
+    final heartbeat = await service.command(
+      matchId: 'match-1',
+      actorUserId: 'user-1',
+      command: _command(0, 'heartbeat-after-move', PvpCommandType.heartbeat),
+    );
+
+    expect(heartbeat.accepted, isTrue);
+  });
+
+  test('stored projections carry the clock for realtime subscribers', () async {
+    // Clients receive these projections pushed inside the realtime payload;
+    // without the deadline their timer strip would go blank between commands.
+    final response = await service.command(
+      matchId: 'match-1',
+      actorUserId: 'user-1',
+      command: _command(0, 'ready-clock', PvpCommandType.ready),
+    );
+
+    expect(response.accepted, isTrue);
+    final persisted = await repository.getMatch('match-1');
+    expect(persisted?.projectionsByUser['user-1']?['deadlineAt'], isNotNull);
+    expect(persisted?.projectionsByUser['user-2']?['deadlineAt'], isNotNull);
+  });
+
+  test('a rejected command does not restart the decision clock', () async {
+    // Resetting the deadline on a refusal would let a stalling player extend
+    // their own window forever by spamming illegal moves.
+    final before = await repository.getMatch('match-1');
+    final response = await service.command(
+      matchId: 'match-1',
+      actorUserId: 'user-1',
+      command: _command(0, 'illegal-1', PvpCommandType.declareAttackers),
+    );
+
+    expect(response.accepted, isFalse);
+    final after = await repository.getMatch('match-1');
+    expect(after?.turnDeadline, before?.turnDeadline);
+  });
+
   test('initializes a queued match from validated deck IDs exactly once',
       () async {
     final repo = InMemoryPvpRepository();

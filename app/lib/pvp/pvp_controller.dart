@@ -31,23 +31,10 @@ class PvpController extends ChangeNotifier {
     return events;
   }
 
-  Future<void> _pullMatchEvents() async {
-    final id = matchId;
-    if (id == null) return;
-    try {
-      final events = await gateway.eventsSince(id, _lastEventSeq);
-      if (events.isEmpty) return;
-      _lastEventSeq = events.last.seq;
-      pendingMatchEvents.addAll(events);
-      notifyListeners();
-    } catch (_) {
-      // Animation cues are decoration; the board is already correct without
-      // them, so a failure here must never disturb the match.
-    }
-  }
-
   StreamSubscription<PvpProjection>? _matchSubscription;
+  StreamSubscription<PvpMatchEvent>? _eventSubscription;
   StreamSubscription<String>? _queueSubscription;
+  Timer? _queuePoll;
   Timer? _heartbeat;
 
   /// Rejoins a match left running by a previous session.
@@ -125,40 +112,91 @@ class PvpController extends ChangeNotifier {
     _setState(PvpConnectionState.idle);
   }
 
-  Future<void> send(PvpCommand command) async {
+  /// Commands leave one at a time, each stamped with the freshest revision
+  /// at the moment it actually goes out. Two quick taps used to race: the
+  /// second carried the revision the first had just made stale, and the
+  /// server answered with a cryptic "old match revision" rejection.
+  Future<void> _outbox = Future<void>.value();
+
+  Future<void> send(PvpCommand command) {
+    final run = _outbox.then((_) => _sendNow(command));
+    _outbox = run.catchError((_) {});
+    return run;
+  }
+
+  Future<void> _sendNow(PvpCommand command) async {
     final id = matchId;
-    final current = projection;
-    if (id == null || current == null) {
+    if (id == null || projection == null) {
       _setError('Join a PvP match before sending commands.');
       return;
     }
     if (!pendingCommands.add(command.idempotencyKey)) return;
 
-    final outbound = PvpCommand(
-      type: command.type,
-      idempotencyKey: command.idempotencyKey,
-      revision: current.revision,
-      payload: command.payload,
-    );
+    var retried = false;
     try {
-      final response = await gateway.sendCommand(id, outbound);
-      if (response.projection != null) _applyProjection(response.projection!);
-      if (!response.accepted) {
+      while (true) {
+        final current = projection;
+        if (current == null) return;
+        final outbound = PvpCommand(
+          type: command.type,
+          idempotencyKey: command.idempotencyKey,
+          revision: current.revision,
+          payload: command.payload,
+        );
+        final response = await gateway
+            .sendCommand(id, outbound)
+            .timeout(const Duration(seconds: 15));
+        if (response.projection != null) _applyProjection(response.projection!);
+        if (response.accepted) {
+          if (response.status == 'finished' ||
+              projection?.isFinished == true) {
+            _setState(PvpConnectionState.finished);
+          } else {
+            _setState(PvpConnectionState.active);
+          }
+          return;
+        }
+        // Presence retries on its own tick; a rejected heartbeat says nothing
+        // the player can act on, so it never surfaces as an error banner.
+        if (command.type == PvpCommandType.heartbeat) return;
+        if (response.errorCode == 'stale_revision') {
+          await _resync(id);
+          // The ready and mulligan windows are the one place both players act
+          // at once, so an honest command can arrive stale there through no
+          // fault of the player. Retry it once against the fresh board
+          // instead of reporting a failure.
+          if (!retried &&
+              (command.type == PvpCommandType.ready ||
+                  command.type == PvpCommandType.redraw)) {
+            retried = true;
+            continue;
+          }
+          lastErrorCode = 'stale_revision';
+          _setError(
+            'The board changed just as that move landed. It was not applied, try again.',
+          );
+          return;
+        }
         lastErrorCode = response.errorCode;
         _setError(response.message ?? 'That move is not legal right now.');
-        if (response.errorCode == 'stale_revision') {
-          unawaited(reconnect());
-        }
-      } else if (response.status == 'finished' ||
-          projection?.isFinished == true) {
-        _setState(PvpConnectionState.finished);
-      } else {
-        _setState(PvpConnectionState.active);
+        return;
       }
     } catch (error) {
-      _setError(_messageFor(error));
+      if (command.type != PvpCommandType.heartbeat) {
+        _setError(_messageFor(error));
+      }
     } finally {
       pendingCommands.remove(command.idempotencyKey);
+    }
+  }
+
+  /// Pulls the current board after a stale rejection, without tearing down
+  /// the live subscriptions the way a full reconnect does.
+  Future<void> _resync(String id) async {
+    try {
+      _applyProjection(await _reconnectWithRetry(id));
+    } catch (_) {
+      // The next realtime push heals the board anyway.
     }
   }
 
@@ -199,6 +237,10 @@ class PvpController extends ChangeNotifier {
 
   Future<void> passPriority() => send(_command(PvpCommandType.passPriority));
 
+  /// "Pass until the turn changes hands" as one round trip. The server
+  /// expands it into the phase steps the client used to send one by one.
+  Future<void> endTurn() => send(_command(PvpCommandType.endTurn));
+
   Future<void> concede() => send(_command(PvpCommandType.concede));
 
   PvpCommand _command(
@@ -212,6 +254,9 @@ class PvpController extends ChangeNotifier {
   );
 
   Future<void> _attachToMatch(String id) async {
+    // The queue watcher and its fallback poll can both spot the pairing at
+    // the same time; attaching twice would double every subscription.
+    if (matchId != null) return;
     matchId = id;
     _setState(PvpConnectionState.starting);
     try {
@@ -225,15 +270,17 @@ class PvpController extends ChangeNotifier {
 
   Future<PvpProjection> _reconnectWithRetry(String id) async {
     Object? lastError;
-    for (var attempt = 0; attempt < 4; attempt++) {
+    // A freshly paired match can still be initializing on the server, and a
+    // sleeping service needs a couple of seconds to wake. The old window of
+    // roughly 1.5 seconds gave up before either had finished.
+    const delays = [400, 800, 1200, 1600, 2000, 2000, 2000];
+    for (var attempt = 0; attempt <= delays.length; attempt++) {
       try {
         return await gateway.reconnect(id);
       } catch (error) {
         lastError = error;
-        if (attempt == 3) rethrow;
-        await Future<void>.delayed(
-          Duration(milliseconds: 250 * (attempt + 1)),
-        );
+        if (attempt == delays.length) rethrow;
+        await Future<void>.delayed(Duration(milliseconds: delays[attempt]));
       }
     }
     throw lastError ?? const PvpServiceException('PvP reconnect failed.');
@@ -242,6 +289,8 @@ class PvpController extends ChangeNotifier {
   Future<void> _startWatching(String id) async {
     await _queueSubscription?.cancel();
     _queueSubscription = null;
+    _queuePoll?.cancel();
+    _queuePoll = null;
     await _matchSubscription?.cancel();
     _matchSubscription = gateway
         .watchMatch(id, userId, appliedRevision: () => projection?.revision ?? -1)
@@ -253,6 +302,22 @@ class PvpController extends ChangeNotifier {
             }
           },
         );
+    await _eventSubscription?.cancel();
+    // Animation cues ride the realtime event stream now. They used to be
+    // polled from the events table after every projection, so the board
+    // visibly changed first and the animations chased it a beat later.
+    _eventSubscription = gateway.watchEvents(id).listen(
+      (event) {
+        if (event.seq <= _lastEventSeq) return;
+        _lastEventSeq = event.seq;
+        pendingMatchEvents.add(event);
+        notifyListeners();
+      },
+      onError: (Object error, StackTrace stack) {
+        // Animation cues are decoration; the board is already correct without
+        // them, so a failure here must never disturb the match.
+      },
+    );
     _heartbeat?.cancel();
     _heartbeat = Timer.periodic(const Duration(seconds: 20), (_) {
       if (state == PvpConnectionState.active) {
@@ -277,6 +342,20 @@ class PvpController extends ChangeNotifier {
             }
           },
         );
+    // Realtime almost always delivers the pairing, but "almost" strands a
+    // waiting player on the search screen. A slow poll is the backstop.
+    _queuePoll?.cancel();
+    _queuePoll = Timer.periodic(const Duration(seconds: 5), (_) async {
+      if (matchId != null || state != PvpConnectionState.queued) return;
+      try {
+        final id = await gateway.findActiveMatch();
+        if (id != null && matchId == null) {
+          await _attachToMatch(id);
+        }
+      } catch (_) {
+        // The next tick tries again.
+      }
+    });
   }
 
   /// Drops a stale failure so the next command's outcome can be read cleanly.
@@ -290,7 +369,6 @@ class PvpController extends ChangeNotifier {
   void _applyProjection(PvpProjection next) {
     if (projection != null && next.revision < projection!.revision) return;
     projection = next;
-    unawaited(_pullMatchEvents());
     lastError = null;
     lastErrorCode = null;
     _setState(
@@ -301,10 +379,14 @@ class PvpController extends ChangeNotifier {
   Future<void> _resetConnection() async {
     _heartbeat?.cancel();
     _heartbeat = null;
+    _queuePoll?.cancel();
+    _queuePoll = null;
     await _queueSubscription?.cancel();
     _queueSubscription = null;
     await _matchSubscription?.cancel();
     _matchSubscription = null;
+    await _eventSubscription?.cancel();
+    _eventSubscription = null;
     matchId = null;
     projection = null;
     pendingCommands.clear();
@@ -333,8 +415,10 @@ class PvpController extends ChangeNotifier {
   @override
   void dispose() {
     _heartbeat?.cancel();
+    _queuePoll?.cancel();
     unawaited(_queueSubscription?.cancel());
     unawaited(_matchSubscription?.cancel());
+    unawaited(_eventSubscription?.cancel());
     gateway.dispose();
     super.dispose();
   }

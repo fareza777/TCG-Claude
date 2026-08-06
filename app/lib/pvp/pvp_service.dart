@@ -12,12 +12,6 @@ abstract interface class PvpGateway {
 
   Future<void> leaveQueue();
 
-  /// Public events newer than [afterSeq], oldest first.
-  ///
-  /// The projection says what the board looks like; these say what just
-  /// happened, which is what the battle screen animates.
-  Future<List<PvpMatchEvent>> eventsSince(String matchId, int afterSeq);
-
   /// The match this player is already in, or null.
   ///
   /// The server refuses to queue anyone holding a live match, so without this
@@ -34,6 +28,12 @@ abstract interface class PvpGateway {
     String userId, {
     int Function()? appliedRevision,
   });
+
+  /// Live match events, oldest first, as they are committed.
+  ///
+  /// The projection says what the board looks like; these say what just
+  /// happened, which is what the battle screen animates.
+  Stream<PvpMatchEvent> watchEvents(String matchId);
 
   Stream<String> watchQueue(String userId);
 
@@ -71,20 +71,6 @@ class PvpService implements PvpGateway {
   @override
   Future<void> leaveQueue() async {
     await _invoke('pvp-queue', {'action': 'leave'});
-  }
-
-  @override
-  Future<List<PvpMatchEvent>> eventsSince(String matchId, int afterSeq) async {
-    // Row level security already limits this to matches the caller is in, and
-    // public_payload never carries hidden state.
-    final rows = await _client
-        .from('pvp_events')
-        .select('seq, event_type, public_payload')
-        .eq('match_id', matchId)
-        .gt('seq', afterSeq)
-        .order('seq')
-        .limit(50);
-    return [for (final row in rows) PvpMatchEvent.fromRow(row)];
   }
 
   @override
@@ -136,74 +122,60 @@ class PvpService implements PvpGateway {
   }) {
     final controller = StreamController<PvpProjection>.broadcast();
     final channel = _client.channel('pvp-match:$matchId:$userId');
+    var lastDelivered = -1;
 
-    // One command publishes more than one event -- a card play emits both
-    // card_played and state_changed -- and each of those would otherwise pull
-    // the whole projection back through the Edge Function, the Dart service
-    // and several Postgres queries. Coalescing means a burst costs one
-    // refresh, with a single follow-up if anything landed while it was in
-    // flight, so nothing is missed and nothing is fetched twice.
-    var refreshing = false;
-    var refreshAgain = false;
-
-    Future<void> refresh() async {
-      if (refreshing) {
-        refreshAgain = true;
-        return;
-      }
-      refreshing = true;
-      try {
-        do {
-          refreshAgain = false;
-          controller.add(await reconnect(matchId));
-        } while (refreshAgain);
-      } catch (error, stack) {
-        controller.addError(error, stack);
-      } finally {
-        refreshing = false;
-      }
-    }
-
-    void refreshProjection(PostgresChangePayload payload) {
-      // Your own move already came back on the command response. The event it
-      // published then arrives here and would fetch the same board again, so a
-      // revision this client has already applied is simply dropped.
+    void deliver(PvpProjection projection) {
+      // Heartbeats and presence stamps rewrite the row without moving the
+      // game; a revision this client has already shown is not news.
+      if (projection.revision <= lastDelivered) return;
       final seen = appliedRevision?.call();
-      final incoming = payload.newRecord['revision'];
-      if (seen != null && incoming is int && incoming <= seen) return;
-      unawaited(refresh());
+      if (seen != null && projection.revision <= seen) return;
+      lastDelivered = projection.revision;
+      controller.add(projection);
     }
 
+    // The player's own match row carries their private projection, so the
+    // board arrives inside the realtime payload itself. The old flow threw
+    // that away and refetched the projection through the Edge Function and
+    // the Dart service on every event -- the better part of a second between
+    // the opponent moving and the board changing here. Row level security
+    // limits the row to the owner, so the opponent's hidden state never
+    // reaches this channel.
     channel
-        .onPostgresChanges(
-          event: PostgresChangeEvent.all,
-          schema: 'public',
-          table: 'pvp_events',
-          filter: PostgresChangeFilter(
-            type: PostgresChangeFilterType.eq,
-            column: 'match_id',
-            value: matchId,
-          ),
-          callback: refreshProjection,
-        )
-        // pvp_match_players is deliberately NOT watched. Reading a projection
-        // stamps connected_at and last_heartbeat_at on that very table, so
-        // refreshing on its changes fed itself: every read triggered a write
-        // that triggered another read, a few times a second, until the match
-        // screen stopped responding. pvp_events already fires for every
-        // accepted command, which is the state the player actually needs.
         .onPostgresChanges(
           event: PostgresChangeEvent.update,
           schema: 'public',
-          table: 'pvp_matches',
+          table: 'pvp_match_players',
           filter: PostgresChangeFilter(
             type: PostgresChangeFilterType.eq,
-            column: 'id',
-            value: matchId,
+            column: 'user_id',
+            value: userId,
           ),
-          callback: refreshProjection,
+          callback: (payload) {
+            final record = payload.newRecord;
+            if (record['match_id'] != matchId) return;
+            final raw = record['private_state'];
+            if (raw is! Map) return;
+            try {
+              deliver(PvpProjection.fromJson(Map<String, dynamic>.from(raw)));
+            } on FormatException {
+              // A projection that cannot be read is retried as a full
+              // reconnect below rather than dropping the match.
+              unawaited(reconnect(matchId).then(deliver, onError: (_) {}));
+            }
+          },
         )
-        .subscribe();
+        .subscribe((status, [error]) {
+          if (status != RealtimeSubscribeStatus.subscribed) return;
+          // Anything committed before the subscription went live would
+          // otherwise be invisible until the next move. One catch-up read
+          // closes that gap; staleness is filtered by deliver().
+          unawaited(
+            reconnect(matchId).then(deliver, onError: (Object e, StackTrace s) {
+              controller.addError(e, s);
+            }),
+          );
+        });
 
     _channels.add(channel);
     _controllers.add(controller);
@@ -213,6 +185,88 @@ class PvpService implements PvpGateway {
       unawaited(channel.unsubscribe());
     };
     return controller.stream;
+  }
+
+  @override
+  Stream<PvpMatchEvent> watchEvents(String matchId) {
+    final controller = StreamController<PvpMatchEvent>.broadcast();
+    final channel = _client.channel('pvp-events:$matchId');
+
+    // Events that arrive before the high-water mark is known are buffered,
+    // then replayed in order once it is. The mark itself is read after the
+    // subscription is live, so history is skipped without losing anything
+    // committed in between.
+    var highWater = -1;
+    var ready = false;
+    final buffer = <PvpMatchEvent>[];
+
+    void flush() {
+      ready = true;
+      buffer.sort((a, b) => a.seq.compareTo(b.seq));
+      for (final event in buffer) {
+        if (event.seq > highWater) {
+          highWater = event.seq;
+          controller.add(event);
+        }
+      }
+      buffer.clear();
+    }
+
+    channel
+        .onPostgresChanges(
+          event: PostgresChangeEvent.insert,
+          schema: 'public',
+          table: 'pvp_events',
+          filter: PostgresChangeFilter(
+            type: PostgresChangeFilterType.eq,
+            column: 'match_id',
+            value: matchId,
+          ),
+          callback: (payload) {
+            final event = PvpMatchEvent.fromRow(payload.newRecord);
+            if (!ready) {
+              buffer.add(event);
+              return;
+            }
+            if (event.seq <= highWater) return;
+            highWater = event.seq;
+            controller.add(event);
+          },
+        )
+        .subscribe((status, [error]) {
+          if (status != RealtimeSubscribeStatus.subscribed) return;
+          unawaited(() async {
+            try {
+              highWater = await _latestEventSeq(matchId);
+            } catch (_) {
+              // Animation cues are decoration; if the mark cannot be read,
+              // play whatever the buffer holds rather than nothing at all.
+            }
+            flush();
+          }());
+        });
+
+    _channels.add(channel);
+    _controllers.add(controller);
+    controller.onCancel = () {
+      _channels.remove(channel);
+      _controllers.remove(controller);
+      unawaited(channel.unsubscribe());
+    };
+    return controller.stream;
+  }
+
+  /// The newest event sequence the match has committed, for skipping history
+  /// when a subscription starts mid-match.
+  Future<int> _latestEventSeq(String matchId) async {
+    final rows = await _client
+        .from('pvp_events')
+        .select('seq')
+        .eq('match_id', matchId)
+        .order('seq', ascending: false)
+        .limit(1);
+    if (rows.isEmpty) return 0;
+    return (rows.first['seq'] as num).toInt();
   }
 
   @override

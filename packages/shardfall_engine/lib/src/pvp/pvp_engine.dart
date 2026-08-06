@@ -75,7 +75,11 @@ abstract final class PvpEngine {
       return _reject(
           session, 'invalid_command', 'Idempotency key is required.');
     }
-    if (command.revision != session.revision) {
+    // Heartbeat carries no opinion about the board, so it can never be
+    // stale. Rejecting it only produced phantom "old revision" errors every
+    // time the 20-second presence tick raced a real move.
+    if (command.revision != session.revision &&
+        command.type != PvpCommandType.heartbeat) {
       return _reject(
         session,
         'stale_revision',
@@ -86,6 +90,16 @@ abstract final class PvpEngine {
         command.type != PvpCommandType.heartbeat) {
       return _reject(
           session, 'match_finished', 'The match is already finished.');
+    }
+    // The match service expands endTurn into real sub-commands before the
+    // reducer runs. Reaching the reducer with it means a caller skipped the
+    // service, which is a bug, not a move.
+    if (command.type == PvpCommandType.endTurn) {
+      return _reject(
+        session,
+        'invalid_command',
+        'End turn is resolved by the match service, not the engine.',
+      );
     }
 
     try {
@@ -108,6 +122,11 @@ abstract final class PvpEngine {
         // Presence only: no event, so it does not wake both clients into a
         // full projection refetch every 20 seconds for no state change.
         PvpCommandType.heartbeat => _Transition(
+            session: session,
+            incrementsRevision: false,
+          ),
+        // Unreachable: rejected above. The switch must still name every value.
+        PvpCommandType.endTurn => _Transition(
             session: session,
             incrementsRevision: false,
           ),

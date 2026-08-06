@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
@@ -31,6 +33,11 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
   PvpController? _controller;
   int _selected = 0;
   bool _controllerListening = false;
+
+  /// The match the battle screen was already opened for. Guards the
+  /// auto-navigation against pushing a second battle screen for the same
+  /// pairing every time the controller notifies.
+  String? _openedMatchId;
 
   List<_PvpDeckOption> get _options {
     final options = <_PvpDeckOption>[];
@@ -91,7 +98,7 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
 
     setState(() {});
     _snack('Rejoining your match in progress.');
-    await _openMatch(controller);
+    // The controller listener opens the battle screen.
   }
 
   /// Opens the online match on the same battle screen the story duels use.
@@ -120,6 +127,13 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
       ),
     );
     duel.dispose();
+    if (!mounted) return;
+    // A finished match is done for good; leaving it resets the lobby so the
+    // next queue starts clean. A live match stays attached so the REJOIN
+    // button can take the player back after an accidental back-out.
+    if (controller.state == PvpConnectionState.finished) {
+      await controller.leave();
+    }
     if (mounted) setState(() {});
   }
 
@@ -131,7 +145,13 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
       _snack(widget.auth.message!);
       return;
     }
-    if (signedIn) await _resumeIfInMatch();
+    if (signedIn) {
+      // Remember the link so the next launch can re-auth silently instead
+      // of asking again.
+      await widget.save.setAccountLinked(true);
+      widget.auth.accountLinked = true;
+      await _resumeIfInMatch();
+    }
   }
 
   Future<void> _join() async {
@@ -151,15 +171,30 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
     await controller.join(
       options[_selected.clamp(0, options.length - 1)].cardIds,
     );
-    if (!mounted || controller.matchId == null) return;
-    if (controller.state == PvpConnectionState.active ||
-        controller.state == PvpConnectionState.finished) {
-      await _openMatch(controller);
-    }
+    // The controller listener opens the battle screen once the pairing
+    // lands, whether that is instantly or after a wait in the queue.
   }
 
+  /// Keeps the lobby in sync with the controller and opens the battle
+  /// screen for every path that reaches a live match.
+  ///
+  /// The controller becomes active from several directions: an instant
+  /// match from join, the realtime queue watcher for the player who waited,
+  /// or a resume. Only the first one used to open the battle screen, which
+  /// stranded the player who had queued first on the lobby until they
+  /// tapped FIND OPPONENT a second time.
   void _refresh() {
-    if (mounted) setState(() {});
+    if (!mounted) return;
+    setState(() {});
+    final controller = _controller;
+    if (controller == null) return;
+    final id = controller.matchId;
+    final live = controller.state == PvpConnectionState.active ||
+        controller.state == PvpConnectionState.finished;
+    if (id != null && live && _openedMatchId != id) {
+      _openedMatchId = id;
+      unawaited(_openMatch(controller));
+    }
   }
 
   void _snack(String message) {
@@ -219,6 +254,16 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
                     const SizedBox(height: 14),
                     if (controller?.state == PvpConnectionState.queued)
                       _queueCard(controller!)
+                    else if (controller != null &&
+                        controller.matchId != null &&
+                        (controller.state == PvpConnectionState.starting ||
+                            controller.state ==
+                                PvpConnectionState.reconnecting))
+                      _connectingCard()
+                    else if (controller != null &&
+                        controller.matchId != null &&
+                        controller.state == PvpConnectionState.active)
+                      _rejoinButton(controller)
                     else
                       _joinButton(selected),
                     if (controller?.lastError != null) ...[
@@ -443,6 +488,42 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
         ),
         TextButton(onPressed: controller.leave, child: const Text('CANCEL')),
       ],
+    ),
+  );
+
+  Widget _connectingCard() => Container(
+    padding: const EdgeInsets.all(14),
+    decoration: BoxDecoration(
+      color: const Color(0xFF8FE3FF).withValues(alpha: 0.10),
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: const Color(0x778FE3FF)),
+    ),
+    child: const Row(
+      children: [
+        SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(strokeWidth: 2),
+        ),
+        SizedBox(width: 12),
+        Expanded(
+          child: Text(
+            'Opponent found. Setting up the match...',
+            style: TextStyle(color: AppTheme.textPrimary, fontSize: 13),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  /// A live match survives leaving the battle screen, so the lobby offers a
+  /// way back in instead of pretending the queue is the only option.
+  Widget _rejoinButton(PvpController controller) => SizedBox(
+    height: 48,
+    child: FilledButton.icon(
+      onPressed: () => unawaited(_openMatch(controller)),
+      icon: const Icon(Icons.play_arrow),
+      label: const Text('REJOIN MATCH'),
     ),
   );
 

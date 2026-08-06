@@ -12,6 +12,13 @@ enum PvpCommandType {
   passPriority,
   concede,
   heartbeat,
+
+  /// "Pass until the turn changes hands" as a single command.
+  ///
+  /// The reducer never resolves this: the match service expands it into
+  /// nextPhase / empty-attack sub-commands inside one lock, so ending a turn
+  /// costs the player one network round trip instead of three or four.
+  endTurn,
 }
 
 class PvpCommand {
