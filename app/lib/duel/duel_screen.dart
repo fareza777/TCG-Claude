@@ -13,8 +13,16 @@ class DuelScreen extends StatefulWidget {
   final DuelController controller;
   final String enemyName;
 
+  /// An optional strip rendered in the layout between the enemy bar and the
+  /// phase bar. PvP uses it for the online status (turn, phase, clock);
+  /// leaving it out keeps the offline duel layout exactly as it was.
+  final Widget? statusBanner;
+
   const DuelScreen(
-      {super.key, required this.controller, this.enemyName = 'Ashen Warlord'});
+      {super.key,
+      required this.controller,
+      this.enemyName = 'Ashen Warlord',
+      this.statusBanner});
 
   @override
   State<DuelScreen> createState() => _DuelScreenState();
@@ -182,6 +190,7 @@ class _DuelScreenState extends State<DuelScreen>
                 Column(
                   children: [
                     _enemyBar(),
+                    if (widget.statusBanner != null) widget.statusBanner!,
                     _phaseBar(),
                     if (c.enemyCastName != null) _enemyCastBanner(),
                     if (c.playerCastName != null) _playerCastBanner(),

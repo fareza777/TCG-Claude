@@ -8,13 +8,15 @@ import '../duel/duel_screen.dart';
 import '../theme.dart';
 import 'pvp_duel_controller.dart';
 
-/// The shared battle screen with an online status strip laid over it.
+/// The shared battle screen with an online status strip in its header.
 ///
 /// Offline you always know where you are: the AI acts in front of you, in
 /// paced beats. Online the opponent is silent, so the same board can leave a
 /// player unsure whether it is their move, whose phase it is, or whether the
-/// match is still alive at all. This strip answers those three questions
-/// without changing a line of the duel screen it sits on.
+/// match is still alive at all. The strip answers those three questions from
+/// a slot the duel screen reserves for it between the enemy bar and the
+/// phase bar. It used to float over the top edge instead, where it covered
+/// the enemy's name and health orb.
 class PvpBattleScreen extends StatelessWidget {
   const PvpBattleScreen({super.key, required this.controller});
 
@@ -22,19 +24,10 @@ class PvpBattleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        DuelScreen(controller: controller, enemyName: 'Opponent'),
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: SafeArea(
-            bottom: false,
-            child: _PvpStatusStrip(controller: controller),
-          ),
-        ),
-      ],
+    return DuelScreen(
+      controller: controller,
+      enemyName: 'Opponent',
+      statusBanner: _PvpStatusStrip(controller: controller),
     );
   }
 }
@@ -100,7 +93,7 @@ class _PvpStatusStripState extends State<_PvpStatusStrip> {
 
     return Center(
       child: Container(
-        margin: const EdgeInsets.only(top: 4),
+        margin: const EdgeInsets.symmetric(vertical: 3),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
         decoration: BoxDecoration(
           color: Colors.black.withValues(alpha: 0.62),
