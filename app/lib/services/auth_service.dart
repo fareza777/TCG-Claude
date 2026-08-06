@@ -34,6 +34,13 @@ class AuthService extends ChangeNotifier {
       BackendConfig.hasGoogleSignIn ? AuthState.signedOut : AuthState.disabled;
   String? message;
 
+  /// Set by the owner from the saved profile: true once the player has
+  /// explicitly linked a Google account on this device. The silent re-auth
+  /// at startup keys off it — without the gate, launching the game could
+  /// surface a Google account prompt in the middle of the opening
+  /// cinematic for a player who never asked to sign in.
+  bool accountLinked = false;
+
   bool _googleReady = false;
 
   SupabaseClient get _supabase => client ?? Supabase.instance.client;
@@ -61,6 +68,8 @@ class AuthService extends ChangeNotifier {
   ///
   /// Supabase restores its own session from disk, so this only needs to cover
   /// the case where that session is gone but Google still knows the player.
+  /// That Google attempt is only made for a player who linked their account
+  /// before; anyone else stays signed out and, crucially, unprompted.
   Future<void> restoreSession() async {
     if (state == AuthState.disabled) return;
 
@@ -69,6 +78,8 @@ class AuthService extends ChangeNotifier {
       notifyListeners();
       return;
     }
+
+    if (!accountLinked) return;
 
     try {
       await _ensureGoogleReady();

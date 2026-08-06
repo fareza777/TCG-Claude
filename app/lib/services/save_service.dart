@@ -38,6 +38,16 @@ class SaveService extends ChangeNotifier {
   bool colorblind;
   bool reduceMotion;
 
+  /// The player chose "Play as Guest" on the login screen, so it is not
+  /// shown again. Device-local on purpose: this is about who signs in here,
+  /// not progress, so it never joins save codes or cloud snapshots.
+  bool guestMode = false;
+
+  /// The player has explicitly linked a Google account on this device.
+  /// Gates the silent re-auth at startup: without it, launching the game
+  /// must not surface a Google prompt out of nowhere.
+  bool accountLinked = false;
+
   // Progression (#6): daily login streak + lifetime stats + achievements.
   int loginStreak = 0;
   String lastLoginDate = '';
@@ -152,6 +162,8 @@ class SaveService extends ChangeNotifier {
     );
     service.loginStreak = prefs.getInt('loginStreak') ?? 0;
     service.lastLoginDate = prefs.getString('lastLoginDate') ?? '';
+    service.guestMode = prefs.getBool('guestMode') ?? false;
+    service.accountLinked = prefs.getBool('accountLinked') ?? false;
     service.totalWins = prefs.getInt('totalWins') ?? 0;
     service.totalPacks = prefs.getInt('totalPacks') ?? 0;
     service.achievements =
@@ -359,6 +371,18 @@ class SaveService extends ChangeNotifier {
   Future<void> markTutorialSeen() async {
     tutorialSeen = true;
     await _persist();
+  }
+
+  Future<void> setGuestMode(bool on) async {
+    guestMode = on;
+    await _persist();
+    notifyListeners();
+  }
+
+  Future<void> setAccountLinked(bool on) async {
+    accountLinked = on;
+    await _persist();
+    notifyListeners();
   }
 
   Future<void> setAudio({bool? music, bool? sfx}) async {
@@ -713,6 +737,8 @@ class SaveService extends ChangeNotifier {
     await _prefs.setStringList('clearedBattles', clearedBattles.toList());
     await _prefs.setString('decks', json.encode(decks));
     await _prefs.setBool('tutorialSeen', tutorialSeen);
+    await _prefs.setBool('guestMode', guestMode);
+    await _prefs.setBool('accountLinked', accountLinked);
     await _prefs.setBool('musicOn', musicOn);
     await _prefs.setBool('sfxOn', sfxOn);
     await _prefs.setBool('colorblind', colorblind);

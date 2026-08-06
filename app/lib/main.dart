@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'auth/login_screen.dart';
 import 'card_render/card_widget.dart';
 import 'collection/collection_screen.dart';
 import 'deckbuilder/deck_builder_screen.dart';
@@ -107,6 +108,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed) {
       AudioManager.instance.ensurePlaying();
     } else if (state == AppLifecycleState.paused) {
+      // Music must not keep playing into someone else's app.
+      unawaited(AudioManager.instance.pauseMusic());
       // Leaving the app is the natural moment to back the profile up. An
       // unresolved conflict is left alone so it cannot silently pick a winner.
       final cloud = _cloud;
@@ -140,23 +143,50 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       _auth = auth;
       _cloud = cloud;
     });
+    // The silent re-auth at startup keys off this flag; without it a Google
+    // prompt could surface mid-cinematic for a player who never signed in.
+    auth.accountLinked = save.accountLinked;
     unawaited(purchases.initialize());
     unawaited(_syncBackend(auth, cloud));
-    if (!save.tutorialSeen && mounted) {
+    if (mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await Navigator.of(context).push(MaterialPageRoute<void>(
-            builder: (ctx) =>
-                OpeningCinematic(onDone: () => Navigator.of(ctx).pop())));
+        if (!save.tutorialSeen) {
+          await Navigator.of(context).push(MaterialPageRoute<void>(
+              builder: (ctx) =>
+                  OpeningCinematic(onDone: () => Navigator.of(ctx).pop())));
+          if (!mounted) return;
+          await Navigator.of(context).push(MaterialPageRoute<void>(
+              builder: (_) => const TutorialScreen()));
+          await save.markTutorialSeen();
+        }
         if (!mounted) return;
-        await Navigator.of(context).push(MaterialPageRoute<void>(
-            builder: (_) => const TutorialScreen()));
-        await save.markTutorialSeen();
+        await _maybeShowLogin();
         _showProgressToasts();
       });
-    } else if (mounted) {
-      WidgetsBinding.instance
-          .addPostFrameCallback((_) => _showProgressToasts());
     }
+  }
+
+  /// The one-time account choice, shown after the intro on a first run or
+  /// right after the menu loads. Skipped for builds without a backend, for
+  /// players already signed in, and for guests who already chose — their
+  /// answer is remembered, so this never becomes a nag screen.
+  Future<void> _maybeShowLogin() async {
+    final auth = _auth;
+    final save = _save;
+    final cloud = _cloud;
+    if (auth == null || save == null) return;
+    if (!BackendConfig.hasGoogleSignIn) return;
+    if (auth.isSignedIn || save.guestMode) return;
+
+    final linked = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(builder: (_) => LoginScreen(auth: auth, save: save)),
+    );
+    if (linked != true || cloud == null || !mounted) return;
+
+    await cloud.syncOnSignIn();
+    if (!mounted) return;
+    setState(() {});
+    _reportSync(cloud);
   }
 
   /// Re-establishes a previous session and pulls back anything paid for.
@@ -170,6 +200,45 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     _reportSync(cloud);
   }
 
+  /// A visible home for the account: who is playing, and the way out.
+  /// Signing out used to hide inside the settings sheet, which read as
+  /// there being no logout at all.
+  void _showAccount() {
+    final auth = _auth;
+    if (auth == null) return;
+    final signedIn = auth.isSignedIn;
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: AppTheme.panel,
+        title: Text(signedIn ? 'Signed in' : 'Playing as guest',
+            style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
+        content: Text(
+          signedIn
+              ? '${auth.displayName ?? 'Google account'}\nPvP and Gold '
+                  'purchases are unlocked, and your progress is backed up.'
+              : 'Your progress lives only on this device. Link a Google '
+                  'account to unlock PvP and Gold purchases.',
+          style: const TextStyle(
+              color: AppTheme.textMuted, fontSize: 12, height: 1.4),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Close'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(dialogContext);
+              unawaited(_toggleAccount());
+            },
+            child: Text(signedIn ? 'Sign out' : 'Sign in with Google'),
+          ),
+        ],
+      ),
+    );
+  }
+
   /// Signs in, or signs out after saving one last time.
   Future<void> _toggleAccount() async {
     final auth = _auth;
@@ -179,6 +248,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     if (auth.isSignedIn) {
       await cloud.pushSave();
       await auth.signOut();
+      await _save?.setAccountLinked(false);
+      auth.accountLinked = false;
       if (mounted) setState(() {});
       return;
     }
@@ -195,6 +266,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       return;
     }
 
+    await _save?.setAccountLinked(true);
+    auth.accountLinked = true;
     await cloud.syncOnSignIn();
     if (!mounted) return;
     setState(() {});
@@ -772,6 +845,21 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                   child: const Icon(Icons.settings,
                                       color: Color(0xFF9FB2BC), size: 16),
                                 ),
+                                if (BackendConfig.hasGoogleSignIn) ...[
+                                  const SizedBox(width: 12),
+                                  GestureDetector(
+                                    onTap: _showAccount,
+                                    child: Icon(
+                                      _auth?.isSignedIn == true
+                                          ? Icons.account_circle
+                                          : Icons.person_outline,
+                                      color: _auth?.isSignedIn == true
+                                          ? const Color(0xFF7FBF7F)
+                                          : const Color(0xFF9FB2BC),
+                                      size: 16,
+                                    ),
+                                  ),
+                                ],
                               ],
                             ),
                           ),
@@ -858,7 +946,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     builder: (_) => BoosterScreen(
                                         library: _library!,
                                         save: _save!,
-                                        purchaseService: _purchases!)),
+                                        purchaseService: _purchases!,
+                                        auth: _auth!)),
                               ),
                             ),
                             _tile(

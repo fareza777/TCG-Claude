@@ -7,6 +7,7 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 import '../card_render/card_widget.dart';
 import 'pack_odds.dart';
 import '../services/audio_manager.dart';
+import '../services/auth_service.dart';
 import '../services/gold_purchase_service.dart';
 import '../services/purchase_catalog.dart';
 import '../services/save_service.dart';
@@ -21,11 +22,16 @@ class BoosterScreen extends StatefulWidget {
   final SaveService save;
   final GoldPurchaseService purchaseService;
 
+  /// Real-money Gold is account-only: a receipt has to outlive the device,
+  /// and only a linked account can carry it. Guests see the offer locked.
+  final AuthService auth;
+
   const BoosterScreen(
       {super.key,
       required this.library,
       required this.save,
-      required this.purchaseService});
+      required this.purchaseService,
+      required this.auth});
 
   @override
   State<BoosterScreen> createState() => _BoosterScreenState();
@@ -201,9 +207,10 @@ class _BoosterScreenState extends State<BoosterScreen>
 
   Widget _goldPurchasePanel() {
     return ListenableBuilder(
-      listenable: widget.purchaseService,
+      listenable: Listenable.merge([widget.purchaseService, widget.auth]),
       builder: (context, _) {
         final purchases = widget.purchaseService;
+        final locked = !widget.auth.isSignedIn;
         final isBusy = purchases.state == GoldPurchaseState.loading ||
             purchases.state == GoldPurchaseState.purchasing ||
             purchases.state == GoldPurchaseState.pending;
@@ -269,16 +276,19 @@ class _BoosterScreenState extends State<BoosterScreen>
                 SizedBox(
                   height: 44,
                   child: ElevatedButton.icon(
-                    onPressed: purchases.canBuy && !isBusy
+                    onPressed: !locked && purchases.canBuy && !isBusy
                         ? () {
                             AudioManager.instance.tap();
                             unawaited(purchases.buyGold());
                           }
                         : null,
-                    icon: Icon(isBusy
-                        ? Icons.hourglass_top
-                        : Icons.shopping_bag_outlined),
-                    label: Text(buttonLabel),
+                    icon: Icon(locked
+                        ? Icons.lock_outline
+                        : isBusy
+                            ? Icons.hourglass_top
+                            : Icons.shopping_bag_outlined),
+                    label: Text(
+                        locked ? 'Sign in to purchase Gold' : buttonLabel),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFC9A86A),
                       foregroundColor: const Color(0xFF1C1508),
@@ -293,7 +303,15 @@ class _BoosterScreenState extends State<BoosterScreen>
                     ),
                   ),
                 ),
-                if (purchases.message != null) ...[
+                if (locked) ...[
+                  const SizedBox(height: 8),
+                  const Text(
+                      'Paid Gold is tied to a Google account so it survives '
+                      'reinstalls. Link one from Settings to unlock this.',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                ] else if (purchases.message != null) ...[
                   const SizedBox(height: 8),
                   Text(purchases.message!,
                       textAlign: TextAlign.center,
