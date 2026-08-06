@@ -14,6 +14,7 @@ class AudioManager {
   bool musicOn = true;
   bool sfxOn = true;
   bool _musicPlaying = false;
+  bool _musicPaused = false;
 
   /// The ambient track for the current section — 'ambient' (menu/story/collection)
   /// or 'battle_ambient' (duels). Falls back to 'ambient' if a file is missing.
@@ -33,6 +34,7 @@ class AudioManager {
   /// battle screen uses a more driving bed. No-op if already on that track.
   Future<void> playTrack(String track) async {
     _currentTrack = track;
+    _musicPaused = false;
     if (!musicOn) return;
     try {
       await _music.setVolume(1.0);
@@ -56,6 +58,15 @@ class AudioManager {
   /// the OS paused the player (audio-focus loss) but our flag says "playing".
   Future<void> ensurePlaying() async {
     if (!musicOn) return;
+    if (_musicPaused) {
+      // Backgrounded earlier: pick the bed back up where it left off.
+      _musicPaused = false;
+      try {
+        await _music.resume();
+        _musicPlaying = true;
+        return;
+      } catch (_) {}
+    }
     if (!_musicPlaying) {
       await playTrack(_currentTrack);
     } else {
@@ -76,8 +87,21 @@ class AudioManager {
 
   Future<void> stopMusic() async {
     _musicPlaying = false;
+    _musicPaused = false;
     try {
       await _music.stop();
+    } catch (_) {}
+  }
+
+  /// Pauses the bed where it is, for when the app goes to the background.
+  /// Playing on while the player is in another app reads as a bug, and
+  /// [ensurePlaying] picks the track back up right where it left off.
+  Future<void> pauseMusic() async {
+    if (!_musicPlaying) return;
+    _musicPlaying = false;
+    _musicPaused = true;
+    try {
+      await _music.pause();
     } catch (_) {}
   }
 
