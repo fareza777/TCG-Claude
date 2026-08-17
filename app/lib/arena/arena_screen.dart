@@ -9,6 +9,8 @@ import '../duel/scenario.dart';
 import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
+import 'arena_draft.dart';
+import 'arena_draft_screen.dart';
 
 /// The Proving Gauntlet: choose a deck, then fight an escalating run of AI
 /// champions. Three losses ends the run; rewards scale with your win streak.
@@ -51,34 +53,60 @@ class _ArenaScreenState extends State<ArenaScreen> {
 
   String _cap(String s) => s[0].toUpperCase() + s.substring(1);
 
-  int get _foeHealth => 25 + (_wins * 2).clamp(0, 14);
-  AiTier get _foeTier => _wins <= 1 ? AiTier.tactician : AiTier.strategist;
-  int get _winReward => 20 + _wins * 8;
-
-  /// Build every deck the player can bring: saved decks + the five starters.
-  List<(String, List<CardDef>)> _deckOptions() {
-    final opts = <(String, List<CardDef>)>[];
-    widget.save.decks.forEach((name, ids) {
-      opts.add((name, [for (final id in ids) widget.library.card(id)]));
-    });
-    for (final key in const [
-      'VERDANCE',
-      'PYRE',
-      'TIDE',
-      'DAWN',
-      'GLOOM'
-    ]) {
-      opts.add(('${_cap(key.toLowerCase())} Starter',
-          widget.library.buildStarterDeck(key)));
-    }
-    return opts;
+  String _ordinal(int n) {
+    if (n % 100 >= 11 && n % 100 <= 13) return '${n}th';
+    return switch (n % 10) {
+      1 => '${n}st',
+      2 => '${n}nd',
+      3 => '${n}rd',
+      _ => '${n}th',
+    };
   }
 
-  void _startRun(String name, List<CardDef> deck) {
+  /// The run gets genuinely hard at the far end rather than merely longer:
+  /// Health climbs steadily, the AI sharpens twice, and from the sixth fight
+  /// the champion opens with a board already deployed.
+  int get _foeHealth => 25 + (_wins * 3).clamp(0, 27);
+
+  AiTier get _foeTier => switch (_wins) {
+        0 => AiTier.greedy,
+        1 || 2 || 3 => AiTier.tactician,
+        _ => AiTier.strategist,
+      };
+
+  /// Champions from the sixth fight onward start with units in the arena.
+  int get _foeBoardSize => _wins >= 8
+      ? 2
+      : _wins >= 5
+          ? 1
+          : 0;
+
+  int get _winReward => SaveService.arenaGoldForWin(_wins + 1);
+
+  /// Take the fee, draft a deck, start the run.
+  ///
+  /// The fee is charged before the draft so a run cannot be started unpaid,
+  /// and refunded in full if the player backs out of the draft — they got
+  /// nothing for it, so charging them would be theft.
+  Future<void> _enterGauntlet() async {
     AudioManager.instance.tap();
+    if (!await widget.save.payArenaEntry()) return;
+    if (!mounted) return;
+
+    final deck = await Navigator.of(context).push<List<CardDef>>(
+      MaterialPageRoute(
+          builder: (_) => ArenaDraftScreen(library: widget.library)),
+    );
+    if (!mounted) return;
+
+    if (deck == null) {
+      await widget.save.addGold(SaveService.arenaEntryCost);
+      return;
+    }
+
     setState(() {
       _deck = deck;
-      _deckName = name;
+      _deckName = _draftName(deck);
       _wins = 0;
       _losses = 0;
       _runGold = 0;
@@ -87,11 +115,39 @@ class _ArenaScreenState extends State<ArenaScreen> {
     });
   }
 
+  /// Name the run after the colours it was drafted in.
+  String _draftName(List<CardDef> deck) {
+    final seen = <Dominion>{};
+    for (final card in deck) {
+      seen.addAll(card.costDominion.keys);
+    }
+    if (seen.isEmpty) return 'Drafted deck';
+    return seen.map((d) => _cap(d.name)).join(' · ');
+  }
+
   Future<void> _fight() async {
     if (_deck == null) return;
     AudioManager.instance.attack();
     final foeKey = _nextFoe.name.toUpperCase();
-    final scenario = BattleScenario(enemyHealth: _foeHealth);
+    final foeDeck = widget.library.buildStarterDeck(foeKey);
+    final foeUnits = [
+      for (final c in foeDeck)
+        if (c.type == CardType.unit) c,
+    ];
+    final scenario = BattleScenario(
+      enemyHealth: _foeHealth,
+      enemyBoard: [
+        for (var i = 0; i < _foeBoardSize && foeUnits.isNotEmpty; i++)
+          foeUnits[_rng.nextInt(foeUnits.length)],
+      ],
+      objective: 'Survive the ${_ordinal(_wins + 1)} champion.',
+      specialRules: [
+        if (_foeBoardSize > 0)
+          'The champion opens with $_foeBoardSize '
+              '${_foeBoardSize == 1 ? "unit" : "units"} already deployed.',
+        'Worth $_winReward Gold.',
+      ],
+    );
     final controller = DuelController(
       playerDeck: _deck!,
       enemyDeck: widget.library.buildStarterDeck(foeKey),
@@ -185,14 +241,35 @@ class _ArenaScreenState extends State<ArenaScreen> {
     );
   }
 
-  // ── lobby: pick a deck ────────────────────────────────────────────────
+  // ── lobby: pay, then draft ────────────────────────────────────────────
   Widget _lobbyView() {
-    final opts = _deckOptions();
+    final canPay = widget.save.canEnterArena;
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(18, 4, 18, 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(14),
+            child: AspectRatio(
+              aspectRatio: 3 / 2,
+              child: Image.asset('assets/art/ARENA-gauntlet.webp',
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => const SizedBox.shrink()),
+            ),
+          ),
+          const SizedBox(height: 14),
+          const Text(
+            'They keep no records here. No house, no dominion, no name you '
+            'arrived with — only how many you put down before somebody put '
+            'you down.',
+            style: TextStyle(
+                color: AppTheme.textMuted,
+                fontSize: 13,
+                height: 1.5,
+                fontStyle: FontStyle.italic),
+          ),
+          const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
@@ -203,62 +280,145 @@ class _ArenaScreenState extends State<ArenaScreen> {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: AppTheme.panelBorder),
             ),
-            child: const Text(
-              'Fight an endless run of champions. Each win makes the next foe '
-              'stronger and pays more gold. Three losses ends the run — reach '
-              '3, 5, or 7 wins for Shard bonuses.',
-              style: TextStyle(
-                  color: AppTheme.textMuted, fontSize: 12.5, height: 1.4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _rule('Pay ${SaveService.arenaEntryCost} Gold to enter.'),
+                _rule('Draft a deck: ${ArenaDraft.picks} picks of one card '
+                    'from three. Wellsprings are added for you.'),
+                _rule('Every win pays more than the last. The third win '
+                    'returns your entry; everything after it is profit.'),
+                _rule('Champions sharpen as you climb, and from the sixth '
+                    'they start with units already on the board.'),
+                _rule('Three losses ends the run. Reach 3, 5 or 7 wins for '
+                    'Shard bonuses.'),
+              ],
             ),
           ),
-          const SizedBox(height: 16),
-          const Text('CHOOSE YOUR DECK',
+          const SizedBox(height: 18),
+          GestureDetector(
+            onTap: canPay ? _enterGauntlet : null,
+            child: Opacity(
+              opacity: canPay ? 1 : 0.45,
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 17),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    const Color(0xFFE3B341),
+                    const Color(0xFFE3B341).withValues(alpha: 0.55),
+                  ]),
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.paid, color: Colors.black87, size: 20),
+                    const SizedBox(width: 8),
+                    Text('ENTER — ${SaveService.arenaEntryCost} GOLD',
+                        style: const TextStyle(
+                            color: Colors.black87,
+                            fontSize: 15,
+                            letterSpacing: 1.5,
+                            fontWeight: FontWeight.w900)),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Center(
+            child: Text(
+              canPay
+                  ? 'You hold ${widget.save.gold} Gold.'
+                  : 'You hold ${widget.save.gold} Gold — '
+                      '${SaveService.arenaEntryCost - widget.save.gold} short.',
+              style: TextStyle(
+                  color: canPay ? AppTheme.textMuted : AppTheme.danger,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          const SizedBox(height: 18),
+          const Text('PAYOUT PER WIN',
               style: TextStyle(
                   color: AppTheme.textMuted,
                   fontSize: 11,
                   letterSpacing: 2,
                   fontWeight: FontWeight.w800)),
           const SizedBox(height: 8),
-          for (final (name, deck) in opts)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: GestureDetector(
-                onTap: () => _startRun(name, deck),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.3),
-                    borderRadius: BorderRadius.circular(11),
-                    border: Border.all(
-                        color: const Color(0xFFC9A86A).withValues(alpha: 0.5)),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.style,
-                          color: Color(0xFFC9A86A), size: 18),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(name,
-                            style: const TextStyle(
-                                color: AppTheme.textPrimary,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700)),
-                      ),
-                      Text('${deck.length} cards',
-                          style: const TextStyle(
-                              color: AppTheme.textMuted, fontSize: 11)),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.play_arrow,
-                          color: Color(0xFF7FE0A8), size: 20),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          _payoutTable(),
         ],
       ),
     );
+  }
+
+  Widget _rule(String text) => Padding(
+        padding: const EdgeInsets.only(bottom: 7),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 5, right: 8),
+              child: Icon(Icons.circle, size: 5, color: Color(0xFFE3B341)),
+            ),
+            Expanded(
+              child: Text(text,
+                  style: const TextStyle(
+                      color: AppTheme.textMuted, fontSize: 12.5, height: 1.4)),
+            ),
+          ],
+        ),
+      );
+
+  Widget _payoutTable() {
+    var running = 0;
+    final rows = <Widget>[];
+    for (var win = 1; win <= SaveService.arenaWinGold.length; win++) {
+      final pay = SaveService.arenaGoldForWin(win);
+      running += pay;
+      final profit = running - SaveService.arenaEntryCost;
+      rows.add(Padding(
+        padding: const EdgeInsets.symmetric(vertical: 3),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 58,
+              child: Text('Win $win',
+                  style: const TextStyle(
+                      color: AppTheme.textMuted, fontSize: 12.5)),
+            ),
+            SizedBox(
+              width: 56,
+              child: Text('+$pay',
+                  style: const TextStyle(
+                      color: Color(0xFFE3B341),
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w800)),
+            ),
+            Expanded(
+              child: Text(
+                  profit == 0
+                      ? 'breaks even'
+                      : profit > 0
+                          ? '+$profit net'
+                          : '$profit net',
+                  style: TextStyle(
+                      color: profit >= 0
+                          ? const Color(0xFF7FE0A8)
+                          : AppTheme.textMuted,
+                      fontSize: 12)),
+            ),
+            if (win == 3 || win == 5 || win == 7)
+              Text('+${win >= 7 ? 300 : win >= 5 ? 150 : 60} Shards',
+                  style: const TextStyle(
+                      color: Color(0xFF9B6BD1),
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w800)),
+          ],
+        ),
+      ));
+    }
+    return Column(children: rows);
   }
 
   // ── active run ────────────────────────────────────────────────────────

@@ -22,6 +22,20 @@ class SaveService extends ChangeNotifier {
   static const chapterClearGold = 250;
   static const packCost = 100;
 
+  /// Arena entry. Priced so that a run pays for itself on the third win —
+  /// good players sustain themselves, everyone else feels the cost.
+  static const arenaEntryCost = 150;
+
+  /// Gold paid for the Nth arena win (1-indexed). Cumulative payouts:
+  /// 25 · 75 · 150 · 250 · 375 · 525 · 700 · 900 · 1125 · 1375.
+  /// Third win exactly refunds the 150 entry; everything past it is profit,
+  /// and the curve steepens where the runs get genuinely hard.
+  static const arenaWinGold = [25, 50, 75, 100, 125, 150, 175, 200, 225, 250];
+
+  static int arenaGoldForWin(int winNumber) => winNumber <= 0
+      ? 0
+      : arenaWinGold[(winNumber - 1).clamp(0, arenaWinGold.length - 1)];
+
   final SharedPreferences _prefs;
   int gold;
   int shards;
@@ -194,6 +208,17 @@ class SaveService extends ChangeNotifier {
   int copiesOf(String cardId) => owned[cardId] ?? 0;
   int get uniqueOwned => owned.keys.length;
   bool get canBuyPack => gold >= packCost;
+  bool get canEnterArena => gold >= arenaEntryCost;
+
+  /// Takes the arena entry fee. Returns false — and charges nothing — when the
+  /// player cannot afford it, so the caller can never start an unpaid run.
+  Future<bool> payArenaEntry() async {
+    if (gold < arenaEntryCost) return false;
+    gold -= arenaEntryCost;
+    await _persist();
+    notifyListeners();
+    return true;
+  }
 
   int stageOf(String chapterId) => chapterStage[chapterId] ?? 0;
   bool chapterDone(String chapterId) => chaptersDone.contains(chapterId);
