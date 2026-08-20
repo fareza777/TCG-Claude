@@ -7,27 +7,26 @@ import 'purchase_catalog.dart';
 import 'purchase_verifier.dart';
 import 'save_service.dart';
 
-/// The UI-facing state of the Google Play Gold purchase flow.
-enum GoldPurchaseState {
+/// UI-facing states for the permanent Remove Ads purchase.
+enum RemoveAdsPurchaseState {
   loading,
   ready,
   unavailable,
   purchasing,
   pending,
-  success,
+  owned,
   error,
 }
 
-/// Small adapter around the store API so the purchase flow can be tested
-/// without opening a real Google Play billing sheet.
-abstract interface class GoldStore {
+/// Small adapter around Google Play Billing for deterministic tests.
+abstract interface class RemoveAdsStore {
   Stream<List<PurchaseDetails>> get purchaseStream;
 
   Future<bool> isAvailable();
 
   Future<ProductDetailsResponse> queryProductDetails(Set<String> identifiers);
 
-  Future<bool> buyConsumable({required PurchaseParam purchaseParam});
+  Future<bool> buyNonConsumable({required PurchaseParam purchaseParam});
 
   Future<void> completePurchase(PurchaseDetails purchase);
 
@@ -35,9 +34,9 @@ abstract interface class GoldStore {
 }
 
 /// Production adapter for the Flutter in-app purchase plugin.
-class FlutterGoldStore implements GoldStore {
-  FlutterGoldStore({InAppPurchase? instance})
-      : _instance = instance ?? InAppPurchase.instance;
+class FlutterRemoveAdsStore implements RemoveAdsStore {
+  FlutterRemoveAdsStore({InAppPurchase? instance})
+    : _instance = instance ?? InAppPurchase.instance;
 
   final InAppPurchase _instance;
 
@@ -48,18 +47,13 @@ class FlutterGoldStore implements GoldStore {
   Future<bool> isAvailable() => _instance.isAvailable();
 
   @override
-  Future<ProductDetailsResponse> queryProductDetails(
-    Set<String> identifiers,
-  ) {
+  Future<ProductDetailsResponse> queryProductDetails(Set<String> identifiers) {
     return _instance.queryProductDetails(identifiers);
   }
 
   @override
-  Future<bool> buyConsumable({required PurchaseParam purchaseParam}) {
-    return _instance.buyConsumable(
-      purchaseParam: purchaseParam,
-      autoConsume: true,
-    );
+  Future<bool> buyNonConsumable({required PurchaseParam purchaseParam}) {
+    return _instance.buyNonConsumable(purchaseParam: purchaseParam);
   }
 
   @override
@@ -71,27 +65,19 @@ class FlutterGoldStore implements GoldStore {
   Future<void> restorePurchases() => _instance.restorePurchases();
 }
 
-/// Loads the Gold product and delivers completed purchases to [SaveService].
-///
-/// This iteration targets Google Play on Android. The local purchase ID ledger
-/// in [SaveService] makes repeated purchase-stream deliveries idempotent while
-/// the app is in closed testing; production server-side verification remains a
-/// separate hardening step.
-class GoldPurchaseService extends ChangeNotifier {
-  GoldPurchaseService({
+/// Loads and delivers the permanent Remove Ads Play product.
+class RemoveAdsPurchaseService extends ChangeNotifier {
+  RemoveAdsPurchaseService({
     required this.save,
-    GoldStore? store,
+    RemoveAdsStore? store,
     this.verifier,
-  }) : store = store ?? FlutterGoldStore();
+  }) : store = store ?? FlutterRemoveAdsStore();
 
   final SaveService save;
-  final GoldStore store;
-
-  /// Optional backend recorder. When absent the game still works, but a
-  /// purchase only exists on this device.
+  final RemoveAdsStore store;
   final PurchaseVerifier? verifier;
 
-  GoldPurchaseState state = GoldPurchaseState.loading;
+  RemoveAdsPurchaseState state = RemoveAdsPurchaseState.loading;
   ProductDetails? product;
   String? message;
 
@@ -99,14 +85,14 @@ class GoldPurchaseService extends ChangeNotifier {
   bool _initialized = false;
 
   bool get canBuy =>
+      !save.removeAds &&
       product != null &&
-      (state == GoldPurchaseState.ready ||
-          state == GoldPurchaseState.success ||
-          state == GoldPurchaseState.error);
+      (state == RemoveAdsPurchaseState.ready ||
+          state == RemoveAdsPurchaseState.error);
 
-  String get priceLabel => product?.price ?? 'Price unavailable';
+  String get priceLabel => product?.price ?? 'US\$4.99';
 
-  /// Subscribe before querying the catalog so a store update cannot be missed.
+  /// Subscribes before querying so a Play update cannot be missed.
   Future<void> initialize() async {
     if (_initialized) return;
     _initialized = true;
@@ -114,14 +100,14 @@ class GoldPurchaseService extends ChangeNotifier {
     _purchaseSubscription = store.purchaseStream.listen(
       (purchases) => unawaited(_handlePurchases(purchases)),
       onError: (Object error, StackTrace stackTrace) {
-        state = GoldPurchaseState.error;
+        state = RemoveAdsPurchaseState.error;
         message = 'Google Play billing encountered an error.';
         notifyListeners();
       },
     );
 
     if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) {
-      _setUnavailable('Gold purchases are available on Android only.');
+      _setUnavailable('Remove Ads is available on Android only.');
       return;
     }
 
@@ -140,81 +126,80 @@ class GoldPurchaseService extends ChangeNotifier {
       }
 
       final matches = response.productDetails
-          .where((candidate) => candidate.id == PurchaseCatalog.gold500Id)
+          .where((candidate) => candidate.id == PurchaseCatalog.removeAdsId)
           .toList(growable: false);
       if (matches.isEmpty) {
-        _setUnavailable('500 Gold is not available in Google Play yet.');
+        _setUnavailable('Remove Ads is not available in Google Play yet.');
         return;
       }
 
       product = matches.first;
-      state = GoldPurchaseState.ready;
+      state = save.removeAds
+          ? RemoveAdsPurchaseState.owned
+          : RemoveAdsPurchaseState.ready;
       message = null;
       notifyListeners();
 
-      await _recoverStrandedPurchases();
-    } catch (error) {
-      _setError('Unable to load Google Play billing: $error');
-    }
-  }
-
-  /// Re-delivers Gold that was paid for but never consumed.
-  ///
-  /// If the app dies between payment and [GoldStore.completePurchase], Google
-  /// still holds the purchase as owned, so the player can neither receive the
-  /// Gold nor buy it again. Querying past purchases pushes those back through
-  /// [GoldStore.purchaseStream] as [PurchaseStatus.restored]. A failure here is
-  /// not fatal: the catalog is already loaded and the player can still buy.
-  Future<void> _recoverStrandedPurchases() async {
-    try {
-      await store.restorePurchases();
+      await restorePurchases();
     } catch (_) {
-      // Leave the ready state intact; delivery retries on the next launch.
+      _setError('Unable to load Google Play billing.');
     }
   }
 
-  /// Starts the store checkout. Delivery is handled by [purchaseStream].
-  Future<void> buyGold() async {
+  /// Starts the non-consumable checkout. Delivery remains stream-driven.
+  Future<void> buyRemoveAds() async {
     if (!canBuy || product == null) return;
 
-    state = GoldPurchaseState.purchasing;
+    state = RemoveAdsPurchaseState.purchasing;
     message = null;
     notifyListeners();
 
     try {
-      final started = await store.buyConsumable(
+      final started = await store.buyNonConsumable(
         purchaseParam: PurchaseParam(productDetails: product!),
       );
       if (!started) {
         _setError('Google Play could not start the purchase.');
       }
-    } catch (error) {
-      _setError('Unable to start the Gold purchase: $error');
+    } catch (_) {
+      _setError('Unable to start the Remove Ads purchase.');
+    }
+  }
+
+  /// Explicit restore action from Settings.
+  Future<void> restorePurchases() async {
+    try {
+      await store.restorePurchases();
+    } catch (_) {
+      // A restore outage must not clear local ownership or disable checkout.
+      if (save.removeAds) {
+        state = RemoveAdsPurchaseState.owned;
+      } else if (product != null) {
+        state = RemoveAdsPurchaseState.ready;
+      }
+      message = 'Restore is temporarily unavailable.';
+      notifyListeners();
     }
   }
 
   Future<void> _handlePurchases(List<PurchaseDetails> purchases) async {
     for (final purchase in purchases) {
-      if (purchase.productID != PurchaseCatalog.gold500Id) continue;
+      if (purchase.productID != PurchaseCatalog.removeAdsId) continue;
 
       switch (purchase.status) {
         case PurchaseStatus.pending:
-          state = GoldPurchaseState.pending;
+          state = RemoveAdsPurchaseState.pending;
           message = 'Payment is pending confirmation from Google Play.';
           notifyListeners();
         case PurchaseStatus.canceled:
-          state = GoldPurchaseState.ready;
+          state = save.removeAds
+              ? RemoveAdsPurchaseState.owned
+              : RemoveAdsPurchaseState.ready;
           message = 'Purchase canceled.';
           notifyListeners();
         case PurchaseStatus.error:
-          state = GoldPurchaseState.error;
-          message = purchase.error?.message ?? 'Google Play purchase failed.';
-          notifyListeners();
+          _setError(purchase.error?.message ?? 'Google Play purchase failed.');
         case PurchaseStatus.restored:
-          // A consumable only stays restorable while Google still owns it, so
-          // this is a purchase that was paid for but never delivered. The
-          // purchase ID ledger keeps a second delivery from granting twice.
-          await _deliverPurchase(purchase);
         case PurchaseStatus.purchased:
           await _deliverPurchase(purchase);
       }
@@ -222,8 +207,6 @@ class GoldPurchaseService extends ChangeNotifier {
   }
 
   Future<void> _deliverPurchase(PurchaseDetails purchase) async {
-    // The token is preferred over the order ID because the backend ledger is
-    // keyed on it; the order ID rides along so either one resolves the grant.
     final token = purchase.verificationData.serverVerificationData.trim();
     final orderId = (purchase.purchaseID ?? '').trim();
     final purchaseId = token.isNotEmpty ? token : orderId;
@@ -234,7 +217,7 @@ class GoldPurchaseService extends ChangeNotifier {
     }
 
     try {
-      final granted = await save.grantPurchasedGold(
+      final granted = await save.grantRemoveAds(
         productId: purchase.productID,
         purchaseId: purchaseId,
         aliasIds: {if (orderId.isNotEmpty) orderId},
@@ -244,23 +227,20 @@ class GoldPurchaseService extends ChangeNotifier {
         await store.completePurchase(purchase);
       }
 
-      state = granted ? GoldPurchaseState.success : GoldPurchaseState.ready;
-      message = granted ? '500 Gold added to your balance.' : null;
+      state = save.removeAds
+          ? RemoveAdsPurchaseState.owned
+          : RemoveAdsPurchaseState.ready;
+      message = granted ? 'Ads removed from Shardfall.' : null;
       notifyListeners();
 
       if (granted && token.isNotEmpty) {
         await _recordWithBackend(purchase.productID, token);
       }
-    } catch (error) {
-      _setError('Gold could not be added: $error');
+    } catch (_) {
+      _setError('Remove Ads could not be applied.');
     }
   }
 
-  /// Makes a delivered purchase durable.
-  ///
-  /// The Gold is already in the player's balance by this point. If the backend
-  /// cannot be reached the purchase stays queued and the next sync retries it —
-  /// nothing is ever taken back.
   Future<void> _recordWithBackend(String productId, String token) async {
     await save.markPurchaseUnverified(productId, token);
 
@@ -277,14 +257,14 @@ class GoldPurchaseService extends ChangeNotifier {
   }
 
   void _setUnavailable(String text) {
-    state = GoldPurchaseState.unavailable;
+    state = RemoveAdsPurchaseState.unavailable;
     product = null;
     message = text;
     notifyListeners();
   }
 
   void _setError(String text) {
-    state = GoldPurchaseState.error;
+    state = RemoveAdsPurchaseState.error;
     message = text;
     notifyListeners();
   }
