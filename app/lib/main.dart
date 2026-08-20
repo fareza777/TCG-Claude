@@ -20,16 +20,21 @@ import 'packs/booster_screen.dart';
 import 'pvp/pvp_screen.dart';
 import 'progress/achievements_screen.dart';
 import 'quests/quests_screen.dart';
+import 'services/ad_service.dart';
+import 'services/ad_result_flow.dart';
 import 'services/audio_manager.dart';
 import 'services/auth_service.dart';
 import 'services/backend_config.dart';
 import 'services/cloud_sync_service.dart';
 import 'services/gold_purchase_service.dart';
+import 'services/remove_ads_purchase_service.dart';
 import 'services/save_service.dart';
 import 'splash_screen.dart';
 import 'story/story_screen.dart';
 import 'theme.dart';
 import 'tutorial/tutorial_screen.dart';
+import 'widgets/ad_banner.dart';
+import 'widgets/remove_ads_offer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +80,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   CardLibrary? _library;
   SaveService? _save;
   GoldPurchaseService? _purchases;
+  RemoveAdsPurchaseService? _removeAdsPurchases;
+  AdService? _ads;
   AuthService? _auth;
   CloudSyncService? _cloud;
 
@@ -95,6 +102,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
 
   @override
   void dispose() {
+    _ads?.dispose();
+    _removeAdsPurchases?.dispose();
     _purchases?.dispose();
     _cloud?.dispose();
     _auth?.dispose();
@@ -136,10 +145,17 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       save: save,
       verifier: cloud.verifyPurchase,
     );
+    final removeAdsPurchases = RemoveAdsPurchaseService(
+      save: save,
+      verifier: cloud.verifyPurchase,
+    );
+    final ads = AdService(save: save);
     setState(() {
       _library = library;
       _save = save;
       _purchases = purchases;
+      _removeAdsPurchases = removeAdsPurchases;
+      _ads = ads;
       _auth = auth;
       _cloud = cloud;
     });
@@ -147,6 +163,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     // prompt could surface mid-cinematic for a player who never signed in.
     auth.accountLinked = save.accountLinked;
     unawaited(purchases.initialize());
+    unawaited(removeAdsPurchases.initialize());
+    unawaited(ads.initialize().then((_) => ads.preloadInterstitial()));
     unawaited(_syncBackend(auth, cloud));
     if (mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -423,6 +441,13 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                   MotionPrefs.reduce = v;
                 },
               ),
+              if (_removeAdsPurchases != null) ...[
+                const Divider(color: AppTheme.panelBorder),
+                RemoveAdsOffer(
+                  purchaseService: _removeAdsPurchases!,
+                  save: _save!,
+                ),
+              ],
               const Divider(color: AppTheme.panelBorder),
               ListTile(
                 leading: const Icon(Icons.movie_creation_outlined,
@@ -527,7 +552,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
           TextButton(
             onPressed: () async {
               final ok = await _save!.importCode(ctrl.text.trim());
-              if (!context.mounted) return;
+              if (!mounted) return;
               Navigator.pop(context);
               CardWidget.colorblindLabels = _save!.colorblind;
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -625,6 +650,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
         ));
       }
     }
+    await showPostResultInterstitial(_ads);
   }
 
   Widget _savedDeckButton(BuildContext sheetContext, String name) {
@@ -877,7 +903,9 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute<void>(
                                 builder: (_) => StoryScreen(
-                                    library: _library!, save: _save!)),
+                                    library: _library!,
+                                    save: _save!,
+                                    adService: _ads!)),
                           ),
                         ),
                         _heroCard(
@@ -914,7 +942,9 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                               onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                     builder: (_) => CollectionScreen(
-                                        library: _library!, save: _save!)),
+                                        library: _library!,
+                                        save: _save!,
+                                        adService: _ads!)),
                               ),
                             ),
                             _tile(
@@ -947,7 +977,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         library: _library!,
                                         save: _save!,
                                         purchaseService: _purchases!,
-                                        auth: _auth!)),
+                                        auth: _auth!,
+                                        adService: _ads!)),
                               ),
                             ),
                             _tile(
@@ -957,7 +988,9 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                               onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute<void>(
                                     builder: (_) => ArenaScreen(
-                                        library: _library!, save: _save!)),
+                                        library: _library!,
+                                        save: _save!,
+                                        adService: _ads!)),
                               ),
                             ),
                             _tile(
@@ -1004,6 +1037,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                             ],
                           ),
                         ),
+                        if (_ads != null) AdBanner(adService: _ads!),
                       ],
                     ),
                   ),

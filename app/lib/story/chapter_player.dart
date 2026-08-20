@@ -4,6 +4,8 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 import '../duel/duel_controller.dart';
 import '../duel/duel_screen.dart';
 import '../duel/scenario.dart';
+import '../services/ad_service.dart';
+import '../services/ad_result_flow.dart';
 import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
@@ -14,6 +16,7 @@ class ChapterPlayerScreen extends StatefulWidget {
   final StoryChapter chapter;
   final CardLibrary library;
   final SaveService save;
+  final AdService adService;
 
   /// Stage to start at. Null → resume from saved progress.
   final int? startStage;
@@ -27,6 +30,7 @@ class ChapterPlayerScreen extends StatefulWidget {
     required this.chapter,
     required this.library,
     required this.save,
+    required this.adService,
     this.startStage,
     this.freePlay = false,
   });
@@ -100,6 +104,7 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
                   chapter: ch,
                   library: widget.library,
                   save: widget.save,
+                  adService: widget.adService,
                   stageIndex: _stage,
                   onVictory: _advance,
                   onExit: () => Navigator.of(context).pop(),
@@ -287,6 +292,7 @@ class _BattleIntro extends StatefulWidget {
   final StoryChapter chapter;
   final CardLibrary library;
   final SaveService save;
+  final AdService adService;
   final int stageIndex;
   final VoidCallback onVictory;
   final VoidCallback onExit;
@@ -297,6 +303,7 @@ class _BattleIntro extends StatefulWidget {
     required this.chapter,
     required this.library,
     required this.save,
+    required this.adService,
     required this.stageIndex,
     required this.onVictory,
     required this.onExit,
@@ -345,12 +352,14 @@ class _BattleIntroState extends State<_BattleIntro> {
       await widget.save.trackQuest('story_win');
       AudioManager.instance.reward();
       await _showVictory(reward);
+      await showPostResultInterstitial(widget.adService);
       widget.onVictory();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Defeated. Steel yourself and try again.'),
         duration: Duration(seconds: 2),
       ));
+      await showPostResultInterstitial(widget.adService);
     }
   }
 

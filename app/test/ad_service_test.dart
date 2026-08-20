@@ -7,13 +7,11 @@ import 'package:shardfall/services/ad_service.dart';
 import 'package:shardfall/services/save_service.dart';
 
 class _FakeBannerHandle implements AdBannerHandle {
-  _FakeBannerHandle({this.width = 320, this.height = 50});
+  @override
+  final int width = 320;
 
   @override
-  final int width;
-
-  @override
-  final int height;
+  final int height = 50;
 
   int disposeCalls = 0;
 
@@ -119,15 +117,16 @@ void main() {
 
     await service.initialize();
     expect(platform.initializeCalls, 1);
+    final banner = await service.loadBanner();
     expect(platform.bannerLoads, 1);
-    expect(service.banner, isNotNull);
+    expect(banner, isNotNull);
 
     await service.preloadInterstitial();
     expect(platform.interstitialLoads, 1);
     expect(await service.showInterstitialIfEligible(), isTrue);
     expect(platform.interstitial?.showCalls, 1);
     expect(platform.interstitial?.disposeCalls, 1);
-    expect(service.banner, isNotNull);
+    expect(banner, isNotNull);
   });
 
   test('does not load or show ads after Remove Ads is granted', () async {
@@ -143,7 +142,7 @@ void main() {
     await service.preloadInterstitial();
 
     expect(service.adsEnabled, isFalse);
-    expect(service.banner, isNull);
+    expect(await service.loadBanner(), isNull);
     expect(platform.bannerLoads, 0);
     expect(await service.showInterstitialIfEligible(), isFalse);
     expect(platform.interstitialLoads, 0);
@@ -161,7 +160,7 @@ void main() {
     );
 
     await service.initialize();
-    expect(service.banner, isNull);
+    expect(await service.loadBanner(), isNull);
 
     final first = _FakeInterstitialHandle();
     final second = _FakeInterstitialHandle();

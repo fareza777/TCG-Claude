@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
-import '../lib/services/purchase_catalog.dart';
-import '../lib/services/save_service.dart';
+import 'package:shardfall/services/purchase_catalog.dart';
+import 'package:shardfall/services/save_service.dart';
 
 void main() {
   const emptyLibrary = CardLibrary(byId: {}, starterDecks: {});

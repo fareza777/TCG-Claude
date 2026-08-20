@@ -6,6 +6,8 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 import '../duel/duel_controller.dart';
 import '../duel/duel_screen.dart';
 import '../duel/scenario.dart';
+import '../services/ad_service.dart';
+import '../services/ad_result_flow.dart';
 import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
@@ -17,7 +19,13 @@ import 'arena_draft_screen.dart';
 class ArenaScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
-  const ArenaScreen({super.key, required this.library, required this.save});
+  final AdService adService;
+  const ArenaScreen({
+    super.key,
+    required this.library,
+    required this.save,
+    required this.adService,
+  });
 
   @override
   State<ArenaScreen> createState() => _ArenaScreenState();
@@ -189,6 +197,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
         best: widget.save.arenaBestWins,
       ),
     );
+    await showPostResultInterstitial(widget.adService);
     if (mounted) setState(() => _runActive = false);
   }
 

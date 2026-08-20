@@ -71,7 +71,9 @@ class RemoveAdsPurchaseService extends ChangeNotifier {
     required this.save,
     RemoveAdsStore? store,
     this.verifier,
-  }) : store = store ?? FlutterRemoveAdsStore();
+  }) : store = store ?? FlutterRemoveAdsStore() {
+    save.addListener(_onSaveChanged);
+  }
 
   final SaveService save;
   final RemoveAdsStore store;
@@ -269,8 +271,20 @@ class RemoveAdsPurchaseService extends ChangeNotifier {
     notifyListeners();
   }
 
+  void _onSaveChanged() {
+    final next = save.removeAds
+        ? RemoveAdsPurchaseState.owned
+        : state == RemoveAdsPurchaseState.owned
+        ? RemoveAdsPurchaseState.ready
+        : state;
+    if (next == state) return;
+    state = next;
+    notifyListeners();
+  }
+
   @override
   void dispose() {
+    save.removeListener(_onSaveChanged);
     unawaited(_purchaseSubscription?.cancel());
     super.dispose();
   }

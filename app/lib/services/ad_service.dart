@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -151,21 +150,15 @@ class AdService extends ChangeNotifier {
   final Duration cooldown;
   final DateTime Function() now;
 
-  AdBannerHandle? _banner;
   AdInterstitialHandle? _interstitial;
-  Timer? _bannerRetryTimer;
   DateTime? _lastInterstitialAt;
   bool _initialized = false;
-  bool _loadingBanner = false;
   bool _loadingInterstitial = false;
-  int _bannerRetryCount = 0;
 
   bool get adsEnabled => AdPolicy.canShowBanner(
     removeAds: save.removeAds,
     configured: AdMobConfig.hasEffectiveUnits,
   );
-
-  AdBannerHandle? get banner => _banner;
 
   bool get _inCooldown =>
       _lastInterstitialAt != null &&
@@ -179,24 +172,18 @@ class AdService extends ChangeNotifier {
     } catch (error) {
       debugPrint('AdMob initialization deferred: $error');
     }
-    await loadBanner();
   }
 
-  Future<void> loadBanner() async {
-    if (!adsEnabled || _loadingBanner || _banner != null) return;
-    _loadingBanner = true;
+  /// Creates an independent banner for one mounted screen. A route beneath
+  /// the current route can remain mounted, so sharing one [BannerAd] between
+  /// screens would violate AdWidget's single-mount contract.
+  Future<AdBannerHandle?> loadBanner() async {
+    if (!adsEnabled) return null;
     try {
-      final loaded = await platform.loadBanner(AdMobConfig.bannerUnitId);
-      if (loaded == null) {
-        _scheduleBannerRetry();
-        return;
-      }
-      _banner?.dispose();
-      _banner = loaded;
-      _bannerRetryCount = 0;
-      notifyListeners();
-    } finally {
-      _loadingBanner = false;
+      return await platform.loadBanner(AdMobConfig.bannerUnitId);
+    } catch (error) {
+      debugPrint('Banner load skipped: $error');
+      return null;
     }
   }
 
@@ -238,36 +225,18 @@ class AdService extends ChangeNotifier {
 
   void _onSaveChanged() {
     if (save.removeAds) {
-      _banner?.dispose();
-      _banner = null;
       _interstitial?.dispose();
       _interstitial = null;
-      _bannerRetryTimer?.cancel();
-      _bannerRetryTimer = null;
       notifyListeners();
     } else if (_initialized) {
-      unawaited(loadBanner());
       unawaited(preloadInterstitial());
       notifyListeners();
     }
   }
 
-  void _scheduleBannerRetry() {
-    if (_bannerRetryTimer != null || _bannerRetryCount >= 3 || !adsEnabled) {
-      return;
-    }
-    _bannerRetryCount++;
-    _bannerRetryTimer = Timer(Duration(seconds: 5 * _bannerRetryCount), () {
-      _bannerRetryTimer = null;
-      unawaited(loadBanner());
-    });
-  }
-
   @override
   void dispose() {
     save.removeListener(_onSaveChanged);
-    _bannerRetryTimer?.cancel();
-    _banner?.dispose();
     _interstitial?.dispose();
     super.dispose();
   }

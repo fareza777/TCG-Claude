@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
+import '../services/ad_service.dart';
 import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
@@ -11,8 +12,14 @@ import 'story_data.dart';
 class StoryScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
+  final AdService adService;
 
-  const StoryScreen({super.key, required this.library, required this.save});
+  const StoryScreen({
+    super.key,
+    required this.library,
+    required this.save,
+    required this.adService,
+  });
 
   @override
   State<StoryScreen> createState() => _StoryScreenState();
@@ -88,7 +95,8 @@ class _StoryScreenState extends State<StoryScreen> {
                   builder: (_) => ChapterMapScreen(
                       chapter: ch,
                       library: widget.library,
-                      save: widget.save),
+                      save: widget.save,
+                      adService: widget.adService),
                 ));
                 setState(() {});
               }
@@ -166,12 +174,14 @@ class ChapterMapScreen extends StatefulWidget {
   final StoryChapter chapter;
   final CardLibrary library;
   final SaveService save;
+  final AdService adService;
 
   const ChapterMapScreen({
     super.key,
     required this.chapter,
     required this.library,
     required this.save,
+    required this.adService,
   });
 
   @override
@@ -194,6 +204,7 @@ class _ChapterMapScreenState extends State<ChapterMapScreen> {
         chapter: ch,
         library: widget.library,
         save: widget.save,
+        adService: widget.adService,
         startStage: stage,
         freePlay: freePlay,
       ),
