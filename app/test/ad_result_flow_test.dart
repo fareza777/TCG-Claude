@@ -33,6 +33,17 @@ class _FakePlatform implements AdPlatform {
       interstitial;
 }
 
+class _GrantedConsentPlatform implements AdConsentPlatform {
+  @override
+  Future<bool> gatherConsent() async => true;
+
+  @override
+  Future<bool> get isPrivacyOptionsRequired async => false;
+
+  @override
+  Future<void> showPrivacyOptions() async {}
+}
+
 void main() {
   const emptyLibrary = CardLibrary(byId: {}, starterDecks: {});
 
@@ -54,6 +65,7 @@ void main() {
     final service = AdService(
       save: save,
       platform: _FakePlatform(interstitial),
+      consentPlatform: _GrantedConsentPlatform(),
       cooldown: Duration.zero,
     );
 

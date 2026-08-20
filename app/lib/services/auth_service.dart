@@ -24,14 +24,15 @@ enum AuthState {
 /// keeps working from local storage alone.
 class AuthService extends ChangeNotifier {
   AuthService({this.client, GoogleSignIn? google})
-      : _google = google ?? GoogleSignIn.instance;
+    : _google = google ?? GoogleSignIn.instance;
 
   /// Injected by tests; production falls back to the shared Supabase instance.
   final SupabaseClient? client;
   final GoogleSignIn _google;
 
-  AuthState state =
-      BackendConfig.hasGoogleSignIn ? AuthState.signedOut : AuthState.disabled;
+  AuthState state = BackendConfig.hasGoogleSignIn
+      ? AuthState.signedOut
+      : AuthState.disabled;
   String? message;
 
   /// Set by the owner from the saved profile: true once the player has
@@ -45,7 +46,8 @@ class AuthService extends ChangeNotifier {
 
   SupabaseClient get _supabase => client ?? Supabase.instance.client;
 
-  User? get user => BackendConfig.hasBackend ? _supabase.auth.currentUser : null;
+  User? get user =>
+      BackendConfig.hasBackend ? _supabase.auth.currentUser : null;
 
   bool get isSignedIn => user != null;
 
@@ -155,6 +157,46 @@ class AuthService extends ChangeNotifier {
     state = AuthState.signedOut;
     message = null;
     notifyListeners();
+  }
+
+  /// Permanently removes the signed-in Supabase account and its cascaded
+  /// cloud data. The Edge Function derives the account ID from the verified
+  /// access token; the client never supplies a user ID to delete.
+  Future<bool> deleteAccount() async {
+    if (!isSignedIn) {
+      message = 'Sign in before deleting an account.';
+      notifyListeners();
+      return false;
+    }
+
+    message = null;
+    notifyListeners();
+
+    try {
+      final response = await _supabase.functions.invoke(
+        'delete-account',
+        body: const {'confirm': true},
+      );
+      if (response.status != 200) {
+        throw StateError('Account deletion returned ${response.status}.');
+      }
+
+      try {
+        await _google.signOut();
+      } catch (error) {
+        debugPrint('Google sign-out after deletion failed: $error');
+      }
+      await _supabase.auth.signOut(scope: SignOutScope.local);
+      accountLinked = false;
+      state = AuthState.signedOut;
+      message = null;
+      notifyListeners();
+      return true;
+    } catch (error) {
+      message = 'Could not delete account: $error';
+      notifyListeners();
+      return false;
+    }
   }
 
   void _fail(String text) {

@@ -19,8 +19,9 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     _ctrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 2400))
-      ..forward();
+      vsync: this,
+      duration: const Duration(milliseconds: 2400),
+    )..forward();
     _ctrl.addStatusListener((s) {
       if (s == AnimationStatus.completed && mounted) {
         Navigator.of(context).pushReplacement(
@@ -46,8 +47,11 @@ class _SplashScreenState extends State<SplashScreen>
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset('assets/ui/menu_bg.webp',
-              fit: BoxFit.cover, errorBuilder: (_, _, _) => const SizedBox()),
+          Image.asset(
+            'assets/ui/menu_bg.webp',
+            fit: BoxFit.cover,
+            errorBuilder: (_, _, _) => const SizedBox(),
+          ),
           const DecoratedBox(
             decoration: BoxDecoration(
               gradient: RadialGradient(
@@ -62,11 +66,9 @@ class _SplashScreenState extends State<SplashScreen>
               animation: _ctrl,
               builder: (context, _) {
                 final t = Curves.easeOut.transform(
-                    (_ctrl.value / 0.6).clamp(0.0, 1.0));
-                final glow = (0.5 +
-                        0.5 *
-                            (1 -
-                                (2 * (_ctrl.value - 0.5)).abs()))
+                  (_ctrl.value / 0.6).clamp(0.0, 1.0),
+                );
+                final glow = (0.5 + 0.5 * (1 - (2 * (_ctrl.value - 0.5)).abs()))
                     .clamp(0.0, 1.0);
                 return Column(
                   mainAxisSize: MainAxisSize.min,
@@ -80,18 +82,23 @@ class _SplashScreenState extends State<SplashScreen>
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                                color: const Color(0xFFC9A86A)
-                                    .withValues(alpha: 0.4 * glow),
-                                blurRadius: 40 * glow)
+                              color: const Color(
+                                0xFFC9A86A,
+                              ).withValues(alpha: 0.4 * glow),
+                              blurRadius: 40 * glow,
+                            ),
                           ],
                         ),
                         child: ClipOval(
-                          child: Image.asset('assets/ui/app_icon.png',
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, _, _) => const Icon(
-                                  Icons.auto_awesome,
-                                  color: Color(0xFFE6CE96),
-                                  size: 80)),
+                          child: Image.asset(
+                            'assets/ui/app_icon_shardfall.png',
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, _, _) => const Icon(
+                              Icons.auto_awesome,
+                              color: Color(0xFFE6CE96),
+                              size: 80,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -103,28 +110,34 @@ class _SplashScreenState extends State<SplashScreen>
                           colors: [
                             Color(0xFFF4ECD4),
                             Color(0xFFC9A86A),
-                            Color(0xFF8A713A)
+                            Color(0xFF8A713A),
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                         ).createShader(r),
-                        child: const Text('SHARDFALL',
-                            style: TextStyle(
-                                fontFamily: 'Cinzel',
-                                fontSize: 40,
-                                letterSpacing: 6,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white)),
+                        child: const Text(
+                          'SHARDFALL',
+                          style: TextStyle(
+                            fontFamily: 'Cinzel',
+                            fontSize: 40,
+                            letterSpacing: 6,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 8),
                     Opacity(
                       opacity: (t - 0.3).clamp(0.0, 1.0) / 0.7,
-                      child: const Text('THE SUNDERING',
-                          style: TextStyle(
-                              color: Color(0xFFD8CCAE),
-                              fontSize: 11,
-                              letterSpacing: 5)),
+                      child: const Text(
+                        'THE SUNDERING',
+                        style: TextStyle(
+                          color: Color(0xFFD8CCAE),
+                          fontSize: 11,
+                          letterSpacing: 5,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 40),
                     Opacity(
@@ -133,9 +146,9 @@ class _SplashScreenState extends State<SplashScreen>
                         width: 22,
                         height: 22,
                         child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation(
-                                Color(0xFFC9A86A))),
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation(Color(0xFFC9A86A)),
+                        ),
                       ),
                     ),
                   ],

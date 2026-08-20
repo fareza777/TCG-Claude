@@ -34,7 +34,9 @@ import 'story/story_screen.dart';
 import 'theme.dart';
 import 'tutorial/tutorial_screen.dart';
 import 'widgets/ad_banner.dart';
+import 'widgets/delete_account_tile.dart';
 import 'widgets/remove_ads_offer.dart';
+import 'widgets/privacy_options_tile.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -135,8 +137,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     save.addListener(() {
       if (mounted) setState(() {});
     });
-    await AudioManager.instance
-        .init(music: save.musicOn, sfx: save.sfxOn);
+    await AudioManager.instance.init(music: save.musicOn, sfx: save.sfxOn);
     CardWidget.colorblindLabels = save.colorblind;
     MotionPrefs.reduce = save.reduceMotion;
     final auth = AuthService();
@@ -169,12 +170,16 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     if (mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         if (!save.tutorialSeen) {
-          await Navigator.of(context).push(MaterialPageRoute<void>(
+          await Navigator.of(context).push(
+            MaterialPageRoute<void>(
               builder: (ctx) =>
-                  OpeningCinematic(onDone: () => Navigator.of(ctx).pop())));
+                  OpeningCinematic(onDone: () => Navigator.of(ctx).pop()),
+            ),
+          );
           if (!mounted) return;
-          await Navigator.of(context).push(MaterialPageRoute<void>(
-              builder: (_) => const TutorialScreen()));
+          await Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const TutorialScreen()),
+          );
           await save.markTutorialSeen();
         }
         if (!mounted) return;
@@ -197,7 +202,9 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     if (auth.isSignedIn || save.guestMode) return;
 
     final linked = await Navigator.of(context).push<bool>(
-      MaterialPageRoute(builder: (_) => LoginScreen(auth: auth, save: save)),
+      MaterialPageRoute(
+        builder: (_) => LoginScreen(auth: auth, save: save),
+      ),
     );
     if (linked != true || cloud == null || !mounted) return;
 
@@ -229,16 +236,21 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: AppTheme.panel,
-        title: Text(signedIn ? 'Signed in' : 'Playing as guest',
-            style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
+        title: Text(
+          signedIn ? 'Signed in' : 'Playing as guest',
+          style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16),
+        ),
         content: Text(
           signedIn
               ? '${auth.displayName ?? 'Google account'}\nPvP and Gold '
-                  'purchases are unlocked, and your progress is backed up.'
+                    'purchases are unlocked, and your progress is backed up.'
               : 'Your progress lives only on this device. Link a Google '
-                  'account to unlock PvP and Gold purchases.',
+                    'account to unlock PvP and Gold purchases.',
           style: const TextStyle(
-              color: AppTheme.textMuted, fontSize: 12, height: 1.4),
+            color: AppTheme.textMuted,
+            fontSize: 12,
+            height: 1.4,
+          ),
         ),
         actions: [
           TextButton(
@@ -278,8 +290,9 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     if (!signedIn) {
       final failure = auth.message;
       if (failure != null) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(failure)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(failure)));
       }
       return;
     }
@@ -292,15 +305,33 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     _reportSync(cloud);
   }
 
+  Future<bool> _deleteAccount() async {
+    final auth = _auth;
+    final save = _save;
+    if (auth == null || save == null || !auth.isSignedIn) return false;
+
+    final deleted = await auth.deleteAccount();
+    if (!deleted) return false;
+
+    await save.setAccountLinked(false);
+    await save.setGuestMode(true);
+    if (mounted) setState(() {});
+    return true;
+  }
+
   void _reportSync(CloudSyncService cloud) {
     if (cloud.cloudSaveConflict) {
       _showCloudConflict(cloud);
       return;
     }
     if (cloud.recoveredGold > 0) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content:
-              Text('${cloud.recoveredGold} Gold restored to your balance.')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            '${cloud.recoveredGold} Gold restored to your balance.',
+          ),
+        ),
+      );
     }
   }
 
@@ -312,12 +343,15 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       barrierDismissible: false,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: AppTheme.panel,
-        title: const Text('Two saves found',
-            style: TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
+        title: const Text(
+          'Two saves found',
+          style: TextStyle(color: AppTheme.textPrimary, fontSize: 16),
+        ),
         content: const Text(
-            'Your account already has a save, and this device has progress of '
-            'its own. Keeping one replaces the other.',
-            style: TextStyle(color: AppTheme.textMuted, fontSize: 12)),
+          'Your account already has a save, and this device has progress of '
+          'its own. Keeping one replaces the other.',
+          style: TextStyle(color: AppTheme.textMuted, fontSize: 12),
+        ),
         actions: [
           TextButton(
             onPressed: () async {
@@ -347,19 +381,24 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     final bonus = _save!.pendingDailyBonus;
     if (bonus > 0) {
       _save!.clearPendingDailyBonus();
-      messenger.showSnackBar(SnackBar(
-        content: Text(
-            'Daily login: +$bonus gold  ·  ${_save!.loginStreak}-day streak 🔥'),
-        duration: const Duration(seconds: 3),
-      ));
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            'Daily login: +$bonus gold  ·  ${_save!.loginStreak}-day streak 🔥',
+          ),
+          duration: const Duration(seconds: 3),
+        ),
+      );
     }
     for (final id in _save!.pendingAchievements) {
       final a = SaveService.achievementCatalogue[id];
       if (a != null) {
-        messenger.showSnackBar(SnackBar(
-          content: Text('🏆 ${a.$1} unlocked — +${a.$3} gold'),
-          duration: const Duration(seconds: 3),
-        ));
+        messenger.showSnackBar(
+          SnackBar(
+            content: Text('🏆 ${a.$1} unlocked — +${a.$3} gold'),
+            duration: const Duration(seconds: 3),
+          ),
+        );
       }
     }
     _save!.pendingAchievements.clear();
@@ -368,9 +407,12 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   /// Replay the opening lore cinematic from the menu.
   Future<void> _playCinematic() async {
     AudioManager.instance.tap();
-    await Navigator.of(context).push(MaterialPageRoute<void>(
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
         builder: (ctx) =>
-            OpeningCinematic(onDone: () => Navigator.of(ctx).pop())));
+            OpeningCinematic(onDone: () => Navigator.of(ctx).pop()),
+      ),
+    );
   }
 
   void _showSettings() {
@@ -378,7 +420,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       context: context,
       backgroundColor: AppTheme.panel,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
       builder: (_) => StatefulBuilder(
         builder: (context, setSheet) => Padding(
           padding: const EdgeInsets.fromLTRB(20, 18, 20, 30),
@@ -386,15 +429,20 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Settings',
-                  style: TextStyle(
-                      color: AppTheme.textPrimary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800)),
+              const Text(
+                'Settings',
+                style: TextStyle(
+                  color: AppTheme.textPrimary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
               const SizedBox(height: 10),
               SwitchListTile(
-                title: const Text('Music',
-                    style: TextStyle(color: AppTheme.textPrimary)),
+                title: const Text(
+                  'Music',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
                 value: _save!.musicOn,
                 activeThumbColor: const Color(0xFFC9A86A),
                 onChanged: (v) {
@@ -404,8 +452,10 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                 },
               ),
               SwitchListTile(
-                title: const Text('Sound effects',
-                    style: TextStyle(color: AppTheme.textPrimary)),
+                title: const Text(
+                  'Sound effects',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
                 value: _save!.sfxOn,
                 activeThumbColor: const Color(0xFFC9A86A),
                 onChanged: (v) {
@@ -416,10 +466,14 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                 },
               ),
               SwitchListTile(
-                title: const Text('Colorblind rarity labels',
-                    style: TextStyle(color: AppTheme.textPrimary)),
-                subtitle: const Text('Show C/U/R/E/L on cards',
-                    style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                title: const Text(
+                  'Colorblind rarity labels',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
+                subtitle: const Text(
+                  'Show C/U/R/E/L on cards',
+                  style: TextStyle(color: AppTheme.textMuted, fontSize: 11),
+                ),
                 value: _save!.colorblind,
                 activeThumbColor: const Color(0xFFC9A86A),
                 onChanged: (v) {
@@ -429,10 +483,14 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                 },
               ),
               SwitchListTile(
-                title: const Text('Reduce motion',
-                    style: TextStyle(color: AppTheme.textPrimary)),
-                subtitle: const Text('Fewer shakes and flying animations',
-                    style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                title: const Text(
+                  'Reduce motion',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
+                subtitle: const Text(
+                  'Fewer shakes and flying animations',
+                  style: TextStyle(color: AppTheme.textMuted, fontSize: 11),
+                ),
                 value: _save!.reduceMotion,
                 activeThumbColor: const Color(0xFFC9A86A),
                 onChanged: (v) {
@@ -448,39 +506,61 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                   save: _save!,
                 ),
               ],
+              if (_ads != null) PrivacyOptionsTile(ads: _ads!),
+              if (_auth?.isSignedIn == true)
+                DeleteAccountTile(onDelete: _deleteAccount),
               const Divider(color: AppTheme.panelBorder),
               ListTile(
-                leading: const Icon(Icons.movie_creation_outlined,
-                    color: Color(0xFFC9A86A)),
-                title: const Text('Watch opening cinematic',
-                    style: TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
-                subtitle: const Text('Replay the story of the Sundering',
-                    style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                leading: const Icon(
+                  Icons.movie_creation_outlined,
+                  color: Color(0xFFC9A86A),
+                ),
+                title: const Text(
+                  'Watch opening cinematic',
+                  style: TextStyle(color: AppTheme.textPrimary, fontSize: 14),
+                ),
+                subtitle: const Text(
+                  'Replay the story of the Sundering',
+                  style: TextStyle(color: AppTheme.textMuted, fontSize: 11),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   _playCinematic();
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.school_outlined,
-                    color: Color(0xFF9FB2BC)),
-                title: const Text('How to play',
-                    style: TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
-                subtitle: const Text('Replay the onboarding guide',
-                    style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                leading: const Icon(
+                  Icons.school_outlined,
+                  color: Color(0xFF9FB2BC),
+                ),
+                title: const Text(
+                  'How to play',
+                  style: TextStyle(color: AppTheme.textPrimary, fontSize: 14),
+                ),
+                subtitle: const Text(
+                  'Replay the onboarding guide',
+                  style: TextStyle(color: AppTheme.textMuted, fontSize: 11),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   AudioManager.instance.tap();
-                  Navigator.of(context).push(MaterialPageRoute<void>(
-                      builder: (_) => const TutorialScreen()));
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const TutorialScreen(),
+                    ),
+                  );
                 },
               ),
               ListTile(
                 leading: const Icon(Icons.backup, color: Color(0xFF9FB2BC)),
-                title: const Text('Back up / restore progress',
-                    style: TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
-                subtitle: const Text('Export or import a save code',
-                    style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                title: const Text(
+                  'Back up / restore progress',
+                  style: TextStyle(color: AppTheme.textPrimary, fontSize: 14),
+                ),
+                subtitle: const Text(
+                  'Export or import a save code',
+                  style: TextStyle(color: AppTheme.textMuted, fontSize: 11),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   _showSaveBackup();
@@ -490,20 +570,27 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                 const Divider(color: AppTheme.panelBorder),
                 ListTile(
                   leading: Icon(
-                      _auth!.isSignedIn ? Icons.cloud_done : Icons.cloud_off,
-                      color: _auth!.isSignedIn
-                          ? const Color(0xFF7FBF7F)
-                          : const Color(0xFF9FB2BC)),
+                    _auth!.isSignedIn ? Icons.cloud_done : Icons.cloud_off,
+                    color: _auth!.isSignedIn
+                        ? const Color(0xFF7FBF7F)
+                        : const Color(0xFF9FB2BC),
+                  ),
                   title: Text(
-                      _auth!.isSignedIn ? 'Sign out' : 'Sign in with Google',
-                      style: const TextStyle(
-                          color: AppTheme.textPrimary, fontSize: 14)),
+                    _auth!.isSignedIn ? 'Sign out' : 'Sign in with Google',
+                    style: const TextStyle(
+                      color: AppTheme.textPrimary,
+                      fontSize: 14,
+                    ),
+                  ),
                   subtitle: Text(
-                      _auth!.isSignedIn
-                          ? _auth!.displayName ?? 'Signed in'
-                          : 'Keeps purchased Gold if you reinstall',
-                      style: const TextStyle(
-                          color: AppTheme.textMuted, fontSize: 11)),
+                    _auth!.isSignedIn
+                        ? _auth!.displayName ?? 'Signed in'
+                        : 'Keeps purchased Gold if you reinstall',
+                    style: const TextStyle(
+                      color: AppTheme.textMuted,
+                      fontSize: 11,
+                    ),
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     unawaited(_toggleAccount());
@@ -523,20 +610,25 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: AppTheme.panel,
-        title: const Text('Back up / restore',
-            style: TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
+        title: const Text(
+          'Back up / restore',
+          style: TextStyle(color: AppTheme.textPrimary, fontSize: 16),
+        ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-                'Copy your save code to keep progress, or paste one to restore. (Cloud sync arrives with online play.)',
-                style: TextStyle(color: AppTheme.textMuted, fontSize: 12)),
+              'Copy your save code to keep progress, or paste one to restore. (Cloud sync arrives with online play.)',
+              style: TextStyle(color: AppTheme.textMuted, fontSize: 12),
+            ),
             const SizedBox(height: 12),
             TextField(
               controller: ctrl,
               maxLines: 3,
               style: const TextStyle(color: AppTheme.textPrimary, fontSize: 11),
-              decoration: const InputDecoration(hintText: 'Paste SFSAVE-... to import'),
+              decoration: const InputDecoration(
+                hintText: 'Paste SFSAVE-... to import',
+              ),
             ),
           ],
         ),
@@ -544,8 +636,9 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
           TextButton(
             onPressed: () {
               Clipboard.setData(ClipboardData(text: _save!.exportCode()));
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('Save code copied to clipboard.')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Save code copied to clipboard.')),
+              );
             },
             child: const Text('Copy my code'),
           ),
@@ -555,10 +648,13 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
               if (!mounted) return;
               Navigator.pop(context);
               CardWidget.colorblindLabels = _save!.colorblind;
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(ok
-                      ? 'Progress restored.'
-                      : 'Invalid save code.')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    ok ? 'Progress restored.' : 'Invalid save code.',
+                  ),
+                ),
+              );
               setState(() {});
             },
             child: const Text('Import'),
@@ -569,20 +665,21 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   }
 
   String _enemyNameFor(String key) => switch (key) {
-        'VERDANCE' => 'Thornmaw, Wild Patriarch',
-        'PYRE' => 'Kaelis Emberborn',
-        'TIDE' => 'Archivist Numen',
-        'DAWN' => 'Seraphel the Lightkeeper',
-        'GLOOM' => 'Ravenna Duskveil',
-        _ => 'Shardcaller',
-      };
+    'VERDANCE' => 'Thornmaw, Wild Patriarch',
+    'PYRE' => 'Kaelis Emberborn',
+    'TIDE' => 'Archivist Numen',
+    'DAWN' => 'Seraphel the Lightkeeper',
+    'GLOOM' => 'Ravenna Duskveil',
+    _ => 'Shardcaller',
+  };
 
   void _pickDominionAndDuel() {
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: AppTheme.panel,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(18))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      ),
       builder: (sheetContext) => SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(18, 18, 18, 26),
@@ -590,12 +687,15 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (_save!.decks.isNotEmpty) ...[
-                const Text('YOUR DECKS',
-                    style: TextStyle(
-                        color: AppTheme.textPrimary,
-                        fontSize: 13,
-                        letterSpacing: 3,
-                        fontWeight: FontWeight.w800)),
+                const Text(
+                  'YOUR DECKS',
+                  style: TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 13,
+                    letterSpacing: 3,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
                 const SizedBox(height: 12),
                 for (final name in _save!.decks.keys)
                   _savedDeckButton(sheetContext, name),
@@ -603,12 +703,15 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                 const Divider(color: AppTheme.panelBorder),
                 const SizedBox(height: 10),
               ],
-              const Text('OR A STARTER DOMINION',
-                  style: TextStyle(
-                      color: AppTheme.textPrimary,
-                      fontSize: 13,
-                      letterSpacing: 3,
-                      fontWeight: FontWeight.w800)),
+              const Text(
+                'OR A STARTER DOMINION',
+                style: TextStyle(
+                  color: AppTheme.textPrimary,
+                  fontSize: 13,
+                  letterSpacing: 3,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
               const SizedBox(height: 16),
               Wrap(
                 spacing: 12,
@@ -636,18 +739,24 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       enemyDeck: _library!.buildStarterDeck(enemyKey),
       firstPlayer: firstPlayer,
     );
-    final won = await Navigator.of(context).push<bool>(MaterialPageRoute(
-      builder: (_) => DuelScreen(
-          controller: controller, enemyName: _enemyNameFor(enemyKey)),
-    ));
+    final won = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) => DuelScreen(
+          controller: controller,
+          enemyName: _enemyNameFor(enemyKey),
+        ),
+      ),
+    );
     if (won == true && _save != null) {
       await _save!.addGold(SaveService.duelWinGold);
       await _save!.trackQuest('duel_win');
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Victory! +${SaveService.duelWinGold} gold'),
-          duration: const Duration(seconds: 2),
-        ));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Victory! +${SaveService.duelWinGold} gold'),
+            duration: const Duration(seconds: 2),
+          ),
+        );
       }
     }
     await showPostResultInterstitial(_ads);
@@ -669,31 +778,38 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
           color: Colors.black.withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-              color: const Color(0xFFC9A86A).withValues(alpha: 0.5)),
+            color: const Color(0xFFC9A86A).withValues(alpha: 0.5),
+          ),
         ),
         child: Row(
           children: [
-            const Icon(Icons.dashboard_customize,
-                color: Color(0xFFE6CE96), size: 18),
+            const Icon(
+              Icons.dashboard_customize,
+              color: Color(0xFFE6CE96),
+              size: 18,
+            ),
             const SizedBox(width: 12),
             Expanded(
-              child: Text(name,
-                  style: const TextStyle(
-                      color: AppTheme.textPrimary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700)),
+              child: Text(
+                name,
+                style: const TextStyle(
+                  color: AppTheme.textPrimary,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
-            Text('${ids.length} cards',
-                style:
-                    const TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+            Text(
+              '${ids.length} cards',
+              style: const TextStyle(color: AppTheme.textMuted, fontSize: 11),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _dominionButton(
-      BuildContext sheetContext, String key, Dominion dom) {
+  Widget _dominionButton(BuildContext sheetContext, String key, Dominion dom) {
     final style = DominionStyle.of(dom);
     return GestureDetector(
       onTap: () {
@@ -705,9 +821,10 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
         padding: const EdgeInsets.symmetric(vertical: 13),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: style.frame),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: style.frame,
+          ),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: style.glow.withValues(alpha: 0.5)),
         ),
@@ -715,12 +832,15 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
           children: [
             Icon(style.icon, color: style.glow, size: 28),
             const SizedBox(height: 7),
-            Text(key,
-                style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.92),
-                    fontSize: 10,
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.w800)),
+            Text(
+              key,
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.92),
+                fontSize: 10,
+                letterSpacing: 1,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
           ],
         ),
       ),
@@ -779,7 +899,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                               colors: [
                                 Color(0xFFF4ECD4),
                                 Color(0xFFC9A86A),
-                                Color(0xFF8A713A)
+                                Color(0xFF8A713A),
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
@@ -794,82 +914,112 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                 color: Colors.white,
                                 shadows: [
                                   Shadow(
-                                      color: Colors.black87,
-                                      blurRadius: 16,
-                                      offset: Offset(0, 3)),
+                                    color: Colors.black87,
+                                    blurRadius: 16,
+                                    offset: Offset(0, 3),
+                                  ),
                                 ],
                               ),
                             ),
                           ),
                         ),
                         const SizedBox(height: 4),
-                        const Text('SET I — THE SUNDERING',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(0xFFD8CCAE),
-                                fontSize: 11,
-                                letterSpacing: 4,
-                                fontWeight: FontWeight.w600,
-                                shadows: [
-                                  Shadow(color: Colors.black, blurRadius: 8)
-                                ])),
+                        const Text(
+                          'SET I — THE SUNDERING',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFFD8CCAE),
+                            fontSize: 11,
+                            letterSpacing: 4,
+                            fontWeight: FontWeight.w600,
+                            shadows: [
+                              Shadow(color: Colors.black, blurRadius: 8),
+                            ],
+                          ),
+                        ),
                         const SizedBox(height: 12),
                         Center(
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 7),
+                              horizontal: 16,
+                              vertical: 7,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.black.withValues(alpha: 0.55),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                  color: const Color(0xFFC9A86A)
-                                      .withValues(alpha: 0.6)),
+                                color: const Color(
+                                  0xFFC9A86A,
+                                ).withValues(alpha: 0.6),
+                              ),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(Icons.monetization_on,
-                                    color: Color(0xFFE3B341), size: 17),
+                                const Icon(
+                                  Icons.monetization_on,
+                                  color: Color(0xFFE3B341),
+                                  size: 17,
+                                ),
                                 const SizedBox(width: 7),
-                                Text('${_save?.gold ?? 0}',
-                                    style: const TextStyle(
-                                        color: Color(0xFFF0E4C0),
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w800)),
+                                Text(
+                                  '${_save?.gold ?? 0}',
+                                  style: const TextStyle(
+                                    color: Color(0xFFF0E4C0),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
                                 const SizedBox(width: 12),
-                                const Icon(Icons.hexagon,
-                                    color: Color(0xFF8FE3FF), size: 14),
+                                const Icon(
+                                  Icons.hexagon,
+                                  color: Color(0xFF8FE3FF),
+                                  size: 14,
+                                ),
                                 const SizedBox(width: 5),
-                                Text('${_save?.shards ?? 0}',
-                                    style: const TextStyle(
-                                        color: Color(0xFFCFEFFF),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w800)),
+                                Text(
+                                  '${_save?.shards ?? 0}',
+                                  style: const TextStyle(
+                                    color: Color(0xFFCFEFFF),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
                                 const SizedBox(width: 12),
                                 Container(
-                                    width: 1,
-                                    height: 14,
-                                    color: const Color(0x55C9A86A)),
+                                  width: 1,
+                                  height: 14,
+                                  color: const Color(0x55C9A86A),
+                                ),
                                 const SizedBox(width: 12),
-                                const Icon(Icons.style,
-                                    color: Color(0xFF9FB2BC), size: 15),
+                                const Icon(
+                                  Icons.style,
+                                  color: Color(0xFF9FB2BC),
+                                  size: 15,
+                                ),
                                 const SizedBox(width: 6),
                                 Text(
-                                    '${_save?.uniqueOwned ?? 0}/${_library?.byId.length ?? 0}',
-                                    style: const TextStyle(
-                                        color: Color(0xFFCFD6DE),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700)),
+                                  '${_save?.uniqueOwned ?? 0}/${_library?.byId.length ?? 0}',
+                                  style: const TextStyle(
+                                    color: Color(0xFFCFD6DE),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
                                 const SizedBox(width: 12),
                                 Container(
-                                    width: 1,
-                                    height: 14,
-                                    color: const Color(0x55C9A86A)),
+                                  width: 1,
+                                  height: 14,
+                                  color: const Color(0x55C9A86A),
+                                ),
                                 const SizedBox(width: 10),
                                 GestureDetector(
                                   onTap: _showSettings,
-                                  child: const Icon(Icons.settings,
-                                      color: Color(0xFF9FB2BC), size: 16),
+                                  child: const Icon(
+                                    Icons.settings,
+                                    color: Color(0xFF9FB2BC),
+                                    size: 16,
+                                  ),
                                 ),
                                 if (BackendConfig.hasGoogleSignIn) ...[
                                   const SizedBox(width: 12),
@@ -895,145 +1045,168 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                           child: ListView(
                             padding: const EdgeInsets.only(top: 56, bottom: 16),
                             children: [
-                        _heroCard(
-                          icon: Icons.auto_stories,
-                          title: 'STORY',
-                          subtitle: 'Chapter I — The Waking Grove',
-                          color: DominionStyle.of(Dominion.verdance).glow,
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                                builder: (_) => StoryScreen(
-                                    library: _library!,
-                                    save: _save!,
-                                    adService: _ads!)),
-                          ),
-                        ),
-                        _heroCard(
-                          icon: Icons.sports_kabaddi,
-                          title: 'DUEL',
-                          subtitle: 'Skirmish against the AI',
-                          color: AppTheme.danger,
-                          onTap: _pickDominionAndDuel,
-                        ),
-                        const SizedBox(height: 14),
-                        GridView.count(
-                          crossAxisCount: 3,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.92,
-                          children: [
-                            _tile(
-                              icon: Icons.assignment_turned_in,
-                              label: 'QUESTS',
-                              color: const Color(0xFFE3B341),
-                              badge: _save?.claimableQuests ?? 0,
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                    builder: (_) =>
-                                        QuestsScreen(save: _save!)),
-                              ),
-                            ),
-                            _tile(
-                              icon: Icons.style,
-                              label: 'COLLECTION',
-                              color: DominionStyle.of(Dominion.tide).glow,
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                    builder: (_) => CollectionScreen(
-                                        library: _library!,
-                                        save: _save!,
-                                        adService: _ads!)),
-                              ),
-                            ),
-                            _tile(
-                              icon: Icons.dashboard_customize,
-                              label: 'DECKS',
-                              color: DominionStyle.of(Dominion.verdance).glow,
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                    builder: (_) => DeckBuilderScreen(
-                                        library: _library!, save: _save!)),
-                              ),
-                            ),
-                            _tile(
-                              icon: Icons.hardware,
-                              label: 'FORGE',
-                              color: const Color(0xFF8FE3FF),
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                    builder: (_) => ForgeScreen(
-                                        library: _library!, save: _save!)),
-                              ),
-                            ),
-                            _tile(
-                              icon: Icons.card_giftcard,
-                              label: 'BOOSTERS',
-                              color: const Color(0xFFC9A86A),
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                    builder: (_) => BoosterScreen(
-                                        library: _library!,
-                                        save: _save!,
-                                        purchaseService: _purchases!,
-                                        auth: _auth!,
-                                        adService: _ads!)),
-                              ),
-                            ),
-                            _tile(
-                              icon: Icons.military_tech,
-                              label: 'ARENA',
-                              color: AppTheme.danger,
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                    builder: (_) => ArenaScreen(
-                                        library: _library!,
-                                        save: _save!,
-                                        adService: _ads!)),
-                              ),
-                            ),
-                            _tile(
-                              icon: Icons.sports_esports,
-                              label: 'PVP',
-                              color: const Color(0xFF8FE3FF),
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                  builder: (_) => PvpLobbyScreen(
-                                    library: _library!,
-                                    save: _save!,
-                                    auth: _auth!,
+                              _heroCard(
+                                icon: Icons.auto_stories,
+                                title: 'STORY',
+                                subtitle: 'Chapter I — The Waking Grove',
+                                color: DominionStyle.of(Dominion.verdance).glow,
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => StoryScreen(
+                                      library: _library!,
+                                      save: _save!,
+                                      adService: _ads!,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            _tile(
-                              icon: Icons.emoji_events,
-                              label: 'AWARDS',
-                              color: const Color(0xFFE3B341),
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                    builder: (_) =>
-                                        AchievementsScreen(save: _save!)),
+                              _heroCard(
+                                icon: Icons.sports_kabaddi,
+                                title: 'DUEL',
+                                subtitle: 'Skirmish against the AI',
+                                color: AppTheme.danger,
+                                onTap: _pickDominionAndDuel,
                               ),
-                            ),
-                            _tile(
-                              icon: Icons.school,
-                              label: 'HOW TO PLAY',
-                              color: DominionStyle.of(Dominion.dawn).glow,
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                    builder: (_) => const TutorialScreen()),
+                              const SizedBox(height: 14),
+                              GridView.count(
+                                crossAxisCount: 3,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: 0.92,
+                                children: [
+                                  _tile(
+                                    icon: Icons.assignment_turned_in,
+                                    label: 'QUESTS',
+                                    color: const Color(0xFFE3B341),
+                                    badge: _save?.claimableQuests ?? 0,
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) =>
+                                            QuestsScreen(save: _save!),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.style,
+                                    label: 'COLLECTION',
+                                    color: DominionStyle.of(Dominion.tide).glow,
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => CollectionScreen(
+                                          library: _library!,
+                                          save: _save!,
+                                          adService: _ads!,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.dashboard_customize,
+                                    label: 'DECKS',
+                                    color: DominionStyle.of(
+                                      Dominion.verdance,
+                                    ).glow,
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => DeckBuilderScreen(
+                                          library: _library!,
+                                          save: _save!,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.hardware,
+                                    label: 'FORGE',
+                                    color: const Color(0xFF8FE3FF),
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => ForgeScreen(
+                                          library: _library!,
+                                          save: _save!,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.card_giftcard,
+                                    label: 'BOOSTERS',
+                                    color: const Color(0xFFC9A86A),
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => BoosterScreen(
+                                          library: _library!,
+                                          save: _save!,
+                                          purchaseService: _purchases!,
+                                          auth: _auth!,
+                                          adService: _ads!,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.military_tech,
+                                    label: 'ARENA',
+                                    color: AppTheme.danger,
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => ArenaScreen(
+                                          library: _library!,
+                                          save: _save!,
+                                          adService: _ads!,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.sports_esports,
+                                    label: 'PVP',
+                                    color: const Color(0xFF8FE3FF),
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => PvpLobbyScreen(
+                                          library: _library!,
+                                          save: _save!,
+                                          auth: _auth!,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.emoji_events,
+                                    label: 'AWARDS',
+                                    color: const Color(0xFFE3B341),
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) =>
+                                            AchievementsScreen(save: _save!),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.school,
+                                    label: 'HOW TO PLAY',
+                                    color: DominionStyle.of(Dominion.dawn).glow,
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => const TutorialScreen(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        const Text('Set 1: The Sundering — PvE',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(0x779A97A8), fontSize: 10)),
-                        const SizedBox(height: 12),
+                              const SizedBox(height: 16),
+                              const Text(
+                                'Set 1: The Sundering — PvE',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0x779A97A8),
+                                  fontSize: 10,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
                             ],
                           ),
                         ),
@@ -1082,11 +1255,13 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
               height: 50,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: RadialGradient(colors: [
-                  color.withValues(alpha: 0.45),
-                  Colors.transparent
-                ]),
-                border: Border.all(color: color.withValues(alpha: 0.9), width: 1.5),
+                gradient: RadialGradient(
+                  colors: [color.withValues(alpha: 0.45), Colors.transparent],
+                ),
+                border: Border.all(
+                  color: color.withValues(alpha: 0.9),
+                  width: 1.5,
+                ),
               ),
               child: Icon(icon, color: color, size: 26),
             ),
@@ -1095,22 +1270,32 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
-                      style: const TextStyle(
-                          fontFamily: 'Cinzel',
-                          color: Colors.white,
-                          fontSize: 19,
-                          letterSpacing: 2,
-                          fontWeight: FontWeight.w700)),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontFamily: 'Cinzel',
+                      color: Colors.white,
+                      fontSize: 19,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                   const SizedBox(height: 3),
-                  Text(subtitle,
-                      style: const TextStyle(
-                          color: AppTheme.textMuted, fontSize: 12)),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      color: AppTheme.textMuted,
+                      fontSize: 12,
+                    ),
+                  ),
                 ],
               ),
             ),
-            Icon(Icons.play_circle_fill,
-                color: color.withValues(alpha: 0.85), size: 30),
+            Icon(
+              Icons.play_circle_fill,
+              color: color.withValues(alpha: 0.85),
+              size: 30,
+            ),
           ],
         ),
       ),
@@ -1154,23 +1339,27 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                     height: 44,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: RadialGradient(colors: [
-                        color.withValues(alpha: 0.35),
-                        Colors.transparent
-                      ]),
-                      border:
-                          Border.all(color: color.withValues(alpha: 0.8)),
+                      gradient: RadialGradient(
+                        colors: [
+                          color.withValues(alpha: 0.35),
+                          Colors.transparent,
+                        ],
+                      ),
+                      border: Border.all(color: color.withValues(alpha: 0.8)),
                     ),
                     child: Icon(icon, color: color, size: 22),
                   ),
                   const SizedBox(height: 9),
-                  Text(label,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10.5,
-                          letterSpacing: 0.8,
-                          fontWeight: FontWeight.w800)),
+                  Text(
+                    label,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10.5,
+                      letterSpacing: 0.8,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -1180,16 +1369,21 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                 right: 6,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 6, vertical: 1),
+                    horizontal: 6,
+                    vertical: 1,
+                  ),
                   decoration: BoxDecoration(
                     color: AppTheme.danger,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text('$badge',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w900)),
+                  child: Text(
+                    '$badge',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
                 ),
               ),
           ],

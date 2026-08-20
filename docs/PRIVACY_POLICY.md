@@ -1,10 +1,10 @@
 # Shardfall: The Sundering Privacy Policy
 
-**Last updated: August 4, 2026**
+**Last updated: August 20, 2026**
 
 F7 Developer operates Shardfall: The Sundering ("Shardfall"). This policy
 explains what information Shardfall handles when you use the optional online
-features, Google sign-in, and Google Play purchases.
+features, Google sign-in, Google Play purchases, and advertising.
 
 ## Information we handle
 
@@ -29,6 +29,18 @@ entitlement when Google Play reports a voided purchase.
 Google Play processes the payment. Shardfall does not receive or store your
 credit-card number, bank details, or Google Play payment credentials.
 
+### Advertising and consent data
+
+Shardfall uses Google Mobile Ads to display banner and interstitial ads to
+players who have not purchased Remove Ads. Depending on your location and
+privacy choices, Google Mobile Ads may process device or advertising
+identifiers, IP address, approximate location derived from IP, app
+interactions, diagnostics, and consent signals to deliver, measure, prevent
+fraud in, and personalize or limit advertising. Where required, Shardfall
+uses Google's User Messaging Platform to request consent before requesting
+ads and provides a Privacy choices entry point so consent can be reviewed or
+withdrawn.
+
 ## How we use information
 
 We use this information only to:
@@ -37,19 +49,21 @@ We use this information only to:
 - restore progress and paid Gold across supported installations;
 - verify Google Play purchases and handle refunds or chargebacks;
 - protect the purchase ledger from duplicate or replayed receipts; and
+- show and measure advertising according to applicable consent choices; and
 - respond to support requests and maintain the service.
 
-Shardfall does not contain advertising, does not sell personal information,
-and does not use personal information for targeted advertising. We do not use
-contacts, microphone, camera, precise location, health data, or browsing
-history for the game.
+Shardfall does not sell personal information. Advertising personalization,
+when available, is controlled by the consent choices presented for the
+player's region. We do not use contacts, microphone, camera, precise location,
+health data, or browsing history for the game.
 
 ## Service providers
 
 The online features rely on third-party infrastructure:
 
-- Google provides Google sign-in, Google Play Billing, and purchase status
-  information under Google's own terms and privacy policy.
+- Google provides Google sign-in, Google Play Billing, purchase status,
+  Google Mobile Ads, and User Messaging Platform consent services under
+  Google's own terms and privacy policy.
 - Supabase provides authentication, database, and server-side functions used
   to operate the Shardfall backend.
 
@@ -66,11 +80,11 @@ until you request deletion.
 ## Retention and deletion
 
 You can remove local data by clearing Shardfall's app storage or uninstalling
-the app. To request deletion of your Shardfall account and associated cloud
-save data, email **fajar.mreza@gmail.com** from the account you used to sign
-in and include "Shardfall account deletion" in the subject. We will delete the
-account data we control, except information we must retain for security,
-fraud prevention, legal, tax, or payment-record purposes.
+the app. You can permanently delete your signed-in account from Shardfall
+Settings or follow the instructions at
+<https://fareza777.github.io/shardfall/delete-account.html>. We will delete the
+account data we control, except information we must retain for security, fraud
+prevention, legal, tax, or payment-record purposes.
 
 ## Children
 

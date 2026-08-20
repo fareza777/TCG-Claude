@@ -46,6 +46,17 @@ class _AdPlatform implements AdPlatform {
       _InterstitialHandle();
 }
 
+class _GrantedConsentPlatform implements AdConsentPlatform {
+  @override
+  Future<bool> gatherConsent() async => true;
+
+  @override
+  Future<bool> get isPrivacyOptionsRequired async => false;
+
+  @override
+  Future<void> showPrivacyOptions() async {}
+}
+
 class _Store implements RemoveAdsStore {
   _Store()
     : product = ProductDetails(
@@ -98,7 +109,11 @@ void main() {
     tester,
   ) async {
     final save = await SaveService.load(emptyLibrary);
-    final ads = AdService(save: save, platform: _AdPlatform());
+    final ads = AdService(
+      save: save,
+      platform: _AdPlatform(),
+      consentPlatform: _GrantedConsentPlatform(),
+    );
     await ads.initialize();
 
     await tester.pumpWidget(

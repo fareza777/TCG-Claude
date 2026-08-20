@@ -66,6 +66,30 @@ class _FakeAdPlatform implements AdPlatform {
   }
 }
 
+class _FakeConsentPlatform implements AdConsentPlatform {
+  _FakeConsentPlatform({
+    this.canRequestAds = true,
+    this.privacyOptionsRequired = false,
+  });
+
+  bool canRequestAds;
+  bool privacyOptionsRequired;
+  int gatherCalls = 0;
+  int privacyOptionsCalls = 0;
+
+  @override
+  Future<bool> gatherConsent() async {
+    gatherCalls++;
+    return canRequestAds;
+  }
+
+  @override
+  Future<bool> get isPrivacyOptionsRequired async => privacyOptionsRequired;
+
+  @override
+  Future<void> showPrivacyOptions() async => privacyOptionsCalls++;
+}
+
 void main() {
   const emptyLibrary = CardLibrary(byId: {}, starterDecks: {});
 
@@ -112,6 +136,7 @@ void main() {
     final service = AdService(
       save: save,
       platform: platform,
+      consentPlatform: _FakeConsentPlatform(),
       cooldown: Duration.zero,
     );
 
@@ -136,7 +161,11 @@ void main() {
       purchaseId: 'remove-token',
     );
     final platform = _FakeAdPlatform();
-    final service = AdService(save: save, platform: platform);
+    final service = AdService(
+      save: save,
+      platform: platform,
+      consentPlatform: _FakeConsentPlatform(),
+    );
 
     await service.initialize();
     await service.preloadInterstitial();
@@ -155,6 +184,7 @@ void main() {
     final service = AdService(
       save: save,
       platform: platform,
+      consentPlatform: _FakeConsentPlatform(),
       cooldown: const Duration(minutes: 5),
       now: () => now,
     );
@@ -188,6 +218,7 @@ void main() {
       final service = AdService(
         save: save,
         platform: platform,
+        consentPlatform: _FakeConsentPlatform(),
         cooldown: Duration.zero,
       );
 
@@ -196,6 +227,44 @@ void main() {
 
       expect(await service.showInterstitialIfEligible(), isFalse);
       expect(failing.disposeCalls, 1);
+    },
+  );
+
+  test('does not initialize or request ads before consent allows it', () async {
+    final save = await SaveService.load(emptyLibrary);
+    final platform = _FakeAdPlatform();
+    final consent = _FakeConsentPlatform(canRequestAds: false);
+    final service = AdService(
+      save: save,
+      platform: platform,
+      consentPlatform: consent,
+    );
+
+    await service.initialize();
+    await service.preloadInterstitial();
+
+    expect(consent.gatherCalls, 1);
+    expect(platform.initializeCalls, 0);
+    expect(platform.interstitialLoads, 0);
+    expect(await service.loadBanner(), isNull);
+  });
+
+  test(
+    'exposes required privacy options and presents them on request',
+    () async {
+      final save = await SaveService.load(emptyLibrary);
+      final consent = _FakeConsentPlatform(privacyOptionsRequired: true);
+      final service = AdService(
+        save: save,
+        platform: _FakeAdPlatform(),
+        consentPlatform: consent,
+      );
+
+      await service.initialize();
+      expect(service.privacyOptionsRequired, isTrue);
+
+      await service.showPrivacyOptions();
+      expect(consent.privacyOptionsCalls, 1);
     },
   );
 }
