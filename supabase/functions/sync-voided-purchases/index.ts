@@ -1,5 +1,5 @@
-// Marks purchases Google has voided, so a refund or chargeback stops counting
-// as an entitlement.
+// Marks Google-voided Gold and permanent-entitlement purchases, so a refund or
+// chargeback stops counting as an entitlement on the next client sync.
 //
 // Meant to be called on a schedule with the service role key, not by the app.
 // The client picks the change up on its next sync and takes the Gold back.
@@ -158,18 +158,30 @@ Deno.serve(async (req: Request) => {
     { auth: { persistSession: false } },
   );
 
-  // Scoped to 'granted' so a repeat run is a no-op rather than a rewrite.
+  // Scoped to 'granted' so a repeat run is a no-op rather than a rewrite. The
+  // product is deliberately not filtered: both Gold and Remove Ads rows use
+  // the same Google purchase-token voiding boundary.
   const { data, error } = await admin
     .from("purchases")
     .update({ state: "refunded" })
     .in("purchase_token", tokens)
     .eq("state", "granted")
-    .select("purchase_token");
+    .select("purchase_token, product_id");
 
   if (error) {
     console.error("refund marking failed", error);
     return json({ error: "update_failed" }, 500);
   }
 
-  return json({ checked: tokens.length, refunded: data?.length ?? 0 });
+  return json({
+    checked: tokens.length,
+    refunded: data?.length ?? 0,
+    productIds: [
+      ...new Set(
+        (data ?? [])
+          .map((row) => row.product_id as string)
+          .filter((productId) => productId.length > 0),
+      ),
+    ],
+  });
 });

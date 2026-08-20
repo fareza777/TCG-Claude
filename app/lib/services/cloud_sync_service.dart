@@ -88,42 +88,78 @@ class CloudSyncService extends ChangeNotifier {
     try {
       final rows = await _supabase
           .from('purchases')
-          .select('product_id, purchase_token, order_id, state');
-
-      var granted = 0;
-      for (final row in rows) {
-        final token = (row['purchase_token'] as String?)?.trim() ?? '';
-        if (token.isEmpty) continue;
-
-        final productId = row['product_id'] as String;
-        final orderId = (row['order_id'] as String?)?.trim() ?? '';
-        final aliases = {if (orderId.isNotEmpty) orderId};
-
-        if (row['state'] == 'refunded') {
-          await save.revokePurchasedGold(
-            productId: productId,
-            purchaseId: token,
-            aliasIds: aliases,
-          );
-          continue;
-        }
-
-        final delivered = await save.grantPurchasedGold(
-          productId: productId,
-          purchaseId: token,
-          aliasIds: aliases,
-        );
-        if (delivered) granted++;
-      }
-
-      recoveredGold = granted * PurchaseCatalog.gold500Amount;
-      if (granted > 0) notifyListeners();
-      return granted;
+          .select('product_id, purchase_token, order_id, state, entitlement_id');
+      return applyPurchaseRows([
+        for (final row in rows) Map<String, dynamic>.from(row),
+      ]);
     } catch (error) {
       lastError = 'Could not restore purchases: $error';
       debugPrint(lastError);
       return 0;
     }
+  }
+
+  /// Applies server-authoritative purchase rows without touching the profile
+  /// conflict flow. Kept public for deterministic tests of restore/refund
+  /// reconciliation; production callers reach it through [restoreEntitlements].
+  @visibleForTesting
+  Future<int> applyPurchaseRows(Iterable<Map<String, dynamic>> rows) async {
+    var grantedGold = 0;
+    var changed = false;
+
+    for (final row in rows) {
+      final productId = (row['product_id'] as String?)?.trim() ?? '';
+      final token = (row['purchase_token'] as String?)?.trim() ?? '';
+      if (token.isEmpty) continue;
+
+      final orderId = (row['order_id'] as String?)?.trim() ?? '';
+      final aliases = {if (orderId.isNotEmpty) orderId};
+      final refunded = row['state'] == 'refunded';
+
+      if (productId == PurchaseCatalog.gold500Id) {
+        if (refunded) {
+          changed = await save.revokePurchasedGold(
+                productId: productId,
+                purchaseId: token,
+                aliasIds: aliases,
+              ) ||
+              changed;
+        } else {
+          final delivered = await save.grantPurchasedGold(
+            productId: productId,
+            purchaseId: token,
+            aliasIds: aliases,
+          );
+          if (delivered) {
+            grantedGold++;
+            changed = true;
+          }
+        }
+        continue;
+      }
+
+      if (productId == PurchaseCatalog.removeAdsId) {
+        if (refunded) {
+          changed = await save.revokeRemoveAds(
+                productId: productId,
+                purchaseId: token,
+                aliasIds: aliases,
+              ) ||
+              changed;
+        } else {
+          changed = await save.grantRemoveAds(
+                productId: productId,
+                purchaseId: token,
+                aliasIds: aliases,
+              ) ||
+              changed;
+        }
+      }
+    }
+
+    recoveredGold = grantedGold * PurchaseCatalog.gold500Amount;
+    if (changed) notifyListeners();
+    return grantedGold;
   }
 
   /// Asks the backend to verify a receipt straight from Google and record it.
