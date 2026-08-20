@@ -6,15 +6,15 @@ import 'package:flutter/foundation.dart';
 abstract final class AdMobConfig {
   static const productionAppId = String.fromEnvironment(
     'ADMOB_APP_ID',
-    defaultValue: '',
+    defaultValue: 'ca-app-pub-6279186647593327~2315466241',
   );
   static const productionBannerUnitId = String.fromEnvironment(
     'ADMOB_BANNER_UNIT_ID',
-    defaultValue: '',
+    defaultValue: 'ca-app-pub-6279186647593327/6469549858',
   );
   static const productionInterstitialUnitId = String.fromEnvironment(
     'ADMOB_INTERSTITIAL_UNIT_ID',
-    defaultValue: '',
+    defaultValue: 'ca-app-pub-6279186647593327/9807672400',
   );
 
   static const testBannerUnitId = 'ca-app-pub-3940256099942544/6300978111';
