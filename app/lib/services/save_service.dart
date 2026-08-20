@@ -94,6 +94,16 @@ class SaveService extends ChangeNotifier {
   /// existing only on this device.
   final Set<String> unverifiedPurchases = {};
 
+  /// True while at least one Google-verified Remove Ads purchase is active on
+  /// this device. The value is persisted so a completed Play purchase can
+  /// suppress ads immediately, even when the backend is temporarily offline.
+  bool removeAds = false;
+
+  /// Purchase token/order identifiers that currently support [removeAds].
+  /// Keeping every identifier makes restore and refund handling idempotent
+  /// when Play and the backend expose different aliases for one purchase.
+  final Set<String> removeAdsPurchaseIds = {};
+
   // Crafting economy (Shards).
   static const craftCost = {
     Rarity.common: 20,
@@ -136,15 +146,17 @@ class SaveService extends ChangeNotifier {
     Map<String, int> intMap(String key) {
       final s = prefs.getString(key);
       if (s == null) return {};
-      return (json.decode(s) as Map<String, dynamic>)
-          .map((k, v) => MapEntry(k, v as int));
+      return (json.decode(s) as Map<String, dynamic>).map(
+        (k, v) => MapEntry(k, v as int),
+      );
     }
 
     Map<String, List<String>> deckMap() {
       final s = prefs.getString('decks');
       if (s == null) return {};
       return (json.decode(s) as Map<String, dynamic>).map(
-          (k, v) => MapEntry(k, [for (final id in v as List) id as String]));
+        (k, v) => MapEntry(k, [for (final id in v as List) id as String]),
+      );
     }
 
     List<Map<String, dynamic>> questList() {
@@ -163,8 +175,8 @@ class SaveService extends ChangeNotifier {
       owned: intMap('owned'),
       chapterStage: intMap('chapterStage'),
       chaptersDone: (prefs.getStringList('chaptersDone') ?? const []).toSet(),
-      clearedBattles:
-          (prefs.getStringList('clearedBattles') ?? const []).toSet(),
+      clearedBattles: (prefs.getStringList('clearedBattles') ?? const [])
+          .toSet(),
       decks: deckMap(),
       quests: questList(),
       questDate: prefs.getString('questDate') ?? '',
@@ -180,14 +192,23 @@ class SaveService extends ChangeNotifier {
     service.accountLinked = prefs.getBool('accountLinked') ?? false;
     service.totalWins = prefs.getInt('totalWins') ?? 0;
     service.totalPacks = prefs.getInt('totalPacks') ?? 0;
-    service.achievements =
-        (prefs.getStringList('achievements') ?? const []).toSet();
-    service.processedPurchaseIds
-        .addAll(prefs.getStringList('processedPurchaseIds') ?? const []);
-    service.unverifiedPurchases
-        .addAll(prefs.getStringList('unverifiedPurchases') ?? const []);
-    service.revokedPurchaseIds
-        .addAll(prefs.getStringList('revokedPurchaseIds') ?? const []);
+    service.achievements = (prefs.getStringList('achievements') ?? const [])
+        .toSet();
+    service.processedPurchaseIds.addAll(
+      prefs.getStringList('processedPurchaseIds') ?? const [],
+    );
+    service.unverifiedPurchases.addAll(
+      prefs.getStringList('unverifiedPurchases') ?? const [],
+    );
+    service.revokedPurchaseIds.addAll(
+      prefs.getStringList('revokedPurchaseIds') ?? const [],
+    );
+    service.removeAdsPurchaseIds.addAll(
+      prefs.getStringList('removeAdsPurchaseIds') ?? const [],
+    );
+    service.removeAds =
+        (prefs.getBool('removeAds') ?? false) ||
+        service.removeAdsPurchaseIds.isNotEmpty;
     service.arenaBestWins = prefs.getInt('arenaBestWins') ?? 0;
     service._rollDailyQuestsIfNeeded();
     service._checkLogin();
@@ -263,10 +284,10 @@ class SaveService extends ChangeNotifier {
     required String purchaseId,
     Set<String> aliasIds = const {},
   }) async {
-    final ids = {purchaseId, ...aliasIds}
-        .map((id) => id.trim())
-        .where((id) => id.isNotEmpty)
-        .toSet();
+    final ids = {
+      purchaseId,
+      ...aliasIds,
+    }.map((id) => id.trim()).where((id) => id.isNotEmpty).toSet();
 
     if (productId != PurchaseCatalog.gold500Id || ids.isEmpty) return false;
 
@@ -302,10 +323,10 @@ class SaveService extends ChangeNotifier {
     required String purchaseId,
     Set<String> aliasIds = const {},
   }) async {
-    final ids = {purchaseId, ...aliasIds}
-        .map((id) => id.trim())
-        .where((id) => id.isNotEmpty)
-        .toSet();
+    final ids = {
+      purchaseId,
+      ...aliasIds,
+    }.map((id) => id.trim()).where((id) => id.isNotEmpty).toSet();
 
     if (productId != PurchaseCatalog.gold500Id || ids.isEmpty) return false;
     if (ids.any(revokedPurchaseIds.contains)) return false;
@@ -324,6 +345,69 @@ class SaveService extends ChangeNotifier {
     await _persist();
     notifyListeners();
     return true;
+  }
+
+  /// Delivers the permanent Remove Ads entitlement exactly once per Play
+  /// purchase identifier. A second purchase can be recorded without toggling
+  /// the visible state, which keeps cross-device reconciliation idempotent.
+  Future<bool> grantRemoveAds({
+    required String productId,
+    required String purchaseId,
+    Set<String> aliasIds = const {},
+  }) async {
+    final ids = {
+      purchaseId,
+      ...aliasIds,
+    }.map((id) => id.trim()).where((id) => id.isNotEmpty).toSet();
+
+    if (productId != PurchaseCatalog.removeAdsId || ids.isEmpty) return false;
+
+    if (ids.any(revokedPurchaseIds.contains)) {
+      final before = revokedPurchaseIds.length;
+      revokedPurchaseIds.addAll(ids);
+      if (revokedPurchaseIds.length != before) await _persist();
+      return false;
+    }
+
+    final newIds = ids.difference(removeAdsPurchaseIds);
+    if (newIds.isEmpty) return false;
+
+    final wasOwned = removeAds;
+    removeAdsPurchaseIds.addAll(newIds);
+    removeAds = true;
+    await _persist();
+    if (!wasOwned) notifyListeners();
+    return true;
+  }
+
+  /// Revokes only the supplied Remove Ads purchase identifiers. If another
+  /// active purchase remains, the entitlement stays enabled.
+  Future<bool> revokeRemoveAds({
+    required String productId,
+    required String purchaseId,
+    Set<String> aliasIds = const {},
+  }) async {
+    final ids = {
+      purchaseId,
+      ...aliasIds,
+    }.map((id) => id.trim()).where((id) => id.isNotEmpty).toSet();
+
+    if (productId != PurchaseCatalog.removeAdsId || ids.isEmpty) return false;
+
+    final wasOwned = removeAds;
+    final wasActive = ids.any(removeAdsPurchaseIds.contains);
+    final revokedBefore = revokedPurchaseIds.length;
+    revokedPurchaseIds.addAll(ids);
+    removeAdsPurchaseIds.removeAll(ids);
+    removeAds = removeAdsPurchaseIds.isNotEmpty;
+
+    final changed =
+        revokedPurchaseIds.length != revokedBefore ||
+        wasOwned != removeAds ||
+        wasActive;
+    if (changed) await _persist();
+    if (wasOwned != removeAds) notifyListeners();
+    return wasActive;
   }
 
   Future<bool> buyPack(List<CardDef> cards) async {
@@ -448,46 +532,53 @@ class SaveService extends ChangeNotifier {
   /// settings and the purchase ledger so a restored install resumes exactly
   /// where it left off and cannot re-grant Gold it already delivered.
   Map<String, dynamic> toSnapshot() => {
-        'gold': gold,
-        'shards': shards,
-        'owned': owned,
-        'chapterStage': chapterStage,
-        'chaptersDone': chaptersDone.toList(),
-        'clearedBattles': clearedBattles.toList(),
-        'decks': decks,
-        'quests': quests,
-        'questDate': questDate,
-        'tutorialSeen': tutorialSeen,
-        'musicOn': musicOn,
-        'sfxOn': sfxOn,
-        'colorblind': colorblind,
-        'reduceMotion': reduceMotion,
-        'loginStreak': loginStreak,
-        'lastLoginDate': lastLoginDate,
-        'totalWins': totalWins,
-        'totalPacks': totalPacks,
-        'achievements': achievements.toList(),
-        'arenaBestWins': arenaBestWins,
-        'processedPurchaseIds': processedPurchaseIds.toList(),
-        'unverifiedPurchases': unverifiedPurchases.toList(),
-        'revokedPurchaseIds': revokedPurchaseIds.toList(),
-      };
+    'gold': gold,
+    'shards': shards,
+    'owned': owned,
+    'chapterStage': chapterStage,
+    'chaptersDone': chaptersDone.toList(),
+    'clearedBattles': clearedBattles.toList(),
+    'decks': decks,
+    'quests': quests,
+    'questDate': questDate,
+    'tutorialSeen': tutorialSeen,
+    'musicOn': musicOn,
+    'sfxOn': sfxOn,
+    'colorblind': colorblind,
+    'reduceMotion': reduceMotion,
+    'loginStreak': loginStreak,
+    'lastLoginDate': lastLoginDate,
+    'totalWins': totalWins,
+    'totalPacks': totalPacks,
+    'achievements': achievements.toList(),
+    'arenaBestWins': arenaBestWins,
+    'processedPurchaseIds': processedPurchaseIds.toList(),
+    'unverifiedPurchases': unverifiedPurchases.toList(),
+    'revokedPurchaseIds': revokedPurchaseIds.toList(),
+    'removeAds': removeAds,
+    'removeAdsPurchaseIds': removeAdsPurchaseIds.toList(),
+  };
 
   /// Replaces the local profile with [data]. Fields missing from the snapshot
   /// keep their current value, so an older snapshot never blanks newer state.
   Future<void> applySnapshot(Map<String, dynamic> data) async {
     gold = data['gold'] as int? ?? gold;
     shards = data['shards'] as int? ?? shards;
-    owned = (data['owned'] as Map<String, dynamic>? ?? {})
-        .map((k, v) => MapEntry(k, v as int));
-    chapterStage = (data['chapterStage'] as Map<String, dynamic>? ?? {})
-        .map((k, v) => MapEntry(k, v as int));
-    chaptersDone =
-        (data['chaptersDone'] as List? ?? const []).cast<String>().toSet();
-    clearedBattles =
-        (data['clearedBattles'] as List? ?? const []).cast<String>().toSet();
+    owned = (data['owned'] as Map<String, dynamic>? ?? {}).map(
+      (k, v) => MapEntry(k, v as int),
+    );
+    chapterStage = (data['chapterStage'] as Map<String, dynamic>? ?? {}).map(
+      (k, v) => MapEntry(k, v as int),
+    );
+    chaptersDone = (data['chaptersDone'] as List? ?? const [])
+        .cast<String>()
+        .toSet();
+    clearedBattles = (data['clearedBattles'] as List? ?? const [])
+        .cast<String>()
+        .toSet();
     decks = (data['decks'] as Map<String, dynamic>? ?? {}).map(
-        (k, v) => MapEntry(k, [for (final id in v as List) id as String]));
+      (k, v) => MapEntry(k, [for (final id in v as List) id as String]),
+    );
     quests = [
       for (final q in data['quests'] as List? ?? const [])
         Map<String, dynamic>.from(q as Map),
@@ -502,8 +593,9 @@ class SaveService extends ChangeNotifier {
     lastLoginDate = data['lastLoginDate'] as String? ?? lastLoginDate;
     totalWins = data['totalWins'] as int? ?? totalWins;
     totalPacks = data['totalPacks'] as int? ?? totalPacks;
-    achievements =
-        (data['achievements'] as List? ?? const []).cast<String>().toSet();
+    achievements = (data['achievements'] as List? ?? const [])
+        .cast<String>()
+        .toSet();
     arenaBestWins = data['arenaBestWins'] as int? ?? arenaBestWins;
     // Union, never replace: an identifier this device already delivered must
     // stay known even if the snapshot predates it.
@@ -516,6 +608,14 @@ class SaveService extends ChangeNotifier {
     revokedPurchaseIds.addAll(
       (data['revokedPurchaseIds'] as List? ?? const []).cast<String>(),
     );
+    removeAdsPurchaseIds.addAll(
+      (data['removeAdsPurchaseIds'] as List? ?? const []).cast<String>(),
+    );
+    // A cloud snapshot can add a known entitlement, but it must never revoke
+    // a local Play purchase merely because the snapshot predates it.
+    if (data['removeAds'] == true || removeAdsPurchaseIds.isNotEmpty) {
+      removeAds = true;
+    }
     await _persist();
     notifyListeners();
   }
@@ -543,24 +643,31 @@ class SaveService extends ChangeNotifier {
     try {
       final raw = code.trim().replaceFirst('SFSAVE-', '');
       final data =
-          json.decode(utf8.decode(base64Url.decode(raw))) as Map<String, dynamic>;
+          json.decode(utf8.decode(base64Url.decode(raw)))
+              as Map<String, dynamic>;
       gold = data['gold'] as int? ?? gold;
       shards = data['shards'] as int? ?? shards;
-      owned = (data['owned'] as Map<String, dynamic>? ?? {})
-          .map((k, v) => MapEntry(k, v as int));
-      chapterStage = (data['chapterStage'] as Map<String, dynamic>? ?? {})
-          .map((k, v) => MapEntry(k, v as int));
-      chaptersDone =
-          (data['chaptersDone'] as List? ?? const []).cast<String>().toSet();
-      clearedBattles =
-          (data['clearedBattles'] as List? ?? const []).cast<String>().toSet();
-      decks = (data['decks'] as Map<String, dynamic>? ?? {}).map((k, v) =>
-          MapEntry(k, [for (final id in v as List) id as String]));
+      owned = (data['owned'] as Map<String, dynamic>? ?? {}).map(
+        (k, v) => MapEntry(k, v as int),
+      );
+      chapterStage = (data['chapterStage'] as Map<String, dynamic>? ?? {}).map(
+        (k, v) => MapEntry(k, v as int),
+      );
+      chaptersDone = (data['chaptersDone'] as List? ?? const [])
+          .cast<String>()
+          .toSet();
+      clearedBattles = (data['clearedBattles'] as List? ?? const [])
+          .cast<String>()
+          .toSet();
+      decks = (data['decks'] as Map<String, dynamic>? ?? {}).map(
+        (k, v) => MapEntry(k, [for (final id in v as List) id as String]),
+      );
       tutorialSeen = data['tutorialSeen'] as bool? ?? tutorialSeen;
       totalWins = data['totalWins'] as int? ?? totalWins;
       totalPacks = data['totalPacks'] as int? ?? totalPacks;
-      achievements =
-          (data['achievements'] as List? ?? const []).cast<String>().toSet();
+      achievements = (data['achievements'] as List? ?? const [])
+          .cast<String>()
+          .toSet();
       loginStreak = data['loginStreak'] as int? ?? loginStreak;
       await _persist();
       notifyListeners();
@@ -599,11 +706,41 @@ class SaveService extends ChangeNotifier {
 
   // ── daily quests ────────────────────────────────────────────────────
   static const _questPool = [
-    {'desc': 'Win 2 battles', 'event': 'battle_win', 'target': 2, 'gold': 60, 'shards': 0},
-    {'desc': 'Win 3 battles', 'event': 'battle_win', 'target': 3, 'gold': 90, 'shards': 20},
-    {'desc': 'Win a story battle', 'event': 'story_win', 'target': 1, 'gold': 80, 'shards': 0},
-    {'desc': 'Open a Shard Pack', 'event': 'pack_open', 'target': 1, 'gold': 40, 'shards': 30},
-    {'desc': 'Win a duel', 'event': 'duel_win', 'target': 1, 'gold': 40, 'shards': 0},
+    {
+      'desc': 'Win 2 battles',
+      'event': 'battle_win',
+      'target': 2,
+      'gold': 60,
+      'shards': 0,
+    },
+    {
+      'desc': 'Win 3 battles',
+      'event': 'battle_win',
+      'target': 3,
+      'gold': 90,
+      'shards': 20,
+    },
+    {
+      'desc': 'Win a story battle',
+      'event': 'story_win',
+      'target': 1,
+      'gold': 80,
+      'shards': 0,
+    },
+    {
+      'desc': 'Open a Shard Pack',
+      'event': 'pack_open',
+      'target': 1,
+      'gold': 40,
+      'shards': 30,
+    },
+    {
+      'desc': 'Win a duel',
+      'event': 'duel_win',
+      'target': 1,
+      'gold': 40,
+      'shards': 0,
+    },
   ];
 
   static String _today() {
@@ -675,8 +812,7 @@ class SaveService extends ChangeNotifier {
     notifyListeners();
   }
 
-  int get claimableQuests =>
-      quests.where(questClaimable).length;
+  int get claimableQuests => quests.where(questClaimable).length;
 
   // ── progression: login streak + achievements (#6) ─────────────────────
 
@@ -749,11 +885,22 @@ class SaveService extends ChangeNotifier {
     await _prefs.setInt('gold', gold);
     await _prefs.setInt('shards', shards);
     await _prefs.setStringList(
-        'processedPurchaseIds', processedPurchaseIds.toList());
+      'processedPurchaseIds',
+      processedPurchaseIds.toList(),
+    );
     await _prefs.setStringList(
-        'unverifiedPurchases', unverifiedPurchases.toList());
+      'unverifiedPurchases',
+      unverifiedPurchases.toList(),
+    );
     await _prefs.setStringList(
-        'revokedPurchaseIds', revokedPurchaseIds.toList());
+      'revokedPurchaseIds',
+      revokedPurchaseIds.toList(),
+    );
+    await _prefs.setBool('removeAds', removeAds);
+    await _prefs.setStringList(
+      'removeAdsPurchaseIds',
+      removeAdsPurchaseIds.toList(),
+    );
     await _prefs.setString('quests', json.encode(quests));
     await _prefs.setString('questDate', questDate);
     await _prefs.setString('owned', json.encode(owned));
@@ -783,10 +930,10 @@ class SaveService extends ChangeNotifier {
     final bonus = wins >= 7
         ? 300
         : wins >= 5
-            ? 150
-            : wins >= 3
-                ? 60
-                : 0;
+        ? 150
+        : wins >= 3
+        ? 60
+        : 0;
     shards += bonus;
     await _persist();
     notifyListeners();
