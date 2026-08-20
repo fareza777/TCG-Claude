@@ -8,11 +8,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { importPKCS8, SignJWT } from "npm:jose@5";
-
-/// Keep in sync with app/lib/services/purchase_catalog.dart.
-const GOLD_PRODUCTS: Record<string, number> = {
-  gold_500: 500,
-};
+import { PLAY_PRODUCTS } from "../_shared/purchase_catalog.ts";
 
 const ANDROID_PUBLISHER_SCOPE =
   "https://www.googleapis.com/auth/androidpublisher";
@@ -147,15 +143,15 @@ Deno.serve(async (req: Request) => {
 
   const productId = String(body.productId ?? "");
   const purchaseToken = String(body.purchaseToken ?? "").trim();
-  const goldAmount = GOLD_PRODUCTS[productId];
+  const product = PLAY_PRODUCTS[productId];
 
-  if (goldAmount === undefined) return json({ error: "unknown_product" }, 400);
+  if (product === undefined) return json({ error: "unknown_product" }, 400);
   if (!purchaseToken) return json({ error: "missing_purchase_token" }, 400);
 
   // Settle a token we have already seen before spending a Google API call.
   const { data: existing } = await admin
     .from("purchases")
-    .select("user_id, gold_amount, state")
+    .select("user_id, gold_amount, entitlement_id, state")
     .eq("purchase_token", purchaseToken)
     .maybeSingle();
 
@@ -167,6 +163,7 @@ Deno.serve(async (req: Request) => {
       granted: false,
       alreadyRecorded: true,
       goldAmount: existing.gold_amount,
+      entitlementId: existing.entitlement_id,
       state: existing.state,
     });
   }
@@ -191,18 +188,28 @@ Deno.serve(async (req: Request) => {
     product_id: productId,
     purchase_token: purchaseToken,
     order_id: receipt.orderId ?? null,
-    gold_amount: goldAmount,
+    gold_amount: product.goldAmount,
+    entitlement_id: product.entitlementId,
     raw_receipt: receipt,
   });
 
   if (insertError) {
     // 23505: a concurrent call for the same token won the race.
     if (insertError.code === "23505") {
-      return json({ granted: false, alreadyRecorded: true, goldAmount });
+      return json({
+        granted: false,
+        alreadyRecorded: true,
+        goldAmount: product.goldAmount,
+        entitlementId: product.entitlementId,
+      });
     }
     console.error("purchase insert failed", insertError);
     return json({ error: "record_failed" }, 500);
   }
 
-  return json({ granted: true, goldAmount });
+  return json({
+    granted: true,
+    goldAmount: product.goldAmount,
+    entitlementId: product.entitlementId,
+  });
 });
