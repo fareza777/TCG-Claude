@@ -94,6 +94,16 @@ class SaveService extends ChangeNotifier {
   /// existing only on this device.
   final Set<String> unverifiedPurchases = {};
 
+  /// True while at least one Google-verified Remove Ads purchase is active on
+  /// this device. The value is persisted so a completed Play purchase can
+  /// suppress ads immediately, even when the backend is temporarily offline.
+  bool removeAds = false;
+
+  /// Purchase token/order identifiers that currently support [removeAds].
+  /// Keeping every identifier makes restore and refund handling idempotent
+  /// when Play and the backend expose different aliases for one purchase.
+  final Set<String> removeAdsPurchaseIds = {};
+
   // Crafting economy (Shards).
   static const craftCost = {
     Rarity.common: 20,
@@ -188,6 +198,10 @@ class SaveService extends ChangeNotifier {
         .addAll(prefs.getStringList('unverifiedPurchases') ?? const []);
     service.revokedPurchaseIds
         .addAll(prefs.getStringList('revokedPurchaseIds') ?? const []);
+    service.removeAdsPurchaseIds
+        .addAll(prefs.getStringList('removeAdsPurchaseIds') ?? const []);
+    service.removeAds = (prefs.getBool('removeAds') ?? false) ||
+        service.removeAdsPurchaseIds.isNotEmpty;
     service.arenaBestWins = prefs.getInt('arenaBestWins') ?? 0;
     service._rollDailyQuestsIfNeeded();
     service._checkLogin();
@@ -324,6 +338,68 @@ class SaveService extends ChangeNotifier {
     await _persist();
     notifyListeners();
     return true;
+  }
+
+  /// Delivers the permanent Remove Ads entitlement exactly once per Play
+  /// purchase identifier. A second purchase can be recorded without toggling
+  /// the visible state, which keeps cross-device reconciliation idempotent.
+  Future<bool> grantRemoveAds({
+    required String productId,
+    required String purchaseId,
+    Set<String> aliasIds = const {},
+  }) async {
+    final ids = {purchaseId, ...aliasIds}
+        .map((id) => id.trim())
+        .where((id) => id.isNotEmpty)
+        .toSet();
+
+    if (productId != PurchaseCatalog.removeAdsId || ids.isEmpty) return false;
+
+    if (ids.any(revokedPurchaseIds.contains)) {
+      final before = revokedPurchaseIds.length;
+      revokedPurchaseIds.addAll(ids);
+      if (revokedPurchaseIds.length != before) await _persist();
+      return false;
+    }
+
+    final newIds = ids.difference(removeAdsPurchaseIds);
+    if (newIds.isEmpty) return false;
+
+    final wasOwned = removeAds;
+    removeAdsPurchaseIds.addAll(newIds);
+    removeAds = true;
+    await _persist();
+    if (!wasOwned) notifyListeners();
+    return true;
+  }
+
+  /// Revokes only the supplied Remove Ads purchase identifiers. If another
+  /// active purchase remains, the entitlement stays enabled.
+  Future<bool> revokeRemoveAds({
+    required String productId,
+    required String purchaseId,
+    Set<String> aliasIds = const {},
+  }) async {
+    final ids = {purchaseId, ...aliasIds}
+        .map((id) => id.trim())
+        .where((id) => id.isNotEmpty)
+        .toSet();
+
+    if (productId != PurchaseCatalog.removeAdsId || ids.isEmpty) return false;
+
+    final wasOwned = removeAds;
+    final wasActive = ids.any(removeAdsPurchaseIds.contains);
+    final revokedBefore = revokedPurchaseIds.length;
+    revokedPurchaseIds.addAll(ids);
+    removeAdsPurchaseIds.removeAll(ids);
+    removeAds = removeAdsPurchaseIds.isNotEmpty;
+
+    final changed = revokedPurchaseIds.length != revokedBefore ||
+        wasOwned != removeAds ||
+        wasActive;
+    if (changed) await _persist();
+    if (wasOwned != removeAds) notifyListeners();
+    return wasActive;
   }
 
   Future<bool> buyPack(List<CardDef> cards) async {
@@ -471,6 +547,8 @@ class SaveService extends ChangeNotifier {
         'processedPurchaseIds': processedPurchaseIds.toList(),
         'unverifiedPurchases': unverifiedPurchases.toList(),
         'revokedPurchaseIds': revokedPurchaseIds.toList(),
+        'removeAds': removeAds,
+        'removeAdsPurchaseIds': removeAdsPurchaseIds.toList(),
       };
 
   /// Replaces the local profile with [data]. Fields missing from the snapshot
@@ -516,6 +594,14 @@ class SaveService extends ChangeNotifier {
     revokedPurchaseIds.addAll(
       (data['revokedPurchaseIds'] as List? ?? const []).cast<String>(),
     );
+    removeAdsPurchaseIds.addAll(
+      (data['removeAdsPurchaseIds'] as List? ?? const []).cast<String>(),
+    );
+    // A cloud snapshot can add a known entitlement, but it must never revoke
+    // a local Play purchase merely because the snapshot predates it.
+    if (data['removeAds'] == true || removeAdsPurchaseIds.isNotEmpty) {
+      removeAds = true;
+    }
     await _persist();
     notifyListeners();
   }
@@ -754,6 +840,9 @@ class SaveService extends ChangeNotifier {
         'unverifiedPurchases', unverifiedPurchases.toList());
     await _prefs.setStringList(
         'revokedPurchaseIds', revokedPurchaseIds.toList());
+    await _prefs.setBool('removeAds', removeAds);
+    await _prefs.setStringList(
+        'removeAdsPurchaseIds', removeAdsPurchaseIds.toList());
     await _prefs.setString('quests', json.encode(quests));
     await _prefs.setString('questDate', questDate);
     await _prefs.setString('owned', json.encode(owned));
