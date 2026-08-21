@@ -165,7 +165,6 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     auth.accountLinked = save.accountLinked;
     unawaited(purchases.initialize());
     unawaited(removeAdsPurchases.initialize());
-    unawaited(ads.initialize().then((_) => ads.preloadInterstitial()));
     unawaited(_syncBackend(auth, cloud));
     if (mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -185,7 +184,19 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
         if (!mounted) return;
         await _maybeShowLogin();
         _showProgressToasts();
+        // Consent/ads must wait until this Activity is showing. Starting UMP
+        // during the cinematic used to crash the closed-test build.
+        unawaited(_startAds(ads));
       });
+    }
+  }
+
+  Future<void> _startAds(AdService ads) async {
+    try {
+      await ads.initialize();
+      await ads.preloadInterstitial();
+    } catch (error) {
+      debugPrint('Ads unavailable: $error');
     }
   }
 
@@ -506,7 +517,11 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                   save: _save!,
                 ),
               ],
-              if (_ads != null) PrivacyOptionsTile(ads: _ads!),
+              if (_ads != null)
+                ListenableBuilder(
+                  listenable: _ads!,
+                  builder: (_, _) => PrivacyOptionsTile(ads: _ads!),
+                ),
               if (_auth?.isSignedIn == true)
                 DeleteAccountTile(onDelete: _deleteAccount),
               const Divider(color: AppTheme.panelBorder),

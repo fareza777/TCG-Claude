@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
@@ -64,6 +66,17 @@ class _FakeAdPlatform implements AdPlatform {
     if (interstitialQueue.isNotEmpty) return interstitialQueue.removeAt(0);
     return interstitial ??= _FakeInterstitialHandle();
   }
+}
+
+class _HangingConsentPlatform implements AdConsentPlatform {
+  @override
+  Future<bool> gatherConsent() => Completer<bool>().future;
+
+  @override
+  Future<bool> get isPrivacyOptionsRequired async => false;
+
+  @override
+  Future<void> showPrivacyOptions() async {}
 }
 
 class _FakeConsentPlatform implements AdConsentPlatform {
@@ -247,6 +260,21 @@ void main() {
     expect(platform.initializeCalls, 0);
     expect(platform.interstitialLoads, 0);
     expect(await service.loadBanner(), isNull);
+  });
+
+  test('a hung consent prompt fails soft instead of blocking the game', () async {
+    final save = await SaveService.load(emptyLibrary);
+    final platform = _FakeAdPlatform();
+    final service = AdService(
+      save: save,
+      platform: platform,
+      consentPlatform: _HangingConsentPlatform(),
+      consentTimeout: const Duration(milliseconds: 30),
+    );
+
+    await service.initialize();
+    expect(platform.initializeCalls, 0);
+    expect(service.adsEnabled, isFalse);
   });
 
   test(

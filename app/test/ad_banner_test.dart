@@ -147,6 +147,7 @@ void main() {
     );
     expect(find.textContaining('\$4.99'), findsOneWidget);
     expect(find.text('Remove Ads'), findsOneWidget);
+    expect(find.byKey(const ValueKey('remove-ads-restore')), findsOneWidget);
 
     await tester.tap(find.byKey(const ValueKey('remove-ads-buy')));
     await tester.pump();

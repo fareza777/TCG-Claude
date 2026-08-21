@@ -132,7 +132,14 @@ class _GoogleBannerHandle implements AdBannerHandle {
   int get height => _ad.size.height;
 
   @override
-  Widget buildWidget() => AdWidget(ad: _ad);
+  Widget buildWidget() {
+    try {
+      return AdWidget(ad: _ad);
+    } catch (error) {
+      debugPrint('Ad banner widget skipped: $error');
+      return const SizedBox.shrink();
+    }
+  }
 
   @override
   void dispose() => _ad.dispose();
@@ -215,6 +222,7 @@ class AdService extends ChangeNotifier {
     AdPlatform? platform,
     AdConsentPlatform? consentPlatform,
     this.cooldown = const Duration(minutes: 2),
+    this.consentTimeout = const Duration(seconds: 12),
     DateTime Function()? now,
   }) : platform = platform ?? GoogleAdPlatform(),
        consentPlatform = consentPlatform ?? GoogleAdConsentPlatform(),
@@ -226,6 +234,7 @@ class AdService extends ChangeNotifier {
   final AdPlatform platform;
   final AdConsentPlatform consentPlatform;
   final Duration cooldown;
+  final Duration consentTimeout;
   final DateTime Function() now;
 
   AdInterstitialHandle? _interstitial;
@@ -252,8 +261,15 @@ class AdService extends ChangeNotifier {
     if (_initializationStarted) return;
     _initializationStarted = true;
     try {
-      _consentAllowsAds = await consentPlatform.gatherConsent();
-      _privacyOptionsRequired = await consentPlatform.isPrivacyOptionsRequired;
+      _consentAllowsAds = await consentPlatform.gatherConsent().timeout(
+        consentTimeout,
+        onTimeout: () {
+          debugPrint('Ad consent timed out; ads stay off for this session.');
+          return false;
+        },
+      );
+      _privacyOptionsRequired = await consentPlatform.isPrivacyOptionsRequired
+          .timeout(consentTimeout, onTimeout: () => false);
       if (!_consentAllowsAds) {
         notifyListeners();
         return;
@@ -263,6 +279,7 @@ class AdService extends ChangeNotifier {
       notifyListeners();
     } catch (error) {
       debugPrint('AdMob initialization deferred: $error');
+      notifyListeners();
     }
   }
 
