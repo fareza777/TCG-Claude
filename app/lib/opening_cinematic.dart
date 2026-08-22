@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'services/audio_manager.dart';
+import 'story/narration.dart';
+
 /// A single static-art frame with a Ken Burns pan/zoom and narration.
-class _Frame {
+class CinematicFrame {
   final String art; // asset stem under assets/art or a full asset path
   final String text;
   final bool fullPath;
   final Alignment begin;
   final Alignment end;
-  const _Frame(this.art, this.text,
+  const CinematicFrame(this.art, this.text,
       {this.fullPath = false,
       this.begin = Alignment.topLeft,
       this.end = Alignment.bottomRight});
@@ -15,30 +18,31 @@ class _Frame {
 
 // The Sundering, told in static art. All lore is original (IP-safe) and
 // matches docs/STORY.md.
-const _frames = <_Frame>[
-  _Frame('assets/ui/menu_bg.webp',
-      'A thousand years ago, the star Vael hung whole in the night — and the world of Aethyr slept beneath its light.',
+/// Public so the voice-over pipeline reads the same lines the screen shows.
+final openingFrames = <CinematicFrame>[
+  CinematicFrame('assets/ui/menu_bg.webp',
+      Narration.introLines[0],
       fullPath: true, begin: Alignment.center, end: Alignment.topCenter),
-  _Frame('SF001-211',
-      'Then it shattered. Five burning Shards fell upon the world, and where each one struck, a Dominion woke.',
+  CinematicFrame('SF001-211',
+      Narration.introLines[1],
       begin: Alignment.bottomRight, end: Alignment.topLeft),
-  _Frame('SF001-101',
-      'Where the emerald Shard fell, the forests of Sylvaris remembered how to move — and chose their wardens.',
+  CinematicFrame('SF001-101',
+      Narration.introLines[2],
       begin: Alignment.topLeft, end: Alignment.bottomRight),
-  _Frame('SF001-221',
-      'Where the crimson Shard fell, the forges of Ashmar burned a thousand years without fuel.',
+  CinematicFrame('SF001-221',
+      Narration.introLines[3],
       begin: Alignment.topRight, end: Alignment.bottomLeft),
-  _Frame('SF001-043',
-      'The cyan Shard sank beneath Meridine, into an archive of truths the tide would rather keep drowned.',
+  CinematicFrame('SF001-043',
+      Narration.introLines[4],
       begin: Alignment.bottomLeft, end: Alignment.topRight),
-  _Frame('SF001-063',
-      'The golden Shard crowned the Concord of Dawn in borrowed, blinding light.',
+  CinematicFrame('SF001-063',
+      Narration.introLines[5],
       begin: Alignment.center, end: Alignment.bottomRight),
-  _Frame('SF001-091',
-      'And the violet Shard fell into the Hollow — where something patient has been waiting ever since.',
+  CinematicFrame('SF001-091',
+      Narration.introLines[6],
       begin: Alignment.topRight, end: Alignment.center),
-  _Frame('SF001-227',
-      'Now the Shards stir again. The seals are failing. A war with no honest side begins once more.',
+  CinematicFrame('SF001-227',
+      Narration.introLines[7],
       begin: Alignment.bottomRight, end: Alignment.topLeft),
 ];
 
@@ -58,30 +62,56 @@ class _OpeningCinematicState extends State<OpeningCinematic>
   int _i = 0;
   bool _leaving = false;
 
+  /// How long a frame's Ken Burns move takes. It no longer decides when the
+  /// scene changes — the narration does.
   static const _frameMs = 5600;
+
+  /// A frame stays up at least this long even if its line is short, and never
+  /// longer than the ceiling if audio stalls or the clip is missing.
+  static const _minFrame = Duration(milliseconds: 2600);
+  static const _maxFrame = Duration(seconds: 22);
+
+  int _playToken = 0;
 
   @override
   void initState() {
     super.initState();
     _ctrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: _frameMs))
-      ..addStatusListener((s) {
-        if (s == AnimationStatus.completed) _advance();
-      })
       ..forward();
+    _playFrame();
   }
 
   @override
   void dispose() {
+    AudioManager.instance.stopVoice();
     _ctrl.dispose();
     super.dispose();
   }
 
+  /// Show a frame for as long as its narration needs, then move on.
+  Future<void> _playFrame() async {
+    final token = ++_playToken;
+    _ctrl.forward(from: 0);
+
+    final spoken = AudioManager.instance
+        .speak(Narration.clipId(Narration.introId, _i, Narration.slotBeat, 0));
+
+    await Future.any([
+      Future.wait([spoken, Future<void>.delayed(_minFrame)]),
+      Future<void>.delayed(_maxFrame),
+    ]);
+
+    // A tap (or leaving) started a different frame while we were waiting.
+    if (!mounted || _leaving || token != _playToken) return;
+    _advance();
+  }
+
   void _advance() {
     if (_leaving) return;
-    if (_i < _frames.length - 1) {
+    if (_i < openingFrames.length - 1) {
       setState(() => _i++);
-      _ctrl.forward(from: 0);
+      _playFrame();
     } else {
       _finish();
     }
@@ -90,12 +120,13 @@ class _OpeningCinematicState extends State<OpeningCinematic>
   void _finish() {
     if (_leaving) return;
     _leaving = true;
+    AudioManager.instance.stopVoice();
     widget.onDone();
   }
 
   @override
   Widget build(BuildContext context) {
-    final frame = _frames[_i];
+    final frame = openingFrames[_i];
     return Scaffold(
       backgroundColor: Colors.black,
       body: GestureDetector(
@@ -147,7 +178,7 @@ class _OpeningCinematicState extends State<OpeningCinematic>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (var j = 0; j < _frames.length; j++)
+                  for (var j = 0; j < openingFrames.length; j++)
                     Container(
                       width: j == _i ? 18 : 6,
                       height: 4,
@@ -187,7 +218,7 @@ class _OpeningCinematicState extends State<OpeningCinematic>
 }
 
 class _KenBurns extends StatelessWidget {
-  final _Frame frame;
+  final CinematicFrame frame;
   final AnimationController controller;
   const _KenBurns({super.key, required this.frame, required this.controller});
 

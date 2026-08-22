@@ -13,12 +13,34 @@ abstract final class AdPolicy {
     bool configured = true,
   }) => !removeAds && configured;
 
+  /// A brand-new player finishes their first fights uninterrupted.
+  ///
+  /// Interrupting someone in their first session is the cheapest way to lose
+  /// them, and a player who leaves on day one never sees a second impression —
+  /// let alone buys Remove Ads. The few impressions given up here are worth
+  /// less than the retention they buy.
+  static const graceBattles = 3;
+
   static bool canShowInterstitial({
     required bool removeAds,
     required bool ready,
     required bool inCooldown,
+    required int battlesPlayed,
     bool configured = true,
-  }) => !removeAds && configured && ready && !inCooldown;
+  }) =>
+      !removeAds &&
+      configured &&
+      ready &&
+      !inCooldown &&
+      battlesPlayed >= graceBattles;
+
+  /// Rewarded ads are always offered when one is ready: the player chooses to
+  /// watch, so there is nothing to protect them from. Remove Ads buyers keep
+  /// the offers — they paid to lose interruptions, not to lose free Gold.
+  static bool canOfferRewarded({
+    required bool ready,
+    bool configured = true,
+  }) => configured && ready;
 }
 
 abstract interface class AdBannerHandle {
@@ -37,12 +59,22 @@ abstract interface class AdInterstitialHandle {
   void dispose();
 }
 
+/// A rewarded video. [show] completes with true only when the player watched
+/// far enough for Google to grant the reward.
+abstract interface class AdRewardedHandle {
+  Future<bool> show();
+
+  void dispose();
+}
+
 abstract interface class AdPlatform {
   Future<void> initialize();
 
   Future<AdBannerHandle?> loadBanner(String adUnitId);
 
   Future<AdInterstitialHandle?> loadInterstitial(String adUnitId);
+
+  Future<AdRewardedHandle?> loadRewarded(String adUnitId);
 }
 
 /// Privacy boundary kept separate from ad loading so no ad request can be
@@ -157,6 +189,22 @@ class _GoogleInterstitialHandle implements AdInterstitialHandle {
   void dispose() => _ad.dispose();
 }
 
+class _GoogleRewardedHandle implements AdRewardedHandle {
+  _GoogleRewardedHandle(this._ad);
+
+  final RewardedAd _ad;
+
+  @override
+  Future<bool> show() async {
+    var earned = false;
+    await _ad.show(onUserEarnedReward: (_, _) => earned = true);
+    return earned;
+  }
+
+  @override
+  void dispose() => _ad.dispose();
+}
+
 /// Production adapter around the Google Mobile Ads SDK.
 class GoogleAdPlatform implements AdPlatform {
   @override
@@ -213,6 +261,26 @@ class GoogleAdPlatform implements AdPlatform {
     );
     return completer.future;
   }
+
+  @override
+  Future<AdRewardedHandle?> loadRewarded(String adUnitId) async {
+    final completer = Completer<AdRewardedHandle?>();
+    await RewardedAd.load(
+      adUnitId: adUnitId,
+      request: const AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad) {
+          if (!completer.isCompleted) {
+            completer.complete(_GoogleRewardedHandle(ad));
+          }
+        },
+        onAdFailedToLoad: (error) {
+          if (!completer.isCompleted) completer.complete(null);
+        },
+      ),
+    );
+    return completer.future;
+  }
 }
 
 /// Owns the SDK lifecycle and ensures an ad can never interrupt gameplay.
@@ -238,6 +306,8 @@ class AdService extends ChangeNotifier {
   final DateTime Function() now;
 
   AdInterstitialHandle? _interstitial;
+  AdRewardedHandle? _rewarded;
+  bool _loadingRewarded = false;
   DateTime? _lastInterstitialAt;
   bool _initializationStarted = false;
   bool _sdkInitialized = false;
@@ -320,12 +390,58 @@ class AdService extends ChangeNotifier {
     }
   }
 
+  /// True when a rewarded video is loaded and can be offered right now.
+  /// Callers use this to decide whether to render the offer at all.
+  bool get rewardedReady => AdPolicy.canOfferRewarded(
+        ready: _rewarded != null,
+        configured: AdMobConfig.hasRewardedUnit && _consentAllowsAds &&
+            _sdkInitialized,
+      );
+
+  /// Fetch a rewarded video ahead of time so the offer appears instantly.
+  Future<void> preloadRewarded() async {
+    if (!AdMobConfig.hasRewardedUnit) return;
+    if (!_consentAllowsAds || !_sdkInitialized) return;
+    if (_loadingRewarded || _rewarded != null) return;
+    _loadingRewarded = true;
+    try {
+      _rewarded = await platform.loadRewarded(AdMobConfig.rewardedUnitId);
+    } catch (error) {
+      debugPrint('Rewarded load skipped: $error');
+    } finally {
+      _loadingRewarded = false;
+      notifyListeners();
+    }
+  }
+
+  /// Play a rewarded video. Returns true only when the player watched enough
+  /// for Google to grant the reward, so callers can pay out on that alone.
+  ///
+  /// Note this ignores Remove Ads on purpose: that purchase removes
+  /// interruptions, not the player's ability to choose to earn something.
+  Future<bool> showRewarded() async {
+    final ad = _rewarded;
+    if (!rewardedReady || ad == null) return false;
+    _rewarded = null;
+    notifyListeners();
+    try {
+      return await ad.show();
+    } catch (error) {
+      debugPrint('Rewarded display skipped: $error');
+      return false;
+    } finally {
+      ad.dispose();
+      unawaited(preloadRewarded());
+    }
+  }
+
   Future<bool> showInterstitialIfEligible() async {
     final ad = _interstitial;
     final eligible = AdPolicy.canShowInterstitial(
       removeAds: save.removeAds,
       ready: ad != null,
       inCooldown: _inCooldown,
+      battlesPlayed: save.battlesPlayed,
       configured: AdMobConfig.hasEffectiveUnits,
     );
     if (!eligible || ad == null) return false;
@@ -359,6 +475,7 @@ class AdService extends ChangeNotifier {
   void dispose() {
     save.removeListener(_onSaveChanged);
     _interstitial?.dispose();
+    _rewarded?.dispose();
     super.dispose();
   }
 }

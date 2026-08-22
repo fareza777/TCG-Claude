@@ -137,7 +137,11 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     save.addListener(() {
       if (mounted) setState(() {});
     });
-    await AudioManager.instance.init(music: save.musicOn, sfx: save.sfxOn);
+    await AudioManager.instance.init(
+      music: save.musicOn,
+      sfx: save.sfxOn,
+      voice: save.voiceOn,
+    );
     CardWidget.colorblindLabels = save.colorblind;
     MotionPrefs.reduce = save.reduceMotion;
     final auth = AuthService();
@@ -195,6 +199,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     try {
       await ads.initialize();
       await ads.preloadInterstitial();
+      await ads.preloadRewarded();
     } catch (error) {
       debugPrint('Ads unavailable: $error');
     }
@@ -474,6 +479,23 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                   _save!.setAudio(sfx: v);
                   AudioManager.instance.setSfx(v);
                   if (v) AudioManager.instance.tap();
+                },
+              ),
+              SwitchListTile(
+                title: const Text(
+                  'Narration',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
+                subtitle: const Text(
+                  'Spoken story and dialogue',
+                  style: TextStyle(color: AppTheme.textMuted, fontSize: 12),
+                ),
+                value: _save!.voiceOn,
+                activeThumbColor: const Color(0xFFC9A86A),
+                onChanged: (v) {
+                  setSheet(() {});
+                  _save!.setAudio(voice: v);
+                  AudioManager.instance.setVoice(v);
                 },
               ),
               SwitchListTile(
@@ -1091,6 +1113,15 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                 crossAxisSpacing: 10,
                                 childAspectRatio: 0.92,
                                 children: [
+                                  if (_ads?.rewardedReady == true &&
+                                      (_save?.canClaimAdGold ?? false))
+                                    _tile(
+                                      icon: Icons.play_circle_outline,
+                                      label: 'FREE GOLD',
+                                      color: const Color(0xFF7FE0A8),
+                                      badge: _save?.adGoldClaimsLeft ?? 0,
+                                      onTap: _watchForGold,
+                                    ),
                                   _tile(
                                     icon: Icons.assignment_turned_in,
                                     label: 'QUESTS',
@@ -1099,7 +1130,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
-                                            QuestsScreen(save: _save!),
+                                            QuestsScreen(save: _save!, adService: _ads!),
                                       ),
                                     ),
                                   ),
@@ -1128,6 +1159,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => DeckBuilderScreen(
                                           library: _library!,
                                           save: _save!,
+                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1141,6 +1173,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => ForgeScreen(
                                           library: _library!,
                                           save: _save!,
+                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1196,7 +1229,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
-                                            AchievementsScreen(save: _save!),
+                                            AchievementsScreen(save: _save!, adService: _ads!),
                                       ),
                                     ),
                                   ),
@@ -1318,6 +1351,42 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   }
 
   /// Compact icon tile for the secondary actions grid.
+  /// Play a rewarded video and pay out the Gold, but only once Google
+  /// confirms the player actually watched it.
+  Future<void> _watchForGold() async {
+    final ads = _ads;
+    final save = _save;
+    if (ads == null || save == null) return;
+    AudioManager.instance.tap();
+
+    if (!save.canClaimAdGold) {
+      _toast('You have taken all of today\'s free Gold. Back tomorrow.');
+      return;
+    }
+
+    final watched = await ads.showRewarded();
+    if (!mounted) return;
+    if (!watched) {
+      _toast('No Gold this time — the video needs to finish.');
+      return;
+    }
+
+    final granted = await save.claimAdGold();
+    if (!mounted) return;
+    if (granted > 0) {
+      AudioManager.instance.reward();
+      _toast('+$granted Gold. ${save.adGoldClaimsLeft} left today.');
+    }
+  }
+
+  void _toast(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      duration: const Duration(seconds: 2),
+    ));
+  }
+
   Widget _tile({
     required IconData icon,
     required String label,

@@ -9,6 +9,7 @@ import '../services/ad_result_flow.dart';
 import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
+import 'narration.dart';
 import 'story_data.dart';
 
 /// Plays a chapter stage-by-stage: narrative dialogue and scenario battles.
@@ -139,11 +140,36 @@ class _BeatView extends StatefulWidget {
 class _BeatViewState extends State<_BeatView> {
   int _line = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _speak();
+  }
+
+  @override
+  void dispose() {
+    AudioManager.instance.stopVoice();
+    super.dispose();
+  }
+
+  /// Voice the line currently on screen. Tapping ahead cuts the previous line
+  /// off rather than letting two narrators overlap.
+  void _speak() {
+    AudioManager.instance.speak(Narration.clipId(
+      widget.chapter.id,
+      widget.stageIndex,
+      Narration.slotBeat,
+      _line,
+    ));
+  }
+
   void _next() {
     AudioManager.instance.tap();
     if (_line < widget.beat.dialogue.length - 1) {
       setState(() => _line++);
+      _speak();
     } else {
+      AudioManager.instance.stopVoice();
       widget.onDone();
     }
   }
@@ -320,9 +346,35 @@ class _BattleIntroState extends State<_BattleIntro> {
 
   bool get _preDone => _preLine >= b.preBattle.length;
 
+  @override
+  void initState() {
+    super.initState();
+    if (b.preBattle.isNotEmpty) _speakPre(0);
+  }
+
+  @override
+  void dispose() {
+    AudioManager.instance.stopVoice();
+    super.dispose();
+  }
+
+  void _speakPre(int line) {
+    AudioManager.instance.speak(Narration.clipId(
+      widget.chapter.id,
+      widget.stageIndex,
+      Narration.slotPre,
+      line,
+    ));
+  }
+
   void _tapPre() {
     AudioManager.instance.tap();
     setState(() => _preLine++);
+    if (_preLine < b.preBattle.length) {
+      _speakPre(_preLine);
+    } else {
+      AudioManager.instance.stopVoice();
+    }
   }
 
   Future<void> _fight() async {
@@ -368,7 +420,12 @@ class _BattleIntroState extends State<_BattleIntro> {
     await showDialog<void>(
       context: context,
       barrierDismissible: false,
-      builder: (_) => _VictoryDialog(lines: b.victory, reward: reward),
+      builder: (_) => _VictoryDialog(
+        lines: b.victory,
+        reward: reward,
+        chapterId: widget.chapter.id,
+        stageIndex: widget.stageIndex,
+      ),
     );
   }
 
@@ -616,7 +673,14 @@ class _BattleIntroState extends State<_BattleIntro> {
 class _VictoryDialog extends StatefulWidget {
   final List<DialogueLine> lines;
   final int reward;
-  const _VictoryDialog({required this.lines, required this.reward});
+  final String chapterId;
+  final int stageIndex;
+  const _VictoryDialog({
+    required this.lines,
+    required this.reward,
+    required this.chapterId,
+    required this.stageIndex,
+  });
 
   @override
   State<_VictoryDialog> createState() => _VictoryDialogState();
@@ -624,6 +688,27 @@ class _VictoryDialog extends StatefulWidget {
 
 class _VictoryDialogState extends State<_VictoryDialog> {
   int _i = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _speak();
+  }
+
+  @override
+  void dispose() {
+    AudioManager.instance.stopVoice();
+    super.dispose();
+  }
+
+  void _speak() {
+    AudioManager.instance.speak(Narration.clipId(
+      widget.chapterId,
+      widget.stageIndex,
+      Narration.slotVictory,
+      _i,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -681,9 +766,11 @@ class _VictoryDialogState extends State<_VictoryDialog> {
                   onTap: () {
                     AudioManager.instance.tap();
                     if (last) {
+                      AudioManager.instance.stopVoice();
                       Navigator.of(context).pop();
                     } else {
                       setState(() => _i++);
+                      _speak();
                     }
                   },
                   child: Container(

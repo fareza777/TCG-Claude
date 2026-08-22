@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 
 /// Central audio: looping ambient music + one-shot SFX. Toggled by the
@@ -11,8 +13,15 @@ class AudioManager {
       List.generate(4, (_) => AudioPlayer());
   int _sfxIndex = 0;
 
+  /// Narration gets its own player: a spoken line must interrupt the previous
+  /// line cleanly when the player taps ahead, which a shared SFX pool cannot do.
+  final AudioPlayer _voice = AudioPlayer();
+  bool _speaking = false;
+  Completer<void>? _voiceDone;
+
   bool musicOn = true;
   bool sfxOn = true;
+  bool voiceOn = true;
   bool _musicPlaying = false;
   bool _musicPaused = false;
 
@@ -20,13 +29,20 @@ class AudioManager {
   /// or 'battle_ambient' (duels). Falls back to 'ambient' if a file is missing.
   String _currentTrack = 'ambient';
 
-  Future<void> init({required bool music, required bool sfx}) async {
+  Future<void> init({
+    required bool music,
+    required bool sfx,
+    bool voice = true,
+  }) async {
     musicOn = music;
     sfxOn = sfx;
+    voiceOn = voice;
     await _music.setReleaseMode(ReleaseMode.loop);
     for (final p in _sfxPool) {
       await p.setReleaseMode(ReleaseMode.stop);
     }
+    await _voice.setReleaseMode(ReleaseMode.stop);
+    _voice.onPlayerComplete.listen((_) => _endSpeech());
     if (musicOn) await startMusic();
   }
 
@@ -125,6 +141,67 @@ class AudioManager {
       await player.stop();
       await player.setVolume(volume);
       await player.play(AssetSource('audio/$name.wav'));
+    } catch (_) {}
+  }
+
+  Future<void> setVoice(bool on) async {
+    voiceOn = on;
+    if (!on) await stopVoice();
+  }
+
+  /// Speak one narration clip, replacing whatever was being said.
+  ///
+  /// Returns a future that completes when the line has finished — callers that
+  /// pace themselves by the voice (the opening cinematic) await it, so a scene
+  /// can never cut its own narration off mid-sentence. Callers the player
+  /// paces themselves (story beats) simply ignore it.
+  ///
+  /// A missing file is not an error the player should ever see: the campaign
+  /// stays fully playable in silence, so an ungenerated line just reads, and
+  /// the future completes immediately so nothing waits on silence.
+  Future<void> speak(String clipId) async {
+    if (!voiceOn) return;
+    _resolveVoiceDone();
+    final done = Completer<void>();
+    _voiceDone = done;
+    try {
+      await _voice.stop();
+      await _duckMusic(true);
+      _speaking = true;
+      await _voice.play(AssetSource('vo/$clipId.mp3'));
+    } catch (_) {
+      await _endSpeech();
+      return;
+    }
+    return done.future;
+  }
+
+  void _resolveVoiceDone() {
+    final pending = _voiceDone;
+    _voiceDone = null;
+    if (pending != null && !pending.isCompleted) pending.complete();
+  }
+
+  Future<void> stopVoice() async {
+    try {
+      await _voice.stop();
+    } catch (_) {}
+    await _endSpeech();
+  }
+
+  Future<void> _endSpeech() async {
+    _resolveVoiceDone();
+    if (!_speaking) return;
+    _speaking = false;
+    await _duckMusic(false);
+  }
+
+  /// Pull the ambient bed down while someone is talking, so the line stays
+  /// intelligible on a phone speaker.
+  Future<void> _duckMusic(bool down) async {
+    if (!musicOn) return;
+    try {
+      await _music.setVolume(down ? 0.25 : 1.0);
     } catch (_) {}
   }
 

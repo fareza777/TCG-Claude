@@ -16,6 +16,12 @@ class _NoopAdPlatform implements AdPlatform {
 
   @override
   Future<AdInterstitialHandle?> loadInterstitial(String adUnitId) async => null;
+
+  @override
+  Future<AdRewardedHandle?> loadRewarded(String adUnitId) async => rewarded;
+
+  /// Set by tests that exercise the rewarded path; null means "none loaded".
+  AdRewardedHandle? rewarded;
 }
 
 class _ConsentPlatform implements AdConsentPlatform {

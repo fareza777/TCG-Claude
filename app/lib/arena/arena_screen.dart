@@ -13,6 +13,7 @@ import '../services/save_service.dart';
 import '../theme.dart';
 import 'arena_draft.dart';
 import 'arena_draft_screen.dart';
+import '../widgets/ad_banner.dart';
 
 /// The Proving Gauntlet: choose a deck, then fight an escalating run of AI
 /// champions. Three losses ends the run; rewards scale with your win streak.
@@ -43,6 +44,9 @@ class _ArenaScreenState extends State<ArenaScreen> {
   late Dominion _nextFoe;
 
   static const _maxLosses = 3;
+
+  /// One rewarded revive per run. More than that turns a rescue into a grind.
+  bool _usedRevive = false;
 
   @override
   void initState() {
@@ -119,6 +123,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
       _losses = 0;
       _runGold = 0;
       _runActive = true;
+      _usedRevive = false;
       _nextFoe = _rollDominion();
     });
   }
@@ -178,10 +183,63 @@ class _ArenaScreenState extends State<ArenaScreen> {
       _losses += 1;
     }
     if (_losses >= _maxLosses) {
+      if (!_usedRevive && widget.adService.rewardedReady) {
+        final revived = await _offerRevive();
+        if (!mounted) return;
+        if (revived) {
+          setState(() {
+            _usedRevive = true;
+            _losses -= 1;
+          });
+          return;
+        }
+      }
       await _endRun();
     } else {
       setState(() {});
     }
+  }
+
+  /// Ask whether the player wants to trade an ad for one more life. Returns
+  /// true only once Google confirms they actually watched it — a player who
+  /// backs out of the video keeps their run ended, and sees no charge.
+  Future<bool> _offerRevive() async {
+    final wantsAd = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppTheme.panel,
+        title: const Text('One more life?',
+            style: TextStyle(
+                fontFamily: 'Cinzel',
+                color: AppTheme.textPrimary,
+                fontSize: 19)),
+        content: Text(
+          'Your run ends here at $_wins '
+          '${_wins == 1 ? "win" : "wins"} and $_runGold Gold.\n\n'
+          'Watch a short video to keep going with one life left.',
+          style: const TextStyle(
+              color: AppTheme.textMuted, fontSize: 13.5, height: 1.45),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('End run',
+                style: TextStyle(color: AppTheme.textMuted)),
+          ),
+          FilledButton.icon(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            icon: const Icon(Icons.play_circle_outline, size: 18),
+            style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFFE3B341),
+                foregroundColor: Colors.black87),
+            label: const Text('Watch & continue'),
+          ),
+        ],
+      ),
+    );
+    if (wantsAd != true) return false;
+    return widget.adService.showRewarded();
   }
 
   Future<void> _endRun() async {
@@ -204,6 +262,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(

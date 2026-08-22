@@ -5,13 +5,22 @@ import '../card_render/card_widget.dart';
 import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
+import '../widgets/ad_banner.dart';
+import '../services/ad_service.dart';
 
 /// The Forge — craft cards with Shards, or disenchant duplicates for Shards.
 class ForgeScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
 
-  const ForgeScreen({super.key, required this.library, required this.save});
+  final AdService adService;
+
+  const ForgeScreen({
+    super.key,
+    required this.library,
+    required this.save,
+    required this.adService,
+  });
 
   @override
   State<ForgeScreen> createState() => _ForgeScreenState();
@@ -29,6 +38,7 @@ class _ForgeScreenState extends State<ForgeScreen> {
       ..sort((a, b) => a.id.compareTo(b.id));
 
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(

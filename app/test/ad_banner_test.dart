@@ -44,6 +44,12 @@ class _AdPlatform implements AdPlatform {
   @override
   Future<AdInterstitialHandle?> loadInterstitial(String adUnitId) async =>
       _InterstitialHandle();
+
+  @override
+  Future<AdRewardedHandle?> loadRewarded(String adUnitId) async => rewarded;
+
+  /// Set by tests that exercise the rewarded path; null means "none loaded".
+  AdRewardedHandle? rewarded;
 }
 
 class _GrantedConsentPlatform implements AdConsentPlatform {

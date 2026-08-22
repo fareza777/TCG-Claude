@@ -22,6 +22,12 @@ class SaveService extends ChangeNotifier {
   static const chapterClearGold = 250;
   static const packCost = 100;
 
+  /// Gold paid for watching a rewarded video, and how many a day count.
+  /// Sized to be worth the interruption the player chose — two watches buy a
+  /// Shard Pack, three cover an arena entry — without making Gold worthless.
+  static const adGoldReward = 50;
+  static const adGoldDailyCap = 3;
+
   /// Arena entry. Priced so that a run pays for itself on the third win —
   /// good players sustain themselves, everyone else feels the cost.
   static const arenaEntryCost = 150;
@@ -49,6 +55,7 @@ class SaveService extends ChangeNotifier {
   bool tutorialSeen;
   bool musicOn;
   bool sfxOn;
+  bool voiceOn;
   bool colorblind;
   bool reduceMotion;
 
@@ -71,6 +78,14 @@ class SaveService extends ChangeNotifier {
 
   // Arena — best win streak in the Proving Gauntlet.
   int arenaBestWins = 0;
+
+  /// Battles finished, win or lose. Gates the new-player grace period: the
+  /// first few fights are never interrupted by an interstitial.
+  int battlesPlayed = 0;
+
+  /// Rewarded-video Gold claimed today, and the day it was counted for.
+  int adGoldClaims = 0;
+  String adGoldDate = '';
 
   /// Set once on load when a new day's login bonus is granted (gold amount);
   /// the menu shows it, then calls [clearPendingDailyBonus].
@@ -135,6 +150,7 @@ class SaveService extends ChangeNotifier {
     required this.tutorialSeen,
     required this.musicOn,
     required this.sfxOn,
+    required this.voiceOn,
     required this.colorblind,
     required this.reduceMotion,
   });
@@ -181,6 +197,7 @@ class SaveService extends ChangeNotifier {
       tutorialSeen: prefs.getBool('tutorialSeen') ?? false,
       musicOn: prefs.getBool('musicOn') ?? true,
       sfxOn: prefs.getBool('sfxOn') ?? true,
+      voiceOn: prefs.getBool('voiceOn') ?? true,
       colorblind: prefs.getBool('colorblind') ?? false,
       reduceMotion: prefs.getBool('reduceMotion') ?? false,
     );
@@ -203,6 +220,9 @@ class SaveService extends ChangeNotifier {
     service.removeAds = (prefs.getBool('removeAds') ?? false) ||
         service.removeAdsPurchaseIds.isNotEmpty;
     service.arenaBestWins = prefs.getInt('arenaBestWins') ?? 0;
+    service.battlesPlayed = prefs.getInt('battlesPlayed') ?? 0;
+    service.adGoldClaims = prefs.getInt('adGoldClaims') ?? 0;
+    service.adGoldDate = prefs.getString('adGoldDate') ?? '';
     service._rollDailyQuestsIfNeeded();
     service._checkLogin();
 
@@ -486,9 +506,10 @@ class SaveService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setAudio({bool? music, bool? sfx}) async {
+  Future<void> setAudio({bool? music, bool? sfx, bool? voice}) async {
     if (music != null) musicOn = music;
     if (sfx != null) sfxOn = sfx;
+    if (voice != null) voiceOn = voice;
     await _persist();
     notifyListeners();
   }
@@ -536,6 +557,7 @@ class SaveService extends ChangeNotifier {
         'tutorialSeen': tutorialSeen,
         'musicOn': musicOn,
         'sfxOn': sfxOn,
+        'voiceOn': voiceOn,
         'colorblind': colorblind,
         'reduceMotion': reduceMotion,
         'loginStreak': loginStreak,
@@ -574,6 +596,7 @@ class SaveService extends ChangeNotifier {
     tutorialSeen = data['tutorialSeen'] as bool? ?? tutorialSeen;
     musicOn = data['musicOn'] as bool? ?? musicOn;
     sfxOn = data['sfxOn'] as bool? ?? sfxOn;
+    voiceOn = data['voiceOn'] as bool? ?? voiceOn;
     colorblind = data['colorblind'] as bool? ?? colorblind;
     reduceMotion = data['reduceMotion'] as bool? ?? reduceMotion;
     loginStreak = data['loginStreak'] as int? ?? loginStreak;
@@ -855,6 +878,7 @@ class SaveService extends ChangeNotifier {
     await _prefs.setBool('accountLinked', accountLinked);
     await _prefs.setBool('musicOn', musicOn);
     await _prefs.setBool('sfxOn', sfxOn);
+    await _prefs.setBool('voiceOn', voiceOn);
     await _prefs.setBool('colorblind', colorblind);
     await _prefs.setBool('reduceMotion', reduceMotion);
     await _prefs.setInt('loginStreak', loginStreak);
@@ -863,6 +887,40 @@ class SaveService extends ChangeNotifier {
     await _prefs.setInt('totalPacks', totalPacks);
     await _prefs.setStringList('achievements', achievements.toList());
     await _prefs.setInt('arenaBestWins', arenaBestWins);
+    await _prefs.setInt('battlesPlayed', battlesPlayed);
+    await _prefs.setInt('adGoldClaims', adGoldClaims);
+    await _prefs.setString('adGoldDate', adGoldDate);
+  }
+
+  /// How many rewarded Gold claims are left today.
+  int get adGoldClaimsLeft =>
+      adGoldDate == _today() ? adGoldDailyCap - adGoldClaims : adGoldDailyCap;
+
+  bool get canClaimAdGold => adGoldClaimsLeft > 0;
+
+  /// Count a finished battle, whatever the result. Only the first few matter
+  /// (they hold interstitials off), so this stops persisting once past them.
+  Future<void> recordBattlePlayed() async {
+    if (battlesPlayed > 100) return;
+    battlesPlayed += 1;
+    await _persist();
+    notifyListeners();
+  }
+
+  /// Pay out a watched rewarded video. Returns the Gold granted, or 0 when the
+  /// daily cap is already used — the caller must not have shown an ad then.
+  Future<int> claimAdGold() async {
+    final today = _today();
+    if (adGoldDate != today) {
+      adGoldDate = today;
+      adGoldClaims = 0;
+    }
+    if (adGoldClaims >= adGoldDailyCap) return 0;
+    adGoldClaims += 1;
+    gold += adGoldReward;
+    await _persist();
+    notifyListeners();
+    return adGoldReward;
   }
 
   /// Record a finished Arena run, updating the best streak and paying a

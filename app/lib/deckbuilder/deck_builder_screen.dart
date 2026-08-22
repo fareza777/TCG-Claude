@@ -9,6 +9,8 @@ import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
 import '../widgets/card_zoom.dart';
+import '../widgets/ad_banner.dart';
+import '../services/ad_service.dart';
 
 /// Build and save 40+ card decks from owned cards. Wellsprings are treated
 /// as unlimited basic resources (cap 20); other cards are limited by owned
@@ -16,12 +18,14 @@ import '../widgets/card_zoom.dart';
 class DeckBuilderScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
+  final AdService adService;
   final String? editDeck;
 
   const DeckBuilderScreen({
     super.key,
     required this.library,
     required this.save,
+    required this.adService,
     this.editDeck,
   });
 
@@ -292,6 +296,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
 
     final valid = _size >= minDeck;
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(

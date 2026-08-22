@@ -66,6 +66,12 @@ class _FakeAdPlatform implements AdPlatform {
     if (interstitialQueue.isNotEmpty) return interstitialQueue.removeAt(0);
     return interstitial ??= _FakeInterstitialHandle();
   }
+
+  @override
+  Future<AdRewardedHandle?> loadRewarded(String adUnitId) async => rewarded;
+
+  /// Set by tests that exercise the rewarded path; null means "none loaded".
+  AdRewardedHandle? rewarded;
 }
 
 class _HangingConsentPlatform implements AdConsentPlatform {
@@ -111,7 +117,44 @@ void main() {
     SharedPreferences.setMockInitialValues({
       'gold': SaveService.startGold,
       'lastLoginDate': '${today.year}-${today.month}-${today.day}',
+      // Most cases here are about a settled player, so they start past the
+      // new-player grace period. The grace itself has its own test below.
+      'battlesPlayed': 99,
     });
+  });
+
+  test('a new player finishes their first fights without an interstitial', () {
+    // Interrupting someone in their first session is the cheapest way to lose
+    // them, and a player lost on day one never sees a second impression.
+    for (var played = 0; played < AdPolicy.graceBattles; played++) {
+      expect(
+        AdPolicy.canShowInterstitial(
+          removeAds: false,
+          ready: true,
+          inCooldown: false,
+          battlesPlayed: played,
+        ),
+        isFalse,
+        reason: 'battle ${played + 1} should not carry an ad',
+      );
+    }
+    expect(
+      AdPolicy.canShowInterstitial(
+        removeAds: false,
+        ready: true,
+        inCooldown: false,
+        battlesPlayed: AdPolicy.graceBattles,
+      ),
+      isTrue,
+      reason: 'the fight after the grace period is the first with an ad',
+    );
+  });
+
+  test('rewarded offers survive Remove Ads', () {
+    // Remove Ads buys freedom from interruptions, not from choosing to earn.
+    expect(AdPolicy.canOfferRewarded(ready: true), isTrue);
+    expect(AdPolicy.canOfferRewarded(ready: false), isFalse);
+    expect(AdPolicy.canOfferRewarded(ready: true, configured: false), isFalse);
   });
 
   test('policy skips banners and interstitials when Remove Ads is owned', () {
@@ -122,6 +165,7 @@ void main() {
         removeAds: false,
         ready: false,
         inCooldown: false,
+        battlesPlayed: 99,
       ),
       isFalse,
     );
@@ -130,6 +174,7 @@ void main() {
         removeAds: false,
         ready: true,
         inCooldown: false,
+        battlesPlayed: 99,
       ),
       isTrue,
     );
@@ -138,6 +183,7 @@ void main() {
         removeAds: true,
         ready: true,
         inCooldown: false,
+        battlesPlayed: 99,
       ),
       isFalse,
     );

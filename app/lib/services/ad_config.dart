@@ -17,9 +17,17 @@ abstract final class AdMobConfig {
     defaultValue: 'ca-app-pub-6279186647593327/9807672400',
   );
 
+  /// Rewarded video. Empty until a unit exists in the AdMob account, and the
+  /// offers stay hidden while it is — a button that fails to produce an ad is
+  /// worse than no button.
+  static const productionRewardedUnitId = String.fromEnvironment(
+    'ADMOB_REWARDED_UNIT_ID',
+  );
+
   static const testBannerUnitId = 'ca-app-pub-3940256099942544/6300978111';
   static const testInterstitialUnitId =
       'ca-app-pub-3940256099942544/1033173712';
+  static const testRewardedUnitId = 'ca-app-pub-3940256099942544/5224354917';
 
   static const useTestAds = bool.fromEnvironment(
     'ADMOB_USE_TEST_ADS',
@@ -34,6 +42,11 @@ abstract final class AdMobConfig {
   static String get interstitialUnitId =>
       useTestUnits ? testInterstitialUnitId : productionInterstitialUnitId;
 
+  static String get rewardedUnitId =>
+      useTestUnits ? testRewardedUnitId : productionRewardedUnitId;
+
   static bool get hasEffectiveUnits =>
       bannerUnitId.isNotEmpty && interstitialUnitId.isNotEmpty;
+
+  static bool get hasRewardedUnit => rewardedUnitId.isNotEmpty;
 }

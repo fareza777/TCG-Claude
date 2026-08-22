@@ -31,6 +31,12 @@ class _FakePlatform implements AdPlatform {
   @override
   Future<AdInterstitialHandle?> loadInterstitial(String adUnitId) async =>
       interstitial;
+
+  @override
+  Future<AdRewardedHandle?> loadRewarded(String adUnitId) async => rewarded;
+
+  /// Set by tests that exercise the rewarded path; null means "none loaded".
+  AdRewardedHandle? rewarded;
 }
 
 class _GrantedConsentPlatform implements AdConsentPlatform {
@@ -52,6 +58,8 @@ void main() {
     SharedPreferences.setMockInitialValues({
       'gold': SaveService.startGold,
       'lastLoginDate': '${today.year}-${today.month}-${today.day}',
+      // Past the new-player grace period; these cases are about the hook.
+      'battlesPlayed': 99,
     });
   });
 
