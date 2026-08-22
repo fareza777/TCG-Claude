@@ -182,8 +182,22 @@ class _GoogleInterstitialHandle implements AdInterstitialHandle {
 
   final InterstitialAd _ad;
 
+  /// Completes when the ad is gone, not when it appears — otherwise the
+  /// caller's dispose would tear the ad down while the player is watching it.
   @override
-  Future<void> show() => _ad.show();
+  Future<void> show() {
+    final done = Completer<void>();
+    void finish() {
+      if (!done.isCompleted) done.complete();
+    }
+
+    _ad.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (_) => finish(),
+      onAdFailedToShowFullScreenContent: (_, _) => finish(),
+    );
+    _ad.show().catchError((_) => finish());
+    return done.future.timeout(const Duration(minutes: 5), onTimeout: finish);
+  }
 
   @override
   void dispose() => _ad.dispose();
@@ -194,11 +208,32 @@ class _GoogleRewardedHandle implements AdRewardedHandle {
 
   final RewardedAd _ad;
 
+  /// Resolves once the ad has been dismissed, reporting whether Google
+  /// granted the reward along the way.
+  ///
+  /// Returning at [RewardedAd.show] time instead — which is when it resolves —
+  /// meant the reward callback always arrived after the caller had disposed
+  /// the ad, so the player watched a full video and received nothing.
   @override
-  Future<bool> show() async {
+  Future<bool> show() {
+    final done = Completer<bool>();
     var earned = false;
-    await _ad.show(onUserEarnedReward: (_, _) => earned = true);
-    return earned;
+    void finish() {
+      if (!done.isCompleted) done.complete(earned);
+    }
+
+    _ad.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (_) => finish(),
+      onAdFailedToShowFullScreenContent: (_, _) => finish(),
+    );
+    _ad
+        .show(onUserEarnedReward: (_, _) => earned = true)
+        .catchError((_) => finish());
+    return done.future.timeout(const Duration(minutes: 5), onTimeout: () {
+      // A callback that never arrives must not hang the game. Pay out only
+      // if the reward had already been reported.
+      return earned;
+    });
   }
 
   @override
