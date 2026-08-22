@@ -47,12 +47,18 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
             signingConfig = if (keystorePropertiesFile.exists()) {
                 signingConfigs.getByName("release")
             } else {
                 signingConfigs.getByName("debug")
             }
+            // R8 renames Room's generated *_Impl classes, which Room then
+            // cannot find by name at runtime. Without these rules WorkManager
+            // crashes the process on launch, before Flutter starts.
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 }
