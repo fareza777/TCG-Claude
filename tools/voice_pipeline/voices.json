@@ -1,0 +1,28 @@
+{
+  "_note": "Voice casting for Shardfall narration. Keys match the speaker in DialogueLine('Speaker', ...) in app/lib/story/chapters/*.dart; 'Narrator' covers DialogueLine.narrate. Anything unlisted falls back to _default.",
+  "_default": "CwhRBWXzGAHq8TQ4Fs17",
+
+  "Narrator": "JBFqnCBsd6RMkjVDRZzb",
+  "You": "dRqoXefWJMo2lbk72Ucp",
+
+  "Thornmaw": "pqHfZKP75CvOlQylNhV4",
+  "Ravenna": "pFZP5JQG7iQjIQuC4Bku",
+  "Numen": "Xb7hH8MSUJpSbSDYk0k2",
+  "Kaelis": "SOYHLrjzK2X1ezoPC6cr",
+  "Seraphel": "hpp4J3VqNfWAUOO0d1Us",
+  "Draxus": "pNInz6obpgDQGcFmaJgB",
+  "Inquisitor": "onwK4e9ZLuTAKqWW03F9",
+
+  "The First Caller": "XrExE9yKIg1WjnnlVkGX",
+  "The Sister": "EXAVITQu4vr4xnSDxMaL",
+  "The Voice": "bfGb7JTLUnZebZRiFYyq",
+  "The Erasure": "bfGb7JTLUnZebZRiFYyq",
+
+  "Forgewright": "CwhRBWXzGAHq8TQ4Fs17",
+  "Old Smelter": "CwhRBWXzGAHq8TQ4Fs17",
+  "Blightherald": "N2lVS1w4EtoT3dr4eOWO",
+  "Infiltrator": "FGY2WhTYpPnrIDTdsKH5",
+  "Enforcer": "IKne3meq5aSn9XLyUdCD",
+  "Ember Widow": "XrExE9yKIg1WjnnlVkGX",
+  "Sproutling": "cgSgspJ2msm6clMCkdW9"
+}

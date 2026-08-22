@@ -1,0 +1,2496 @@
+{
+  "count": 415,
+  "characters": 34693,
+  "clips": [
+    {
+      "id": "intro_00_b_00",
+      "chapter": "intro",
+      "voiceKey": "Narrator",
+      "text": "A thousand years ago, the star Vael hung whole in the night — and the world of Aethyr slept beneath its light."
+    },
+    {
+      "id": "intro_01_b_00",
+      "chapter": "intro",
+      "voiceKey": "Narrator",
+      "text": "Then it shattered. Five burning Shards fell upon the world, and where each one struck, a Dominion woke."
+    },
+    {
+      "id": "intro_02_b_00",
+      "chapter": "intro",
+      "voiceKey": "Narrator",
+      "text": "Where the emerald Shard fell, the forests of Sylvaris remembered how to move — and chose their wardens."
+    },
+    {
+      "id": "intro_03_b_00",
+      "chapter": "intro",
+      "voiceKey": "Narrator",
+      "text": "Where the crimson Shard fell, the forges of Ashmar burned a thousand years without fuel."
+    },
+    {
+      "id": "intro_04_b_00",
+      "chapter": "intro",
+      "voiceKey": "Narrator",
+      "text": "The cyan Shard sank beneath Meridine, into an archive of truths the tide would rather keep drowned."
+    },
+    {
+      "id": "intro_05_b_00",
+      "chapter": "intro",
+      "voiceKey": "Narrator",
+      "text": "The golden Shard crowned the Concord of Dawn in borrowed, blinding light."
+    },
+    {
+      "id": "intro_06_b_00",
+      "chapter": "intro",
+      "voiceKey": "Narrator",
+      "text": "And the violet Shard fell into the Hollow — where something patient has been waiting ever since."
+    },
+    {
+      "id": "intro_07_b_00",
+      "chapter": "intro",
+      "voiceKey": "Narrator",
+      "text": "Now the Shards stir again. The seals are failing. A war with no honest side begins once more."
+    },
+    {
+      "id": "ch1_00_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "A thousand years ago the star Vael shattered and its five Shards fell upon Aethyr. The emerald Shard came down in Sylvaris, and the forest grew over it the way skin grows over a splinter."
+    },
+    {
+      "id": "ch1_00_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Tonight the leaves are wrong. A wind out of the southern marshes carries rot, and the great stag Thornmaw has stopped grazing."
+    },
+    {
+      "id": "ch1_00_b_02",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "You feel it. Say what you feel."
+    },
+    {
+      "id": "ch1_00_b_03",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Something crossed the border, and the border let it."
+    },
+    {
+      "id": "ch1_00_b_04",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Yes. Come. I will not send you out blind, and I will not send you out alone."
+    },
+    {
+      "id": "ch1_01_p_00",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Two of mine are already standing. Send them forward. That is the whole of attacking."
+    },
+    {
+      "id": "ch1_01_v_00",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "A scout."
+    },
+    {
+      "id": "ch1_01_v_01",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Scouts are sent. Remember that word."
+    },
+    {
+      "id": "ch1_02_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "By morning the clearing where the blight fell is bare. Not burned, not poisoned — simply refusing."
+    },
+    {
+      "id": "ch1_02_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "The Grove heals everything. It has healed worse than this in a single night."
+    },
+    {
+      "id": "ch1_02_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Then why not this?"
+    },
+    {
+      "id": "ch1_02_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Because this is not a wound. It is a mark."
+    },
+    {
+      "id": "ch1_03_p_00",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Lay a Wellspring every turn. Every turn, without exception. A Caller who forgets is a Caller who watches."
+    },
+    {
+      "id": "ch1_03_v_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "They were not feeding. They stood on the bare ground facing outward, as if guarding it."
+    },
+    {
+      "id": "ch1_04_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "A sylvaris sproutling, barely a season old, follows you to the root-line and will not be shooed away."
+    },
+    {
+      "id": "ch1_04_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Sproutling",
+      "text": "Warden. What is under the Oak?"
+    },
+    {
+      "id": "ch1_04_b_02",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "The Shard is under the Oak."
+    },
+    {
+      "id": "ch1_04_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Sproutling",
+      "text": "I know what the Shard smells like. That is not what is under the Oak."
+    },
+    {
+      "id": "ch1_04_b_04",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Thornmaw does not answer. He turns, and the conversation is over."
+    },
+    {
+      "id": "ch1_05_p_00",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Thick bark in front. A creature with high Guard survives what it blocks, and the Grove cannot spare what it does not have to."
+    },
+    {
+      "id": "ch1_06_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "A man staggers out of the southern treeline with a marsh still drying on him, and the ember-brand of Ashmar burnt into his pauldron. Kaelis Emberborn. Everyone knows that name."
+    },
+    {
+      "id": "ch1_06_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "Nyxhollow is not raiding, Caller. They are surveying. There is a difference, and the difference should frighten you."
+    },
+    {
+      "id": "ch1_06_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Ashmar is a month west. Why come here?"
+    },
+    {
+      "id": "ch1_06_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "Because they are surveying there too, and our fire is going out."
+    },
+    {
+      "id": "ch1_06_b_04",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Surveying for what?"
+    },
+    {
+      "id": "ch1_06_b_05",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "For depth."
+    },
+    {
+      "id": "ch1_06_b_06",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Thornmaw has not moved since Kaelis appeared. He is watching him the way you watch a fire indoors."
+    },
+    {
+      "id": "ch1_07_p_00",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "They followed me. I am sorry. They always follow me now."
+    },
+    {
+      "id": "ch1_08_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "The next thing across the border does not skitter. It walks upright, it carries steel, and it stops when it sees you — which nothing mindless has ever done."
+    },
+    {
+      "id": "ch1_08_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "That is a surveyor's escort."
+    },
+    {
+      "id": "ch1_08_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "It is looking at the Oak."
+    },
+    {
+      "id": "ch1_08_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "They are all looking at the Oak. That is the entire problem."
+    },
+    {
+      "id": "ch1_09_v_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "It carried no loot and no rations. Only a measuring cord, knotted at intervals, already half used."
+    },
+    {
+      "id": "ch1_10_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "At dusk something walks openly up the deer-path with both hands empty, which is its own kind of threat."
+    },
+    {
+      "id": "ch1_10_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Blightherald",
+      "text": "Lady Duskveil offers terms. Stand aside from the Oak and Sylvaris keeps every leaf it has. She does not want your forest."
+    },
+    {
+      "id": "ch1_10_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "And if we refuse?"
+    },
+    {
+      "id": "ch1_10_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Blightherald",
+      "text": "Then she comes anyway, and the forest is simply in the way."
+    },
+    {
+      "id": "ch1_10_b_04",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Kill it."
+    },
+    {
+      "id": "ch1_10_b_05",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "It is the first order Thornmaw has ever given you. He does not give orders. He asks."
+    },
+    {
+      "id": "ch1_11_p_00",
+      "chapter": "ch1",
+      "voiceKey": "Blightherald",
+      "text": "She said you would do this. She said to tell you she is sorry."
+    },
+    {
+      "id": "ch1_12_b_00",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "It offered terms and you had it killed before it finished. Why?"
+    },
+    {
+      "id": "ch1_12_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Because I have heard those terms before."
+    },
+    {
+      "id": "ch1_12_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "When?"
+    },
+    {
+      "id": "ch1_12_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Thornmaw walks away."
+    },
+    {
+      "id": "ch1_12_b_04",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "Watch him, Caller. That was not a warden protecting a secret. That was something frightened protecting itself."
+    },
+    {
+      "id": "ch1_14_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Among the swarm's nest you find oilcloth, and on the oilcloth a map. Not of the forest — of the roots beneath it. Every taproot, every hollow, drawn true."
+    },
+    {
+      "id": "ch1_14_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "No outsider surveyed this. This was drawn from underneath."
+    },
+    {
+      "id": "ch1_14_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Then someone here drew it."
+    },
+    {
+      "id": "ch1_14_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "Or something here did."
+    },
+    {
+      "id": "ch1_16_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Warriors come up the deer-path in formation, and you recognise their colours before you recognise that they are attacking."
+    },
+    {
+      "id": "ch1_16_b_01",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Those are yours."
+    },
+    {
+      "id": "ch1_16_b_02",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "Those were mine. I have not commanded anything for eleven days."
+    },
+    {
+      "id": "ch1_16_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "I did not come north to warn you, Caller. I came north because something walked me here."
+    },
+    {
+      "id": "ch1_17_v_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "They do not rout. They stop, all at once, like a hand letting go."
+    },
+    {
+      "id": "ch1_18_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Kaelis rolls back his sleeve without being asked. The dark is past his elbow, and it is not spreading — it is arriving, in pulses, from somewhere else."
+    },
+    {
+      "id": "ch1_18_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "Eleven days. Since I stood at the edge of their dig and looked down."
+    },
+    {
+      "id": "ch1_18_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Then you are already theirs."
+    },
+    {
+      "id": "ch1_18_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "I am already something's. Theirs would be simpler. When I stop being able to say so — end it. Say you will."
+    },
+    {
+      "id": "ch1_18_b_04",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "I will."
+    },
+    {
+      "id": "ch1_19_p_00",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "Those are Ashmar riders. My riders. Duskveil is paying in coin now instead of fear, and my people are taking it, because a cold forge does not feed anyone."
+    },
+    {
+      "id": "ch1_20_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "The southern bog has moved four hundred paces in a night. Trees that stood a thousand years are standing in water now, drowning politely, without complaint."
+    },
+    {
+      "id": "ch1_20_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "From here you fight alone. Not as punishment — because they are counting my herd, and I would rather the count were wrong."
+    },
+    {
+      "id": "ch1_22_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Gold on the ridgeline. Aurelian knights, banners high, marching into a war nobody invited them to."
+    },
+    {
+      "id": "ch1_22_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Inquisitor",
+      "text": "Sylvaris has proven it cannot hold its Shard. Aurelia will take it into safekeeping. Stand down and no leaf burns."
+    },
+    {
+      "id": "ch1_22_b_02",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "Two armies, one hole. Ask yourself how both of them learned about it in the same season."
+    },
+    {
+      "id": "ch1_24_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "From the ridge you can see both digs at once. Nyxhollow from the south, Aurelia from the east. Neither is aimed at the Shard."
+    },
+    {
+      "id": "ch1_24_b_01",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "They are converging on a point beside it."
+    },
+    {
+      "id": "ch1_24_b_02",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Yes."
+    },
+    {
+      "id": "ch1_24_b_03",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "You knew. You have known since the first night."
+    },
+    {
+      "id": "ch1_24_b_04",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "I have known for a thousand years."
+    },
+    {
+      "id": "ch1_26_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "The Shard did not make this forest. It fell on a battlefield that was already old, and the first Caller lies under it — and the first Caller was not of Verdance."
+    },
+    {
+      "id": "ch1_26_b_01",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "What was she?"
+    },
+    {
+      "id": "ch1_26_b_02",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Gloom. The Grove was not grown to protect the Shard, Caller. The Grove is a lid."
+    },
+    {
+      "id": "ch1_26_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "A thousand years of stories, and every one of them was the same lie told gently."
+    },
+    {
+      "id": "ch1_28_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "The wardens you grew up beside are walking south with black in their veins, in step, in silence."
+    },
+    {
+      "id": "ch1_28_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "It is not converting them. It is calling them. The difference is that they want to go."
+    },
+    {
+      "id": "ch1_30_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "You find his sword planted at the lip of the shaft and Kaelis already ten paces below it, going down without a torch."
+    },
+    {
+      "id": "ch1_30_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "It has been pulling me since the marsh. If it wants me down there so badly, let it have me while I still choose the timing."
+    },
+    {
+      "id": "ch1_30_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Kaelis —"
+    },
+    {
+      "id": "ch1_30_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Kaelis",
+      "text": "You promised me an ending. This is me taking it first."
+    },
+    {
+      "id": "ch1_32_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Something comes back up the shaft. It has Kaelis' voice and it is using it carefully, like a borrowed coat."
+    },
+    {
+      "id": "ch1_32_b_01",
+      "chapter": "ch1",
+      "voiceKey": "The Voice",
+      "text": "He asked you to end it. You said you would. You are very slow."
+    },
+    {
+      "id": "ch1_32_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "What are you?"
+    },
+    {
+      "id": "ch1_32_b_03",
+      "chapter": "ch1",
+      "voiceKey": "The Voice",
+      "text": "The thing your warden has been standing on. Ask him how tired he is."
+    },
+    {
+      "id": "ch1_34_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Ravenna Duskveil stands at the shaft with her own dead stacked around her like sandbags. She is not digging. She is filling it in."
+    },
+    {
+      "id": "ch1_34_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Ravenna",
+      "text": "Nine hundred years my house has held this lid down from the other side while your forest took the credit. Do you know what your warden did the first night I sent word?"
+    },
+    {
+      "id": "ch1_34_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "He had your herald killed."
+    },
+    {
+      "id": "ch1_34_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Ravenna",
+      "text": "He has had eleven of them killed."
+    },
+    {
+      "id": "ch1_36_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Thornmaw comes through the treeline at a run, and he does not go for the diggers. He goes for Ravenna."
+    },
+    {
+      "id": "ch1_36_b_01",
+      "chapter": "ch1",
+      "voiceKey": "Ravenna",
+      "text": "There. Now you have seen it."
+    },
+    {
+      "id": "ch1_36_b_02",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "Warden. Stop."
+    },
+    {
+      "id": "ch1_36_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "A thousand years I stood over her grave, Caller, and every single one of them I stood there listening."
+    },
+    {
+      "id": "ch1_36_b_04",
+      "chapter": "ch1",
+      "voiceKey": "Thornmaw",
+      "text": "Do you understand? I was not guarding it. I was keeping it company."
+    },
+    {
+      "id": "ch1_38_b_00",
+      "chapter": "ch1",
+      "voiceKey": "Ravenna",
+      "text": "I will not hand nine hundred years to a Caller who has held the truth for one afternoon. Show me you can carry it."
+    },
+    {
+      "id": "ch1_38_b_01",
+      "chapter": "ch1",
+      "voiceKey": "You",
+      "text": "You want to fight me while that thing is awake?"
+    },
+    {
+      "id": "ch1_38_b_02",
+      "chapter": "ch1",
+      "voiceKey": "Ravenna",
+      "text": "I want to fight you because it is awake. If you cannot beat me you cannot hold the lid, and I will not die leaving it to you."
+    },
+    {
+      "id": "ch1_38_b_03",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "Behind her, the shaft exhales."
+    },
+    {
+      "id": "ch1_39_p_00",
+      "chapter": "ch1",
+      "voiceKey": "Ravenna",
+      "text": "No terms this time, Caller. Come on."
+    },
+    {
+      "id": "ch1_39_v_00",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "She goes down on one knee and stays there — breathing, alive, and for the first time in nine hundred years not alone in this."
+    },
+    {
+      "id": "ch1_39_v_01",
+      "chapter": "ch1",
+      "voiceKey": "Ravenna",
+      "text": "Good. Now look behind you."
+    },
+    {
+      "id": "ch1_39_v_02",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "The shaft is sealed. The lid is holding. And Thornmaw is gone — no body, no trail, only tracks going down."
+    },
+    {
+      "id": "ch1_39_v_03",
+      "chapter": "ch1",
+      "voiceKey": "Ravenna",
+      "text": "He has gone to keep it company. Ashmar next, Caller — their forges are going cold, and cold forges mean someone is digging there too."
+    },
+    {
+      "id": "ch1_39_v_04",
+      "chapter": "ch1",
+      "voiceKey": "Narrator",
+      "text": "The Grove endures. The tale turns west, to fire."
+    },
+    {
+      "id": "ch2_00_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "You smell Ashmar three days before you see it, and what you smell is wrong: not smoke, but wet ash. Rain has been falling on the city of fire and nothing has been drying it."
+    },
+    {
+      "id": "ch2_00_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "The Heartforge still burns at the centre of the caldera. It is the size of a cathedral and it is the colour of a dying coal."
+    },
+    {
+      "id": "ch2_00_b_02",
+      "chapter": "ch2",
+      "voiceKey": "Forgewright",
+      "text": "A thousand years, Caller. A thousand years it never once needed stoking, and now we feed it all night and by dawn it has given the heat back."
+    },
+    {
+      "id": "ch2_00_b_03",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Given it back to what?"
+    },
+    {
+      "id": "ch2_00_b_04",
+      "chapter": "ch2",
+      "voiceKey": "Forgewright",
+      "text": "That is the question nobody here likes."
+    },
+    {
+      "id": "ch2_01_p_00",
+      "chapter": "ch2",
+      "voiceKey": "Forgewright",
+      "text": "They never came near heat before. Now they sleep in it."
+    },
+    {
+      "id": "ch2_02_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Ashmar has begun rationing heat. The line for a warming-stone runs four streets and does not move quickly."
+    },
+    {
+      "id": "ch2_02_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Old Smelter",
+      "text": "Third day I have stood here. Yesterday they turned the line away at dusk. Two did not walk home."
+    },
+    {
+      "id": "ch2_02_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Who decides who gets a stone?"
+    },
+    {
+      "id": "ch2_02_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Old Smelter",
+      "text": "The Warlord decides. The Warlord decides everything now."
+    },
+    {
+      "id": "ch2_03_v_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "They were not thieves this morning. Ashmar is four days of cold away from not being Ashmar."
+    },
+    {
+      "id": "ch2_04_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Warlord Draxus reads the decree himself, from the forge steps, in a voice built for exactly this."
+    },
+    {
+      "id": "ch2_04_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "The outer holds will be emptied and burned. Their fuel comes to the Heartforge. Ashmar survives as a smaller Ashmar or it does not survive."
+    },
+    {
+      "id": "ch2_04_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "You are burning your own villages."
+    },
+    {
+      "id": "ch2_04_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "I am burning six thousand to keep sixty thousand. Give me a better number, Caller, and I will read that one instead."
+    },
+    {
+      "id": "ch2_05_p_00",
+      "chapter": "ch2",
+      "voiceKey": "Enforcer",
+      "text": "Step aside. We take no pleasure in this and we will do it anyway."
+    },
+    {
+      "id": "ch2_06_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "A woman waits at the hold gate with her husband's tools on her back and no husband."
+    },
+    {
+      "id": "ch2_06_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Ember Widow",
+      "text": "He went down the vein with the third survey. Twelve went. Twelve came back. He was not one of the twelve, and one of them was not anyone."
+    },
+    {
+      "id": "ch2_06_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Say that again."
+    },
+    {
+      "id": "ch2_06_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Ember Widow",
+      "text": "Twelve went down and twelve came up, and one of the twelve who came up had never gone down."
+    },
+    {
+      "id": "ch2_07_v_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "What is left on the stones does not match any of the twelve, and does not match anything else either."
+    },
+    {
+      "id": "ch2_08_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "The vein opens in the caldera floor like a wound that has been kept open on purpose. Warm air comes out of it in slow, even pushes."
+    },
+    {
+      "id": "ch2_08_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Forgewright",
+      "text": "That is not a draught, Caller."
+    },
+    {
+      "id": "ch2_08_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "No. That is breathing."
+    },
+    {
+      "id": "ch2_10_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Word comes up from the coast: Meridine has closed the sea. Tide hulls sit in a ring around Ashmar's harbours, and they are not firing."
+    },
+    {
+      "id": "ch2_10_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "A siege without a shot. They mean to watch us go cold and then walk in."
+    },
+    {
+      "id": "ch2_10_b_02",
+      "chapter": "ch2",
+      "voiceKey": "Forgewright",
+      "text": "Or they mean nothing to leave. Warlord — they are facing outward."
+    },
+    {
+      "id": "ch2_12_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "The Tide envoy comes ashore alone, robed to the fingertips, carrying a coral staff and no weapon."
+    },
+    {
+      "id": "ch2_12_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "We are not besieging you. We are containing you. There is a difference, and you will like it less."
+    },
+    {
+      "id": "ch2_12_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Containing what?"
+    },
+    {
+      "id": "ch2_12_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Whatever comes up that vein when your fire finally fails. The Archive has a word for it. I am forbidden to say the word."
+    },
+    {
+      "id": "ch2_14_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Your Heartforge has no fuel source. It never had. Meridine measured the mountain nine hundred years ago and the mountain does not produce a tenth of what you burn."
+    },
+    {
+      "id": "ch2_14_b_01",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Then where has the heat come from?"
+    },
+    {
+      "id": "ch2_14_b_02",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Up. From something that has been giving it to you, without complaint, for a thousand years."
+    },
+    {
+      "id": "ch2_14_b_03",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Giving?"
+    },
+    {
+      "id": "ch2_14_b_04",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "I chose that word carefully, Caller."
+    },
+    {
+      "id": "ch2_16_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Draxus does not wait for the argument to finish. Emberhold goes up at dusk, and the column of smoke is the brightest thing in Ashmar for the first time in a season."
+    },
+    {
+      "id": "ch2_16_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "Four hundred souls, and the Heartforge came up two shades. Say it was not worth it. Say it to the sixty thousand."
+    },
+    {
+      "id": "ch2_16_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "It came up two shades for one night."
+    },
+    {
+      "id": "ch2_16_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "Then we will need more holds."
+    },
+    {
+      "id": "ch2_18_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "By morning the city wears two colours. Draxus holds the forge and the granaries. The holds hold the roads."
+    },
+    {
+      "id": "ch2_18_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Forgewright",
+      "text": "A civil war over a fire that is going out either way. There is a joke in that and I cannot find it."
+    },
+    {
+      "id": "ch2_20_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "The descent takes a day. The walls are warm, then hot, then warm again — and the warmth arrives in slow, even pushes, the same rhythm as the mouth above."
+    },
+    {
+      "id": "ch2_20_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "From here you go alone. My order permits me to observe. It does not permit me to help, and I am sorry for the distinction."
+    },
+    {
+      "id": "ch2_22_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "The vein opens into a chamber that is not a chamber. The walls move. They have been moving for a thousand years, slowly, in the rhythm of the heat."
+    },
+    {
+      "id": "ch2_22_b_01",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Ashmar has not been mining."
+    },
+    {
+      "id": "ch2_22_b_02",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "No. Ashmar has been drawing. And it has been letting you."
+    },
+    {
+      "id": "ch2_24_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Understand what you are looking at. The fire is not failing. It is being withheld."
+    },
+    {
+      "id": "ch2_24_b_01",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Why would it stop now?"
+    },
+    {
+      "id": "ch2_24_b_02",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Because a cold city digs. Because a starving Warlord burns his own holds and calls it arithmetic. Everything Ashmar has done this season, it did because the heat stopped."
+    },
+    {
+      "id": "ch2_24_b_03",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "It wanted us to come down here."
+    },
+    {
+      "id": "ch2_24_b_04",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "It has wanted that for a thousand years. This season it simply asked."
+    },
+    {
+      "id": "ch2_26_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "A man walks out of the deep dark of an Ashmaran vein, a month's travel from the shaft he descended, and he is not out of breath."
+    },
+    {
+      "id": "ch2_26_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Kaelis",
+      "text": "Caller."
+    },
+    {
+      "id": "ch2_26_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "You went down under the World-Oak."
+    },
+    {
+      "id": "ch2_26_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Kaelis",
+      "text": "I did. I have not walked a single step since. It is one place down here. Sylvaris, Ashmar, Meridine — one room with a thousand doors, and we built our cities on the doors."
+    },
+    {
+      "id": "ch2_28_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "In the fine grey ash of the chamber floor there are hoofprints. Enormous ones. They come from the direction of Sylvaris and they go deeper."
+    },
+    {
+      "id": "ch2_28_b_01",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Thornmaw."
+    },
+    {
+      "id": "ch2_28_b_02",
+      "chapter": "ch2",
+      "voiceKey": "Kaelis",
+      "text": "He passed through eleven days ago and he did not stop. He is the only one down here who knows where he is going."
+    },
+    {
+      "id": "ch2_30_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Meridine's order is to flood the vein. Sea water, all of it, until Ashmar is a lake and the door is shut."
+    },
+    {
+      "id": "ch2_30_b_01",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Sixty thousand people live on top of that door."
+    },
+    {
+      "id": "ch2_30_b_02",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Yes. I have been carrying that order in my sleeve for nine days and I have not read it aloud once."
+    },
+    {
+      "id": "ch2_30_b_03",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Then don't."
+    },
+    {
+      "id": "ch2_30_b_04",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Give me the alternative and I will burn it in front of you."
+    },
+    {
+      "id": "ch2_32_b_00",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Let the Heartforge go out."
+    },
+    {
+      "id": "ch2_32_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "Ashmar freezes."
+    },
+    {
+      "id": "ch2_32_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Ashmar freezes for one winter. The draw stops, the wound closes, and it has nothing left to bargain with."
+    },
+    {
+      "id": "ch2_32_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Kaelis",
+      "text": "It will not simply allow that, Caller. It has spent a thousand years making sure we could not survive without it."
+    },
+    {
+      "id": "ch2_34_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Draxus has the Heartforge stoked to a height it has not reached in living memory. Every hold in Ashmar is burning to feed it."
+    },
+    {
+      "id": "ch2_34_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "You want me to let it go dark. I will do the opposite. I will burn so hot the thing below gives back everything it has taken."
+    },
+    {
+      "id": "ch2_34_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "You will wake it."
+    },
+    {
+      "id": "ch2_34_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "Then it will be awake, and cold, and in my city — where I have sixty thousand and a mountain of fuel."
+    },
+    {
+      "id": "ch2_36_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Kaelis steps between you and the forge stair, and the black in his veins has reached his throat."
+    },
+    {
+      "id": "ch2_36_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Kaelis",
+      "text": "It is using me to hold this door. I can feel exactly how it intends to do it."
+    },
+    {
+      "id": "ch2_36_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "I promised you an ending."
+    },
+    {
+      "id": "ch2_36_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Kaelis",
+      "text": "You did. But not yet — I have one thing left that it does not expect. Take the stair. I will hold the door shut from this side."
+    },
+    {
+      "id": "ch2_38_b_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Draxus waits at the top of the forge stair with the Heartforge roaring white behind him, and he looks, for the first time, like a man who has done the arithmetic twice."
+    },
+    {
+      "id": "ch2_38_b_01",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "I know what it is. I have known since the third survey. Do you imagine that changes what a Warlord is for?"
+    },
+    {
+      "id": "ch2_38_b_02",
+      "chapter": "ch2",
+      "voiceKey": "You",
+      "text": "Let it go out, Draxus."
+    },
+    {
+      "id": "ch2_38_b_03",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "And be the man who froze Ashmar. No, Caller. Take the forge from me if you want it dark."
+    },
+    {
+      "id": "ch2_39_p_00",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "Sixty thousand, Caller. Be sure."
+    },
+    {
+      "id": "ch2_39_v_00",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "The Heartforge goes out at the ninth hour of the night. A thousand years of light, and the sound it makes going is almost nothing at all."
+    },
+    {
+      "id": "ch2_39_v_01",
+      "chapter": "ch2",
+      "voiceKey": "Draxus",
+      "text": "Cold. So this is what the rest of the world has been doing all along."
+    },
+    {
+      "id": "ch2_39_v_02",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Deep below, the drawing stops. The wound begins to close. And somewhere further down, something that has been patient for a thousand years turns its attention elsewhere."
+    },
+    {
+      "id": "ch2_39_v_03",
+      "chapter": "ch2",
+      "voiceKey": "Numen",
+      "text": "It will look for another door. There are three left, and mine is the one made of paper."
+    },
+    {
+      "id": "ch2_39_v_04",
+      "chapter": "ch2",
+      "voiceKey": "Narrator",
+      "text": "Ashmar endures, and shivers. The tale turns to the deep water."
+    },
+    {
+      "id": "ch3_00_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "Meridine floats above its own library. Beneath the hulls, shelves go down further than light does, and every tablet on them glows faintly, because a thing written in Meridine is a thing kept."
+    },
+    {
+      "id": "ch3_00_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Nine hundred thousand records, Caller. I could tell you the count to the last one."
+    },
+    {
+      "id": "ch3_00_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "Could you yesterday?"
+    },
+    {
+      "id": "ch3_00_b_03",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "That is precisely the problem."
+    },
+    {
+      "id": "ch3_02_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "A tablet in the third vault has gone half blank. Not smashed, not stolen — the ink is simply thinning, letter by letter, while you watch it."
+    },
+    {
+      "id": "ch3_02_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "What did it say?"
+    },
+    {
+      "id": "ch3_02_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "I read it four days ago and I cannot tell you. That is not forgetting, Caller. I know exactly what forgetting feels like."
+    },
+    {
+      "id": "ch3_04_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "You catch her in the ninth vault with no bag, no cart, and nothing in her hands."
+    },
+    {
+      "id": "ch3_04_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Infiltrator",
+      "text": "I am not here to take anything. Lady Duskveil sent me to check whether one particular page still exists."
+    },
+    {
+      "id": "ch3_04_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "Which page?"
+    },
+    {
+      "id": "ch3_04_b_03",
+      "chapter": "ch3",
+      "voiceKey": "Infiltrator",
+      "text": "If I say it aloud in this room it will be gone by morning. That is how it works here. Surely you know how it works here."
+    },
+    {
+      "id": "ch3_06_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "You sit in the reading room with a single tablet and watch it for an hour. Nothing happens. Then you read it aloud, and the line you read fades while your mouth is still shaping it."
+    },
+    {
+      "id": "ch3_06_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Now you have seen it."
+    },
+    {
+      "id": "ch3_06_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "It goes when it is read."
+    },
+    {
+      "id": "ch3_06_b_03",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "It goes when it is *known*. Something is reading through us, Caller, and it does not leave what it has taken."
+    },
+    {
+      "id": "ch3_08_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "She takes the Ashmar flood order out of her sleeve, still sealed, and drops it into the black water of the vault."
+    },
+    {
+      "id": "ch3_08_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Sixty thousand. I told you I would burn it in front of you. There is no fire left in Ashmar, so this will have to do."
+    },
+    {
+      "id": "ch3_08_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "Your order will ask."
+    },
+    {
+      "id": "ch3_08_b_03",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "My order will not remember asking."
+    },
+    {
+      "id": "ch3_10_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "Aurelian sail comes over the horizon in a line, and it does not slow at the harbour boom. It goes through it."
+    },
+    {
+      "id": "ch3_10_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Inquisitor",
+      "text": "Meridine has been keeping records it had no right to keep. Aurelia will take the Archive into safekeeping."
+    },
+    {
+      "id": "ch3_10_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "That word again."
+    },
+    {
+      "id": "ch3_12_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "The Inquisition does not loot. It goes straight down, past nine centuries of trade ledgers, to a vault it should not know about."
+    },
+    {
+      "id": "ch3_12_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "They have a shelf number."
+    },
+    {
+      "id": "ch3_12_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "They have *our* shelf number. Someone in this Archive gave it to them."
+    },
+    {
+      "id": "ch3_14_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "The vault holds one tablet on an empty shelf built for six hundred. It is a contract. It has five marks on it."
+    },
+    {
+      "id": "ch3_14_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "Sylvaris. Ashmar. Meridine. Aurelia. Nyxhollow. All five."
+    },
+    {
+      "id": "ch3_14_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Signed nine hundred and eleven years ago, and every copy of it has been erased since — by us."
+    },
+    {
+      "id": "ch3_14_b_03",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "What did the five of us agree to?"
+    },
+    {
+      "id": "ch3_14_b_04",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "The clause is blank. We erased that too."
+    },
+    {
+      "id": "ch3_16_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "You should hear it from me. The erasures are not an attack. They are my office. I am the ninth Keeper of the Erasure and I have unmade eleven thousand records with my own hand."
+    },
+    {
+      "id": "ch3_16_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "You have been destroying your own history."
+    },
+    {
+      "id": "ch3_16_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "I have been starving something that eats it. A fact nobody has written down is a fact it cannot read."
+    },
+    {
+      "id": "ch3_18_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "In the deepest vault the shelves are not empty. They are full — of tablets Meridine never wrote, in Meridine's own hand, recording things nobody alive has done yet."
+    },
+    {
+      "id": "ch3_18_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "It has been keeping its own copy."
+    },
+    {
+      "id": "ch3_18_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Nine hundred years of erasure. And it simply wrote them out again behind us, one shelf lower, every single time."
+    },
+    {
+      "id": "ch3_20_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "Below the last shelf the floor is silt, and across the silt, unhurried, go the prints of something enormous with hooves. They do not disturb the water."
+    },
+    {
+      "id": "ch3_20_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "He was in Ashmar eleven days ago."
+    },
+    {
+      "id": "ch3_20_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "He was in Sylvaris a month ago. Caller — it is one room down here, and your warden is walking it faster than we can sail."
+    },
+    {
+      "id": "ch3_22_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "The second archive has a map, and the map is the only thing on it that has never been erased, because the thing that drew it wanted it kept."
+    },
+    {
+      "id": "ch3_22_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "Every capital is on a door. All five. We did not settle where the Shards fell. We settled where the doors were."
+    },
+    {
+      "id": "ch3_22_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "We were placed, Caller. Like weights."
+    },
+    {
+      "id": "ch3_24_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "In the second archive, the Ledger of Five is not blank. The clause is there, written out fully, in nine hundred year old ink."
+    },
+    {
+      "id": "ch3_24_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Do not read it aloud."
+    },
+    {
+      "id": "ch3_24_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "It is already read. It has always been read. That is the whole point of this shelf."
+    },
+    {
+      "id": "ch3_26_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "The clause is short. Nine hundred years of erasure to hide four lines."
+    },
+    {
+      "id": "ch3_26_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "\"Each city shall sit upon its door. Each city shall give what is asked. Each city shall forget the asking. The fifth shall keep the count.\""
+    },
+    {
+      "id": "ch3_26_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "The fifth. Nyxhollow."
+    },
+    {
+      "id": "ch3_26_b_03",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Ravenna Duskveil's house has kept the count for nine hundred years while the other four called them the villains of the story."
+    },
+    {
+      "id": "ch3_28_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "Aurelia reaches the second archive an hour behind you and does not pause at the shelves. They begin loading them."
+    },
+    {
+      "id": "ch3_28_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Inquisitor",
+      "text": "Every word of this returns to Aurelia. A truth this size cannot be left with a city that erases things."
+    },
+    {
+      "id": "ch3_28_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "You are about to carry nine hundred years of its own writing into the one capital that has never once erased anything."
+    },
+    {
+      "id": "ch3_30_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "One line in the second archive has been struck through by a different hand — an old hand, a frightened one."
+    },
+    {
+      "id": "ch3_30_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "The name of the first Caller. The one buried under Sylvaris. Someone tried to take it out of even *this* record."
+    },
+    {
+      "id": "ch3_30_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "Who strikes out a name in a library nobody knows exists?"
+    },
+    {
+      "id": "ch3_30_b_03",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Someone who has been down here a very long time."
+    },
+    {
+      "id": "ch3_32_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "Every tablet in the Archive goes blank at once, from the deepest shelf upward, and the blankness keeps rising."
+    },
+    {
+      "id": "ch3_32_b_01",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "It has finished reading. It does not need the copies any more."
+    },
+    {
+      "id": "ch3_34_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "It reads what is known. It cannot read what no longer exists to be known. There is one record left that it has not taken."
+    },
+    {
+      "id": "ch3_34_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "The name."
+    },
+    {
+      "id": "ch3_34_b_02",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "In my head, Caller. Only there. And I am the ninth Keeper of the Erasure, and I do know how to unmake a record."
+    },
+    {
+      "id": "ch3_34_b_03",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "Numen —"
+    },
+    {
+      "id": "ch3_34_b_04",
+      "chapter": "ch3",
+      "voiceKey": "Numen",
+      "text": "Tell Duskveil the count was kept honestly. Tell her Meridine is sorry it took nine hundred years to say so."
+    },
+    {
+      "id": "ch3_36_b_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "Where Numen was standing there is an absence, and the absence is wearing her robes."
+    },
+    {
+      "id": "ch3_36_b_01",
+      "chapter": "ch3",
+      "voiceKey": "The Erasure",
+      "text": "She unmade herself to keep four syllables from me. Do you know how nearly that worked?"
+    },
+    {
+      "id": "ch3_36_b_02",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "It worked."
+    },
+    {
+      "id": "ch3_36_b_03",
+      "chapter": "ch3",
+      "voiceKey": "The Erasure",
+      "text": "It cost her everything and bought you a season. Yes. Call that working, if the word helps."
+    },
+    {
+      "id": "ch3_38_b_00",
+      "chapter": "ch3",
+      "voiceKey": "The Erasure",
+      "text": "Four cities fed me and forgot. The fifth counted. And one warden sat on a lid for a thousand years and talked to me every night of it, which was kinder than any of you managed."
+    },
+    {
+      "id": "ch3_38_b_01",
+      "chapter": "ch3",
+      "voiceKey": "You",
+      "text": "Thornmaw."
+    },
+    {
+      "id": "ch3_38_b_02",
+      "chapter": "ch3",
+      "voiceKey": "The Erasure",
+      "text": "He is ahead of you. He has been ahead of you since the Grove. Ask yourself, Caller — ahead of you, or leading you?"
+    },
+    {
+      "id": "ch3_39_p_00",
+      "chapter": "ch3",
+      "voiceKey": "The Erasure",
+      "text": "Her name is already gone, you know. You will not get that one back."
+    },
+    {
+      "id": "ch3_39_v_00",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "The blankness stops rising. Ink returns to eleven shelves and no further, and one of the restored tablets is a duty roster with a name on it that nobody in the room can read."
+    },
+    {
+      "id": "ch3_39_v_01",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "Meridine will rebuild the Archive. It will take four hundred years and they will start tomorrow."
+    },
+    {
+      "id": "ch3_39_v_02",
+      "chapter": "ch3",
+      "voiceKey": "Narrator",
+      "text": "The Archive endures, thinner. The tale turns to the light."
+    },
+    {
+      "id": "ch4_00_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "Aurelia has not known darkness in nine hundred years. The Halo hangs above the high spire and the light it throws does not cast shadows, which visitors find beautiful for about two days."
+    },
+    {
+      "id": "ch4_00_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "You come from Meridine carrying bad news, and the Inquisition came back yesterday carrying eleven barges of shelves. Tell me which of you I should be more afraid of."
+    },
+    {
+      "id": "ch4_00_b_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "The barges."
+    },
+    {
+      "id": "ch4_00_b_03",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Yes. I was hoping to be wrong."
+    },
+    {
+      "id": "ch4_02_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "Aurelia writes everything down and destroys nothing. The Wall of Edicts runs the length of the sanctum and it is nine hundred years deep in gold leaf."
+    },
+    {
+      "id": "ch4_02_b_01",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "Every law you have ever passed."
+    },
+    {
+      "id": "ch4_02_b_02",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Every law, every census, every confession. The first commandment of Aurelia is that a thing recorded cannot be taken from you."
+    },
+    {
+      "id": "ch4_02_b_03",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "In Meridine they proved the opposite."
+    },
+    {
+      "id": "ch4_04_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "At the fourth hour the Halo stutters. For the length of one breath, Aurelia has shadows. Nine hundred years, and nobody alive has seen their own."
+    },
+    {
+      "id": "ch4_04_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Note the hour."
+    },
+    {
+      "id": "ch4_04_b_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "Why the hour?"
+    },
+    {
+      "id": "ch4_04_b_03",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Because it is the eleventh time this season and I have all ten others written down, and they are getting closer together."
+    },
+    {
+      "id": "ch4_06_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "The Inquisition parades the Meridine shelves through the Ivory Gate. Scribes have been copying them onto the Wall since dawn."
+    },
+    {
+      "id": "ch4_06_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Inquisitor",
+      "text": "Nine hundred years of a drowned city's cowardice, brought into the light. Every erased word restored."
+    },
+    {
+      "id": "ch4_06_b_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "You are feeding it."
+    },
+    {
+      "id": "ch4_06_b_03",
+      "chapter": "ch4",
+      "voiceKey": "Inquisitor",
+      "text": "I am recording the truth. If your enemy is harmed by truth, Caller, examine which side you are on."
+    },
+    {
+      "id": "ch4_08_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "I am going to tell you something that would end me if the Inquisition heard it. I have been destroying records for four hundred years."
+    },
+    {
+      "id": "ch4_08_b_01",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "Aurelia's first commandment."
+    },
+    {
+      "id": "ch4_08_b_02",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "I know what it is. I wrote the modern wording of it. And every decade I take eleven or twelve pages off that Wall and I burn them, and I have never once been caught, and I would do it again tonight."
+    },
+    {
+      "id": "ch4_10_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "She takes you up the spire to the Halo, and this close it is not a ring of light. It is a mechanism, and it is under strain."
+    },
+    {
+      "id": "ch4_10_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "It is not a blessing. It is a lock."
+    },
+    {
+      "id": "ch4_10_b_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "On what?"
+    },
+    {
+      "id": "ch4_10_b_03",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "On the fourth door. Aurelia was built directly on top of it, and the light has been holding it shut since the founding."
+    },
+    {
+      "id": "ch4_12_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "The founding miracle. Aurelia teaches that the light was given to us for our virtue. It was not given. It was lent."
+    },
+    {
+      "id": "ch4_12_b_01",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "Lent by whom?"
+    },
+    {
+      "id": "ch4_12_b_02",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "By the woman buried under Sylvaris. Every ray over this city for nine hundred years has been hers, and we have spent it, and we have never once said her name at a service."
+    },
+    {
+      "id": "ch4_14_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "They come for Seraphel at the sixth hour with a charge sheet four hundred years long and every entry on it true."
+    },
+    {
+      "id": "ch4_14_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Inquisitor",
+      "text": "The Lightkeeper has been burning Aurelia's memory. She will answer for eleven thousand pages."
+    },
+    {
+      "id": "ch4_14_b_02",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Twelve thousand, four hundred and six. If you are going to hang me for it, hang me for the correct number."
+    },
+    {
+      "id": "ch4_16_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "While Aurelia argues about a charge sheet, the thing under it walks up to the Ivory Gate in daylight and knocks."
+    },
+    {
+      "id": "ch4_16_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Inquisitor",
+      "text": "The gate has never been closed."
+    },
+    {
+      "id": "ch4_16_b_02",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "I am aware. Close it."
+    },
+    {
+      "id": "ch4_18_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "The gold leaf on the Wall of Edicts begins to lift, letter by letter, and hangs in the air of the sanctum like a swarm."
+    },
+    {
+      "id": "ch4_18_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "It is not stealing them. It is *finishing* them. Nine hundred years of Aurelian record, read in one night."
+    },
+    {
+      "id": "ch4_20_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "The Chosen are holding the lower city. From here up, the spire is yours alone."
+    },
+    {
+      "id": "ch4_20_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Whatever you meet on these stairs, it will be wearing something you trust. That is what it does with a city that writes everything down — it knows exactly who you would open a door for."
+    },
+    {
+      "id": "ch4_22_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "The Inquisitor holds the middle landing with forty knights and the Halo flickering above all of them."
+    },
+    {
+      "id": "ch4_22_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Inquisitor",
+      "text": "I have read the Meridine shelves. All of them. I know what the light is and I know what we owe."
+    },
+    {
+      "id": "ch4_22_b_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "Then stand aside."
+    },
+    {
+      "id": "ch4_22_b_03",
+      "chapter": "ch4",
+      "voiceKey": "Inquisitor",
+      "text": "And tell six hundred thousand faithful that their salvation was a loan from a corpse? No, Caller. Some truths are load-bearing and this one is not mine to pull out."
+    },
+    {
+      "id": "ch4_24_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "The Inquisitor is dying on the landing and he is still arguing, because he is Aurelian and that is what they do."
+    },
+    {
+      "id": "ch4_24_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Inquisitor",
+      "text": "The clause. The fifth shall keep the count. Do you know what the count *is*, Caller? It is not a tally of tribute."
+    },
+    {
+      "id": "ch4_24_b_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "Then what?"
+    },
+    {
+      "id": "ch4_24_b_03",
+      "chapter": "ch4",
+      "voiceKey": "Inquisitor",
+      "text": "Years. Duskveil has been counting down."
+    },
+    {
+      "id": "ch4_26_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "The pact was signed nine hundred and eleven years ago. The lock was cut for nine hundred."
+    },
+    {
+      "id": "ch4_26_b_01",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "It expired eleven years ago."
+    },
+    {
+      "id": "ch4_26_b_02",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Eleven years ago the Grove's moss stopped growing back in one clearing and nobody thought it was worth a letter."
+    },
+    {
+      "id": "ch4_28_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "Thornmaw is standing on the upper stair with his flanks steaming in the cold, and he does not look surprised to see you."
+    },
+    {
+      "id": "ch4_28_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Thornmaw",
+      "text": "You are four days later than I hoped."
+    },
+    {
+      "id": "ch4_28_b_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "You have been ahead of me since Sylvaris."
+    },
+    {
+      "id": "ch4_28_b_03",
+      "chapter": "ch4",
+      "voiceKey": "Thornmaw",
+      "text": "I have been *opening* doors ahead of you since Sylvaris. Do not thank me yet. Ask me why."
+    },
+    {
+      "id": "ch4_30_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Thornmaw",
+      "text": "A thousand years I stood on her grave and listened to her. She is not a monster, Caller. She is a woman who was buried alive to hold something down, and five cities agreed to keep her fed and forget her name."
+    },
+    {
+      "id": "ch4_30_b_01",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "She has been erasing archives and hollowing people."
+    },
+    {
+      "id": "ch4_30_b_02",
+      "chapter": "ch4",
+      "voiceKey": "Thornmaw",
+      "text": "She has been *calling*. For nine hundred years. In every language any of us could hear. What would you have sounded like, by the end?"
+    },
+    {
+      "id": "ch4_32_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Warden. Finish it. What is under her?"
+    },
+    {
+      "id": "ch4_32_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Thornmaw",
+      "text": "I do not know. She would never say. In a thousand years of nights, that is the only question she refused."
+    },
+    {
+      "id": "ch4_32_b_02",
+      "chapter": "ch4",
+      "voiceKey": "Thornmaw",
+      "text": "But she said this: if she is ever freed, someone must be in the ground before she leaves it. Someone willing."
+    },
+    {
+      "id": "ch4_34_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "The Halo tears. Aurelia has shadows for the first time in nine hundred years and they are all pointing the same way — down."
+    },
+    {
+      "id": "ch4_34_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Four hundred years I burned pages to buy this city time, and it bought eleven. Take the spire, Caller. I will hold what is left of the light."
+    },
+    {
+      "id": "ch4_36_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "She walks into the broken Halo and the mechanism takes her the way a lock takes a key — completely, and without ceremony."
+    },
+    {
+      "id": "ch4_36_b_01",
+      "chapter": "ch4",
+      "voiceKey": "Seraphel",
+      "text": "Tell Aurelia the truth. All of it. We were never owed the light. Tell them, and then let them decide what kind of city they want to be in the dark."
+    },
+    {
+      "id": "ch4_38_b_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "What is left of the Halo speaks, and it uses Seraphel's voice because it has just finished reading her."
+    },
+    {
+      "id": "ch4_38_b_01",
+      "chapter": "ch4",
+      "voiceKey": "The Voice",
+      "text": "Four cities. Four doors. Your warden opened three of them for you and you called it help."
+    },
+    {
+      "id": "ch4_38_b_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "He opened them so I could close them."
+    },
+    {
+      "id": "ch4_38_b_03",
+      "chapter": "ch4",
+      "voiceKey": "The Voice",
+      "text": "He opened them so you would be standing at the fifth when the count runs out. Go to Nyxhollow, Caller. Everyone else already has."
+    },
+    {
+      "id": "ch4_39_p_00",
+      "chapter": "ch4",
+      "voiceKey": "The Voice",
+      "text": "She gave you an instruction with her last breath. Ask yourself who was listening when she said it."
+    },
+    {
+      "id": "ch4_39_v_00",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "The Halo goes out. Aurelia stands in its first darkness in nine hundred years, and the shadows are ordinary, and long, and harmless."
+    },
+    {
+      "id": "ch4_39_v_01",
+      "chapter": "ch4",
+      "voiceKey": "Thornmaw",
+      "text": "Three doors shut. One left, and it is the one that has been counted down to."
+    },
+    {
+      "id": "ch4_39_v_02",
+      "chapter": "ch4",
+      "voiceKey": "You",
+      "text": "You are going to tell me why you opened them."
+    },
+    {
+      "id": "ch4_39_v_03",
+      "chapter": "ch4",
+      "voiceKey": "Thornmaw",
+      "text": "In Nyxhollow. In front of Duskveil, so that there is a witness who can stop me if the answer is bad enough."
+    },
+    {
+      "id": "ch4_39_v_04",
+      "chapter": "ch4",
+      "voiceKey": "Narrator",
+      "text": "Aurelia endures, in the dark. The tale turns at last to the thankless city."
+    },
+    {
+      "id": "ch5_00_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "You have been told about Nyxhollow your whole life. Black spires, a violet moon, a people who traffic in rot."
+    },
+    {
+      "id": "ch5_00_b_01",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "What you find is a city with clean streets, full granaries, and a watch that changes on the hour, every hour, without fail. It is the most disciplined place you have ever stood in."
+    },
+    {
+      "id": "ch5_00_b_02",
+      "chapter": "ch5",
+      "voiceKey": "Thornmaw",
+      "text": "Four capitals spent nine hundred years describing this city to each other. None of them ever visited."
+    },
+    {
+      "id": "ch5_02_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "The heart of Nyxhollow is not a palace. It is a hall of black glass ledgers, nine hundred years deep, and every page is a tally."
+    },
+    {
+      "id": "ch5_02_b_01",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "The count."
+    },
+    {
+      "id": "ch5_02_b_02",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "The count. Meridine erased its history to starve her. Aurelia wrote everything and fed her. We simply counted, every year, without missing one."
+    },
+    {
+      "id": "ch5_04_b_00",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "Nine hundred entries. What is the unit?"
+    },
+    {
+      "id": "ch5_04_b_01",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "Years remaining."
+    },
+    {
+      "id": "ch5_04_b_02",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "Then it reached zero —"
+    },
+    {
+      "id": "ch5_04_b_03",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "Eleven years ago. And I have been writing negative numbers in this ledger ever since, alone, while four capitals argued about trade tariffs."
+    },
+    {
+      "id": "ch5_06_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Thornmaw",
+      "text": "I asked for a witness. Here is the confession. I opened the first three doors. Sylvaris, Ashmar, Meridine — I went ahead of the Caller and I unsealed each one."
+    },
+    {
+      "id": "ch5_06_b_01",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "I know. I have been watching you do it."
+    },
+    {
+      "id": "ch5_06_b_02",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "You *knew*?"
+    },
+    {
+      "id": "ch5_06_b_03",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "I have counted every door he opened. It is the only reason the fifth has not torn. They had to open in order, and slowly, or this one takes the whole coast with it."
+    },
+    {
+      "id": "ch5_08_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "Ravenna takes you to a wall of names. It is not a memorial to war. Every name is a Duskveil, and there is one per generation, without a gap, for nine hundred years."
+    },
+    {
+      "id": "ch5_08_b_01",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "Your family has sent one down. Every generation."
+    },
+    {
+      "id": "ch5_08_b_02",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "Her condition was that somebody willing had to be in the ground. Not a prisoner. Not a sacrifice. Willing. Four cities agreed to that clause in an afternoon and then went home."
+    },
+    {
+      "id": "ch5_10_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "The final name on the wall was carved eleven years ago and the stone dust has not been swept from under it."
+    },
+    {
+      "id": "ch5_10_b_01",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "Who was she?"
+    },
+    {
+      "id": "ch5_10_b_02",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "My sister. She was nineteen. She volunteered because the count had run out and I was needed up here, and because one of us had to and she got to the door first."
+    },
+    {
+      "id": "ch5_12_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "The violet Shard hangs in a shaft of still air under the city, and it is not glowing steadily. It pulses, unevenly, like something breathing badly."
+    },
+    {
+      "id": "ch5_12_b_01",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "Ten years it held that rhythm. This season it began to stutter."
+    },
+    {
+      "id": "ch5_14_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "Riders arrive from Sylvaris, Ashmar, Meridine and Aurelia within the same day. Nine hundred years of silence, and now everyone has an opinion."
+    },
+    {
+      "id": "ch5_14_b_01",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "They want to know what Nyxhollow intends to do about it. Read the first line of every letter. Go on."
+    },
+    {
+      "id": "ch5_14_b_02",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "They all begin by asking whose fault it is."
+    },
+    {
+      "id": "ch5_16_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "Beneath the Heartshard the fifth door is not a shaft or a vein or a vault. It is a plain stone stair going down, well maintained, with a handrail worn smooth by nine hundred years of use."
+    },
+    {
+      "id": "ch5_16_b_01",
+      "chapter": "ch5",
+      "voiceKey": "Thornmaw",
+      "text": "Somebody has swept these steps."
+    },
+    {
+      "id": "ch5_16_b_02",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "Somebody sweeps them every week."
+    },
+    {
+      "id": "ch5_18_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "Every landing has a lamp. Every lamp has oil. Somebody has been coming down here, alone, every week, for eleven years, to keep the lamps lit for a sister who cannot see them."
+    },
+    {
+      "id": "ch5_18_b_01",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "Ravenna."
+    },
+    {
+      "id": "ch5_18_b_02",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "Do not."
+    },
+    {
+      "id": "ch5_20_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "Past the last lamp the stair keeps going, and the guard does not."
+    },
+    {
+      "id": "ch5_20_b_01",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "From here it is one at a time. That is not a rule of mine. It is a rule of the place."
+    },
+    {
+      "id": "ch5_22_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "She is nineteen. She has been nineteen for eleven years. She is sitting with her back against the stone with her hands open on her knees, and she is entirely, unbearably awake."
+    },
+    {
+      "id": "ch5_22_b_01",
+      "chapter": "ch5",
+      "voiceKey": "The Sister",
+      "text": "Ravenna. You are late with the oil."
+    },
+    {
+      "id": "ch5_22_b_02",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "I am four days early."
+    },
+    {
+      "id": "ch5_22_b_03",
+      "chapter": "ch5",
+      "voiceKey": "The Sister",
+      "text": "Oh. Then it is worse than I thought."
+    },
+    {
+      "id": "ch5_24_b_00",
+      "chapter": "ch5",
+      "voiceKey": "The Sister",
+      "text": "Ten. Grandmother did ten. Her father did ten. Nobody has ever done eleven, and there is a reason nobody has ever done eleven."
+    },
+    {
+      "id": "ch5_24_b_01",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "What happens at eleven?"
+    },
+    {
+      "id": "ch5_24_b_02",
+      "chapter": "ch5",
+      "voiceKey": "The Sister",
+      "text": "You stop being able to tell which of the two of you is doing the calling."
+    },
+    {
+      "id": "ch5_26_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "Beyond the sister, in the deepest chamber, there is a woman in the stone. She has been there for a thousand years and she turns her head when you come in."
+    },
+    {
+      "id": "ch5_26_b_01",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "You are the one who has been shutting my doors."
+    },
+    {
+      "id": "ch5_26_b_02",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "I am."
+    },
+    {
+      "id": "ch5_26_b_03",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "Good. Now sit down, because you are about to be very angry with four cities and I would rather you were sitting."
+    },
+    {
+      "id": "ch5_28_b_00",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "Tell me what you are holding down."
+    },
+    {
+      "id": "ch5_28_b_01",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "Nothing."
+    },
+    {
+      "id": "ch5_28_b_02",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "Nothing."
+    },
+    {
+      "id": "ch5_28_b_03",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "There is nothing under me. There never was. I told five kings there was a horror beneath this stone because it was the only thing that would make them build cities on top of the doors instead of digging them out."
+    },
+    {
+      "id": "ch5_28_b_04",
+      "chapter": "ch5",
+      "voiceKey": "Thornmaw",
+      "text": "A thousand years. You never told me that."
+    },
+    {
+      "id": "ch5_28_b_05",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "You would have stopped visiting."
+    },
+    {
+      "id": "ch5_30_b_00",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "Me. Not on purpose. I have been calling for nine hundred years and nobody came, and a voice that is never answered does not stay a voice. It becomes weather."
+    },
+    {
+      "id": "ch5_30_b_01",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "The blight. The erasure. The forge going cold. All of it was —"
+    },
+    {
+      "id": "ch5_30_b_02",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "A woman in a hole, asking. Yes. I am so sorry about your friend."
+    },
+    {
+      "id": "ch5_32_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Thornmaw",
+      "text": "Then let me take the stone. I have sat over you for a thousand years already. I am practised."
+    },
+    {
+      "id": "ch5_32_b_01",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "You are not willing, old friend. You are loving. It is a warmer thing and it is the wrong shape for this lock."
+    },
+    {
+      "id": "ch5_32_b_02",
+      "chapter": "ch5",
+      "voiceKey": "Thornmaw",
+      "text": "Explain the difference."
+    },
+    {
+      "id": "ch5_32_b_03",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "Willing means you could leave and you choose the stone anyway. You have never once believed you could leave."
+    },
+    {
+      "id": "ch5_34_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "I have kept the count for nineteen years. I have carried oil down four hundred and twelve times. I could walk up that stair tonight and be Queen of Nyxhollow until I died old."
+    },
+    {
+      "id": "ch5_34_b_01",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "Get up, little sister. You are relieved."
+    },
+    {
+      "id": "ch5_34_b_02",
+      "chapter": "ch5",
+      "voiceKey": "The Sister",
+      "text": "Ravenna —"
+    },
+    {
+      "id": "ch5_34_b_03",
+      "chapter": "ch5",
+      "voiceKey": "Ravenna",
+      "text": "Eleven years. You did eleven. Nobody has ever done eleven. Go and be nineteen somewhere with weather in it."
+    },
+    {
+      "id": "ch5_36_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "Nine hundred years of unanswered calling does not simply disperse because somebody finally answered. It has been a thing in its own right for a long time now."
+    },
+    {
+      "id": "ch5_36_b_01",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "It is not mine any more, Caller. I made it and it left home. You will have to put it down yourself."
+    },
+    {
+      "id": "ch5_38_b_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "It goes up into the Heartshard and wears it, and nine hundred years of Nyxhollow's patience turns its face toward you."
+    },
+    {
+      "id": "ch5_38_b_01",
+      "chapter": "ch5",
+      "voiceKey": "The Voice",
+      "text": "Five cities heard me and four of them looked away. I am what is left when you do that for long enough."
+    },
+    {
+      "id": "ch5_38_b_02",
+      "chapter": "ch5",
+      "voiceKey": "You",
+      "text": "I know. Someone is holding the stone now."
+    },
+    {
+      "id": "ch5_38_b_03",
+      "chapter": "ch5",
+      "voiceKey": "The Voice",
+      "text": "Then you have fixed the cause and left the consequence standing in front of you. How very like all five of you."
+    },
+    {
+      "id": "ch5_39_p_00",
+      "chapter": "ch5",
+      "voiceKey": "The Voice",
+      "text": "Answer me properly, then."
+    },
+    {
+      "id": "ch5_39_v_00",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "The Heartshard steadies. Under Nyxhollow a woman who has been nineteen for eleven years stands up, and above her a queen sits down with her hands open on her knees."
+    },
+    {
+      "id": "ch5_39_v_01",
+      "chapter": "ch5",
+      "voiceKey": "The First Caller",
+      "text": "Sylvaris, Ashmar, Meridine, Aurelia, Nyxhollow. Five doors shut, and one of them shut honestly. Do not let them forget which."
+    },
+    {
+      "id": "ch5_39_v_02",
+      "chapter": "ch5",
+      "voiceKey": "Thornmaw",
+      "text": "I will stay. Not for the lock — she is right, I was never the right shape for it. I will stay because somebody should be down here who chose to be, and because I have four hundred and twelve lamps to keep lit."
+    },
+    {
+      "id": "ch5_39_v_03",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "You climb the well-kept stair alone. Behind you, for the first time in a thousand years, there is conversation in the dark."
+    },
+    {
+      "id": "ch5_39_v_04",
+      "chapter": "ch5",
+      "voiceKey": "Narrator",
+      "text": "The five endure. Set One is closed."
+    }
+  ]
+}
