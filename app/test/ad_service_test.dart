@@ -39,6 +39,21 @@ class _FakeInterstitialHandle implements AdInterstitialHandle {
   void dispose() => disposeCalls++;
 }
 
+class _FakeRewardedHandle implements AdRewardedHandle {
+  int showCalls = 0;
+  int disposeCalls = 0;
+  bool earns = true;
+
+  @override
+  Future<bool> show() async {
+    showCalls++;
+    return earns;
+  }
+
+  @override
+  void dispose() => disposeCalls++;
+}
+
 class _FakeAdPlatform implements AdPlatform {
   int initializeCalls = 0;
   int bannerLoads = 0;
@@ -148,6 +163,32 @@ void main() {
       isTrue,
       reason: 'the fight after the grace period is the first with an ad',
     );
+  });
+
+  test('a loaded rewarded ad notifies listeners so offers can appear', () async {
+    // The menu's FREE GOLD tile only exists while an ad is ready, and loading
+    // finishes well after the menu is first built. Without a notification the
+    // tile never appears no matter how ready the ad is — which is exactly what
+    // shipped in build 46.
+    final save = await SaveService.load(emptyLibrary);
+    final platform = _FakeAdPlatform();
+    platform.rewarded = _FakeRewardedHandle();
+    final service = AdService(
+      save: save,
+      platform: platform,
+      consentPlatform: _FakeConsentPlatform(),
+    );
+
+    await service.initialize();
+    expect(service.rewardedReady, isFalse, reason: 'nothing loaded yet');
+
+    var notifications = 0;
+    service.addListener(() => notifications++);
+
+    await service.preloadRewarded();
+    expect(service.rewardedReady, isTrue);
+    expect(notifications, greaterThan(0),
+        reason: 'a screen showing rewarded offers must be told to rebuild');
   });
 
   test('rewarded offers survive Remove Ads', () {

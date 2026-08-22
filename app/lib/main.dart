@@ -155,6 +155,12 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       verifier: cloud.verifyPurchase,
     );
     final ads = AdService(save: save);
+    // The menu shows offers that only exist once an ad is loaded (FREE GOLD),
+    // and loading finishes long after this screen is first built. Without
+    // listening here the tile would never appear, however ready the ad was.
+    ads.addListener(() {
+      if (mounted) setState(() {});
+    });
     setState(() {
       _library = library;
       _save = save;

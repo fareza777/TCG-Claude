@@ -17,11 +17,10 @@ abstract final class AdMobConfig {
     defaultValue: 'ca-app-pub-6279186647593327/9807672400',
   );
 
-  /// Rewarded video. Empty until a unit exists in the AdMob account, and the
-  /// offers stay hidden while it is — a button that fails to produce an ad is
-  /// worse than no button.
+  /// Rewarded video used for the optional Gold reward and Arena revive.
   static const productionRewardedUnitId = String.fromEnvironment(
     'ADMOB_REWARDED_UNIT_ID',
+    defaultValue: 'ca-app-pub-6279186647593327/4838943412',
   );
 
   static const testBannerUnitId = 'ca-app-pub-3940256099942544/6300978111';
