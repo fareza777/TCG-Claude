@@ -111,6 +111,45 @@ void main() {
     });
   });
 
+  testWidgets('a banner in bottomNavigationBar leaves the body its height', (
+    tester,
+  ) async {
+    // Shipped broken once: AdBanner returned a Container with an alignment and
+    // no height, which expands to whatever it is offered. In
+    // Scaffold.bottomNavigationBar that is the whole screen, so the body was
+    // squeezed to nothing and six screens rendered as a banner floating in the
+    // dark. The banner must always claim only the height it needs.
+    final save = await SaveService.load(emptyLibrary);
+    final ads = AdService(
+      save: save,
+      platform: _AdPlatform(),
+      consentPlatform: _GrantedConsentPlatform(),
+    );
+    await ads.initialize();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          bottomNavigationBar: AdBanner(adService: ads),
+          body: const Center(child: Text('screen content')),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.byKey(const ValueKey('ad-banner')), findsOneWidget);
+    expect(find.text('screen content'), findsOneWidget);
+
+    final screen = tester.getSize(find.byType(Scaffold)).height;
+    final banner = tester.getSize(find.byKey(const ValueKey('ad-banner')));
+    expect(banner.height, lessThan(screen / 2),
+        reason: 'the banner is eating the screen instead of sitting on it');
+
+    final body = tester.getSize(find.text('screen content'));
+    expect(body.height, greaterThan(0),
+        reason: 'the body must still be laid out');
+  });
+
   testWidgets('banner disappears immediately after Remove Ads is granted', (
     tester,
   ) async {

@@ -78,22 +78,33 @@ class _AdBannerState extends State<AdBanner> {
     });
   }
 
+  /// Margin (4 + 8) plus padding (3 + 3) around the ad itself.
+  static const _chromeHeight = 18.0;
+
   @override
   Widget build(BuildContext context) {
     final handle = _handle;
     if (!widget.adService.adsEnabled || handle == null) {
       return const SizedBox.shrink();
     }
-    return Container(
-      key: const ValueKey('ad-banner'),
-      alignment: Alignment.center,
-      margin: const EdgeInsets.fromLTRB(12, 4, 12, 8),
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      color: Colors.black.withValues(alpha: 0.12),
-      child: SizedBox(
-        width: handle.width.toDouble(),
-        height: handle.height.toDouble(),
-        child: handle.buildWidget(),
+    // The explicit height is not decoration. A Container that has an
+    // alignment but no height expands to fill whatever it is given, and
+    // Scaffold.bottomNavigationBar offers it the whole screen — which pushed
+    // the body to zero height and left six screens showing nothing but a
+    // banner floating in the middle of the dark.
+    return SizedBox(
+      height: handle.height.toDouble() + _chromeHeight,
+      child: Container(
+        key: const ValueKey('ad-banner'),
+        alignment: Alignment.center,
+        margin: const EdgeInsets.fromLTRB(12, 4, 12, 8),
+        padding: const EdgeInsets.symmetric(vertical: 3),
+        color: Colors.black.withValues(alpha: 0.12),
+        child: SizedBox(
+          width: handle.width.toDouble(),
+          height: handle.height.toDouble(),
+          child: handle.buildWidget(),
+        ),
       ),
     );
   }
