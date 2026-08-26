@@ -70,13 +70,45 @@ class AiPlayer {
   /// Step 3 (one iteration): deploy the single most-expensive affordable unit.
   /// Returns the new state and the deployed unit's instance id, or null when
   /// no unit can be played.
+  /// Roughly what a unit is worth on an empty board.
+  ///
+  /// Stats plus what its keywords are actually good for. Evasion and reach are
+  /// worth more than raw numbers, which is why sorting by cost alone made the
+  /// AI prefer a big vanilla over a smaller card that does something.
+  static double unitValue(CardDef def) {
+    var score = (def.might ?? 0) * 1.15 + (def.guard ?? 0) * 0.85;
+    for (final keyword in def.keywords) {
+      score += switch (keyword) {
+        Keyword.soar => 2.2, // hard to block at all
+        Keyword.rush => 1.8, // damage this turn, not next
+        Keyword.swiftstrike => 1.6,
+        Keyword.leech => 1.4,
+        Keyword.venom => 1.5,
+        Keyword.dread => 1.2,
+        Keyword.rampage => 1.1,
+        Keyword.intercept => 1.0,
+        Keyword.alert => 0.9,
+        Keyword.bulwark => 0.4, // defensive only; it cannot attack
+        Keyword.ambush => 0.8,
+        Keyword.aegis => 1.3,
+      };
+    }
+    score += def.aegisValue * 0.6;
+    if (def.effects.isNotEmpty) score += 1.2; // it does something on arrival
+    return score;
+  }
+
   ({GameState state, int deployedId})? deployNextUnit(GameState s, PlayerId me) {
     final hand = s
         .player(me)
         .hand
         .where((c) => c.def.type == CardType.unit)
-        .toList()
-      ..sort((a, b) => b.def.totalCost.compareTo(a.def.totalCost));
+        .toList();
+    if (tier == AiTier.greedy) {
+      hand.sort((a, b) => b.def.totalCost.compareTo(a.def.totalCost));
+    } else {
+      hand.sort((a, b) => unitValue(b.def).compareTo(unitValue(a.def)));
+    }
     for (final card in hand) {
       try {
         final next = Game.playUnit(s, me, card.instanceId,
@@ -330,6 +362,54 @@ class AiPlayer {
   /// hold back a unit if the defender has a strictly better blocker.
   /// Strategist: 1-ply lookahead — simulate the opponent's best blocks and
   /// prune attackers that lower the resulting board evaluation.
+  /// Units the opponent could actually put in front of [attacker].
+  ///
+  /// Soar can only be blocked by Soar or Intercept, so a flier facing a ground
+  /// board is unblockable — which is exactly the case a naive damage count
+  /// gets wrong in both directions.
+  List<CardInstance> _blockersFor(
+      GameState s, PlayerId me, CardInstance attacker) {
+    final ready = s
+        .player(me.opponent)
+        .arena
+        .where((c) => c.def.type == CardType.unit && !c.exerted);
+    if (!attacker.def.keywords.contains(Keyword.soar)) return ready.toList();
+    return ready
+        .where((b) =>
+            b.def.keywords.contains(Keyword.soar) ||
+            b.def.keywords.contains(Keyword.intercept))
+        .toList();
+  }
+
+  /// True when swinging with [attackers] ends the game this turn even if the
+  /// opponent blocks as well as they possibly can.
+  ///
+  /// Each blocker is assumed to stop the single biggest attacker it is allowed
+  /// to stop — the best case for the defender. If the rest still gets there,
+  /// the attack is a win and nothing else about the board matters.
+  bool _isLethal(GameState s, PlayerId me, List<CardInstance> attackers) {
+    final health = s.player(me.opponent).health;
+    if (health <= 0) return false;
+
+    final remaining = [...attackers]..sort((a, b) => b.might.compareTo(a.might));
+    final used = <int>{};
+
+    for (final attacker in [...remaining]) {
+      final options = _blockersFor(s, me, attacker)
+          .where((b) => !used.contains(b.instanceId))
+          .toList();
+      if (options.isEmpty) continue;
+      // The defender spends a blocker on the biggest thing it can reach.
+      options.sort((a, b) => b.guard.compareTo(a.guard));
+      used.add(options.first.instanceId);
+      remaining.remove(attacker);
+      if (used.length >= _blockersFor(s, me, attacker).length) continue;
+    }
+
+    final through = remaining.fold<int>(0, (sum, c) => sum + c.might);
+    return through >= health;
+  }
+
   List<int> chooseAttackers(GameState s, PlayerId me) {
     final myUnits = s
         .player(me)
@@ -338,6 +418,14 @@ class AiPlayer {
             c.canAttack && !c.def.keywords.contains(Keyword.bulwark))
         .toList();
     if (myUnits.isEmpty) return const [];
+
+    // Winning beats every other consideration. Checked before the tier
+    // heuristics because those exist to preserve a board that will not matter
+    // if the game ends here.
+    if (tier != AiTier.greedy && _isLethal(s, me, myUnits)) {
+      return [for (final c in myUnits) c.instanceId];
+    }
+
     if (tier == AiTier.greedy) {
       return [for (final c in myUnits) c.instanceId];
     }
