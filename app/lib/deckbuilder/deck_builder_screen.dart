@@ -9,23 +9,25 @@ import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
 import '../widgets/card_zoom.dart';
-import '../widgets/ad_banner.dart';
-import '../services/ad_service.dart';
 
 /// Build and save 40+ card decks from owned cards. Wellsprings are treated
 /// as unlimited basic resources (cap 20); other cards are limited by owned
 /// copies and rarity (Legendary 1, else 3).
 class DeckBuilderScreen extends StatefulWidget {
+  /// Deck-size rules, public because PvP and the arena must agree with them.
+  /// They were duplicated as a bare 40 in PvP once, and the two drifted.
+  static const minDeck = 40;
+  static const maxDeck = 60;
+  static const maxWellspring = 20;
+
   final CardLibrary library;
   final SaveService save;
-  final AdService adService;
   final String? editDeck;
 
   const DeckBuilderScreen({
     super.key,
     required this.library,
     required this.save,
-    required this.adService,
     this.editDeck,
   });
 
@@ -37,9 +39,9 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   final Map<String, int> _deck = {}; // cardId -> count
   Dominion? _filter;
 
-  static const minDeck = 40;
-  static const maxDeck = 60;
-  static const maxWellspring = 20;
+  static const minDeck = DeckBuilderScreen.minDeck;
+  static const maxDeck = DeckBuilderScreen.maxDeck;
+  static const maxWellspring = DeckBuilderScreen.maxWellspring;
 
   @override
   void initState() {
@@ -296,7 +298,6 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
 
     final valid = _size >= minDeck;
     return Scaffold(
-      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(
@@ -336,11 +337,19 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.arrow_back, color: AppTheme.textPrimary),
           ),
-          const Text('Deck Builder',
-              style: TextStyle(
-                  color: AppTheme.textPrimary,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800)),
+          // The title yields, not the Save button. This row's fixed children
+          // — back arrow, two icons, the counter and Save — already exceed a
+          // narrow phone, so without Flexible the Spacer collapses and the
+          // last child, Save, is the one that gets clipped.
+          const Flexible(
+            child: Text('Deck Builder',
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                style: TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800)),
+          ),
           const Spacer(),
           IconButton(
             tooltip: 'Import code',
@@ -358,7 +367,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                   color: valid ? const Color(0xFF7FE0A8) : AppTheme.danger,
                   fontSize: 17,
                   fontWeight: FontWeight.w900)),
-          Text('/$minDeck  ·  ${_wellsprings}W',
+          Text('/$minDeck · ${_wellsprings}W',
+              softWrap: false,
               style: const TextStyle(color: AppTheme.textMuted, fontSize: 12)),
           const SizedBox(width: 8),
           GestureDetector(

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'about/about_screen.dart';
 import 'auth/login_screen.dart';
 import 'card_render/card_widget.dart';
 import 'collection/collection_screen.dart';
@@ -29,16 +30,24 @@ import 'services/cloud_sync_service.dart';
 import 'services/gold_purchase_service.dart';
 import 'services/remove_ads_purchase_service.dart';
 import 'services/save_service.dart';
+import 'services/telemetry_service.dart';
 import 'splash_screen.dart';
 import 'story/story_screen.dart';
 import 'theme.dart';
 import 'tutorial/tutorial_screen.dart';
-import 'widgets/ad_banner.dart';
 import 'widgets/delete_account_tile.dart';
 import 'widgets/remove_ads_offer.dart';
 import 'widgets/privacy_options_tile.dart';
 
 Future<void> main() async {
+  // Everything runs inside the guarded zone so an error escaping an async gap
+  // reaches a report instead of vanishing. Reporting never blocks startup.
+  TelemetryService.instance.captureErrors(() async {
+    await _boot();
+  });
+}
+
+Future<void> _boot() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // The backend is an enhancement, never a gate: a failure here leaves the
@@ -53,6 +62,10 @@ Future<void> main() async {
       debugPrint('Backend unavailable, continuing offline: $error');
     }
   }
+
+  unawaited(TelemetryService.instance.init().then(
+    (_) => TelemetryService.instance.track('app_opened'),
+  ));
 
   runApp(const ShardfallApp());
 }
@@ -441,16 +454,26 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: AppTheme.panel,
+      // Without these two the sheet is capped at 9/16 of the screen and its
+      // Column simply runs off the bottom with no way to scroll: every item
+      // past Remove Ads — Delete account, About — was unreachable.
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (_) => StatefulBuilder(
-        builder: (context, setSheet) => Padding(
-          padding: const EdgeInsets.fromLTRB(20, 18, 20, 30),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        builder: (context, setSheet) => SafeArea(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.85,
+            ),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 18, 20, 30),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
               const Text(
                 'Settings',
                 style: TextStyle(
@@ -552,6 +575,20 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                 ),
               if (_auth?.isSignedIn == true)
                 DeleteAccountTile(onDelete: _deleteAccount),
+              ListTile(
+                leading:
+                    const Icon(Icons.info_outline, color: Color(0xFFC9A86A)),
+                title: const Text('About',
+                    style: TextStyle(color: AppTheme.textPrimary)),
+                subtitle: const Text('Developer, version, rate and share',
+                    style: TextStyle(color: AppTheme.textMuted, fontSize: 12)),
+                onTap: () {
+                  AudioManager.instance.tap();
+                  Navigator.of(context).push(MaterialPageRoute<void>(
+                    builder: (_) => const AboutScreen(),
+                  ));
+                },
+              ),
               const Divider(color: AppTheme.panelBorder),
               ListTile(
                 leading: const Icon(
@@ -641,6 +678,9 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                 ),
               ],
             ],
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -1136,7 +1176,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
-                                            QuestsScreen(save: _save!, adService: _ads!),
+                                            QuestsScreen(save: _save!),
                                       ),
                                     ),
                                   ),
@@ -1149,7 +1189,6 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => CollectionScreen(
                                           library: _library!,
                                           save: _save!,
-                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1165,7 +1204,6 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => DeckBuilderScreen(
                                           library: _library!,
                                           save: _save!,
-                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1179,7 +1217,6 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => ForgeScreen(
                                           library: _library!,
                                           save: _save!,
-                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1195,7 +1232,6 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                           save: _save!,
                                           purchaseService: _purchases!,
                                           auth: _auth!,
-                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1235,7 +1271,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
-                                            AchievementsScreen(save: _save!, adService: _ads!),
+                                            AchievementsScreen(save: _save!),
                                       ),
                                     ),
                                   ),
@@ -1264,7 +1300,6 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                             ],
                           ),
                         ),
-                        if (_ads != null) AdBanner(adService: _ads!),
                       ],
                     ),
                   ),
@@ -1373,6 +1408,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     final watched = await ads.showRewarded();
     if (!mounted) return;
     if (!watched) {
+      unawaited(TelemetryService.instance.track('rewarded_gold_abandoned'));
       _toast('No Gold this time — the video needs to finish.');
       return;
     }
@@ -1380,6 +1416,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     final granted = await save.claimAdGold();
     if (!mounted) return;
     if (granted > 0) {
+      unawaited(TelemetryService.instance.track(
+          'rewarded_gold_claimed', {'left_today': save.adGoldClaimsLeft}));
       AudioManager.instance.reward();
       _toast('+$granted Gold. ${save.adGoldClaimsLeft} left today.');
     }
@@ -1400,7 +1438,12 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     required VoidCallback onTap,
     int badge = 0,
   }) {
-    return GestureDetector(
+    // Without this the whole menu is invisible to a screen reader: the
+    // tiles are gesture detectors around icons, which announce nothing.
+    return Semantics(
+      button: true,
+      label: badge > 0 ? '$label, $badge waiting' : label,
+      child: GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
@@ -1479,6 +1522,6 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
           ],
         ),
       ),
-    );
+    ));
   }
 }

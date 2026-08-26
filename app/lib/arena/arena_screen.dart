@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -9,11 +10,12 @@ import '../duel/scenario.dart';
 import '../services/ad_service.dart';
 import '../services/ad_result_flow.dart';
 import '../services/audio_manager.dart';
+import '../services/leaderboard_service.dart';
 import '../services/save_service.dart';
+import '../services/telemetry_service.dart';
 import '../theme.dart';
 import 'arena_draft.dart';
 import 'arena_draft_screen.dart';
-import '../widgets/ad_banner.dart';
 
 /// The Proving Gauntlet: choose a deck, then fight an escalating run of AI
 /// champions. Three losses ends the run; rewards scale with your win streak.
@@ -112,10 +114,13 @@ class _ArenaScreenState extends State<ArenaScreen> {
     if (!mounted) return;
 
     if (deck == null) {
+      unawaited(TelemetryService.instance.track('arena_draft_abandoned'));
       await widget.save.addGold(SaveService.arenaEntryCost);
       return;
     }
 
+    unawaited(TelemetryService.instance
+        .track('arena_entered', {'colours': _draftName(deck)}));
     setState(() {
       _deck = deck;
       _deckName = _draftName(deck);
@@ -186,6 +191,8 @@ class _ArenaScreenState extends State<ArenaScreen> {
       if (!_usedRevive && widget.adService.rewardedReady) {
         final revived = await _offerRevive();
         if (!mounted) return;
+        unawaited(TelemetryService.instance
+            .track('arena_revive', {'taken': revived, 'wins': _wins}));
         if (revived) {
           setState(() {
             _usedRevive = true;
@@ -243,6 +250,13 @@ class _ArenaScreenState extends State<ArenaScreen> {
   }
 
   Future<void> _endRun() async {
+    unawaited(TelemetryService.instance.track('arena_run_ended', {
+      'wins': _wins,
+      'gold': _runGold,
+      'used_revive': _usedRevive,
+    }));
+    unawaited(LeaderboardService.instance
+        .submitArenaRun(wins: _wins, gold: _runGold));
     final bonus = await widget.save.recordArenaRun(_wins);
     if (!mounted) return;
     await showDialog<void>(
@@ -259,10 +273,19 @@ class _ArenaScreenState extends State<ArenaScreen> {
     if (mounted) setState(() => _runActive = false);
   }
 
+  Future<void> _showStandings() async {
+    AudioManager.instance.tap();
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: AppTheme.panel,
+      isScrollControlled: true,
+      builder: (_) => const _StandingsSheet(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(
@@ -289,14 +312,23 @@ class _ArenaScreenState extends State<ArenaScreen> {
                             fontSize: 17,
                             fontWeight: FontWeight.w800)),
                     const Spacer(),
-                    const Icon(Icons.military_tech,
-                        color: Color(0xFFE3B341), size: 18),
-                    const SizedBox(width: 4),
-                    Text('Best ${widget.save.arenaBestWins}',
-                        style: const TextStyle(
-                            color: Color(0xFFE3B341),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w900)),
+                    Semantics(
+                      button: true,
+                      label: 'Standings',
+                      child: GestureDetector(
+                        onTap: _showStandings,
+                        child: Row(children: [
+                          const Icon(Icons.leaderboard,
+                              color: Color(0xFFE3B341), size: 18),
+                          const SizedBox(width: 6),
+                          Text('Best ${widget.save.arenaBestWins}',
+                              style: const TextStyle(
+                                  color: Color(0xFFE3B341),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w900)),
+                        ]),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -724,6 +756,133 @@ class _RunOverDialog extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w700)),
         ],
+      ),
+    );
+  }
+}
+
+
+/// The Proving Gauntlet standings.
+///
+/// Signed-in players only — a device id is trivially forged, and a board
+/// nobody trusts is worse than none. Guests are told plainly why they are
+/// missing rather than shown an empty list.
+class _StandingsSheet extends StatefulWidget {
+  const _StandingsSheet();
+
+  @override
+  State<_StandingsSheet> createState() => _StandingsSheetState();
+}
+
+class _StandingsSheetState extends State<_StandingsSheet> {
+  List<ArenaStanding>? _rows;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final rows = await LeaderboardService.instance.topArena();
+    if (mounted) setState(() => _rows = rows);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = _rows;
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('STANDINGS',
+                style: TextStyle(
+                    color: Color(0xFFE3B341),
+                    fontSize: 13,
+                    letterSpacing: 3,
+                    fontWeight: FontWeight.w900)),
+            const SizedBox(height: 12),
+            if (rows == null)
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 30),
+                child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+              )
+            else if (rows.isEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Text(
+                  LeaderboardService.instance.canRank
+                      ? 'Nobody has finished a run yet. Be first.'
+                      : 'Sign in from Settings to appear here. Your best run '
+                          'is kept on this device either way.',
+                  style: const TextStyle(
+                      color: AppTheme.textMuted, fontSize: 13, height: 1.45),
+                ),
+              )
+            else
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.55),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: rows.length,
+                  itemBuilder: (_, i) {
+                    final row = rows[i];
+                    return Semantics(
+                      label: 'Rank ${i + 1}, ${row.name}, ${row.bestWins} wins',
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 9),
+                        margin: const EdgeInsets.only(bottom: 4),
+                        decoration: BoxDecoration(
+                          color: row.isYou
+                              ? const Color(0xFFE3B341).withValues(alpha: 0.14)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 30,
+                              child: Text('${i + 1}',
+                                  style: TextStyle(
+                                      color: i < 3
+                                          ? const Color(0xFFE3B341)
+                                          : AppTheme.textMuted,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w900)),
+                            ),
+                            Expanded(
+                              child: Text(row.name,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: AppTheme.textPrimary,
+                                      fontSize: 13.5,
+                                      fontWeight: row.isYou
+                                          ? FontWeight.w900
+                                          : FontWeight.w500)),
+                            ),
+                            Text('${row.bestWins}W',
+                                style: const TextStyle(
+                                    color: Color(0xFFE3B341),
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w800)),
+                            const SizedBox(width: 10),
+                            Text('${row.bestGold}g',
+                                style: const TextStyle(
+                                    color: AppTheme.textMuted, fontSize: 12)),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

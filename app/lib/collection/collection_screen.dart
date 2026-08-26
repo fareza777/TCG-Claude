@@ -2,23 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../card_render/card_widget.dart';
-import '../services/ad_service.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
-import '../widgets/ad_banner.dart';
 import '../widgets/card_zoom.dart';
 
 /// The player's binder: owned cards in color, unowned locked in shadow.
 class CollectionScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
-  final AdService adService;
 
   const CollectionScreen(
       {super.key,
       required this.library,
-      required this.save,
-      required this.adService});
+      required this.save});
 
   @override
   State<CollectionScreen> createState() => _CollectionScreenState();
@@ -209,7 +205,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   },
                 ),
               ),
-              AdBanner(adService: widget.adService),
             ],
           ),
         ),

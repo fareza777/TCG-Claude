@@ -7,7 +7,6 @@ import '../services/save_service.dart';
 import '../theme.dart';
 import 'chapter_player.dart';
 import 'story_data.dart';
-import '../widgets/ad_banner.dart';
 
 /// Chapter select. Chapters unlock in sequence.
 class StoryScreen extends StatefulWidget {
@@ -35,7 +34,6 @@ class _StoryScreenState extends State<StoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(

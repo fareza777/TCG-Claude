@@ -40,18 +40,47 @@ class CardWidget extends StatelessWidget {
   static const _goldLight = Color(0xFFE6CE96);
   static const _goldDark = Color(0xFF6E5527);
 
+  /// What a screen reader says about this card.
+  ///
+  /// A card is drawn, not written, so without this it announces nothing at
+  /// all — the entire game would be unusable with TalkBack. Stats, state and
+  /// rules text in the order a player would ask for them.
+  String get semanticLabel {
+    if (faceDown) return 'Face-down card';
+    final parts = <String>[def.name, def.rarity.name, def.type.name];
+    if (def.might != null && def.guard != null) {
+      final power = plusCounters > 0
+          ? '${def.might! + plusCounters}'
+          : '${def.might}';
+      final health = damage > 0
+          ? '${def.guard! - damage} of ${def.guard}'
+          : '${def.guard}';
+      parts.add('$power might, $health guard');
+    }
+    if (def.keywords.isNotEmpty) {
+      parts.add(def.keywords.map((k) => k.name).join(', '));
+    }
+    if (def.text.isNotEmpty) parts.add(def.text);
+    if (exerted) parts.add('exerted');
+    return parts.join('. ');
+  }
+
   @override
   Widget build(BuildContext context) {
     final card = faceDown ? _back() : _face();
     // Material ancestor prevents the yellow double-underline fallback text
     // style when the card is shown in raw overlays/dialogs.
-    return Material(
-      type: MaterialType.transparency,
-      child: AnimatedRotation(
-        turns: exerted ? 0.25 * 0.35 : 0,
-        duration: const Duration(milliseconds: 220),
-        curve: Curves.easeOutCubic,
-        child: card,
+    return Semantics(
+      label: semanticLabel,
+      image: true,
+      child: Material(
+        type: MaterialType.transparency,
+        child: AnimatedRotation(
+          turns: exerted ? 0.25 * 0.35 : 0,
+          duration: const Duration(milliseconds: 220),
+          curve: Curves.easeOutCubic,
+          child: card,
+        ),
       ),
     );
   }

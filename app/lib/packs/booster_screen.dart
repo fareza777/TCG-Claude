@@ -7,13 +7,11 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 import '../card_render/card_widget.dart';
 import 'pack_odds.dart';
 import '../services/audio_manager.dart';
-import '../services/ad_service.dart';
 import '../services/auth_service.dart';
 import '../services/gold_purchase_service.dart';
 import '../services/purchase_catalog.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
-import '../widgets/ad_banner.dart';
 import '../widgets/card_zoom.dart';
 
 /// Sundering Shard Pack opening. A premium foil pack (with a shine sweep) →
@@ -27,15 +25,13 @@ class BoosterScreen extends StatefulWidget {
   /// Real-money Gold is account-only: a receipt has to outlive the device,
   /// and only a linked account can carry it. Guests see the offer locked.
   final AuthService auth;
-  final AdService adService;
 
   const BoosterScreen(
       {super.key,
       required this.library,
       required this.save,
       required this.purchaseService,
-      required this.auth,
-      required this.adService});
+      required this.auth});
 
   @override
   State<BoosterScreen> createState() => _BoosterScreenState();
@@ -153,7 +149,6 @@ class _BoosterScreenState extends State<BoosterScreen>
               Expanded(
                 child: _pack == null ? _sealedPack() : _openedPack(),
               ),
-              AdBanner(adService: widget.adService),
             ],
           ),
         ),

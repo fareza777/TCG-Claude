@@ -6,6 +6,7 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 import '../card_render/card_widget.dart';
 import '../services/audio_manager.dart';
 import '../theme.dart';
+import '../widgets/card_zoom.dart';
 import 'arena_draft.dart';
 
 /// Pick your two dominions, then build a deck one card at a time.
@@ -219,6 +220,9 @@ class _ArenaDraftScreenState extends State<ArenaDraftScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 6),
                       child: GestureDetector(
                         onTap: () => _take(card),
+                        // Drafting blind is a bad decision, not a hard one:
+                        // 132px is too small to read a card's text.
+                        onLongPress: () => showCardZoom(context, card),
                         child: CardWidget(def: card, width: 132),
                       ),
                     ),
@@ -230,7 +234,7 @@ class _ArenaDraftScreenState extends State<ArenaDraftScreen> {
         Padding(
           padding: const EdgeInsets.fromLTRB(18, 4, 18, 14),
           child: Text(
-            'Tap a card to add it to your deck.',
+            'Tap to draft it. Hold to read it.',
             style: TextStyle(
                 color: AppTheme.textMuted.withValues(alpha: 0.8),
                 fontSize: 12),

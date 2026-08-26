@@ -3,25 +3,19 @@ import 'package:flutter/material.dart';
 import '../services/audio_manager.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
-import '../widgets/ad_banner.dart';
-import '../services/ad_service.dart';
 
 /// Daily quests — progress, claim rewards. Refreshes each day.
 class QuestsScreen extends StatelessWidget {
   final SaveService save;
 
-  final AdService adService;
-
   const QuestsScreen({
     super.key,
     required this.save,
-    required this.adService,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AdBanner(adService: adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(

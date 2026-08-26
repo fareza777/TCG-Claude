@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
@@ -8,6 +10,7 @@ import '../services/ad_service.dart';
 import '../services/ad_result_flow.dart';
 import '../services/audio_manager.dart';
 import '../services/save_service.dart';
+import '../services/telemetry_service.dart';
 import '../theme.dart';
 import 'narration.dart';
 import 'story_data.dart';
@@ -403,10 +406,18 @@ class _BattleIntroState extends State<_BattleIntro> {
           await widget.save.rewardStoryBattle('${widget.chapter.id}:${widget.stageIndex}');
       await widget.save.trackQuest('story_win');
       AudioManager.instance.reward();
+      unawaited(TelemetryService.instance.track('story_battle_won', {
+        'chapter': widget.chapter.id,
+        'stage': widget.stageIndex,
+      }));
       await _showVictory(reward);
       await showPostResultInterstitial(widget.adService);
       widget.onVictory();
     } else {
+      unawaited(TelemetryService.instance.track('story_battle_lost', {
+        'chapter': widget.chapter.id,
+        'stage': widget.stageIndex,
+      }));
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Defeated. Steel yourself and try again.'),
         duration: Duration(seconds: 2),
