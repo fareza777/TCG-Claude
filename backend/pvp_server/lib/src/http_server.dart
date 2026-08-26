@@ -8,6 +8,10 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 
 import 'match_service.dart';
 
+/// Deck-size bounds, matching the client's deck builder.
+const minDeckSize = 40;
+const maxDeckSize = 60;
+
 class PvpHttpServer {
   final MatchService service;
   final CardLibrary cardLibrary;
@@ -170,8 +174,12 @@ class PvpHttpServer {
           throw const FormatException(
               'deckSnapshot contains an invalid card ID'),
     ];
-    if (ids.length != 40) {
-      throw const FormatException('deckSnapshot must contain exactly 40 cards');
+    // The deck builder allows 40 or more, so the server must too — requiring
+    // exactly 40 rejected legal decks. The upper bound stays: an unbounded
+    // deck is a way to make the server do arbitrary work.
+    if (ids.length < minDeckSize || ids.length > maxDeckSize) {
+      throw FormatException(
+          'deckSnapshot must contain $minDeckSize-$maxDeckSize cards');
     }
     return _InitializePlayer(
       userId: userId,

@@ -12,6 +12,7 @@ import 'pvp_battle_screen.dart';
 import 'pvp_duel_controller.dart';
 import 'pvp_models.dart';
 import 'pvp_service.dart';
+import '../deckbuilder/deck_builder_screen.dart';
 
 class PvpLobbyScreen extends StatefulWidget {
   final CardLibrary library;
@@ -42,7 +43,10 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
   List<_PvpDeckOption> get _options {
     final options = <_PvpDeckOption>[];
     widget.save.decks.forEach((name, ids) {
-      if (ids.length == 40) {
+      // The deck builder saves 40 *or more*, so requiring exactly 40 here made
+      // a legal 41-card deck vanish from this list with no explanation — the
+      // player was told no valid deck existed while looking at one.
+      if (ids.length >= DeckBuilderScreen.minDeck) {
         options.add(_PvpDeckOption(name: name, cardIds: ids));
       }
     });
@@ -161,7 +165,7 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
     }
     final options = _options;
     if (options.isEmpty) {
-      _snack('No valid 40-card deck is available.');
+      _snack('Build a deck of ${DeckBuilderScreen.minDeck} cards or more in DECKS first.');
       return;
     }
     final user = widget.auth.user;
@@ -373,7 +377,7 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
       border: Border.all(color: AppTheme.panelBorder),
     ),
     child: const Text(
-      'Build a 40-card deck in DECKS before entering the queue.',
+      'Build a deck of ${DeckBuilderScreen.minDeck} cards or more in DECKS before entering the queue.',
       style: TextStyle(color: AppTheme.textMuted),
     ),
   );

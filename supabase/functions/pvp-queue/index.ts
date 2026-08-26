@@ -4,6 +4,12 @@ import {
   type SupabaseClient,
 } from "jsr:@supabase/supabase-js@2";
 
+// Deck-size bounds, matching the client's deck builder. The upper bound is
+// not tidiness: without it a deck of arbitrary length would make this
+// function do arbitrary work.
+const MIN_DECK = 40;
+const MAX_DECK = 60;
+
 type QueueAction = "join" | "leave";
 
 function json(body: unknown, status = 200): Response {
@@ -145,8 +151,15 @@ Deno.serve(async (req: Request) => {
     return json({ status: "cancelled" });
   }
 
-  if (!Array.isArray(body.deckSnapshot) || body.deckSnapshot.length !== 40) {
-    return json({ error: "deck_must_contain_40_cards" }, 400);
+  // The deck builder allows 40 or more, so requiring exactly 40 here rejected
+  // legal decks. The upper bound stays — an unbounded deck is a cheap way to
+  // make this function do arbitrary work.
+  if (
+    !Array.isArray(body.deckSnapshot) ||
+    body.deckSnapshot.length < MIN_DECK ||
+    body.deckSnapshot.length > MAX_DECK
+  ) {
+    return json({ error: "deck_size_out_of_range" }, 400);
   }
   if (body.deckSnapshot.some((id) => typeof id !== "string" || !id.trim())) {
     return json({ error: "deck_contains_invalid_card_id" }, 400);
@@ -176,7 +189,7 @@ Deno.serve(async (req: Request) => {
       return json({ error: "deck_not_legal", detail: message }, 400);
     }
     if (message.includes("deck must contain")) {
-      return json({ error: "deck_must_contain_40_cards" }, 400);
+      return json({ error: "deck_size_out_of_range", detail: message }, 400);
     }
     if (message.includes("already has an active match")) {
       return json({ error: "already_in_match" }, 409);

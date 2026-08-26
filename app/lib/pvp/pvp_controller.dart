@@ -5,6 +5,7 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 
 import 'pvp_models.dart';
 import 'pvp_service.dart';
+import '../deckbuilder/deck_builder_screen.dart';
 
 class PvpController extends ChangeNotifier {
   PvpController({required this.gateway, required this.userId});
@@ -54,8 +55,10 @@ class PvpController extends ChangeNotifier {
   }
 
   Future<void> join(List<String> deckSnapshot) async {
-    if (deckSnapshot.length != 40) {
-      _setError('PvP deck must contain exactly 40 cards.');
+    if (deckSnapshot.length < DeckBuilderScreen.minDeck ||
+        deckSnapshot.length > DeckBuilderScreen.maxDeck) {
+      _setError('PvP decks are ${DeckBuilderScreen.minDeck}'
+          '–${DeckBuilderScreen.maxDeck} cards.');
       return;
     }
     await _resetConnection();
