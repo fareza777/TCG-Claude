@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
+import '../season/season.dart';
+
 import 'purchase_catalog.dart';
 
 /// Persistent player profile: gold, card ownership, story progress, decks.
@@ -50,12 +52,18 @@ class SaveService extends ChangeNotifier {
   Set<String> chaptersDone;
   Set<String> clearedBattles; // "ch1:2"
   Map<String, List<String>> decks; // deckName -> [cardId,...] (with repeats)
+  /// The season these numbers belong to, as `YYYY-MM`. A mismatch on load
+  /// means a new month has started and the track resets.
+  String seasonId;
+  int seasonXp;
+  List<int> seasonClaimed; // tiers already collected
   List<Map<String, dynamic>> quests; // daily quests
   String questDate; // yyyy-mm-dd the quests were rolled
   bool tutorialSeen;
   bool musicOn;
   bool sfxOn;
   bool voiceOn;
+  bool hapticsOn;
   bool colorblind;
   bool reduceMotion;
 
@@ -145,12 +153,16 @@ class SaveService extends ChangeNotifier {
     required this.chaptersDone,
     required this.clearedBattles,
     required this.decks,
+    required this.seasonId,
+    required this.seasonXp,
+    required this.seasonClaimed,
     required this.quests,
     required this.questDate,
     required this.tutorialSeen,
     required this.musicOn,
     required this.sfxOn,
     required this.voiceOn,
+    required this.hapticsOn,
     required this.colorblind,
     required this.reduceMotion,
   });
@@ -192,12 +204,19 @@ class SaveService extends ChangeNotifier {
       clearedBattles:
           (prefs.getStringList('clearedBattles') ?? const []).toSet(),
       decks: deckMap(),
+      seasonId: prefs.getString('seasonId') ?? '',
+      seasonXp: prefs.getInt('seasonXp') ?? 0,
+      seasonClaimed: (prefs.getStringList('seasonClaimed') ?? const [])
+          .map(int.tryParse)
+          .whereType<int>()
+          .toList(),
       quests: questList(),
       questDate: prefs.getString('questDate') ?? '',
       tutorialSeen: prefs.getBool('tutorialSeen') ?? false,
       musicOn: prefs.getBool('musicOn') ?? true,
       sfxOn: prefs.getBool('sfxOn') ?? true,
       voiceOn: prefs.getBool('voiceOn') ?? true,
+      hapticsOn: prefs.getBool('hapticsOn') ?? true,
       colorblind: prefs.getBool('colorblind') ?? false,
       reduceMotion: prefs.getBool('reduceMotion') ?? false,
     );
@@ -425,6 +444,10 @@ class SaveService extends ChangeNotifier {
   Future<bool> buyPack(List<CardDef> cards) async {
     if (!canBuyPack) return false;
     gold -= packCost;
+    _rollSeason();
+    if (seasonXp < Season.tierCount * Season.xpPerTier) {
+      seasonXp += Season.xpPerPack;
+    }
     for (final c in cards) {
       final have = owned[c.id] ?? 0;
       if (have >= maxCopies(c.rarity)) {
@@ -506,10 +529,16 @@ class SaveService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setAudio({bool? music, bool? sfx, bool? voice}) async {
+  Future<void> setAudio({
+    bool? music,
+    bool? sfx,
+    bool? voice,
+    bool? haptics,
+  }) async {
     if (music != null) musicOn = music;
     if (sfx != null) sfxOn = sfx;
     if (voice != null) voiceOn = voice;
+    if (haptics != null) hapticsOn = haptics;
     await _persist();
     notifyListeners();
   }
@@ -552,12 +581,16 @@ class SaveService extends ChangeNotifier {
         'chaptersDone': chaptersDone.toList(),
         'clearedBattles': clearedBattles.toList(),
         'decks': decks,
+        'seasonId': seasonId,
+        'seasonXp': seasonXp,
+        'seasonClaimed': seasonClaimed,
         'quests': quests,
         'questDate': questDate,
         'tutorialSeen': tutorialSeen,
         'musicOn': musicOn,
         'sfxOn': sfxOn,
         'voiceOn': voiceOn,
+        'hapticsOn': hapticsOn,
         'colorblind': colorblind,
         'reduceMotion': reduceMotion,
         'loginStreak': loginStreak,
@@ -593,10 +626,17 @@ class SaveService extends ChangeNotifier {
         Map<String, dynamic>.from(q as Map),
     ];
     questDate = data['questDate'] as String? ?? questDate;
+    seasonId = data['seasonId'] as String? ?? seasonId;
+    seasonXp = data['seasonXp'] as int? ?? seasonXp;
+    seasonClaimed = [
+      for (final t in data['seasonClaimed'] as List? ?? const [])
+        if (t is int) t,
+    ];
     tutorialSeen = data['tutorialSeen'] as bool? ?? tutorialSeen;
     musicOn = data['musicOn'] as bool? ?? musicOn;
     sfxOn = data['sfxOn'] as bool? ?? sfxOn;
     voiceOn = data['voiceOn'] as bool? ?? voiceOn;
+    hapticsOn = data['hapticsOn'] as bool? ?? hapticsOn;
     colorblind = data['colorblind'] as bool? ?? colorblind;
     reduceMotion = data['reduceMotion'] as bool? ?? reduceMotion;
     loginStreak = data['loginStreak'] as int? ?? loginStreak;
@@ -747,9 +787,77 @@ class SaveService extends ChangeNotifier {
 
   /// Advance quest progress for an event. [event] is one of the quest event
   /// keys; 'duel_win' and 'story_win' also count as 'battle_win'.
+  // ── seasonal track ───────────────────────────────────────────────────
+
+  /// Rolls the season over when the calendar has moved on.
+  ///
+  /// Called on every XP grant and whenever the season is displayed, so a
+  /// player who leaves the game open across midnight on the first still sees
+  /// the right month. Returns true when a reset happened.
+  bool _rollSeason() {
+    final now = Season.idFor(DateTime.now());
+    if (seasonId == now) return false;
+    seasonId = now;
+    seasonXp = 0;
+    seasonClaimed = [];
+    return true;
+  }
+
+  int get seasonTier => Season.tierFor(seasonXp);
+
+  /// Tiers reached but not yet collected.
+  List<SeasonTier> get claimableTiers => [
+        for (final t in Season.tiers)
+          if (t.tier <= seasonTier && !seasonClaimed.contains(t.tier)) t,
+      ];
+
+  Future<void> claimSeasonTier(int tier) async {
+    _rollSeason();
+    if (tier > seasonTier || seasonClaimed.contains(tier)) return;
+    final reward = Season.tiers.firstWhere((t) => t.tier == tier,
+        orElse: () => const SeasonTier(0, 0));
+    if (reward.tier == 0) return;
+    gold += reward.gold;
+    shards += reward.shards;
+    seasonClaimed = [...seasonClaimed, tier];
+    await _persist();
+    notifyListeners();
+  }
+
+  /// Collects everything owed in one tap. Long absences otherwise mean
+  /// tapping Claim eleven times, which is busywork, not a reward.
+  Future<({int gold, int shards, int tiers})> claimAllSeasonTiers() async {
+    _rollSeason();
+    final owed = claimableTiers;
+    if (owed.isEmpty) return (gold: 0, shards: 0, tiers: 0);
+    var g = 0;
+    var sh = 0;
+    for (final t in owed) {
+      g += t.gold;
+      sh += t.shards;
+    }
+    gold += g;
+    shards += sh;
+    seasonClaimed = [...seasonClaimed, for (final t in owed) t.tier];
+    await _persist();
+    notifyListeners();
+    return (gold: g, shards: sh, tiers: owed.length);
+  }
+
   Future<void> trackQuest(String event) async {
     final events = {event, if (event.endsWith('_win')) 'battle_win'};
     var changed = false;
+
+    // Season XP rides on the hook every win path already calls, so no screen
+    // needs a second line to feed the track.
+    final xp = Season.xpFor[event];
+    if (xp != null) {
+      if (_rollSeason()) changed = true;
+      if (seasonXp < Season.tierCount * Season.xpPerTier) {
+        seasonXp += xp;
+        changed = true;
+      }
+    }
     for (final q in quests) {
       if (events.contains(q['event']) &&
           (q['progress'] as int) < (q['target'] as int)) {
@@ -879,6 +987,11 @@ class SaveService extends ChangeNotifier {
     await _prefs.setBool('musicOn', musicOn);
     await _prefs.setBool('sfxOn', sfxOn);
     await _prefs.setBool('voiceOn', voiceOn);
+    await _prefs.setBool('hapticsOn', hapticsOn);
+    await _prefs.setString('seasonId', seasonId);
+    await _prefs.setInt('seasonXp', seasonXp);
+    await _prefs.setStringList(
+        'seasonClaimed', [for (final t in seasonClaimed) '$t']);
     await _prefs.setBool('colorblind', colorblind);
     await _prefs.setBool('reduceMotion', reduceMotion);
     await _prefs.setInt('loginStreak', loginStreak);

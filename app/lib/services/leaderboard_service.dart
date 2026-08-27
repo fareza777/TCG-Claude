@@ -20,6 +20,27 @@ class ArenaStanding {
   });
 }
 
+/// One row of the PvP ladder.
+class PvpStanding {
+  final String name;
+  final int rating;
+  final int wins;
+  final int losses;
+  final int streak;
+  final bool isYou;
+
+  const PvpStanding({
+    required this.name,
+    required this.rating,
+    required this.wins,
+    required this.losses,
+    required this.streak,
+    required this.isYou,
+  });
+
+  int get played => wins + losses;
+}
+
 /// Arena standings and the ladder, backed by the project's own Supabase.
 ///
 /// Signed-in players only, by design: a device id is trivially forged, and a
@@ -96,6 +117,64 @@ class LeaderboardService {
     } catch (error) {
       debugPrint('Arena standings unavailable: $error');
       return const [];
+    }
+  }
+
+  /// The top of the ladder, with the player's own row marked.
+  ///
+  /// Ordered by rating, then by games played, so a 1200 earned over forty
+  /// matches outranks a 1200 earned over four.
+  Future<List<PvpStanding>> topPvp({int limit = 50}) async {
+    final client = _client;
+    if (client == null) return const [];
+    try {
+      final rows = await client
+          .from('pvp_ratings')
+          .select('user_id, display_name, rating, wins, losses, streak')
+          .order('rating', ascending: false)
+          .order('wins', ascending: false)
+          .limit(limit);
+      final me = _user?.id;
+      return [
+        for (final row in rows as List)
+          PvpStanding(
+            name: (row['display_name'] as String?) ?? 'Caller',
+            rating: (row['rating'] as num?)?.toInt() ?? 1000,
+            wins: (row['wins'] as num?)?.toInt() ?? 0,
+            losses: (row['losses'] as num?)?.toInt() ?? 0,
+            streak: (row['streak'] as num?)?.toInt() ?? 0,
+            isYou: me != null && row['user_id'] == me,
+          ),
+      ];
+    } catch (error) {
+      debugPrint('Ladder unavailable: $error');
+      return const [];
+    }
+  }
+
+  /// This player's own ladder row, or null when unranked or signed out.
+  Future<PvpStanding?> myPvpStanding() async {
+    final client = _client;
+    final user = _user;
+    if (client == null || user == null) return null;
+    try {
+      final row = await client
+          .from('pvp_ratings')
+          .select('display_name, rating, wins, losses, streak')
+          .eq('user_id', user.id)
+          .maybeSingle();
+      if (row == null) return null;
+      return PvpStanding(
+        name: (row['display_name'] as String?) ?? 'Caller',
+        rating: (row['rating'] as num?)?.toInt() ?? 1000,
+        wins: (row['wins'] as num?)?.toInt() ?? 0,
+        losses: (row['losses'] as num?)?.toInt() ?? 0,
+        streak: (row['streak'] as num?)?.toInt() ?? 0,
+        isYou: true,
+      );
+    } catch (error) {
+      debugPrint('Own ladder row unavailable: $error');
+      return null;
     }
   }
 

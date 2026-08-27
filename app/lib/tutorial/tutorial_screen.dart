@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../theme.dart';
+import 'practice_battle.dart';
 
 class _TutorialPage {
   final IconData icon;
@@ -63,7 +65,12 @@ const _keywords = <(String, IconData, String)>[
 ];
 
 class TutorialScreen extends StatefulWidget {
-  const TutorialScreen({super.key});
+  /// Supplied where a practice battle can be offered. Optional so the older
+  /// call sites, which have no library to hand, keep working as a read-only
+  /// primer rather than breaking.
+  final CardLibrary? library;
+
+  const TutorialScreen({super.key, this.library});
 
   @override
   State<TutorialScreen> createState() => _TutorialScreenState();
@@ -140,9 +147,21 @@ class _TutorialScreenState extends State<TutorialScreen> {
                         _controller.nextPage(
                             duration: const Duration(milliseconds: 280),
                             curve: Curves.easeOutCubic);
-                      } else {
-                        Navigator.of(context).pop();
+                        return;
                       }
+                      final library = widget.library;
+                      if (library == null) {
+                        Navigator.of(context).pop();
+                        return;
+                      }
+                      // Reading about a turn is not the same as taking one.
+                      // The primer ends by handing the player the game.
+                      Navigator.of(context).pushReplacement<void, void>(
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              PracticeBattleScreen(library: library),
+                        ),
+                      );
                     },
                     child: Container(
                       width: double.infinity,
@@ -159,7 +178,11 @@ class _TutorialScreenState extends State<TutorialScreen> {
                         ],
                       ),
                       child: Text(
-                        _page < _pages.length - 1 ? 'NEXT' : 'BEGIN',
+                        _page < _pages.length - 1
+                            ? 'NEXT'
+                            : (widget.library == null
+                                ? 'BEGIN'
+                                : 'TRY A PRACTICE BATTLE'),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color(0xFF1C1508),

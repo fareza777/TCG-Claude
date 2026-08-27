@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../duel/duel_controller.dart';
+import '../services/leaderboard_service.dart';
 import 'pvp_controller.dart';
 import 'pvp_game_state.dart';
 import 'pvp_models.dart';
@@ -24,7 +25,10 @@ class PvpDuelController extends DuelController {
     required this.pvp,
     required this.library,
     required List<CardDef> deck,
-  }) : super(
+    Future<void> Function({required bool won})? recordResult,
+  })  : _recordResult =
+            recordResult ?? LeaderboardService.instance.recordPvpResult,
+        super(
           // Only used to satisfy the base constructor. The first projection
           // replaces this board before anything is drawn.
           playerDeck: _openingDeck(deck),
@@ -37,6 +41,15 @@ class PvpDuelController extends DuelController {
 
   final PvpController pvp;
   final CardLibrary library;
+
+  /// Injected so the ladder write can be observed in a test without a backend.
+  final Future<void> Function({required bool won}) _recordResult;
+
+  /// The ladder is written once per match, and this is what guarantees it.
+  /// Projections keep arriving after the server declares a winner — the
+  /// screen stays open on the result — so without a latch a single win would
+  /// be banked again on every frame that followed it.
+  bool _resultRecorded = false;
 
   /// The base constructor deals an opening hand, so it needs a deck big enough
   /// to draw from. Callers should not have to care: a short or empty list would
@@ -235,6 +248,16 @@ class PvpDuelController extends DuelController {
     // Seed the banner from the board we arrive on. Without this, the first
     // phase event of an ongoing turn is mistaken for a change of turn.
     _bannerSeat ??= projection.activePlayer;
+
+    // Bank the result the moment the server names a winner. This is the only
+    // place that knows both that the match ended and who was sitting here, so
+    // it is the only place that can tell the ladder anything true.
+    final winner = projection.winner;
+    if (!_resultRecorded && winner != null) {
+      _resultRecorded = true;
+      unawaited(_recordResult(won: winner == projection.viewer));
+    }
+
     ui = _uiFor(projection);
     // Two distinct windows share this screen. In waitingForReady both players
     // are only confirming they are present; the mulligan itself does not open

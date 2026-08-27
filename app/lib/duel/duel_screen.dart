@@ -5,6 +5,7 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../card_render/card_widget.dart';
 import '../services/audio_manager.dart';
+import '../services/haptics.dart';
 import '../theme.dart';
 import '../widgets/card_zoom.dart';
 import 'duel_controller.dart';
@@ -65,8 +66,10 @@ class _DuelScreenState extends State<DuelScreen>
       switch (e.kind) {
         case 'play':
           audio.cardPlay();
+          Haptics.commit();
         case 'attack':
           audio.attack();
+          Haptics.strike();
           final id = e.instanceId;
           if (id != null) {
             _lunging.add(id);
@@ -76,6 +79,7 @@ class _DuelScreenState extends State<DuelScreen>
           }
         case 'death':
           audio.damage();
+          Haptics.strike();
           _spawnFloat('✕', 0.5, const Color(0xFFB03A3A));
         case 'unitDamaged':
           audio.damage();
@@ -90,10 +94,16 @@ class _DuelScreenState extends State<DuelScreen>
               e.player == DuelController.enemy ? 0.28 : 0.66,
               AppTheme.danger);
         case 'proc':
+          // The name already flashes; the click is what makes it read as the
+          // game doing something rather than a label appearing.
+          Haptics.select();
           if (e.label != null) {
             _spawnFloat(e.label!, 0.42, const Color(0xFFE6CE96));
           }
         case 'turnStart':
+          // Only your own turn. Buzzing when the opponent starts theirs would
+          // nag during the half of the game you are not playing.
+          if (e.player == DuelController.human) Haptics.select();
           _turnBanner = e.player == DuelController.human
               ? 'YOUR TURN'
               : 'ENEMY TURN';
@@ -104,7 +114,12 @@ class _DuelScreenState extends State<DuelScreen>
               setState(() => _turnBanner = null);
             }
           });
+        case 'draw':
+          // Drawing was the one routine action with no feedback at all, which
+          // made a free card feel like nothing happening.
+          audio.tap();
         case 'discard':
+          audio.tap();
           _spawnDiscard(e.player == DuelController.enemy);
         case 'damagePlayer':
           if ((e.amount ?? 0) > 0) {
@@ -114,8 +129,13 @@ class _DuelScreenState extends State<DuelScreen>
                 AppTheme.danger);
             _flashSeq++;
             _flashTop = e.player == DuelController.enemy;
-            if (e.player == DuelController.human && !MotionPrefs.reduce) {
-              _shake.forward(from: 0);
+            if (e.player == DuelController.human) {
+              // Only damage to this player is worth the heaviest cue; buzzing
+              // the same way for damage you dealt would flatten the difference.
+              Haptics.blow();
+              if (!MotionPrefs.reduce) _shake.forward(from: 0);
+            } else {
+              Haptics.strike();
             }
           }
       }
@@ -123,6 +143,7 @@ class _DuelScreenState extends State<DuelScreen>
     if (c.isGameOver && !_endSoundPlayed) {
       _endSoundPlayed = true;
       c.playerWon ? audio.victory() : audio.defeat();
+      Haptics.blow();
     }
     if (mounted) setState(() {});
   }

@@ -23,7 +23,9 @@ import 'progress/achievements_screen.dart';
 import 'quests/quests_screen.dart';
 import 'services/ad_service.dart';
 import 'services/ad_result_flow.dart';
+import 'season/season_screen.dart';
 import 'services/audio_manager.dart';
+import 'services/haptics.dart';
 import 'services/auth_service.dart';
 import 'services/backend_config.dart';
 import 'services/cloud_sync_service.dart';
@@ -157,6 +159,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     );
     CardWidget.colorblindLabels = save.colorblind;
     MotionPrefs.reduce = save.reduceMotion;
+    Haptics.enabled = save.hapticsOn;
     final auth = AuthService();
     final cloud = CloudSyncService(save: save, auth: auth);
     final purchases = GoldPurchaseService(
@@ -200,7 +203,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
           );
           if (!mounted) return;
           await Navigator.of(context).push(
-            MaterialPageRoute<void>(builder: (_) => const TutorialScreen()),
+            MaterialPageRoute<void>(
+                builder: (_) => TutorialScreen(library: library)),
           );
           await save.markTutorialSeen();
         }
@@ -512,6 +516,24 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
               ),
               SwitchListTile(
                 title: const Text(
+                  'Vibration',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
+                subtitle: const Text(
+                  'Touch feedback in battle',
+                  style: TextStyle(color: AppTheme.textMuted, fontSize: 12),
+                ),
+                value: _save!.hapticsOn,
+                activeThumbColor: const Color(0xFFC9A86A),
+                onChanged: (v) {
+                  setSheet(() {});
+                  _save!.setAudio(haptics: v);
+                  Haptics.enabled = v;
+                  if (v) Haptics.select();
+                },
+              ),
+              SwitchListTile(
+                title: const Text(
                   'Narration',
                   style: TextStyle(color: AppTheme.textPrimary),
                 ),
@@ -626,7 +648,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                   AudioManager.instance.tap();
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => const TutorialScreen(),
+                      builder: (_) => TutorialScreen(library: _library),
                     ),
                   );
                 },
@@ -1169,6 +1191,19 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                       onTap: _watchForGold,
                                     ),
                                   _tile(
+                                    icon: Icons.military_tech,
+                                    label: 'SEASON',
+                                    color: const Color(0xFFC9A86A),
+                                    badge:
+                                        _save?.claimableTiers.length ?? 0,
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) =>
+                                            SeasonScreen(save: _save!),
+                                      ),
+                                    ),
+                                  ),
+                                  _tile(
                                     icon: Icons.assignment_turned_in,
                                     label: 'QUESTS',
                                     color: const Color(0xFFE3B341),
@@ -1281,7 +1316,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     color: DominionStyle.of(Dominion.dawn).glow,
                                     onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => const TutorialScreen(),
+                                        builder: (_) =>
+                                            TutorialScreen(library: _library),
                                       ),
                                     ),
                                   ),

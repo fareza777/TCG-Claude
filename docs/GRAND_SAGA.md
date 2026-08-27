@@ -212,9 +212,10 @@ reality-wound horrors wearing the shapes of the lost).
 
 ## 6. Set 1 chapter status
 
-Five chapters, one per Dominion, ~10 / 4 / 4 / 4 / 4 battles:
+Five chapters, one per Dominion, **20 battles each — 100 in total**. Every
+battle is preceded by its own story beat with its own generated art.
 
-1. **The Waking Grove** (Verdance) — 10 battles — *implemented*
+1. **The Waking Grove** (Verdance) — *implemented*
 2. **The Dying Forge** (Pyre) — *implemented*
 3. **The Erased Archive** (Tide) — *implemented*
 4. **The Hollow Halo** (Dawn) — *implemented (this pass)*

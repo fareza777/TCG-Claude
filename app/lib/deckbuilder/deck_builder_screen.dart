@@ -6,8 +6,10 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../card_render/card_widget.dart';
 import '../services/audio_manager.dart';
+import '../services/haptics.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
+import 'deck_suggester.dart';
 import '../widgets/card_zoom.dart';
 
 /// Build and save 40+ card decks from owned cards. Wellsprings are treated
@@ -118,6 +120,68 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         _deck[id] = n;
       }
     });
+  }
+
+  /// Builds a whole deck from what the player owns.
+  ///
+  /// Confirmed first when there is work to lose: this replaces the deck rather
+  /// than adding to it, and silently discarding twenty minutes of choices is
+  /// the kind of help nobody asks for twice.
+  Future<void> _buildForMe() async {
+    Haptics.select();
+    if (_deck.isNotEmpty) {
+      final replace = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: AppTheme.panel,
+          title: const Text('Replace this deck?',
+              style: TextStyle(color: AppTheme.textPrimary)),
+          content: const Text(
+              'This builds a fresh deck from the cards you own. What you have '
+              'here now will be discarded.',
+              style: TextStyle(color: AppTheme.textMuted, height: 1.4)),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('Keep mine')),
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Build it')),
+          ],
+        ),
+      );
+      if (replace != true) return;
+    }
+
+    final result = suggestDeck(
+      library: widget.library,
+      copiesOwned: widget.save.copiesOf,
+      size: minDeck,
+      wellspringCap: maxWellspring,
+    );
+    if (!mounted) return;
+
+    if (!result.ok) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(result.problem ?? 'Could not build a deck.')));
+      return;
+    }
+
+    AudioManager.instance.reward();
+    Haptics.commit();
+    setState(() {
+      _deck
+        ..clear()
+        ..addAll(result.cards);
+    });
+    final dominion = result.dominion;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(dominion == null
+          ? 'Built a deck of ${result.size} cards.'
+          : 'Built a ${dominion.name[0].toUpperCase()}'
+              '${dominion.name.substring(1)} deck of ${result.size} cards. '
+              'Edit it however you like.'),
+    ));
   }
 
   void _autoWellspring() {
@@ -472,6 +536,34 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
           ])
             _chip(d, d.name[0].toUpperCase() + d.name.substring(1),
                 DominionStyle.of(d).icon, DominionStyle.of(d).glow),
+          Semantics(
+            button: true,
+            label: 'Build a deck for me from the cards I own',
+            child: GestureDetector(
+              onTap: _buildForMe,
+              child: Container(
+                margin: const EdgeInsets.only(right: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFC9A86A).withValues(alpha: 0.18),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                      color: const Color(0xFFC9A86A).withValues(alpha: 0.7)),
+                ),
+                child: const Row(children: [
+                  Icon(Icons.auto_fix_high,
+                      size: 14, color: Color(0xFFC9A86A)),
+                  SizedBox(width: 5),
+                  Text('Build for me',
+                      style: TextStyle(
+                          color: Color(0xFFC9A86A),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700)),
+                ]),
+              ),
+            ),
+          ),
           GestureDetector(
             onTap: _autoWellspring,
             child: Container(

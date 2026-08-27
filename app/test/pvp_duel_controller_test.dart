@@ -173,14 +173,68 @@ class _SilentGateway extends _Gateway {
   }
 }
 
-Future<PvpDuelController> _attach(PvpProjection projection) async {
+Future<PvpDuelController> _attach(
+  PvpProjection projection, {
+  Future<void> Function({required bool won})? recordResult,
+}) async {
   final gateway = _Gateway(projection);
   final pvp = PvpController(gateway: gateway, userId: 'user-1');
   await pvp.resumeActiveMatch();
-  return PvpDuelController(pvp: pvp, library: _library, deck: const []);
+  return PvpDuelController(
+    pvp: pvp,
+    library: _library,
+    deck: const [],
+    recordResult: recordResult,
+  );
+}
+
+/// Attaches to a finished match and returns every ladder write it made.
+///
+/// The controller is re-notified afterwards on purpose: the screen stays open
+/// on the result and keeps receiving projections, which is exactly the
+/// condition that would let an unlatched write bank the same win repeatedly.
+Future<List<bool>> _ladderWrites(PvpProjection projection) async {
+  final written = <bool>[];
+  final gateway = _Gateway(projection);
+  final pvp = PvpController(gateway: gateway, userId: 'user-1');
+  await pvp.resumeActiveMatch();
+  final duel = PvpDuelController(
+    pvp: pvp,
+    library: _library,
+    deck: const [],
+    recordResult: ({required bool won}) async => written.add(won),
+  );
+  await pvp.resumeActiveMatch();
+  await pvp.resumeActiveMatch();
+  duel.dispose();
+  return written;
 }
 
 void main() {
+  group('the ladder', () {
+    test('records a win for the player who actually won', () async {
+      expect(await _ladderWrites(_projection(viewer: 'p1', winner: 'p1')),
+          [true]);
+    });
+
+    test('records a loss from the loser\'s own seat', () async {
+      // The same match, watched from the other chair. Reading the winner
+      // without asking who is sitting here would score this as a win.
+      expect(await _ladderWrites(_projection(viewer: 'p2', winner: 'p1')),
+          [false]);
+    });
+
+    test('banks the result once, however many projections follow', () async {
+      final writes = await _ladderWrites(_projection(viewer: 'p1', winner: 'p1'));
+      expect(writes, hasLength(1),
+          reason: 'a win re-banked on every frame would inflate the ladder');
+    });
+
+    test('an unfinished match writes nothing', () async {
+      expect(await _ladderWrites(_projection(viewer: 'p1')), isEmpty);
+    });
+  });
+
   test('a player seated as p2 still sees themselves as the local player',
       () async {
     // The duel screen reads `me` as p1. Without the remap, a p2 player would

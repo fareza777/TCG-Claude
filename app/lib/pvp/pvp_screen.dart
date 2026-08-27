@@ -5,6 +5,7 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../services/auth_service.dart';
 import '../services/backend_config.dart';
+import '../services/leaderboard_service.dart';
 import '../services/save_service.dart';
 import '../theme.dart';
 import 'pvp_controller.dart';
@@ -132,6 +133,16 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
     );
     duel.dispose();
     if (!mounted) return;
+
+    // Feed the seasonal track. Read from the final projection rather than
+    // trusting the screen's return value, because backing out of a decided
+    // match must still count as the win it was.
+    final projection = controller.projection;
+    final winner = projection?.winner;
+    if (winner != null && winner == projection?.viewer) {
+      await widget.save.trackQuest('pvp_win');
+    }
+
     // A finished match is done for good; leaving it resets the lobby so the
     // next queue starts clean. A live match stays attached so the REJOIN
     // button can take the player back after an accidental back-out.
@@ -323,9 +334,34 @@ class _PvpLobbyScreenState extends State<PvpLobbyScreen> {
             letterSpacing: 1.1,
           ),
         ),
+        const Spacer(),
+        Semantics(
+          button: true,
+          label: 'Ladder standings',
+          child: TextButton.icon(
+            onPressed: _showLadder,
+            icon: const Icon(Icons.leaderboard, size: 16),
+            label: const Text('LADDER',
+                style: TextStyle(
+                    fontSize: 11,
+                    letterSpacing: 1.6,
+                    fontWeight: FontWeight.w900)),
+            style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFF8FE3FF)),
+          ),
+        ),
       ],
     ),
   );
+
+  Future<void> _showLadder() async {
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: AppTheme.panel,
+      isScrollControlled: true,
+      builder: (_) => const _LadderSheet(),
+    );
+  }
 
   Widget _introCard() => Container(
     padding: const EdgeInsets.all(14),
@@ -550,4 +586,179 @@ class _PvpDeckOption {
   final List<String> cardIds;
 
   const _PvpDeckOption({required this.name, required this.cardIds});
+}
+
+/// The PvP ladder.
+///
+/// Rating alone reads as arbitrary, so each row also carries the record it was
+/// earned with — a 1180 from 40 matches and a 1180 from 4 are not the same
+/// claim, and the player deserves to see which they are looking at.
+class _LadderSheet extends StatefulWidget {
+  const _LadderSheet();
+
+  @override
+  State<_LadderSheet> createState() => _LadderSheetState();
+}
+
+class _LadderSheetState extends State<_LadderSheet> {
+  List<PvpStanding>? _rows;
+  PvpStanding? _me;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final service = LeaderboardService.instance;
+    final rows = await service.topPvp();
+    final me = await service.myPvpStanding();
+    if (!mounted) return;
+    setState(() {
+      _rows = rows;
+      _me = me;
+    });
+  }
+
+  /// A streak is only worth showing while it is a story worth telling.
+  String _streakLabel(int streak) {
+    if (streak >= 3) return '$streak in a row';
+    if (streak <= -3) return '${-streak} lost';
+    return '';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = _rows;
+    final me = _me;
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('LADDER',
+                style: TextStyle(
+                    color: Color(0xFF8FE3FF),
+                    fontSize: 13,
+                    letterSpacing: 3,
+                    fontWeight: FontWeight.w900)),
+            if (me != null) ...[
+              const SizedBox(height: 10),
+              Semantics(
+                label: 'Your rating ${me.rating}, '
+                    '${me.wins} wins and ${me.losses} losses',
+                child: Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF8FE3FF).withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      Text('${me.rating}',
+                          style: const TextStyle(
+                              color: Color(0xFF8FE3FF),
+                              fontSize: 22,
+                              fontWeight: FontWeight.w900)),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          '${me.wins}W  ${me.losses}L'
+                          '${_streakLabel(me.streak).isEmpty ? '' : '   ${_streakLabel(me.streak)}'}',
+                          style: const TextStyle(
+                              color: AppTheme.textMuted, fontSize: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+            const SizedBox(height: 12),
+            if (rows == null)
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 30),
+                child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+              )
+            else if (rows.isEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Text(
+                  LeaderboardService.instance.canRank
+                      ? 'No ranked matches yet. Win one and this is your board.'
+                      : 'Sign in from Settings to appear on the ladder.',
+                  style: const TextStyle(
+                      color: AppTheme.textMuted, fontSize: 13, height: 1.45),
+                ),
+              )
+            else
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.5),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: rows.length,
+                  itemBuilder: (_, i) {
+                    final row = rows[i];
+                    return Semantics(
+                      label: 'Rank ${i + 1}, ${row.name}, '
+                          'rating ${row.rating}, ${row.wins} wins',
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 9),
+                        margin: const EdgeInsets.only(bottom: 4),
+                        decoration: BoxDecoration(
+                          color: row.isYou
+                              ? const Color(0xFF8FE3FF).withValues(alpha: 0.14)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 30,
+                              child: Text('${i + 1}',
+                                  style: const TextStyle(
+                                      color: AppTheme.textMuted,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700)),
+                            ),
+                            Expanded(
+                              child: Text(row.name,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: row.isYou
+                                          ? const Color(0xFF8FE3FF)
+                                          : AppTheme.textPrimary,
+                                      fontSize: 14,
+                                      fontWeight: row.isYou
+                                          ? FontWeight.w800
+                                          : FontWeight.w600)),
+                            ),
+                            Text('${row.wins}W ${row.losses}L',
+                                style: const TextStyle(
+                                    color: AppTheme.textMuted, fontSize: 11)),
+                            const SizedBox(width: 12),
+                            Text('${row.rating}',
+                                style: const TextStyle(
+                                    color: Color(0xFF8FE3FF),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w900)),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
 }
