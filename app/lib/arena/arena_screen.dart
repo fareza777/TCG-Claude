@@ -310,18 +310,21 @@ class _ArenaScreenState extends State<ArenaScreen> {
                       icon: const Icon(Icons.arrow_back,
                           color: AppTheme.textPrimary),
                     ),
-                    // The title yields, not the Standings button. On a 400px
-                    // phone the fixed children already exceed the width, and
-                    // without this the Spacer collapses and the right-hand
-                    // content is what gets clipped.
+                    // The title yields, not the Standings button — and it
+                    // yields by shrinking, so the whole name still reads on a
+                    // narrow phone instead of ending in an ellipsis.
                     const Flexible(
-                      child: Text('The Proving Gauntlet',
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: false,
-                          style: TextStyle(
-                              color: AppTheme.textPrimary,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w800)),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text('The Proving Gauntlet',
+                            maxLines: 1,
+                            softWrap: false,
+                            style: TextStyle(
+                                color: AppTheme.textPrimary,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w800)),
+                      ),
                     ),
                     const Spacer(),
                     Semantics(
@@ -426,12 +429,24 @@ class _ArenaScreenState extends State<ArenaScreen> {
                   children: [
                     const Icon(Icons.paid, color: Colors.black87, size: 20),
                     const SizedBox(width: 8),
-                    Text('ENTER — ${SaveService.arenaEntryCost} GOLD',
-                        style: const TextStyle(
-                            color: Colors.black87,
-                            fontSize: 15,
-                            letterSpacing: 1.5,
-                            fontWeight: FontWeight.w900)),
+                    // The label shrinks rather than overflowing: on a 320px
+                    // phone the icon, the gap and this text together exceed
+                    // the button, and a clipped price is worse than a small
+                    // one.
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                            'ENTER — ${SaveService.arenaEntryCost} GOLD',
+                            maxLines: 1,
+                            softWrap: false,
+                            style: const TextStyle(
+                                color: Colors.black87,
+                                fontSize: 15,
+                                letterSpacing: 1.5,
+                                fontWeight: FontWeight.w900)),
+                      ),
+                    ),
                   ],
                 ),
               ),

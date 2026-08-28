@@ -333,10 +333,11 @@ class _GauntletScreenState extends State<GauntletScreen> {
                           fontWeight: FontWeight.w800)),
                   const SizedBox(height: 2),
                   Text(body,
+                      textAlign: TextAlign.justify,
                       style: const TextStyle(
                           color: AppTheme.textMuted,
                           fontSize: 12,
-                          height: 1.4)),
+                          height: 1.45)),
                 ],
               ),
             ),

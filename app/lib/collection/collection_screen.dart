@@ -71,14 +71,18 @@ class _CollectionScreenState extends State<CollectionScreen> {
                     // children overflow -- clipping the counter and the
                     // filter toggle rather than the word everyone can guess.
                     const Flexible(
-                      child: Text('Collection',
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: false,
-                          style: TextStyle(
-                              color: AppTheme.textPrimary,
-                              fontSize: 19,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 1)),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text('Collection',
+                            maxLines: 1,
+                            softWrap: false,
+                            style: TextStyle(
+                                color: AppTheme.textPrimary,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 1)),
+                      ),
                     ),
                     const Spacer(),
                     Text(

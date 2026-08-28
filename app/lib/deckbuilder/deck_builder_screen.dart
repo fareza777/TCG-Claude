@@ -407,18 +407,23 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.arrow_back, color: AppTheme.textPrimary),
           ),
-          // The title yields, not the Save button. This row's fixed children
+          // The title yields, not the Save button: this row's fixed children
           // — back arrow, two icons, the counter and Save — already exceed a
-          // narrow phone, so without Flexible the Spacer collapses and the
-          // last child, Save, is the one that gets clipped.
+          // narrow phone. It yields by shrinking rather than truncating,
+          // because "Deck Buil..." is not a header, it is a bug that stopped
+          // throwing.
           const Flexible(
-            child: Text('Deck Builder',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: TextStyle(
-                    color: AppTheme.textPrimary,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800)),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text('Deck Builder',
+                  maxLines: 1,
+                  softWrap: false,
+                  style: TextStyle(
+                      color: AppTheme.textPrimary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800)),
+            ),
           ),
           const Spacer(),
           IconButton(
@@ -432,14 +437,31 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
             icon: const Icon(Icons.ios_share,
                 color: AppTheme.textMuted, size: 19),
           ),
-          Text('$_size',
-              style: TextStyle(
-                  color: valid ? const Color(0xFF7FE0A8) : AppTheme.danger,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w900)),
-          Text('/$minDeck · ${_wellsprings}W',
-              softWrap: false,
-              style: const TextStyle(color: AppTheme.textMuted, fontSize: 12)),
+          // The counter shrinks before anything else does. On a 320px phone
+          // the fixed children alone exceed the width, and of everything in
+          // this row the count is the part that survives being small: the
+          // icons are touch targets and SAVE is the button the screen exists
+          // for.
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('$_size',
+                      style: TextStyle(
+                          color:
+                              valid ? const Color(0xFF7FE0A8) : AppTheme.danger,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w900)),
+                  Text('/$minDeck · ${_wellsprings}W',
+                      softWrap: false,
+                      style: const TextStyle(
+                          color: AppTheme.textMuted, fontSize: 12)),
+                ],
+              ),
+            ),
+          ),
           const SizedBox(width: 8),
           GestureDetector(
             onTap: _save,
