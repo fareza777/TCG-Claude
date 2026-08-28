@@ -23,6 +23,8 @@ import 'progress/achievements_screen.dart';
 import 'quests/quests_screen.dart';
 import 'services/ad_service.dart';
 import 'services/ad_result_flow.dart';
+import 'gauntlet/daily_gauntlet.dart';
+import 'gauntlet/gauntlet_screen.dart';
 import 'season/season_screen.dart';
 import 'services/audio_manager.dart';
 import 'services/haptics.dart';
@@ -1195,6 +1197,28 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                       badge: _save?.adGoldClaimsLeft ?? 0,
                                       onTap: _watchForGold,
                                     ),
+                                  _tile(
+                                    icon: Icons.bolt,
+                                    label: 'GAUNTLET',
+                                    color: const Color(0xFF8FE3FF),
+                                    // Badges when today's attempt is still
+                                    // unspent -- the one number on this menu
+                                    // that expires at midnight.
+                                    badge: _save != null &&
+                                            !_save!.gauntletDoneFor(
+                                                DailyGauntlet.idFor(
+                                                    DateTime.now()))
+                                        ? 1
+                                        : 0,
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => GauntletScreen(
+                                          library: _library!,
+                                          save: _save!,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   _tile(
                                     icon: Icons.military_tech,
                                     label: 'SEASON',

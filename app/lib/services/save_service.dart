@@ -54,6 +54,20 @@ class SaveService extends ChangeNotifier {
   Map<String, List<String>> decks; // deckName -> [cardId,...] (with repeats)
   /// The season these numbers belong to, as `YYYY-MM`. A mismatch on load
   /// means a new month has started and the track resets.
+  /// The Gauntlet day the player has an attempt open or finished on, and
+  /// what happened. One attempt per day is the whole point of the mode, so
+  /// this is what enforces it.
+  String gauntletDay = '';
+  bool gauntletStarted = false;
+  bool gauntletFinished = false;
+  bool gauntletWon = false;
+  int gauntletHealthLeft = 0;
+  int gauntletTurns = 0;
+
+  /// Consecutive days on which an attempt was finished, and the last such day.
+  int gauntletStreak = 0;
+  String gauntletLastDay = '';
+
   String seasonId;
   int seasonXp;
   List<int> seasonClaimed; // tiers already collected
@@ -221,6 +235,14 @@ class SaveService extends ChangeNotifier {
       reduceMotion: prefs.getBool('reduceMotion') ?? false,
     );
     service.loginStreak = prefs.getInt('loginStreak') ?? 0;
+    service.gauntletDay = prefs.getString('gauntletDay') ?? '';
+    service.gauntletStarted = prefs.getBool('gauntletStarted') ?? false;
+    service.gauntletFinished = prefs.getBool('gauntletFinished') ?? false;
+    service.gauntletWon = prefs.getBool('gauntletWon') ?? false;
+    service.gauntletHealthLeft = prefs.getInt('gauntletHealthLeft') ?? 0;
+    service.gauntletTurns = prefs.getInt('gauntletTurns') ?? 0;
+    service.gauntletStreak = prefs.getInt('gauntletStreak') ?? 0;
+    service.gauntletLastDay = prefs.getString('gauntletLastDay') ?? '';
     service.lastLoginDate = prefs.getString('lastLoginDate') ?? '';
     service.guestMode = prefs.getBool('guestMode') ?? false;
     service.accountLinked = prefs.getBool('accountLinked') ?? false;
@@ -275,6 +297,18 @@ class SaveService extends ChangeNotifier {
 
   int stageOf(String chapterId) => chapterStage[chapterId] ?? 0;
   bool chapterDone(String chapterId) => chaptersDone.contains(chapterId);
+
+  /// Adds both currencies in one write.
+  ///
+  /// addGold exists and shards had no equivalent, so callers that paid both
+  /// were reaching into the field directly. One method, one persist.
+  Future<void> grantCurrency({int gold = 0, int shards = 0}) async {
+    if (gold == 0 && shards == 0) return;
+    this.gold += gold;
+    this.shards += shards;
+    await _persist();
+    notifyListeners();
+  }
 
   Future<void> addGold(int amount) async {
     gold += amount;
@@ -543,6 +577,76 @@ class SaveService extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ── daily gauntlet ───────────────────────────────────────────────────
+
+  /// True once today's attempt has been used up.
+  bool gauntletDoneFor(String dayId) =>
+      gauntletDay == dayId && gauntletFinished;
+
+  /// True when an attempt was opened today and never finished.
+  ///
+  /// The match is deterministic, so this can be resumed rather than forfeited:
+  /// a flat battery must not cost the player their one attempt. What it may
+  /// not do is start over, which is why this is recorded on entry.
+  bool gauntletResumableFor(String dayId) =>
+      gauntletDay == dayId && gauntletStarted && !gauntletFinished;
+
+  /// Records that the attempt has been opened. Called before the first card
+  /// is seen, so backing out cannot be used to reroll a bad-looking day.
+  Future<void> beginGauntlet(String dayId) async {
+    if (gauntletDay != dayId) {
+      gauntletDay = dayId;
+      gauntletFinished = false;
+      gauntletWon = false;
+      gauntletHealthLeft = 0;
+      gauntletTurns = 0;
+    }
+    gauntletStarted = true;
+    await _persist();
+    notifyListeners();
+  }
+
+  /// Banks the result and pays out. Returns the streak *after* this attempt.
+  ///
+  /// The streak counts finished attempts on consecutive days. Playing twice in
+  /// one day cannot advance it, and neither can finishing an attempt opened on
+  /// an older day.
+  Future<int> finishGauntlet({
+    required String dayId,
+    required bool won,
+    required int healthLeft,
+    required int turns,
+    required int gold,
+    required int shards,
+  }) async {
+    if (gauntletDay == dayId && gauntletFinished) return gauntletStreak;
+
+    gauntletDay = dayId;
+    gauntletStarted = true;
+    gauntletFinished = true;
+    gauntletWon = won;
+    gauntletHealthLeft = healthLeft;
+    gauntletTurns = turns;
+
+    if (gauntletLastDay != dayId) {
+      final yesterday = DateTime.tryParse(dayId)?.subtract(
+        const Duration(days: 1),
+      );
+      final yesterdayId = yesterday == null
+          ? ''
+          : '${yesterday.year}-${yesterday.month.toString().padLeft(2, '0')}'
+              '-${yesterday.day.toString().padLeft(2, '0')}';
+      gauntletStreak = gauntletLastDay == yesterdayId ? gauntletStreak + 1 : 1;
+      gauntletLastDay = dayId;
+    }
+
+    this.gold += gold;
+    this.shards += shards;
+    await _persist();
+    notifyListeners();
+    return gauntletStreak;
+  }
+
   Future<void> setColorblind(bool on) async {
     colorblind = on;
     await _persist();
@@ -594,6 +698,14 @@ class SaveService extends ChangeNotifier {
         'colorblind': colorblind,
         'reduceMotion': reduceMotion,
         'loginStreak': loginStreak,
+        'gauntletDay': gauntletDay,
+        'gauntletStarted': gauntletStarted,
+        'gauntletFinished': gauntletFinished,
+        'gauntletWon': gauntletWon,
+        'gauntletHealthLeft': gauntletHealthLeft,
+        'gauntletTurns': gauntletTurns,
+        'gauntletStreak': gauntletStreak,
+        'gauntletLastDay': gauntletLastDay,
         'lastLoginDate': lastLoginDate,
         'totalWins': totalWins,
         'totalPacks': totalPacks,
@@ -640,6 +752,15 @@ class SaveService extends ChangeNotifier {
     colorblind = data['colorblind'] as bool? ?? colorblind;
     reduceMotion = data['reduceMotion'] as bool? ?? reduceMotion;
     loginStreak = data['loginStreak'] as int? ?? loginStreak;
+    gauntletDay = data['gauntletDay'] as String? ?? gauntletDay;
+    gauntletStarted = data['gauntletStarted'] as bool? ?? gauntletStarted;
+    gauntletFinished = data['gauntletFinished'] as bool? ?? gauntletFinished;
+    gauntletWon = data['gauntletWon'] as bool? ?? gauntletWon;
+    gauntletHealthLeft =
+        data['gauntletHealthLeft'] as int? ?? gauntletHealthLeft;
+    gauntletTurns = data['gauntletTurns'] as int? ?? gauntletTurns;
+    gauntletStreak = data['gauntletStreak'] as int? ?? gauntletStreak;
+    gauntletLastDay = data['gauntletLastDay'] as String? ?? gauntletLastDay;
     lastLoginDate = data['lastLoginDate'] as String? ?? lastLoginDate;
     totalWins = data['totalWins'] as int? ?? totalWins;
     totalPacks = data['totalPacks'] as int? ?? totalPacks;
@@ -995,6 +1116,14 @@ class SaveService extends ChangeNotifier {
     await _prefs.setBool('colorblind', colorblind);
     await _prefs.setBool('reduceMotion', reduceMotion);
     await _prefs.setInt('loginStreak', loginStreak);
+    await _prefs.setString('gauntletDay', gauntletDay);
+    await _prefs.setBool('gauntletStarted', gauntletStarted);
+    await _prefs.setBool('gauntletFinished', gauntletFinished);
+    await _prefs.setBool('gauntletWon', gauntletWon);
+    await _prefs.setInt('gauntletHealthLeft', gauntletHealthLeft);
+    await _prefs.setInt('gauntletTurns', gauntletTurns);
+    await _prefs.setInt('gauntletStreak', gauntletStreak);
+    await _prefs.setString('gauntletLastDay', gauntletLastDay);
     await _prefs.setString('lastLoginDate', lastLoginDate);
     await _prefs.setInt('totalWins', totalWins);
     await _prefs.setInt('totalPacks', totalPacks);
