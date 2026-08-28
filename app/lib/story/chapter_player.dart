@@ -418,6 +418,9 @@ class _BattleIntroState extends State<_BattleIntro> {
         'chapter': widget.chapter.id,
         'stage': widget.stageIndex,
       }));
+      // Not awaited: the message below needs this frame's context, and the
+      // season write has no reason to hold it up.
+      unawaited(widget.save.trackQuest('battle_loss'));
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Defeated. Steel yourself and try again.'),
         duration: Duration(seconds: 2),

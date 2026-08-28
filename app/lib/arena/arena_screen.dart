@@ -186,6 +186,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
       _nextFoe = _rollDominion();
     } else {
       _losses += 1;
+      await widget.save.trackQuest('battle_loss');
     }
     if (_losses >= _maxLosses) {
       if (!_usedRevive && widget.adService.rewardedReady) {

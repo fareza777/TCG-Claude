@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shardfall/season/season.dart';
 
@@ -73,11 +75,41 @@ void main() {
         reason: 'December must roll the year, not produce month 13');
   });
 
+  test('every XP event is actually emitted by the app', () {
+    // A reward keyed to an event nothing sends is a reward nobody can earn.
+    // This reads the source rather than trusting the comment above the map,
+    // because that comment was wrong once already.
+    final sources = <String>[];
+    for (final entity in Directory('lib').listSync(recursive: true)) {
+      if (entity is File && entity.path.endsWith('.dart')) {
+        sources.add(entity.readAsStringSync());
+      }
+    }
+    final all = sources.join('\n');
+
+    for (final event in Season.xpFor.keys) {
+      expect(all, contains("trackQuest('$event')"),
+          reason: '$event pays XP but no screen ever sends it');
+    }
+  });
+
+  test('a loss pays, and pays less than a win', () {
+    final loss = Season.xpFor['battle_loss'];
+
+    expect(loss, isNotNull, reason: 'three losses end an Arena run; paying '
+        'nothing for them makes the run feel wasted');
+    expect(loss, greaterThan(0));
+    for (final win in ['duel_win', 'story_win', 'pvp_win']) {
+      expect(loss, lessThan(Season.xpFor[win]!),
+          reason: 'losing must never be worth as much as $win');
+    }
+  });
+
   test('the whole track is reachable by an ordinary player', () {
-    // Thirty tiers at 100 XP is 3000. At 10 XP a duel win that is 300 wins in
-    // a month, which is not ordinary — so the mix has to carry it. This test
-    // exists so that if the numbers are ever tuned, the claim in the doc
-    // comment gets re-examined rather than quietly becoming false.
+    // Thirty tiers at 50 XP is 1500. The first draft used 100 per tier, which
+    // needed 3000 and made the track quietly uncompletable -- this test is
+    // what caught it. It stays so that any future tuning has to re-earn the
+    // claim rather than silently breaking it.
     final perDay = Season.xpFor['duel_win']! * 3 +
         Season.xpFor['story_win']! * 2 +
         Season.xpPerPack;

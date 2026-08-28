@@ -36,13 +36,20 @@ class Season {
 
   /// XP per event, keyed to the events `trackQuest` actually emits.
   ///
-  /// Only these three: arena wins already arrive as `duel_win`, and opening a
-  /// pack is handled inside `buyPack` rather than through the quest hook. A
-  /// key here that nothing ever sends would be a reward nobody can earn.
+  /// Arena wins already arrive as `duel_win`, and opening a pack is handled
+  /// inside `buyPack` rather than through the quest hook, so neither has an
+  /// entry here. A key that nothing ever sends would be a reward nobody can
+  /// earn — the season test checks every one of these is really emitted.
   static const xpFor = <String, int>{
     'duel_win': 10,
     'story_win': 15,
     'pvp_win': 20,
+    // A loss pays too, at less than half a win. An Arena run ends on three
+    // losses by design, and a track that pays nothing for them tells the
+    // player their last twenty minutes were worth nothing -- which is the
+    // opposite of what a progression track is for. It matches no quest, so
+    // quest progress is untouched.
+    'battle_loss': 4,
   };
 
   /// Opening a booster. Granted directly by the save file, which is where

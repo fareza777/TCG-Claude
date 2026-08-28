@@ -231,16 +231,194 @@ class _ArenaDraftScreenState extends State<ArenaDraftScreen> {
             ),
           ),
         ),
+        _curveStrip(draft),
         Padding(
-          padding: const EdgeInsets.fromLTRB(18, 4, 18, 14),
-          child: Text(
-            'Tap to draft it. Hold to read it.',
-            style: TextStyle(
-                color: AppTheme.textMuted.withValues(alpha: 0.8),
-                fontSize: 12),
+          padding: const EdgeInsets.fromLTRB(18, 2, 18, 12),
+          child: Row(
+            children: [
+              Text(
+                'Tap to draft it. Hold to read it.',
+                style: TextStyle(
+                    color: AppTheme.textMuted.withValues(alpha: 0.8),
+                    fontSize: 12),
+              ),
+              const Spacer(),
+              if (draft.picked.isNotEmpty)
+                Semantics(
+                  button: true,
+                  label: 'Review the cards drafted so far',
+                  child: GestureDetector(
+                    onTap: () => _showPicked(draft),
+                    child: Row(children: [
+                      const Icon(Icons.inventory_2_outlined,
+                          size: 14, color: Color(0xFFC9A86A)),
+                      const SizedBox(width: 5),
+                      Text('${draft.picked.length} drafted',
+                          style: const TextStyle(
+                              color: Color(0xFFC9A86A),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700)),
+                    ]),
+                  ),
+                ),
+            ],
           ),
         ),
       ],
+    );
+  }
+
+  /// The curve of what has been drafted so far.
+  ///
+  /// A draft is a run of small decisions whose only shared context is the pile
+  /// already built. Without this the player picks number nineteen with no idea
+  /// they have taken six five-drops and nothing that costs two.
+  Widget _curveStrip(ArenaDraft draft) {
+    final buckets = List<int>.filled(8, 0);
+    for (final card in draft.picked) {
+      if (card.type == CardType.wellspring) continue;
+      buckets[card.totalCost.clamp(0, 7)] += 1;
+    }
+    final peak = buckets.fold(1, (a, b) => b > a ? b : a);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          for (var cost = 1; cost < 8; cost++)
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('${buckets[cost]}',
+                        style: TextStyle(
+                            color: buckets[cost] == 0
+                                ? AppTheme.textMuted.withValues(alpha: 0.4)
+                                : AppTheme.textPrimary,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700)),
+                    const SizedBox(height: 2),
+                    Container(
+                      height: 4 + 22 * (buckets[cost] / peak),
+                      decoration: BoxDecoration(
+                        color: buckets[cost] == 0
+                            ? AppTheme.panelBorder
+                            : const Color(0xFFC9A86A).withValues(alpha: 0.75),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(cost == 7 ? '7+' : '$cost',
+                        style: TextStyle(
+                            color: AppTheme.textMuted.withValues(alpha: 0.75),
+                            fontSize: 9)),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  /// Everything drafted so far, grouped by name and ordered by cost.
+  Future<void> _showPicked(ArenaDraft draft) async {
+    AudioManager.instance.tap();
+    final counts = <String, int>{};
+    final defs = <String, CardDef>{};
+    for (final card in draft.picked) {
+      counts[card.name] = (counts[card.name] ?? 0) + 1;
+      defs[card.name] = card;
+    }
+    final names = counts.keys.toList()
+      ..sort((a, b) {
+        final ca = defs[a]!.totalCost;
+        final cb = defs[b]!.totalCost;
+        return ca != cb ? ca.compareTo(cb) : a.compareTo(b);
+      });
+
+    if (!mounted) return;
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: AppTheme.panel,
+      isScrollControlled: true,
+      builder: (context) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('DRAFTED - ${draft.picked.length}',
+                  style: const TextStyle(
+                      color: Color(0xFFC9A86A),
+                      fontSize: 13,
+                      letterSpacing: 3,
+                      fontWeight: FontWeight.w900)),
+              const SizedBox(height: 12),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.6),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: names.length,
+                  itemBuilder: (_, i) {
+                    final def = defs[names[i]]!;
+                    final n = counts[names[i]]!;
+                    return GestureDetector(
+                      onTap: () => showCardZoom(context, def),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 22,
+                              height: 22,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: _colourOf(def.dominions.first)
+                                    .withValues(alpha: 0.28),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text('${def.totalCost}',
+                                  style: const TextStyle(
+                                      color: AppTheme.textPrimary,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w800)),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(names[i],
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      color: AppTheme.textPrimary,
+                                      fontSize: 13)),
+                            ),
+                            if (n > 1)
+                              Text('x$n',
+                                  style: const TextStyle(
+                                      color: AppTheme.textMuted,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700)),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text('Tap a card to read it.',
+                  style: TextStyle(
+                      color: AppTheme.textMuted.withValues(alpha: 0.8),
+                      fontSize: 11)),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

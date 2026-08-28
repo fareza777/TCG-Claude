@@ -852,6 +852,11 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
         ),
       ),
     );
+    if (won != true && _save != null) {
+      // A loss still feeds the season. Nothing else changes: 'battle_loss'
+      // matches no quest and does not touch the win counter.
+      await _save!.trackQuest('battle_loss');
+    }
     if (won == true && _save != null) {
       await _save!.addGold(SaveService.duelWinGold);
       await _save!.trackQuest('duel_win');

@@ -430,10 +430,16 @@ class _DuelScreenState extends State<DuelScreen>
           const Icon(Icons.shield, size: 14, color: Color(0xFF7FE0A8)),
           const SizedBox(width: 8),
           Expanded(
+            // Kept to one line. The old copy ran to three on a phone, and
+            // every line it took came out of the battlefield and pushed the
+            // Take the hit / Confirm blocks buttons toward the hand, which is
+            // the one moment in the game where they must be easy to reach.
             child: Text(
               selName == null
-                  ? 'Enemy attacks! Tap a red attacker, then your Units to block. You may also cast a Rite in response — or Take the hit.'
-                  : 'Blocking $selName — tap your Units to assign blockers.',
+                  ? 'Tap a red attacker, then your Units.'
+                  : 'Blocking $selName — tap your Units.',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                   color: AppTheme.textPrimary,
                   fontSize: 12,
@@ -746,11 +752,48 @@ class _DuelScreenState extends State<DuelScreen>
     );
   }
 
+  /// The Aether indicator, one tile per Dominion.
+  ///
+  /// This used to be a single tile coloured by whichever Wellspring happened
+  /// to be first in the list. Aether is Dominion-typed, so in a two-colour
+  /// deck — which is every Arena run — that told the player the total and hid
+  /// the only part that decides what they can cast. A 5/9 that is really
+  /// 1 Verdance and 4 Pyre is a different board.
   Widget _wellspringPile(List<CardInstance> wells, bool enemySide) {
     if (wells.isEmpty) return const SizedBox(width: 34);
+
+    // Grouped by the Wellspring's own Dominion, in a stable order so the
+    // tiles do not swap places between turns.
+    final groups = <Dominion, List<CardInstance>>{};
+    for (final w in wells) {
+      final dominion = w.def.dominions.firstWhere(
+          (d) => d != Dominion.neutral,
+          orElse: () => Dominion.neutral);
+      groups.putIfAbsent(dominion, () => []).add(w);
+    }
+    final order = groups.keys.toList()
+      ..sort((a, b) => a.index.compareTo(b.index));
+
+    if (order.length == 1) return _aetherTile(groups[order.first]!, wells.length);
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (var i = 0; i < order.length; i++) ...[
+          if (i > 0) const SizedBox(width: 4),
+          _aetherTile(groups[order[i]]!, groups[order[i]]!.length),
+        ],
+      ],
+    );
+  }
+
+  Widget _aetherTile(List<CardInstance> wells, int total) {
     final ready = wells.where((w) => !w.exerted).length;
     final style = DominionStyle.ofCard(wells.first.def);
-    return Column(
+    return Semantics(
+      label: '${wells.first.def.dominions.first.name} Aether, '
+          '$ready of $total ready',
+      child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
@@ -776,7 +819,7 @@ class _DuelScreenState extends State<DuelScreen>
                   ]
                 : null,
           ),
-          child: Text('$ready/${wells.length}',
+          child: Text('$ready/$total',
               style: TextStyle(
                   color: style.glow,
                   fontSize: 11,
@@ -788,6 +831,7 @@ class _DuelScreenState extends State<DuelScreen>
                 color: AppTheme.textMuted.withValues(alpha: 0.8),
                 fontSize: 9)),
       ],
+      ),
     );
   }
 

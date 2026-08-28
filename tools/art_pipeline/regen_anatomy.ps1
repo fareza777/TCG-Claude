@@ -13,6 +13,7 @@
 # No backup folder: git already holds the previous images, so
 # `git checkout HEAD -- app/assets/art/SF001-270.webp` restores one. A second
 # copy inside app/assets would only be clutter that ships nowhere.
+param([string[]]$Only)   # e.g. -Only SF001-387,SF001-281 ; omit to run all
 $ErrorActionPreference = "Continue"
 $env:REPLICATE_API_TOKEN = (Get-ItemProperty "HKCU:\Environment").REPLICATE_API_TOKEN
 . "$PSScriptRoot\ArtProvider.ps1"
@@ -32,6 +33,7 @@ $pal = @{
   V = "verdant forest tones, emerald and moss green palette, bioluminescent accents, moonlit canopy"
   P = "volcanic orange and crimson palette, ember glow, ash-filled air, heat shimmer"
   D = "golden hour light, ivory and gold palette, radiant glow, abstract sun sigils, marble architecture"
+  G = "deep violet and black palette, pale moonlight, thorns and shadow tendrils"
 }
 
 $cards = @(
@@ -48,13 +50,31 @@ $cards = @(
   @{ id="SF001-022"; d="P"; c=$HELM; p="an armored raider in full plate and closed helm charging forward, gripping a single blackened greatsword with both gauntleted hands together on the hilt, no free hand, cloak streaming, cracked volcanic ground" },
 
   # Six-fingered gauntlet: the off hand was open. Both hands now on the haft.
-  @{ id="SF001-025"; d="P"; c=$HELM; p="a berserker in heavy horned full-helm armor mid-charge, both gauntleted hands gripping the long haft of a great two-handed axe, no free hand, trail of fire behind, ash storm" }
+  @{ id="SF001-025"; d="P"; c=$HELM; p="a berserker in heavy horned full-helm armor mid-charge, both gauntleted hands gripping the long haft of a great two-handed axe, no free hand, trail of fire behind, ash storm" },
+
+  # ---- Pass 2: Gloom ----
+
+  # Arms that did not attach to a shoulder, and a grip hand with no thumb. The
+  # blade now rests point-down in front, which puts both hands together at
+  # chest height where the pose can only resolve one way.
+  @{ id="SF001-387"; d="G"; c=$HOOD; p="a deeply hooded executioner standing still, a great curved blade resting point-down on the ground directly in front of them with both gauntleted hands stacked together on the pommel, arms straight and symmetrical, moonlit graveyard" },
+
+  # Both hands malformed while cupping an orb. Holding the ledger was the first
+  # attempt and the gloves still came back thumbless -- any pose that keeps the
+  # fingers on camera keeps failing here, so they leave the frame entirely.
+  # The ledger stays: Chapter V is about the count she keeps.
+  @{ id="SF001-281"; d="G"; c=$HOOD; p="a regal hooded sovereign in layered violet veils and a crown of blackened silver set over the hood, standing behind a stone lectern that holds a heavy open black-glass ledger, her arms lowered at her sides and swallowed by long trailing sleeves, no hands visible anywhere, ravens circling, moonlit hall" },
+
+  # Three arms: two forearms reached for the cauldron. Seen from behind now,
+  # with the arms inside sleeves.
+  @{ id="SF001-089"; d="G"; c=$BEHIND; p="a hooded robed figure seen entirely from behind, standing over a stone cauldron of rising violet flame, arms lowered inside long sleeves with no hands visible, full moon above, dead branches" }
 )
 
 $outDir = "C:\TCG Claude\app\assets\art"
 
 $ok = 0; $fail = 0
 foreach ($card in $cards) {
+  if ($Only -and ($Only -notcontains $card.id)) { continue }
   $dest = Join-Path $outDir "$($card.id).webp"
 
   $concl  = if ($card.ContainsKey('c')) { ", $($card.c)" } else { "" }
