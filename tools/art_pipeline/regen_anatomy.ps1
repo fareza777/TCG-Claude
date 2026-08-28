@@ -13,7 +13,7 @@
 # No backup folder: git already holds the previous images, so
 # `git checkout HEAD -- app/assets/art/SF001-270.webp` restores one. A second
 # copy inside app/assets would only be clutter that ships nowhere.
-param([string[]]$Only)   # e.g. -Only SF001-387,SF001-281 ; omit to run all
+param([string[]]$Only)   # e.g. -Only SF001-387 ; omit to run every card below
 $ErrorActionPreference = "Continue"
 $env:REPLICATE_API_TOKEN = (Get-ItemProperty "HKCU:\Environment").REPLICATE_API_TOKEN
 . "$PSScriptRoot\ArtProvider.ps1"
@@ -57,17 +57,14 @@ $cards = @(
   # Arms that did not attach to a shoulder, and a grip hand with no thumb. The
   # blade now rests point-down in front, which puts both hands together at
   # chest height where the pose can only resolve one way.
-  @{ id="SF001-387"; d="G"; c=$HOOD; p="a deeply hooded executioner standing still, a great curved blade resting point-down on the ground directly in front of them with both gauntleted hands stacked together on the pommel, arms straight and symmetrical, moonlit graveyard" },
+  @{ id="SF001-387"; d="G"; c=$HOOD; p="a deeply hooded executioner standing still, a great curved blade resting point-down on the ground directly in front of them with both gauntleted hands stacked together on the pommel, arms straight and symmetrical, moonlit graveyard" }
 
-  # Both hands malformed while cupping an orb. Holding the ledger was the first
-  # attempt and the gloves still came back thumbless -- any pose that keeps the
-  # fingers on camera keeps failing here, so they leave the frame entirely.
-  # The ledger stays: Chapter V is about the count she keeps.
-  @{ id="SF001-281"; d="G"; c=$HOOD; p="a regal hooded sovereign in layered violet veils and a crown of blackened silver set over the hood, standing behind a stone lectern that holds a heavy open black-glass ledger, her arms lowered at her sides and swallowed by long trailing sleeves, no hands visible anywhere, ravens circling, moonlit hall" },
-
-  # Three arms: two forearms reached for the cauldron. Seen from behind now,
-  # with the arms inside sleeves.
-  @{ id="SF001-089"; d="G"; c=$BEHIND; p="a hooded robed figure seen entirely from behind, standing over a stone cauldron of rising violet flame, arms lowered inside long sleeves with no hands visible, full moon above, dead branches" }
+  # SF001-281 Ravenna Duskveil and SF001-089 Soul Drain were regenerated too --
+  # her fingers were malformed on both hands, and he had three arms. Both
+  # replacements worked, and both were rejected on artistic grounds: the
+  # originals read better as cards. They are deliberately NOT in this list, so
+  # a plain run of this script cannot quietly overwrite that decision. The
+  # generated versions are kept in alternates/ if the call is ever reversed.
 )
 
 $outDir = "C:\TCG Claude\app\assets\art"
