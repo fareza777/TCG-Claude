@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../services/ad_service.dart';
+import '../widgets/ad_banner.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../card_render/card_widget.dart';
@@ -10,11 +13,13 @@ import '../theme.dart';
 class ForgeScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
+  final AdService adService;
 
   const ForgeScreen({
     super.key,
     required this.library,
     required this.save,
+    required this.adService,
   });
 
   @override
@@ -33,6 +38,7 @@ class _ForgeScreenState extends State<ForgeScreen> {
       ..sort((a, b) => a.id.compareTo(b.id));
 
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(

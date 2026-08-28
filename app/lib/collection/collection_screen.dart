@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../services/ad_service.dart';
+import '../widgets/ad_banner.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../card_render/card_widget.dart';
@@ -10,11 +13,13 @@ import '../widgets/card_zoom.dart';
 class CollectionScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
+  final AdService adService;
 
   const CollectionScreen(
       {super.key,
       required this.library,
-      required this.save});
+      required this.save,
+      required this.adService});
 
   @override
   State<CollectionScreen> createState() => _CollectionScreenState();
@@ -40,6 +45,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
       ..sort((a, b) => a.id.compareTo(b.id));
 
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(
@@ -60,12 +66,20 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       icon: const Icon(Icons.arrow_back,
                           color: AppTheme.textPrimary),
                     ),
-                    const Text('Collection',
-                        style: TextStyle(
-                            color: AppTheme.textPrimary,
-                            fontSize: 19,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: 1)),
+                    // The title yields. With a full library the owned counter
+                    // reads "0/192 owned", and on a 400px phone the fixed
+                    // children overflow -- clipping the counter and the
+                    // filter toggle rather than the word everyone can guess.
+                    const Flexible(
+                      child: Text('Collection',
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                          style: TextStyle(
+                              color: AppTheme.textPrimary,
+                              fontSize: 19,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 1)),
+                    ),
                     const Spacer(),
                     Text(
                         '${widget.save.uniqueOwned}/${widget.library.byId.length} owned',

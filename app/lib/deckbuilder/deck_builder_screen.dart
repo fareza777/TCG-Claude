@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
+import '../services/ad_service.dart';
+import '../widgets/ad_banner.dart';
 import 'package:flutter/services.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
@@ -24,12 +27,14 @@ class DeckBuilderScreen extends StatefulWidget {
 
   final CardLibrary library;
   final SaveService save;
+  final AdService adService;
   final String? editDeck;
 
   const DeckBuilderScreen({
     super.key,
     required this.library,
     required this.save,
+    required this.adService,
     this.editDeck,
   });
 
@@ -362,6 +367,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
 
     final valid = _size >= minDeck;
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(

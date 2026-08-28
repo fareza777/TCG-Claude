@@ -1215,6 +1215,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => GauntletScreen(
                                           library: _library!,
                                           save: _save!,
+                                          adService: _ads,
                                         ),
                                       ),
                                     ),
@@ -1240,7 +1241,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
-                                            QuestsScreen(save: _save!),
+                                            QuestsScreen(save: _save!, adService: _ads!),
                                       ),
                                     ),
                                   ),
@@ -1253,6 +1254,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => CollectionScreen(
                                           library: _library!,
                                           save: _save!,
+                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1268,6 +1270,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => DeckBuilderScreen(
                                           library: _library!,
                                           save: _save!,
+                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1281,6 +1284,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => ForgeScreen(
                                           library: _library!,
                                           save: _save!,
+                                          adService: _ads!,
                                         ),
                                       ),
                                     ),
@@ -1294,6 +1298,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                         builder: (_) => BoosterScreen(
                                           library: _library!,
                                           save: _save!,
+                                          adService: _ads!,
                                           purchaseService: _purchases!,
                                           auth: _auth!,
                                         ),
@@ -1335,7 +1340,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
-                                            AchievementsScreen(save: _save!),
+                                            AchievementsScreen(save: _save!, adService: _ads!),
                                       ),
                                     ),
                                   ),

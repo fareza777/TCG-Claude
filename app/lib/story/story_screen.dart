@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../widgets/ad_banner.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../services/ad_service.dart';
@@ -34,6 +36,7 @@ class _StoryScreenState extends State<StoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(

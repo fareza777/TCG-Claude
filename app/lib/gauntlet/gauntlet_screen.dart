@@ -5,6 +5,8 @@ import '../card_render/card_widget.dart';
 import '../duel/duel_controller.dart';
 import '../duel/duel_screen.dart';
 import '../duel/scenario.dart';
+import '../services/ad_result_flow.dart';
+import '../services/ad_service.dart';
 import '../services/audio_manager.dart';
 import '../services/haptics.dart';
 import '../services/save_service.dart';
@@ -17,8 +19,14 @@ import 'gauntlet_reward.dart';
 class GauntletScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
+  final AdService? adService;
 
-  const GauntletScreen({super.key, required this.library, required this.save});
+  const GauntletScreen({
+    super.key,
+    required this.library,
+    required this.save,
+    this.adService,
+  });
 
   @override
   State<GauntletScreen> createState() => _GauntletScreenState();
@@ -123,6 +131,11 @@ class _GauntletScreenState extends State<GauntletScreen> {
           gold: milestone.gold, shards: milestone.shards);
     }
     await save.trackQuest(won ? 'duel_win' : 'battle_loss');
+    if (!mounted) return;
+
+    // The same seam story and arena use, so the grace period for new players
+     // and the frequency cap apply here too rather than being re-invented.
+    await showPostResultInterstitial(widget.adService);
     if (!mounted) return;
 
     AudioManager.instance.reward();

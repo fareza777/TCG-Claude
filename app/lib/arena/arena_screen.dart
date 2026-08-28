@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
+import '../widgets/ad_banner.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../duel/duel_controller.dart';
@@ -287,6 +289,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(
@@ -307,11 +310,19 @@ class _ArenaScreenState extends State<ArenaScreen> {
                       icon: const Icon(Icons.arrow_back,
                           color: AppTheme.textPrimary),
                     ),
-                    const Text('The Proving Gauntlet',
-                        style: TextStyle(
-                            color: AppTheme.textPrimary,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w800)),
+                    // The title yields, not the Standings button. On a 400px
+                    // phone the fixed children already exceed the width, and
+                    // without this the Spacer collapses and the right-hand
+                    // content is what gets clipped.
+                    const Flexible(
+                      child: Text('The Proving Gauntlet',
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                          style: TextStyle(
+                              color: AppTheme.textPrimary,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w800)),
+                    ),
                     const Spacer(),
                     Semantics(
                       button: true,

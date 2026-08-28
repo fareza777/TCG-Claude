@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../services/ad_service.dart';
+import '../widgets/ad_banner.dart';
+
 import '../services/save_service.dart';
 import '../theme.dart';
 
 /// Lifetime progression: login streak, stats, and the achievement catalogue.
 class AchievementsScreen extends StatelessWidget {
   final SaveService save;
+  final AdService adService;
 
   const AchievementsScreen({
     super.key,
     required this.save,
+    required this.adService,
   });
 
   @override
@@ -18,6 +23,7 @@ class AchievementsScreen extends StatelessWidget {
     final unlocked = entries.where((e) => save.hasAchievement(e.key)).length;
 
     return Scaffold(
+      bottomNavigationBar: AdBanner(adService: adService),
       body: Container(
         decoration: const BoxDecoration(
           gradient: RadialGradient(
