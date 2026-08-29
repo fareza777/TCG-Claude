@@ -21,6 +21,18 @@ dependencies:
   package_info_plus: ^10.2.1
   url_launcher: ^6.3.2
 
+# path_provider_android 2.3.x moved to JNI bindings, which pull in the
+# jni_flutter plugin. That plugin fails to configure under this project's
+# Gradle/AGP: ":jni_flutter:compileReleaseJavaWithJavac -- Cannot query the
+# value of this provider because it has no value available".
+#
+# It went unnoticed for weeks because incremental builds reused cached Gradle
+# state; the break only appears on a clean build, which means the project could
+# not be built from scratch -- on CI, or on a new machine. Pinned below 2.3.0
+# until the plugin or the toolchain catches up.
+dependency_overrides:
+  path_provider_android: ">=2.2.0 <2.3.0"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
