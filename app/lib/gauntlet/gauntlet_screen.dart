@@ -133,11 +133,6 @@ class _GauntletScreenState extends State<GauntletScreen> {
     await save.trackQuest(won ? 'duel_win' : 'battle_loss');
     if (!mounted) return;
 
-    // The same seam story and arena use, so the grace period for new players
-     // and the frequency cap apply here too rather than being re-invented.
-    await showPostResultInterstitial(widget.adService);
-    if (!mounted) return;
-
     AudioManager.instance.reward();
     Haptics.blow();
     setState(() {
@@ -149,6 +144,14 @@ class _GauntletScreenState extends State<GauntletScreen> {
         lines: [...earned.lines, ...milestone.lines],
       );
     });
+
+    // The reward is shown first and the ad comes after it, matching story --
+    // the payout is what the player earned, and putting an ad in front of it
+    // reads as a toll on their own winnings. The same seam is used so the
+    // new-player grace period and the two-minute cap apply rather than being
+    // re-invented; that grace is also why no ad appears for the first three
+    // battles after a fresh install.
+    await showPostResultInterstitial(widget.adService);
   }
 
   // ── screen ────────────────────────────────────────────────────────────

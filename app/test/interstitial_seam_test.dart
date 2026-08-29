@@ -25,4 +25,30 @@ void main() {
         reason: 'call showPostResultInterstitial instead, so the new-player '
             'grace period cannot be skipped: ${offenders.join(", ")}');
   });
+
+  test('every mode that ends a battle goes through the seam', () {
+    // The other half of the guarantee. The first test stops a screen showing
+    // an ad the wrong way; this one stops a screen forgetting to show one at
+    // all -- and, because the seam is also where a battle gets counted, a mode
+    // that skips it would quietly hold the grace period open forever.
+    const modes = {
+      'story/chapter_player.dart': 'story battles',
+      'arena/arena_screen.dart': 'arena runs',
+      'gauntlet/gauntlet_screen.dart': 'the daily gauntlet',
+      'main.dart': 'free duels',
+    };
+
+    final missing = <String>[];
+    modes.forEach((path, what) {
+      final source = File('lib/$path').readAsStringSync();
+      if (!source.contains('showPostResultInterstitial')) {
+        missing.add('$what ($path)');
+      }
+    });
+
+    expect(missing, isEmpty,
+        reason: 'these finish a battle without going through the seam, so '
+            'they neither show an ad nor count the battle: '
+            '${missing.join(", ")}');
+  });
 }

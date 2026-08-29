@@ -1160,8 +1160,34 @@ class _DuelScreenState extends State<DuelScreen>
     final me = c.me;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
+          // The refusal gets its own line rather than a seat in the button
+          // row. Sharing the row meant a long message -- "Insufficient
+          // Verdance Aether" -- pushed Combat and End Turn off the right
+          // edge, and it appears precisely when the player has just been told
+          // no and needs those buttons most.
+          if (c.lastError != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Row(
+                children: [
+                  const Icon(Icons.block, size: 13, color: AppTheme.danger),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(c.lastError!,
+                        maxLines: 2,
+                        style: const TextStyle(
+                            color: AppTheme.danger,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                ],
+              ),
+            ),
+          Row(
+            children: [
           GestureDetector(
             onTap: c.isTargeting &&
                     c.targetingDef != null &&
@@ -1179,13 +1205,6 @@ class _DuelScreenState extends State<DuelScreen>
               style:
                   const TextStyle(color: AppTheme.textMuted, fontSize: 11)),
           const Spacer(),
-          if (c.lastError != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: Text(c.lastError!,
-                  style:
-                      const TextStyle(color: AppTheme.danger, fontSize: 11)),
-            ),
           if (c.ui == DuelUiState.playerMain) ...[
             _btn('⚔ Combat', AppTheme.danger, c.enterCombat),
             const SizedBox(width: 8),
@@ -1213,6 +1232,8 @@ class _DuelScreenState extends State<DuelScreen>
           ] else if (c.ui == DuelUiState.playerResponse) ...[
             _btn('Pass', const Color(0xFF6FB0DC), c.passResponse),
           ],
+            ],
+          ),
         ],
       ),
     );
