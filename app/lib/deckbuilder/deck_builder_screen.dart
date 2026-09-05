@@ -56,6 +56,11 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
     final existing = widget.editDeck;
     if (existing != null && widget.save.decks.containsKey(existing)) {
       for (final id in widget.save.decks[existing]!) {
+        // Skipped rather than loaded blindly: the curve and the counters look
+        // every card up, library.card throws on an id it does not know, and a
+        // deck comes out of a save file. One retired card would otherwise make
+        // the deck impossible to open -- or to repair.
+        if (!widget.library.byId.containsKey(id)) continue;
         _deck[id] = (_deck[id] ?? 0) + 1;
       }
     }
@@ -339,13 +344,45 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       ),
     );
     if (name == null || name.isEmpty) return;
+    if (!mounted) return;
+
+    // Saving over another deck is silent and permanent, and the name box
+    // defaults to "My Deck" -- so a player who saved twice without renaming
+    // destroyed their first deck without ever being told. Ask first, but only
+    // when it really is a different deck.
+    if (widget.save.decks.containsKey(name) && name != widget.editDeck) {
+      final replace = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: AppTheme.panel,
+          title: const Text('Replace that deck?',
+              style: TextStyle(color: AppTheme.textPrimary)),
+          content: Text(
+              'You already have a deck called "$name". Saving will overwrite '
+              'it, and the old list cannot be recovered.',
+              style: const TextStyle(color: AppTheme.textMuted, height: 1.4)),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('Pick another name')),
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Overwrite',
+                    style: TextStyle(color: AppTheme.danger))),
+          ],
+        ),
+      );
+      if (replace != true) return;
+    }
+
     final ids = <String>[];
     _deck.forEach((id, c) {
       for (var i = 0; i < c; i++) {
         ids.add(id);
       }
     });
-    await widget.save.saveDeck(name, ids);
+    // `replacing` makes renaming an edited deck a rename rather than a copy.
+    await widget.save.saveDeck(name, ids, replacing: widget.editDeck);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Deck "$name" saved.')));

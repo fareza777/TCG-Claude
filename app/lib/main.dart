@@ -10,7 +10,7 @@ import 'about/about_screen.dart';
 import 'auth/login_screen.dart';
 import 'card_render/card_widget.dart';
 import 'collection/collection_screen.dart';
-import 'deckbuilder/deck_builder_screen.dart';
+import 'deckbuilder/decks_screen.dart';
 import 'duel/coin_flip.dart';
 import 'duel/duel_controller.dart';
 import 'duel/duel_screen.dart';
@@ -1267,7 +1267,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                     ).glow,
                                     onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => DeckBuilderScreen(
+                                        builder: (_) => DecksScreen(
                                           library: _library!,
                                           save: _save!,
                                           adService: _ads!,

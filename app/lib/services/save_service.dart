@@ -534,7 +534,15 @@ class SaveService extends ChangeNotifier {
     return chapterClearGold;
   }
 
-  Future<void> saveDeck(String name, List<String> cardIds) async {
+  /// Saves a deck, optionally under a new name.
+  ///
+  /// [replacing] is the name the deck was opened under. Editing a deck and
+  /// giving it a different name is a rename, not a second deck -- without
+  /// this the old entry stayed behind, and since nothing could delete it, it
+  /// stayed forever.
+  Future<void> saveDeck(String name, List<String> cardIds,
+      {String? replacing}) async {
+    if (replacing != null && replacing != name) decks.remove(replacing);
     decks[name] = cardIds;
     await _persist();
     notifyListeners();
