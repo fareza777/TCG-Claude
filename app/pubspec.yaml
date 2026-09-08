@@ -1,7 +1,7 @@
 name: shardfall
 description: "SHARDFALL - trading card game."
 publish_to: 'none'
-version: 0.1.20+60
+version: 0.1.21+61
 
 environment:
   sdk: ^3.12.2
