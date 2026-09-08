@@ -427,11 +427,13 @@ const chapterFour = StoryChapter(
       enemyName: 'The Long Calling',
       objective: 'Nine centuries of unanswered voice.',
       specialRules: [
+        'One of the Chosen stands with you.',
         'The enemy opens with two creatures in play.',
         'It has 29 Health.',
       ],
       enemyHealth: 29,
       enemyBoardIds: ['SF001-082', 'SF001-084'],
+      playerBoardIds: ['SF001-063'],
     )),
 
     // ══ 17 ═══════════════════════════════════════════════════════════════
@@ -453,11 +455,13 @@ const chapterFour = StoryChapter(
       enemyName: 'The Thing Beneath the Thing',
       objective: 'A shape at the very bottom of the light.',
       specialRules: [
+        'One of the Chosen stands with you.',
         'The enemy opens with two creatures in play.',
         'It has 30 Health.',
       ],
       enemyHealth: 30,
       enemyBoardIds: ['SF001-086', 'SF001-083'],
+      playerBoardIds: ['SF001-063'],
     )),
 
     // ══ 18 ═══════════════════════════════════════════════════════════════
@@ -479,11 +483,13 @@ const chapterFour = StoryChapter(
       enemyName: 'The Fourth Door',
       objective: 'It opens under the sanctum floor.',
       specialRules: [
+        'One of the Chosen stands with you.',
         'The enemy opens with two creatures in play.',
         'It has 31 Health.',
       ],
       enemyHealth: 31,
       enemyBoardIds: ['SF001-086', 'SF001-084'],
+      playerBoardIds: ['SF001-063'],
     )),
 
     // ══ 19 ═══════════════════════════════════════════════════════════════
@@ -505,11 +511,13 @@ const chapterFour = StoryChapter(
       enemyName: 'The Chosen, Hollowed',
       objective: 'The order she built comes up the stair.',
       specialRules: [
+        'One of the Chosen stands with you.',
         'They fight with real cunning.',
         'They have 32 Health and open with two creatures.',
       ],
       enemyHealth: 32,
       enemyBoardIds: ['SF001-067', 'SF001-066'],
+      playerBoardIds: ['SF001-063'],
       hardAi: true,
     )),
 
@@ -536,11 +544,13 @@ const chapterFour = StoryChapter(
       enemyName: 'The Voice in the Halo',
       objective: 'Take back the light Aurelia never owned.',
       specialRules: [
+        'One of the Chosen stands with you.',
         'It fights with a stolen city behind it.',
         'It has 40 Health and opens with two creatures.',
       ],
       enemyHealth: 40,
       enemyBoardIds: ['SF001-086', 'SF001-085'],
+      playerBoardIds: ['SF001-063'],
       hardAi: true,
       preBattle: [
         DialogueLine('The Voice',

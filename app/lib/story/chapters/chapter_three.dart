@@ -429,11 +429,13 @@ const chapterThree = StoryChapter(
       enemyName: 'The Struck-Through',
       objective: 'What the old hand was hiding.',
       specialRules: [
+        'One of the deep watch stands with you.',
         'The enemy opens with two creatures in play.',
         'It has 29 Health.',
       ],
       enemyHealth: 29,
       enemyBoardIds: ['SF001-082', 'SF001-084'],
+      playerBoardIds: ['SF001-043'],
     )),
 
     // ══ 17 ═══════════════════════════════════════════════════════════════
@@ -453,11 +455,13 @@ const chapterThree = StoryChapter(
       enemyName: 'The Drowned Memories',
       objective: 'Nine centuries of archivists, unmade and rising.',
       specialRules: [
+        'One of the deep watch stands with you.',
         'The enemy opens with two creatures in play.',
         'They have 30 Health.',
       ],
       enemyHealth: 30,
       enemyBoardIds: ['SF001-085', 'SF001-083'],
+      playerBoardIds: ['SF001-043'],
     )),
 
     // ══ 18 ═══════════════════════════════════════════════════════════════
@@ -483,11 +487,13 @@ const chapterThree = StoryChapter(
       enemyName: 'What Comes for the Name',
       objective: 'Buy her the time.',
       specialRules: [
+        'One of the deep watch stands with you.',
         'The enemy opens with two creatures in play.',
         'It has 31 Health.',
       ],
       enemyHealth: 31,
       enemyBoardIds: ['SF001-086', 'SF001-084'],
+      playerBoardIds: ['SF001-043'],
     )),
 
     // ══ 19 ═══════════════════════════════════════════════════════════════
@@ -512,11 +518,13 @@ const chapterThree = StoryChapter(
       enemyName: 'The Unwritten Guard',
       objective: 'It wears nine hundred years of erased things.',
       specialRules: [
+        'One of the deep watch stands with you.',
         'They fight with real cunning.',
         'They have 32 Health and open with two creatures.',
       ],
       enemyHealth: 32,
       enemyBoardIds: ['SF001-086', 'SF001-085'],
+      playerBoardIds: ['SF001-043'],
       hardAi: true,
     )),
 
@@ -540,11 +548,13 @@ const chapterThree = StoryChapter(
       enemyName: 'The Erasure',
       objective: 'Take back what it read.',
       specialRules: [
+        'One of the deep watch stands with you.',
         'It fights with everything it has taken.',
         'It has 38 Health and opens with two creatures.',
       ],
       enemyHealth: 38,
       enemyBoardIds: ['SF001-086', 'SF001-085'],
+      playerBoardIds: ['SF001-043'],
       hardAi: true,
       preBattle: [
         DialogueLine('The Erasure',
