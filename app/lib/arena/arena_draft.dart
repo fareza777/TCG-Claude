@@ -11,8 +11,10 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 /// click, not a decision. What the draft does instead is let your picks decide
 /// how those sixteen are split.
 ///
-/// A run is locked to two dominions for the same reason. Costs are paid in
-/// matching Aether, so a five-colour pile would be a deck of uncastable cards.
+/// A run is locked to one or two dominions for the same reason. Costs are paid
+/// in matching Aether, so a five-colour pile would be a deck of uncastable
+/// cards. One colour trades a pool about half the size for Aether that never
+/// fails; two colours is the reverse.
 class ArenaDraft {
   static const picks = 24;
   static const wellspringCount = 16;
@@ -47,23 +49,33 @@ class ArenaDraft {
     _deal();
   }
 
-  /// Three dominion pairs to choose a run's colours from.
-  static List<List<Dominion>> rollPairs(Random rng) {
-    const all = [
-      Dominion.verdance,
-      Dominion.pyre,
-      Dominion.tide,
-      Dominion.dawn,
-      Dominion.gloom,
-    ];
-    final pairs = <List<Dominion>>[];
-    for (var i = 0; i < all.length; i++) {
-      for (var j = i + 1; j < all.length; j++) {
-        pairs.add([all[i], all[j]]);
-      }
-    }
-    pairs.shuffle(rng);
-    return pairs.take(3).toList();
+  /// How many single-colour and two-colour options a run is offered.
+  static const monoOffers = 2;
+  static const pairOffers = 4;
+
+  static const _colours = [
+    Dominion.verdance,
+    Dominion.pyre,
+    Dominion.tide,
+    Dominion.dawn,
+    Dominion.gloom,
+  ];
+
+  /// The colour choices for a run: [monoOffers] single dominions followed by
+  /// [pairOffers] pairs, none repeated. Singles come first so the screen can
+  /// group them, and because they are the rarer, more particular choice.
+  static List<List<Dominion>> rollRuns(Random rng) {
+    final mono = [
+      for (final d in _colours) [d],
+    ]..shuffle(rng);
+
+    final pairs = <List<Dominion>>[
+      for (var i = 0; i < _colours.length; i++)
+        for (var j = i + 1; j < _colours.length; j++)
+          [_colours[i], _colours[j]],
+    ]..shuffle(rng);
+
+    return [...mono.take(monoOffers), ...pairs.take(pairOffers)];
   }
 
   /// A card belongs in this run if every Aether it demands is a colour the run

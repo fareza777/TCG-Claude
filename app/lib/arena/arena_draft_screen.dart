@@ -9,7 +9,7 @@ import '../theme.dart';
 import '../widgets/card_zoom.dart';
 import 'arena_draft.dart';
 
-/// Pick your two dominions, then build a deck one card at a time.
+/// Pick your colours, then build a deck one card at a time.
 ///
 /// Pops the finished 40-card list, or null if the player backs out — the caller
 /// is responsible for refunding the entry fee in that case.
@@ -23,18 +23,18 @@ class ArenaDraftScreen extends StatefulWidget {
 
 class _ArenaDraftScreenState extends State<ArenaDraftScreen> {
   final _rng = Random();
-  late List<List<Dominion>> _pairs;
+  late List<List<Dominion>> _runs;
   ArenaDraft? _draft;
 
   @override
   void initState() {
     super.initState();
-    _pairs = ArenaDraft.rollPairs(_rng);
+    _runs = ArenaDraft.rollRuns(_rng);
   }
 
   String _cap(String s) => s[0].toUpperCase() + s.substring(1);
-  String _pairName(List<Dominion> p) =>
-      p.map((d) => _cap(d.name)).join(' · ');
+  String _runName(List<Dominion> run) =>
+      run.map((d) => _cap(d.name)).join(' · ');
 
   Color _colourOf(Dominion d) => switch (d) {
         Dominion.verdance => const Color(0xFF4FB477),
@@ -45,10 +45,10 @@ class _ArenaDraftScreenState extends State<ArenaDraftScreen> {
         Dominion.neutral => AppTheme.textMuted,
       };
 
-  void _choosePair(List<Dominion> pair) {
+  void _chooseRun(List<Dominion> run) {
     AudioManager.instance.tap();
     setState(() {
-      _draft = ArenaDraft(library: widget.library, dominions: pair, rng: _rng);
+      _draft = ArenaDraft(library: widget.library, dominions: run, rng: _rng);
     });
   }
 
@@ -75,7 +75,7 @@ class _ArenaDraftScreenState extends State<ArenaDraftScreen> {
             children: [
               _header(draft),
               Expanded(
-                child: draft == null ? _pairView() : _pickView(draft),
+                child: draft == null ? _runView() : _pickView(draft),
               ),
             ],
           ),
@@ -110,60 +110,104 @@ class _ArenaDraftScreenState extends State<ArenaDraftScreen> {
     );
   }
 
-  // ── step one: the run's two dominions ─────────────────────────────────
-  Widget _pairView() {
+  // ── step one: the run's colours ───────────────────────────────────────
+  Widget _runView() {
+    final mono = [for (final r in _runs) if (r.length == 1) r];
+    final pairs = [for (final r in _runs) if (r.length == 2) r];
     return ListView(
       padding: const EdgeInsets.fromLTRB(18, 8, 18, 24),
       children: [
         const Text(
-          'A run is locked to two dominions. Aether is paid in matching '
-          'colours, so this choice decides everything you will be offered.',
+          'Aether is paid in matching colours, so this choice decides '
+          'everything you will be offered.',
           style: TextStyle(
               color: AppTheme.textMuted, fontSize: 13, height: 1.45),
         ),
-        const SizedBox(height: 18),
-        for (final pair in _pairs) ...[
-          GestureDetector(
-            onTap: () => _choosePair(pair),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                gradient: LinearGradient(colors: [
-                  _colourOf(pair.first).withValues(alpha: 0.35),
-                  _colourOf(pair.last).withValues(alpha: 0.35),
-                ]),
-                border: Border.all(
-                    color: _colourOf(pair.first).withValues(alpha: 0.7)),
+        const SizedBox(height: 20),
+        _runSection(
+          'ONE COLOUR',
+          'Every card you draft is always castable, from a smaller pool.',
+          mono,
+        ),
+        const SizedBox(height: 8),
+        _runSection(
+          'TWO COLOURS',
+          'A wider pool, but your Wellsprings are split between two kinds '
+              'of Aether.',
+          pairs,
+        ),
+      ],
+    );
+  }
+
+  Widget _runSection(
+          String title, String blurb, List<List<Dominion>> runs) =>
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title,
+              style: const TextStyle(
+                  color: AppTheme.textPrimary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.4)),
+          const SizedBox(height: 3),
+          Text(blurb,
+              style: const TextStyle(
+                  color: AppTheme.textMuted, fontSize: 12, height: 1.4)),
+          const SizedBox(height: 10),
+          for (final run in runs) ...[
+            _runTile(run),
+            const SizedBox(height: 12),
+          ],
+        ],
+      );
+
+  Widget _runTile(List<Dominion> run) {
+    return GestureDetector(
+      onTap: () => _chooseRun(run),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          gradient: LinearGradient(colors: [
+            _colourOf(run.first).withValues(alpha: 0.35),
+            _colourOf(run.last).withValues(alpha: 0.35),
+          ]),
+          border: Border.all(
+              color: _colourOf(run.first).withValues(alpha: 0.7)),
+        ),
+        child: Row(
+          children: [
+            for (final d in run) ...[
+              Container(
+                width: 16,
+                height: 16,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: _colourOf(d)),
               ),
-              child: Row(
-                children: [
-                  for (final d in pair) ...[
-                    Container(
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: _colourOf(d)),
-                    ),
-                    const SizedBox(width: 8),
-                  ],
-                  const SizedBox(width: 4),
-                  Text(_pairName(pair),
-                      style: const TextStyle(
-                          fontFamily: 'Cinzel',
-                          color: AppTheme.textPrimary,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700)),
-                  const Spacer(),
-                  const Icon(Icons.chevron_right,
-                      color: AppTheme.textMuted),
-                ],
+              const SizedBox(width: 8),
+            ],
+            const SizedBox(width: 4),
+            // Shrinks rather than truncates: a colour name cut short reads as
+            // a different colour.
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(_runName(run),
+                    maxLines: 1,
+                    style: const TextStyle(
+                        fontFamily: 'Cinzel',
+                        color: AppTheme.textPrimary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700)),
               ),
             ),
-          ),
-          const SizedBox(height: 12),
-        ],
-      ],
+            const Icon(Icons.chevron_right, color: AppTheme.textMuted),
+          ],
+        ),
+      ),
     );
   }
 
