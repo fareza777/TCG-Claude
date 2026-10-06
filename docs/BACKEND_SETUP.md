@@ -54,33 +54,44 @@ verification returns `503 verification_unavailable`, which the client treats as
 
 ## 2. Google Sign-In
 
-In Google Cloud → **APIs & Services → Credentials**, create **two** OAuth
-client IDs:
+In Google Auth Platform → **Clients**, use the existing Web client for
+`serverClientId` and the existing Android upload-key client for sideloaded
+builds. This Shardfall Play app uses quantum-ready hybrid signing, so add an
+Android OAuth client for each of its three Play signing certificates as well
+(package `com.shardfall.shardfall`):
 
-- **Android** — package `com.shardfall.shardfall`, plus the SHA-1 fingerprint.
-  Use the SHA-1 from Play Console → **Test and release → App integrity → App
-  signing key certificate**, not just your local upload key. Play re-signs the
-  app, so a build downloaded from Play carries the Play key.
-- **Web** — this one's client ID is what the app and Supabase both need.
+| Play certificate | SHA-1 |
+| --- | --- |
+| `deployment_cert.der` | `4B:14:A8:CB:50:EE:A5:3F:E5:3B:17:4C:7F:01:0D:F8:0C:15:B4:75` |
+| `hybrid_classical_cert.der` | `1B:84:81:76:BB:19:5C:F1:D0:76:09:27:A8:F9:46:96:A9:F7:BD:57` |
+| `hybrid_pqc_cert.der` | `08:80:0F:3F:F8:21:BF:85:B0:4E:A3:89:54:C5:50:8D:11:AA:FC:A1` |
+
+The three certificates are available from Play Console → **Protected with
+Play → Manage Play app signing → Download certificates**. Keep the upload-key
+Android client too; Play-distributed installs use the three Play signing
+certificates, not the upload key.
 
 Then Supabase Dashboard → **Authentication → Providers → Google**:
 
-- enable it,
-- paste the **Web** client ID and its client secret,
-- add the **Android** client ID to **Authorized Client IDs**.
+- keep **Enable Sign in with Google** on and **Skip nonce checks** off,
+- put the Web client ID first in **Client IDs**, followed by the upload-key
+  Android client ID and all three Play signing Android client IDs,
+- keep the Web client secret in the provider's secret field.
 
 ## 3. Building the app
 
-The Supabase URL and publishable key are already the defaults in
-[`app/lib/services/backend_config.dart`](../app/lib/services/backend_config.dart)
-— they are meant to ship in the client, since RLS is the real boundary. Only
-the Google client ID has to be supplied at build time:
+The Supabase URL, publishable key, and production Google **Web** client ID are
+defaults in [`app/lib/services/backend_config.dart`](../app/lib/services/backend_config.dart).
+They are public client configuration; RLS is the security boundary. Production
+builds no longer need a Google client-ID flag. For a staging project only, you
+can override the Web client ID at build time:
 
 ```bash
-flutter build appbundle --dart-define=GOOGLE_SERVER_CLIENT_ID=<web-client-id>.apps.googleusercontent.com
+flutter build appbundle --dart-define=GOOGLE_SERVER_CLIENT_ID=<staging-web-client-id>.apps.googleusercontent.com
 ```
 
-Omit it and the sign-in entry disappears from Settings; the game runs offline.
+The ID must be a Web application OAuth client ID; Android client IDs are not a
+substitute for the token audience checked by Supabase.
 
 ## 4. Verifying it end to end
 

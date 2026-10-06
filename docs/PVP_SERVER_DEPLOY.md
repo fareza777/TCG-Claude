@@ -176,9 +176,12 @@ On two real devices with two Google accounts, on a build made with sign-in and
 PvP enabled:
 
 ```bash
-flutter build apk --release \
-  --dart-define=GOOGLE_SERVER_CLIENT_ID=<web-client-id>.apps.googleusercontent.com
+flutter build apk --release
 ```
+
+The production Web OAuth client ID is built in as the default. Supply
+`--dart-define=GOOGLE_SERVER_CLIENT_ID=<staging-web-client-id>.apps.googleusercontent.com`
+only for an intentional staging build.
 
 | # | Do this | Expect |
 | --- | --- | --- |

@@ -65,53 +65,59 @@ Track A is now live. Nothing to rebuild.
 
 ### Step 4 · OAuth consent screen
 
-Open <https://console.cloud.google.com/apis/credentials/consent> and fill it in.
-Google requires links to a **privacy policy** and **terms of service** — this is
-usually what blocks people. You already have the text in
-[PRIVACY_POLICY.md](PRIVACY_POLICY.md); it needs to be hosted at a public URL
-(GitHub Pages is enough).
+In Google Auth Platform → **Branding**, use app name `Shardfall`, support email
+`fajar.mreza@gmail.com`, and the public privacy policy URL
+<https://fareza777.github.io/shardfall/privacy.html>. Terms of service are
+optional. Add `fareza777.github.io` to Authorized domains if Google reports it
+missing. In **Audience**, set Publishing status to **In production** after the
+branding is saved.
 
-### Step 5 · Two OAuth client IDs
+### Step 5 · OAuth client IDs
 
-Open <https://console.cloud.google.com/auth/clients/create> — do this **twice**.
+The `Shardfall Web` client and Android upload-key client already exist in
+project `Shardfall Billing`. The Web client ID is
+`729072124482-a5mn4a6alj6ielikioqrjgfp1v1mvg66.apps.googleusercontent.com`;
+use it as `serverClientId` and keep its secret only in Supabase.
 
-**5a. Application type: Web** → name it `Shardfall Web`. Copy the **Client ID**
-and **Client secret**. This is the one the app and Supabase both use, even
-though the app is not a website.
+Also create Android clients for all three Play signing certificates (same
+package `com.shardfall.shardfall`). Hybrid signing uses three fingerprints;
+register all of them, not just the upload certificate:
 
-**5b. Application type: Android** → package name `com.shardfall.shardfall`,
-SHA-1 `B6:94:27:07:FC:09:DD:E5:75:CE:38:4C:5A:16:89:CB:E8:26:CA:59`. Copy its
-Client ID too.
+| Certificate | SHA-1 |
+| --- | --- |
+| `deployment_cert.der` | `4B:14:A8:CB:50:EE:A5:3F:E5:3B:17:4C:7F:01:0D:F8:0C:15:B4:75` |
+| `hybrid_classical_cert.der` | `1B:84:81:76:BB:19:5C:F1:D0:76:09:27:A8:F9:46:96:A9:F7:BD:57` |
+| `hybrid_pqc_cert.der` | `08:80:0F:3F:F8:21:BF:85:B0:4E:A3:89:54:C5:50:8D:11:AA:FC:A1` |
 
-> Play re-signs anything distributed through the Play Store, so a build
-> downloaded from Play carries a **different** fingerprint. Once your app is on
-> a Play track, also add the SHA-1 from Play Console → **Test and release → App
-> integrity → App signing key certificate**, as a second Android OAuth client.
-> Skip this and sign-in works on sideloaded APKs but fails on Play installs.
+Download these from Play Console → **Protected with Play → Manage Play app
+signing → Download certificates**. The existing `Shardfall Android` client
+uses the upload-key fingerprint and should remain for sideloaded APKs.
 
 ### Step 6 · Enable Google in Supabase
 
 Open <https://supabase.com/dashboard/project/vqssjwewtjgekuyzzggo/auth/providers?provider=Google>:
 
 1. Toggle **Enable Sign in with Google**.
-2. **Client IDs** — paste both, comma-separated, **Web first**:
-   `<web-client-id>,<android-client-id>`
-3. **Client Secret** — the Web client's secret from step 5a.
+2. **Client IDs** — comma-separated, **Web first**: Web client ID, upload-key
+   Android client ID, then the Android client IDs for `deployment_cert.der`,
+   `hybrid_classical_cert.der`, and `hybrid_pqc_cert.der`.
+3. **Client Secret** — keep the existing Web client secret.
 4. Save.
 
 Leave **Skip nonce check** off. It is only needed for iOS.
 
-### Step 7 · Rebuild with the client ID
+### Step 7 · Rebuild with production defaults
 
 ```bash
 export ANDROID_HOME=/c/Android/Sdk
 cd "C:/TCG Claude/app"
-flutter build appbundle --release --dart-define=GOOGLE_SERVER_CLIENT_ID=<web-client-id>.apps.googleusercontent.com
-flutter build apk --release --dart-define=GOOGLE_SERVER_CLIENT_ID=<web-client-id>.apps.googleusercontent.com
+flutter build appbundle --release
+flutter build apk --release
 ```
 
-Without this flag the **Sign in with Google** row stays hidden in Settings —
-that is deliberate, not a bug.
+The production Web client ID is now the source default, so omit the
+`--dart-define` flag for production. Use that override only when intentionally
+building against a separate staging Web client ID.
 
 ---
 
