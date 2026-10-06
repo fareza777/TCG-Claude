@@ -375,11 +375,15 @@ const chapterTwo = StoryChapter(
       enemyName: 'The Invitation',
       objective: 'Something holds the way open for you.',
       specialRules: [
+        'You begin with 30 Health.',
+        'One of the forge-hands stands with you.',
         'The enemy opens with a creature in play.',
         'It has 27 Health.',
       ],
       enemyHealth: 27,
       enemyBoardIds: ['SF001-081'],
+      playerHealth: 30,
+      playerBoardIds: ['SF001-021'],
     )),
 
     // ══ 14 ═══════════════════════════════════════════════════════════════
@@ -403,11 +407,13 @@ const chapterTwo = StoryChapter(
       enemyName: 'What Walks With Kaelis',
       objective: 'He did not come up alone.',
       specialRules: [
+        'Two of the forge-hands stand with you.',
         'The enemy opens with a creature in play.',
         'It has 28 Health.',
       ],
       enemyHealth: 28,
       enemyBoardIds: ['SF001-084'],
+      playerBoardIds: ['SF001-021', 'SF001-021'],
     )),
 
     // ══ 15 ═══════════════════════════════════════════════════════════════
@@ -430,11 +436,13 @@ const chapterTwo = StoryChapter(
       enemyName: 'The Hollowed Twelve',
       objective: 'The survey crew, still working.',
       specialRules: [
+        'Two of the forge-hands stand with you.',
         'The enemy opens with a creature in play.',
         'They have 28 Health.',
       ],
       enemyHealth: 28,
       enemyBoardIds: ['SF001-085'],
+      playerBoardIds: ['SF001-021', 'SF001-021'],
     )),
 
     // ══ 16 ═══════════════════════════════════════════════════════════════
@@ -459,13 +467,15 @@ const chapterTwo = StoryChapter(
       enemyName: 'The Floodwrights',
       objective: 'Her own engineers came ahead of the order.',
       specialRules: [
-        'One of the forge-hands stands with you.',
-        'The enemy opens with two creatures in play.',
+        'Two of the forge-hands stand with you.',
+        'The foe takes the first turn. You draw an extra card.',
+        'The enemy opens with a creature in play.',
         'They have 29 Health.',
       ],
       enemyHealth: 29,
-      enemyBoardIds: ['SF001-043', 'SF001-042'],
-      playerBoardIds: ['SF001-023'],
+      enemyBoardIds: ['SF001-043'],
+      playerBoardIds: ['SF001-023', 'SF001-021'],
+      playerFirst: false,
     )),
 
     // ══ 17 ═══════════════════════════════════════════════════════════════
@@ -488,13 +498,13 @@ const chapterTwo = StoryChapter(
       enemyName: 'The Withdrawal',
       objective: 'It takes back everything at once.',
       specialRules: [
-        'One of the forge-hands stands with you.',
+        'Three of the forge-hands stand with you.',
         'The enemy opens with two creatures in play.',
         'It has 30 Health.',
       ],
       enemyHealth: 30,
       enemyBoardIds: ['SF001-082', 'SF001-084'],
-      playerBoardIds: ['SF001-023'],
+      playerBoardIds: ['SF001-023', 'SF001-021', 'SF001-021'],
     )),
 
     // ══ 18 ═══════════════════════════════════════════════════════════════
@@ -519,13 +529,13 @@ const chapterTwo = StoryChapter(
       enemyName: 'The Forge Guard',
       objective: 'Reach the Heartforge before it is fed again.',
       specialRules: [
-        'One of the forge-hands stands with you.',
-        'The enemy opens with two creatures in play.',
+        'Three of the forge-hands stand with you.',
+        'The enemy opens with a creature in play.',
         'They have 31 Health.',
       ],
       enemyHealth: 31,
-      enemyBoardIds: ['SF001-026', 'SF001-025'],
-      playerBoardIds: ['SF001-023'],
+      enemyBoardIds: ['SF001-026'],
+      playerBoardIds: ['SF001-023', 'SF001-021', 'SF001-022'],
     )),
 
     // ══ 19 ═══════════════════════════════════════════════════════════════
@@ -551,13 +561,13 @@ const chapterTwo = StoryChapter(
       enemyName: 'The Vein\'s Grip',
       objective: 'Everything it has, to keep you off the stair.',
       specialRules: [
-        'One of the forge-hands stands with you.',
+        'Three of the forge-hands stand with you.',
         'It fights with real cunning.',
-        'It has 32 Health and opens with two creatures.',
+        'It has 32 Health and opens with a creature.',
       ],
       enemyHealth: 32,
-      enemyBoardIds: ['SF001-086', 'SF001-084'],
-      playerBoardIds: ['SF001-023'],
+      enemyBoardIds: ['SF001-086'],
+      playerBoardIds: ['SF001-023', 'SF001-021', 'SF001-022'],
       hardAi: true,
     )),
 
@@ -584,13 +594,13 @@ const chapterTwo = StoryChapter(
       enemyName: 'Warlord Draxus',
       objective: 'Take the Heartforge, and put it out.',
       specialRules: [
-        'One of the forge-hands stands with you.',
+        'Three of the forge-hands stand with you.',
         'He fights with everything Ashmar has left.',
-        'Draxus has 36 Health and opens with two creatures.',
+        'Draxus has 35 Health and opens with a creature.',
       ],
-      enemyHealth: 36,
-      enemyBoardIds: ['SF001-027', 'SF001-026'],
-      playerBoardIds: ['SF001-023'],
+      enemyHealth: 35,
+      enemyBoardIds: ['SF001-027'],
+      playerBoardIds: ['SF001-023', 'SF001-021', 'SF001-022'],
       hardAi: true,
       preBattle: [
         DialogueLine('Draxus', 'Sixty thousand, Caller. Be sure.'),

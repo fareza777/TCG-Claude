@@ -338,11 +338,13 @@ const chapterFive = StoryChapter(
       enemyName: 'The Blurring',
       objective: 'Two voices using one throat.',
       specialRules: [
+        'One of the watch stands with you.',
         'The enemy opens with a creature in play.',
         'It has 27 Health.',
       ],
       enemyHealth: 27,
       enemyBoardIds: ['SF001-081'],
+      playerBoardIds: ['SF001-082'],
     )),
 
     // ══ 14 ═══════════════════════════════════════════════════════════════
@@ -367,11 +369,15 @@ const chapterFive = StoryChapter(
       enemyName: 'The Thousand-Year Echo',
       objective: 'Her voice arrives before she does.',
       specialRules: [
+        'You begin with 35 Health.',
+        'Two of the watch stand with you.',
         'The enemy opens with a creature in play.',
         'It has 28 Health.',
       ],
       enemyHealth: 28,
       enemyBoardIds: ['SF001-084'],
+      playerHealth: 35,
+      playerBoardIds: ['SF001-081', 'SF001-081'],
     )),
 
     // ══ 15 ═══════════════════════════════════════════════════════════════
@@ -397,11 +403,15 @@ const chapterFive = StoryChapter(
       enemyName: 'The Lie She Told',
       objective: 'Nine hundred years of a story, gone solid.',
       specialRules: [
+        'You begin with 35 Health.',
+        'Two of the watch stand with you.',
         'The enemy opens with a creature in play.',
         'It has 28 Health.',
       ],
       enemyHealth: 28,
       enemyBoardIds: ['SF001-085'],
+      playerHealth: 35,
+      playerBoardIds: ['SF001-081', 'SF001-081'],
     )),
 
     // ══ 16 ═══════════════════════════════════════════════════════════════
@@ -425,13 +435,15 @@ const chapterFive = StoryChapter(
       enemyName: 'Nine Hundred Years of Asking',
       objective: 'The weather she became.',
       specialRules: [
-        'One of the watch stands with you.',
+        'You begin with 35 Health.',
+        'Three of the watch stand with you.',
         'The enemy opens with two creatures in play.',
         'It has 29 Health.',
       ],
       enemyHealth: 29,
       enemyBoardIds: ['SF001-086', 'SF001-082'],
-      playerBoardIds: ['SF001-084'],
+      playerHealth: 35,
+      playerBoardIds: ['SF001-084', 'SF001-081', 'SF001-081'],
     )),
 
     // ══ 17 ═══════════════════════════════════════════════════════════════
@@ -456,13 +468,15 @@ const chapterFive = StoryChapter(
       enemyName: 'The Refusal',
       objective: 'The chamber rejects a warden who cannot leave.',
       specialRules: [
-        'One of the watch stands with you.',
+        'You begin with 40 Health.',
+        'Three of the watch stand with you.',
         'The enemy opens with two creatures in play.',
         'It has 30 Health.',
       ],
       enemyHealth: 30,
       enemyBoardIds: ['SF001-086', 'SF001-084'],
-      playerBoardIds: ['SF001-084'],
+      playerHealth: 40,
+      playerBoardIds: ['SF001-084', 'SF001-081', 'SF001-081'],
     )),
 
     // ══ 18 ═══════════════════════════════════════════════════════════════
@@ -486,13 +500,15 @@ const chapterFive = StoryChapter(
       enemyName: 'The Handover',
       objective: 'Everything the stone has gathered fights the relief.',
       specialRules: [
-        'One of the watch stands with you.',
+        'You begin with 40 Health.',
+        'Three of the watch stand with you.',
         'The enemy opens with two creatures in play.',
         'It has 31 Health.',
       ],
       enemyHealth: 31,
       enemyBoardIds: ['SF001-086', 'SF001-085'],
-      playerBoardIds: ['SF001-084'],
+      playerHealth: 40,
+      playerBoardIds: ['SF001-084', 'SF001-081', 'SF001-081'],
     )),
 
     // ══ 19 ═══════════════════════════════════════════════════════════════
@@ -514,13 +530,15 @@ const chapterFive = StoryChapter(
       enemyName: 'The Unanswered',
       objective: 'What her voice turned into.',
       specialRules: [
-        'One of the watch stands with you.',
+        'You begin with 40 Health.',
+        'Three of the watch stand with you.',
         'It fights with real cunning.',
-        'It has 33 Health and opens with two creatures.',
+        'It has 32 Health and opens with two creatures.',
       ],
       enemyHealth: 32,
       enemyBoardIds: ['SF001-086', 'SF001-085'],
-      playerBoardIds: ['SF001-084'],
+      playerHealth: 40,
+      playerBoardIds: ['SF001-084', 'SF001-081', 'SF001-081'],
       hardAi: true,
     )),
 
@@ -546,13 +564,17 @@ const chapterFive = StoryChapter(
       enemyName: 'The Voice in the Heartshard',
       objective: 'End nine hundred years of being ignored.',
       specialRules: [
-        'One of the watch stands with you.',
+        'You begin with 40 Health.',
+        'Three of the watch stand with you.',
+        'The foe takes the first turn. You draw an extra card.',
         'It fights with everything five cities refused to hear.',
-        'It has 44 Health and opens with two creatures.',
+        'It has 38 Health and opens with a creature.',
       ],
-      enemyHealth: 44,
-      enemyBoardIds: ['SF001-086', 'SF001-085'],
-      playerBoardIds: ['SF001-084'],
+      enemyHealth: 38,
+      enemyBoardIds: ['SF001-086'],
+      playerHealth: 40,
+      playerBoardIds: ['SF001-084', 'SF001-081', 'SF001-082'],
+      playerFirst: false,
       hardAi: true,
       preBattle: [
         DialogueLine('The Voice', 'Answer me properly, then.'),

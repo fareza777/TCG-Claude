@@ -370,11 +370,15 @@ const chapterFour = StoryChapter(
       enemyName: 'Eleven Years of Patience',
       objective: 'It has been polite for over a decade.',
       specialRules: [
+        'You begin with 30 Health.',
+        'One of the Chosen stands with you.',
         'The enemy opens with a creature in play.',
         'It has 28 Health.',
       ],
       enemyHealth: 28,
       enemyBoardIds: ['SF001-084'],
+      playerHealth: 30,
+      playerBoardIds: ['SF001-061'],
     )),
 
     // ══ 15 ═══════════════════════════════════════════════════════════════
@@ -397,11 +401,13 @@ const chapterFour = StoryChapter(
       enemyName: 'What Follows the Warden',
       objective: 'He does not travel alone any more.',
       specialRules: [
+        'One of the Chosen stands with you.',
         'The enemy opens with a creature in play.',
         'It has 28 Health.',
       ],
       enemyHealth: 28,
       enemyBoardIds: ['SF001-085'],
+      playerBoardIds: ['SF001-065'],
     )),
 
     // ══ 16 ═══════════════════════════════════════════════════════════════
@@ -427,13 +433,13 @@ const chapterFour = StoryChapter(
       enemyName: 'The Long Calling',
       objective: 'Nine centuries of unanswered voice.',
       specialRules: [
-        'One of the Chosen stands with you.',
+        'Two of the Chosen stand with you.',
         'The enemy opens with two creatures in play.',
         'It has 29 Health.',
       ],
       enemyHealth: 29,
       enemyBoardIds: ['SF001-082', 'SF001-084'],
-      playerBoardIds: ['SF001-063'],
+      playerBoardIds: ['SF001-063', 'SF001-065'],
     )),
 
     // ══ 17 ═══════════════════════════════════════════════════════════════
@@ -455,13 +461,15 @@ const chapterFour = StoryChapter(
       enemyName: 'The Thing Beneath the Thing',
       objective: 'A shape at the very bottom of the light.',
       specialRules: [
-        'One of the Chosen stands with you.',
+        'You begin with 35 Health.',
+        'Three of the Chosen stand with you.',
         'The enemy opens with two creatures in play.',
         'It has 30 Health.',
       ],
       enemyHealth: 30,
       enemyBoardIds: ['SF001-086', 'SF001-083'],
-      playerBoardIds: ['SF001-063'],
+      playerHealth: 35,
+      playerBoardIds: ['SF001-063', 'SF001-061', 'SF001-065'],
     )),
 
     // ══ 18 ═══════════════════════════════════════════════════════════════
@@ -483,13 +491,15 @@ const chapterFour = StoryChapter(
       enemyName: 'The Fourth Door',
       objective: 'It opens under the sanctum floor.',
       specialRules: [
-        'One of the Chosen stands with you.',
+        'You begin with 40 Health.',
+        'Two of the Chosen stand with you.',
         'The enemy opens with two creatures in play.',
         'It has 31 Health.',
       ],
       enemyHealth: 31,
       enemyBoardIds: ['SF001-086', 'SF001-084'],
-      playerBoardIds: ['SF001-063'],
+      playerHealth: 40,
+      playerBoardIds: ['SF001-063', 'SF001-065'],
     )),
 
     // ══ 19 ═══════════════════════════════════════════════════════════════
@@ -511,13 +521,13 @@ const chapterFour = StoryChapter(
       enemyName: 'The Chosen, Hollowed',
       objective: 'The order she built comes up the stair.',
       specialRules: [
-        'One of the Chosen stands with you.',
+        'Two of the Chosen stand with you.',
         'They fight with real cunning.',
-        'They have 32 Health and open with two creatures.',
+        'They have 32 Health and open with one creature.',
       ],
       enemyHealth: 32,
-      enemyBoardIds: ['SF001-067', 'SF001-066'],
-      playerBoardIds: ['SF001-063'],
+      enemyBoardIds: ['SF001-067'],
+      playerBoardIds: ['SF001-063', 'SF001-065'],
       hardAi: true,
     )),
 
@@ -544,13 +554,15 @@ const chapterFour = StoryChapter(
       enemyName: 'The Voice in the Halo',
       objective: 'Take back the light Aurelia never owned.',
       specialRules: [
-        'One of the Chosen stands with you.',
+        'You begin with 35 Health.',
+        'Two of the Chosen stand with you.',
         'It fights with a stolen city behind it.',
-        'It has 40 Health and opens with two creatures.',
+        'It has 37 Health and opens with a creature.',
       ],
-      enemyHealth: 40,
-      enemyBoardIds: ['SF001-086', 'SF001-085'],
-      playerBoardIds: ['SF001-063'],
+      enemyHealth: 37,
+      enemyBoardIds: ['SF001-086'],
+      playerHealth: 35,
+      playerBoardIds: ['SF001-063', 'SF001-065'],
       hardAi: true,
       preBattle: [
         DialogueLine('The Voice',

@@ -422,11 +422,13 @@ const chapterOne = StoryChapter(
       enemyName: 'The Hollow Chorus',
       objective: 'They sing to keep the diggers working.',
       specialRules: [
+        'One of the grove wardens stands with you.',
         'The enemy opens with a creature in play.',
         'The chorus has 27 Health.',
       ],
       enemyHealth: 27,
       enemyBoardIds: ['SF001-081'],
+      playerBoardIds: ['SF001-001'],
     )),
 
     // ══ 14 ═══════════════════════════════════════════════════════════════
@@ -452,11 +454,15 @@ const chapterOne = StoryChapter(
       enemyName: 'Gravebound Digger',
       objective: 'Stop it before it reaches the lid.',
       specialRules: [
+        'You begin with 30 Health.',
+        'One of the grove wardens stands with you.',
         'The enemy opens with a creature in play.',
         'The digger has 28 Health.',
       ],
       enemyHealth: 28,
       enemyBoardIds: ['SF001-084'],
+      playerHealth: 30,
+      playerBoardIds: ['SF001-001'],
     )),
 
     // ══ 15 ═══════════════════════════════════════════════════════════════
@@ -477,11 +483,13 @@ const chapterOne = StoryChapter(
       enemyName: 'The Hollowed Warden',
       objective: 'One of your own, and she knows your name.',
       specialRules: [
+        'Three of the grove wardens stand with you.',
         'The enemy opens with a creature in play.',
         'The warden has 28 Health.',
       ],
       enemyHealth: 28,
       enemyBoardIds: ['SF001-085'],
+      playerBoardIds: ['SF001-001', 'SF001-001', 'SF001-002'],
     )),
 
     // ══ 16 ═══════════════════════════════════════════════════════════════
@@ -505,13 +513,13 @@ const chapterOne = StoryChapter(
       enemyName: 'The Rotting Choir',
       objective: 'They close the shaft behind him.',
       specialRules: [
-        'One of the grove wardens stands with you.',
+        'Two of the grove wardens stand with you.',
         'The enemy opens with two creatures in play.',
         'The choir has 29 Health.',
       ],
       enemyHealth: 29,
       enemyBoardIds: ['SF001-081', 'SF001-083'],
-      playerBoardIds: ['SF001-003'],
+      playerBoardIds: ['SF001-003', 'SF001-001'],
     )),
 
     // ══ 17 ═══════════════════════════════════════════════════════════════
@@ -535,13 +543,15 @@ const chapterOne = StoryChapter(
       enemyName: 'Blightfather\'s Herald',
       objective: 'Silence the borrowed voice.',
       specialRules: [
-        'One of the grove wardens stands with you.',
+        'You begin with 30 Health.',
+        'Two of the grove wardens stand with you.',
         'The enemy opens with two creatures in play.',
         'The herald has 30 Health.',
       ],
       enemyHealth: 30,
       enemyBoardIds: ['SF001-082', 'SF001-084'],
-      playerBoardIds: ['SF001-003'],
+      playerHealth: 30,
+      playerBoardIds: ['SF001-003', 'SF001-002'],
     )),
 
     // ══ 18 ═══════════════════════════════════════════════════════════════
@@ -566,13 +576,13 @@ const chapterOne = StoryChapter(
       enemyName: 'The Last Warden',
       objective: 'Thornmaw\'s own guard bars the shaft.',
       specialRules: [
-        'One of the grove wardens stands with you.',
-        'The enemy opens with two creatures in play.',
+        'Two of the grove wardens stand with you.',
+        'The enemy opens with a creature in play.',
         'The warden has 31 Health.',
       ],
       enemyHealth: 31,
-      enemyBoardIds: ['SF001-084', 'SF001-085'],
-      playerBoardIds: ['SF001-003'],
+      enemyBoardIds: ['SF001-084'],
+      playerBoardIds: ['SF001-003', 'SF001-001'],
     )),
 
     // ══ 19 ═══════════════════════════════════════════════════════════════
@@ -598,13 +608,13 @@ const chapterOne = StoryChapter(
       enemyName: 'The Dusk Vanguard',
       objective: 'Ravenna\'s guard will not let you near her.',
       specialRules: [
-        'One of the grove wardens stands with you.',
+        'Three of the grove wardens stand with you.',
         'They fight with real cunning.',
-        'The vanguard has 31 Health and opens with two creatures.',
+        'The vanguard has 32 Health and opens with a creature.',
       ],
       enemyHealth: 32,
-      enemyBoardIds: ['SF001-085', 'SF001-083'],
-      playerBoardIds: ['SF001-003'],
+      enemyBoardIds: ['SF001-085'],
+      playerBoardIds: ['SF001-003', 'SF001-001', 'SF001-002'],
       hardAi: true,
     )),
 
@@ -628,13 +638,15 @@ const chapterOne = StoryChapter(
       enemyName: 'Ravenna Duskveil',
       objective: 'Earn the truth she has carried alone.',
       specialRules: [
-        'One of the grove wardens stands with you.',
+        'You begin with 30 Health.',
+        'Three of the grove wardens stand with you.',
         'She fights with everything she has.',
-        'Ravenna has 34 Health and opens with two creatures.',
+        'Ravenna has 34 Health and opens with a creature.',
       ],
       enemyHealth: 34,
-      enemyBoardIds: ['SF001-086', 'SF001-085'],
-      playerBoardIds: ['SF001-003'],
+      enemyBoardIds: ['SF001-086'],
+      playerHealth: 30,
+      playerBoardIds: ['SF001-003', 'SF001-001', 'SF001-002'],
       hardAi: true,
       preBattle: [
         DialogueLine('Ravenna', 'No terms this time, Caller. Come on.'),

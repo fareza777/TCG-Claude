@@ -46,6 +46,12 @@ class StoryBattle {
   /// Boss fights use the smarter Strategist AI.
   final bool hardAi;
 
+  /// Whether the player takes the first turn. Almost every fight leaves this
+  /// true; the few that do not hand the player the second turn, which is worth
+  /// an extra opening card and a look at what the foe does first. Measured with
+  /// the story simulator, moving first is the weaker seat in this game.
+  final bool playerFirst;
+
   const StoryBattle({
     required this.enemyDominion,
     required this.enemyName,
@@ -58,6 +64,7 @@ class StoryBattle {
     this.preBattle = const [],
     this.victory = const [],
     this.hardAi = false,
+    this.playerFirst = true,
   });
 }
 

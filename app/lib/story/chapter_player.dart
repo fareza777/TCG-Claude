@@ -395,6 +395,7 @@ class _BattleIntroState extends State<_BattleIntro> {
       enemyDeck: widget.library.buildStarterDeck(b.enemyDominion),
       scenario: scenario,
       aiTier: b.hardAi ? AiTier.strategist : AiTier.tactician,
+      firstPlayer: b.playerFirst ? PlayerId.p1 : PlayerId.p2,
     );
     final won = await Navigator.of(context).push<bool>(MaterialPageRoute(
       builder: (_) =>

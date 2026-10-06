@@ -48,8 +48,15 @@ void main() {
     // be gone by battle four.
     //
     // It comes back later, but never as a gift: only in the fights where the
-    // enemy itself opens with two units, and never more than one. Between
-    // battle four and the first of those, the player stands alone.
+    // enemy itself opens with units on the board. Between battle four and the
+    // first of those, the player stands alone.
+    //
+    // How much comes back is no longer one creature. Measured by playing the
+    // fights, a single lent wall left them at 14%, 4% and 0% for a competent
+    // player -- and a wall cannot block Dread at all, which needs two units --
+    // so each fight now gets the lightest help that makes it fair, up to
+    // [maxLent] units in total. See tool/story_calibrate.dart.
+    const maxLent = 3;
     for (final chapter in storyChapters) {
       final battles = battlesOf(chapter);
       final help = [for (final b in battles) b.playerBoardIds.length];
@@ -66,13 +73,18 @@ void main() {
 
       for (var i = 4; i <= help.length; i++) {
         final battle = battles[i - 1];
-        if (battle.enemyBoardIds.length >= 2) {
-          expect(help[i - 1], 1,
-              reason: '${chapter.id} battle $i answers two enemy creatures '
-                  'with ${help[i - 1]} — it should be exactly one');
-        } else {
+        if (battle.enemyBoardIds.isEmpty) {
           expect(help[i - 1], 0,
               reason: '${chapter.id} battle $i must stand on its own');
+          expect(battle.playerHealth, 25,
+              reason: '${chapter.id} battle $i has no board to answer, so it '
+                  'has no extra Health to offer either');
+          expect(battle.playerFirst, isTrue,
+              reason: '${chapter.id} battle $i has no reason to move second');
+        } else {
+          expect(help[i - 1], lessThanOrEqualTo(maxLent),
+              reason: '${chapter.id} battle $i lends ${help[i - 1]} units; '
+                  'past $maxLent it is an army, not help');
         }
       }
     }
@@ -112,15 +124,73 @@ void main() {
     }
   });
 
-  test('a lent creature is always announced', () {
-    // The briefing is the only place a player learns they are not alone.
+  test('every kind of help a fight gives is announced, and agrees', () {
+    // The briefing is the only place a player learns they are not alone, or
+    // that they start with more Health, or that the foe moves first.
+    final lent = RegExp(r'^(One|Two|Three) of .* (stands|stand) with you\.$');
+    const words = ['One', 'Two', 'Three'];
+
     for (final chapter in storyChapters) {
       for (final (i, battle) in battlesOf(chapter).indexed) {
-        if (battle.playerBoardIds.isEmpty) continue;
-        expect(battle.specialRules.any((r) => r.contains('stands with you') ||
-                r.contains('already stand with you')), isTrue,
-            reason: '${chapter.id} battle ${i + 1} lends a creature without '
-                'saying so');
+        final where = '${chapter.id} battle ${i + 1}';
+        final rules = battle.specialRules;
+
+        if (battle.playerBoardIds.isNotEmpty) {
+          final line = rules.where(lent.hasMatch).toList();
+          if (line.isEmpty) {
+            // The opening fights word it as already standing with you.
+            expect(rules.any((r) => r.contains('already stand with you')),
+                isTrue,
+                reason: '$where lends creatures without saying so');
+          } else {
+            final count = battle.playerBoardIds.length;
+            expect(line.single, startsWith(words[count - 1]),
+                reason: '$where lends $count but says "${line.single}"');
+          }
+        }
+
+        if (battle.playerHealth != 25) {
+          expect(rules, contains('You begin with ${battle.playerHealth} '
+              'Health.'),
+              reason: '$where gives extra Health without saying so');
+        }
+        if (!battle.playerFirst) {
+          expect(rules.any((r) => r.startsWith('The foe takes the first turn')),
+              isTrue,
+              reason: '$where moves the foe first without saying so');
+        }
+      }
+    }
+  });
+
+  test('every number a briefing quotes is the number the fight uses', () {
+    // Found by looking: chapter 1 battle 19 said "31 Health" over a fight with
+    // 32, and chapter 5 battle 19 said 33. The earlier check only read the
+    // opening ten fights, so nothing caught either.
+    final health = RegExp(r'(\d+) Health');
+    for (final chapter in storyChapters) {
+      for (final (i, battle) in battlesOf(chapter).indexed) {
+        final where = '${chapter.id} battle ${i + 1}';
+        final foes = battle.enemyBoardIds.length;
+
+        for (final line in battle.specialRules) {
+          for (final m in health.allMatches(line)) {
+            final quoted = int.parse(m.group(1)!);
+            if (line.startsWith('You begin with')) {
+              expect(quoted, battle.playerHealth, reason: '$where: "$line"');
+            } else if (line.startsWith('The foe has')) {
+              continue; // "has X Health to your Y." -- checked above
+            } else {
+              expect(quoted, battle.enemyHealth, reason: '$where: "$line"');
+            }
+          }
+          if (line.contains('two creatures')) {
+            expect(foes, 2, reason: '$where says two creatures: "$line"');
+          }
+          if (RegExp(r'\b(a|one) creature').hasMatch(line)) {
+            expect(foes, 1, reason: '$where says one creature: "$line"');
+          }
+        }
       }
     }
   });
