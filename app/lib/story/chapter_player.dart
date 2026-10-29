@@ -14,6 +14,9 @@ import '../services/telemetry_service.dart';
 import '../theme.dart';
 import 'narration.dart';
 import 'story_data.dart';
+import 'vow_encounters.dart';
+import 'story_scene.dart';
+import 'campaign_progress.dart';
 
 /// Plays a chapter stage-by-stage: narrative dialogue and scenario battles.
 class ChapterPlayerScreen extends StatefulWidget {
@@ -48,6 +51,13 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
 
   StoryChapter get ch => widget.chapter;
   StoryStage get current => ch.stages[_stage];
+  String? get _previousArt {
+    for (var i = _stage - 1; i >= 0; i--) {
+      final art = ch.stages[i].beat?.artAsset;
+      if (art != null) return art;
+    }
+    return ch.id == 'vow01' ? 'STORY-ch5-20' : null;
+  }
 
   @override
   void initState() {
@@ -57,6 +67,7 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
   }
 
   Future<void> _advance() async {
+    if (!mounted) return;
     // Free-play (replay): never mutate progress — just return to the map.
     if (widget.freePlay) {
       if (mounted) Navigator.of(context).pop();
@@ -97,6 +108,7 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
               ? _BeatView(
                   key: ValueKey('beat$_stage'),
                   beat: stage.beat!,
+                  previousArtAsset: _previousArt,
                   chapter: ch,
                   stageIndex: _stage,
                   onDone: _advance,
@@ -105,6 +117,7 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
               : _BattleIntro(
                   key: ValueKey('battle$_stage'),
                   battle: stage.battle!,
+                  grantRewards: !widget.freePlay,
                   chapter: ch,
                   library: widget.library,
                   save: widget.save,
@@ -122,6 +135,7 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
 // ── narrative dialogue view ────────────────────────────────────────────────
 class _BeatView extends StatefulWidget {
   final StoryBeat beat;
+  final String? previousArtAsset;
   final StoryChapter chapter;
   final int stageIndex;
   final VoidCallback onDone;
@@ -130,6 +144,7 @@ class _BeatView extends StatefulWidget {
   const _BeatView({
     super.key,
     required this.beat,
+    this.previousArtAsset,
     required this.chapter,
     required this.stageIndex,
     required this.onDone,
@@ -142,6 +157,7 @@ class _BeatView extends StatefulWidget {
 
 class _BeatViewState extends State<_BeatView> {
   int _line = 0;
+  bool _finishing = false;
 
   @override
   void initState() {
@@ -167,12 +183,14 @@ class _BeatViewState extends State<_BeatView> {
   }
 
   void _next() {
+    if (_finishing) return;
     AudioManager.instance.tap();
     if (_line < widget.beat.dialogue.length - 1) {
       setState(() => _line++);
       _speak();
     } else {
       AudioManager.instance.stopVoice();
+      _finishing = true;
       widget.onDone();
     }
   }
@@ -187,14 +205,23 @@ class _BeatViewState extends State<_BeatView> {
       child: Column(
         children: [
           _topBar(),
+          if (widget.chapter.id.startsWith('vow'))
+            Padding(padding: const EdgeInsets.only(bottom: 8),
+                child: Text(widget.chapter.subtitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Color(0xFFC9A86A),
+                        fontSize: 10, letterSpacing: 1.2))),
           Expanded(
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset('assets/art/${widget.beat.artAsset}.webp',
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, _, _) =>
-                        Container(color: AppTheme.panel)),
+                if (widget.chapter.id.startsWith('vow'))
+                  StoryScene(artAsset: widget.beat.artAsset,
+                      previousArtAsset: widget.previousArtAsset)
+                else
+                  Image.asset('assets/art/${widget.beat.artAsset}.webp',
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, _, _) => Container(color: AppTheme.panel)),
                 Positioned.fill(
                   child: DecoratedBox(
                     decoration: BoxDecoration(
@@ -229,7 +256,10 @@ class _BeatViewState extends State<_BeatView> {
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: _dialogueBox(line, narration),
+                    child: widget.chapter.id.startsWith('vow')
+                        ? StoryDialogueTransition(identity: _line,
+                            child: _dialogueBox(line, narration))
+                        : _dialogueBox(line, narration),
                   ),
                 ),
               ],
@@ -318,6 +348,7 @@ class _BeatViewState extends State<_BeatView> {
 // ── battle intro + launch ──────────────────────────────────────────────────
 class _BattleIntro extends StatefulWidget {
   final StoryBattle battle;
+  final bool grantRewards;
   final StoryChapter chapter;
   final CardLibrary library;
   final SaveService save;
@@ -329,6 +360,7 @@ class _BattleIntro extends StatefulWidget {
   const _BattleIntro({
     super.key,
     required this.battle,
+    this.grantRewards = true,
     required this.chapter,
     required this.library,
     required this.save,
@@ -344,6 +376,7 @@ class _BattleIntro extends StatefulWidget {
 
 class _BattleIntroState extends State<_BattleIntro> {
   int _preLine = 0;
+  bool _launching = false;
 
   StoryBattle get b => widget.battle;
 
@@ -381,6 +414,8 @@ class _BattleIntroState extends State<_BattleIntro> {
   }
 
   Future<void> _fight() async {
+    if (_launching) return;
+    setState(() => _launching = true);
     AudioManager.instance.attack();
     final scenario = BattleScenario(
       playerHealth: b.playerHealth,
@@ -391,8 +426,10 @@ class _BattleIntroState extends State<_BattleIntro> {
       specialRules: b.specialRules,
     );
     final controller = DuelController(
-      playerDeck: widget.library.buildStarterDeck(widget.chapter.playerDominion),
-      enemyDeck: widget.library.buildStarterDeck(b.enemyDominion),
+      playerDeck: storyDeck(widget.library, widget.chapter.playerDominion,
+          setCode: b.deckSetCode, variant: b.deckVariant),
+      enemyDeck: storyDeck(widget.library, b.enemyDominion,
+          setCode: b.deckSetCode, variant: b.deckVariant + 1),
       scenario: scenario,
       aiTier: b.hardAi ? AiTier.strategist : AiTier.tactician,
       firstPlayer: b.playerFirst ? PlayerId.p1 : PlayerId.p2,
@@ -402,18 +439,19 @@ class _BattleIntroState extends State<_BattleIntro> {
           DuelScreen(controller: controller, enemyName: b.enemyName),
     ));
     if (!mounted) return;
+    setState(() => _launching = false);
     if (won == true) {
-      final reward =
-          await widget.save.rewardStoryBattle('${widget.chapter.id}:${widget.stageIndex}');
-      await widget.save.trackQuest('story_win');
+      final reward = await rewardCampaignBattle(widget.save,
+          widget.chapter.id, widget.stageIndex, freePlay: !widget.grantRewards);
       AudioManager.instance.reward();
       unawaited(TelemetryService.instance.track('story_battle_won', {
         'chapter': widget.chapter.id,
         'stage': widget.stageIndex,
       }));
       await _showVictory(reward);
+      if (!mounted) return;
       await showPostResultInterstitial(widget.adService);
-      widget.onVictory();
+      if (mounted) widget.onVictory();
     } else {
       unawaited(TelemetryService.instance.track('story_battle_lost', {
         'chapter': widget.chapter.id,
@@ -431,7 +469,7 @@ class _BattleIntroState extends State<_BattleIntro> {
   }
 
   Future<void> _showVictory(int reward) async {
-    if (b.victory.isEmpty) return;
+    if (!mounted || b.victory.isEmpty) return;
     await showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -703,6 +741,7 @@ class _VictoryDialog extends StatefulWidget {
 
 class _VictoryDialogState extends State<_VictoryDialog> {
   int _i = 0;
+  bool _closing = false;
 
   @override
   void initState() {
@@ -779,8 +818,10 @@ class _VictoryDialogState extends State<_VictoryDialog> {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
+                    if (_closing) return;
                     AudioManager.instance.tap();
                     if (last) {
+                      _closing = true;
                       AudioManager.instance.stopVoice();
                       Navigator.of(context).pop();
                     } else {

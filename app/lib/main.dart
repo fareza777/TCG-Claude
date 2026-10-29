@@ -10,6 +10,7 @@ import 'about/about_screen.dart';
 import 'auth/login_screen.dart';
 import 'card_render/card_widget.dart';
 import 'collection/collection_screen.dart';
+import 'data/card_catalog.dart';
 import 'deckbuilder/decks_screen.dart';
 import 'duel/coin_flip.dart';
 import 'duel/duel_controller.dart';
@@ -37,6 +38,7 @@ import 'services/save_service.dart';
 import 'services/telemetry_service.dart';
 import 'splash_screen.dart';
 import 'story/story_screen.dart';
+import 'story/campaign_progress.dart';
 import 'theme.dart';
 import 'tutorial/tutorial_screen.dart';
 import 'widgets/delete_account_tile.dart';
@@ -148,8 +150,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
   }
 
   Future<void> _load() async {
-    final jsonStr = await rootBundle.loadString('assets/data/set01.json');
-    final library = CardLibrary.fromJsonString(jsonStr);
+    final library = await CardCatalog.load();
     final save = await SaveService.load(library);
     save.addListener(() {
       if (mounted) setState(() {});
@@ -1160,7 +1161,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                               _heroCard(
                                 icon: Icons.auto_stories,
                                 title: 'STORY',
-                                subtitle: 'Chapter I — The Waking Grove',
+                                subtitle: nextStoryChapter(_save!)?.title ??
+                                    'Revisit your completed campaign',
                                 color: DominionStyle.of(Dominion.verdance).glow,
                                 onTap: () => Navigator.of(context).push(
                                   MaterialPageRoute<void>(
@@ -1168,6 +1170,25 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                       library: _library!,
                                       save: _save!,
                                       adService: _ads!,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              _heroCard(
+                                icon: Icons.auto_awesome,
+                                title: 'THE FIVE VOWS',
+                                subtitle:
+                                    '215 new cards · Discover the expansion',
+                                color: const Color(0xFFC9A86A),
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => BoosterScreen(
+                                      library: _library!,
+                                      save: _save!,
+                                      adService: _ads!,
+                                      purchaseService: _purchases!,
+                                      auth: _auth!,
+                                      initialSet: CardSet.fiveVows,
                                     ),
                                   ),
                                 ),

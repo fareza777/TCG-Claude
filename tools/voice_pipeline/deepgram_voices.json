@@ -1,0 +1,19 @@
+{
+  "_note": "Fixed Aura 2 cast for all Five Vows dialogue. Existing ElevenLabs audio remains untouched. Narrator matches the approved first production clip.",
+  "_default": "aura-2-orion-en",
+  "Narrator": "aura-2-orion-en",
+  "You": "aura-2-apollo-en",
+  "Thornmaw": "aura-2-draco-en",
+  "Ravenna": "aura-2-athena-en",
+  "Numen": "aura-2-odysseus-en",
+  "Kaelis": "aura-2-hera-en",
+  "Seraphel": "aura-2-luna-en",
+  "Draxus": "aura-2-arcas-en",
+  "Inquisitor": "aura-2-zeus-en",
+  "The First Caller": "aura-2-pandora-en",
+  "The Sister": "aura-2-thalia-en",
+  "The Voice": "aura-2-saturn-en",
+  "The Cantor": "aura-2-jupiter-en",
+  "Forgewright": "aura-2-orion-en",
+  "Sproutling": "aura-2-asteria-en"
+}

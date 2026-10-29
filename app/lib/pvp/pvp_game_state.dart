@@ -103,6 +103,10 @@ abstract final class PvpGameState {
       damage: card.damage,
       plusCounters: card.plusCounters,
       summonedThisTurn: card.summonedThisTurn,
+      vowFulfilled: card.vowFulfilled,
+      tempMight: card.tempMight,
+      tempGuard: card.tempGuard,
+      tempKeywords: card.tempKeywords,
     );
   }
 
@@ -113,6 +117,11 @@ abstract final class PvpGameState {
   static CardDef _definition(PvpCardView card, CardLibrary library) {
     final def = library.byId[card.cardId];
     if (def != null) return def;
+    if (card.cardId.startsWith('TOKEN-') &&
+        card.tokenDefinition != null &&
+        card.tokenDefinition!['id'] == card.cardId) {
+      return CardDef.fromJson(card.tokenDefinition!);
+    }
     return CardDef(
       id: card.cardId,
       name: card.name,

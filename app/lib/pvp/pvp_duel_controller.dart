@@ -496,22 +496,28 @@ class PvpDuelController extends DuelController {
   @override
   void selectUnitTarget(int unitInstanceId) {
     final card = _aimingCard();
-    if (card == null) return;
+    if (card == null || !canTargetUnit(card.def, unitInstanceId)) return;
     targetingId = null;
-    unawaited(_send(card, [
-      {'kind': 'unit', 'instanceId': unitInstanceId},
-    ]));
+    unawaited(
+      _send(card, [
+        for (var i = 0; i < DuelController.chooseCount(card.def); i++)
+          {'kind': 'unit', 'instanceId': unitInstanceId},
+      ]),
+    );
   }
 
   @override
   void selectPlayerTarget(PlayerId pid) {
     final card = _aimingCard();
     if (card == null) return;
-    if (!targetSpec(card.def).players) return;
+    if (!canTargetPlayer(card.def, pid)) return;
     targetingId = null;
-    unawaited(_send(card, [
-      {'kind': 'player', 'playerId': _toServerSeat(pid).name},
-    ]));
+    unawaited(
+      _send(card, [
+        for (var i = 0; i < DuelController.chooseCount(card.def); i++)
+          {'kind': 'player', 'playerId': _toServerSeat(pid).name},
+      ]),
+    );
   }
 
   CardInstance? _aimingCard() {

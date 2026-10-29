@@ -5,10 +5,11 @@
 // This reads the same story data the game does, so the clip ids it emits are
 // exactly the ones the player will look for at runtime.
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:shardfall/story/narration.dart';
 
-void main() {
+void main(List<String> args) {
   final clips = Narration.all();
   final chars = clips.fold<int>(0, (sum, c) => sum + c.text.length);
   final out = {
@@ -21,8 +22,14 @@ void main() {
           'chapter': c.chapterId,
           'voiceKey': c.voiceKey,
           'text': c.text,
-        }
+        },
     ],
   };
-  print(const JsonEncoder.withIndent('  ').convert(out));
+  final encoded = const JsonEncoder.withIndent('  ').convert(out);
+  if (args.contains('--output')) {
+    File(args[args.indexOf('--output') + 1]).writeAsStringSync(encoded);
+    print('Exported ${clips.length} clips ($chars characters).');
+  } else {
+    print(encoded);
+  }
 }

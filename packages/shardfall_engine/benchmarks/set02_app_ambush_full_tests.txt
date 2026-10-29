@@ -1,0 +1,283 @@
+00:00 +0: loading C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/accessibility_test.dart
+00:00 +0: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/accessibility_test.dart: a card announces its name, stats, keywords and rules text
+00:00 +1: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/accessibility_test.dart: damage is announced as remaining guard, not the printed number
+00:00 +2: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/accessibility_test.dart: a face-down card gives nothing away
+00:01 +3: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_banner_test.dart: a banner in bottomNavigationBar leaves the body its height
+00:01 +4: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_banner_test.dart: a banner in bottomNavigationBar leaves the body its height
+00:02 +5: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_banner_test.dart: banner disappears immediately after Remove Ads is granted
+00:02 +6: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_banner_test.dart: Remove Ads offer shows price, progress, and Restore states
+00:03 +7: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_result_flow_test.dart: post-result hook is a no-op when ads are unavailable
+00:03 +8: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_result_flow_test.dart: post-result hook delegates to a ready interstitial once
+00:03 +9: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: a new player finishes their first fights without an interstitial
+00:03 +10: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: a loaded rewarded ad notifies listeners so offers can appear
+00:03 +11: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: rewarded offers survive Remove Ads
+00:03 +12: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: policy skips banners and interstitials when Remove Ads is owned
+00:03 +13: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: initializes, loads a banner, and shows a ready interstitial
+00:03 +14: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: does not load or show ads after Remove Ads is granted
+00:03 +15: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: load failures are soft and cooldown prevents repeated shows
+00:03 +16: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: an interstitial show error is disposed and never blocks the caller
+Interstitial display skipped: Bad state: ad failed
+00:03 +17: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: does not initialize or request ads before consent allows it
+00:03 +18: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: a hung consent prompt fails soft instead of blocking the game
+Ad consent timed out; ads stay off for this session.
+00:03 +19: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/ad_service_test.dart: exposes required privacy options and presents them on request
+00:04 +20: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a roll offers two single colours and four pairs, none repeated
+00:04 +21: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: every one of the fifteen colour choices can come up
+00:04 +22: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: every offer holds three distinct cards until the draft ends
+00:04 +23: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: the draft ends after exactly twenty-four picks
+00:04 +24: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: every sixth offer contains a rare or better
+00:04 +25: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: the finished deck is a legal forty cards with sixteen Wellsprings
+00:04 +26: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: no drafted card demands Aether the run cannot produce
+00:04 +27: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a dominion the deck actually uses always gets Wellsprings
+00:04 +28: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a single-colour run verdance drafts a legal deck it can always cast
+00:04 +29: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a single-colour run pyre drafts a legal deck it can always cast
+00:04 +30: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a single-colour run tide drafts a legal deck it can always cast
+00:04 +31: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a single-colour run dawn drafts a legal deck it can always cast
+00:04 +32: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a single-colour run gloom drafts a legal deck it can always cast
+00:04 +33: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a single-colour run the Wellsprings are all sixteen of that one colour
+00:04 +34: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a single-colour run the pool is deep enough that picks are choices, not repeats
+00:04 +35: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_draft_test.dart: a single-colour run golden picks still find a rare in a single colour
+00:05 +36: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_run_choice_test.dart: (setUpAll)
+00:05 +36: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_run_choice_test.dart: single colours and pairs sit under their own headings
+00:05 +37: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_run_choice_test.dart: single colours and pairs sit under their own headings
+00:06 +38: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_run_choice_test.dart: each heading says what the choice costs
+00:06 +39: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_run_choice_test.dart: a colour name is never cut off, at any phone width
+00:06 +40: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_run_choice_test.dart: choosing a single colour starts a draft in that colour
+00:07 +41: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/arena_run_choice_test.dart: (tearDownAll)
+00:15 +41: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+00:16 +42: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+00:16 +43: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+00:16 +44: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+00:17 +45: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/banner_placement_test.dart: the banner never swallows the screen it sits on
+00:17 +46: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/banner_placement_test.dart: buying Remove Ads takes the banner away everywhere
+00:18 +47: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/cloud_sync_entitlement_test.dart: restores an active Remove Ads entitlement idempotently
+00:18 +48: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/cloud_sync_entitlement_test.dart: a refunded Remove Ads row revokes only its own active identifiers
+00:18 +49: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/cloud_sync_entitlement_test.dart: restores Gold separately and reports only new Gold grants
+00:18 +50: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/cloud_sync_entitlement_test.dart: a refunded row that was never delivered remains blocked locally
+00:19 +51: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: a year of days all build without throwing
+00:19 +52: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: every day deals a legal deck
+00:19 +53: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: every deck can pay for itself
+00:19 +54: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: no deck strays outside its two Dominions
+00:19 +55: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: every day has something to do on turn two
+00:19 +56: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: the opponent is never the same colour as the loan deck
+00:19 +57: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: the fight is hard but not hopeless
+00:19 +58: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: the same date always builds the same day
+00:19 +59: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/daily_gauntlet_test.dart: different dates build genuinely different days
+00:20 +60: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: saved decks are actually listed
+00:20 +61: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: saved decks are actually listed
+00:21 +62: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: a deck too small to play says so
+00:21 +63: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: deleting asks first, and then really deletes
+00:21 +64: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: deleting asks first, and then really deletes
+00:21 +65: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/deck_size_rules_test.dart: no screen hard-codes the deck size instead of sharing it
+00:21 +66: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/deck_size_rules_test.dart: no screen hard-codes the deck size instead of sharing it
+00:21 +67: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: an empty collection explains itself
+00:21 +68: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: saving renaming an edited deck moves it rather than copying it
+00:21 +69: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: saving saving under the same name is an edit, not a duplicate
+00:21 +70: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: saving a new deck leaves the others alone
+00:21 +71: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/decks_screen_test.dart: saving deletes survive a reload
+00:21 +72: loading C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/deck_suggester_test.dart
+00:23 +72: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/deck_suggester_test.dart: builds a full, legal deck from an ordinary collection
+00:23 +73: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/deck_suggester_test.dart: the deck can pay for itself
+00:23 +74: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/deck_suggester_test.dart: never suggests more copies than the player owns
+00:23 +75: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/deck_suggester_test.dart: respects the one-copy limit on legendaries
+00:23 +76: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:23 +77: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:23 +78: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:23 +79: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:23 +80: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:23 +81: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:23 +82: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:23 +83: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:23 +84: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+00:24 +85: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/delete_account_tile_test.dart: keeps the dialog open and reports a deletion failure
+00:24 +86: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_ambush_blocking_test.dart: (setUpAll)
+00:24 +86: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_ambush_blocking_test.dart: printed Ambush state controls the actual prompt and lethal block
+00:25 +87: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_ambush_blocking_test.dart: printed Ambush state controls assignment of an exerted unit
+00:25 +88: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_ambush_blocking_test.dart: printed Ambush state controls tapping the exerted arena card
+00:25 +89: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+00:25 +90: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+00:25 +91: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+00:26 +92: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+00:26 +93: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+00:26 +94: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+00:26 +95: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+00:31 +96: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_catalog_test.dart: app boundary loads both assets and preserves original starter ids
+00:31 +97: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_catalog_test.dart: packaged catalog adds 215 definitions and preserves old starter decks
+00:32 +98: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_filters_test.dart: set filters isolate actual collection, deckbuilder and Forge cards on 320px
+00:38 +99: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_packs_test.dart: sundering actual pulls keep their set and disclosed distribution
+00:39 +100: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_packs_test.dart: fiveVows actual pulls keep their set and disclosed distribution
+00:39 +101: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_packs_test.dart: missing common pool fails before buying
+00:39 +102: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_packs_test.dart: missing uncommon pool fails before buying
+00:39 +103: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_packs_test.dart: missing rare pool fails before buying
+00:39 +104: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_packs_test.dart: missing legendary pool fails before buying
+00:39 +105: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_packs_test.dart: an empty selected set cannot borrow original cards
+00:40 +106: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_pvp_tokens_test.dart: unknown summoned tokens retain definition, keywords, Vow and modifiers across swapped seats
+00:40 +107: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_pvp_tokens_test.dart: old projections default to unfulfilled Vow and no temporary modifiers
+00:40 +108: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_pvp_tokens_test.dart: a remote embedded definition cannot replace a catalog definition
+00:44 +109: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_save_test.dart: expansion pack duplicates preserve limits, price and shard conversion
+00:44 +110: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_targeting_test.dart: Renew only aims at friendly units and rejects wrong-side clicks
+00:44 +111: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_save_test.dart: expansion ownership cannot substitute for original completion
+00:44 +112: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_save_test.dart: expansion ownership cannot substitute for original completion
+00:44 +113: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_save_test.dart: expansion ownership cannot substitute for original completion
+00:45 +114: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_save_test.dart: vow chapters never substitute for the original five chapters
+00:45 +115: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/expansion_save_test.dart: existing saved ids, decks, chapter progress and entitlements survive
+00:49 +116: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_animation_test.dart: new scene moves, crossfades and releases tickers on exit
+00:50 +117: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_animation_test.dart: app and operating-system reduced motion remove camera movement
+00:51 +118: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_media_test.dart: every expansion illustration ships as a real WebP
+00:51 +119: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+00:53 +120: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: Five Vows appends twenty complete chapters after original five
+00:54 +121: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: forty encounters use legal, playable SF002 loan decks and fair boards
+00:54 +122: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: expansion unlock, persisted resume and replay rewards are safe
+00:54 +123: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +124: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +125: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +126: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +127: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +128: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +129: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +130: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +131: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +132: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +133: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +134: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +135: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +136: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +137: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/five_vows_story_test.dart: narration export exactly matches positional runtime clips
+00:55 +138: loading C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart
+00:58 +138: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: exposes the closed-test Play product catalog
+00:58 +139: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: queries unconsumed purchases once the catalog is ready
+00:58 +140: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: stays usable when the restore query fails
+00:58 +141: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: delivers Gold for a purchase that was never consumed
+00:58 +142: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: never grants the same purchase twice across a restore
+00:58 +143: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: records a delivered purchase with the backend
+00:58 +144: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: keeps a purchase queued when the backend cannot record it
+00:58 +145: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: a failing verifier never costs the player their Gold
+Purchase verification deferred: Bad state: network down
+00:58 +146: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/gold_purchase_service_test.dart: ignores restored purchases for other products
+01:02 +147: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/haptics_test.dart: each level reaches the platform
+01:03 +148: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/haptics_test.dart: turning it off silences every level
+01:07 +149: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/header_titles_test.dart: titles are never truncated, at any phone width
+01:11 +150: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/interstitial_seam_test.dart: nothing shows an interstitial except the post-result seam
+01:11 +151: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/interstitial_seam_test.dart: every mode that ends a battle goes through the seam
+01:18 +152: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/login_screen_test.dart: the guest and account choices are remembered, not asked again
+01:18 +153: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+01:20 +154: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+01:20 +155: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+01:20 +156: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+01:20 +157: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+01:20 +158: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+01:25 +159: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/privacy_options_tile_test.dart: shows the privacy entry point only when Google requires it
+01:26 +160: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/privacy_options_tile_test.dart: shows the privacy entry point only when Google requires it
+01:26 +161: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/privacy_options_tile_test.dart: shows the privacy entry point only when Google requires it
+01:26 +162: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/privacy_options_tile_test.dart: shows the privacy entry point only when Google requires it
+01:26 +163: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/privacy_options_tile_test.dart: shows the privacy entry point only when Google requires it
+01:32 +164: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: join queue reports queued state
+01:32 +165: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: resumes a match left running by a previous session
+01:32 +166: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: reports nothing to resume when no match is live
+01:32 +167: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: an already-in-match rejection rejoins instead of erroring
+01:32 +168: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: queued player attaches when realtime reports a paired match
+01:32 +169: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: matched queue reconnects and starts the projection stream
+01:32 +170: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: command uses current revision and projection updates from gateway
+01:32 +171: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: realtime projection advances the visible state
+01:32 +172: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: match events from the realtime stream queue for animation
+01:32 +173: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: commands leave one at a time, each stamped with the fresh revision
+01:32 +174: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: a stale ready is retried once against the fresh board
+01:32 +175: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_controller_test.dart: a rejected heartbeat never surfaces as an error
+01:34 +176: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: the ladder records a win for the player who actually won
+01:34 +177: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: the ladder records a loss from the loser's own seat
+01:34 +178: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: the ladder banks the result once, however many projections follow
+01:35 +179: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: the ladder an unfinished match writes nothing
+01:35 +180: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a player seated as p2 still sees themselves as the local player
+01:36 +181: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: the board is drawn straight for a player seated as p1
+01:36 +182: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: input is enabled only on this player's decision
+01:37 +183: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_game_state_test.dart: the viewer is always mapped to p1
+01:37 +184: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_game_state_test.dart: the viewer is always mapped to p1
+01:37 +185: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: holding priority opens the response window
+01:37 +186: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: holding priority opens the response window
+01:37 +187: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_game_state_test.dart: a swapped seat swaps the winner with it
+01:37 +188: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_game_state_test.dart: an unswapped seat is left alone
+01:37 +189: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a finished match reports the winner from the viewer's side
+01:37 +190: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a finished match reports the winner from the viewer's side
+01:37 +191: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a finished match reports the winner from the viewer's side
+01:37 +192: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a finished match reports the winner from the viewer's side
+01:37 +193: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a finished match reports the winner from the viewer's side
+01:38 +194: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: the mulligan window is offered before play starts
+01:38 +195: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: server events become the cues the battle screen animates
+01:38 +196: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: playing a card costs exactly one round trip
+01:38 +197: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a tapped card leaves the hand and animates before the server replies
+01:38 +198: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: the turn banner announces turns, not every phase
+01:38 +199: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: ending the turn is one command, expanded on the server
+01:38 +200: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a confirmed attack lunges on the tap, not on the server echo
+01:38 +201: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: a second confirm is held while the first waits on the server
+01:38 +202: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: confirming blocks declares every attacker, blocked or not
+01:38 +203: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_duel_controller_test.dart: conceding sends the command rather than ending locally
+01:38 +204: loading C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_models_test.dart
+01:42 +204: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_models_test.dart: projection decodes the viewer hand and redacted opponent hand
+01:42 +205: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/pvp_models_test.dart: command envelope serializes the server intent
+01:43 +206: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_entitlement_test.dart: catalog exposes a non-consumable remove ads product
+01:43 +207: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_entitlement_test.dart: grants remove ads once and persists it
+01:43 +208: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_entitlement_test.dart: treats the order id and token as one remove ads grant
+01:43 +209: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_entitlement_test.dart: revoking one entitlement token does not revoke another active token
+01:43 +210: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_entitlement_test.dart: a refund blocks a later restore of the same token
+01:43 +211: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_entitlement_test.dart: snapshot round-trips the entitlement and old snapshots keep it
+01:43 +212: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_entitlement_test.dart: rejects unknown products and empty identifiers
+01:47 +213: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_purchase_service_test.dart: loads the Remove Ads product and restores purchases
+01:47 +214: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_purchase_service_test.dart: starts a non-consumable purchase with the product details
+01:47 +215: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_purchase_service_test.dart: delivers a purchased token once and completes it
+01:47 +216: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_purchase_service_test.dart: does not grant the same restored purchase twice
+01:47 +217: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_purchase_service_test.dart: keeps local ownership when backend verification is unavailable
+01:47 +218: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_purchase_service_test.dart: handles pending and canceled states without granting access
+01:47 +219: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_purchase_service_test.dart: ignores Gold and unknown products
+01:47 +220: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/remove_ads_purchase_service_test.dart: stays usable when restore fails
+01:48 +221: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/rewarded_gold_test.dart: pays out up to the daily cap and not one claim further
+01:48 +222: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/rewarded_gold_test.dart: the cap survives a reload — it is not just in memory
+01:48 +223: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/rewarded_gold_test.dart: a fresh profile is inside the new-player grace period
+01:48 +224: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/rewarded_gold_test.dart: the post-result hook counts the battle even when no ad shows
+01:51 +225: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: grants 500 Gold once for a valid product
+01:51 +226: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: rejects an unknown product and empty purchase id
+01:51 +227: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: treats the order id and the purchase token as one grant
+01:51 +228: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: recognises a grant first seen under its order id
+01:51 +229: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: queues a purchase for verification until the backend confirms
+01:51 +230: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: a refund takes the Gold back exactly once
+01:51 +231: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: a refund cannot push the balance negative
+01:51 +232: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: a refunded purchase is never granted again by a restore
+01:51 +233: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: a refund from another device blocks a first delivery here
+01:51 +234: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_purchase_test.dart: restores processed purchase ids after reload
+01:52 +235: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_snapshot_test.dart: a fresh profile has nothing a cloud restore could destroy
+01:52 +236: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_snapshot_test.dart: a played profile is protected from being overwritten
+01:52 +237: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_snapshot_test.dart: a snapshot round-trips the profile
+01:52 +238: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/save_service_snapshot_test.dart: applying a snapshot keeps purchases this device already knew
+01:55 +239: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: the track is monotonic and reaches its end
+01:55 +240: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: every tier pays something
+01:55 +241: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +242: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +243: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +244: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +245: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +246: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +247: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +248: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +249: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +250: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +251: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +252: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+01:56 +253: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: tier is earned, never overshot
+01:56 +254: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: the bar cannot run past the end of the track
+01:56 +255: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: progress within a tier is a real fraction
+01:57 +256: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: a season is the calendar month it falls in
+01:57 +257: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: a season ends when the next one starts
+01:58 +258: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: every XP event is actually emitted by the app
+01:58 +259: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: a loss pays, and pays less than a win
+01:58 +260: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/season_test.dart: the whole track is reachable by an ordinary player
+01:58 +261: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/story_second_turn_test.dart: the foe opens, attacks with what it started with, and the turn comes back to the player
+01:59 +262: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/story_second_turn_test.dart: the player draws on their first turn after moving second
+01:59 +263: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/story_second_turn_test.dart: every fight that gives up the first turn says so
+02:02 +264: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/tutorial_coach_test.dart: opens by asking for a Wellspring
+02:02 +265: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/tutorial_coach_test.dart: moves on once Aether exists
+02:02 +266: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/tutorial_coach_test.dart: counts Aether in the pool as a Wellspring played
+02:02 +267: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/tutorial_coach_test.dart: asks for a turn to pass while the unit is still settling
+02:02 +268: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/tutorial_coach_test.dart: asks for the attack as soon as something can make one
+02:02 +269: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/tutorial_coach_test.dart: stops coaching once the loop has been completed
+02:02 +270: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/tutorial_coach_test.dart: never goes backwards into a step already satisfied
+02:02 +271: C:/Users/FAJAR/.codex/worktrees/shardfall-five-vows/TCG Claude/app/test/tutorial_coach_test.dart: every step has something to say
+02:02 +272: All tests passed!

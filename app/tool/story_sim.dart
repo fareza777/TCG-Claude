@@ -78,7 +78,7 @@ void main(List<String> args) {
     return '';
   }
 
-  for (var c = 0; c < storyChapters.length; c++) {
+  for (var c = 0; c < 5; c++) {
     if (only != null && only != c + 1) continue;
     final chapter = storyChapters[c];
 

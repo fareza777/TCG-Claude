@@ -43,7 +43,9 @@ class AudioManager {
     }
     await _voice.setReleaseMode(ReleaseMode.stop);
     _voice.onPlayerComplete.listen((_) => _endSpeech());
-    if (musicOn) await startMusic();
+    // Browsers can leave AudioContext.resume pending until a user gesture.
+    // Menu readiness depends on the configured players, not ambient playback.
+    if (musicOn) unawaited(startMusic());
   }
 
   /// Switch the ambient bed for a section. Menus/story use the calm pad; the

@@ -10,6 +10,10 @@ import 'chapters/chapter_two.dart';
 import 'chapters/chapter_three.dart';
 import 'chapters/chapter_four.dart';
 import 'chapters/chapter_five.dart';
+import 'chapters/vows_act_1.dart';
+import 'chapters/vows_act_2.dart';
+import 'chapters/vows_act_3.dart';
+import 'chapters/vows_act_4.dart';
 
 class DialogueLine {
   final String speaker; // '' for narration
@@ -34,6 +38,11 @@ class StoryBeat {
 class StoryBattle {
   final String enemyDominion; // starter deck key for the foe
   final String enemyName;
+
+  /// Null keeps the original starter decks. SF002 uses the expansion's
+  /// curated loan decks, independently of the player's collection.
+  final String? deckSetCode;
+  final int deckVariant;
   final String objective;
   final List<String> specialRules;
   final int playerHealth;
@@ -55,6 +64,8 @@ class StoryBattle {
   const StoryBattle({
     required this.enemyDominion,
     required this.enemyName,
+    this.deckSetCode,
+    this.deckVariant = 0,
     this.objective = 'Reduce the enemy to 0 Health.',
     this.specialRules = const [],
     this.playerHealth = 25,
@@ -92,10 +103,30 @@ class StoryChapter {
   int get battleCount => stages.where((s) => s.battle != null).length;
 }
 
-const storyChapters = [
+final storyChapters = <StoryChapter>[
   chapterOne,
   chapterTwo,
   chapterThree,
   chapterFour,
   chapterFive,
+  vow01,
+  vow02,
+  vow03,
+  vow04,
+  vow05,
+  vow06,
+  vow07,
+  vow08,
+  vow09,
+  vow10,
+  vow11,
+  vow12,
+  vow13,
+  vow14,
+  vow15,
+  vow16,
+  vow17,
+  vow18,
+  vow19,
+  vow20,
 ];

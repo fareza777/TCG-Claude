@@ -60,8 +60,40 @@ class EffectInterpreter {
         return [EffectTarget.player(source.owner)];
       case 'OPPONENT_PLAYER':
         return [EffectTarget.player(source.owner.opponent)];
+      case 'SELF':
+        return [
+          for (final c in s.player(source.owner).arena)
+            if (c.instanceId == source.instanceId)
+              EffectTarget.unit(c.instanceId),
+        ];
       case 'CHOOSE':
-        return [nextChosen()];
+        final chosen = nextChosen();
+        if (chosen.instanceId == null && chosen.playerId == null) return [];
+        // Explicit owner/type constraints are opt-in, keeping legacy DSL
+        // semantics intact while enforcing SF002 targeting on the server.
+        final owner = t['owner'] as String?;
+        final type = (t['filter'] as Map?)?['type'] as String?;
+        if (owner == null && type == null) return [chosen];
+        PlayerId? pid = chosen.playerId;
+        CardInstance? card;
+        if (chosen.instanceId != null) {
+          for (final player in PlayerId.values) {
+            for (final c in s.player(player).arena) {
+              if (c.instanceId == chosen.instanceId) {
+                card = c;
+                pid = player;
+              }
+            }
+          }
+          if (card == null) return [];
+        }
+        if (owner == 'SELF' && pid != source.owner) return [];
+        if (owner == 'OPPONENT' && pid != source.owner.opponent) return [];
+        if (type == 'UNIT' && card?.def.type != CardType.unit) return [];
+        if (type == 'UNIT_OR_PLAYER' &&
+            card != null &&
+            card.def.type != CardType.unit) return [];
+        return [chosen];
       case 'ALL':
         final owner = (t['owner'] as String?) ?? 'ANY';
         final filter = (t['filter'] as Map?) ?? const {};
@@ -138,6 +170,20 @@ class EffectInterpreter {
               (c) => c.copyWith(plusCounters: c.plusCounters + amount));
         });
 
+      case 'RENEW':
+        final amount = effect['amount'] as int;
+        if (amount <= 0) return s;
+        return _forEachTarget(s, targets, (state, t) {
+          if (t.instanceId == null) return state;
+          return _mapUnit(state, t.instanceId!, (c) {
+            if (c.def.type != CardType.unit || c.damage <= 0 || c.isDead)
+              return c;
+            final healed = c.damage < amount ? c.damage : amount;
+            return c.copyWith(
+                damage: c.damage - healed, plusCounters: c.plusCounters + 1);
+          });
+        });
+
       case 'BUFF':
         // Temporary +might/+guard until end of turn (combat trick).
         return _forEachTarget(s, targets, (state, t) {
@@ -169,8 +215,11 @@ class EffectInterpreter {
             final p = state.player(pid);
             final i = p.arena.indexWhere((c) => c.instanceId == t.instanceId);
             if (i >= 0) {
-              final card = p.arena[i]
-                  .copyWith(damage: 0, exerted: false, summonedThisTurn: false);
+              final card = p.arena[i].copyWith(
+                  damage: 0,
+                  exerted: false,
+                  summonedThisTurn: false,
+                  vowFulfilled: false);
               return state.withPlayer(p.copyWith(
                 arena: [...p.arena]..removeAt(i),
                 hand: [...p.hand, card],
@@ -187,7 +236,8 @@ class EffectInterpreter {
             : Dominion.values.byName(dominionName.toLowerCase());
         var p = s.player(source.owner);
         final pool = Map<Dominion, int>.from(p.aetherPool);
-        pool[dominion] = (pool[dominion] ?? 0) + (effect['amount'] as int? ?? 1);
+        pool[dominion] =
+            (pool[dominion] ?? 0) + (effect['amount'] as int? ?? 1);
         return s.withPlayer(p.copyWith(aetherPool: pool));
 
       case 'UNCOUNTERABLE':
@@ -276,8 +326,7 @@ class EffectInterpreter {
   /// Fire ON_DEATH triggers for a set of units that just left the Arena.
   /// Effects with untargeted selectors (self/opponent/all/gain) resolve;
   /// CHOOSE selectors without a supplied target are skipped.
-  static GameState fireDeathTriggers(
-      GameState s, List<CardInstance> dead) {
+  static GameState fireDeathTriggers(GameState s, List<CardInstance> dead) {
     var state = s;
     for (final unit in dead) {
       for (final block in unit.def.effects) {
@@ -334,9 +383,15 @@ class EffectInterpreter {
   }
 
   static GameState _damageUnit(GameState s, int instanceId, int amount) {
-    var next = _mapUnit(
-        s, instanceId, (c) => c.copyWith(damage: c.damage + amount));
-    return _sweepDead(next);
+    var next =
+        _mapUnit(s, instanceId, (c) => c.copyWith(damage: c.damage + amount));
+    final dead = [
+      for (final pid in PlayerId.values)
+        for (final c in next.player(pid).arena)
+          if (c.isDead) c,
+    ];
+    next = _sweepDead(next);
+    return dead.isEmpty ? next : fireDeathTriggers(next, dead);
   }
 
   static GameState _destroyUnit(GameState s, int instanceId) {

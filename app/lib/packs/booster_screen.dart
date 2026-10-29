@@ -9,6 +9,9 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../card_render/card_widget.dart';
 import 'pack_odds.dart';
+import 'pack_generator.dart';
+import '../data/card_catalog.dart';
+import '../data/card_set_filter.dart';
 import '../services/audio_manager.dart';
 import '../services/auth_service.dart';
 import '../services/gold_purchase_service.dart';
@@ -23,6 +26,7 @@ import '../widgets/card_zoom.dart';
 class BoosterScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
+  final CardSet initialSet;
   final GoldPurchaseService purchaseService;
 
   /// Real-money Gold is account-only: a receipt has to outlive the device,
@@ -33,6 +37,7 @@ class BoosterScreen extends StatefulWidget {
   const BoosterScreen(
       {super.key,
       required this.library,
+      this.initialSet = CardSet.sundering,
       required this.save,
       required this.purchaseService,
       required this.auth,
@@ -44,17 +49,18 @@ class BoosterScreen extends StatefulWidget {
 
 class _BoosterScreenState extends State<BoosterScreen>
     with SingleTickerProviderStateMixin {
-  final _rng = math.Random();
+  late CardSet _selectedSet;
+  bool _opening = false;
   List<CardDef>? _pack;
   final Set<int> _flipped = {};
   late final AnimationController _shine;
 
-  // A dramatic hero art shown in the pack window.
-  static const _packArt = 'SF001-281';
+
 
   @override
   void initState() {
     super.initState();
+    _selectedSet = widget.initialSet;
     _shine = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 2600))
       ..repeat();
@@ -66,41 +72,37 @@ class _BoosterScreenState extends State<BoosterScreen>
     super.dispose();
   }
 
-  List<CardDef> _pool(Rarity r) => widget.library.byId.values
-      .where((c) => c.type != CardType.wellspring && c.rarity == r)
-      .toList();
-
   Future<void> _openPack() async {
-    if (_pack != null) return;
+    if (_pack != null || _opening) return;
     if (!widget.save.canBuyPack) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Not enough gold. Win duels and story battles!'),
-        duration: Duration(seconds: 2),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Not enough gold. Win duels and story battles!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
       return;
     }
-    final commons = _pool(Rarity.common);
-    final uncommons = _pool(Rarity.uncommon);
-    final rares = _pool(Rarity.rare);
-    final legendaries = _pool(Rarity.legendary);
-    CardDef pick(List<CardDef> from) => from[_rng.nextInt(from.length)];
-
-    final rareSlot =
-        (_rng.nextInt(PackOdds.legendaryOneIn) == 0 && legendaries.isNotEmpty)
-            ? pick(legendaries)
-            : pick(rares);
-    final pack = [
-      for (var i = 0; i < PackOdds.commonSlots; i++) pick(commons),
-      for (var i = 0; i < PackOdds.uncommonSlots; i++) pick(uncommons),
-      rareSlot,
-    ];
-    final paid = await widget.save.buyPack(pack);
-    if (!paid || !mounted) return;
-    AudioManager.instance.cardPlay();
-    setState(() {
-      _flipped.clear();
-      _pack = pack;
-    });
+    // Lock synchronously before the first asynchronous save write.
+    setState(() => _opening = true);
+    try {
+      final pack = PackGenerator(widget.library).generate(_selectedSet);
+      final paid = await widget.save.buyPack(pack);
+      if (!paid || !mounted) return;
+      AudioManager.instance.cardPlay();
+      setState(() {
+        _flipped.clear();
+        _pack = pack;
+      });
+    } on StateError catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Pack unavailable. ${error.message}')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _opening = false);
+    }
   }
 
   @override
@@ -124,37 +126,74 @@ class _BoosterScreenState extends State<BoosterScreen>
                   children: [
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back,
-                          color: AppTheme.textPrimary),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: AppTheme.textPrimary,
+                      ),
                     ),
-                    const Text('Shard Packs',
-                        style: TextStyle(
+                    const Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Shard Packs',
+                          maxLines: 1,
+                          style: TextStyle(
                             color: AppTheme.textPrimary,
                             fontSize: 19,
                             fontWeight: FontWeight.w800,
-                            letterSpacing: 1)),
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ),
+                    ),
                     const Spacer(),
                     ListenableBuilder(
                       listenable: widget.save,
                       builder: (_, _) => Row(
                         children: [
-                          const Icon(Icons.monetization_on,
-                              color: Color(0xFFE3B341), size: 17),
+                          const Icon(
+                            Icons.monetization_on,
+                            color: Color(0xFFE3B341),
+                            size: 17,
+                          ),
                           const SizedBox(width: 5),
-                          Text('${widget.save.gold}',
-                              style: const TextStyle(
-                                  color: Color(0xFFF0E4C0),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w800)),
+                          Text(
+                            '${widget.save.gold}',
+                            style: const TextStyle(
+                              color: Color(0xFFF0E4C0),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                child: _pack == null ? _sealedPack() : _openedPack(),
-              ),
+              if (_pack == null)
+                CardSetFilter(
+                  selected: _selectedSet,
+                  includeAll: false,
+                  onChanged: (set) {
+                    if (!_opening && set != null) {
+                      setState(() => _selectedSet = set);
+                    }
+                  },
+                )
+              else
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6),
+                  child: Text(
+                    _selectedSet.title,
+                    style: const TextStyle(
+                      color: AppTheme.textMuted,
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
+              Expanded(child: _pack == null ? _sealedPack() : _openedPack()),
             ],
           ),
         ),
@@ -177,7 +216,8 @@ class _BoosterScreenState extends State<BoosterScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: _openPack,
+                  key: const ValueKey('open-pack'),
+                  onTap: _opening ? null : _openPack,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -193,11 +233,16 @@ class _BoosterScreenState extends State<BoosterScreen>
                       ),
                       const SizedBox(height: 22),
                       Text(
-                          widget.save.canBuyPack
-                              ? 'Tap to tear open'
-                              : 'Not enough gold — win battles to earn more',
-                          style: const TextStyle(
-                              color: AppTheme.textMuted, fontSize: 13)),
+                        _opening
+                            ? 'Opening pack…'
+                            : widget.save.canBuyPack
+                            ? 'Tap to tear open'
+                            : 'Not enough gold — win battles to earn more',
+                        style: const TextStyle(
+                          color: AppTheme.textMuted,
+                          fontSize: 13,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -334,7 +379,7 @@ class _BoosterScreenState extends State<BoosterScreen>
 
   Widget _packBody() {
     const w = 210.0;
-    const h = 300.0;
+    const h = 340.0;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
@@ -404,7 +449,7 @@ class _BoosterScreenState extends State<BoosterScreen>
                                 color: const Color(0xFFC9A86A), width: 2),
                           ),
                           clipBehavior: Clip.antiAlias,
-                          child: Image.asset('assets/art/$_packArt.webp',
+                          child: Image.asset('assets/art/${_selectedSet.packArt}.webp',
                               fit: BoxFit.cover,
                               errorBuilder: (_, _, _) =>
                                   Container(color: AppTheme.panel)),
@@ -412,7 +457,7 @@ class _BoosterScreenState extends State<BoosterScreen>
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const Text('THE SUNDERING',
+                    Text(_selectedSet.title.toUpperCase(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: 'Cinzel',
@@ -456,7 +501,7 @@ class _BoosterScreenState extends State<BoosterScreen>
                     const SizedBox(height: 6),
                     // Play policy: the odds have to be readable before buying.
                     GestureDetector(
-                      onTap: () => PackOddsSheet.show(context),
+                      onTap: () => PackOddsSheet.show(context, set: _selectedSet),
                       behavior: HitTestBehavior.opaque,
                       child: const Padding(
                         padding: EdgeInsets.symmetric(

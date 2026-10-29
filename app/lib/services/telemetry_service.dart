@@ -125,7 +125,7 @@ class TelemetryService {
       'error': error.length > 2000 ? error.substring(0, 2000) : error,
       'stack': trimmed,
       'context': context,
-      'platform': Platform.operatingSystem,
+      'platform': kIsWeb ? 'web' : Platform.operatingSystem,
     });
   }
 

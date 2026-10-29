@@ -150,7 +150,7 @@ void main(List<String> args) {
 
   final plan = <Map<String, Object?>>[];
 
-  for (var c = 0; c < storyChapters.length; c++) {
+  for (var c = 0; c < 5; c++) {
     if (only != null && only != c + 1) continue;
     final chapter = storyChapters[c];
     final light = _lights[c];

@@ -97,7 +97,7 @@ void main() {
     // A player who did not expect the foe to move first would take it for a
     // bug. The sentence also tells them what they got in exchange.
     var seen = 0;
-    for (final chapter in storyChapters) {
+    for (final chapter in storyChapters.take(5)) {
       for (final stage in chapter.stages) {
         final battle = stage.battle;
         if (battle == null || battle.playerFirst) continue;

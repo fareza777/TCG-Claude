@@ -18,11 +18,7 @@ Future<void> main() async {
     return;
   }
 
-  final cardPath = Platform.environment['SHARDFALL_CARD_DATA'] ??
-      'app/assets/data/set01.json';
-  final cardLibrary = CardLibrary.fromJsonString(
-    File(cardPath).readAsStringSync(),
-  );
+  final cardLibrary = loadCardLibrary(Platform.environment);
   final supabaseUrl = Platform.environment['SUPABASE_URL'];
   final serviceKey = Platform.environment['SHARDFALL_SERVICE_ROLE_KEY'] ??
       Platform.environment['SUPABASE_SERVICE_ROLE_KEY'];
@@ -59,4 +55,17 @@ Future<void> main() async {
       await shelf_io.serve(handler, InternetAddress.anyIPv4, port);
   httpServer.autoCompress = true;
   stdout.writeln('SHARDFALL PvP listening on ${httpServer.port}');
+}
+
+/// Preserve the original file override and locate the expansion beside it.
+/// Failing either read is intentional: the server must support every live id.
+CardLibrary loadCardLibrary(Map<String, String> environment) {
+  final original =
+      File(environment['SHARDFALL_CARD_DATA'] ?? 'app/assets/data/set01.json');
+  final expansion = File(environment['SHARDFALL_EXPANSION_CARD_DATA'] ??
+      '${original.parent.path}/set02.json');
+  return CardLibrary.fromJsonStrings([
+    original.readAsStringSync(),
+    expansion.readAsStringSync(),
+  ]);
 }

@@ -28,6 +28,11 @@ class PvpCardView {
   final int damage;
   final int plusCounters;
   final bool summonedThisTurn;
+  final bool vowFulfilled;
+  final int tempMight;
+  final int tempGuard;
+  final Set<Keyword> tempKeywords;
+  final Map<String, dynamic>? tokenDefinition;
 
   const PvpCardView({
     required this.instanceId,
@@ -42,6 +47,11 @@ class PvpCardView {
     required this.damage,
     required this.plusCounters,
     required this.summonedThisTurn,
+    this.vowFulfilled = false,
+    this.tempMight = 0,
+    this.tempGuard = 0,
+    this.tempKeywords = const {},
+    this.tokenDefinition,
   });
 
   factory PvpCardView.fromJson(Map<String, dynamic> json) => PvpCardView(
@@ -59,6 +69,16 @@ class PvpCardView {
     exerted: _asBool(json['exerted'] ?? false, 'card.exerted'),
     damage: _asInt(json['damage'] ?? 0, 'card.damage'),
     plusCounters: _asInt(json['plusCounters'] ?? 0, 'card.plusCounters'),
+    vowFulfilled: _asBool(json['vowFulfilled'] ?? false, 'card.vowFulfilled'),
+    tempMight: _asInt(json['tempMight'] ?? 0, 'card.tempMight'),
+    tempGuard: _asInt(json['tempGuard'] ?? 0, 'card.tempGuard'),
+    tempKeywords: {
+      for (final keyword in _asList(json['tempKeywords'] ?? const []))
+        _enum(Keyword.values, keyword, 'card.tempKeyword'),
+    },
+    tokenDefinition: json['tokenDefinition'] == null
+        ? null
+        : _asMap(json['tokenDefinition'], 'card.tokenDefinition'),
     summonedThisTurn: _asBool(
       json['summonedThisTurn'] ?? false,
       'card.summonedThisTurn',
@@ -179,7 +199,9 @@ class PvpProjection {
     );
     final winner = json['winner'];
     return PvpProjection(
-      deadlineAt: DateTime.tryParse(json['deadlineAt'] as String? ?? '')?.toUtc(),
+      deadlineAt: DateTime.tryParse(
+        json['deadlineAt'] as String? ?? '',
+      )?.toUtc(),
       version: _asInt(json['version'], 'version'),
       viewer: viewer,
       activePlayer: _enum(
@@ -325,10 +347,10 @@ class PvpMatchEvent {
   });
 
   factory PvpMatchEvent.fromRow(Map<String, dynamic> row) => PvpMatchEvent(
-        seq: _asInt(row['seq'], 'seq'),
-        type: (row['event_type'] ?? 'state_changed').toString(),
-        payload: row['public_payload'] is Map
-            ? _asMap(row['public_payload'], 'public_payload')
-            : const {},
-      );
+    seq: _asInt(row['seq'], 'seq'),
+    type: (row['event_type'] ?? 'state_changed').toString(),
+    payload: row['public_payload'] is Map
+        ? _asMap(row['public_payload'], 'public_payload')
+        : const {},
+  );
 }

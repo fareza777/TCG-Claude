@@ -8,6 +8,7 @@
 // is the seed's shuffle and results are reproducible.
 import 'package:shardfall/duel/scenario.dart';
 import 'package:shardfall/story/story_data.dart';
+import 'package:shardfall/story/vow_encounters.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 const _turnGuard = 300;
@@ -75,8 +76,8 @@ bool? playBattle({
   );
 
   var s = Game.create(
-    deckP1: library.buildStarterDeck(chapter.playerDominion),
-    deckP2: library.buildStarterDeck(battle.enemyDominion),
+    deckP1: storyDeck(library, chapter.playerDominion, setCode: battle.deckSetCode, variant: battle.deckVariant),
+    deckP2: storyDeck(library, battle.enemyDominion, setCode: battle.deckSetCode, variant: battle.deckVariant + 1),
     seed: seed,
     firstPlayer: setup.playerSecond ? PlayerId.p2 : PlayerId.p1,
   );

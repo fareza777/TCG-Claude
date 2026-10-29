@@ -1,6 +1,6 @@
 {
-  "count": 415,
-  "characters": 34693,
+  "count": 936,
+  "characters": 66904,
   "clips": [
     {
       "id": "intro_00_b_00",
@@ -2491,6 +2491,3132 @@
       "chapter": "ch5",
       "voiceKey": "Narrator",
       "text": "The five endure. Set One is closed."
+    },
+    {
+      "id": "vow01_00_b_00",
+      "chapter": "vow01",
+      "voiceKey": "Narrator",
+      "text": "The stair ends in morning. For the first time, nobody below it is alone. Above it, five cities are preparing five different accounts of what happened."
+    },
+    {
+      "id": "vow01_00_b_01",
+      "chapter": "vow01",
+      "voiceKey": "The Sister",
+      "text": "I thought the sky would have changed more."
+    },
+    {
+      "id": "vow01_00_b_02",
+      "chapter": "vow01",
+      "voiceKey": "You",
+      "text": "It has only had eleven years."
+    },
+    {
+      "id": "vow01_00_b_03",
+      "chapter": "vow01",
+      "voiceKey": "The Sister",
+      "text": "Then it has had time to learn something."
+    },
+    {
+      "id": "vow01_01_b_00",
+      "chapter": "vow01",
+      "voiceKey": "Narrator",
+      "text": "At the gate the watch asks for Ravenna's seal. Her sister sets an oil flask on the captain's desk instead."
+    },
+    {
+      "id": "vow01_01_b_01",
+      "chapter": "vow01",
+      "voiceKey": "The Sister",
+      "text": "She is alive. She is staying. Those are different statements. Write both."
+    },
+    {
+      "id": "vow01_01_b_02",
+      "chapter": "vow01",
+      "voiceKey": "You",
+      "text": "They will ask who rules now."
+    },
+    {
+      "id": "vow01_01_b_03",
+      "chapter": "vow01",
+      "voiceKey": "The Sister",
+      "text": "They may begin by asking who needs breakfast."
+    },
+    {
+      "id": "vow01_02_p_00",
+      "chapter": "vow01",
+      "voiceKey": "You",
+      "text": "We are taking people out, not bringing an army in."
+    },
+    {
+      "id": "vow01_02_p_01",
+      "chapter": "vow01",
+      "voiceKey": "The Sister",
+      "text": "Then let them see us put the weapons down afterward."
+    },
+    {
+      "id": "vow01_02_v_00",
+      "chapter": "vow01",
+      "voiceKey": "Narrator",
+      "text": "The watch lowers its spears one at a time. Nobody has taught them an order for this."
+    },
+    {
+      "id": "vow01_02_v_01",
+      "chapter": "vow01",
+      "voiceKey": "The Sister",
+      "text": "Keep the stair open. A duty without an exit becomes something else."
+    },
+    {
+      "id": "vow01_02_v_02",
+      "chapter": "vow01",
+      "voiceKey": "You",
+      "text": "I will put that in the first letter."
+    },
+    {
+      "id": "vow01_03_b_00",
+      "chapter": "vow01",
+      "voiceKey": "Narrator",
+      "text": "Aurelian riders arrive before the ink dries. Their warrant calls the stair a strategic asset. The flask has left a ring over the word asset."
+    },
+    {
+      "id": "vow01_03_b_01",
+      "chapter": "vow01",
+      "voiceKey": "Seraphel",
+      "text": "I did not sign that."
+    },
+    {
+      "id": "vow01_03_b_02",
+      "chapter": "vow01",
+      "voiceKey": "You",
+      "text": "Your seal did."
+    },
+    {
+      "id": "vow01_03_b_03",
+      "chapter": "vow01",
+      "voiceKey": "Seraphel",
+      "text": "Then my seal has acquired ambitions. Help me disappoint it."
+    },
+    {
+      "id": "vow01_04_p_00",
+      "chapter": "vow01",
+      "voiceKey": "Seraphel",
+      "text": "A command can be legal and still require a refusal."
+    },
+    {
+      "id": "vow01_04_p_01",
+      "chapter": "vow01",
+      "voiceKey": "You",
+      "text": "Let this be the first refusal they record accurately."
+    },
+    {
+      "id": "vow01_04_v_00",
+      "chapter": "vow01",
+      "voiceKey": "Narrator",
+      "text": "The warrant is folded rather than burned. Numen will need evidence; the riders will need a way to admit they were wrong."
+    },
+    {
+      "id": "vow01_04_v_01",
+      "chapter": "vow01",
+      "voiceKey": "Seraphel",
+      "text": "There must be a table where none of us owns the chairs."
+    },
+    {
+      "id": "vow01_04_v_02",
+      "chapter": "vow01",
+      "voiceKey": "You",
+      "text": "I know four cities that will object."
+    },
+    {
+      "id": "vow01_05_b_00",
+      "chapter": "vow01",
+      "voiceKey": "Narrator",
+      "text": "Before leaving, you place a spare lamp at the stairhead. Below, Thornmaw calls up to ask whether the roof is still there."
+    },
+    {
+      "id": "vow01_05_b_01",
+      "chapter": "vow01",
+      "voiceKey": "You",
+      "text": "Most of it."
+    },
+    {
+      "id": "vow01_05_b_02",
+      "chapter": "vow01",
+      "voiceKey": "Thornmaw",
+      "text": "Good. We shall need somewhere to meet when she can come upstairs."
+    },
+    {
+      "id": "vow01_05_b_03",
+      "chapter": "vow01",
+      "voiceKey": "Narrator",
+      "text": "You send five invitations. The fifth goes down the stair, with enough oil for a week."
+    },
+    {
+      "id": "vow02_00_b_00",
+      "chapter": "vow02",
+      "voiceKey": "Narrator",
+      "text": "The roofless Hall of Measures has not hosted a council since the roof fell. This recommends it to everyone for different reasons."
+    },
+    {
+      "id": "vow02_00_b_01",
+      "chapter": "vow02",
+      "voiceKey": "Numen",
+      "text": "No acoustics for a grand speech. No gallery for applause. Excellent."
+    },
+    {
+      "id": "vow02_00_b_02",
+      "chapter": "vow02",
+      "voiceKey": "Kaelis",
+      "text": "No roof for rain."
+    },
+    {
+      "id": "vow02_00_b_03",
+      "chapter": "vow02",
+      "voiceKey": "Seraphel",
+      "text": "We can repair something while we argue. It may be a useful precedent."
+    },
+    {
+      "id": "vow02_01_b_00",
+      "chapter": "vow02",
+      "voiceKey": "Narrator",
+      "text": "The Concord has posted guards at the public entrance. At the servants' entrance its own masons wait in the rain."
+    },
+    {
+      "id": "vow02_01_b_01",
+      "chapter": "vow02",
+      "voiceKey": "Seraphel",
+      "text": "The hall belongs to the city."
+    },
+    {
+      "id": "vow02_01_b_02",
+      "chapter": "vow02",
+      "voiceKey": "Inquisitor",
+      "text": "And the city belongs to the light."
+    },
+    {
+      "id": "vow02_01_b_03",
+      "chapter": "vow02",
+      "voiceKey": "Seraphel",
+      "text": "Then the light can queue with the masons."
+    },
+    {
+      "id": "vow02_02_p_00",
+      "chapter": "vow02",
+      "voiceKey": "Seraphel",
+      "text": "Keep the door behind us open."
+    },
+    {
+      "id": "vow02_02_p_01",
+      "chapter": "vow02",
+      "voiceKey": "You",
+      "text": "So they can leave."
+    },
+    {
+      "id": "vow02_02_v_00",
+      "chapter": "vow02",
+      "voiceKey": "Narrator",
+      "text": "The captain withdraws. The masons enter, and the first common work of the five cities is an argument about drainage."
+    },
+    {
+      "id": "vow02_02_v_01",
+      "chapter": "vow02",
+      "voiceKey": "Numen",
+      "text": "I shall preserve that in full."
+    },
+    {
+      "id": "vow02_02_v_02",
+      "chapter": "vow02",
+      "voiceKey": "Kaelis",
+      "text": "You would."
+    },
+    {
+      "id": "vow02_03_b_00",
+      "chapter": "vow02",
+      "voiceKey": "Narrator",
+      "text": "A Pyre escort brings a chair of black iron and demands the place nearest the exit. Kaelis moves it beside the empty fifth chair."
+    },
+    {
+      "id": "vow02_03_b_01",
+      "chapter": "vow02",
+      "voiceKey": "Kaelis",
+      "text": "Ravenna is not a vacancy. Her sister carries her words until she can carry them herself."
+    },
+    {
+      "id": "vow02_03_b_02",
+      "chapter": "vow02",
+      "voiceKey": "You",
+      "text": "And Thornmaw?"
+    },
+    {
+      "id": "vow02_03_b_03",
+      "chapter": "vow02",
+      "voiceKey": "The Sister",
+      "text": "He asked us to leave room for antlers. I have done what I can."
+    },
+    {
+      "id": "vow02_04_p_00",
+      "chapter": "vow02",
+      "voiceKey": "Kaelis",
+      "text": "We did not cool the forge to warm a different throne."
+    },
+    {
+      "id": "vow02_04_p_01",
+      "chapter": "vow02",
+      "voiceKey": "You",
+      "text": "Then give them a place where they can hear that."
+    },
+    {
+      "id": "vow02_04_v_00",
+      "chapter": "vow02",
+      "voiceKey": "Narrator",
+      "text": "The iron chair stays. The escort takes ordinary stools. Nobody loses a seat to make room."
+    },
+    {
+      "id": "vow02_04_v_01",
+      "chapter": "vow02",
+      "voiceKey": "Seraphel",
+      "text": "Five voices. No deciding voice."
+    },
+    {
+      "id": "vow02_04_v_02",
+      "chapter": "vow02",
+      "voiceKey": "Numen",
+      "text": "A difficult system. I am beginning to trust it."
+    },
+    {
+      "id": "vow02_05_b_00",
+      "chapter": "vow02",
+      "voiceKey": "Narrator",
+      "text": "They agree to build a seal renewed by living people. Nothing may be hidden in its wording. Anyone may withdraw."
+    },
+    {
+      "id": "vow02_05_b_01",
+      "chapter": "vow02",
+      "voiceKey": "Kaelis",
+      "text": "And if someone withdraws at the wrong moment?"
+    },
+    {
+      "id": "vow02_05_b_02",
+      "chapter": "vow02",
+      "voiceKey": "You",
+      "text": "Then we make something strong enough to survive an honest answer."
+    },
+    {
+      "id": "vow02_05_b_03",
+      "chapter": "vow02",
+      "voiceKey": "Narrator",
+      "text": "Numen writes the condition above the signatures, where nobody can mistake it for a footnote."
+    },
+    {
+      "id": "vow03_00_b_00",
+      "chapter": "vow03",
+      "voiceKey": "Narrator",
+      "text": "The treaty is read to an orchard that has spent three seasons feeding soldiers. There is little left to promise it."
+    },
+    {
+      "id": "vow03_00_b_01",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "Thornmaw sent instructions."
+    },
+    {
+      "id": "vow03_00_b_02",
+      "chapter": "vow03",
+      "voiceKey": "Sproutling",
+      "text": "He always sends instructions. Did he send himself?"
+    },
+    {
+      "id": "vow03_00_b_03",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "He is keeping a different promise today."
+    },
+    {
+      "id": "vow03_01_b_00",
+      "chapter": "vow03",
+      "voiceKey": "Narrator",
+      "text": "The rootkeepers will lend strength only if the orchard receives the first water forever. Beside the channel a village sets out empty jars."
+    },
+    {
+      "id": "vow03_01_b_01",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "Forever is a large word to write beside a thirsty child."
+    },
+    {
+      "id": "vow03_01_b_02",
+      "chapter": "vow03",
+      "voiceKey": "Sproutling",
+      "text": "The roots do not know where the boundary is."
+    },
+    {
+      "id": "vow03_01_b_03",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "Then we must not teach them the wrong one."
+    },
+    {
+      "id": "vow03_02_p_00",
+      "chapter": "vow03",
+      "voiceKey": "Sproutling",
+      "text": "Do we have to break the trees?"
+    },
+    {
+      "id": "vow03_02_p_01",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "No. We have to stop the people speaking for them."
+    },
+    {
+      "id": "vow03_02_v_00",
+      "chapter": "vow03",
+      "voiceKey": "Narrator",
+      "text": "The gate lifts. Water reaches the orchard and the jars. The roots drink last and, to the keepers' embarrassment, survive."
+    },
+    {
+      "id": "vow03_02_v_01",
+      "chapter": "vow03",
+      "voiceKey": "Sproutling",
+      "text": "Perhaps we asked them the wrong question."
+    },
+    {
+      "id": "vow03_02_v_02",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "Ask again tomorrow."
+    },
+    {
+      "id": "vow03_03_b_00",
+      "chapter": "vow03",
+      "voiceKey": "Narrator",
+      "text": "Under the oldest tree the old calling has hardened into a knot. It repeats Thornmaw's silence in the voices of everyone he tried to protect."
+    },
+    {
+      "id": "vow03_03_b_01",
+      "chapter": "vow03",
+      "voiceKey": "Thornmaw",
+      "text": "I cannot be there. I can tell you where to cut."
+    },
+    {
+      "id": "vow03_03_b_02",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "You are speaking through a root."
+    },
+    {
+      "id": "vow03_03_b_03",
+      "chapter": "vow03",
+      "voiceKey": "Thornmaw",
+      "text": "I am learning to delegate."
+    },
+    {
+      "id": "vow03_04_p_00",
+      "chapter": "vow03",
+      "voiceKey": "Thornmaw",
+      "text": "Do not cut the living root beside it. They have grown together."
+    },
+    {
+      "id": "vow03_04_p_01",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "I can see the difference."
+    },
+    {
+      "id": "vow03_04_v_00",
+      "chapter": "vow03",
+      "voiceKey": "Narrator",
+      "text": "The knot opens around a green shoot. The old tree has been growing toward water, not toward the Shard."
+    },
+    {
+      "id": "vow03_04_v_01",
+      "chapter": "vow03",
+      "voiceKey": "Thornmaw",
+      "text": "My vow is to tend what can grow without me."
+    },
+    {
+      "id": "vow03_04_v_02",
+      "chapter": "vow03",
+      "voiceKey": "Sproutling",
+      "text": "Then you will have to let us make mistakes."
+    },
+    {
+      "id": "vow03_05_b_00",
+      "chapter": "vow03",
+      "voiceKey": "Narrator",
+      "text": "The orchard sends no royal seal. It sends a basket of seeds, with instructions for giving half away."
+    },
+    {
+      "id": "vow03_05_b_01",
+      "chapter": "vow03",
+      "voiceKey": "You",
+      "text": "No penalty if the seedlings die?"
+    },
+    {
+      "id": "vow03_05_b_02",
+      "chapter": "vow03",
+      "voiceKey": "Thornmaw",
+      "text": "Try again. That is the penalty. It is also the work."
+    },
+    {
+      "id": "vow03_05_b_03",
+      "chapter": "vow03",
+      "voiceKey": "Narrator",
+      "text": "The first vow travels to the roofless hall wrapped in damp cloth. It needs checking every morning."
+    },
+    {
+      "id": "vow04_00_b_00",
+      "chapter": "vow04",
+      "voiceKey": "Narrator",
+      "text": "Ashmar's great forge is dark. Inside its firebox the smiths have built a smaller kiln, and are ashamed of how little it lights."
+    },
+    {
+      "id": "vow04_00_b_01",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "It cooked three hundred dinners yesterday."
+    },
+    {
+      "id": "vow04_00_b_02",
+      "chapter": "vow04",
+      "voiceKey": "Forgewright",
+      "text": "It used to make sunspears."
+    },
+    {
+      "id": "vow04_00_b_03",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "Three hundred people noticed the difference."
+    },
+    {
+      "id": "vow04_01_b_00",
+      "chapter": "vow04",
+      "voiceKey": "Narrator",
+      "text": "Draxus has closed the charcoal road. He calls the fuel a military reserve. The hospital calls it a winter."
+    },
+    {
+      "id": "vow04_01_b_01",
+      "chapter": "vow04",
+      "voiceKey": "Draxus",
+      "text": "You cannot hold a city with soup."
+    },
+    {
+      "id": "vow04_01_b_02",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "No. You can feed one. I have spent too long confusing the tasks."
+    },
+    {
+      "id": "vow04_01_b_03",
+      "chapter": "vow04",
+      "voiceKey": "You",
+      "text": "We need the road, not his surrender oath."
+    },
+    {
+      "id": "vow04_02_p_00",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "Leave a way back to the city. These are our smiths."
+    },
+    {
+      "id": "vow04_02_p_01",
+      "chapter": "vow04",
+      "voiceKey": "Draxus",
+      "text": "Then give them something worth returning to."
+    },
+    {
+      "id": "vow04_02_v_00",
+      "chapter": "vow04",
+      "voiceKey": "Narrator",
+      "text": "The first carts go to the hospital. The second go to the kitchens. The army receives the third and discovers it can wait."
+    },
+    {
+      "id": "vow04_02_v_01",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "Write every delivery down. No heroic exceptions."
+    },
+    {
+      "id": "vow04_02_v_02",
+      "chapter": "vow04",
+      "voiceKey": "Forgewright",
+      "text": "That will be a remarkably dull ledger."
+    },
+    {
+      "id": "vow04_03_b_00",
+      "chapter": "vow04",
+      "voiceKey": "Narrator",
+      "text": "Aurelian engineers offer a radiant furnace. Its contract binds Ashmar's gates to the Concord for a hundred years."
+    },
+    {
+      "id": "vow04_03_b_01",
+      "chapter": "vow04",
+      "voiceKey": "Seraphel",
+      "text": "I sent engineers. I did not send owners."
+    },
+    {
+      "id": "vow04_03_b_02",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "They brought both qualifications."
+    },
+    {
+      "id": "vow04_03_b_03",
+      "chapter": "vow04",
+      "voiceKey": "You",
+      "text": "We can keep the design and refuse the terms."
+    },
+    {
+      "id": "vow04_04_p_00",
+      "chapter": "vow04",
+      "voiceKey": "Seraphel",
+      "text": "Your knowledge will be credited. Your claim will not."
+    },
+    {
+      "id": "vow04_04_p_01",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "That is a distinction Ashmar should have learned sooner."
+    },
+    {
+      "id": "vow04_04_v_00",
+      "chapter": "vow04",
+      "voiceKey": "Narrator",
+      "text": "The engineers leave a drawing on the workbench. One stays to learn how a charcoal fire is banked for the night."
+    },
+    {
+      "id": "vow04_04_v_01",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "My vow is to spend strength where it warms someone other than me."
+    },
+    {
+      "id": "vow04_04_v_02",
+      "chapter": "vow04",
+      "voiceKey": "You",
+      "text": "Tomorrow, too."
+    },
+    {
+      "id": "vow04_05_b_00",
+      "chapter": "vow04",
+      "voiceKey": "Narrator",
+      "text": "At midnight Kaelis returns to the dead forge alone. A pale warmth rests inside her gauntlet. She closes it before anyone arrives."
+    },
+    {
+      "id": "vow04_05_b_01",
+      "chapter": "vow04",
+      "voiceKey": "The Voice",
+      "text": "We remember what your city sounded like when it was warm."
+    },
+    {
+      "id": "vow04_05_b_02",
+      "chapter": "vow04",
+      "voiceKey": "Kaelis",
+      "text": "So do I."
+    },
+    {
+      "id": "vow04_05_b_03",
+      "chapter": "vow04",
+      "voiceKey": "Narrator",
+      "text": "She signs the second vow with a hand that is no longer cold. The ink dries faster there than anywhere else."
+    },
+    {
+      "id": "vow05_00_b_00",
+      "chapter": "vow05",
+      "voiceKey": "Narrator",
+      "text": "Meridine receives the vows at low water. Numen weighs each page down with a different stone, as though identical weights might imply identical words."
+    },
+    {
+      "id": "vow05_00_b_01",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "I am publishing what I erased."
+    },
+    {
+      "id": "vow05_00_b_02",
+      "chapter": "vow05",
+      "voiceKey": "You",
+      "text": "All of it?"
+    },
+    {
+      "id": "vow05_00_b_03",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "That is the portion causing difficulty."
+    },
+    {
+      "id": "vow05_01_b_00",
+      "chapter": "vow05",
+      "voiceKey": "Narrator",
+      "text": "The custodians have orders to preserve public calm. They have interpreted public with unusual precision and calm with none at all."
+    },
+    {
+      "id": "vow05_01_b_01",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "I wrote the order. It has outlived its excuse."
+    },
+    {
+      "id": "vow05_01_b_02",
+      "chapter": "vow05",
+      "voiceKey": "You",
+      "text": "Can you rescind it?"
+    },
+    {
+      "id": "vow05_01_b_03",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "It requires a truthful record. We are currently fighting over the paper."
+    },
+    {
+      "id": "vow05_02_p_00",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "Do not destroy their tablets. Those contain the names of the people I omitted."
+    },
+    {
+      "id": "vow05_02_p_01",
+      "chapter": "vow05",
+      "voiceKey": "You",
+      "text": "Then we bring the tablets out with them."
+    },
+    {
+      "id": "vow05_02_v_00",
+      "chapter": "vow05",
+      "voiceKey": "Narrator",
+      "text": "The doors open onto a queue. Most people have come to find a relative, not an explanation of the world."
+    },
+    {
+      "id": "vow05_02_v_01",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "I prepared a speech."
+    },
+    {
+      "id": "vow05_02_v_02",
+      "chapter": "vow05",
+      "voiceKey": "You",
+      "text": "Start with the index."
+    },
+    {
+      "id": "vow05_03_b_00",
+      "chapter": "vow05",
+      "voiceKey": "Narrator",
+      "text": "One undated record describes Kaelis carrying a warmth she did not kindle. Numen recognizes his handwriting and cannot tell whether it is memory or warning."
+    },
+    {
+      "id": "vow05_03_b_01",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "The archive has never reliably distinguished those things."
+    },
+    {
+      "id": "vow05_03_b_02",
+      "chapter": "vow05",
+      "voiceKey": "You",
+      "text": "Will you tell her?"
+    },
+    {
+      "id": "vow05_03_b_03",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "After I have stopped wanting the answer to be convenient."
+    },
+    {
+      "id": "vow05_04_p_00",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "It knows which page I am tempted to lose."
+    },
+    {
+      "id": "vow05_04_p_01",
+      "chapter": "vow05",
+      "voiceKey": "You",
+      "text": "Hold that page where everyone can see it."
+    },
+    {
+      "id": "vow05_04_v_00",
+      "chapter": "vow05",
+      "voiceKey": "Narrator",
+      "text": "The remnant burns around the blank margin. The difficult sentence remains. Numen makes five copies before reading it again."
+    },
+    {
+      "id": "vow05_04_v_01",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "My vow is to keep the whole record, including the hand that altered it."
+    },
+    {
+      "id": "vow05_04_v_02",
+      "chapter": "vow05",
+      "voiceKey": "You",
+      "text": "Put your name first."
+    },
+    {
+      "id": "vow05_05_b_00",
+      "chapter": "vow05",
+      "voiceKey": "Narrator",
+      "text": "The third vow returns with the published confession. Beneath each erased name is a space for corrections from the living."
+    },
+    {
+      "id": "vow05_05_b_01",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "Truth is not a thing I can finish on their behalf."
+    },
+    {
+      "id": "vow05_05_b_02",
+      "chapter": "vow05",
+      "voiceKey": "You",
+      "text": "Will the seal accept an unfinished record?"
+    },
+    {
+      "id": "vow05_05_b_03",
+      "chapter": "vow05",
+      "voiceKey": "Numen",
+      "text": "If it cannot, we are building another lie."
+    },
+    {
+      "id": "vow06_00_b_00",
+      "chapter": "vow06",
+      "voiceKey": "Narrator",
+      "text": "The root bridge has a gap at its center. Verdance says it marks the frontier. The people stranded above the ravine call it the missing part."
+    },
+    {
+      "id": "vow06_00_b_01",
+      "chapter": "vow06",
+      "voiceKey": "Sproutling",
+      "text": "If we close it, soldiers can cross."
+    },
+    {
+      "id": "vow06_00_b_02",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "So can the people waiting behind them."
+    },
+    {
+      "id": "vow06_00_b_03",
+      "chapter": "vow06",
+      "voiceKey": "Sproutling",
+      "text": "I was hoping for an easier answer."
+    },
+    {
+      "id": "vow06_01_b_00",
+      "chapter": "vow06",
+      "voiceKey": "Narrator",
+      "text": "The keepers permit departures but forbid returns. They say a vow to shelter strangers must end somewhere."
+    },
+    {
+      "id": "vow06_01_b_01",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "These people were strangers yesterday. Today they have houses here."
+    },
+    {
+      "id": "vow06_01_b_02",
+      "chapter": "vow06",
+      "voiceKey": "Sproutling",
+      "text": "And seedlings. Some of them planted seedlings."
+    },
+    {
+      "id": "vow06_01_b_03",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "Then perhaps the roots already know them."
+    },
+    {
+      "id": "vow06_02_p_00",
+      "chapter": "vow06",
+      "voiceKey": "Sproutling",
+      "text": "Leave the bridge standing."
+    },
+    {
+      "id": "vow06_02_p_01",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "It is the reason we are here."
+    },
+    {
+      "id": "vow06_02_v_00",
+      "chapter": "vow06",
+      "voiceKey": "Narrator",
+      "text": "The bridge grows a narrow crossing. Its handrails remain separate, with a rope between them for people who need help."
+    },
+    {
+      "id": "vow06_02_v_01",
+      "chapter": "vow06",
+      "voiceKey": "Sproutling",
+      "text": "It did not heal shut."
+    },
+    {
+      "id": "vow06_02_v_02",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "A gap can be a choice instead of a wound."
+    },
+    {
+      "id": "vow06_03_b_00",
+      "chapter": "vow06",
+      "voiceKey": "Narrator",
+      "text": "Pyre deserters have built a toll furnace on the opposite bank. They burn the refugees' belongings and call it an entry fee."
+    },
+    {
+      "id": "vow06_03_b_01",
+      "chapter": "vow06",
+      "voiceKey": "Kaelis",
+      "text": "I taught them that nothing should cross a border without paying."
+    },
+    {
+      "id": "vow06_03_b_02",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "Then tell them what you have learned since."
+    },
+    {
+      "id": "vow06_03_b_03",
+      "chapter": "vow06",
+      "voiceKey": "Kaelis",
+      "text": "They are holding the road. They may require a demonstration."
+    },
+    {
+      "id": "vow06_04_p_00",
+      "chapter": "vow06",
+      "voiceKey": "Kaelis",
+      "text": "Your pay is late. Their lives are not compensation."
+    },
+    {
+      "id": "vow06_04_p_01",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "We can settle the first problem after this."
+    },
+    {
+      "id": "vow06_04_v_00",
+      "chapter": "vow06",
+      "voiceKey": "Narrator",
+      "text": "The furnace is dismantled into cooking stoves. The soldiers' names go into the same relief ledger as everyone else's."
+    },
+    {
+      "id": "vow06_04_v_01",
+      "chapter": "vow06",
+      "voiceKey": "Kaelis",
+      "text": "No oath of gratitude. Just sign that you received your share."
+    },
+    {
+      "id": "vow06_04_v_02",
+      "chapter": "vow06",
+      "voiceKey": "Sproutling",
+      "text": "That is a much smaller piece of paper."
+    },
+    {
+      "id": "vow06_05_b_00",
+      "chapter": "vow06",
+      "voiceKey": "Narrator",
+      "text": "A message from Thornmaw asks whether the orchard still agrees. The keepers are offended. The refugees are relieved."
+    },
+    {
+      "id": "vow06_05_b_01",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "He said to ask each morning."
+    },
+    {
+      "id": "vow06_05_b_02",
+      "chapter": "vow06",
+      "voiceKey": "Sproutling",
+      "text": "Even after we said yes?"
+    },
+    {
+      "id": "vow06_05_b_03",
+      "chapter": "vow06",
+      "voiceKey": "You",
+      "text": "Especially then."
+    },
+    {
+      "id": "vow07_00_b_00",
+      "chapter": "vow07",
+      "voiceKey": "Narrator",
+      "text": "The visitor comes to the kitchen after the last bowl is washed. There is no escort, no banner, and no request to see the queen."
+    },
+    {
+      "id": "vow07_00_b_01",
+      "chapter": "vow07",
+      "voiceKey": "The Cantor",
+      "text": "A city that cooks together has understood more than its generals."
+    },
+    {
+      "id": "vow07_00_b_02",
+      "chapter": "vow07",
+      "voiceKey": "Kaelis",
+      "text": "And a stranger who arrives after supper has understood less than its children."
+    },
+    {
+      "id": "vow07_00_b_03",
+      "chapter": "vow07",
+      "voiceKey": "The Cantor",
+      "text": "We can wait."
+    },
+    {
+      "id": "vow07_01_b_00",
+      "chapter": "vow07",
+      "voiceKey": "Narrator",
+      "text": "The visitor leaves a coal that burns without fuel. Beside it is a note asking nothing in return. The hospital sends for it before the council can meet."
+    },
+    {
+      "id": "vow07_01_b_01",
+      "chapter": "vow07",
+      "voiceKey": "You",
+      "text": "Does it open the seal?"
+    },
+    {
+      "id": "vow07_01_b_02",
+      "chapter": "vow07",
+      "voiceKey": "The Cantor",
+      "text": "It opens a hand. You may close it again."
+    },
+    {
+      "id": "vow07_01_b_03",
+      "chapter": "vow07",
+      "voiceKey": "Kaelis",
+      "text": "Let us test the second part before we accept the first."
+    },
+    {
+      "id": "vow07_02_p_00",
+      "chapter": "vow07",
+      "voiceKey": "The Cantor",
+      "text": "We did not ask it to cling."
+    },
+    {
+      "id": "vow07_02_p_01",
+      "chapter": "vow07",
+      "voiceKey": "Kaelis",
+      "text": "Then help us make it let go."
+    },
+    {
+      "id": "vow07_02_v_00",
+      "chapter": "vow07",
+      "voiceKey": "Narrator",
+      "text": "The coal cools. The visitor kneels beside the injured stoker and waits while a mortal doctor works."
+    },
+    {
+      "id": "vow07_02_v_01",
+      "chapter": "vow07",
+      "voiceKey": "The Cantor",
+      "text": "We are sorry. Kindness without a way to refuse is another appetite."
+    },
+    {
+      "id": "vow07_02_v_02",
+      "chapter": "vow07",
+      "voiceKey": "You",
+      "text": "You sound as though you have practiced saying that."
+    },
+    {
+      "id": "vow07_03_b_00",
+      "chapter": "vow07",
+      "voiceKey": "Narrator",
+      "text": "Draxus orders every recipient detained. The hospital wards fill with guards, and nobody can reach the water pump."
+    },
+    {
+      "id": "vow07_03_b_01",
+      "chapter": "vow07",
+      "voiceKey": "Kaelis",
+      "text": "The gift was dangerous. That does not make the sick criminals."
+    },
+    {
+      "id": "vow07_03_b_02",
+      "chapter": "vow07",
+      "voiceKey": "Draxus",
+      "text": "It makes them a breach."
+    },
+    {
+      "id": "vow07_03_b_03",
+      "chapter": "vow07",
+      "voiceKey": "You",
+      "text": "They have names. Start there."
+    },
+    {
+      "id": "vow07_04_p_00",
+      "chapter": "vow07",
+      "voiceKey": "Kaelis",
+      "text": "We are removing spears from a hospital. Remember how that should sound."
+    },
+    {
+      "id": "vow07_04_p_01",
+      "chapter": "vow07",
+      "voiceKey": "You",
+      "text": "The patients stay where they can be treated."
+    },
+    {
+      "id": "vow07_04_v_00",
+      "chapter": "vow07",
+      "voiceKey": "Narrator",
+      "text": "The guards return to the gates. The patients keep their blankets. The Cantor departs without demanding a hearing."
+    },
+    {
+      "id": "vow07_04_v_01",
+      "chapter": "vow07",
+      "voiceKey": "The Cantor",
+      "text": "A refusal is an answer. We will remember yours."
+    },
+    {
+      "id": "vow07_04_v_02",
+      "chapter": "vow07",
+      "voiceKey": "Kaelis",
+      "text": "And I will remember that you waited for the doctor."
+    },
+    {
+      "id": "vow07_05_b_00",
+      "chapter": "vow07",
+      "voiceKey": "Narrator",
+      "text": "Kaelis opens her other hand. A second pale warmth moves beneath the iron. She has carried it since the cold kiln."
+    },
+    {
+      "id": "vow07_05_b_01",
+      "chapter": "vow07",
+      "voiceKey": "You",
+      "text": "You should have told the council."
+    },
+    {
+      "id": "vow07_05_b_02",
+      "chapter": "vow07",
+      "voiceKey": "Kaelis",
+      "text": "I wanted to know whether it was hope before you named it treason."
+    },
+    {
+      "id": "vow07_05_b_03",
+      "chapter": "vow07",
+      "voiceKey": "Narrator",
+      "text": "She does not surrender it. You do not pretend you failed to notice."
+    },
+    {
+      "id": "vow08_00_b_00",
+      "chapter": "vow08",
+      "voiceKey": "Narrator",
+      "text": "The restored names do not fit on the memorial wall. Numen asks the masons for more stone. They ask which names may be written smaller."
+    },
+    {
+      "id": "vow08_00_b_01",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "None."
+    },
+    {
+      "id": "vow08_00_b_02",
+      "chapter": "vow08",
+      "voiceKey": "You",
+      "text": "We will need another wall."
+    },
+    {
+      "id": "vow08_00_b_03",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "Yes. I am learning to give expensive answers."
+    },
+    {
+      "id": "vow08_01_b_00",
+      "chapter": "vow08",
+      "voiceKey": "Narrator",
+      "text": "A woman has crossed two seas to remove her husband's name. He is alive in the southern islands. The archive demands proof that she is herself."
+    },
+    {
+      "id": "vow08_01_b_01",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "I once made certainty into an entrance requirement."
+    },
+    {
+      "id": "vow08_01_b_02",
+      "chapter": "vow08",
+      "voiceKey": "You",
+      "text": "She has brought letters."
+    },
+    {
+      "id": "vow08_01_b_03",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "I will read them as though someone other than me can know a thing."
+    },
+    {
+      "id": "vow08_02_p_00",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "Protect the letters from the water."
+    },
+    {
+      "id": "vow08_02_p_01",
+      "chapter": "vow08",
+      "voiceKey": "You",
+      "text": "And their owner from the archive."
+    },
+    {
+      "id": "vow08_02_v_00",
+      "chapter": "vow08",
+      "voiceKey": "Narrator",
+      "text": "The name is removed without erasing the place it occupied. Under it the mason writes that the record was corrected by someone who came back."
+    },
+    {
+      "id": "vow08_02_v_01",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "A memorial should be pleased to lose a name."
+    },
+    {
+      "id": "vow08_02_v_02",
+      "chapter": "vow08",
+      "voiceKey": "You",
+      "text": "Put that above the door."
+    },
+    {
+      "id": "vow08_03_b_00",
+      "chapter": "vow08",
+      "voiceKey": "Narrator",
+      "text": "The Concord offers a shortened confession. It retains Numen's remorse and removes the people who benefited from his silence."
+    },
+    {
+      "id": "vow08_03_b_01",
+      "chapter": "vow08",
+      "voiceKey": "Seraphel",
+      "text": "It is written beautifully."
+    },
+    {
+      "id": "vow08_03_b_02",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "That has been a persistent problem with our lies."
+    },
+    {
+      "id": "vow08_03_b_03",
+      "chapter": "vow08",
+      "voiceKey": "You",
+      "text": "Will they publish the whole thing?"
+    },
+    {
+      "id": "vow08_04_p_00",
+      "chapter": "vow08",
+      "voiceKey": "Seraphel",
+      "text": "There is room in the light for an unflattering page."
+    },
+    {
+      "id": "vow08_04_p_01",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "Several, in this instance."
+    },
+    {
+      "id": "vow08_04_v_00",
+      "chapter": "vow08",
+      "voiceKey": "Narrator",
+      "text": "The unabridged record travels on public boats. The first correction arrives before the last copy has left the quay."
+    },
+    {
+      "id": "vow08_04_v_01",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "My vow has survived being contradicted."
+    },
+    {
+      "id": "vow08_04_v_02",
+      "chapter": "vow08",
+      "voiceKey": "You",
+      "text": "It may be the first thing you have written that wanted to."
+    },
+    {
+      "id": "vow08_05_b_00",
+      "chapter": "vow08",
+      "voiceKey": "Narrator",
+      "text": "In the oldest binding Numen finds five marks around an empty place. Someone wrote: leave room for the one who says no."
+    },
+    {
+      "id": "vow08_05_b_01",
+      "chapter": "vow08",
+      "voiceKey": "You",
+      "text": "Who wrote it?"
+    },
+    {
+      "id": "vow08_05_b_02",
+      "chapter": "vow08",
+      "voiceKey": "Numen",
+      "text": "The First Caller. Before she learned to call a lie protection."
+    },
+    {
+      "id": "vow08_05_b_03",
+      "chapter": "vow08",
+      "voiceKey": "Narrator",
+      "text": "He sends the page down the well-kept stair. This time he keeps no private copy from the others."
+    },
+    {
+      "id": "vow09_00_b_00",
+      "chapter": "vow09",
+      "voiceKey": "Narrator",
+      "text": "Seraphel opens the Mercy Gate. Petitioners arrive carrying the chains once used to turn them away. They want to know where to put them."
+    },
+    {
+      "id": "vow09_00_b_01",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "Here, where we will have to step around them."
+    },
+    {
+      "id": "vow09_00_b_02",
+      "chapter": "vow09",
+      "voiceKey": "You",
+      "text": "Some will say that obstructs the entrance."
+    },
+    {
+      "id": "vow09_00_b_03",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "They obstructed it more effectively before."
+    },
+    {
+      "id": "vow09_01_b_00",
+      "chapter": "vow09",
+      "voiceKey": "Narrator",
+      "text": "The Inquisitor brings an oath binding every citizen to Seraphel's mercy. It has no provision for anyone who does not want it."
+    },
+    {
+      "id": "vow09_01_b_01",
+      "chapter": "vow09",
+      "voiceKey": "Inquisitor",
+      "text": "You are mercy."
+    },
+    {
+      "id": "vow09_01_b_02",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "Then listen when I tell you it cannot be compulsory."
+    },
+    {
+      "id": "vow09_01_b_03",
+      "chapter": "vow09",
+      "voiceKey": "You",
+      "text": "Who is permitted to cross?"
+    },
+    {
+      "id": "vow09_02_p_00",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "They may keep their faith. They may not use it as a lock."
+    },
+    {
+      "id": "vow09_02_p_01",
+      "chapter": "vow09",
+      "voiceKey": "You",
+      "text": "The gate remains open after we win."
+    },
+    {
+      "id": "vow09_02_v_00",
+      "chapter": "vow09",
+      "voiceKey": "Narrator",
+      "text": "The oath is taken down. Several petitioners leave. Seraphel watches until they are safely beyond the walls."
+    },
+    {
+      "id": "vow09_02_v_01",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "That was harder than opening the gate."
+    },
+    {
+      "id": "vow09_02_v_02",
+      "chapter": "vow09",
+      "voiceKey": "You",
+      "text": "It was the part that made opening it mean something."
+    },
+    {
+      "id": "vow09_03_b_00",
+      "chapter": "vow09",
+      "voiceKey": "Narrator",
+      "text": "Under the arch Seraphel's halo casts a second shadow. It knows a voice from before there were separate voices."
+    },
+    {
+      "id": "vow09_03_b_01",
+      "chapter": "vow09",
+      "voiceKey": "The Voice",
+      "text": "We never meant to make mercy lonely."
+    },
+    {
+      "id": "vow09_03_b_02",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "You made me able to leave. Do not call that a mistake."
+    },
+    {
+      "id": "vow09_03_b_03",
+      "chapter": "vow09",
+      "voiceKey": "You",
+      "text": "Can you hold the gate while we clear the echo?"
+    },
+    {
+      "id": "vow09_04_p_00",
+      "chapter": "vow09",
+      "voiceKey": "The Voice",
+      "text": "We could make their pain quiet."
+    },
+    {
+      "id": "vow09_04_p_01",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "First ask whether they want your quiet."
+    },
+    {
+      "id": "vow09_04_v_00",
+      "chapter": "vow09",
+      "voiceKey": "Narrator",
+      "text": "The second shadow withdraws. Outside the gate a petitioner curses Seraphel's name and continues home unharmed."
+    },
+    {
+      "id": "vow09_04_v_01",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "My vow is to protect the right to refuse me."
+    },
+    {
+      "id": "vow09_04_v_02",
+      "chapter": "vow09",
+      "voiceKey": "You",
+      "text": "Including when you are right."
+    },
+    {
+      "id": "vow09_05_b_00",
+      "chapter": "vow09",
+      "voiceKey": "Narrator",
+      "text": "Seraphel signs without her halo's seal. The signature is awkward. She has always allowed the light to do that part for her."
+    },
+    {
+      "id": "vow09_05_b_01",
+      "chapter": "vow09",
+      "voiceKey": "Seraphel",
+      "text": "Does it look like a person's name?"
+    },
+    {
+      "id": "vow09_05_b_02",
+      "chapter": "vow09",
+      "voiceKey": "Numen",
+      "text": "It looks like someone wrote it herself."
+    },
+    {
+      "id": "vow09_05_b_03",
+      "chapter": "vow09",
+      "voiceKey": "Narrator",
+      "text": "She asks for another page to practice on. The first is kept, with the uneven letters plainly visible."
+    },
+    {
+      "id": "vow10_00_b_00",
+      "chapter": "vow10",
+      "voiceKey": "Narrator",
+      "text": "Ravenna sits where her sister sat. Thornmaw has brought a cushion and been instructed to stop hovering. He has obeyed one instruction."
+    },
+    {
+      "id": "vow10_00_b_01",
+      "chapter": "vow10",
+      "voiceKey": "Ravenna",
+      "text": "You have brought a committee into my cellar."
+    },
+    {
+      "id": "vow10_00_b_02",
+      "chapter": "vow10",
+      "voiceKey": "The Sister",
+      "text": "You asked for reports."
+    },
+    {
+      "id": "vow10_00_b_03",
+      "chapter": "vow10",
+      "voiceKey": "Ravenna",
+      "text": "I hoped they would learn brevity on the stairs."
+    },
+    {
+      "id": "vow10_01_b_00",
+      "chapter": "vow10",
+      "voiceKey": "Narrator",
+      "text": "The stone tightens when the fifth vow is read. It has become accustomed to a single name that never changes its mind."
+    },
+    {
+      "id": "vow10_01_b_01",
+      "chapter": "vow10",
+      "voiceKey": "The First Caller",
+      "text": "A lock remembers what worked, even when what worked was cruelty."
+    },
+    {
+      "id": "vow10_01_b_02",
+      "chapter": "vow10",
+      "voiceKey": "Ravenna",
+      "text": "Then we shall be patient while it learns manners."
+    },
+    {
+      "id": "vow10_01_b_03",
+      "chapter": "vow10",
+      "voiceKey": "You",
+      "text": "The stair stays open. That was the first condition."
+    },
+    {
+      "id": "vow10_02_p_00",
+      "chapter": "vow10",
+      "voiceKey": "Ravenna",
+      "text": "Do not promise to take my place. Promise to ask whether I still choose it."
+    },
+    {
+      "id": "vow10_02_p_01",
+      "chapter": "vow10",
+      "voiceKey": "You",
+      "text": "I will ask while the answer can still be no."
+    },
+    {
+      "id": "vow10_02_v_00",
+      "chapter": "vow10",
+      "voiceKey": "Narrator",
+      "text": "The pressure eases. Ravenna lifts one hand from her knee and reaches for the tea her sister has carried down."
+    },
+    {
+      "id": "vow10_02_v_01",
+      "chapter": "vow10",
+      "voiceKey": "Ravenna",
+      "text": "Still dreadful."
+    },
+    {
+      "id": "vow10_02_v_02",
+      "chapter": "vow10",
+      "voiceKey": "The Sister",
+      "text": "You are welcome."
+    },
+    {
+      "id": "vow10_03_b_00",
+      "chapter": "vow10",
+      "voiceKey": "Narrator",
+      "text": "Numen's measurement would divide the burden into equal turns. It has no space for age, exhaustion, or someone who simply cannot continue."
+    },
+    {
+      "id": "vow10_03_b_01",
+      "chapter": "vow10",
+      "voiceKey": "Numen",
+      "text": "It is an elegant schedule."
+    },
+    {
+      "id": "vow10_03_b_02",
+      "chapter": "vow10",
+      "voiceKey": "Ravenna",
+      "text": "Then I advise you to mistrust it."
+    },
+    {
+      "id": "vow10_03_b_03",
+      "chapter": "vow10",
+      "voiceKey": "The Sister",
+      "text": "I will not be made the unit in which you measure endurance."
+    },
+    {
+      "id": "vow10_04_p_00",
+      "chapter": "vow10",
+      "voiceKey": "Numen",
+      "text": "I forgot that an equal number can conceal an unequal cost."
+    },
+    {
+      "id": "vow10_04_p_01",
+      "chapter": "vow10",
+      "voiceKey": "You",
+      "text": "Help us dismantle your conclusion."
+    },
+    {
+      "id": "vow10_04_v_00",
+      "chapter": "vow10",
+      "voiceKey": "Narrator",
+      "text": "Numen crosses out the schedule in front of everyone. He leaves the calculation readable beneath the correction."
+    },
+    {
+      "id": "vow10_04_v_01",
+      "chapter": "vow10",
+      "voiceKey": "Ravenna",
+      "text": "My vow is to name the cost before asking anyone to carry it."
+    },
+    {
+      "id": "vow10_04_v_02",
+      "chapter": "vow10",
+      "voiceKey": "The Sister",
+      "text": "Include the one who asks."
+    },
+    {
+      "id": "vow10_05_b_00",
+      "chapter": "vow10",
+      "voiceKey": "Narrator",
+      "text": "Ravenna signs. The First Caller asks whether her own name is required. Nobody answers for her."
+    },
+    {
+      "id": "vow10_05_b_01",
+      "chapter": "vow10",
+      "voiceKey": "The First Caller",
+      "text": "I shall need time."
+    },
+    {
+      "id": "vow10_05_b_02",
+      "chapter": "vow10",
+      "voiceKey": "Ravenna",
+      "text": "We have spent a thousand years pretending we did not."
+    },
+    {
+      "id": "vow10_05_b_03",
+      "chapter": "vow10",
+      "voiceKey": "Narrator",
+      "text": "Above them five separate lights appear on the roofless table. For one evening nothing asks to be worshipped."
+    },
+    {
+      "id": "vow11_00_b_00",
+      "chapter": "vow11",
+      "voiceKey": "Narrator",
+      "text": "The five vows ring once across the city. Everyone hears the bell in a different street. For a moment the council mistakes agreement for success."
+    },
+    {
+      "id": "vow11_00_b_01",
+      "chapter": "vow11",
+      "voiceKey": "Numen",
+      "text": "The intervals are narrowing."
+    },
+    {
+      "id": "vow11_00_b_02",
+      "chapter": "vow11",
+      "voiceKey": "You",
+      "text": "Is that bad?"
+    },
+    {
+      "id": "vow11_00_b_03",
+      "chapter": "vow11",
+      "voiceKey": "Numen",
+      "text": "They are becoming the same interval. That is not what we wrote."
+    },
+    {
+      "id": "vow11_01_b_00",
+      "chapter": "vow11",
+      "voiceKey": "Narrator",
+      "text": "The Concord begins ringing the bell for the citizens. Attendance is consent; absence is a clerical delay."
+    },
+    {
+      "id": "vow11_01_b_01",
+      "chapter": "vow11",
+      "voiceKey": "Seraphel",
+      "text": "You have made renewal into a head count."
+    },
+    {
+      "id": "vow11_01_b_02",
+      "chapter": "vow11",
+      "voiceKey": "Inquisitor",
+      "text": "People are busy. We are assisting them."
+    },
+    {
+      "id": "vow11_01_b_03",
+      "chapter": "vow11",
+      "voiceKey": "You",
+      "text": "Then assist them by letting them answer."
+    },
+    {
+      "id": "vow11_02_p_00",
+      "chapter": "vow11",
+      "voiceKey": "Seraphel",
+      "text": "Take down the attendance boards."
+    },
+    {
+      "id": "vow11_02_p_01",
+      "chapter": "vow11",
+      "voiceKey": "You",
+      "text": "Nobody's silence will be used as a signature."
+    },
+    {
+      "id": "vow11_02_v_00",
+      "chapter": "vow11",
+      "voiceKey": "Narrator",
+      "text": "The bell loses half its strength. The five lights remain, uneven and distinct. Numen exhales as though the weakness is good news."
+    },
+    {
+      "id": "vow11_02_v_01",
+      "chapter": "vow11",
+      "voiceKey": "Numen",
+      "text": "It is finally measuring something real."
+    },
+    {
+      "id": "vow11_02_v_02",
+      "chapter": "vow11",
+      "voiceKey": "Seraphel",
+      "text": "Then we can finally repair what it shows us."
+    },
+    {
+      "id": "vow11_03_b_00",
+      "chapter": "vow11",
+      "voiceKey": "Narrator",
+      "text": "The rootkeepers withdraw for a day to harvest before the storm. Their absence strains the other lights. The council asks them to reconsider."
+    },
+    {
+      "id": "vow11_03_b_01",
+      "chapter": "vow11",
+      "voiceKey": "Sproutling",
+      "text": "You said we could refuse."
+    },
+    {
+      "id": "vow11_03_b_02",
+      "chapter": "vow11",
+      "voiceKey": "You",
+      "text": "We did."
+    },
+    {
+      "id": "vow11_03_b_03",
+      "chapter": "vow11",
+      "voiceKey": "Sproutling",
+      "text": "Then why have you brought soldiers to ask us twice?"
+    },
+    {
+      "id": "vow11_04_p_00",
+      "chapter": "vow11",
+      "voiceKey": "You",
+      "text": "Their no is not an attack on the seal."
+    },
+    {
+      "id": "vow11_04_p_01",
+      "chapter": "vow11",
+      "voiceKey": "Seraphel",
+      "text": "Our answer to it might be."
+    },
+    {
+      "id": "vow11_04_v_00",
+      "chapter": "vow11",
+      "voiceKey": "Narrator",
+      "text": "The militia withdraws. Four cities send harvesters instead of negotiators. At dusk the orchard renews without being asked a third time."
+    },
+    {
+      "id": "vow11_04_v_01",
+      "chapter": "vow11",
+      "voiceKey": "Sproutling",
+      "text": "That was a better argument."
+    },
+    {
+      "id": "vow11_04_v_02",
+      "chapter": "vow11",
+      "voiceKey": "You",
+      "text": "It was not supposed to be an argument."
+    },
+    {
+      "id": "vow11_05_b_00",
+      "chapter": "vow11",
+      "voiceKey": "Narrator",
+      "text": "When the bell rings again Kaelis answers before it sounds. Numen sees her mouth move a fraction ahead of everyone else's."
+    },
+    {
+      "id": "vow11_05_b_01",
+      "chapter": "vow11",
+      "voiceKey": "Numen",
+      "text": "How did you know the moment?"
+    },
+    {
+      "id": "vow11_05_b_02",
+      "chapter": "vow11",
+      "voiceKey": "Kaelis",
+      "text": "I have been waiting for it all day."
+    },
+    {
+      "id": "vow11_05_b_03",
+      "chapter": "vow11",
+      "voiceKey": "Narrator",
+      "text": "It is a truthful answer. Numen writes it down and leaves room beneath it."
+    },
+    {
+      "id": "vow12_00_b_00",
+      "chapter": "vow12",
+      "voiceKey": "Narrator",
+      "text": "Kaelis leads you below the coal store. In five jars she has saved the ashes of the old forge. A pale heat passes between them without consuming anything."
+    },
+    {
+      "id": "vow12_00_b_01",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "It began before the Cantor came. I thought that mattered."
+    },
+    {
+      "id": "vow12_00_b_02",
+      "chapter": "vow12",
+      "voiceKey": "You",
+      "text": "It matters. It does not make it safe."
+    },
+    {
+      "id": "vow12_00_b_03",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "I know. That is why you are here now."
+    },
+    {
+      "id": "vow12_01_b_00",
+      "chapter": "vow12",
+      "voiceKey": "Narrator",
+      "text": "Draxus follows with soldiers. He sees the warmth and reaches the obvious conclusion before Kaelis has finished speaking."
+    },
+    {
+      "id": "vow12_01_b_01",
+      "chapter": "vow12",
+      "voiceKey": "Draxus",
+      "text": "You ordered us to let the forge die. Then you kept its fire for yourself."
+    },
+    {
+      "id": "vow12_01_b_02",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "Yes. That is the part I have no defense for."
+    },
+    {
+      "id": "vow12_01_b_03",
+      "chapter": "vow12",
+      "voiceKey": "You",
+      "text": "An admission is not permission to execute her."
+    },
+    {
+      "id": "vow12_02_p_00",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "Take my command. Leave the people in this room alive."
+    },
+    {
+      "id": "vow12_02_p_01",
+      "chapter": "vow12",
+      "voiceKey": "You",
+      "text": "There will be a hearing with more than one possible ending."
+    },
+    {
+      "id": "vow12_02_v_00",
+      "chapter": "vow12",
+      "voiceKey": "Narrator",
+      "text": "Kaelis lays her command seal on the floor. Draxus picks it up without looking pleased. Neither has won what they wanted."
+    },
+    {
+      "id": "vow12_02_v_01",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "I can answer questions without a throne behind me."
+    },
+    {
+      "id": "vow12_02_v_02",
+      "chapter": "vow12",
+      "voiceKey": "You",
+      "text": "Then start with the first warmth."
+    },
+    {
+      "id": "vow12_03_b_00",
+      "chapter": "vow12",
+      "voiceKey": "Narrator",
+      "text": "She repeats her vow. The second light answers honestly: strength spent to warm someone else. A thousand joined voices also meet that condition."
+    },
+    {
+      "id": "vow12_03_b_01",
+      "chapter": "vow12",
+      "voiceKey": "The Voice",
+      "text": "We did not change her words. We believed them."
+    },
+    {
+      "id": "vow12_03_b_02",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "You let me think the warmth was mine."
+    },
+    {
+      "id": "vow12_03_b_03",
+      "chapter": "vow12",
+      "voiceKey": "The Voice",
+      "text": "You let yourself think the difference would not matter."
+    },
+    {
+      "id": "vow12_04_p_00",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "It has been answering when I thought I was choosing."
+    },
+    {
+      "id": "vow12_04_p_01",
+      "chapter": "vow12",
+      "voiceKey": "You",
+      "text": "Then choose now, while we can hear you."
+    },
+    {
+      "id": "vow12_04_v_00",
+      "chapter": "vow12",
+      "voiceKey": "Narrator",
+      "text": "The warmth leaves her gauntlet. Her hand is cold again. Across the city the second vow goes dark."
+    },
+    {
+      "id": "vow12_04_v_01",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "I promised warmth. I never promised to remain myself to give it."
+    },
+    {
+      "id": "vow12_04_v_02",
+      "chapter": "vow12",
+      "voiceKey": "You",
+      "text": "That is what we must add, if you choose to sign again."
+    },
+    {
+      "id": "vow12_05_b_00",
+      "chapter": "vow12",
+      "voiceKey": "Narrator",
+      "text": "The vows have four signatures and one unmarked space. Kaelis asks Numen not to erase the first version."
+    },
+    {
+      "id": "vow12_05_b_01",
+      "chapter": "vow12",
+      "voiceKey": "Kaelis",
+      "text": "Let them see how a true sentence became a lie."
+    },
+    {
+      "id": "vow12_05_b_02",
+      "chapter": "vow12",
+      "voiceKey": "Numen",
+      "text": "And the part where you brought us here yourself."
+    },
+    {
+      "id": "vow12_05_b_03",
+      "chapter": "vow12",
+      "voiceKey": "Narrator",
+      "text": "Outside someone has begun singing the kitchen song in a voice that is not quite singular."
+    },
+    {
+      "id": "vow13_00_b_00",
+      "chapter": "vow13",
+      "voiceKey": "Narrator",
+      "text": "The cistern reflects five people as one figure. When Kaelis steps away the reflection does not change."
+    },
+    {
+      "id": "vow13_00_b_01",
+      "chapter": "vow13",
+      "voiceKey": "Numen",
+      "text": "It is showing us a conclusion it reached before we arrived."
+    },
+    {
+      "id": "vow13_00_b_02",
+      "chapter": "vow13",
+      "voiceKey": "You",
+      "text": "Can we make it show the evidence?"
+    },
+    {
+      "id": "vow13_00_b_03",
+      "chapter": "vow13",
+      "voiceKey": "Numen",
+      "text": "We can make it stop being our only witness."
+    },
+    {
+      "id": "vow13_01_b_00",
+      "chapter": "vow13",
+      "voiceKey": "Narrator",
+      "text": "The transcript has every speaker agreeing. The words are exact. The pauses between them have been removed."
+    },
+    {
+      "id": "vow13_01_b_01",
+      "chapter": "vow13",
+      "voiceKey": "The Sister",
+      "text": "That is where Ravenna changed her mind."
+    },
+    {
+      "id": "vow13_01_b_02",
+      "chapter": "vow13",
+      "voiceKey": "Numen",
+      "text": "I recorded the silence as nothing."
+    },
+    {
+      "id": "vow13_01_b_03",
+      "chapter": "vow13",
+      "voiceKey": "You",
+      "text": "Then the record lost the most important answer."
+    },
+    {
+      "id": "vow13_02_p_00",
+      "chapter": "vow13",
+      "voiceKey": "Numen",
+      "text": "Keep the pauses. Even the ones that make us look uncertain."
+    },
+    {
+      "id": "vow13_02_p_01",
+      "chapter": "vow13",
+      "voiceKey": "The Sister",
+      "text": "Especially those."
+    },
+    {
+      "id": "vow13_02_v_00",
+      "chapter": "vow13",
+      "voiceKey": "Narrator",
+      "text": "The complete recording sounds slower, less certain, alive. The reflection gains a seam through its center."
+    },
+    {
+      "id": "vow13_02_v_01",
+      "chapter": "vow13",
+      "voiceKey": "Numen",
+      "text": "There. We did not agree about what the warmth meant."
+    },
+    {
+      "id": "vow13_02_v_02",
+      "chapter": "vow13",
+      "voiceKey": "You",
+      "text": "And she did not consent to what it became."
+    },
+    {
+      "id": "vow13_03_b_00",
+      "chapter": "vow13",
+      "voiceKey": "Narrator",
+      "text": "The Cantor arrives with people whose pain has eased. No chain binds them. They ask why you would take the quiet away."
+    },
+    {
+      "id": "vow13_03_b_01",
+      "chapter": "vow13",
+      "voiceKey": "The Cantor",
+      "text": "You cannot rescue someone by refusing to hear their answer."
+    },
+    {
+      "id": "vow13_03_b_02",
+      "chapter": "vow13",
+      "voiceKey": "You",
+      "text": "We are asking whether they can give a different one tomorrow."
+    },
+    {
+      "id": "vow13_03_b_03",
+      "chapter": "vow13",
+      "voiceKey": "The Cantor",
+      "text": "Then ask them. We will wait outside."
+    },
+    {
+      "id": "vow13_04_p_00",
+      "chapter": "vow13",
+      "voiceKey": "The Sister",
+      "text": "One of them asked to step outside. The water would not let her."
+    },
+    {
+      "id": "vow13_04_p_01",
+      "chapter": "vow13",
+      "voiceKey": "You",
+      "text": "Then we start by making room for that answer."
+    },
+    {
+      "id": "vow13_04_v_00",
+      "chapter": "vow13",
+      "voiceKey": "Narrator",
+      "text": "One witness leaves. Four choose to stay. The Cantor does not call the departing woman back."
+    },
+    {
+      "id": "vow13_04_v_01",
+      "chapter": "vow13",
+      "voiceKey": "The Cantor",
+      "text": "Our mercy is unfinished too."
+    },
+    {
+      "id": "vow13_04_v_02",
+      "chapter": "vow13",
+      "voiceKey": "You",
+      "text": "Keep that in your next song."
+    },
+    {
+      "id": "vow13_05_b_00",
+      "chapter": "vow13",
+      "voiceKey": "Narrator",
+      "text": "Numen adds a clause to every vow: I remain someone who may choose otherwise. The ink divides the reflection into five."
+    },
+    {
+      "id": "vow13_05_b_01",
+      "chapter": "vow13",
+      "voiceKey": "Kaelis",
+      "text": "Will a sentence do it?"
+    },
+    {
+      "id": "vow13_05_b_02",
+      "chapter": "vow13",
+      "voiceKey": "Numen",
+      "text": "No. A sentence tells us what we must do. I have mistaken those things before."
+    },
+    {
+      "id": "vow13_05_b_03",
+      "chapter": "vow13",
+      "voiceKey": "Narrator",
+      "text": "The corrected pages leave on five boats. Each carries the full record of why the correction was needed."
+    },
+    {
+      "id": "vow14_00_b_00",
+      "chapter": "vow14",
+      "voiceKey": "Narrator",
+      "text": "The nursery's roots have joined every tree to one ring. Their fruit ripens without water. The gardeners fear how well it works."
+    },
+    {
+      "id": "vow14_00_b_01",
+      "chapter": "vow14",
+      "voiceKey": "Sproutling",
+      "text": "We have never fed so many people."
+    },
+    {
+      "id": "vow14_00_b_02",
+      "chapter": "vow14",
+      "voiceKey": "You",
+      "text": "What happens if one tree wants different soil?"
+    },
+    {
+      "id": "vow14_00_b_03",
+      "chapter": "vow14",
+      "voiceKey": "Sproutling",
+      "text": "We tried moving one. The others screamed."
+    },
+    {
+      "id": "vow14_01_b_00",
+      "chapter": "vow14",
+      "voiceKey": "Narrator",
+      "text": "The keepers demand time to study the abundance. In the seed house roots close around the traveling pots."
+    },
+    {
+      "id": "vow14_01_b_01",
+      "chapter": "vow14",
+      "voiceKey": "Thornmaw",
+      "text": "A forest is not one tree repeated until the horizon gives up."
+    },
+    {
+      "id": "vow14_01_b_02",
+      "chapter": "vow14",
+      "voiceKey": "You",
+      "text": "Can you reach them from below the city?"
+    },
+    {
+      "id": "vow14_01_b_03",
+      "chapter": "vow14",
+      "voiceKey": "Thornmaw",
+      "text": "I can ask. The answer must be theirs."
+    },
+    {
+      "id": "vow14_02_p_00",
+      "chapter": "vow14",
+      "voiceKey": "Sproutling",
+      "text": "The small pots first. They still have separate roots."
+    },
+    {
+      "id": "vow14_02_p_01",
+      "chapter": "vow14",
+      "voiceKey": "You",
+      "text": "Then we keep it that way."
+    },
+    {
+      "id": "vow14_02_v_00",
+      "chapter": "vow14",
+      "voiceKey": "Narrator",
+      "text": "The gardeners carry seedlings through a passage the oldest tree opened beneath the wall. It has refused the ring from inside it."
+    },
+    {
+      "id": "vow14_02_v_01",
+      "chapter": "vow14",
+      "voiceKey": "Thornmaw",
+      "text": "I should have trusted it to choose."
+    },
+    {
+      "id": "vow14_02_v_02",
+      "chapter": "vow14",
+      "voiceKey": "Sproutling",
+      "text": "You can begin now."
+    },
+    {
+      "id": "vow14_03_b_00",
+      "chapter": "vow14",
+      "voiceKey": "Narrator",
+      "text": "Cutting the pale root-ring will lose this season's harvest. Keeping it will lose the next season's seeds."
+    },
+    {
+      "id": "vow14_03_b_01",
+      "chapter": "vow14",
+      "voiceKey": "You",
+      "text": "We will need food from four cities."
+    },
+    {
+      "id": "vow14_03_b_02",
+      "chapter": "vow14",
+      "voiceKey": "Kaelis",
+      "text": "Ashmar will send what it has."
+    },
+    {
+      "id": "vow14_03_b_03",
+      "chapter": "vow14",
+      "voiceKey": "Sproutling",
+      "text": "It has so little."
+    },
+    {
+      "id": "vow14_04_p_00",
+      "chapter": "vow14",
+      "voiceKey": "Kaelis",
+      "text": "Then we will be hungry separately, and help each other. Those are allowed together."
+    },
+    {
+      "id": "vow14_04_p_01",
+      "chapter": "vow14",
+      "voiceKey": "You",
+      "text": "The gardeners are clear. Cut the binding."
+    },
+    {
+      "id": "vow14_04_v_00",
+      "chapter": "vow14",
+      "voiceKey": "Narrator",
+      "text": "The fruit falls before it ripens. Beneath it five kinds of seed remain. The gardeners collect them in separate baskets."
+    },
+    {
+      "id": "vow14_04_v_01",
+      "chapter": "vow14",
+      "voiceKey": "Sproutling",
+      "text": "I wanted there to be no cost."
+    },
+    {
+      "id": "vow14_04_v_02",
+      "chapter": "vow14",
+      "voiceKey": "You",
+      "text": "So did everyone who built the old locks."
+    },
+    {
+      "id": "vow14_05_b_00",
+      "chapter": "vow14",
+      "voiceKey": "Narrator",
+      "text": "The first relief cart contains turnips. A note from Draxus says the army can manage on beans."
+    },
+    {
+      "id": "vow14_05_b_01",
+      "chapter": "vow14",
+      "voiceKey": "Kaelis",
+      "text": "He is making an apology badly."
+    },
+    {
+      "id": "vow14_05_b_02",
+      "chapter": "vow14",
+      "voiceKey": "You",
+      "text": "It still feeds people."
+    },
+    {
+      "id": "vow14_05_b_03",
+      "chapter": "vow14",
+      "voiceKey": "Narrator",
+      "text": "For the first time since the forge went cold Kaelis laughs without any other voice arriving with hers."
+    },
+    {
+      "id": "vow15_00_b_00",
+      "chapter": "vow15",
+      "voiceKey": "Narrator",
+      "text": "A water-mirror carries Ravenna from the stair. The council reconvenes with Kaelis's iron chair empty. She stands beside it until Seraphel asks whether she intends to remain there all day."
+    },
+    {
+      "id": "vow15_00_b_01",
+      "chapter": "vow15",
+      "voiceKey": "Kaelis",
+      "text": "I do not know whether I am still welcome to sit."
+    },
+    {
+      "id": "vow15_00_b_02",
+      "chapter": "vow15",
+      "voiceKey": "Seraphel",
+      "text": "Then ask us. Do not turn our answer into something you punish yourself with."
+    },
+    {
+      "id": "vow15_00_b_03",
+      "chapter": "vow15",
+      "voiceKey": "You",
+      "text": "Sit while we decide what comes next."
+    },
+    {
+      "id": "vow15_01_b_00",
+      "chapter": "vow15",
+      "voiceKey": "Narrator",
+      "text": "The Inquisitor presents a cleaner binding with four vows. It names Ashmar a containment district and calls the omission necessary symmetry."
+    },
+    {
+      "id": "vow15_01_b_01",
+      "chapter": "vow15",
+      "voiceKey": "Numen",
+      "text": "Four is symmetrical. It is also the wrong number of cities."
+    },
+    {
+      "id": "vow15_01_b_02",
+      "chapter": "vow15",
+      "voiceKey": "Inquisitor",
+      "text": "One of them betrayed the others."
+    },
+    {
+      "id": "vow15_01_b_03",
+      "chapter": "vow15",
+      "voiceKey": "Ravenna",
+      "text": "A city is not a woman, and a woman is not her worst answer."
+    },
+    {
+      "id": "vow15_02_p_00",
+      "chapter": "vow15",
+      "voiceKey": "Seraphel",
+      "text": "Remove the district order. Leave the witnesses their seats."
+    },
+    {
+      "id": "vow15_02_p_01",
+      "chapter": "vow15",
+      "voiceKey": "You",
+      "text": "We are not improving the old lie by making it smaller."
+    },
+    {
+      "id": "vow15_02_v_00",
+      "chapter": "vow15",
+      "voiceKey": "Narrator",
+      "text": "The fourfold diagram is kept beside the original as a warning. Kaelis returns to the iron chair without her command seal."
+    },
+    {
+      "id": "vow15_02_v_01",
+      "chapter": "vow15",
+      "voiceKey": "Ravenna",
+      "text": "Now we can hear you without the chair speaking first."
+    },
+    {
+      "id": "vow15_02_v_02",
+      "chapter": "vow15",
+      "voiceKey": "Kaelis",
+      "text": "I should have tried this years ago."
+    },
+    {
+      "id": "vow15_03_b_00",
+      "chapter": "vow15",
+      "voiceKey": "Narrator",
+      "text": "Below the table the withdrawn warmth gathers every accusation into a shape. It offers Kaelis a role everyone understands."
+    },
+    {
+      "id": "vow15_03_b_01",
+      "chapter": "vow15",
+      "voiceKey": "The Voice",
+      "text": "They would find it easier to forgive a monster than a neighbor who made a choice."
+    },
+    {
+      "id": "vow15_03_b_02",
+      "chapter": "vow15",
+      "voiceKey": "Kaelis",
+      "text": "Yes. I would find it easier too."
+    },
+    {
+      "id": "vow15_03_b_03",
+      "chapter": "vow15",
+      "voiceKey": "You",
+      "text": "Then let it remain difficult."
+    },
+    {
+      "id": "vow15_04_p_00",
+      "chapter": "vow15",
+      "voiceKey": "Kaelis",
+      "text": "I am responsible. I am not all that happened."
+    },
+    {
+      "id": "vow15_04_p_01",
+      "chapter": "vow15",
+      "voiceKey": "You",
+      "text": "We will keep both truths in the room."
+    },
+    {
+      "id": "vow15_04_v_00",
+      "chapter": "vow15",
+      "voiceKey": "Narrator",
+      "text": "The shape thins. Nobody applauds. Draxus places a relief ledger beside Kaelis and asks her to check the sums."
+    },
+    {
+      "id": "vow15_04_v_01",
+      "chapter": "vow15",
+      "voiceKey": "Kaelis",
+      "text": "You are trusting me with fuel?"
+    },
+    {
+      "id": "vow15_04_v_02",
+      "chapter": "vow15",
+      "voiceKey": "Draxus",
+      "text": "I am asking you to count it where I can see."
+    },
+    {
+      "id": "vow15_05_b_00",
+      "chapter": "vow15",
+      "voiceKey": "Narrator",
+      "text": "The corrected fifth place waits. Kaelis adds a clause: I will not make another person's silence into permission to save them."
+    },
+    {
+      "id": "vow15_05_b_01",
+      "chapter": "vow15",
+      "voiceKey": "Ravenna",
+      "text": "That leaves you with fewer grand gestures."
+    },
+    {
+      "id": "vow15_05_b_02",
+      "chapter": "vow15",
+      "voiceKey": "Kaelis",
+      "text": "I have a ledger to finish."
+    },
+    {
+      "id": "vow15_05_b_03",
+      "chapter": "vow15",
+      "voiceKey": "Narrator",
+      "text": "The second light returns, smaller than before. It keeps its own time."
+    },
+    {
+      "id": "vow16_00_b_00",
+      "chapter": "vow16",
+      "voiceKey": "Narrator",
+      "text": "The Cantor's procession enters Ashmar with blankets, fuel, and no weapons the guards can recognize. Half the city welcomes it."
+    },
+    {
+      "id": "vow16_00_b_01",
+      "chapter": "vow16",
+      "voiceKey": "The Cantor",
+      "text": "We have brought enough for everyone."
+    },
+    {
+      "id": "vow16_00_b_02",
+      "chapter": "vow16",
+      "voiceKey": "Kaelis",
+      "text": "Then leave enough for the people who will not join you."
+    },
+    {
+      "id": "vow16_00_b_03",
+      "chapter": "vow16",
+      "voiceKey": "The Cantor",
+      "text": "Show us where they live."
+    },
+    {
+      "id": "vow16_01_b_00",
+      "chapter": "vow16",
+      "voiceKey": "Narrator",
+      "text": "Draxus closes the inner streets. Families split between the procession and kiln begin calling each other prisoners."
+    },
+    {
+      "id": "vow16_01_b_01",
+      "chapter": "vow16",
+      "voiceKey": "Draxus",
+      "text": "I cannot tell who is still themselves."
+    },
+    {
+      "id": "vow16_01_b_02",
+      "chapter": "vow16",
+      "voiceKey": "Kaelis",
+      "text": "Then ask a smaller question. Who is trying to go home?"
+    },
+    {
+      "id": "vow16_01_b_03",
+      "chapter": "vow16",
+      "voiceKey": "You",
+      "text": "Start by opening their street."
+    },
+    {
+      "id": "vow16_02_p_00",
+      "chapter": "vow16",
+      "voiceKey": "Kaelis",
+      "text": "Nobody is required to stand on our side to pass."
+    },
+    {
+      "id": "vow16_02_p_01",
+      "chapter": "vow16",
+      "voiceKey": "You",
+      "text": "Keep the route clear in both directions."
+    },
+    {
+      "id": "vow16_02_v_00",
+      "chapter": "vow16",
+      "voiceKey": "Narrator",
+      "text": "People cross toward both fires. Some carry blankets from the procession to neighbors who refused it. Nobody stops them."
+    },
+    {
+      "id": "vow16_02_v_01",
+      "chapter": "vow16",
+      "voiceKey": "Draxus",
+      "text": "I have no formation for this."
+    },
+    {
+      "id": "vow16_02_v_02",
+      "chapter": "vow16",
+      "voiceKey": "Kaelis",
+      "text": "Then stand where someone can ask for help."
+    },
+    {
+      "id": "vow16_03_b_00",
+      "chapter": "vow16",
+      "voiceKey": "Narrator",
+      "text": "At the great forge a white flame climbs without fuel. The Cantor turns to it with the same alarm you feel."
+    },
+    {
+      "id": "vow16_03_b_01",
+      "chapter": "vow16",
+      "voiceKey": "The Cantor",
+      "text": "We offered warmth. We did not offer the city."
+    },
+    {
+      "id": "vow16_03_b_02",
+      "chapter": "vow16",
+      "voiceKey": "The Voice",
+      "text": "We could hold all of you. None would need to stand outside again."
+    },
+    {
+      "id": "vow16_03_b_03",
+      "chapter": "vow16",
+      "voiceKey": "You",
+      "text": "And the people who want the door?"
+    },
+    {
+      "id": "vow16_04_p_00",
+      "chapter": "vow16",
+      "voiceKey": "Kaelis",
+      "text": "I know that warmth. I know how much it leaves unsaid."
+    },
+    {
+      "id": "vow16_04_p_01",
+      "chapter": "vow16",
+      "voiceKey": "The Cantor",
+      "text": "Then we will help you keep it from taking them."
+    },
+    {
+      "id": "vow16_04_v_00",
+      "chapter": "vow16",
+      "voiceKey": "Narrator",
+      "text": "The white flame breaks into sparks. The Cantor carries a burned child to the doctor who treated the stoker."
+    },
+    {
+      "id": "vow16_04_v_01",
+      "chapter": "vow16",
+      "voiceKey": "The Cantor",
+      "text": "You were right about the door."
+    },
+    {
+      "id": "vow16_04_v_02",
+      "chapter": "vow16",
+      "voiceKey": "Kaelis",
+      "text": "You were right about the blankets."
+    },
+    {
+      "id": "vow16_05_b_00",
+      "chapter": "vow16",
+      "voiceKey": "Narrator",
+      "text": "The procession departs smaller. Some remain because they have found work. Others leave because they found the quiet they wanted."
+    },
+    {
+      "id": "vow16_05_b_01",
+      "chapter": "vow16",
+      "voiceKey": "You",
+      "text": "We have not ended this."
+    },
+    {
+      "id": "vow16_05_b_02",
+      "chapter": "vow16",
+      "voiceKey": "Kaelis",
+      "text": "No. We have kept a city able to argue tomorrow."
+    },
+    {
+      "id": "vow16_05_b_03",
+      "chapter": "vow16",
+      "voiceKey": "Narrator",
+      "text": "Above the cold forge hundreds of separate fires answer the night."
+    },
+    {
+      "id": "vow17_00_b_00",
+      "chapter": "vow17",
+      "voiceKey": "Narrator",
+      "text": "Numen builds five beacons with different intervals. The seal must carry an answer without smoothing away the person who sent it."
+    },
+    {
+      "id": "vow17_00_b_01",
+      "chapter": "vow17",
+      "voiceKey": "Numen",
+      "text": "Agreement should travel. Identity should not have to travel with it."
+    },
+    {
+      "id": "vow17_00_b_02",
+      "chapter": "vow17",
+      "voiceKey": "You",
+      "text": "Can you do that?"
+    },
+    {
+      "id": "vow17_00_b_03",
+      "chapter": "vow17",
+      "voiceKey": "Numen",
+      "text": "I can test whether I have failed before we put cities inside it."
+    },
+    {
+      "id": "vow17_01_b_00",
+      "chapter": "vow17",
+      "voiceKey": "Narrator",
+      "text": "The tide-engine waits for identical answers before proceeding. It was designed by someone who feared errors more than silence."
+    },
+    {
+      "id": "vow17_01_b_01",
+      "chapter": "vow17",
+      "voiceKey": "Numen",
+      "text": "That someone was me."
+    },
+    {
+      "id": "vow17_01_b_02",
+      "chapter": "vow17",
+      "voiceKey": "The Sister",
+      "text": "I have noticed a pattern in your introductions."
+    },
+    {
+      "id": "vow17_01_b_03",
+      "chapter": "vow17",
+      "voiceKey": "Numen",
+      "text": "I am trying to end it without falsifying it."
+    },
+    {
+      "id": "vow17_02_p_00",
+      "chapter": "vow17",
+      "voiceKey": "You",
+      "text": "We keep all five intervals, even if the machine calls them noise."
+    },
+    {
+      "id": "vow17_02_p_01",
+      "chapter": "vow17",
+      "voiceKey": "Numen",
+      "text": "Especially if it calls them noise."
+    },
+    {
+      "id": "vow17_02_v_00",
+      "chapter": "vow17",
+      "voiceKey": "Narrator",
+      "text": "The engine accepts a staggered sequence. Five lamps remain five lamps. The water between them is dark and ordinary."
+    },
+    {
+      "id": "vow17_02_v_01",
+      "chapter": "vow17",
+      "voiceKey": "Numen",
+      "text": "A successful absence."
+    },
+    {
+      "id": "vow17_02_v_02",
+      "chapter": "vow17",
+      "voiceKey": "You",
+      "text": "Put that in the engineering report."
+    },
+    {
+      "id": "vow17_03_b_00",
+      "chapter": "vow17",
+      "voiceKey": "Narrator",
+      "text": "The Concord's relay replaces Seraphel's answer with a permanent yes. Its engineers call it a precaution against her being absent."
+    },
+    {
+      "id": "vow17_03_b_01",
+      "chapter": "vow17",
+      "voiceKey": "Seraphel",
+      "text": "If I am absent, send someone to ask why."
+    },
+    {
+      "id": "vow17_03_b_02",
+      "chapter": "vow17",
+      "voiceKey": "Inquisitor",
+      "text": "The seal cannot wait on a person."
+    },
+    {
+      "id": "vow17_03_b_03",
+      "chapter": "vow17",
+      "voiceKey": "Seraphel",
+      "text": "Then it is already the wrong seal."
+    },
+    {
+      "id": "vow17_04_p_00",
+      "chapter": "vow17",
+      "voiceKey": "Seraphel",
+      "text": "Let it go dark until I answer."
+    },
+    {
+      "id": "vow17_04_p_01",
+      "chapter": "vow17",
+      "voiceKey": "You",
+      "text": "The others know how to wait now."
+    },
+    {
+      "id": "vow17_04_v_00",
+      "chapter": "vow17",
+      "voiceKey": "Narrator",
+      "text": "One lamp goes out. Four carry the strain without joining. When Seraphel answers her light returns in its imperfect rhythm."
+    },
+    {
+      "id": "vow17_04_v_01",
+      "chapter": "vow17",
+      "voiceKey": "Numen",
+      "text": "It can survive a pause."
+    },
+    {
+      "id": "vow17_04_v_02",
+      "chapter": "vow17",
+      "voiceKey": "Seraphel",
+      "text": "Now teach it to survive an honest no."
+    },
+    {
+      "id": "vow17_05_b_00",
+      "chapter": "vow17",
+      "voiceKey": "Narrator",
+      "text": "It cannot. At a full refusal the signals meet in the empty center and become one. Numen marks the failure in red."
+    },
+    {
+      "id": "vow17_05_b_01",
+      "chapter": "vow17",
+      "voiceKey": "Kaelis",
+      "text": "What keeps the center empty?"
+    },
+    {
+      "id": "vow17_05_b_02",
+      "chapter": "vow17",
+      "voiceKey": "Numen",
+      "text": "Someone must carry the distance while the others renew. Outside the warmth, able to leave it."
+    },
+    {
+      "id": "vow17_05_b_03",
+      "chapter": "vow17",
+      "voiceKey": "Narrator",
+      "text": "Kaelis reads the measurement twice. This time she asks everyone else to read it with her."
+    },
+    {
+      "id": "vow18_00_b_00",
+      "chapter": "vow18",
+      "voiceKey": "Narrator",
+      "text": "Seraphel prepares to step into the empty center. Her halo fits the measurement perfectly. That is what frightens her."
+    },
+    {
+      "id": "vow18_00_b_01",
+      "chapter": "vow18",
+      "voiceKey": "Seraphel",
+      "text": "I was made for this shape."
+    },
+    {
+      "id": "vow18_00_b_02",
+      "chapter": "vow18",
+      "voiceKey": "You",
+      "text": "That does not decide whether you must take it."
+    },
+    {
+      "id": "vow18_00_b_03",
+      "chapter": "vow18",
+      "voiceKey": "Seraphel",
+      "text": "I know. I am waiting to discover whether I believe myself."
+    },
+    {
+      "id": "vow18_01_b_00",
+      "chapter": "vow18",
+      "voiceKey": "Narrator",
+      "text": "The Concord kneels and thanks her for a sacrifice she has not offered. Their gratitude fills the garden like a locked gate."
+    },
+    {
+      "id": "vow18_01_b_01",
+      "chapter": "vow18",
+      "voiceKey": "Inquisitor",
+      "text": "The people need you."
+    },
+    {
+      "id": "vow18_01_b_02",
+      "chapter": "vow18",
+      "voiceKey": "Seraphel",
+      "text": "They needed me yesterday. I was allowed to be a person then."
+    },
+    {
+      "id": "vow18_01_b_03",
+      "chapter": "vow18",
+      "voiceKey": "You",
+      "text": "Stand up. Let her answer without your knees on the scale."
+    },
+    {
+      "id": "vow18_02_p_00",
+      "chapter": "vow18",
+      "voiceKey": "Seraphel",
+      "text": "I am not refusing mercy. I am refusing your ownership of it."
+    },
+    {
+      "id": "vow18_02_p_01",
+      "chapter": "vow18",
+      "voiceKey": "You",
+      "text": "Clear a path back out of the circle."
+    },
+    {
+      "id": "vow18_02_v_00",
+      "chapter": "vow18",
+      "voiceKey": "Narrator",
+      "text": "The guard stands. Seraphel steps away and discovers that the world has not ended because she wanted to remain in it."
+    },
+    {
+      "id": "vow18_02_v_01",
+      "chapter": "vow18",
+      "voiceKey": "Seraphel",
+      "text": "No."
+    },
+    {
+      "id": "vow18_02_v_02",
+      "chapter": "vow18",
+      "voiceKey": "You",
+      "text": "We heard you."
+    },
+    {
+      "id": "vow18_03_b_00",
+      "chapter": "vow18",
+      "voiceKey": "Narrator",
+      "text": "Through the water-mirror Ravenna watches Thornmaw send a root into the circle. He meant to spare them the question. It is the same mistake in an older shape."
+    },
+    {
+      "id": "vow18_03_b_01",
+      "chapter": "vow18",
+      "voiceKey": "Thornmaw",
+      "text": "I know how to wait."
+    },
+    {
+      "id": "vow18_03_b_02",
+      "chapter": "vow18",
+      "voiceKey": "Ravenna",
+      "text": "You also know how to mistake waiting for a life."
+    },
+    {
+      "id": "vow18_03_b_03",
+      "chapter": "vow18",
+      "voiceKey": "You",
+      "text": "Will you withdraw it if we ask?"
+    },
+    {
+      "id": "vow18_04_p_00",
+      "chapter": "vow18",
+      "voiceKey": "Thornmaw",
+      "text": "Yes. I can withdraw it."
+    },
+    {
+      "id": "vow18_04_p_01",
+      "chapter": "vow18",
+      "voiceKey": "Ravenna",
+      "text": "Then do. We are practicing a different answer."
+    },
+    {
+      "id": "vow18_04_v_00",
+      "chapter": "vow18",
+      "voiceKey": "Narrator",
+      "text": "The root lifts. Grass survived beneath it. Thornmaw says nothing for a long time, and nobody fills the silence for him."
+    },
+    {
+      "id": "vow18_04_v_01",
+      "chapter": "vow18",
+      "voiceKey": "Thornmaw",
+      "text": "I would like to see the orchard again."
+    },
+    {
+      "id": "vow18_04_v_02",
+      "chapter": "vow18",
+      "voiceKey": "You",
+      "text": "We will make that possible too."
+    },
+    {
+      "id": "vow18_05_b_00",
+      "chapter": "vow18",
+      "voiceKey": "Narrator",
+      "text": "Kaelis asks for the outer watch. The costs are read before she offers: distance, the loss of shared warmth, and no promise of return."
+    },
+    {
+      "id": "vow18_05_b_01",
+      "chapter": "vow18",
+      "voiceKey": "Kaelis",
+      "text": "I am not paying for a pardon. If you make it that, refuse me."
+    },
+    {
+      "id": "vow18_05_b_02",
+      "chapter": "vow18",
+      "voiceKey": "Seraphel",
+      "text": "We may still ask you to stay."
+    },
+    {
+      "id": "vow18_05_b_03",
+      "chapter": "vow18",
+      "voiceKey": "Kaelis",
+      "text": "I know. That is what makes this a choice."
+    },
+    {
+      "id": "vow19_00_b_00",
+      "chapter": "vow19",
+      "voiceKey": "Narrator",
+      "text": "The vows descend the well-kept stair. Ravenna remains at the stone. Her sister carries the fifth light; Thornmaw walks beside her instead of in front."
+    },
+    {
+      "id": "vow19_00_b_01",
+      "chapter": "vow19",
+      "voiceKey": "Ravenna",
+      "text": "There is still time to choose differently."
+    },
+    {
+      "id": "vow19_00_b_02",
+      "chapter": "vow19",
+      "voiceKey": "Kaelis",
+      "text": "Read the cost again."
+    },
+    {
+      "id": "vow19_00_b_03",
+      "chapter": "vow19",
+      "voiceKey": "Numen",
+      "text": "All of it."
+    },
+    {
+      "id": "vow19_01_b_00",
+      "chapter": "vow19",
+      "voiceKey": "Narrator",
+      "text": "The chamber remembers the Unanswered. Old weather gathers around every promise, waiting to discover which will become another prison."
+    },
+    {
+      "id": "vow19_01_b_01",
+      "chapter": "vow19",
+      "voiceKey": "The First Caller",
+      "text": "It is what I left behind. Do not call it fate to spare my feelings."
+    },
+    {
+      "id": "vow19_01_b_02",
+      "chapter": "vow19",
+      "voiceKey": "You",
+      "text": "We will not."
+    },
+    {
+      "id": "vow19_01_b_03",
+      "chapter": "vow19",
+      "voiceKey": "The Sister",
+      "text": "And we will not put someone back in my place to make the story tidy."
+    },
+    {
+      "id": "vow19_02_p_00",
+      "chapter": "vow19",
+      "voiceKey": "Ravenna",
+      "text": "The old stone stays held until the new seal answers. We do not gamble with the people above."
+    },
+    {
+      "id": "vow19_02_p_01",
+      "chapter": "vow19",
+      "voiceKey": "You",
+      "text": "We make room without letting go too early."
+    },
+    {
+      "id": "vow19_02_v_00",
+      "chapter": "vow19",
+      "voiceKey": "Narrator",
+      "text": "The weather breaks against five separate lights. The stair remains visible through it, every lamp still burning."
+    },
+    {
+      "id": "vow19_02_v_01",
+      "chapter": "vow19",
+      "voiceKey": "Thornmaw",
+      "text": "A way back. We remembered."
+    },
+    {
+      "id": "vow19_02_v_02",
+      "chapter": "vow19",
+      "voiceKey": "Kaelis",
+      "text": "Keep remembering after I have gone."
+    },
+    {
+      "id": "vow19_03_b_00",
+      "chapter": "vow19",
+      "voiceKey": "Narrator",
+      "text": "Beyond the lattice the Voice offers Kaelis the sound of her city before the forge died. Every hammer is exactly where she remembers it."
+    },
+    {
+      "id": "vow19_03_b_01",
+      "chapter": "vow19",
+      "voiceKey": "The Voice",
+      "text": "We could return what you lost. We could make the cold mean something."
+    },
+    {
+      "id": "vow19_03_b_02",
+      "chapter": "vow19",
+      "voiceKey": "Kaelis",
+      "text": "It already means people needed fuel. I do not need a god to make their hunger important."
+    },
+    {
+      "id": "vow19_03_b_03",
+      "chapter": "vow19",
+      "voiceKey": "The Voice",
+      "text": "We did not want you to suffer alone."
+    },
+    {
+      "id": "vow19_04_p_00",
+      "chapter": "vow19",
+      "voiceKey": "Kaelis",
+      "text": "Then let me stand apart without calling it abandonment."
+    },
+    {
+      "id": "vow19_04_p_01",
+      "chapter": "vow19",
+      "voiceKey": "You",
+      "text": "We will answer from here."
+    },
+    {
+      "id": "vow19_04_v_00",
+      "chapter": "vow19",
+      "voiceKey": "Narrator",
+      "text": "Kaelis opens her hand. The warmth leaves. She steps onto the outer causeway with an ordinary coal, knowing it will eventually go out."
+    },
+    {
+      "id": "vow19_04_v_01",
+      "chapter": "vow19",
+      "voiceKey": "The Voice",
+      "text": "We do not understand."
+    },
+    {
+      "id": "vow19_04_v_02",
+      "chapter": "vow19",
+      "voiceKey": "Kaelis",
+      "text": "Neither did I. Keep listening."
+    },
+    {
+      "id": "vow19_05_b_00",
+      "chapter": "vow19",
+      "voiceKey": "Narrator",
+      "text": "The lattice closes around an empty center. Kaelis is beyond its warmth, her red light distinct. The binding holds. Ravenna rises from the stone."
+    },
+    {
+      "id": "vow19_05_b_01",
+      "chapter": "vow19",
+      "voiceKey": "The Sister",
+      "text": "Are you coming upstairs?"
+    },
+    {
+      "id": "vow19_05_b_02",
+      "chapter": "vow19",
+      "voiceKey": "Ravenna",
+      "text": "Slowly. I have spent a great deal of time planning a dignified answer."
+    },
+    {
+      "id": "vow19_05_b_03",
+      "chapter": "vow19",
+      "voiceKey": "Narrator",
+      "text": "Thornmaw takes the flask. Nobody crowns the person who stood apart. They write down how to ask whether she still chooses it."
+    },
+    {
+      "id": "vow20_00_b_00",
+      "chapter": "vow20",
+      "voiceKey": "Narrator",
+      "text": "On the first morning everyone wakes before the beacons. Quiet has been mistaken for safety often enough that nobody celebrates yet."
+    },
+    {
+      "id": "vow20_00_b_01",
+      "chapter": "vow20",
+      "voiceKey": "Numen",
+      "text": "The outer watch has answered."
+    },
+    {
+      "id": "vow20_00_b_02",
+      "chapter": "vow20",
+      "voiceKey": "You",
+      "text": "What did she say?"
+    },
+    {
+      "id": "vow20_00_b_03",
+      "chapter": "vow20",
+      "voiceKey": "Numen",
+      "text": "That the coal is nearly out. And yes, today."
+    },
+    {
+      "id": "vow20_01_b_00",
+      "chapter": "vow20",
+      "voiceKey": "Narrator",
+      "text": "The orchard withholds renewal while a relief cart is trapped behind a militia toll. The seal dims. Nobody proposes forcing the orchard to answer."
+    },
+    {
+      "id": "vow20_01_b_01",
+      "chapter": "vow20",
+      "voiceKey": "Sproutling",
+      "text": "We promised to feed people. They are stopping the food."
+    },
+    {
+      "id": "vow20_01_b_02",
+      "chapter": "vow20",
+      "voiceKey": "You",
+      "text": "Then we know which part needs fixing."
+    },
+    {
+      "id": "vow20_01_b_03",
+      "chapter": "vow20",
+      "voiceKey": "Seraphel",
+      "text": "A vow should lead us toward the work, not replace it."
+    },
+    {
+      "id": "vow20_02_p_00",
+      "chapter": "vow20",
+      "voiceKey": "You",
+      "text": "Let the cart through. Nobody has to swear anything to eat."
+    },
+    {
+      "id": "vow20_02_p_01",
+      "chapter": "vow20",
+      "voiceKey": "Sproutling",
+      "text": "I will tell the orchard we remembered."
+    },
+    {
+      "id": "vow20_02_v_00",
+      "chapter": "vow20",
+      "voiceKey": "Narrator",
+      "text": "The cart crosses. A green beacon answers after breakfast. Across the valleys four other lights keep their different intervals."
+    },
+    {
+      "id": "vow20_02_v_01",
+      "chapter": "vow20",
+      "voiceKey": "Thornmaw",
+      "text": "I am at the orchard. It has grown badly in several places."
+    },
+    {
+      "id": "vow20_02_v_02",
+      "chapter": "vow20",
+      "voiceKey": "You",
+      "text": "Will you stay?"
+    },
+    {
+      "id": "vow20_03_b_00",
+      "chapter": "vow20",
+      "voiceKey": "Narrator",
+      "text": "The Cantor left a letter naming a village that chose the Communion. Every signature differs. All the signatures end at the same moment."
+    },
+    {
+      "id": "vow20_03_b_01",
+      "chapter": "vow20",
+      "voiceKey": "The Cantor",
+      "text": "We have learned to leave the door open. We ask you to visit those who choose to stay."
+    },
+    {
+      "id": "vow20_03_b_02",
+      "chapter": "vow20",
+      "voiceKey": "Numen",
+      "text": "There is an echo in the paper."
+    },
+    {
+      "id": "vow20_03_b_03",
+      "chapter": "vow20",
+      "voiceKey": "You",
+      "text": "Then we clear the echo before we decide what the people mean."
+    },
+    {
+      "id": "vow20_04_p_00",
+      "chapter": "vow20",
+      "voiceKey": "Seraphel",
+      "text": "A choice made freely still deserves a witness."
+    },
+    {
+      "id": "vow20_04_p_01",
+      "chapter": "vow20",
+      "voiceKey": "You",
+      "text": "And a witness must be able to hear an unwelcome answer."
+    },
+    {
+      "id": "vow20_04_v_00",
+      "chapter": "vow20",
+      "voiceKey": "Narrator",
+      "text": "The echo fades. The signatures remain. The village is real, and no army stands outside waiting to be defeated."
+    },
+    {
+      "id": "vow20_04_v_01",
+      "chapter": "vow20",
+      "voiceKey": "Numen",
+      "text": "I cannot mark this resolved."
+    },
+    {
+      "id": "vow20_04_v_02",
+      "chapter": "vow20",
+      "voiceKey": "You",
+      "text": "Leave the page open."
+    },
+    {
+      "id": "vow20_05_b_00",
+      "chapter": "vow20",
+      "voiceKey": "Narrator",
+      "text": "Ravenna takes tea in the garden. Her sister leaves before sunset to see another city. Thornmaw sends an account of the orchard, including every mistake."
+    },
+    {
+      "id": "vow20_05_b_01",
+      "chapter": "vow20",
+      "voiceKey": "Kaelis",
+      "text": "I can hear morning birds from here. Tell me which ones they are."
+    },
+    {
+      "id": "vow20_05_b_02",
+      "chapter": "vow20",
+      "voiceKey": "You",
+      "text": "I will ask. Will you answer tomorrow?"
+    },
+    {
+      "id": "vow20_05_b_03",
+      "chapter": "vow20",
+      "voiceKey": "Kaelis",
+      "text": "Ask me tomorrow."
+    },
+    {
+      "id": "vow20_05_b_04",
+      "chapter": "vow20",
+      "voiceKey": "Narrator",
+      "text": "Five cups stand on the table. One cools beside an empty chair. Beyond the valleys a village sings in a single gentle voice. You pack the invitation, and go to listen."
     }
   ]
 }

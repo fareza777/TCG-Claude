@@ -1,4 +1,5 @@
 import '../effects/interpreter.dart';
+import '../model/card_def.dart';
 import '../model/enums.dart';
 import '../model/game_state.dart';
 import '../data/library.dart';
@@ -176,11 +177,24 @@ abstract final class PvpCodec {
   static Map<String, dynamic> _encodeCardInstance(CardInstance card) => {
         'instanceId': card.instanceId,
         'cardId': card.def.id,
+        if (card.def.id.startsWith('TOKEN-'))
+          'tokenDefinition': {
+            'id': card.def.id,
+            'name': card.def.name,
+            'dominion': [for (final d in card.def.dominions) d.name],
+            'type': 'unit',
+            'subtype': card.def.subtype,
+            'might': card.def.might,
+            'guard': card.def.guard,
+            'keywords': [for (final k in card.def.keywords) k.name],
+            'text': card.def.text,
+          },
         'owner': card.owner.name,
         'exerted': card.exerted,
         'damage': card.damage,
         'plusCounters': card.plusCounters,
         'summonedThisTurn': card.summonedThisTurn,
+        'vowFulfilled': card.vowFulfilled,
         'tempMight': card.tempMight,
         'tempGuard': card.tempGuard,
         'tempKeywords': [for (final k in card.tempKeywords) k.name],
@@ -193,11 +207,14 @@ abstract final class PvpCodec {
     final keywords = _asList(json['tempKeywords'], 'tempKeywords');
     return CardInstance(
       instanceId: _asInt(json['instanceId'], 'instanceId'),
-      def: library.card(_asString(json['cardId'], 'cardId')),
+      def: _decodeDefinition(json, library),
       owner: _enumByName(PlayerId.values, json['owner'], 'owner'),
       exerted: _asBool(json['exerted'], 'exerted'),
       damage: _asInt(json['damage'], 'damage'),
       plusCounters: _asInt(json['plusCounters'], 'plusCounters'),
+      vowFulfilled: json['vowFulfilled'] == null
+          ? false
+          : _asBool(json['vowFulfilled'], 'vowFulfilled'),
       summonedThisTurn: _asBool(json['summonedThisTurn'], 'summonedThisTurn'),
       tempMight: _asInt(json['tempMight'], 'tempMight'),
       tempGuard: _asInt(json['tempGuard'], 'tempGuard'),
@@ -206,6 +223,17 @@ abstract final class PvpCodec {
           _enumByName(Keyword.values, raw, 'tempKeyword'),
       },
     );
+  }
+
+  static CardDef _decodeDefinition(
+      Map<String, dynamic> json, CardLibrary library) {
+    final id = _asString(json['cardId'], 'cardId');
+    if (!id.startsWith('TOKEN-')) return library.card(id);
+    final raw = _asMap(json['tokenDefinition'], 'tokenDefinition');
+    if (raw['id'] != id || raw['type'] != 'unit') {
+      throw const FormatException('Invalid token definition');
+    }
+    return CardDef.fromJson(raw);
   }
 
   static Map<String, dynamic> _encodeChainItem(ChainItem item) => {
@@ -291,6 +319,7 @@ abstract final class PvpCodec {
   }
 
   static Map<String, dynamic> _encodeCardView(CardInstance card) => {
+        ..._encodeCardInstance(card),
         'instanceId': card.instanceId,
         'cardId': card.def.id,
         'name': card.def.name,

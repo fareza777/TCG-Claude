@@ -250,13 +250,13 @@ class _DuelScreenState extends State<DuelScreen>
           GestureDetector(
             onTap: c.isTargeting &&
                     c.targetingDef != null &&
-                    c.targetSpec(c.targetingDef!).players
+                    c.canTargetPlayer(c.targetingDef!, DuelController.enemy)
                 ? () => c.selectPlayerTarget(DuelController.enemy)
                 : null,
             child: _healthOrb(foe.health, DominionStyle.of(Dominion.pyre).glow,
                 targetable: c.isTargeting &&
                     c.targetingDef != null &&
-                    c.targetSpec(c.targetingDef!).players),
+                    c.canTargetPlayer(c.targetingDef!, DuelController.enemy)),
           ),
           const SizedBox(width: 10),
           Column(
@@ -456,39 +456,44 @@ class _DuelScreenState extends State<DuelScreen>
     final spec = def == null
         ? const TargetSpec(units: true, players: false)
         : c.targetSpec(def);
+    final color = spec.friendly ? const Color(0xFF7FE0A8) : AppTheme.danger;
     return Container(
       margin: const EdgeInsets.fromLTRB(14, 4, 14, 0),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       decoration: BoxDecoration(
-        color: AppTheme.danger.withValues(alpha: 0.14),
+        color: color.withValues(alpha: 0.14),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppTheme.danger.withValues(alpha: 0.7)),
+        border: Border.all(color: color.withValues(alpha: 0.7)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.gps_fixed, size: 14, color: AppTheme.danger),
+          Icon(Icons.gps_fixed, size: 14, color: color),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               def == null
                   ? 'Choose a target'
                   : 'Choose a target for ${def.name}'
-                      '${spec.players ? ' — tap a unit or a player' : ' — tap a unit'}',
+                        '${spec.players ? ' — tap a unit or a player' : ' — tap a ${spec.friendly ? 'friendly ' : ''}unit'}',
               style: const TextStyle(
-                  color: AppTheme.textPrimary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600),
+                color: AppTheme.textPrimary,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           GestureDetector(
             onTap: c.cancelTargeting,
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 6),
-              child: Text('Cancel',
-                  style: TextStyle(
-                      color: AppTheme.danger,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w800)),
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: AppTheme.danger,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
             ),
           ),
         ],
@@ -838,7 +843,8 @@ class _DuelScreenState extends State<DuelScreen>
   Widget _arenaUnit(CardInstance u, bool enemySide) {
     final blocking = c.ui == DuelUiState.playerBlocking;
     final selected = c.selectedAttackers.contains(u.instanceId);
-    final aiming = c.isTargeting && u.def.type == CardType.unit;
+    final aiming = c.targetingDef != null &&
+        c.canTargetUnit(c.targetingDef!, u.instanceId);
     // The enemy is casting a spell aimed at this unit — show a red reticle.
     final beingTargeted = c.enemyCastTargetId == u.instanceId;
     // The player is casting a spell aimed at this unit — gold reticle.
@@ -858,7 +864,7 @@ class _DuelScreenState extends State<DuelScreen>
     final canBeBlocker = blocking &&
         !enemySide &&
         u.def.type == CardType.unit &&
-        !u.exerted;
+        (!u.exerted || u.keywords.contains(Keyword.ambush));
     final blocksAttacker = c.blockerAssignedTo(u.instanceId);
     // Index label (A1, A2...) for each incoming attacker.
     int? attackerIndex;
@@ -883,7 +889,8 @@ class _DuelScreenState extends State<DuelScreen>
 
     final lift = selected || isSelectedAttacker;
     final highlight = aiming
-        ? AppTheme.danger
+        ? (c.targetSpec(c.targetingDef!).friendly
+            ? const Color(0xFF7FE0A8) : AppTheme.danger)
         : selected
             ? AppTheme.danger
             : isSelectedAttacker
@@ -1191,14 +1198,14 @@ class _DuelScreenState extends State<DuelScreen>
           GestureDetector(
             onTap: c.isTargeting &&
                     c.targetingDef != null &&
-                    c.targetSpec(c.targetingDef!).players
+                    c.canTargetPlayer(c.targetingDef!, DuelController.human)
                 ? () => c.selectPlayerTarget(DuelController.human)
                 : null,
             child: _healthOrb(me.health, AppTheme.health,
                 targetable: c.enemyCastAtPlayer ||
                     (c.isTargeting &&
                         c.targetingDef != null &&
-                        c.targetSpec(c.targetingDef!).players)),
+                        c.canTargetPlayer(c.targetingDef!, DuelController.human))),
           ),
           const SizedBox(width: 8),
           Text('Deck ${me.deck.length}',

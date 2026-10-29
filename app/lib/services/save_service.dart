@@ -45,6 +45,7 @@ class SaveService extends ChangeNotifier {
       : arenaWinGold[(winNumber - 1).clamp(0, arenaWinGold.length - 1)];
 
   final SharedPreferences _prefs;
+  Set<String> _originalSetIds = {};
   int gold;
   int shards;
   Map<String, int> owned; // cardId -> copies
@@ -243,6 +244,8 @@ class SaveService extends ChangeNotifier {
     service.gauntletTurns = prefs.getInt('gauntletTurns') ?? 0;
     service.gauntletStreak = prefs.getInt('gauntletStreak') ?? 0;
     service.gauntletLastDay = prefs.getString('gauntletLastDay') ?? '';
+    service._originalSetIds = library.byId.keys
+        .where((id) => id.startsWith('SF001-')).toSet();
     service.lastLoginDate = prefs.getString('lastLoginDate') ?? '';
     service.guestMode = prefs.getBool('guestMode') ?? false;
     service.accountLinked = prefs.getBool('accountLinked') ?? false;
@@ -1061,7 +1064,7 @@ class SaveService extends ChangeNotifier {
     'warlord': ('Warlord', 'Win 100 battles', 1000),
     'collector_50': ('Collector', 'Own 50 different cards', 150),
     'collector_100': ('Archivist', 'Own 100 different cards', 400),
-    'full_set': ('Completionist', 'Own all 192 cards', 2000),
+    'full_set': ('Completionist', 'Own every card in The Sundering', 2000),
     'chapter_one': ('The Waking Grove', 'Clear Chapter I', 100),
     'saga_done': ('Loneliest War', 'Clear all 5 chapters of Set 1', 1500),
     'pack_rat': ('Pack Rat', 'Open 10 Shard Packs', 200),
@@ -1085,9 +1088,11 @@ class SaveService extends ChangeNotifier {
     unlock('warlord', totalWins >= 100);
     unlock('collector_50', uniqueOwned >= 50);
     unlock('collector_100', uniqueOwned >= 100);
-    unlock('full_set', uniqueOwned >= 192);
+    unlock('full_set', _originalSetIds.isNotEmpty &&
+        _originalSetIds.every((id) => copiesOf(id) > 0));
     unlock('chapter_one', chaptersDone.contains('ch1'));
-    unlock('saga_done', chaptersDone.length >= 5);
+    unlock('saga_done', const ['ch1', 'ch2', 'ch3', 'ch4', 'ch5']
+        .every(chaptersDone.contains));
     unlock('pack_rat', totalPacks >= 10);
   }
 

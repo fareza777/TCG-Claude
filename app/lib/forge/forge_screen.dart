@@ -1,3 +1,5 @@
+import '../data/card_catalog.dart';
+import '../data/card_set_filter.dart';
 import 'package:flutter/material.dart';
 
 import '../services/ad_service.dart';
@@ -28,12 +30,14 @@ class ForgeScreen extends StatefulWidget {
 
 class _ForgeScreenState extends State<ForgeScreen> {
   Dominion? _filter;
+  CardSet? _set;
 
   @override
   Widget build(BuildContext context) {
     final cards = widget.library.byId.values
         .where((d) => d.type != CardType.wellspring)
         .where((d) => _filter == null || d.dominions.contains(_filter))
+        .where((d) => _set == null || _set!.contains(d.id))
         .toList()
       ..sort((a, b) => a.id.compareTo(b.id));
 
@@ -90,6 +94,10 @@ class _ForgeScreenState extends State<ForgeScreen> {
                     style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
               ),
               const SizedBox(height: 6),
+              CardSetFilter(
+                selected: _set,
+                onChanged: (set) => setState(() => _set = set),
+              ),
               SizedBox(height: 40, child: _filterBar()),
               Expanded(
                 child: GridView.builder(
@@ -148,6 +156,7 @@ class _ForgeScreenState extends State<ForgeScreen> {
               ),
             ),
           ),
+          Positioned(bottom: 3, left: 3, child: CardSetBadge(cardId: def.id)),
           if (owned)
             Positioned(
               top: 3,

@@ -30,6 +30,29 @@ class CardLibrary {
     return CardLibrary(byId: byId, starterDecks: starters);
   }
 
+  /// Merge set documents without replacing an earlier card or starter deck.
+  /// Existing callers may continue to load a single set with fromJsonString.
+  static CardLibrary fromJsonStrings(Iterable<String> documents) {
+    final cards = <String, CardDef>{};
+    final starters = <String, StarterDeck>{};
+    for (final document in documents) {
+      final set = fromJsonString(document);
+      for (final entry in set.byId.entries) {
+        if (cards.containsKey(entry.key)) {
+          throw FormatException('Duplicate card id: ${entry.key}');
+        }
+        cards[entry.key] = entry.value;
+      }
+      for (final entry in set.starterDecks.entries) {
+        if (starters.containsKey(entry.key)) {
+          throw FormatException('Duplicate starter deck: ${entry.key}');
+        }
+        starters[entry.key] = entry.value;
+      }
+    }
+    return CardLibrary(byId: cards, starterDecks: starters);
+  }
+
   CardDef card(String id) {
     final def = byId[id];
     if (def == null) throw ArgumentError('Unknown card id: $id');

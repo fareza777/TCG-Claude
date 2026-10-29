@@ -1,0 +1,3647 @@
+{
+  "scopes": {
+    "vow": "deepgram"
+  },
+  "clips": {
+    "vow01_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "0a4a211650b4fe236a40d692e862c4993940606e6304cfa4cee245129cd494c6",
+      "sha256": "c9a49d9edd70ac6bd3a694a118bb00d373e0c16f69ce5d59fcb5bbc637683839",
+      "bytes": 13536
+    },
+    "vow01_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "db5af8fc41dfc41abcf2df8a9b66942d5e2db1f9475dc009ce779c269159cf63",
+      "sha256": "3c303a748e4acf83f08f1167f7c02d2a9bf7863ef7d1cd768c9cf76e5b440ea8",
+      "bytes": 18144
+    },
+    "vow01_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "2810111185ed050fc65bd3c9e3fa4653d9c28c807dffec6b7a1e5af24596f15c",
+      "sha256": "80aa1bc84ab462e66b8ff27a4565b1568f31693c91417b34fd20f87df7596080",
+      "bytes": 15264
+    },
+    "vow01_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "591098183660a75a57a9ea9ec7b150db0b6c621d9164e7d065b6c155b12a47f0",
+      "sha256": "202fb818115ee77a9b4729085ee2aece9c3a8b11f117cc2d2b452ecd3a49a8e6",
+      "bytes": 40896
+    },
+    "vow01_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "9774d52d841c74c400a27288a1a3465d7d3a25a5fd95692c11511a87fb6aef3d",
+      "sha256": "55b1c98fa94c401b3188e7e4f325df89e00985024d0172740bd3a012ad9a4164",
+      "bytes": 39168
+    },
+    "vow01_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "6ad49fc6b2228d650f690386f34d69f0a2d2a686944cb620b309df67410a00bd",
+      "sha256": "78bd395e126e796cd13715a0aa863a5ab1cdfe186f09b76e805c7e724ea57d10",
+      "bytes": 11808
+    },
+    "vow01_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "67935ce7360f921b197e149dd82688191f33a8ea0f2b95780f4d47f7f590e01c",
+      "sha256": "f8909d707054a491eb01ab5eb12b6d0bbebaa00c3a22536b21b4e9db2267f674",
+      "bytes": 17856
+    },
+    "vow01_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "8fa93c2a42e0fcc86f1599c5fb48a871356d40d1d01873a8dd20a9dda7a62c34",
+      "sha256": "b22909fbe073fbd04f87fc600efa228f56a472c9dbbf2497c018760cfae0974c",
+      "bytes": 22608
+    },
+    "vow01_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "8b4a57b62ef426f7253babe904c73be5c974bf246fed76beda07a22a94a32bd9",
+      "sha256": "0187613d2ff9eeb474dbb13d8b04db131f7c544d0fa814f43df9a13604a6e61c",
+      "bytes": 18144
+    },
+    "vow01_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "2a0b524b7633fe87d43d832606bfc0c99100cc94aac28c94ff0fb69f7e0ac96b",
+      "sha256": "3780dccb840b7839567c6e55525859e450d5535f51a038b362bce062a24147a0",
+      "bytes": 32688
+    },
+    "vow01_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "fb9ac53c38948d40eec41494df8a04b6b59ee81c1f6717e95729434e234fdc9d",
+      "sha256": "e5654078bcc22b5216fa93da55b73293d6a16dfdaeb0137583a6ceb0483c30d2",
+      "bytes": 27216
+    },
+    "vow01_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "ca911eaceae449fb9137ac88479467e7cfb239d7fd700d4d66f5ddf11c3f7e09",
+      "sha256": "3fac04d8020357cb03d33c48a70b2bd6b03a19fabbeb7668e0b00c8186099169",
+      "bytes": 16848
+    },
+    "vow01_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "cb2999e13be83e1063d5f4a42e25d00741249d6fe1007563262126e0d1fae1be",
+      "sha256": "89d37445a2a2d93cd74a041f1ed6e6d3d7bb94e1506fca845500f3188b7ee254",
+      "bytes": 62208
+    },
+    "vow01_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "98f269b725fa6b00391e563cd288aeca8cc1e895c73a873a06d0b44b75fe4b63",
+      "sha256": "9ca2f548298a890b1c75dc8496840914d522fa5e5ecb826c2781877e9aedd46a",
+      "bytes": 8928
+    },
+    "vow01_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "df406144fb8967d422d325bdf6b3f99e1e897bf6ad459f906cdb81dfcd662377",
+      "sha256": "0694d68cbf5a5a52a3286b60a095f3041eaf150602904b2977f7e55f6e54491f",
+      "bytes": 9504
+    },
+    "vow01_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "1656c7c654f100891151d7d8f48c33d7327e02f2261ab8362a88c9239e550d71",
+      "sha256": "a0086e1ccd75b28e431c8ecfa71d52601836ae857482499fa7bd2cabdcb88a5a",
+      "bytes": 23184
+    },
+    "vow01_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "8c7c43c7a0b10d23ae31a1cf1c6ed6e85844d8c542b8a52346b5640805f91720",
+      "sha256": "34635136bb6748ec1fdf27c5124923f63dddf1f5d200d0d3a8b18f8e38c9550b",
+      "bytes": 20016
+    },
+    "vow01_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "a1c0644279715fc1c5387a4a58ebc2da023950fdd229d0f63e858d2bf44ef7fe",
+      "sha256": "d65c369eadaa6c2392ace54769fe7d1f85403f17e9e580e6ed36809a36f994da",
+      "bytes": 18576
+    },
+    "vow01_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "605d7a3736dae70183c63282f57cc8af97a7df07884697c47e37b68d97dd5f85",
+      "sha256": "6d04c68dcc37e6b337ed9b9e94dc1c4ce1a5ce4be8a701c12d793c0576b4d4b0",
+      "bytes": 37296
+    },
+    "vow01_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "bef0748a7fd648097928b090733e8f461d3175767352ebffd591e6abed0a5ad8",
+      "sha256": "997ed3b0eef31b19e853bf3eef21a9d33e87bec5dcb4d276bc40a207faf62efe",
+      "bytes": 18576
+    },
+    "vow01_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "8d2bb2de039f0b8a900e3b77e1257525422887d748fbea7b0110811ccb962965",
+      "sha256": "3318e8c51f256b18135e5e10a49a5bb8429811d2769257c843dd842a9963cbd1",
+      "bytes": 14976
+    },
+    "vow01_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "f4824a1dbdd1a6e29c088124464b6c9e7adb52b8ac92af0680d986dbcd333a3a",
+      "sha256": "d96ed5c81271c3e1e5c661716ae1e9d918a85710bcb0779a2b998e7c00b31a0e",
+      "bytes": 40608
+    },
+    "vow01_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "66bbef1d042709510a25b8673a1636264367072bbab4adee47da4166e28b56c3",
+      "sha256": "bd0cf179213b5ca34be146b658e214592ed801fab8d1c740fff01990b49dfdf9",
+      "bytes": 5328
+    },
+    "vow01_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "77fde2500dd7fc97eb94c8cbc567d9f8e83dd97912037fc94cff86752878f609",
+      "sha256": "62422f79a3027302be414fdef5ca274cf27c53b6d9d22f914f92d5dcf352f2de",
+      "bytes": 23184
+    },
+    "vow01_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "100ff3ba714e5a7d3c1175c1b30a594a5b1eee2d0d382f6e3bc03dd3919c617d",
+      "sha256": "10c1b6feba8ea9d98ef24ff85f450abfdfa4e4f30c4038d6ff4d40a8992e30bd",
+      "bytes": 31104
+    },
+    "vow02_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "fd986b9f68831ad8615f63d15ac513495c73d59dea0c9a2c9fc670ea8c6738c3",
+      "sha256": "740ccb1fd78bb1c8c93bb91861b590fc9d519d7249742548e16ebf9963e946f0",
+      "bytes": 43056
+    },
+    "vow02_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "2f4c72f8de4e10a42f03194642f0806cf2ea8c83306be07f085c737b41e276a3",
+      "sha256": "6c1bfb2c57f8b6f050988a7c99783e8fa34f64950a47ffca472ec1298e7d81a8",
+      "bytes": 28656
+    },
+    "vow02_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "245a0962c5d151e0656d40241e722eb197ac210f91737bc4107c27dcea103e7b",
+      "sha256": "bf0fd704dc7dc374a9a99d2a0d9fe44e3067ca123d085541725fdb5a9b4e696b",
+      "bytes": 8064
+    },
+    "vow02_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "e2c77845780d8b987bd5eddcd5277e310a40b51d799f3bc2b27b32535ed1eb2c",
+      "sha256": "7655dc3589a46f4ce185d982898e4710f93cf0d5db2277742cdbe188ddc8fa6e",
+      "bytes": 26784
+    },
+    "vow02_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "f267bd3badf344a05997c50ab8f4802be417d8425833117de44c54e24560cc53",
+      "sha256": "72ed826a1d90a93b80e8106636d9107a8cec658d98e6056e848bf49bfbb90bc7",
+      "bytes": 39456
+    },
+    "vow02_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "095bf61c7f23c7b5e1d060f4cd99baa0f24a88a643ae6c0f5f9798f1008d34f9",
+      "sha256": "c9c4d3c5cc19c0c918d49b84b9a443b90575c9ed97b4ce8e9cd6a260ceb5c86b",
+      "bytes": 11088
+    },
+    "vow02_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-zeus-en",
+      "textSha256": "508f442ce23104001f3a3c13e64a9fe09336540341f7b1efe32b4a84fc7a41aa",
+      "sha256": "909cb9b19a4791a69a20624aecbd427c9d2901b9da74b50042467a4affa90f86",
+      "bytes": 13248
+    },
+    "vow02_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "fe2701655f51ca44fb0e978182c4ef5963ee4e192a4e824214b78a256171359b",
+      "sha256": "6b43fd318cdb8c538d9bea37aadd0ccef087e194c9d8f4384f064522871bc349",
+      "bytes": 13248
+    },
+    "vow02_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "e926c197635946c8df9015fc39eda9d053333d9c54d2c5ace46c4fe3e50b2c96",
+      "sha256": "13b624906facf0a623dae63d17c0c07d91428d07fe6dbb1534e1a23fe6e45bf3",
+      "bytes": 11376
+    },
+    "vow02_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "2da5302122deb1fd9db73026865888bde55217a47e5be902dfdfaab14902a316",
+      "sha256": "0dd20cb1188cb8c3a7ca4249cf7bd58c298fdf389986c27dc4cf324d3f04a5de",
+      "bytes": 7344
+    },
+    "vow02_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "4e0eb15277df5aadb504eefe368eaeae9a90579d12f2d979bb343ed5f4c98ee2",
+      "sha256": "cf2098d6f546629c7dd7bb932eab1b5163a49d2dfcf84ce94415ac3886c44c43",
+      "bytes": 39744
+    },
+    "vow02_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "e429e4f472c179da2ab7e0beedcd0f521f4281857ecd146efca5603fa3068e8c",
+      "sha256": "6394e7e06310363031d633567b89ab7d285a12362121c5fa30af3f4334b67fcb",
+      "bytes": 12816
+    },
+    "vow02_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "e5c0365e41937b68b370bf00bac398ce76b9a5a2da60371e48ab71b71f5ae4ab",
+      "sha256": "73f4150bfede2a3b508e4c69cbe87be9fbb984fba6e011337f3c0ae22b065426",
+      "bytes": 5328
+    },
+    "vow02_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "5233f45181f4baf5bc9a0054eade8f2a83df64533903fe9ca1692e2c2deda4de",
+      "sha256": "a789dda121cbe2a034b0ebacf61ed201caa858e03c9bf707960c9eaf47ca3ab8",
+      "bytes": 53136
+    },
+    "vow02_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d63c66e9cda532bbafb5065a906bb92337b30b6b68779e137b6cec0c6264d978",
+      "sha256": "fbe1cde99e38de9c0e51cf1bceaa3b7fd488afc32d2482a31c058c946a1321c3",
+      "bytes": 32976
+    },
+    "vow02_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "f2e133786f9d7bf8ee5ab90ff047ce45a39e5fdd93734b32c743aead4cca1a46",
+      "sha256": "831f9b1e99ae366a57945d84f366bab420deb03edfd88ea3239b18af22141a49",
+      "bytes": 8784
+    },
+    "vow02_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "2020ac0c2d9c53df4ba60da8c8e3d8bf3e77392f614852046dfc57c302bdf716",
+      "sha256": "248cc5d8cf4d77249379cfa203789201cdcfa108359a1ef479996928968b0220",
+      "bytes": 22464
+    },
+    "vow02_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "8798581dc48c9006ac5c3808d95cce378f355e74d80c99085a7755ee87e933f9",
+      "sha256": "ad907308995532522be7100324d5c71dafc36dedc0922ef80ad35d503fea95b2",
+      "bytes": 15696
+    },
+    "vow02_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "7d6ff1c1267ab70750d70c4faab9d0a3f4d1f8e7519d50ee4e3818a5d2031177",
+      "sha256": "c3752eec5353cd4397432be2ea2cffbe441c835e43ba4c13e9c8f9dd7cc843ae",
+      "bytes": 15696
+    },
+    "vow02_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "b1874492ec96a17ac467ec6de7d8f5aabe336e362c340f8802b87d1c5f8f8cf8",
+      "sha256": "a1ce56bece94c13da7705e15eeea989adb3ca934231cce165720a82984167588",
+      "bytes": 39168
+    },
+    "vow02_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "243f0405da485410add4d7b412277ac6759ffff171d0a5bf8827c823623c0029",
+      "sha256": "c2373b576ed9602b631bf838821f21295e39e28860e121fee8b1e66821feb126",
+      "bytes": 16128
+    },
+    "vow02_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "aebee36aa99dcb1a4f6b533cc973859eb16f1606aa31af46394e1e2658ba48d4",
+      "sha256": "3d80ec02aca58bea9c0890598eb0812af2ceba7e3914abd1aa0c298615558c02",
+      "bytes": 23184
+    },
+    "vow02_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "ef5bf18c546652269b0ec853cdb5a780c970ccc17ba955d4078caee939a3505b",
+      "sha256": "56f4b9b837d7d1f527c9703952cc137c53fa0eaab4b472a58a74a72da699ece4",
+      "bytes": 43488
+    },
+    "vow02_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "dc5c392f0123801333d4c312c07854a0ec00ba45624f9e03ae0c5f3aaa78941d",
+      "sha256": "a117b236e2e20651d33a33f2a4cfeb51beab226f8b6ac015f41b2e94e3536a29",
+      "bytes": 13536
+    },
+    "vow02_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "a826b451c76c656b52d55a9ebcfd6302f8ce1a56795544bbf831d4e39b317f33",
+      "sha256": "b6c399eeef7671fbb5b207d273fc8b62a91bc7a44b6a09296b8fbc9da7ede06d",
+      "bytes": 25056
+    },
+    "vow02_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "7303b000f93b3513f8489b2345333f8425905900c5c322676266a653c5a9cff6",
+      "sha256": "f9bccf73ecef7176dbdc968dde1b29b93e49cce9f0a980c81c26fbe7d35ea9b7",
+      "bytes": 31248
+    },
+    "vow03_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "1e62750a0640f9400bd84e2a77f9632357ece2ee606e1e02f07feaf58042a405",
+      "sha256": "dd4871aefd4d00c02b7cfc0466315db040f48a35422af2159e48609121aa49f1",
+      "bytes": 38016
+    },
+    "vow03_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "23c3f35c5559e9aadda7e652c5f66f74c09783b5736c8468ead0072781a06231",
+      "sha256": "0feb56c99e96003fb9d4ecd82561e45a41a840ed6eb7f610dbaa3a0b4cfc0bf0",
+      "bytes": 15264
+    },
+    "vow03_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "d8367f3d930f66212e6889cac2f538c4f040f491b8d076a2f94d038e5bc2a45d",
+      "sha256": "ee4e0c23d87f75192b45b7e28a5c46cbd97f99d279d53530c1d5e15d3fc9e672",
+      "bytes": 19296
+    },
+    "vow03_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "d199007c2bbeec8e35153724cc3e08a176e17e2eb931a54cfbc04e71893c19fd",
+      "sha256": "b531bbd0af2ad1fea09debcd0ce6a1b883169b00c8735f811857d9ede4a19aad",
+      "bytes": 15696
+    },
+    "vow03_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "0263d04eaceff97b70c212d5b2a1eb2368cb2064cf5af8d218699d1b276ab98b",
+      "sha256": "6629adba9e30e2081d9bb64987f2639f4fe5a1ffaf7b59e190efefe26236e943",
+      "bytes": 61488
+    },
+    "vow03_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "dfb68fbc8af8a303ab47d74c2255cc5bb39b8284aed44939aac169446cc7a5ab",
+      "sha256": "84e4a8a142ce18cbce6243e6cfbe7f70186f68dc9a4ccf10ebf10d4b581ec011",
+      "bytes": 27504
+    },
+    "vow03_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "74117145409d4b91f2750a4aef0fb0386eec67adbdf0ec829a325cbc6b7a1693",
+      "sha256": "054b7c295096b513f75ff26c93ca68a263273eaf081c5232120c06088d050f72",
+      "bytes": 13968
+    },
+    "vow03_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "45b31bdc226b408996ae2cc731635f57258bfd9d498e1cdb7dfc7b3a5fe55e8b",
+      "sha256": "863f47ca58bff531c53034cdd18bb56a019b24b523534dbe82417d94c330328c",
+      "bytes": 16848
+    },
+    "vow03_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "bc30e7ad02dd196534382eaec9ff2cb653be844ef2faaf376e56d4f12c23985a",
+      "sha256": "4e5bdf3f743e8dadfb3c27a6e96c1fc4d7fd7fd60c61c6331d6aeb19523cef8e",
+      "bytes": 10944
+    },
+    "vow03_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "227d0aa29a81c8aec7abd2663a8a83474f5dcb34da2327266d7b309a2474bf56",
+      "sha256": "8ae991188f023dfc1972d28fdab42c367692d3ae0a78e48290b7ec5e1a05df8b",
+      "bytes": 23328
+    },
+    "vow03_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "884554662eb5db418e6cc3ae5505078fb9cb28d04e06801280ea7fa1cad0df79",
+      "sha256": "3f7adae25501f6a3bfa1c19da55dbf321ddeaae245d723649afdbf0739ffc324",
+      "bytes": 45216
+    },
+    "vow03_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "0cee78a59c7da56c42c51f805a13110076858cc299e8bd06623b6b933f921407",
+      "sha256": "6d2392b99ee29f53d569ce3c58c0d81e63ccb085d33e1123666141b91122708e",
+      "bytes": 13536
+    },
+    "vow03_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "46638b1c83430a027eff218bf0bbc9b942556aa708ecfbf4ea9de939fefde7fd",
+      "sha256": "6e9c8d40da832e198703094b4e835159c7723916ae3b427b84121cc6c606fae3",
+      "bytes": 11664
+    },
+    "vow03_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "42e5a5e6838858738aaa21c180a3e054bf67879423fb846a484a858f123a0381",
+      "sha256": "afb421ddd10fcf0727fd7778ae279fb4d5d071652fb814260637b3d272c4dcee",
+      "bytes": 59184
+    },
+    "vow03_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "5e8f42ef33466dd18148f92fb17019a0edf16492549570a2a813ed7651089bd8",
+      "sha256": "438364af4dde4b916caa3c9b3313df3ded4593809dc811f0e005f793b2e9240f",
+      "bytes": 20016
+    },
+    "vow03_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "9a6bcfa7eb664f6898c6a83bf8f51473d425026eca454cded8d225f13a1ea221",
+      "sha256": "be7543435e9df840e99e62a4b88351dad5c5433dfb61e60295a267809736eed9",
+      "bytes": 13248
+    },
+    "vow03_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "d99beed02ecb22026e4357b6604fa98fb2acdc41f642adac50c3b170e6483914",
+      "sha256": "2d944c0e728bf2f3bee31ed13bf8eed1916f77486568b89400d4093fd5d42266",
+      "bytes": 10656
+    },
+    "vow03_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "1eef3106a9f090a05418d03b2a4c46aabb154909b03138dbfd5c20907fa32824",
+      "sha256": "2de0c780bea629ae8af67e6178bc5d177b1e4057256224dc8fe8c28ddbf353ab",
+      "bytes": 27648
+    },
+    "vow03_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "5da49119dce95fbb8a7ac385f7fb67fbaf275c535f54e2d8d41eff4cd2773702",
+      "sha256": "b40a8a1fc2670b2595d6c7666144b1847ab56e687f504935dc8087d18b301026",
+      "bytes": 12384
+    },
+    "vow03_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "21818d1be41a05286cd826cdf8e0d2da8397e07a0c4dd63d0feb99497ac2e37a",
+      "sha256": "4f76d25f120691166fab089da234403d8b00bbffb987838f009c0a8b4c8805bb",
+      "bytes": 38448
+    },
+    "vow03_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "0164722af91122a40d976132fbe4098834b7c57d25382542fc693fd8ba34a8e0",
+      "sha256": "03240f2929139618acc09eb02e076bdc381acee794d9d95162c5a5407c9bc291",
+      "bytes": 17856
+    },
+    "vow03_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "fed6c3c7c49461be9843177246454aeeb0b748d4f23a19bc7692509cf7c43ae1",
+      "sha256": "10a86eb91555c784f22567239e556e09c1017761c87416cba71c252340689010",
+      "bytes": 13824
+    },
+    "vow03_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "45aad89e029e6cba8ddd99a92287c1b7489b03bcf0d721b0b4eb7c10908b4c43",
+      "sha256": "d5cdc8878997e3e14e22426b6137c67ea513c81d79b1188d1d1411f4d27c5228",
+      "bytes": 41184
+    },
+    "vow03_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "edd09e2c73754614a31cfffa0e285f6a357480c8981bbc5a087ef606964d70c7",
+      "sha256": "e32bf8d750183a62e78f0b8cbddd65ff3367bec28aedfd0adca67cdc9b78ffbe",
+      "bytes": 20448
+    },
+    "vow03_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "dd15cbd6d923513d45af0b15f4bbb5b0d3103fdab2c99c21c833ea2e5510286e",
+      "sha256": "0ef3462fb900cfae8f92f5c1909bcdd0b7f869238741da260ad33779a214e33f",
+      "bytes": 26064
+    },
+    "vow03_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "51668822b0f792d70de877fe514d209d8465a62bfb4d8473eccf1db1904ad710",
+      "sha256": "b8f73e059e62958c332939034efe9faa016d353ea7ec03981a844f39690070d5",
+      "bytes": 43776
+    },
+    "vow04_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "0c327cfc5fff87c9c62097bbc6e90544c9ea6365e6c5ccdb7930f0fdbb9c6636",
+      "sha256": "55839a21b07be4b3cba159bba5a00f6bfae2b38099b2ceb0f41b369b5661c354",
+      "bytes": 45504
+    },
+    "vow04_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "cda3741d7406a6f3bd8bd19b3656aefdd66794cde04fe9be4aa090171c8ed10a",
+      "sha256": "acb102cd890a5fe771e054675a53b3160a3fd8d8a7c00ba802083708e6e2bd42",
+      "bytes": 13968
+    },
+    "vow04_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "1866c8405c7ea3232540fe57673d947cb7fcaf99d1e80c64a6221b907fd52c97",
+      "sha256": "cde170a7aca595dbfe02b31c5d3c4d8a55c1485663745d03e8d920af91a9901c",
+      "bytes": 10224
+    },
+    "vow04_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "c3248f7d7bff9290ba0990d3c785a77955688e4e2b324590a3edc5ed5ace9776",
+      "sha256": "b249870e91952c95e4e97e4f855010aa099944a390a3dd9b2f5a0d311a411a1c",
+      "bytes": 11664
+    },
+    "vow04_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "77dbf3bb94a005a72b61bcf13f380891f53c5801a4e684f6448742fa9e4cd005",
+      "sha256": "9496cddd22864f2af6e4ebe666c17c40078e3b7556c7512de1883789a3eb9b66",
+      "bytes": 40176
+    },
+    "vow04_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-arcas-en",
+      "textSha256": "8a3b9891a96aef727cd79e4ed1b1bfbefc42598e9a78ee195e4c4a36ed15c1b2",
+      "sha256": "61c8b5ac78dda1f25ea451a2a55b4e74f9f6509d1eefbefc44d7926e28a83f96",
+      "bytes": 12816
+    },
+    "vow04_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "f510d6a71b4cbe009bd4ca36bff82500cbe912b63cee0704503224fb775ca1de",
+      "sha256": "1dddd9ce0b6d419d1ea70ea0697e47b60a5c5057a9cae8e31fd015e4ac7d9571",
+      "bytes": 29808
+    },
+    "vow04_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "e2585a71186dae4bff4a6785b88dec899f46253379fdc35da1f6ddf4fa6fd84d",
+      "sha256": "5aa24b8bc7a6242f3c3ae8eb610c5493eb11d35ad23ed7430386532904895dc9",
+      "bytes": 16416
+    },
+    "vow04_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d4a81834de7ce7d4d89f958901e3600d63d64522a9cae5829523d209db8eb0d6",
+      "sha256": "a2ea0e637b42d56858b31253f6bc2cb4afa4babf0e36ed43517a503eb3029738",
+      "bytes": 18864
+    },
+    "vow04_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-arcas-en",
+      "textSha256": "17a3fed3da57c5ad08034a8749897f3a92d0280aae7b44067a7ce24fb20f6197",
+      "sha256": "a9afe50148b69fbc1859c48c1f274ffcbdd622129e1d8e8f90449ce31117010e",
+      "bytes": 13968
+    },
+    "vow04_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "1a2e13bb3417352f5bdc3212e90c332cc346804806d7e17286dd9396b8de9f2d",
+      "sha256": "c2f5e291e7f1deab38dc8500124b05b8a451238fc3f7487d7f3599d53d67267e",
+      "bytes": 57888
+    },
+    "vow04_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "32ae1725e94b694896f0190d7a4a94e2ad35a2ff20801048370723a39fdbb598",
+      "sha256": "1918ffa90217d06f1badad5d9703dabf6fb65d578247907049119738884346c3",
+      "bytes": 21024
+    },
+    "vow04_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "06b83ea7b3578afdc55b3dc9f457f6adab42c8b6b1abeea7bcf039fdf2172003",
+      "sha256": "3a78c5590af49f7e520f722b4b89f4cda0f8f3ecf9f9c58daa0e162ee6185af6",
+      "bytes": 16416
+    },
+    "vow04_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "01ed3c804caebddc3839129b0836e87416fbf2ee887208e24f1e5a802c967ba7",
+      "sha256": "1159eed9fb8ba5d04cdfb3314b896177712d7c39895d17f4fe45ec5ac3338c0d",
+      "bytes": 49104
+    },
+    "vow04_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "b973a7cf2f995abff6f14dc4e7e7450170eb7c37b48fda1435c73708b8daf561",
+      "sha256": "28a1db670b430ae5c831499bbcd5dd75135b29c55e9dca9903198f385e3c3640",
+      "bytes": 19296
+    },
+    "vow04_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "3e5a3a353914d3759738073110dc17e5e209bff783c8420064362e9deb1d589b",
+      "sha256": "c9be3a0eec974372273050dba51f68962e3340fe76e5b99e444701a63a9f769f",
+      "bytes": 10944
+    },
+    "vow04_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "5a9240ab1afe5c26f4aef2df17216173c3e59d5761944ee653f596daeb1b6ba0",
+      "sha256": "6a2ddf6bd61c05f04fc1eecb4f9bde16992025e886a39527fe89ca0661b34c8a",
+      "bytes": 19584
+    },
+    "vow04_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "c7f439f318f15653362abd2e7350ba83331809ec6890ffaafd5e25780fd2fcb7",
+      "sha256": "ee40f53ce4ffd417e2d315ada69bbfad3cf96115a86b8e322e04ddcd1f84f6c2",
+      "bytes": 18576
+    },
+    "vow04_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "5730f52779ad996d0de8fec338ca3f711346ae4d034913f15d072200a79e5d16",
+      "sha256": "7791cbdeb46c02bc9618b8ee0cc3d17d2079606c60209760ae0086cf2bcfda08",
+      "bytes": 20448
+    },
+    "vow04_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "4bd0e41cb6998a712a486542db2bc537ecdb40305804a0f1479e32157ceba774",
+      "sha256": "6483ae0aab25a43516247c8df586384beb56e6a7a09d40f24182458797745ab4",
+      "bytes": 36864
+    },
+    "vow04_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "ce144f18a34ec2261aeda546a06df76ab43e0e35126a0849a68e0663a326de20",
+      "sha256": "80b5157a7397608cd434027faa92511d6d7add0b985bdc1de1764b2fce276b65",
+      "bytes": 22464
+    },
+    "vow04_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "23665d62b80d2ba9aa8f3e4b9e859d54b4a72cf7a1e350916206e3b2e70e0e0c",
+      "sha256": "91221b7dcc16e3bb6c5f1a838b1cef55530b9e48ee40fe2beabfb70675b2dae2",
+      "bytes": 8208
+    },
+    "vow04_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "de2612db412ecc2b5e15b327b1d8c7bd268d79cedf39d030e4d06e79e0edc1cc",
+      "sha256": "e6e7b142cf3a0004f44e232293bb5a89161c44e26ac50a19edd36aff803b3461",
+      "bytes": 57456
+    },
+    "vow04_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "39e97762a23de28cc850c4a85624468eff38d6d8e9cbacb7c044add5e4e00996",
+      "sha256": "12c6a37b0fe28793b613db948d636cf754883191fba4dacd3810f1ee8822a728",
+      "bytes": 19008
+    },
+    "vow04_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "e7e488e140fbf1091bdfc6ee46aa90b4a4cb761c4a40c672b6b92ef70384be6d",
+      "sha256": "8c9e71687bac1ca4bf06ba71372e933cea1b75c435d152b2bb322dba8fbc50d5",
+      "bytes": 5904
+    },
+    "vow04_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "247aa60dc3d69848fb6a8ee887d6b2040777498a092723079f9b4df7a5d7d57d",
+      "sha256": "f7b3cff697c1e8b8d097b2dda5f90dbca8a1bc23e01a9c4d834872211508e0ba",
+      "bytes": 43488
+    },
+    "vow05_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "5e7e61904035da264639212604c933222ea12a91a0276677199300436115b6f0",
+      "sha256": "b77419ed7b04689833bdae31bda94adf73b14b4272af267b5fe9808309dba930",
+      "bytes": 62208
+    },
+    "vow05_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "9dfbb81b27bd04c613992bab7b2782c19ebcb2680cb954eee00f1238aeed3d61",
+      "sha256": "7ef859914314a12ca375bf2f5d4c726fdfd1ebdcb137bf939d164d99e04a5840",
+      "bytes": 15696
+    },
+    "vow05_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "57c476606636034f5a0105a701e02780821520d027ad88e760064798f331a714",
+      "sha256": "419d9dd822499f9195b7802b69d18fce17f9ad2602162ebf866f735265f3b0f3",
+      "bytes": 6768
+    },
+    "vow05_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "9d41ecb238eb8286818208bee892333d47e34f22a5326bc168c9befd23b2911e",
+      "sha256": "6e66319e1403a64e8b97d154e2b0975170d9659be4c174a35ac61fe5f49cc9d7",
+      "bytes": 18576
+    },
+    "vow05_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "12af84bf661bea79d49e3987418f244a5ec0ddc9feab4371430312bb40d90eee",
+      "sha256": "5ddf5a48702757cf9740fc0bbbc4c8a0131cee136ae8b595633986bab187a8ac",
+      "bytes": 52704
+    },
+    "vow05_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "4ee2a583a02af246c45994501529d77a4ef10a8abc8ff31ec09aee04d3895cca",
+      "sha256": "e0627e62a57c7fa3a0626c0ab1c3bfab2be0753d2e56a0c25008dcb31b39d043",
+      "bytes": 21456
+    },
+    "vow05_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "05f31daa399feaaeeeda7f5196e762c2d970e51c135939ed6ba41bdbedc58918",
+      "sha256": "bdc0f5d8da8f67c252c2d7fc7276fdf496e50fe08f385844cf7012183ff89d7a",
+      "bytes": 8784
+    },
+    "vow05_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "d632e619824ae852c58d4a006c127c4ca3897c1a8838b08e54d41b863e9f959f",
+      "sha256": "35fb03f6046393cc9f05c403c3931d5ec2ea81fabf68b48e41e227b8206bb32b",
+      "bytes": 27216
+    },
+    "vow05_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "1c584aa9e8792bf92f3b1c92c9c7cb97beb51e070865351cb6c107bb2b6a4f55",
+      "sha256": "b8a10f8485b994c500a2d8be9a97f96565e065530faf5c842bbca70d61a5d1c2",
+      "bytes": 29088
+    },
+    "vow05_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "b1bafa6dddb00f5c8b25c5968beb9a1e944d8714e24c33fa98531ac9c648c01a",
+      "sha256": "6993e2b7489009be9544e4681d395bff7c12f71d6342a1bf646b691a8d6bd80b",
+      "bytes": 15984
+    },
+    "vow05_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "495f52884046f93025f5ecd87360817a573ae9315c7a754be4a80cca170bede9",
+      "sha256": "f0fec234153db56d2375c7496796ac353f72667f1f697d562588b713f841812e",
+      "bytes": 40896
+    },
+    "vow05_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "4879024be07b2470bc561a55df5a4571b1c63d8b3ec4a0f3270e5e99214633a2",
+      "sha256": "3fb48c1f79b3527c5873fbe319d9e3bded1ecf3ccba221c5f2fa8739ecdc876a",
+      "bytes": 8208
+    },
+    "vow05_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "1b44c1be54d7ea6356ec7790b4cbfab9a2707c47a418f26b55477d4d4b29caab",
+      "sha256": "1895692c5f0828df4adf6cb624896dabdabbd2de38bb56f151c11fb444fac3c8",
+      "bytes": 11376
+    },
+    "vow05_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "b25e8341b8abf608cf682cb9001304c5dc7da56617211519e80b42ca32e072b3",
+      "sha256": "458a46ec331e7eadf36838586b7de6e9649eb987e7987272588f077cecaa79f1",
+      "bytes": 60624
+    },
+    "vow05_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "5032cab269b6b38002b0ec2852b2f2d8ebc7aa47635f28888318bb7f997ff047",
+      "sha256": "0cfe3160febe1f99d2a07defeea73ac9f15f5c3988ae2d2ece0ea9c4722f44a3",
+      "bytes": 19728
+    },
+    "vow05_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "a53f5b86ff2d2f8d3e673d5a6ac9379de8244487bca9c27540498ab9187203f0",
+      "sha256": "aaa0100930120133d45a0a9090129d634eef4e6aeb5ebf2475e94c7fbad15852",
+      "bytes": 8928
+    },
+    "vow05_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "42809752263fdfd54ccbb5952d1472d6524302e0b6568a0d40e7d8ea37be1407",
+      "sha256": "d47d4f7c0b16b76b934d117a3ccf1318885e41f21fc41b8bda70753acfb9233f",
+      "bytes": 17568
+    },
+    "vow05_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "b3bd614707335aee45dfe811c5916484ba3373bc369f6edcde1936917c0b97eb",
+      "sha256": "f19e8383f5c742a787b31d5a773787570b689fae3525527863189e9801c2b880",
+      "bytes": 16416
+    },
+    "vow05_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "41c8470cc1d14417da6a6e781a47014f9300c3b7270db4e6704bda744ba1eb5e",
+      "sha256": "3b7101ef4df7effcb0f20815c1486607df64c4f99842aa5799b02014a2f2f523",
+      "bytes": 19008
+    },
+    "vow05_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "e9c7f07732505e76a8c0b0d8ac1bc568842d0a768035033d822f337f813cde4c",
+      "sha256": "fa8845d976a1cad9cb6b50088097497446140af0b5506b7cdd1bbf89fdc02518",
+      "bytes": 42768
+    },
+    "vow05_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "59ea1290ece28fde0e2906a1af490ccd194078093c5a213fa099ec8d9a95ca2a",
+      "sha256": "7fb081208d06c9245dc2198b181a119450d402e41c50f9e2a1d489eb1112ad1e",
+      "bytes": 26208
+    },
+    "vow05_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "57598cfa8556032e30a2da144d182e379d3d3d0fa84278dab2939e3209df389c",
+      "sha256": "9e8b7de385912924458ee815525101d70deadcd1a409c5e7cef3676f7a19d097",
+      "bytes": 10368
+    },
+    "vow05_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "06cb1d57eb8b4409a033cab049cdcb8b23bdaf554a9aec75295aa06dc24327ab",
+      "sha256": "70d124e5872de628f404437ac607d556cd3633b5cbe313f13e755a65722cea59",
+      "bytes": 45216
+    },
+    "vow05_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "dc0cb33cc59e5d1688b63db36462bc60ac5247153a992535f2b514e00a08302b",
+      "sha256": "bc1f75c2ebc51456f9c84c4f2fdf4a79b4c16a2a0e9a266d72071b7f02d93cc2",
+      "bytes": 16848
+    },
+    "vow05_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "73d4631d7b57e0a33d42f1441392409ecc247a33cfae5da415622d917e3ed9b1",
+      "sha256": "0aeb55f9e3f019bca1c4220752ad8a4a62351fb94a51954884add33067dbf892",
+      "bytes": 21744
+    },
+    "vow05_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "4996b98b90b7695fc53ced0da4af9eb444c5f056ffdf10e9351314d51ebd421f",
+      "sha256": "b9b6eec4d70759a6df1e9c6f98a769986c9872aed0ac8dd1a271929d5f73b344",
+      "bytes": 20448
+    },
+    "vow06_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "904a16d6e6ac33952decab787bc30ea6ea0cc566554f21981d14c7a3a7ff2a03",
+      "sha256": "e6e51cb3dcbb25dcf5c1356a5b8283450042a5e085778ce546d60e9afbb1a854",
+      "bytes": 52704
+    },
+    "vow06_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "c738e10a406ed004b24cf13110f08e7a6c704fcbe9e127558492085bd02af833",
+      "sha256": "becbfb81d97ee5754e9a537cc8a6960ea4654cc529a0b01dd8054432a6c2a458",
+      "bytes": 16848
+    },
+    "vow06_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "dceb2cecbb2a5a1ee4a660db2655a67ab7665803ae9bfff743e453d5fb4c5970",
+      "sha256": "50832e01d521b5ac4aa6edc9b644a9bb840ca1023be3b2f38a66032c17c8009e",
+      "bytes": 16128
+    },
+    "vow06_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "69f12a1b13a4e7fbebdb54817d97f1f4edd6281b0308de4880e7ca4356e03d99",
+      "sha256": "a7f9aff91c8adfac3d8e13e52b2b76d948da49f832576362a4058ece142b2ecc",
+      "bytes": 12528
+    },
+    "vow06_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "846425d10ccd77e9d317d9109be1e1fe88fb15bbf6dd6f00d633c7204d0391c9",
+      "sha256": "8f7dd3518f36be97396a579c2023ceaaeb12c95c58b50b32b9dcfa62992f716e",
+      "bytes": 44208
+    },
+    "vow06_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "b2e8a4e6132989ec1366876d7ec5dce7d2df63448c34b322021bb5c41d4908a4",
+      "sha256": "1830ffb0bf6556246223997fdb2b262aa86941a83b8cbdbfeac7bee3b0d69aa3",
+      "bytes": 26784
+    },
+    "vow06_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "be82c066fa2f1abdc38d1833c837c96c394a5069c83d3dcc55fa9a40720b99b9",
+      "sha256": "63d402d86e1f362ef2ff53fc7b4a36fc9aac73aea68a0869165aa4e5c30eeb3b",
+      "bytes": 16848
+    },
+    "vow06_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "bce95acf8d0e354afc128b0004ffa8248dc373d809357742f5ca6ac4313229c3",
+      "sha256": "226121a413d8145ae6664d7a13afccadc01e993d8fbb7bb4cbebe0d7bc2e6163",
+      "bytes": 21168
+    },
+    "vow06_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "c93b28f0c0d46b55eeabec36354b30d6c86c9a57584023f5a423b10e86597310",
+      "sha256": "aae1a7055c6bedf1bfbc78e3710a2e9b1bc7e60a634a5c4e1c835b24c58080fa",
+      "bytes": 10368
+    },
+    "vow06_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "94edbecfd8fa827a229a3e4d14f98e6064c74067d730191ef0fe5ec17561339b",
+      "sha256": "5199740d335b244c558224eeaf432f234de98673b4c4fc1e12d32b9095657ab0",
+      "bytes": 12528
+    },
+    "vow06_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "c199ca1bcaa6213cfd97bdf66c68aeed486a5795fa20eba5d4055d227f54215f",
+      "sha256": "69ec3d87b22208ddc7ebeefbc1990901914fa9a36dca475c2da9dc3b16e89762",
+      "bytes": 42624
+    },
+    "vow06_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "e0b6b94b5a608987bbbfaf1db7d5edf4a4b4f5ae5a964ba3aac2d39135ae0af6",
+      "sha256": "a430ba7aae56230eabb2eefa1da1c8a494ea317af9027b32770b659380b7568c",
+      "bytes": 9504
+    },
+    "vow06_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "7c7cf396b459fdc73621827215fafb96fa1bb1ddd210ef2dcc6889e908c98380",
+      "sha256": "dfb9481afa26de870fa74026711d7d46ab54001358c3d9a33d9e070fd225b5ac",
+      "bytes": 21168
+    },
+    "vow06_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "3337050fe5bf18d277c6d80098fcc1241e912f1d561369aaacf4d70377626940",
+      "sha256": "1e2ac1c3b00145e4b7f1d8b1062b72859b8fd9e98058867356a6bc0cd9b02582",
+      "bytes": 39024
+    },
+    "vow06_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "0610040399505382ed46ad52f5d26e355867332345611570bee3c657e5a28a27",
+      "sha256": "406e6498ed39a9a3e9a912993e494db155645a9dcb5d7ddf8d331e7a06e7788d",
+      "bytes": 19728
+    },
+    "vow06_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "ada3a836053d545e1f4a57197a7edc33bcf7d1ccdfa63b977298d97940be6c2e",
+      "sha256": "ed1b15b153489d703aa7acc60a4766e90c7b921a36cb36f0a0e094b1ef657d43",
+      "bytes": 19728
+    },
+    "vow06_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "2797c87adbf15ea2930f8620d5de66afb373b601d3a918306a12a13ebe866630",
+      "sha256": "3a4b8f0f8acef4cea1b49bfc5cb949516de07a00d58f69be426b82a30a9c1930",
+      "bytes": 24624
+    },
+    "vow06_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d971537fbb95283151aaa88478ab8e1b021c28b50d94bb30159a0ab8a824bf34",
+      "sha256": "04ebf24e67d8206cd829a59131b0f13a233e6d96db674a544acbd9dd0079e42d",
+      "bytes": 17568
+    },
+    "vow06_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "d7b66f19f064ee347f2196f8f30bed286bf3fd184b3cc5758c437ba1e8d8bf37",
+      "sha256": "92ae0ec25b2bd3558accc8c60163c4ac58aa5269ad8cc207a2e1e0907f36cfcb",
+      "bytes": 15984
+    },
+    "vow06_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "e99600535e2e09605cc7da09d8fdb2c4cac9c75158ad30c671a25c3696bc86cf",
+      "sha256": "28faf4be88fcae32918828d4929b83789dc1397618fd9201d90fe26ef0a55c71",
+      "bytes": 49104
+    },
+    "vow06_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "dc4a53957c29ae77817922a4b72be721c99e6324933b243ec3a7b6dee6ba7eb1",
+      "sha256": "380bbe766c47fe5765e0d059f1b063ab9e520beed65bb8de284113f5538c478e",
+      "bytes": 23904
+    },
+    "vow06_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "f9145db4280673bc35e502b2316e3cfae4ba9bdc828f3d864b165d132b81b91e",
+      "sha256": "33c6afe2e20d845f71145132fe3a0b97a707c1a9f7dc3abdcd0d21757f6a415c",
+      "bytes": 15408
+    },
+    "vow06_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "41225727198c7f6fdd77e3224aea9b05e526634126065903b3fecb4a987f1fb3",
+      "sha256": "409aed3ca0e94232f58ac8f2d869c1809c359d8d9bb3d366bdc1d9c916dfe2ec",
+      "bytes": 45504
+    },
+    "vow06_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "0a4331345a5c78a8de47c5211944345bdec06d944f50a1abe24cd66f94473e67",
+      "sha256": "1e70786b6eda5c83a7dd19adecc79a56a7c9e89a4e034b1d4e42883366a155ac",
+      "bytes": 10368
+    },
+    "vow06_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "1c5fe0901a2413cf9ae999b4a2d1a87e31bf010f4215062c056df705c4cc5318",
+      "sha256": "90d7e2043a24379163ca9e032a59b519530ed59f715e42dfbbd3b834d015d7e9",
+      "bytes": 9648
+    },
+    "vow06_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "2e36b74d0d1b00082592d42375f832f6619164a5076580a34ec062b292b2c6f2",
+      "sha256": "43ac70ae740715f53c07b650d2eede1fd6888c0ed0923af7239c55f9d85e5ad8",
+      "bytes": 7344
+    },
+    "vow07_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "2c51ab77554076558cd0728c788b972aa5f62f33160a662ebcca34c7a0d5c487",
+      "sha256": "e36e0db53577325715f513bf44f0eaab166bbcb9e99e69d9cab0a2e59e2d83d6",
+      "bytes": 52704
+    },
+    "vow07_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "f5e022fd15a24ddf0d2e6e9b123ee32a41ba909220475a1bbc20e4c4a1070266",
+      "sha256": "b7f38de232cd8b6d6142ccfaae6440608ae994e614546e668cbc2b05235c9cd4",
+      "bytes": 20016
+    },
+    "vow07_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "0602ea7a2fa1a7105ac11ddc371f74428c6ba6692b031cffbde1478dae070121",
+      "sha256": "e4781b5b7dd417638707a276a20101f000c44633debd62c8b85312230766c797",
+      "bytes": 24768
+    },
+    "vow07_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "4d09899212f2a8b013154c762f52af5334dffc6689121ea2c0a90c50c5347a53",
+      "sha256": "bf8c50aec0f1ea730215830fad3e1b24d5f9784dc592c3cdab01191e4d9d2a9c",
+      "bytes": 5184
+    },
+    "vow07_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "5d287d350f07a66178b60dcbc1e512408ba83ff560dc85ff3407ee7f1e0e1327",
+      "sha256": "16092955e0be0ef86a79d126e42e68f8658d8895c5d685249549312d9138bebf",
+      "bytes": 56016
+    },
+    "vow07_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "32002ce439d4846b81705a5009b961798a625754543e6c75ca0158a0e348deed",
+      "sha256": "7aa8e5e132497b187f8fb40f659b169690dd4598e20169358ec2d2896599121e",
+      "bytes": 7776
+    },
+    "vow07_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "1cbe15b46a591023bb5cc6ae7764816e7a79e128c8ba15e3b5b5a3771802cdad",
+      "sha256": "b7e26090904d162d7e9e23406e120e4718d23b64077f45a145a176d8047a01f9",
+      "bytes": 18144
+    },
+    "vow07_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "b6f06608c9ce87ef6b2b3ec0c521ce677bbd93a9ec2746684967f8eca7d30832",
+      "sha256": "8b3579e7d5bb3e76b1a054bd6d21c4531854c1b6dedd195b940b223654f68392",
+      "bytes": 16128
+    },
+    "vow07_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "89b5efb59ee9f7f33ddcdd4f988ecaa0250ca830f4ec70a3af0915566cec24e9",
+      "sha256": "feecccaccf5ff7e812435d334a10068e4eb27a910c254f7e49671d0f9eb01421",
+      "bytes": 8784
+    },
+    "vow07_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "f75521157a71b23ae71138935242849ea8d64b3608d36279a334083ce4671e1b",
+      "sha256": "89feff3a6168846eaf0f97e3ba72d40086f1735920f41ac2125b7ccf24d6e64d",
+      "bytes": 10944
+    },
+    "vow07_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "59dc51f6e5970487dbce325e5d8830316f79f99f745ec883ed94d0401d60da8c",
+      "sha256": "b8a240e38630f99434f1f91716c60b34789833020bd76bd40b5f58ac21d6232d",
+      "bytes": 44064
+    },
+    "vow07_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "56f08bd4c66f5e582365211c6bb20d829f5a07c3afa1356940b0d21181f3c9c5",
+      "sha256": "55ddbc026b0430427710005796b86bae3cf025795e66acce66ce00fe4fb8772c",
+      "bytes": 22464
+    },
+    "vow07_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "e3a3b2427f1b29de3376b169546b74dd78950abc920795f76669a1623e65409e",
+      "sha256": "61b9c63ddeb9de18b20d52a1e1d614e1e27d0a23a2fe7331e8d9108810ef8355",
+      "bytes": 23328
+    },
+    "vow07_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "e06bb718738a8d76e95f85a0ba43e6814051bf34eace470cfc5d9bcf8556fa6a",
+      "sha256": "1833237c896746c38b8e10869a467f69ed02402db801315ec52f7d681f2033ae",
+      "bytes": 44064
+    },
+    "vow07_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "f4c566e9b6ab87f73f21d52831e9ab37137bca4f46e1105574043a1f561ff511",
+      "sha256": "9dae874c3395a9d6a8d92f8f6c16897fbe7267086b8ee3cb1454b8b8a36d9c5e",
+      "bytes": 19728
+    },
+    "vow07_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-arcas-en",
+      "textSha256": "caa3d37e420afa7b435704fc513050c22f0a3847ccc079e49f6edd1348c4d5d3",
+      "sha256": "517881ea39fe8130fd3f676b4b05aa1d4ef206291f9432b78dfb2730f36ec7db",
+      "bytes": 8928
+    },
+    "vow07_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "a5f03075018c6bd11f8cbceae033e994df6085e14f8187b350ab4bc9410338d1",
+      "sha256": "de77109583cc7083b40006139989ef5484424279ea3a097c74aa309563edcfe2",
+      "bytes": 15264
+    },
+    "vow07_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "69286c60a6aabd067faec373ae46bc27d484d194e231394a2a7fe2a6e9fd94a8",
+      "sha256": "b082cd76522778e2ea5015ec490e41c08ca11572ded21ed95a6ea2bde827977e",
+      "bytes": 27936
+    },
+    "vow07_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "463d45f00a3d1b050aa5b1ba7387214f41a7f8a8509fad257b9b8fe83bf45641",
+      "sha256": "e0e697b75cd362e97bb996014a67e768e79e364e7a52b3e2b56db05de9da9d1a",
+      "bytes": 16416
+    },
+    "vow07_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "1e42c58799015edc1f36ecc873ae3bee927c9c45762387c3ecff9bfcc91b4a4a",
+      "sha256": "35dc9e8e83fd30508e5781bca71588d1874d374b2f9412fcfa769da4b72e503e",
+      "bytes": 39456
+    },
+    "vow07_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "231a7183f1df9003e9d7bc80019af243995d752a4f4a09a16d49b9e796531ac5",
+      "sha256": "addba41abf11185c27d6c4e09e68d956b10effca3d5b79bc50b0c3cfac22d0af",
+      "bytes": 19728
+    },
+    "vow07_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "635744bebc3cc50d5f629e5195e3b6e0ac06ea63fb97e256a0a907bf1628931c",
+      "sha256": "79848697614ea4b68450abd261846b064afec5316d3cb25144e3953b779f0c02",
+      "bytes": 15696
+    },
+    "vow07_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "3d92e410bf3fa64e7e964f512053bec6ee4eb89facb44a539393aee8d7431ee8",
+      "sha256": "7ab0b1366dedf8f8cb81633e3172ccafe48c82e8585f45f26a1acc14c2e2fed1",
+      "bytes": 51408
+    },
+    "vow07_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "745588e568da6ae84282307b217f26b24fb0c5d6aea4623f3c2dc8aeda721c67",
+      "sha256": "f1a139adf996238bc270424996aee4928ee524c56404b39aa6c27bca5ed620c1",
+      "bytes": 16128
+    },
+    "vow07_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "674f502466d47a231048752d5b533f6f62f6525a5a732d49575d3b2c9ce3ef76",
+      "sha256": "d1668912fa0576a3690cb5e16b8bb55eb414777493d153263a3f3ee82e4e28dd",
+      "bytes": 20736
+    },
+    "vow07_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "88d02ee492997b73d0193b1e102b13828f9e14552111dd4362526ed3166b5d11",
+      "sha256": "50fc7f6517a08a0c8e71c841555e5c75ab0b13739fc3bb4a77ae3c5bf61e7fab",
+      "bytes": 26208
+    },
+    "vow08_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "62abe09b335a52caffa16dd0216cd3bc5282ed0218ea980d48df72671dae02a5",
+      "sha256": "a527caba9253015ac2050d8c1e3123032a0a13e1177102e9b582af3f8e7e73b7",
+      "bytes": 58176
+    },
+    "vow08_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "903ea500e7ccf842c1312b6c2f964e3e98ff146456cecec717e9a0e122bf735f",
+      "sha256": "019fc65e087aea1ff1cafeef3f5be4579d44c181b3b7c6d4485cdc115f57449f",
+      "bytes": 3456
+    },
+    "vow08_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "c982c5d0f60cee6f36414a1ab984c6e6d9aee0d3bb9171021a1d79bea14cf812",
+      "sha256": "2f7a505507443d7ee473944773c0635e4f958fd038655ef7d110a4ef16ccfba7",
+      "bytes": 9936
+    },
+    "vow08_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "a4724a5c7ad2fa67bbbfbad0e0c214204e4e85a9c01f225d15128277b2b369cf",
+      "sha256": "19d090cbf48ad21789ef917fa3f398489c3004d5cb829bc1568ea08571f00af2",
+      "bytes": 18864
+    },
+    "vow08_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "cc5f5291ea8cccc628379ab8b75359e11cc4b3a51f3b7a6ca07e84f477a7d917",
+      "sha256": "33891bb1dc4e092a6b1c01ff7f2034b918d3b5521e9b178837660d14752deba4",
+      "bytes": 56448
+    },
+    "vow08_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "540de1f5802f93d13773d815f00645f4bfb8422b76f335e40543a16174adeb83",
+      "sha256": "8281904354a8769fa44bfc8f1cd1784440e1ceed35346b1c428b1be014f24b5c",
+      "bytes": 18576
+    },
+    "vow08_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "48583f41da23b44f9091eacf66184f7b783a5b59ef790f7ef9e35b91b3f12179",
+      "sha256": "c299ae2ca53931b83a662d8b25cc4e82d5dc85840f0db82682eb26ba621e614b",
+      "bytes": 10944
+    },
+    "vow08_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "33bc2deaa003c9328068e7abd3b12451d259a693797cab52d80e22a99217008c",
+      "sha256": "e0422b1106ebf52d967e6de8f0666468220301e8887226a31ba0addc393a1b52",
+      "bytes": 22608
+    },
+    "vow08_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "6110ceebe6fefcf1f1bbf6f3de657f0b92a3a92f51f488254b474c151c690d95",
+      "sha256": "c0c791aa7eb1ee97b62043bc7379838c729bcf2ca3799f7b29829e3f65a46dc4",
+      "bytes": 9504
+    },
+    "vow08_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "5d80b93fd334d28b6e1f3dcae17875be03274860db7603240bdfa8d53e4f64cc",
+      "sha256": "5e99f3ed89a47fcc1aa26461e09f8e52a812db623cd3137811e07ce7ca7cd080",
+      "bytes": 11376
+    },
+    "vow08_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "81568d8da0db36bc05824759efcaa4920ae704e7501a86ee8ff4c4ecef2fd12d",
+      "sha256": "c2fe032ece8d90c7a0c6a3ced130d4baf37612da6e090a6dd8a5bcf64862cd39",
+      "bytes": 47664
+    },
+    "vow08_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "f8c7fac6dc338fd61838c1d945fd2b26922f0fa708d5a52556ca370001bb798a",
+      "sha256": "1b25eb37754cdc14f45b602fb3aa72c87648616c5a2482c836f50c0ddb28b869",
+      "bytes": 14688
+    },
+    "vow08_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "2b1fe73c8efbe11a2a59036abde5eeec3df8f338d544610233507ea2c1ca01d1",
+      "sha256": "b6ada653a3aa0d798b108faa1cc4ba2e4290e6d9ea80317eb398aa1ba9112a48",
+      "bytes": 9216
+    },
+    "vow08_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "3e75752517e3a1cf5b5a5b184c007c96f79ee6d02dda1581ca6c328eb7453b71",
+      "sha256": "01826e808daa6c9bf38aee32e36688a659974e55131f543148d0ce8f65658c85",
+      "bytes": 49104
+    },
+    "vow08_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "715a884ed32b13c0e9f82491e98db150b07a9106478c627b990b594785a054a5",
+      "sha256": "e5ca9dfe5d2cf580c186c8cd03028ad89fc81d9b4cfbb9d0f3a7130a352f9883",
+      "bytes": 10224
+    },
+    "vow08_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "36073638edf8e707971949e21a7d2e637403e761755b2ae1cddc5d9a544a00bf",
+      "sha256": "758f2d054be0489e391b33a57d04b9088c96c54cb11d353bc3a93cadaa3e4fe0",
+      "bytes": 16416
+    },
+    "vow08_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "52d35d1a2ea191d396b215092251354bb6c83a068dd4d6f5cae0a8c7768912d4",
+      "sha256": "8ae7c28592039d10359cd9d8f1cb925c471a4fa52ff7613c9ea387188e32e0ab",
+      "bytes": 13104
+    },
+    "vow08_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "1a361c1b2c7fd7dc1c8162f20abb7a662195f8530644a0aa62f045fe644a1b9b",
+      "sha256": "8fe40dfb101ed5ab0ec368f58f9b653e25f3d66d1562d2e811da4416ec17070a",
+      "bytes": 17568
+    },
+    "vow08_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "5acd417c18edb7e3d2c69f9a3f9f22a61e7cc17e7cc77153bda3fc1d8bebb337",
+      "sha256": "a8ccd90d0772d6cdff908ad0ee83c5be1eef3bad19043cf934ee0846f7d9e43d",
+      "bytes": 12096
+    },
+    "vow08_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "26707633437031c5a55a700caa1dea35cc3838d208dd27263af5a9291b28e995",
+      "sha256": "ef31552dca028442f4d81c6a706e31bc02b238b4b4bd062cd8c66c2a592790a5",
+      "bytes": 39024
+    },
+    "vow08_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "1178a9403e00cc92028a05955c1df4b0308b499128152ffd4f321ea2aac65f04",
+      "sha256": "eee310664dfc129f8df4e1525c02445c32b7ce98af4a63c25e645132072b15b4",
+      "bytes": 15264
+    },
+    "vow08_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "b3ca7dc19a0b8363dd1e6815102084795f600e838de70e00c7369b719a648364",
+      "sha256": "9ec24381f12a7f0cc23ad5d39a9431096afe8b17f1a2ef65177ab98b1d5d41e3",
+      "bytes": 31536
+    },
+    "vow08_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "b0719d84778970a48ed473b046831ef2bede6fcbe6b8c0c3f77f0e69aa27c844",
+      "sha256": "6dd6ffb12e07d12ccf76986bb8b8c16fa96c05c5a8aab415a7d418f714625601",
+      "bytes": 48096
+    },
+    "vow08_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "41d66a14965dcf0ca4bdc7eb13a3eddb057782f303863e65daa2f9d11562c48d",
+      "sha256": "bd9c33d2530c5c3c697662d3befc1bc39490d903d9d9ba86fe0235ad7ae41cab",
+      "bytes": 8928
+    },
+    "vow08_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "af4ecdd8a1b16f6a8fc82e34168aa165f27c3bd3bc4eaa3ab45974fd75d81221",
+      "sha256": "13575cbad70e9a4279f7e9346166a8fc2e85a53e2219a6794b7cb80c709ee0c7",
+      "bytes": 23184
+    },
+    "vow08_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "3fafe994b67cb5d9360ef89a53e18266ad7cb491ee13f3d5fd073dac36678e46",
+      "sha256": "5a42047a053330b1a9d282f06209ee7005a2bf4b027b6b139e9d22ab91539f95",
+      "bytes": 38448
+    },
+    "vow09_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "79c0df23c6072c563e805ab0849e5190b772d92054f55b06756c143647236927",
+      "sha256": "f7ff0b07b8893c67f03e05d50f12aacbe8282c2ea8eb64ebca2e8e42a3d117ed",
+      "bytes": 58464
+    },
+    "vow09_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "68f726a3512d445f52137f1d75fc5f55008a2f7335a50a1e08f6aac605a26507",
+      "sha256": "24efe99d2d9d3543812e6d7de6e2583f6e56672bd51b1456ba5c453a89070e1d",
+      "bytes": 13824
+    },
+    "vow09_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "027827f70b91c8b6a58453fc74f0b80cd3ad431bd1b5362b536a3a2915c06345",
+      "sha256": "aff5044ba53dfe2c155e4131c30d543512d52a121f7e9fe030a608baabb46f35",
+      "bytes": 17568
+    },
+    "vow09_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "0e7af50471476fa84efdffb8d4bc257bda6de4b9b090547a83c51c896c2c4041",
+      "sha256": "674310a2e53905d48797d1836e15011626521e69366ccd907a11690a9ca69646",
+      "bytes": 13968
+    },
+    "vow09_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "32ab54748b1a3df79b59380f343194ae6e290bf1163445e9dc76ff92f7c2e92d",
+      "sha256": "d847e591b105217023cffd857924cf25d453e9b377e1e358caa5feb86ddac5b8",
+      "bytes": 41904
+    },
+    "vow09_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-zeus-en",
+      "textSha256": "5c27872fc72fa0fe86521201de52153b6a2429d90fa0f61a68eba198ac40e981",
+      "sha256": "be2a3586cb35a5f915b20354ae1d5b1aeb245629dec2ceff9ab9e486a9f3663b",
+      "bytes": 7776
+    },
+    "vow09_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "67b334fa60f3f95b3742f27e1328bddc0a481ad50a11a0733e51dd21ccdeca71",
+      "sha256": "67d54bae7daed0accdc0b69bdcc3123aad3587f4bee892c5340b217f2078922b",
+      "bytes": 19584
+    },
+    "vow09_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "a13c590b4eaa34b707cd8a63c28621f5a4713c949a74d9c1119dc75c90f46fc6",
+      "sha256": "da5b1c662313c8452b348971a69da6efc910ede130dd6cdeb99704f11d64348e",
+      "bytes": 13824
+    },
+    "vow09_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "4c72ec3b0efd60ade30a18e1efa31e016f83cbe9b135609e5a777ca972361741",
+      "sha256": "c373ebdca0f35e144a5b45334c3b27e34f753a1c4b9965a4bcf4a7d5b36d019d",
+      "bytes": 21744
+    },
+    "vow09_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "5d7f7765b05b9088750f6cf24e27ab429dce3c3c52083d348b92ada74fff799f",
+      "sha256": "3215b59addfee5888b54b4feaffa71737d811b28da86f9a72a68390a3885d713",
+      "bytes": 17424
+    },
+    "vow09_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "f01f05dcf90a7ffa6d23be90487e3eff7b7af8100586962b133b9629c18f58fd",
+      "sha256": "1a2a1f4726b52e7e68f676528a1decb2004c9791ae42d38bf7fb19bbf48e5504",
+      "bytes": 41184
+    },
+    "vow09_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "d8acc3855193220988f5918d937866ee0a12714f0bf3fe0570ec8b9904c2d468",
+      "sha256": "ca8cb7a4172a007798cf494d6d0eb8ab725c3ba97a32a176f1fe7f4fd882f778",
+      "bytes": 12384
+    },
+    "vow09_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "4f682231ba3180bc9fba8a510527b7780d09a854f8d45400ceef5aa3e4110132",
+      "sha256": "cd20288df6a72af4e9095064bf3ed5fdce5a2b6b0e39beafec77acfe1e6e1acb",
+      "bytes": 20736
+    },
+    "vow09_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "b6205ae994f1099752ff8c6fa7099a8f5c06fc7f568d9fa1a255e433596c734a",
+      "sha256": "6daa020a9717d51d5864cda9a3e75b76f717a288ea44dd5e396e98358a7c3e17",
+      "bytes": 46368
+    },
+    "vow09_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "67162ef4ad18eda5ddf52375094024aeb7cb94d2bd5fb7e02f13eacfc686c8a8",
+      "sha256": "04f55a9c679fd16205250365fa211b965627edd7a99d6d4440a1358e2ece0e5e",
+      "bytes": 12384
+    },
+    "vow09_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "d8ba27a22eac0bfdc4348330fe1b417c6b39d1fffc94f30c3c1a96eb4e7521dd",
+      "sha256": "ef777ee5c8f31557b9e091e38acc6572f97dca9396150b43f630045034a59892",
+      "bytes": 19584
+    },
+    "vow09_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "437c5fbf55c6b53ef2a71cb2d11cd2fccfd12934abe2cd1fb28be629ad623b36",
+      "sha256": "d5a9bb1e9320e619a41a9c07eaec16044d775007ace6a8217ef2a9f784dd4a57",
+      "bytes": 16128
+    },
+    "vow09_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "6f1c24d8fee4e95eb56d1d4daff9bcbb50b20e0fb7ab8e648ccca57d829503fe",
+      "sha256": "93b6afeaafa7c93137948853203066325e137d320a02ae5150854c35d57419bd",
+      "bytes": 10224
+    },
+    "vow09_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "dfc16ebfa9992a2c64766d2c147743e326ec082a6cfbcd018123cf27780a4755",
+      "sha256": "73a51a9b72bf69d22f24a749e1165c6bd05ed1f1f0a7f8ba190399bf39407e98",
+      "bytes": 13536
+    },
+    "vow09_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "b790f9da8522ad194c37a36fc55ba891058105b1fd6cfba4d609ac7a3aa7431e",
+      "sha256": "226aa252015fe883211b6b5c47789d45a7879ec51a638626c1479af0a8782a3c",
+      "bytes": 41328
+    },
+    "vow09_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "b41f30a7cb0a7775b3420c083b955b3b2f6f7bdc5153da6aa4c7085ac84a97fe",
+      "sha256": "4623b865da4fb936a40f7af518d0915cbc958b8fff6c94bf77ae62f110fdca17",
+      "bytes": 17136
+    },
+    "vow09_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "ad59ed66557f47e31f94c996113038eab32e7f25e736dfa00b52f21031769101",
+      "sha256": "91383c71468cbe6dad095f5a64b3b1b446cd193573a754ed07094b1b48eade38",
+      "bytes": 11664
+    },
+    "vow09_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "53c153daeca4d235ea5e83720e3dfbba38109655211fb1d1c397ac8e75173ee9",
+      "sha256": "5931006dd32fa30b27d5f81098a7b3d9d51b287ff88c480ae48d2543b8200a7b",
+      "bytes": 45216
+    },
+    "vow09_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "b7d05cf229ba13bc7f9dcfc0c860f9131e9d43f8a38f52cdae4f415783fa8c37",
+      "sha256": "5874e833e528e597aa517108e742121c359cef5b81f5fa1e554edcd745e23f13",
+      "bytes": 11664
+    },
+    "vow09_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "a6559c0c12b9a93affb24a01420d3132491c43da3fc2a0c36415803177d1829d",
+      "sha256": "5606fec431866c4b4e6e857ffbcc0fcf19c8aa8306c77d4f969ccde1f5bc909c",
+      "bytes": 12528
+    },
+    "vow09_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "d9c321827abad1606a5cf5fed169c38201f48798ac8a1b0a1db3856cfde17b45",
+      "sha256": "6cec7ba9e5ad9fa03009d232bfc1b9b723780122f729956e5fae1bcc18563243",
+      "bytes": 42768
+    },
+    "vow10_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "2f788bcde84ba1f744d3551f3274c788153813b2a4932bed4d3aadc0207f34cc",
+      "sha256": "847918e400d5f36c892ad15faaae6aecf3e2a86a11702e56f6f8cadf409e6259",
+      "bytes": 52704
+    },
+    "vow10_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "801bb2bd25b5c17ea1439d9fda98bb022b0ba89d0a8bef401ccad6597e280613",
+      "sha256": "ff77571fed8fa21009c9573a34a3c72b922e717a367bb9b7f6e163121bc04109",
+      "bytes": 13248
+    },
+    "vow10_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "7aa9ec82e847e7328b7e2abdc39a27a1a9c3fae89b136662d936adf82e0d3a3f",
+      "sha256": "36e68d3285fa242f30e200c70e35227d58955d2d0487cf6b7e8f83f2222e62f9",
+      "bytes": 8784
+    },
+    "vow10_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "03bdd90edbc7ea53e4602ae25e9e4bd90f9a9580b552357b2612b1cc3c34d9f6",
+      "sha256": "5377a86ceb7da08379190bb4c98f721828b00f1eb23ad0e1012e8888f467ac30",
+      "bytes": 14688
+    },
+    "vow10_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "ca56b077228e34812717b2c87eedfbf71ca206f06ae5d7389673e654d369f5ee",
+      "sha256": "18da097467b82186c7ffa3f2ccf03044bbfda5a9e0559d2f0d85849fd50b93fb",
+      "bytes": 42624
+    },
+    "vow10_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-pandora-en",
+      "textSha256": "005ea96802587c5cd85d3d73b6ba0130d21fb524874819bb839abbab338d448d",
+      "sha256": "3ab3cfc3618f51841b712ebc840ed2f65fb1ff2c8bfd262dcd5c97ed3fbe0813",
+      "bytes": 24768
+    },
+    "vow10_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "de5c18bd64c0a11ee3e25518ca0ff3175736f2a6ff37a85255297994a7364f7d",
+      "sha256": "4a57252ae148d1bcff0b11205b453221bdb25a1ed5f301df931cb2a11a35aeb2",
+      "bytes": 14976
+    },
+    "vow10_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "94dc38bac457ac56b247506dfaa921c222bddc55ae151b57cbc4138f3edf787b",
+      "sha256": "b90cbf431293763e670d529485df15c023ffacef7385d04700dfdcb46949b5da",
+      "bytes": 25776
+    },
+    "vow10_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "dc4305f6fd02131a77eb054db50d418583b080980e3dbea6d26d3b8c62481818",
+      "sha256": "ff4045244a621e66102360bd9e3d9bf5a0d231e6a2d1139508df7061be844082",
+      "bytes": 29664
+    },
+    "vow10_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "43f400b055be5dad926470dcde6b2b47297f5edae3d0b976f0f1958fcc0a34bb",
+      "sha256": "314cd0f95059b09cdd48fdccd6a79e1418298086e2761786b6ab03d7b70047c4",
+      "bytes": 20736
+    },
+    "vow10_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "da0284515bf32a200d407d340263c780d53f1a4d4c4fe01493faa10e3934efd2",
+      "sha256": "47fdd6f53710be6531de403f2bdf2f4e3582f023484392c910798ac7b7faae34",
+      "bytes": 40176
+    },
+    "vow10_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "8905e4ac33c35f2f28c9c6c9ae101a61899a3927cb78c17f3e6e26dd7e255e3e",
+      "sha256": "352984587b63d4e452d5b764d5d16ab5d4410bfbea4f9b5872b6445c754d2046",
+      "bytes": 7056
+    },
+    "vow10_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "ea50b2f75179dbffe00b263839764dcac996703f18cfe2d9d19f9917f605414a",
+      "sha256": "09dade364440eec9aa91377f339b30808a94504bc8896fd1d78ca561900545d3",
+      "bytes": 5904
+    },
+    "vow10_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "036a82718941eaeebaa2f89c870170f0b024f5c2da5f34cc6a173fb5ae001d7c",
+      "sha256": "d2d2555ab451cbcb09953bcf48b7cf4429f04093daa188952f13d2b7fc5bb186",
+      "bytes": 56016
+    },
+    "vow10_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "e10e141bc2f166e1a5c72a20c0f51bf291fc73efec79b692614855fdd7ec52d1",
+      "sha256": "35701f628e11f5a35784fd5770dd734f3065c21a93941b3d29fff993cad5e1fa",
+      "bytes": 11808
+    },
+    "vow10_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "3cef8b4605ef363989fd72985e743f8e70b1ffbf56629276997666926199cc5d",
+      "sha256": "6a1c9bf88affe1c28bee0ac0dcbac078c75533a8166a5ce0c562e8a5d0a72a75",
+      "bytes": 14256
+    },
+    "vow10_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "0ae2d53f90f9e74452c72b7e13d209a0891d6912d3908848837c9d41a08045c5",
+      "sha256": "68d845868b7dd16fc4c7c73a6570c589691820ee1ffec49dd62616693f5ee10d",
+      "bytes": 19728
+    },
+    "vow10_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "cfe6f514520df0c83210ec4d5f5bf50ea83602ab519b12e1272a1df68b7e5611",
+      "sha256": "e3d63d41895fc27fc4f11f029ba6cb46a9777359731771b65b342bf35be5e3fc",
+      "bytes": 23904
+    },
+    "vow10_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "b2be020130654ce281b12ca4214903397bc125b5e81375111cda1fd105e96624",
+      "sha256": "2b969bd158b5a9ad4e0dc2c4e3acbfa5bafa51988628f40171f329bb47f69e78",
+      "bytes": 15696
+    },
+    "vow10_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "651e793bf696e24ea39d1ee2267377b0fa365013484941d287e31dcee4e284f5",
+      "sha256": "7610a83c51f541b17503a71470780769e2491a2899657a677bac5c75dcf6d942",
+      "bytes": 38016
+    },
+    "vow10_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "f3685312018cad6b63845bb538a2c0d494dc5a4d56956d1cfec5f81cb4244c87",
+      "sha256": "1fe9cd994702a9e7d6ab2b2fe15c7819564735fbb40b1fea393613caf077251a",
+      "bytes": 25776
+    },
+    "vow10_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "5e66347908172638dffde0ad46ba0294adb9d13d088c27ea67a7baae4e7c9eac",
+      "sha256": "67fd460a032b2c6546920c01f2bcf8463fc33162ca8357d6fcc743c2c7f39e27",
+      "bytes": 11088
+    },
+    "vow10_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "710c1a83bf5b4e4e3c36602f74ef196908a10797ac8f8ad16ce980b3316071d8",
+      "sha256": "0ed0185d2532029364fed8a5483d825d7b7555b4a905b4b588916094e77a5a1d",
+      "bytes": 40608
+    },
+    "vow10_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-pandora-en",
+      "textSha256": "d88db1aa1dcddb8ca3d606aa15e96a831bc6c88314e090835d5e2e2ca891da15",
+      "sha256": "8e6ff23541e159950a6f08ace9d6112486ee14dbb64ea144a0d0e6be701ad376",
+      "bytes": 8208
+    },
+    "vow10_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "43e669e8b5aed65d6a1e889ec2108bd5ea9cf7f9b81c013a01a2e3b10ec2bbbb",
+      "sha256": "995fde7682ecee2747c140ac242e763a17c279c27ae76f798c27dfba176f6d6b",
+      "bytes": 15408
+    },
+    "vow10_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "982e45d142a7d93b32f829c9b16a670efb565e1313f257636691a1ac8df4045f",
+      "sha256": "1a84554abb7373db8b049b42b887898a80124eb7d6ac42ecc50a2559c4eb519d",
+      "bytes": 36144
+    },
+    "vow11_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "0f96bd22b1cbbe3853b3cb6cd7e845f6688c063ad5f5d4ed62ed9c295960da3f",
+      "sha256": "6563c00f1e16edbf5f2cd40e504782475dffa5b1ac1bf4eaedfb24e3e7c5789b",
+      "bytes": 53568
+    },
+    "vow11_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "09d2b2a4c0e3005f9ddd54e73359bc0c96cbd36dcca4711713a4ebf9f3d802f0",
+      "sha256": "62a3236cb4f04ea6169bff61744de0ce9c84e8a7c8b71cbcc075b1265ebcbc7b",
+      "bytes": 8928
+    },
+    "vow11_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "60c82f2cf053a327444291031a3e32dc80adc8ba1846d189d4526cbea568218a",
+      "sha256": "1bca449c4580de14cbfc317e850c2737bc248a0af43f9096d32967e9002f26fd",
+      "bytes": 7488
+    },
+    "vow11_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "7150d80f5aba0d9f0c1ec8b0c0e126e67dca789e33d14563cb1a7bae975ccaf5",
+      "sha256": "92de8d047bff20c5b5b20caddf9f8b8e4d54aa4e8f0c79ebc70ce31eea0f6cf9",
+      "bytes": 22896
+    },
+    "vow11_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "b0cd93abc1800def64ed5325d2a5396c459cbd3a5511d69f2b48e1e58b06a51b",
+      "sha256": "07a875354e549aa01e4c0e4c5d307745589c2ca9c9314953c84db4a10756969d",
+      "bytes": 48816
+    },
+    "vow11_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "fbac704c56a314c57135421e6c30fb2944ba4c842fcb276a5ea6282628244eaf",
+      "sha256": "c239a8d7ce19f1beaf3766a6ed54e985936007d057006ea64a9fbbb535ab73c7",
+      "bytes": 14256
+    },
+    "vow11_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-zeus-en",
+      "textSha256": "2cb2e17c8ed74a57c2b57e92355be045829dfd19d0a91d17a5e3c967c48cc3fd",
+      "sha256": "4bf8ece6e2abea15338e144cce060a649e39ad642b4aa6c845d2222fd6ddd6c7",
+      "bytes": 14256
+    },
+    "vow11_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "51b784962636a9a3508891fc2b0c57422c8774756722fff751c8eec52ee18b3c",
+      "sha256": "92d474b237ccc9af8da6b7ea1303c6d53c9d627f87a75532fac787af6e09a09f",
+      "bytes": 14976
+    },
+    "vow11_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "e9c29e4281335cae52e470d20821d39740212fbc4bd07fa773f1221cf032c1b7",
+      "sha256": "710402dcf5328900de712c3b9075ce051df98aac47301d6869d3b879bc693066",
+      "bytes": 11088
+    },
+    "vow11_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "075960a2bcfea897f3f57273ff5b3bb3cfb893351e4274c734383002893fd551",
+      "sha256": "ea90b61db51a1fefb30155a39f29a8016c74428ab4c4f13d9ac5a7365e30c605",
+      "bytes": 18288
+    },
+    "vow11_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "88b87818d56fa1e8d951183dfde31cb7921d3b64b5ede2d466a0655e89151f22",
+      "sha256": "2f04af4a481e392244f6866ce0bab7bde5a5a5ffff6f0b8573466150747d1b64",
+      "bytes": 58176
+    },
+    "vow11_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "01465f27e559702a4cbbb59e9d3690e195c70c55b6e802ca037d1b43d81d344d",
+      "sha256": "d77af1b01c32574b3b549cab467916d97cb15330f139ab81c63ff8993c2fe858",
+      "bytes": 13824
+    },
+    "vow11_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "30a4385807a1b3336a28e0456495b2c49b66c4d5d98fecca91adc0967bfa47b2",
+      "sha256": "daa864c3b1ca76e81c960f48360ed09b66f11723b8bc1e4434916e1be4e139d9",
+      "bytes": 15264
+    },
+    "vow11_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "b07579fc30f088aa604206555fdd8248fa5fcc92b1bb53b094c04f4d3fac07bf",
+      "sha256": "e4cc2b337ddc0470100df8d7f7abf2a802ba721aef436fa7f58016d5e08af63e",
+      "bytes": 50688
+    },
+    "vow11_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "5abe94adc9920ea8f956a5e4189e9f1654675b8c517ce8f1b4aea934a149583a",
+      "sha256": "899f1d5a462e9090f0f468fda58efedc50f99ab223867b6e8f35107ee172d7c7",
+      "bytes": 9936
+    },
+    "vow11_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "4788bed68a0ac62e3e804b533da7d2724b84c44c9c486b155c06faff60fbd146",
+      "sha256": "9caa4a3a87cc971a49677f1b65aeb8033240ee4f87b2350756610dfe6ea4c8bf",
+      "bytes": 5328
+    },
+    "vow11_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "cf79fcf121c74fc5c694218c5c7c423462b9401f9ccaf2a60117250db20d9219",
+      "sha256": "682dae33f53e274b69287a438423415dc1f674105df1599319b86ca8bbf7db00",
+      "bytes": 17136
+    },
+    "vow11_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "00b6fb2532c0e32f26affb43408b3e97a6b8167f5238de579b123e72651273b4",
+      "sha256": "2ff0c33d681805e35e2b8fc5c3e3fd10b2d7bcba0242ddcfcbc0befa51d1c4cb",
+      "bytes": 18576
+    },
+    "vow11_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "02841efab8e4616e9651587b20d13e6855e19ce2878915eb4f79c24411a01ce7",
+      "sha256": "839b63623b8857d9a7620b4eb12a32c49029a8b3e4ed5e3ba4fec8892ca52a2a",
+      "bytes": 10656
+    },
+    "vow11_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "eefd63a8f47dcb90e84822e5019a02e50268998dfb8a7df783fbdb063d077d3c",
+      "sha256": "fee51cea6acc34bb75b1ab86b6ea0c50f73d2da8dfda395490041f921870a062",
+      "bytes": 57024
+    },
+    "vow11_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "08f8a7bd70ad61a16fd0a92b8c31ff796f6ae2f8e3dc8038e4eb1c3118c88da2",
+      "sha256": "071120cecfe35d252de1c08a305abfea3c2d24f8d8b315d683ceec03c4546efa",
+      "bytes": 10224
+    },
+    "vow11_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "87dba9fe88ef92a41f021b72b2b118753b13f69a1d5193fc4667a5e540ca3b0d",
+      "sha256": "7a7368b7af7b61bd9f6bd3781c417f6d9ddba0212a4cf334ab11db0d5be2fbd6",
+      "bytes": 17568
+    },
+    "vow11_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "6a60920d17aaaa31e6188e844e998858563a39088bca164d23de21569c8b42da",
+      "sha256": "6cdfd5ac07c2f4e97728302a454d00dec9928fe0050c5a3b3fe709ee1473cc2d",
+      "bytes": 44928
+    },
+    "vow11_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "723b7d782e0bb692707ed394b5cfd6417a9c3a7df37a2e81ed589110de2bbb50",
+      "sha256": "864f7260ca6b42394886ea2c116973dded34898ef0c27cb6cbc3528ece9a7444",
+      "bytes": 8208
+    },
+    "vow11_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "acf7c8bad8645fa26d24b0dbc0757303e3ac357e5bbccd23c2dfcbd510f926af",
+      "sha256": "1827b4f29459363e5c17c4bd203c6a68dc0f83d38ce712147412812f6b680e15",
+      "bytes": 12384
+    },
+    "vow11_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "3c876c8e46504c8fbe745c93ad94ab7f2065e0a2eca80ca06037bc6ab2fe01a2",
+      "sha256": "f22b784a2a8a37d2b08545d23bbdd488493468aaf033dcc4c98bfee2c0eba737",
+      "bytes": 25488
+    },
+    "vow12_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "b9c89c4968193e33a63718ff8e135ed1e781e8fbd82f118a32aafda4912ec59b",
+      "sha256": "2e8aa889e290c99b6496f936ce0453ecb4f32d1a1f71b28e96486e771d43a5c5",
+      "bytes": 57024
+    },
+    "vow12_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "fe0f145520e7594b7af90079bab0456bafbf0f32f145368f21fb69c36f09d0b0",
+      "sha256": "8ec81314926e75c2ba3b2ba03bb6ec0a220585536c308188892b022a6139b968",
+      "bytes": 21456
+    },
+    "vow12_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "d163f3d387648bfa8ae236359663f37b987931fcbfcb9fe23367062e0ba23c2e",
+      "sha256": "9f3785d8ecb65d6c3a42efff0484d2913f3cf3f9cc3b67f7188c445eb6107def",
+      "bytes": 18144
+    },
+    "vow12_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "e91629e369aacb6c8857688be7d650cbd048a40eb0e28e5d2959aa3a2927676b",
+      "sha256": "eff6582c15684a2604fdd97aaefbeafa74e70116383853ea89ea36500881d8ee",
+      "bytes": 14688
+    },
+    "vow12_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "7a258867a460a1d3bc25a541d7c81a6bd590eca829029c4c8d5385d3ae84ef5b",
+      "sha256": "8d751a93a9769273bb9d2c9bf73bd68e14cb91dd2c922f67e37d3261fb2c9ea7",
+      "bytes": 47664
+    },
+    "vow12_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-arcas-en",
+      "textSha256": "0c0689c63f58e1bd436933bcbe7027e3ee8bb7335ae9b328f5ddfd25b818921c",
+      "sha256": "437083572604833e912bf27f1e4655478f0d2d557f24cd8a0fad7d3ec6f9b090",
+      "bytes": 26208
+    },
+    "vow12_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "9db26d04c681a75469468892d8218a63cf466292e85f971ed5bebe497874b072",
+      "sha256": "f708efed5e77faff17f6ddb0ae38570fd2065505c511b2ead7fcd6dd5a966d18",
+      "bytes": 14688
+    },
+    "vow12_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "f9100e8453969cbf5ecade9993799b852a749472407321f957ff1fd520aebfa9",
+      "sha256": "8072510fa8f8803c9c4293289f8c899a97c06bdf778fece394d322f8923340ee",
+      "bytes": 22464
+    },
+    "vow12_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "adc68c13a817abe0a08dcc72d1c9a5f65728885787e1ebff68f205bd2efb5999",
+      "sha256": "3df51c04e01006d71d5747ef79a772a214d2947a661ca7768b0cf351b73cdb65",
+      "bytes": 18288
+    },
+    "vow12_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "ec866532540f63f437321c3367cbc50cb9cec3ccd99df82c79014f1970df768b",
+      "sha256": "6d4dbd9914d737c051d84360ea4ef9d9a5ccf8d2a605371d17ae7d27e9e568e3",
+      "bytes": 20736
+    },
+    "vow12_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "8fc6acc06bc8436d2d73f953b4e794b91f104b2a247b335a9c8fe1ffa4e4f15b",
+      "sha256": "df9ff47b46e093ce6956f1cab0491d95ee09e3f4995c6e85735bbadc890be73c",
+      "bytes": 44496
+    },
+    "vow12_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "9e32044cc04b295880cc714404f609f9b0013e85aa9b241705eddf7eb078bee7",
+      "sha256": "5e712af7102f9a6ad6207870a5ef8dc67b2353d87b1da78965ceb0b6b649e8bf",
+      "bytes": 16128
+    },
+    "vow12_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "75f6280a97c318adc01eb45d20993f1661d9c1291cdd90e82112085c5c30d7c7",
+      "sha256": "5fc777a74219aa107ae765a3ef66700d636d1430883539d2ac2076083ed9c799",
+      "bytes": 14544
+    },
+    "vow12_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "ac2d1afa2b38e6a4040e028377e2f1d29a66b9281540ab73ec179ad6e0d33371",
+      "sha256": "475edbc5c14851715be2e2dfe6cc5b1bacf2145c0285be0d3bccd7e7e5a221e0",
+      "bytes": 58464
+    },
+    "vow12_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "dfd14022f19bae940c5e2437f65194662ea464ac9288fc7c5b4787f46ebed6ac",
+      "sha256": "7819b3fd85cd7d8cb9f0031ba47f07c2691ce401d779c9a20b3f83991263c46a",
+      "bytes": 18864
+    },
+    "vow12_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "f5f470651922ba3be9182678d210a6166eed98d397412b7df17553a9fcf04de9",
+      "sha256": "536b64f3684a29e87c1a04b453a259b9931cc2d8dc16c8c10c4724c874e4d0af",
+      "bytes": 11664
+    },
+    "vow12_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "e2667ad76e084f3ab572907fbc2033e8f148258eef256f853bd757a09ba3bec1",
+      "sha256": "da3a16c54669765d08e9e250ae882c4fb5c578018254f50c20aa22c1eb44d665",
+      "bytes": 15984
+    },
+    "vow12_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "9df3c3da066627a9c8ea0d3fe7d71989a6c3fa9a78bfa19d8f2372cd4a793dd2",
+      "sha256": "b1120671f9a2367511f62b7b5d0ecf2e71630ad9edef80f880d4f841c42c5384",
+      "bytes": 14688
+    },
+    "vow12_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "c8164d241f2ae1c473c378bbc4dd7559c1daa73bc6faf8e360c5b098209fe5a0",
+      "sha256": "fbdc5d0396b530dfc5afc579e4bce35676d8638e0cc2f8899438a04c30c9958b",
+      "bytes": 18144
+    },
+    "vow12_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "bf9fff91b6820401455c3fe4a3f0010d9c5a35c44053908ea651f8de69eb03ae",
+      "sha256": "fcfbba5ef022ee1fa311aaa2ffb27ef67002c64723d79e3f0c8b5c8cb5e6f885",
+      "bytes": 38016
+    },
+    "vow12_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "2ea5af44c054c4756984e47e30d5877e57208de03545cd34da165a19e1993595",
+      "sha256": "f66f999fd1e0c25192c7644739fd159b3fbf8aa43ead7cfd77865b619c012274",
+      "bytes": 25344
+    },
+    "vow12_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "e1022928e4adb718bb39239f449b3a747fd540628e82b891908c6edbd68b3ae1",
+      "sha256": "585594b982b04e9cd0636e73c46440c0fcb3ec680224916da4f505817f5a375b",
+      "bytes": 27504
+    },
+    "vow12_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "c9339e7d5d562da0ee461533213c5079fe50a045f80b7270b984f73bb6fc4a45",
+      "sha256": "e5f8a003ee7eb3fb9f5128e9149b041a78134b29bdbc686b598f04a835b54e25",
+      "bytes": 42624
+    },
+    "vow12_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d6fb7f53e2bf2a45268ccee2abe43e2a8b0abd6112869d07e775e7ba295134e0",
+      "sha256": "932afe2c9374c811035bd017e97eefd7341333f0ff26f1941a732fde55e8c3d4",
+      "bytes": 16704
+    },
+    "vow12_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "431c034c73df27fa0a121afbb3f854447a9e8dd2ce092a8048cb6fd29d4a71c0",
+      "sha256": "973d8a5ce1c4f38e9a573e5fc24a0f568b8c4c2406f1d2719c05ffa4e356ba4d",
+      "bytes": 14256
+    },
+    "vow12_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "c48be18fa408db9b0636b9b30316e168e9cae1c2b8e7252abfe0d3178d25a72d",
+      "sha256": "875c8226de080a9da8e39a6bf7e3d349dacb133d744809e2739d19c6ced2dece",
+      "bytes": 31824
+    },
+    "vow13_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "ab566e99990df59a725838cd203cb989db034db71a66893dcd8c76b33c326ee1",
+      "sha256": "a3ea489b89b6ddca7059a12440267e5d8d8054e0c46ba9ef136ac096c6ba1863",
+      "bytes": 43056
+    },
+    "vow13_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "920531b4313604a2192202e1ef510f88d13e26b31311c4d9b3fcbff2ab7c6a17",
+      "sha256": "bc8bd3bca09a5bd9632ddf9ea75007e4f2c984a8a0a58667d24cb35b4fbc2dc3",
+      "bytes": 23616
+    },
+    "vow13_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "66f44de5b32a89f05bac6ed8572799e2f4dd06f6a41079570cfd32e623fdfe62",
+      "sha256": "a60aca630069d882ca59850f3d102a67f7590f225b99627ce8f318a790ef43e5",
+      "bytes": 12096
+    },
+    "vow13_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "50828702b463872cfc15e65b2efcceb98143e81527af4576b62c654178fc56fd",
+      "sha256": "768ea88bc17b79480437f64612aca4024d966e69e0d4049d06636e629f4cd022",
+      "bytes": 16848
+    },
+    "vow13_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "541f3c41d62c56b53e926590d00180b580bcb005eb0d190008dcbc53f4ac9f31",
+      "sha256": "c2d5abaef7e45a2f608a02e41fbc4349be3f8abe27b7c98c1bf981ac7bb81354",
+      "bytes": 42624
+    },
+    "vow13_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "7b3de5f0091854bbd4316b1d0db99f31f51cfafb5cb3da655595bea136ed829d",
+      "sha256": "6d9a5c5199982f28b377c831a88db5a643dcd43919ef2d38db9e2c79403ceb1e",
+      "bytes": 12528
+    },
+    "vow13_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "cb966c57cb0a75e05e8429ffff64b7caaeb62af41a157f13d2c00826ed8bc69b",
+      "sha256": "592d73ca33ae732d91cb38a1dd8984ed3d8928fb607809ac3298cf3e7b6b8473",
+      "bytes": 13248
+    },
+    "vow13_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "400350cd6aafdfa2227f8ee85c71db746386032d1490ecb02ae6f30ea090b3a8",
+      "sha256": "697c9eb0e1fd2c67535cac742f535edca8d2d8d3b2a51db2488b916a9421d0a8",
+      "bytes": 17568
+    },
+    "vow13_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "532c690feff50dd9b13744c31eca8dd379adf363fe6bdd17aac67a871d9348b1",
+      "sha256": "747dfeaf38cc762d341d9c5ad5e3b0ce1f6b054dc362217aedace33a6aa946ad",
+      "bytes": 21744
+    },
+    "vow13_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "2129cb68aa5d97a452d0f466975346b37b73709addb3f9245c980ed989f410db",
+      "sha256": "2d4543fbc49c3e045514c3d00ea8f55bd32d0dae29c32ce831b060145871e01d",
+      "bytes": 8496
+    },
+    "vow13_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "54ce29c2dd5aa54271c04a4c902e5ce015e6393aa149b39a1bdfa5214e8b9408",
+      "sha256": "7ac5fda4751926eaed40a59b17bdf42e4d7955f1303e4c2859897e2bd414222b",
+      "bytes": 48384
+    },
+    "vow13_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "7daeb02642e2260e554d1c26e757f258acc525f1506ac5ddb05f65c43649d9b3",
+      "sha256": "3ef2521aa45fff9242b5d14d1bccb274856d273aa4695e1228e803ad449f06a2",
+      "bytes": 16848
+    },
+    "vow13_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "f6bc1ab001c5c92ff5457f59a8dcdc5cc53f317a4ba993a8190729bc45316361",
+      "sha256": "a42e7afbdb70e02dab07f867249e12a3b6de64c9353aca210d416db086c4db38",
+      "bytes": 15408
+    },
+    "vow13_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "d7ad15eda01501999db62662b7d90e5dad0065c291f1668c39d3aee416b1fdf8",
+      "sha256": "7cccbaac0648b4e144b5ad488e1a1d2dfcc6a3b672c97158c5fe6c790c7e05d6",
+      "bytes": 46944
+    },
+    "vow13_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "bda5faf92b9170fe34ab0dab39dc09cb92418118eda903ef4ea6e784ba439270",
+      "sha256": "07980f987db2e6b9d9031376a4fbc4e59b6260b254abff26bce8e72e49a5a436",
+      "bytes": 20016
+    },
+    "vow13_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "4fd69420bf86d96a7e8b7f6790e533411f8d248e0a3713ac8a19779e264410fc",
+      "sha256": "3133d8c3e9c115c66e6ca9b863107230d286564456c26bf0555d89d7e9a5fd39",
+      "bytes": 18864
+    },
+    "vow13_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "e3907006354ea360fadba18fd4c1523979a8a83fbccf52b7aa2aaf1f0e45479c",
+      "sha256": "f51dc907d1075a4ac10d5941bfcd2c32c42cefcf53fb8f52ec919ff2f68c4d7e",
+      "bytes": 18576
+    },
+    "vow13_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "ffaa824603ee5a279f94e165ef72009c88b463ccf3c5b41031b5e6888b193bb3",
+      "sha256": "25d2d10661cb46a9185b1876ebbda5ea4b949615fda42a51d46259fbf2b018bc",
+      "bytes": 22464
+    },
+    "vow13_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "39a1cb722e9766c320b3b7229b9bfa3237a03e591005aa635823082b565688df",
+      "sha256": "cf41e5b0f16a288bdf4bd5a4fa16d9fc46c5b720b36c295a8ade29186f1ba2a7",
+      "bytes": 22464
+    },
+    "vow13_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "4a2dc4999e83ddb19b767981dd8478b268b4cbcbfde671ebf6335ee512e1e7f7",
+      "sha256": "e44ef7952d233a07b66c2600b7d7325b946f2e1e69cd69551d9f3fb186d57244",
+      "bytes": 39168
+    },
+    "vow13_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "b80fe298b7759faab16077aebc769aefe409153185e4f11e7e6ca73d77ee63e2",
+      "sha256": "0bad9c1341db51a32787e6e9b791fb55704d3bbdc2497e5e9be6951570a64bbd",
+      "bytes": 11088
+    },
+    "vow13_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "e66fe344c1fe26c0691507cb4ea622dc88108a288f9c5ddb77f880b5efce93a0",
+      "sha256": "9ac97124df4960a22fbc3418a17f230c8a6f229ab9d45eda63dcb78e0a80f73d",
+      "bytes": 10368
+    },
+    "vow13_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "060d4389159de091ccaa287fe82d89d6008ea9f56aa1ca1164ed0be441d85f64",
+      "sha256": "0615812c5b84164c81d48d8b4cf6e8d4f0587143a9b1993ef6c712ab8628f9ab",
+      "bytes": 50256
+    },
+    "vow13_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "3a4944ea02324faa2538f60154761abf2edef0f4b0416c35893a2a42fa3a1f68",
+      "sha256": "cc0ade1cd6d300428b5877abe32591e4b8e80e53c9fabb49034eb081fede7933",
+      "bytes": 9216
+    },
+    "vow13_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "6a6120cd487c9212ad282c5a1316264ddfc94aa86d395c217916137082df86ef",
+      "sha256": "cc7e8b33a626caadb8c8ce6b3dd206bd16119c62bdb01171d998c0bd5c8780d3",
+      "bytes": 37008
+    },
+    "vow13_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "a3f2aefc45c9ae653c8bfd6fae5466e70390260a54b1ecb27c22e46140cf72a4",
+      "sha256": "6e21ad79f7833922913584a7583c9c73ef54ca880f45ef753ec90268e527f399",
+      "bytes": 35568
+    },
+    "vow14_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "0019bdbcad7f97a3fd8ec97af413a8589e794b1be158b17bb63f033788c2a4e9",
+      "sha256": "737daa9a6e4bc6937a2815f5ec0bfd52721e0ef842fc66d3f262c046cfe61a50",
+      "bytes": 50256
+    },
+    "vow14_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "d82bc00967d428d1c0cf6e54d5b0acee46e3fc58d430e598b39837ba3b624b51",
+      "sha256": "4086adf271fe9b6ca3b81d0d2283fbd9a5bf94c25fd6039e591a7059fda5c7a6",
+      "bytes": 12096
+    },
+    "vow14_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "481830210227d15b8214533c674854cbbd0ee10c2454f373623a9cf5c66b2f9d",
+      "sha256": "88abbd576fe32cd84a97a5f08cedb2e5476de1e3aa37a81a39cdf676dae3aa14",
+      "bytes": 25488
+    },
+    "vow14_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "df27fe0d9c3d5e54e99a16373deb885b7a90ae4ee17ec51a5bcc3040909a1690",
+      "sha256": "5ed2039d92795eb6c100cdf48d9f9a5780b4763340c113a1fcd96f1bb761497e",
+      "bytes": 16848
+    },
+    "vow14_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "5b345bb731eb9f5d6b011fc55a35afbddeda85916e0612ad02f21d6a86f35dd7",
+      "sha256": "ce3bd2b71599d6e9fafa9ea9c335f4d2a2726869e6c0fb4744961fc2f326f8be",
+      "bytes": 39456
+    },
+    "vow14_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "22c2fa7f79d28b9a0c0b2022300f2b679fb4a36fd5bcdf035911db246d104d8f",
+      "sha256": "4edacf8201b12880ddfcfa55dfd9b0136e51c233c7de69cce8bd8bd0faad2d87",
+      "bytes": 26784
+    },
+    "vow14_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "3c5186628f013a2d7532998b773be8a26a7d373b2a45369c2ebf9895c07f6fd2",
+      "sha256": "c9f20d46e7abe4d813501941df317b783262f5441ac103bb9d71ab53e0d48e61",
+      "bytes": 15696
+    },
+    "vow14_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "82898a1bd47f05f5a3f70181364cf3b5ff41a3868234304221c0fead583eb6f1",
+      "sha256": "aaa25289ee41a1cd0719031039fdfa1e04ec96902eaecbd81cd4231f8698a3e1",
+      "bytes": 17568
+    },
+    "vow14_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "5129878dde0cb0e6efb588f2c02b9aca037d6284ce9b1a4be9b115fd87ff2be7",
+      "sha256": "4d299b0d7d1fcfa3a7d53fe9c645523d66e47b247d661845ee0dd85b6a888c02",
+      "bytes": 21744
+    },
+    "vow14_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "5811bb0a983dac97c8dd8b0830d84e99546d1174a9ef7ab45257306cb0df60de",
+      "sha256": "cf94d0519f240e13bb249d315fc361dbef4510145b6f4cc3d61c2cd269c72738",
+      "bytes": 8928
+    },
+    "vow14_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "d28485fe9c0eea8078f820e5fdb21da07abf8349049a7b36bc9af8f4ade2e873",
+      "sha256": "6c269e1547ac84bb2123944a012242abdf701353ebf20342526c936d4c5194db",
+      "bytes": 44928
+    },
+    "vow14_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "1bcdfbf03993b226599eb0da8bb7041f81d7c8ac051c08cefaf65a77f0290396",
+      "sha256": "5a4a9bd154e2ad9890336a250fbe8ea901bef0ae3dd7216c480ef0cb754e825c",
+      "bytes": 12384
+    },
+    "vow14_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "a63666a21c58b64c9ca9d3f5f5acbbc44f212e3c8c77ad60d5ce28a6772d5652",
+      "sha256": "2181f6e61049645b6250653a64c4a8c28500bd8bf0843984f53e67a400749274",
+      "bytes": 7776
+    },
+    "vow14_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "76d3d801e726b50307e08518991f8547e414894a95d74aa09e0a7a66bad6729a",
+      "sha256": "605de04be583a70f797ececeb2c5ce05301b45f12ac8ada41304a62d0c130329",
+      "bytes": 35424
+    },
+    "vow14_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "bfc9b940017f6ba39e30d0b7c692bbef57845426233e3a06b1603c74a567ad2d",
+      "sha256": "77def2a102398be1de488901b67665187152a73f5cbbe39ff8346373d459da9f",
+      "bytes": 16848
+    },
+    "vow14_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "fd565f9f5a0faec663636b17641e727a3ac10b43506a96a030732e1b92769823",
+      "sha256": "af4946c3229ded433bb1305efa049bebed540f240f3866c27ceef6851ee4550d",
+      "bytes": 11664
+    },
+    "vow14_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "108c511c095a6902d5e905b57feda5e5fc6aaa87701da9aa9271974cf3b5f5d6",
+      "sha256": "16ce80bc4150242d5fd6db822b1a4ed13b9226daad48db814da4157fc85010ec",
+      "bytes": 8928
+    },
+    "vow14_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "72d185d477fa6ddf4e36ea1d44e7647e3352ad39122f1670e209c79520c770d0",
+      "sha256": "45f68dc427966a991f11352984b1db362845f4ef53d3d1f0bb22906c9fa92bcc",
+      "bytes": 30528
+    },
+    "vow14_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "7d28d9cf3750736a4f576c0831d497de5ae37d592d502336d89adbda98bb8923",
+      "sha256": "79fa78fca209171f5cd2b2579581816280af7430f6f59a9ecd92bfed98ad89aa",
+      "bytes": 22608
+    },
+    "vow14_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "07c9f3ed9fcc2dcce7bc3623792160351849908e517042785451d58420ea9308",
+      "sha256": "045ad7a56f4f3e58d9d2d78680bb699bfc8336ffa05766bcc072b2023525a496",
+      "bytes": 46944
+    },
+    "vow14_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "f0f926e1fd46c0e78d0311389b877730f7f57747524d8a2866bb9d6a6d7a32d2",
+      "sha256": "a814e4bd2e5431ce8edb04960fb6a02d9665d19a16d35908d36beb954c8208a1",
+      "bytes": 12384
+    },
+    "vow14_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "e635ca65e03f04245ab5126119cb773fe38805a99962f5d5944660884b597950",
+      "sha256": "c3e381da25846ee58fb84cc09fa32dc23e237fc2b89a018e937424dd03905d68",
+      "bytes": 25344
+    },
+    "vow14_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "5910b54baba7a632c5c052c8d06f2f7c117d17eb7a1fad11bdf62bafce1e2223",
+      "sha256": "3542f204c578d579fd7d84bf4fb984da7e73c5c1fa9bc610fa41ba8e6733b9f8",
+      "bytes": 38304
+    },
+    "vow14_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "b29fdcd30aec1b90b5cf8a399523e4cfb05b1d1ea70de5deb064c154aebcbe6d",
+      "sha256": "7e9561f189889a96941af23437592859d20f1dfce4688049a38b4408ea1f6f4a",
+      "bytes": 11664
+    },
+    "vow14_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "c093be3c9049cd5866ee45d77be616089c31be9455e6f454ffc6bef035d084ba",
+      "sha256": "824557f5879719e9938901e257d992db9872b8223547d30cb2d3de4c173d3ef1",
+      "bytes": 9936
+    },
+    "vow14_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "9e5dfc940987ddd1222ba855dbc67c565e95f3a28731a5ce2f88cd8b4d646992",
+      "sha256": "95fc3b2b205a78a06f87e67c85352b9b058bf04289748ea3379499f854eea753",
+      "bytes": 38736
+    },
+    "vow15_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "7883323247424f495626471351f37e71e77f5367a8317c7fa14e0f8e55330e76",
+      "sha256": "0aef41ec390977685ad16dda7152f0dbe28a0db95e4b207959f16e835f12805a",
+      "bytes": 78336
+    },
+    "vow15_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "0523f19c2f2042a5ea27542f079c944885c0f78278362269ccf958f4dd36f2c9",
+      "sha256": "eb5a001817fb0dff8f49f1c5542e16150338695e73dc0c68a5130d7e993a93da",
+      "bytes": 17136
+    },
+    "vow15_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "b532f8bbfd51cadd7e49c32174038ddac1a1c3389271ed72d7659ed016edb7ea",
+      "sha256": "3e797f706caccea2baac0808e0f3b8c358670ec567f2b18f8b56c55f24031a8e",
+      "bytes": 28368
+    },
+    "vow15_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "3c6ca4d1d1593468546b4cdb45161e42887a0ea84d28ed4cf8c86437c8eb5653",
+      "sha256": "f99a0a7e768233a23de36db9b648ba829737ed44df68acd7cc62759bdf8d7e42",
+      "bytes": 17568
+    },
+    "vow15_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "29e887afdead031fb19971e16a8496a1f9ee1f0b9860dec9871d6b7fd3e0fa53",
+      "sha256": "29d097db8915d4a5298cc39c947a3e002a2a7f8a78eb073229726a041eec8c77",
+      "bytes": 59616
+    },
+    "vow15_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "cefd49498d97c6a247cbdb78b434eb0e9b0fc3d64201961ba4be703e27ea02bb",
+      "sha256": "58f922bbcf42eae40e019b8583c30a23b5d3b658a07c026a977c76312128fd06",
+      "bytes": 26784
+    },
+    "vow15_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-zeus-en",
+      "textSha256": "c0e8ea08a6ec2ae619900d0473684c456eb61418b20df3d90210f331e81b13f8",
+      "sha256": "607aa5e463535b2442fb4e001ed1d24f43b9cc6d53893703eb2aac80f554fba6",
+      "bytes": 11808
+    },
+    "vow15_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "3ae9db362294a9de8eebf1432c628a3ce88eac3c0e0049b7f6e635499bd20806",
+      "sha256": "0a6172111e7134a3072266da47df3fa310fa0f7f7c3e1b399a204a402b84153e",
+      "bytes": 22176
+    },
+    "vow15_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "f1f1682c4b698e68ee7447b1aad48c74b6ba200542d149bc52ee94ab31ffc3e1",
+      "sha256": "664ee67b06c6f2376c11bee66f427d080d0f6c11ea00230dd5254db19bac6345",
+      "bytes": 22464
+    },
+    "vow15_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "ff53dcb95600c98e0e2b33ca420a5e384983d96ff294f731e701efd48ed908f2",
+      "sha256": "727c25046d98dee4ed36bf77275b47a3f9294bba51aeaef8f42462988b3cf5f3",
+      "bytes": 28944
+    },
+    "vow15_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "ad4668dc49afe6baa5ed028a8726f7f0f574e7ba5b17207b89087d5e046bb6fa",
+      "sha256": "6eba988cb89e1bcffc2114b9e7f333c97e09c56b12615f958dbc7cbdcc517490",
+      "bytes": 45936
+    },
+    "vow15_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "9e9a3863b9ef270fd4f70661ce9662eb095071bddeceaff46dff208f6c1d33a0",
+      "sha256": "4913082ea4bb6d322d35bfc0190f57c45662dff2eb11f104570725feac921675",
+      "bytes": 15696
+    },
+    "vow15_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d1c61d3a367f7ce2f2e9d5875c5f4a47b2175c0b79639b483caf6370fcc2bebe",
+      "sha256": "09ef7eb83845c2e4de9214c8ba1a56ca9830c493dc77b58745c50a41944f2f43",
+      "bytes": 12096
+    },
+    "vow15_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "de311ccc69fea515286c403548b739b3f6b033e6d1358a962960eaba248437fb",
+      "sha256": "e1d8f73456ad28c60c0b4505db5abbabcdeff49900182ac2bd0f34b2a32d8c54",
+      "bytes": 47664
+    },
+    "vow15_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "23f5e50673f8b7af8abe89ee2a927a439ca16e0b67ef9dff723c51c68a71986c",
+      "sha256": "4d0798c945054ce5b88aa8934ae0108d4616c712e12e1e85a14eabe87f052e0c",
+      "bytes": 27216
+    },
+    "vow15_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "3e4f7eb607cabbc8cf3d4cc842b5e8bfaa80aa6b63a627fe0fe02323af58265b",
+      "sha256": "6a767f9bf109a4b766a4038d4b2b82524fbef9c65b95745b157e98562f61727c",
+      "bytes": 13248
+    },
+    "vow15_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "53d86e0c9c27d21f5d7bf9a002a743d561b16dd7510c46cf4d8c8ba58d1a0fa5",
+      "sha256": "ba46b74e265c6640f9cba19668f62771a247e93a0b1c985e42d6828e4fdbab0d",
+      "bytes": 12816
+    },
+    "vow15_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "03da1f23e1bf9d3b8d1615a5e5b884fd81d20a7cc9fac6b5eca70b6bab41fbce",
+      "sha256": "02157dd156f0adb1e10a7556d8c5c8c2b09ca1f454edb83b3297612ac84895c7",
+      "bytes": 18576
+    },
+    "vow15_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "bfea3bda00f652ee21dff6eb6460ca775e272974c091882ca4458afc3eadb855",
+      "sha256": "535774009140702abd02ff9f49d3382ee5583234ad2a5620aa53baaeefdc24e8",
+      "bytes": 14256
+    },
+    "vow15_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "bf975c5b42a526f127de613acd2bd313d8e345e29e50386e4faffbb7dba57373",
+      "sha256": "9883f07c8d09f1ede64e2275aaab5fc8808a86007fba6abbd029222337a41e62",
+      "bytes": 49536
+    },
+    "vow15_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "4c6183b3221e324a55263ba38ad2f3ddb59a1bd83a823cc140f94bd3ea3f9080",
+      "sha256": "f29c5118c8d845f105bb8df79fd9b94fcf68885cd361b64786631cab56cd1cc9",
+      "bytes": 8784
+    },
+    "vow15_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-arcas-en",
+      "textSha256": "17ff967d8d1afb509d3a3b4e105392a29e0e8e348b918199e43ba80dfa5c1c88",
+      "sha256": "a4615dc65822d3838a278905f0019df60b5dde3f681872396177ee3d912416f8",
+      "bytes": 14256
+    },
+    "vow15_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "dee7ce26da2f5b51b9e8a9f2776bdda8bfedc244d5c6cc6150f6f359413bbdb3",
+      "sha256": "12b86da28789d505e4834ecb9c5ab3db799fcf3b2506baba0bfad4ddb8518cc8",
+      "bytes": 45936
+    },
+    "vow15_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "488d7daea7d33e8608c27661194b2065dfbd316fcda4da9572508021cf8e2c92",
+      "sha256": "74310f7fad60d4b7dee81d6de4636c9ecaa9c5ed8c7c4ab77950b59fb9619af9",
+      "bytes": 13104
+    },
+    "vow15_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "dd1360d31228ed9738f199b06468ecd38e7bd4a8250ff2aa9bcd12c67adadcff",
+      "sha256": "a0e7c3c68530effbf4384e5749ee2191355a7a19efe79a0ecdf39d8a4a1b5cef",
+      "bytes": 10368
+    },
+    "vow15_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "2f04561a55064bbd63aa885c4d4d9c4abf5ffdc7b46b09f52f1aa514b11ecd86",
+      "sha256": "ca8dcecfe433873e7c7fda8fa5c42112b325642312b889a6ab09da6748381ff7",
+      "bytes": 27216
+    },
+    "vow16_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "3a05769646590dd903e40cd6fccc1f9ca9460f3b0a22f7b3ead41e69b379798d",
+      "sha256": "fa759fb397d6934a778b63e318992a91d919ef25e755a5ca2f5a5dff37f815db",
+      "bytes": 52848
+    },
+    "vow16_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "e2b4ae4691dead38c3f4dfd514be046ef590ff6b38717b87870d597bff41c8a7",
+      "sha256": "b7f2c82821aeecf0b67b1bc521cb46670c6ff87081692ca9756e567449e1259c",
+      "bytes": 11376
+    },
+    "vow16_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "1bfe657261befbf08a49c838971676466bc821e2261115e789c8dce5fe2ae49d",
+      "sha256": "56a302721bd637d83f1f57136e2f711cef2def94739e9d283bc203481d739077",
+      "bytes": 20448
+    },
+    "vow16_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "165bf4a914311b8bdc0ca35bcc5f65796206a101946bd51631da65d6df794eb4",
+      "sha256": "24e8dce120b2bc70d5438a831978ebda3c3aab78ac2adda725841c7d6d10b966",
+      "bytes": 7488
+    },
+    "vow16_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "eccc837234c4421c5cb0c8899b1168d38cbb0b7bec2f5fd3d37b221eb1848164",
+      "sha256": "209f2c5f10c57dbf8261170c74044950197b370cec5adfcf88eee645f42663c8",
+      "bytes": 43776
+    },
+    "vow16_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-arcas-en",
+      "textSha256": "fd26ce1740078a345875f0b7696753259e1ec6e2c3238689126944f5e6ee214d",
+      "sha256": "946da712f0b7bc444464cca97151238986a6956abcd37a393a5cbed47070782b",
+      "bytes": 13968
+    },
+    "vow16_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d687dd37091b09dbdc8ec2d58bc65c5c8d9a1366d36e1fbbea5516258cb1f330",
+      "sha256": "fb515277eacd2a4b1107c7f546c2bdacbd8f6b80d690e5b1d93f669f77bea6f9",
+      "bytes": 21024
+    },
+    "vow16_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "775d3df2dcf958ba9575ca86303977deda7d8b573b622372ed4041d48d9ba462",
+      "sha256": "560d6ea8f9b155893cc60d9c0b5cb0a53408e5f38b67f3a25239a07d7602f429",
+      "bytes": 13248
+    },
+    "vow16_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d036e63d9ab5786d1bc32a6b3615df458bd9d6fdba2e8aa3888d473b3ac3b47e",
+      "sha256": "15e36cf590327bf8900ff6b5c92c8f589eb285173ab3efb6ae7480dcf46c34e5",
+      "bytes": 16128
+    },
+    "vow16_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "62082e205c2c3470c812e9a0b74ea16c78af8a693b8d66c82b50cb2b9358d2a0",
+      "sha256": "3e0ea5638a9c7b6f925304a5228d983fef7e0c71035bf29a45ee53c85fbe545b",
+      "bytes": 22896
+    },
+    "vow16_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "dbbabad9e0ce41c6f03f3233578a5d62a761ac483662d9277b9a58568db2ffd4",
+      "sha256": "b07b1cdfb2f752c6faaa63a198781a4c022668fd455ab3d411e07123e3d8ec7c",
+      "bytes": 44784
+    },
+    "vow16_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-arcas-en",
+      "textSha256": "36282f253305678b4510676f071766dbbd205b1b4d4a1034e7c4acb6b6cbfc83",
+      "sha256": "2eca7281b2f031a6339fcf753b0cc7b9cc0b78985165789862afa75c6edb6f26",
+      "bytes": 11088
+    },
+    "vow16_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "10e4a5eb58704632ac01e5d6a88a99896fff79e059870ded0cce3cf6addb41e0",
+      "sha256": "3d890b4f05e0ac3a1ee80bb01d6427ff826deda9c853533d31e3d567680bd1a1",
+      "bytes": 15264
+    },
+    "vow16_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "5454578ee64ea5494cf73b50b11f54171e9402bb837c7a2c65ffa666ddebecb5",
+      "sha256": "7035470491054328647e4d0452859749fcd1afe7700acd0a5893593ebc9bb216",
+      "bytes": 46224
+    },
+    "vow16_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "390a38d013de98a8b2fa0dd046a1c5b3dc2216c58c781d57dd37757f04b9f792",
+      "sha256": "72c367a1c3f148619ced727d780f8d1a62a72f4d947f70a86f323402f2984ee7",
+      "bytes": 15264
+    },
+    "vow16_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "e67adfd184466d57a0b5fcc3f84519635d89e386d4589c52a1f22986165a87e4",
+      "sha256": "268ffc104ab14071fd58711fee86e6ea9de30a98541feaeb0589e6806cb47bcb",
+      "bytes": 23184
+    },
+    "vow16_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "9cd8d44142296b8067f5a4e41d4bbd9505f380bea44150a76bbe66190d2975e9",
+      "sha256": "b19b5e45fa0232baf8922a9a55bfc3bc36f275c766bb9539512edee863973d09",
+      "bytes": 13248
+    },
+    "vow16_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d2023bbb53b3c68adbb4f91878bf6028e1843e52ea2eb14bdfc7ff83efcfec8c",
+      "sha256": "6db83e4708b606f407674c50e40fa173217af2fe615e7c2520b2150463368371",
+      "bytes": 20304
+    },
+    "vow16_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "56b89b06a49ff55b720868e321a7d12fd74e64b0a8d863efa64986d456a95e9f",
+      "sha256": "0d0ebe6b0bea0975437a47bc6cc1b9de7b5434222bf27d32d3ab00b5b39e90a0",
+      "bytes": 13248
+    },
+    "vow16_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "32b6bcf82fe2a7727758dbe63dff2d710bd71f3b742c7c47202de4ccd3506309",
+      "sha256": "7bdd5ef92c92ccddb5539236d723f6012e29c9bd2682d51d2a5589b8bdaf5d64",
+      "bytes": 41616
+    },
+    "vow16_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "6eca0fcafe7104b0361300ed1a4492019c6842fe03ae55b6e352b7309ad97967",
+      "sha256": "d1b4d404b3b8d310984d08caab309194c76d8f2dc42f4742e45328e7db858db5",
+      "bytes": 10368
+    },
+    "vow16_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "7806dbd92518a2e4714ed8e4e71f04a71f4721f7242772b7f5299e2e31d05eb0",
+      "sha256": "d73f32af3b7616b676554be5439bac5203b62e8b165fb8bd8660fda46f178742",
+      "bytes": 11088
+    },
+    "vow16_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "e63d8ad40d3d6654b9641906264dca44a79f090abb95826788be6dc8f2771e69",
+      "sha256": "4cde1d548b3d2ec24c1462156f8d3578f154e1a89e7272f38fa63d4727c941b6",
+      "bytes": 44496
+    },
+    "vow16_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "92c377fc0382b606b7ab7e70f3a00ad9e3668c9d0446b75146eb53a0177e814e",
+      "sha256": "efcdffc3c68d2a4b58a09fc2a84f628dde6b33373f5e2f6beff8cb086d7f5fa9",
+      "bytes": 14256
+    },
+    "vow16_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "71b31d7e5126114294ebff72db0b484675e9bdf3304534541e040b8a8d6ba8c7",
+      "sha256": "6ba0843a513665913d637ee88df19a870ccb26e33b502ce8f6b57ac37b051ae4",
+      "bytes": 16704
+    },
+    "vow16_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "74888ac2d0edf5ae4eac69291a00c3c31f1472b3bcfb7b2a4cd3745f81325c9d",
+      "sha256": "ad36fbd47e9c5ea6bbcdcb3be422f84abc634906b85479f36b77cc73be5349f9",
+      "bytes": 26208
+    },
+    "vow17_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "257d93c6513bbfde92dad64fa1c598e0c7c007414545642d4942a5752a12542b",
+      "sha256": "60b290069aa247a262404f94167de41656f232810ad88493d5b9f9c43e265c17",
+      "bytes": 48096
+    },
+    "vow17_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "ef4ce04459231999403f31abca26baa6f07d083ba3f43e812c29c04798f59e65",
+      "sha256": "77576dbd3d28c1d3a6f3599bac9ee09e6ceb9bd238572d3a2d5c8a158f634210",
+      "bytes": 23904
+    },
+    "vow17_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "7f56ecf9c9ee669dc562aa81da1e24ece15c0c4ee81d1cc482c95aaa34059903",
+      "sha256": "74c3723f7af1d9401bb93b899db81d0021ea0317169bfa134eebdb89df6eae83",
+      "bytes": 8064
+    },
+    "vow17_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "19940f8cf27d5faa9fc4575218a60f3c3368e91068892090e60821c2d28329a3",
+      "sha256": "e2fc6027515c10f1480c8f0363a9f64dbb3202e208e95fa303062d16bd8af01d",
+      "bytes": 21168
+    },
+    "vow17_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "da96c98e11598f7319afc658d8ee463d36e594a778b13be73b2abe9957510112",
+      "sha256": "127dad92bfa50b56af0a920479fe23b8d170e9e817202eb731183f1b1f5d6024",
+      "bytes": 44928
+    },
+    "vow17_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "ea957e1d86c0d34a3b2edfae722088dbc22cab358c4be42fd9428922308590aa",
+      "sha256": "86dc05bcffeb90273f448b1d63f3b48688fcf848c4eedd52a68783b7f47a0a90",
+      "bytes": 8928
+    },
+    "vow17_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "53fe3190c99105915882b46d42f97de71d872f1aaafe42fd64a76169c42c712a",
+      "sha256": "a18c8d780892fa0aea20ac2a06b8696eaff3228dc6574935f7eb88d933152fc7",
+      "bytes": 15984
+    },
+    "vow17_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "2f71aff4d645c322eacab37031c7d132805f62a74249b2c01c87a7b7ca08c920",
+      "sha256": "a2ec0dd86ece54a29e1008a3769529ec17dcfd379001f8b86ab82cbdbc7ed691",
+      "bytes": 17424
+    },
+    "vow17_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "2639dcde2c91faf392f838f992acad578c829c5ca8d8653c73746da821cd7cdf",
+      "sha256": "ef299c6c695138fcaa34f0df8f45170cda1152f88e0e5afd0200bca8b0221b06",
+      "bytes": 34704
+    },
+    "vow17_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "d0c2d83900b82d7f16f059afbf32b5a867e543d924a161d4ed4f58e6d61a6280",
+      "sha256": "5a8053ff6e59018966dd96835b460a2c7078ada82a45ecdd1bae60c5532f76a9",
+      "bytes": 11664
+    },
+    "vow17_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "225cf8dddd026fcac43e099e02876d575e7748690211af7be83e521d86346e07",
+      "sha256": "0240e0fee7425b5a744be4cc4aa56cfe88480bb47b3bba71b407347d9657aafe",
+      "bytes": 43488
+    },
+    "vow17_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "96b0beaabc2515b786d3ce460ef72ef9945e2a6861decfec4dffac6c84a97105",
+      "sha256": "fa46bbc05ec33de9fc4be9343af1e44652761d8bf0ae9cbf21b86f2c708bc38e",
+      "bytes": 10944
+    },
+    "vow17_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "9a4f6133711533a4619c6661cd01b2cf89f38fdb7a9fb5b9f7261b866d6de111",
+      "sha256": "5fc5d6b15029503469212ad299c6910a6f5d0bcb61589b80492ca2d96efdbd73",
+      "bytes": 15696
+    },
+    "vow17_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "c11845d4e90038d58eef41056cf7f6ce8714fd53c782e12568615f871b88cb78",
+      "sha256": "03a3ee8420396cf80d787ad541c29a41d756b1fee25bebecb3ecaad3ae78c25c",
+      "bytes": 56304
+    },
+    "vow17_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "51a21df08fb523a366fec4c59bf0bf3bb58fe72d82533837ba3a1a7eef767d45",
+      "sha256": "a8f203068f78bc67610c948dcf82cce1b2f8b566fcf08e8cc0288ed907936a2e",
+      "bytes": 18576
+    },
+    "vow17_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-zeus-en",
+      "textSha256": "2504fd56ad7c25be3d6c38c3267ace1f8be860165ff638e7380c741113e6f02e",
+      "sha256": "0eb4e8f05accd8a470d8ea51022b10016dc6b971401450e280d94711b9ba76a4",
+      "bytes": 13248
+    },
+    "vow17_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "16b4207cfbba5c92197acf427bea7df4a62475e68ddf81b6ec48d5eed0792f09",
+      "sha256": "b22a5e4bca2d0a4885227ddd2f61c1ec8f47492b081408a49ec3ba45bc409fe3",
+      "bytes": 12096
+    },
+    "vow17_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "219ae9ad744c0191ee1536ca5c484f68347712b4d1677e6f3edb08a06214eed5",
+      "sha256": "7954847ac9ba4eeaf74dcd1d54dd90c3710f1c87a1d6961895eead530e8d16e9",
+      "bytes": 11808
+    },
+    "vow17_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "6c77ff386849dffeb43092355a658a2bbbec22582dfd270578f5a632da16cea1",
+      "sha256": "0b135ed286a86051bac265ba8ee248b0c6d738a3d030b69add2cc5bbfb896dad",
+      "bytes": 15408
+    },
+    "vow17_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "7274f59fdfbfaa655364923cc6ba400c19380680093b5c3e3a04dc92eccbbc78",
+      "sha256": "45f2c9894e173f64ff6e301417f4b45578841742362bee4a6ebf3143d110c996",
+      "bytes": 44784
+    },
+    "vow17_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "486454b751ab381b749ed90bc0efd3664eaa4901b2f7ea95e1adcf5c2ecdb608",
+      "sha256": "bad0918cd39e03dd40670d46407b5db6b4ecaac18e62c3857fa3c1da0ebc30dc",
+      "bytes": 8064
+    },
+    "vow17_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "955c1683e9241dca581126cf9d2b50d93623d7537f12d6953fbfc8c8a8c9abeb",
+      "sha256": "c128291a80b72c1a5a6d445c1a8041437160ad56cc3f35bd082bdfa7310ecdcd",
+      "bytes": 18864
+    },
+    "vow17_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "0693982b963ec84483095b7cd3524268c5026161d243dcc78b90c3cce848a404",
+      "sha256": "9df415abcf3867044953efb9c1170f4e6a6d78fcb6495bc36f56bbf8cdd5462e",
+      "bytes": 51696
+    },
+    "vow17_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "d84c5cac01065123e40ef4f7434d1b402f953c29dceab7fc3970fbbe4eaa8c67",
+      "sha256": "8cee5b928e8d351f56bd5a9429cfd48e97a657a36eac0c56af59289b42de0e9a",
+      "bytes": 9936
+    },
+    "vow17_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "41c69119fab258e5bd1754d8e017f34f79990ab0dcbfeb7d9de140005a8b72a7",
+      "sha256": "d197c5da9d62ef37a408f58ff3f01286713f294baae33c9063c3326ad17b56bf",
+      "bytes": 38448
+    },
+    "vow17_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "caf8508b9e320977ce7a7da870197b2a17ba1c7399e981d0e5f2dfbdfdf736cd",
+      "sha256": "f593f11bff5023cb95f2d74cf832d54097368ee9e6060528e98de4f900428563",
+      "bytes": 31248
+    },
+    "vow18_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "2d3286893171dd5e5f94175f518b04871e2eb906d3f1685d26222d82381afaf0",
+      "sha256": "7dabdf382c80d468233ba64886b15427aa7bc684d612091a2a7faceba2292206",
+      "bytes": 49824
+    },
+    "vow18_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "f2277105047c3eb4a47c7467155bc7ac8b3f149b00d820952be059f9d62eb185",
+      "sha256": "01af5ee5797ebaa8afa3854bc8ea79bd5a56bfc16084f293c6b955a1d0fbe690",
+      "bytes": 9648
+    },
+    "vow18_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "a87934359c559440704e44bbea9d24bc150b1d67e76cb616a2d8b10a55f36a33",
+      "sha256": "5218c3fca4d37059a52a42ba559fd232bbe02b015c99e1d028bb315f3f401eca",
+      "bytes": 21744
+    },
+    "vow18_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "b9e55b9a034a05088389c8956885031abdec777e817c2a57352f5e56623926a2",
+      "sha256": "bd0e0d441a56c1340ce9b237b89d041f812a22d9d63f8798e9dd7c0e39d5882e",
+      "bytes": 23616
+    },
+    "vow18_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "dba27bfafa8a7bbe9cafc809806b801b9bc305e6269e8c87372982b48de667bc",
+      "sha256": "cdf43af40623feb021d3783e93c1f618f5ca28cb884a7a4022ae2efa0362828c",
+      "bytes": 47376
+    },
+    "vow18_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-zeus-en",
+      "textSha256": "174f716b1043126f189eefe8807faf2fe7c8d44907a54d478a846bba7ce87073",
+      "sha256": "3ecdcd2a5e6ac190aee19cb83e6a62085aa19f7d517c8100f73c198685af80cb",
+      "bytes": 8784
+    },
+    "vow18_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "ab72f424ea37efa1f2c8320c48f8247a19e45d2f95a2653322cf3641c5226621",
+      "sha256": "71b80bcb774fc6291fa87a17091930ba66fcf1584ffa24eac3645d4b8697117c",
+      "bytes": 21456
+    },
+    "vow18_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "995d87ff428ca83bbb854389f84e4cfcd58a3b54825a136f188f8db61cd37ffc",
+      "sha256": "9efd4f9bb94ed85def9b6d9285b192c3f23eb7e6cd6777f2c5a09cc4ed8be85d",
+      "bytes": 26928
+    },
+    "vow18_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "0cd1cc470d333bc2ab66821d49de10328cfe92b5690d8c3a69a76a3078d9c867",
+      "sha256": "4bd14ba7ed1f03ad3eaa9aa987c01657dbfda4a0c3073bb0e01b9860b70bd212",
+      "bytes": 22896
+    },
+    "vow18_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "fb6d3748a4a6d7547c7431b8a42da0e6831959d441d540c776e22d05420f2f04",
+      "sha256": "4a2f4f6421d2147ecd9adc58b2d561df2f084df620a70332760196402be6252d",
+      "bytes": 19728
+    },
+    "vow18_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "344a03f4a65564e24e4be6ed834bce3698c2fab60c462b7a27e61b4dcca10fac",
+      "sha256": "9828670831fb3389074e9549ab664f0e72c147a64646c2dc630335d7588b58aa",
+      "bytes": 45936
+    },
+    "vow18_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "38178a20b470cfd18299fb1593dd4ba706f1a83321dac051d01086efd8b7a96f",
+      "sha256": "35645dc07eb1eb69a22d46a6b3faf62d081818716d8235a9e075bc12e65aada8",
+      "bytes": 3744
+    },
+    "vow18_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "aa776e8ec371ee8bb843a06c2c5906388fbdfea81ffba94a9b2244341351444f",
+      "sha256": "013fb139287ff16413af68ea047cfff3d16e3f77c0190b47025fb1200c0fd992",
+      "bytes": 7056
+    },
+    "vow18_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "2e7e57011854378c790b3fea71b4b06c05767c363f35744746b1fa185f74bc7c",
+      "sha256": "b197796b0265f561687a09bdaeaa4d0c7a4bda4e50b09d0c0bfdab14e3a6d369",
+      "bytes": 62064
+    },
+    "vow18_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "9c7b9176f543b63d8a1bd67deabada2a0f3a4e203f042aa60fcecdab26458165",
+      "sha256": "fa2940f72bae4fce5b6613d3a823a94d07491e26b48a86f654a948b5530894ce",
+      "bytes": 8928
+    },
+    "vow18_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "55b62882790f8c1b223555f7da8cfd8f20ea4db1ff7ba0a16a8359a85469a18e",
+      "sha256": "f2172bb562829c04cb157fa1b5d9c0136d30bd25268022008237b53b3f42ee15",
+      "bytes": 14976
+    },
+    "vow18_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "7ef070ebd057a152840ba337d1e666f066cdc950e7663ce8c51b589c79134318",
+      "sha256": "c70623044131c023208437e41379f352ae7321a934dfdf4da7f410322115b116",
+      "bytes": 10656
+    },
+    "vow18_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "3e4f043bbdf86c1a8c82ee4be65a60fd4ce6db05107389e3e206261961fb9af6",
+      "sha256": "4bd845ecb3951129bfe97b0a8cd15af61e948f78602862308412e9b1f8e57d8a",
+      "bytes": 14544
+    },
+    "vow18_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "4736a78e049bbb15e0fd3dc12e28e4611e659c31e1e2868b5694430b8f9c9b41",
+      "sha256": "1ebeac18439082571dbe2d2540ada895c07e20bb362781a47f171e5df102d405",
+      "bytes": 19728
+    },
+    "vow18_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "9ac6d239fe22eab12cfc14397d750c19836dca90d5a86aca5cb8ff31fd53fba0",
+      "sha256": "b82ec109c37290b6e8e407c5abff4dd8e2476dc4bf418ca3bf9d4f7120b3e2f5",
+      "bytes": 47088
+    },
+    "vow18_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "6cf24c357b9ba9247352439e811822f923ad6fe38914587956b7878e3a886570",
+      "sha256": "ba47cf0394d67c94c64f1fb7f0ac694ebfa7d270b6be0df5ed7952e7dc5f5475",
+      "bytes": 12384
+    },
+    "vow18_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "6131c27299d9778da06e9cd873c11bac79c8e53cc9849f06043d01a00193d40c",
+      "sha256": "5821dc9aad3a0400476c99e160997f1d7c0b548171e712f8fc78768479e6041a",
+      "bytes": 12384
+    },
+    "vow18_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "e66389a3e642a01eb26a8da60b2e0f496ade66a703426af4ac66f65e9f0dc89c",
+      "sha256": "c7574958dcb2813191cb153c54b2bf95ab4f4970f44705c70e602ad24aead94a",
+      "bytes": 55296
+    },
+    "vow18_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "fc1f428d094c790a03a0dca9b0e66e97d4c3fc2079f2b851bb516aade602b56f",
+      "sha256": "6da5e2e62b6aa98984f72518b73b0d59beb67a2800fe22e7bbcddce145cbbd7b",
+      "bytes": 21168
+    },
+    "vow18_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "eb69daa4191e00c55dc45bdbdf5ebed01c91535873d363a15fd75a3fcdf9b671",
+      "sha256": "28234ef7333f2f724e6a016e38956373fbb6eb59d16c70eadaae283f3e96bcb9",
+      "bytes": 11088
+    },
+    "vow18_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "f162278cb8e26a2b8b78079004a6c646d06bedfceafd92d137b17565666f4456",
+      "sha256": "5353152c04826cc93cf3f9a48edfde7147c4e3804bda202416842b5beb6efef9",
+      "bytes": 16704
+    },
+    "vow19_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "bb1f43d3a0a56d862fb87e2606c1981fc02d79e2cc03ac4b749a695e6b65f6d0",
+      "sha256": "e4a9babe3d3c0c942ea2c174393cb30b2523224af25526ba62f34964f366fe77",
+      "bytes": 67536
+    },
+    "vow19_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "4be444aa3162a315ed0d34d698a57ec8943d2897861839bfe82d6dbde14aed93",
+      "sha256": "23ce2eb50e547a1a097dd2b7110a6aa65f7d5d4a68682a67a6a1f6ca7541d8a2",
+      "bytes": 13104
+    },
+    "vow19_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "250bf8abd14d45d5be886a5b447018322dec970eb0eeb55ecc7e1356584cb6da",
+      "sha256": "c4f483c6a709e66570a8eb33bcbc30ffc38fae7f37b34bab9e78699d8dffbb24",
+      "bytes": 8784
+    },
+    "vow19_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "7964ff82a8a5578517817e8c22a2ca611668d46c3dedba9650301bd7b75e5a75",
+      "sha256": "49ca7f3d773d00f277cc40328e74494497617e3caaa08bb3dfabd74aa24f6121",
+      "bytes": 4176
+    },
+    "vow19_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "7d43b7950baab29e6b99e2d394137ef2203c6f5f4c01c23c6f9822475408865f",
+      "sha256": "aba309567ae5748e6aba0df7dd1e5152cc9ed5a03b1c5c80409df43771cfcd5f",
+      "bytes": 56016
+    },
+    "vow19_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-pandora-en",
+      "textSha256": "cd512518cb3f0a1fbe5cdbca183ed562d25c8d8e794d6b6929aaf823650245c4",
+      "sha256": "3e97a9befc287188ddd5694296cd1d6a8b27bf7dc6b747a7a2b7787070751cec",
+      "bytes": 27648
+    },
+    "vow19_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "3951912bf3658fdf7af94f70b54c785cad5c9c363df8eaecc4a36c26234cbfb2",
+      "sha256": "1884cca70a941f57da5c3805fbcbdd605ca01b37cb192d86cc1bf2a13e54b8d9",
+      "bytes": 7488
+    },
+    "vow19_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "03c911c9e840cc2e52f8820eada6bc1f83f0e966d49a5bc9483f0bf4c2cf41e6",
+      "sha256": "6f918a59aa3b8981d7d260600c1c539a9326853d66452fc1c6bfb3c763b8e855",
+      "bytes": 23184
+    },
+    "vow19_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "a0d70aa3a10d303417d41838896a63cd82e7b664c220691bf381faa37ed6c568",
+      "sha256": "3e689704f0a739143b64e105f8380ec7446fae55c47087226fd2260a8a3e85f3",
+      "bytes": 31968
+    },
+    "vow19_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "dca238f9e7a6506ddf68ebaac52600909202525e3f4dfb7b0eec886e8468cc5f",
+      "sha256": "bbb203b946030b99193e947346684553794fe511cacf1aaf2515a552bc07bb28",
+      "bytes": 17136
+    },
+    "vow19_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "c22f48fb94203ecb1a9acac8bbcfcdf340bf1ecf5ae4ab6c82bb49822e741592",
+      "sha256": "23db358833fd2779b543e617a7d74b1c03a3283f3f43c395b57fafef7c67549b",
+      "bytes": 41328
+    },
+    "vow19_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "c50498f8b28761fc71b47eefeffd436431f716274b2d4c0991f1f337a65bcaf3",
+      "sha256": "8955eb737e1e654b5b98c453d4fe820fe8fba5ff1cc7a226a2d6f9e21346e340",
+      "bytes": 12816
+    },
+    "vow19_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "0a90a6de4fdab364c6859307207acea1aba909eefd11f11e0590c9026b15081e",
+      "sha256": "34482b5f2ac9973a97ef1896b2a39b20c09a54b2e2f0a103d2ab88e6b5a6b114",
+      "bytes": 12384
+    },
+    "vow19_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "8915c63042485e05bd507dbe274e159a3942fe88a9fc9d4668937fbc854b5e2b",
+      "sha256": "b345455c6de4931161095417f6629f1d8484f65f4fdd8c7b83552c4174dc4a6b",
+      "bytes": 53424
+    },
+    "vow19_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "a6d2baabd12b4bfa04bd1d16663843bb9c792cd0f5b2baa0d045ab1d75e1c20d",
+      "sha256": "ce64f546808abca14f806db27e58a4aaea947b7a6dfd4ce8fef92bbde61d79e2",
+      "bytes": 23904
+    },
+    "vow19_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "9e579bcd38e4a1ca2328322991bc72e2f75703d71179d74ce7032d6af531fdae",
+      "sha256": "8a8394bbb9d44f2a2bd1eece261418eec2dc8ac70174e4f56ad632c629d8b754",
+      "bytes": 32256
+    },
+    "vow19_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "9b60693e099d640c12908d8598b825a0f37baceca8e4650c8b537805ef72c2d2",
+      "sha256": "a7f58e54410313324a86354231adf07b27434a7b7041897789ce00d0ae50d95e",
+      "bytes": 12384
+    },
+    "vow19_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "66133b27466bd6e1dbcc719ccd0264a1ce35f4479a1bb7ccd00082378a428003",
+      "sha256": "b92b682e94d85c3fdee50d7e9b6c7d3db1048d7de92cd09268a6ef75ca06a1d2",
+      "bytes": 17424
+    },
+    "vow19_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "c2c68433589659d50b15beeb10222077dcb789334e86a6e9257b29050dcc908d",
+      "sha256": "24a7fe4e617b0295aa25ded6a3dd3a149b828f8600fc7f1302193146722af0c0",
+      "bytes": 10368
+    },
+    "vow19_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "c5659879aaedd1aa4c619fd67cb09c9c8bebd8f83101545a11d067b4a780a760",
+      "sha256": "dcff34781ed0e639b46e74868cd4b44cd04d8b029be03bb036603d1b05bc6a2e",
+      "bytes": 59184
+    },
+    "vow19_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-saturn-en",
+      "textSha256": "6df015486bb034d9144a70dc0844fef7d331b78b9cba06fcee0a7b56d40c27e7",
+      "sha256": "f4973fc2cba462e39903d284c5529d3a2dfaebd907c4c111f6f88177a03ff32f",
+      "bytes": 8208
+    },
+    "vow19_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "fa7f8f312c5bea0c864350c9a203d0c8a9885ffccfdf8944272f42d5bfc8c647",
+      "sha256": "2c5600c77f10c573d5afb776b214654a45fc1bb2ba3d3d2101fcfb977fbd8f22",
+      "bytes": 11376
+    },
+    "vow19_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "d37ab115649cba863f84a37864f6da8d7bc5dce773e846e39468978a707ce8d7",
+      "sha256": "61aa285e70c4d3e751f0630ace5aef67f74b67e8312ce55950c5b768536534ca",
+      "bytes": 68976
+    },
+    "vow19_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-thalia-en",
+      "textSha256": "0f55ef6975cd2efd593a4e8845deda58fb2919d9461634c6922c730283f2515c",
+      "sha256": "3f64c5c1ef1411fe0e14c316b0af9432afa71520e54b64f9391d7f1b75f10d5d",
+      "bytes": 10368
+    },
+    "vow19_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-athena-en",
+      "textSha256": "9710dc69cade0c0a1c49c8394cbf8674b11a5b1244fd4da4c28ad27852482bde",
+      "sha256": "2a463e00aa358981115b9ea87b0084945f71339c2e0cd38248c771afe1f081e6",
+      "bytes": 26064
+    },
+    "vow19_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "d00fee2f183a26fc9a1ba7142b92ab9730dbeb3e47b8f4c9c1884136ffd0ea62",
+      "sha256": "41811a3d1113966ea2ca62b30c82034fcffe40403269282bbe0fb9e1320b7f6d",
+      "bytes": 43776
+    },
+    "vow20_00_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "caf910680a41fea4bd956f9cf5ec8a71beffd959d3255fc2388571bd76a88a2b",
+      "sha256": "bcb8ddf801cefeac69bf0168815bbd7a69a697f3b4181e0a166f25238643bab4",
+      "bytes": 52704
+    },
+    "vow20_00_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "cd65fd9b00810f70d227cc5d86975607652d447fafe166aa3b840c183845a7e5",
+      "sha256": "fec51b740aba823a6e6914cff963847353017086b36e80ac2ee480a7897e18d0",
+      "bytes": 10656
+    },
+    "vow20_00_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "80a61f7462ced3543965d11326472e39f4394e652d11c0dd924d86d04b1536e2",
+      "sha256": "c90a3c6af839a4926fd777fcf0e88973a9925838fff7f843b29d63232c5c80a9",
+      "bytes": 8208
+    },
+    "vow20_00_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "04a1cff7ecbeacc1f22e17966f9b428b7fe6ae288b7f79dd16a0059e24c44c6f",
+      "sha256": "1c666d72068e78f6591ff23d5a586725725618b9859f15e4c60e48994e7c458c",
+      "bytes": 22464
+    },
+    "vow20_01_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "be9598e041f576e14aa7a617ac2fec1fd9b571ce4677ea699082aeae2939300b",
+      "sha256": "db9a2def37c99d0924378b1900314e9bb8dcd921fb533e2c6ae9185b7888a4f4",
+      "bytes": 57888
+    },
+    "vow20_01_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "3b2049c76950f7c7326f802ea7240f823ea04169df4c029e86bd6c5216234d90",
+      "sha256": "2eb0e0d05fe3cbe56c15691aed4f21b884f2b4e3974857da56da5949b15f05d0",
+      "bytes": 18576
+    },
+    "vow20_01_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "dff923b971aa28adc0a977188705a28d5d8f16cdc7f971a1abf4be593412008d",
+      "sha256": "f4e6113e67d3c3c648e0e84b103c93fe7c6c3ba65b7938c8022217b9060766d7",
+      "bytes": 13968
+    },
+    "vow20_01_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "ced9bf73a3942f9f79c92b0b9bf52a5ae8e73dd2007a51a6fee4732e2907181b",
+      "sha256": "b86073247e54012f5b074a45d0123639d4cbed44b1904939d3f2a242052d538c",
+      "bytes": 18864
+    },
+    "vow20_02_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "f7178ce5a7734045a28c92566d439376fc28502a94cccd0c48451061401a9712",
+      "sha256": "1d6394d4f8cbffbe8b183d2072297424ce65b16da42f1ba797fea603773f7e74",
+      "bytes": 29088
+    },
+    "vow20_02_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-asteria-en",
+      "textSha256": "11a3722fdbb90468435ca2cad6caf3c6eae87b9f1739681fb6af7b6b91a53a06",
+      "sha256": "b5f55968d0a1050e1a8b75411847474a60c2e779ec3242f3adc937e606f13a1b",
+      "bytes": 12816
+    },
+    "vow20_02_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "e256223ac22e5813ebc0cb0c88e31d6d86f46aef44d6a79ea8c6f538d7e72abf",
+      "sha256": "149b17b5acd99d843a1f6759c9f418129cf3f248a983133dbeb5f2682c5bd177",
+      "bytes": 44208
+    },
+    "vow20_02_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-draco-en",
+      "textSha256": "349bdfe74bb9d1148949c8d282b1c1332181356a308a759327d06fa32b2b49d5",
+      "sha256": "305977c11bf8806739626ab8495ab5ea49364be0d7eecbf6f2a0faa0b5f596c6",
+      "bytes": 27936
+    },
+    "vow20_02_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "4db6757d9ef264894b10248bec0b2e92cb9c0f0547c97e95c6d76f86371a4554",
+      "sha256": "4dde77eb0cb59d28a5c44a6ae58b7f8482e063a6f416750116d23af9ab7fd221",
+      "bytes": 8928
+    },
+    "vow20_03_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "a1e419a8c2c0bc3845b1ac4e5f511592a121f7cfca9d5de25ad369c099e2c98f",
+      "sha256": "7c83a4adb88f5ba0f68db10f39d831372fa6f33a0fa329f274e359e603ab28a4",
+      "bytes": 49824
+    },
+    "vow20_03_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-jupiter-en",
+      "textSha256": "aa8271b0e1566f081e78c6d54fb90feb213e54389b26bc69c5e3f9f459a352bf",
+      "sha256": "1d979f478a2ab8b6c522354de814edb136fe0537d24c5cd7e1d68b5303ce7bee",
+      "bytes": 26208
+    },
+    "vow20_03_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "d5d5180eff7d0e4e3f8e542254bd2dbc754638a79a3543d9363ab1b72a3b2217",
+      "sha256": "30f5d6b6abca261f81f8c30419fdba665f9f2fed273c2540caa8e384bf00ac93",
+      "bytes": 9648
+    },
+    "vow20_03_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "c1a526aa8e77668559c6a731ef350988385210e64c33fc2c23b56c0a54a1ce06",
+      "sha256": "38625fe6e2d64ae5d6beccd3d521c0a81008052285be8d357de337f6b520719f",
+      "bytes": 20736
+    },
+    "vow20_04_p_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-luna-en",
+      "textSha256": "c825410372061eb49ee2e806db178f0341b302aecf532944d5492c37c36916ff",
+      "sha256": "717c66c40887d8a96e912989bdd24d721bdf086e6e9cde18d23db4dc0f2163f4",
+      "bytes": 19728
+    },
+    "vow20_04_p_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "1b1f3354cebafcdb6108b0a76a6a70a0d850f9a61e48662f0274609875f3901e",
+      "sha256": "6d1aaaefbd9bcc5cc42ab024fc9c4d1bafb70c8e5a7fe4f0c05481f4c1a11d91",
+      "bytes": 20736
+    },
+    "vow20_04_v_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "779b646e79fafb8f38f3c2a156e906b8f35692cabef226dbf318b90c174d70fd",
+      "sha256": "7104671dd1fd5951f2cd39f5810498bdb6c0118ec48bfad89b11e8c16e4886f9",
+      "bytes": 51264
+    },
+    "vow20_04_v_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-odysseus-en",
+      "textSha256": "f62b5ee3ff8b5b254c740ad6a56e75c9ccbf9151fd24bcdff419292a164b6c52",
+      "sha256": "1103157a41758c39aba4d8d32edee09ec280ae8dfb44e6d52bdf0a3d9922558d",
+      "bytes": 11376
+    },
+    "vow20_04_v_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "6c6ea3ba24b6d5758f7cd9ff7bbb942fef62f5f1791ec23e00a95e68dfc4ebf8",
+      "sha256": "b5586da7bb44c41aaa47fe996fc9f9402aa8ac74e414dd399dd2dcb8e48f4550",
+      "bytes": 12384
+    },
+    "vow20_05_b_00": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "4a22a6d86bac625ece82fdc6ca803f087fdc0db3ce6e72918a1205fb55eec892",
+      "sha256": "dd5327c53b123ac3178e45e7406cdea449886b870c5c2c1f44699138e14bf9e1",
+      "bytes": 55584
+    },
+    "vow20_05_b_01": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "04af708b9642602a7eda97c8ba944480423a685e4515ac1e3dd414b7d45c36c2",
+      "sha256": "d9e7c9adc4370ca2bafa85232d1867becdcd4f846684f11741b58e5065fbd5c4",
+      "bytes": 22896
+    },
+    "vow20_05_b_02": {
+      "provider": "deepgram",
+      "voice": "aura-2-apollo-en",
+      "textSha256": "2d4e25c8de00e064fe0ea5f661991d4a15811e8fc33de5e4e19442e3da72afc7",
+      "sha256": "3c440896413a9e954a0ce953c8391787f42f77fdace7e755ad64959b16cf01da",
+      "bytes": 23616
+    },
+    "vow20_05_b_03": {
+      "provider": "deepgram",
+      "voice": "aura-2-hera-en",
+      "textSha256": "04b16992dbb8b753ddbdb3d50003f16cfc834d6feca9c33b798040c9a478704d",
+      "sha256": "c07ca19ecd72263b8a02fe85ea697a94a14f5e035f6630bfdaa77477f3cb8390",
+      "bytes": 6624
+    },
+    "vow20_05_b_04": {
+      "provider": "deepgram",
+      "voice": "aura-2-orion-en",
+      "textSha256": "d2047becdca6461b4265d87b3aeda07176d0d69eae03c9bff8ad14af1fb55b43",
+      "sha256": "5992cfcf69572b17cd527cf747297232d85b6f3d791c04b7e37aafce4afd12c2",
+      "bytes": 79488
+    }
+  }
+}

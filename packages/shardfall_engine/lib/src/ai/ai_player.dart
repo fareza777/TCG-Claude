@@ -98,12 +98,10 @@ class AiPlayer {
     return score;
   }
 
-  ({GameState state, int deployedId})? deployNextUnit(GameState s, PlayerId me) {
-    final hand = s
-        .player(me)
-        .hand
-        .where((c) => c.def.type == CardType.unit)
-        .toList();
+  ({GameState state, int deployedId})? deployNextUnit(
+      GameState s, PlayerId me) {
+    final hand =
+        s.player(me).hand.where((c) => c.def.type == CardType.unit).toList();
     if (tier == AiTier.greedy) {
       hand.sort((a, b) => b.def.totalCost.compareTo(a.def.totalCost));
     } else {
@@ -129,8 +127,8 @@ class AiPlayer {
     final spells = s
         .player(me)
         .hand
-        .where((c) =>
-            c.def.type == CardType.rite || c.def.type == CardType.ritual)
+        .where(
+            (c) => c.def.type == CardType.rite || c.def.type == CardType.ritual)
         .toList()
       ..sort((a, b) => a.def.totalCost.compareTo(b.def.totalCost));
     for (final card in spells) {
@@ -194,10 +192,8 @@ class AiPlayer {
             final oppHealth = s.player(me.opponent).health;
             // Only "any target" spells may hit the player; "target Unit"
             // spells must pick a Unit (or be skipped if none exist).
-            final canHitPlayer =
-                def.text.toLowerCase().contains('any target');
-            if (canHitPlayer &&
-                (oppHealth <= amount || enemyUnits.isEmpty)) {
+            final canHitPlayer = def.text.toLowerCase().contains('any target');
+            if (canHitPlayer && (oppHealth <= amount || enemyUnits.isEmpty)) {
               targets.add(EffectTarget.player(me.opponent));
             } else if (enemyUnits.isNotEmpty) {
               targets.add(EffectTarget.unit(enemyUnits.first.instanceId));
@@ -213,12 +209,21 @@ class AiPlayer {
             }
           case 'BUFF':
           case 'ADD_COUNTER':
+          case 'GRANT_KEYWORD':
             // Buff our own strongest Unit.
             if (myUnits.isNotEmpty) {
               targets.add(EffectTarget.unit(myUnits.first.instanceId));
             } else {
               targets.add(const EffectTarget.player(null)); // skipped
             }
+          case 'RENEW':
+            final wounded = myUnits
+                .where((c) => c.damage > 0 && !c.isDead)
+                .toList()
+              ..sort((a, b) => b.damage.compareTo(a.damage));
+            targets.add(wounded.isEmpty
+                ? const EffectTarget.player(null)
+                : EffectTarget.unit(wounded.first.instanceId));
           default:
             targets.add(EffectTarget.player(me.opponent));
         }
@@ -269,9 +274,14 @@ class AiPlayer {
         }
         if (u == null) continue;
         final amount = _firstDamageAmount(card.def);
-        final killable = u.guard - u.damage <= amount && (u.might + u.guard) >= 4;
+        final killable =
+            u.guard - u.damage <= amount && (u.might + u.guard) >= 4;
         if (killable && _castable(s, me, card.instanceId, targets)) {
-          return (cardId: card.instanceId, targets: targets, unitTargetId: unitId);
+          return (
+            cardId: card.instanceId,
+            targets: targets,
+            unitTargetId: unitId
+          );
         }
       }
     }
@@ -290,7 +300,8 @@ class AiPlayer {
   int _firstDamageAmount(CardDef def) {
     for (final block in def.effects) {
       for (final e in (block['effects'] as List? ?? const [])) {
-        if ((e as Map)['op'] == 'DEAL_DAMAGE') return (e['amount'] as int?) ?? 0;
+        if ((e as Map)['op'] == 'DEAL_DAMAGE')
+          return (e['amount'] as int?) ?? 0;
       }
     }
     return 0;
@@ -316,6 +327,8 @@ class AiPlayer {
         if (op == 'DESTROY' || op == 'RETURN_TO_HAND') return true;
         if (op == 'DEAL_DAMAGE' && !anyTarget) return true;
         if (op == 'BUFF') return true; // needs a Unit to buff
+        if (op == 'RENEW' || op == 'ADD_COUNTER' || op == 'GRANT_KEYWORD')
+          return true;
       }
     }
     return false;
@@ -344,7 +357,7 @@ class AiPlayer {
       for (final c in p.arena) {
         if (c.def.type != CardType.unit) continue;
         v += c.might * 1.0 + c.guard * 0.8;
-        for (final kw in c.def.keywords) {
+        for (final kw in c.keywords) {
           v += _keywordValue(kw);
         }
       }
@@ -373,11 +386,11 @@ class AiPlayer {
         .player(me.opponent)
         .arena
         .where((c) => c.def.type == CardType.unit && !c.exerted);
-    if (!attacker.def.keywords.contains(Keyword.soar)) return ready.toList();
+    if (!attacker.keywords.contains(Keyword.soar)) return ready.toList();
     return ready
         .where((b) =>
-            b.def.keywords.contains(Keyword.soar) ||
-            b.def.keywords.contains(Keyword.intercept))
+            b.keywords.contains(Keyword.soar) ||
+            b.keywords.contains(Keyword.intercept))
         .toList();
   }
 
@@ -391,7 +404,8 @@ class AiPlayer {
     final health = s.player(me.opponent).health;
     if (health <= 0) return false;
 
-    final remaining = [...attackers]..sort((a, b) => b.might.compareTo(a.might));
+    final remaining = [...attackers]
+      ..sort((a, b) => b.might.compareTo(a.might));
     final used = <int>{};
 
     for (final attacker in [...remaining]) {
@@ -414,8 +428,7 @@ class AiPlayer {
     final myUnits = s
         .player(me)
         .arena
-        .where((c) =>
-            c.canAttack && !c.def.keywords.contains(Keyword.bulwark))
+        .where((c) => c.canAttack && !c.keywords.contains(Keyword.bulwark))
         .toList();
     if (myUnits.isEmpty) return const [];
 
@@ -437,8 +450,8 @@ class AiPlayer {
           .toList();
       final attackers = <int>[];
       for (final unit in myUnits) {
-        final losesTrade = blockers.any((b) =>
-            b.might >= unit.guard - unit.damage && unit.might < b.guard);
+        final losesTrade = blockers.any(
+            (b) => b.might >= unit.guard - unit.damage && unit.might < b.guard);
         if (!losesTrade || _raceIsOn(s, me)) {
           attackers.add(unit.instanceId);
         }
@@ -451,8 +464,8 @@ class AiPlayer {
       if (atk.isEmpty) return _evaluate(s, me);
       try {
         var sim = Combat.declareAttackers(s, me, atk);
-        final blocks =
-            const AiPlayer(tier: AiTier.tactician).chooseBlocks(sim, me.opponent, atk);
+        final blocks = const AiPlayer(tier: AiTier.tactician)
+            .chooseBlocks(sim, me.opponent, atk);
         sim = Combat.resolveDamage(sim, me, blocks);
         if (sim.winner == me) return 1e9; // lethal — always take it
         return _evaluate(sim, me);
@@ -512,8 +525,7 @@ class AiPlayer {
 
     final declarations = <AttackDeclaration>[];
     final used = <int>{};
-    var unblockedDamage =
-        attackers.fold(0, (sum, a) => sum + a.might);
+    var unblockedDamage = attackers.fold(0, (sum, a) => sum + a.might);
 
     for (final atk in attackers) {
       CardInstance? best;
@@ -524,12 +536,13 @@ class AiPlayer {
         final survives = atk.might < b.guard;
         final mustChump =
             unblockedDamage >= s.player(me).health && tier != AiTier.greedy;
-        if ((kills && survives) || (kills && b.might <= atk.might) || mustChump) {
+        if ((kills && survives) ||
+            (kills && b.might <= atk.might) ||
+            mustChump) {
           if (best == null || b.might > best.might) best = b;
         }
       }
-      if (best != null &&
-          !(atk.def.keywords.contains(Keyword.dread))) {
+      if (best != null && !(atk.keywords.contains(Keyword.dread))) {
         used.add(best.instanceId);
         unblockedDamage -= atk.might;
         declarations.add(AttackDeclaration(
@@ -542,9 +555,9 @@ class AiPlayer {
   }
 
   bool _canBlock(CardInstance attacker, CardInstance blocker) {
-    if (attacker.def.keywords.contains(Keyword.soar) &&
-        !blocker.def.keywords.contains(Keyword.soar) &&
-        !blocker.def.keywords.contains(Keyword.intercept)) {
+    if (attacker.keywords.contains(Keyword.soar) &&
+        !blocker.keywords.contains(Keyword.soar) &&
+        !blocker.keywords.contains(Keyword.intercept)) {
       return false;
     }
     return true;
@@ -576,19 +589,34 @@ class AiPlayer {
     final attackerIds = chooseAttackers(state, me);
     if (attackerIds.isNotEmpty) {
       state = Combat.declareAttackers(state, me, attackerIds);
+      final beforeCombat = [
+        ...state.player(me).arena,
+        ...state.player(me.opponent).arena,
+      ];
       final hasBlockers = state
           .player(me.opponent)
           .arena
-          .any((c) => c.def.type == CardType.unit && !c.exerted);
+          .any((c) =>
+              c.def.type == CardType.unit &&
+              (!c.exerted || c.keywords.contains(Keyword.ambush)));
       if (defenderAi != null && hasBlockers) {
-        final blocks =
-            defenderAi.chooseBlocks(state, me.opponent, attackerIds);
+        final blocks = defenderAi.chooseBlocks(state, me.opponent, attackerIds);
         state = Combat.resolveDamage(state, me, blocks);
       } else if (!hasBlockers) {
         state = Combat.resolveDamage(state, me, [
           for (final id in attackerIds) AttackDeclaration(attackerId: id),
         ]);
       }
+      // The UI and PvP drivers already deliver death events after combat.
+      // The autonomous simulation driver must do the same, exactly once.
+      final survivors = {
+        for (final pid in PlayerId.values)
+          for (final c in state.player(pid).arena) c.instanceId,
+      };
+      state = EffectInterpreter.fireDeathTriggers(state, [
+        for (final c in beforeCombat)
+          if (!survivors.contains(c.instanceId)) c,
+      ]);
     }
     if (state.winner != null) return state;
 

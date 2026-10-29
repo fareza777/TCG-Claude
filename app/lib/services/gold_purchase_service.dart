@@ -111,6 +111,11 @@ class GoldPurchaseService extends ChangeNotifier {
     if (_initialized) return;
     _initialized = true;
 
+    if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) {
+      _setUnavailable('Gold purchases are available on Android only.');
+      return;
+    }
+
     _purchaseSubscription = store.purchaseStream.listen(
       (purchases) => unawaited(_handlePurchases(purchases)),
       onError: (Object error, StackTrace stackTrace) {
@@ -119,11 +124,6 @@ class GoldPurchaseService extends ChangeNotifier {
         notifyListeners();
       },
     );
-
-    if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) {
-      _setUnavailable('Gold purchases are available on Android only.');
-      return;
-    }
 
     try {
       if (!await store.isAvailable()) {

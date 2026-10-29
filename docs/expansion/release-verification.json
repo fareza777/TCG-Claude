@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0+65",
+  "catalog_sha256": "e91ccdae42e34f3e598510e45a2185321305d1b296a2758fe5d0b2576338cc6c",
+  "matching_expansion_files_per_build": 761,
+  "voice_credentials_in_source": false,
+  "voice_credentials_in_web_or_apk": false,
+  "apk_signature": {
+    "verified": true,
+    "debug_certificate": false,
+    "sha256": "fead9fa6ccaca1ed91f08175d394378df0e7edbba219564ce472b6578d448d6b"
+  },
+  "builds": {
+    "apk": {
+      "path": "app/build/app/outputs/flutter-apk/app-release.apk",
+      "bytes": 222994594,
+      "sha256": "a1ecb938c6350949a1d65e6734c51bb06858ee4515eab0d05534380f3ae608b0"
+    },
+    "appbundle": {
+      "path": "app/build/app/outputs/bundle/release/app-release.aab",
+      "bytes": 223216630,
+      "sha256": "e0e3ba6f308952fe6d1ff5b0f22f3ff7ac5e2cd453c5c816e28b8658542981e2"
+    }
+  },
+  "tests": {
+    "app": 277,
+    "engine": 94,
+    "backend": 32,
+    "voice_pipeline": 3
+  },
+  "art": {
+    "cards": 215,
+    "chapter_scenes": 20,
+    "tokens": 4
+  },
+  "voice": {
+    "clips": 521,
+    "seconds": 2122.2
+  }
+}

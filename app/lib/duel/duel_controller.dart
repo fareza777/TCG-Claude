@@ -29,7 +29,12 @@ class DuelEvent {
 class TargetSpec {
   final bool units;
   final bool players;
-  const TargetSpec({required this.units, required this.players});
+  final bool friendly;
+  const TargetSpec({
+    required this.units,
+    required this.players,
+    this.friendly = false,
+  });
 }
 
 /// Drives one PvE duel: human = p1, AI = p2.
@@ -183,30 +188,84 @@ class DuelController extends ChangeNotifier {
     return n;
   }
 
-  /// Determine what the pending card may target.
-  TargetSpec targetSpec(CardDef def) {
-    var players = false;
+  Iterable<Map> _chosenEffects(CardDef def) sync* {
     for (final block in def.effects) {
       for (final raw in (block['effects'] as List? ?? const [])) {
         final effect = raw as Map;
-        final sel = (effect['target'] as Map?)?['select'];
-        if (sel != 'CHOOSE') continue;
-        if (effect['op'] == 'DEAL_DAMAGE' &&
-            def.text.toLowerCase().contains('any target')) {
-          players = true;
-        }
+        if ((effect['target'] as Map?)?['select'] == 'CHOOSE') yield effect;
       }
     }
-    return TargetSpec(units: true, players: players);
   }
 
-  /// Whether any legal target exists right now for the pending card.
-  bool hasLegalTarget(CardDef def) {
-    final spec = targetSpec(def);
-    if (spec.players) return true;
-    return [...me.arena, ...foe.arena]
-        .any((c) => c.def.type == CardType.unit);
+  /// The same restrictions drive reticles, empty-board checks and taps.
+  TargetSpec targetSpec(CardDef def) {
+    final effects = _chosenEffects(def).toList();
+    var players = false;
+    var friendly = effects.isNotEmpty;
+    for (final effect in effects) {
+      final target = effect['target'] as Map;
+      final type = (target['filter'] as Map?)?['type'];
+      if (type == 'PLAYER' ||
+          type == 'UNIT_OR_PLAYER' ||
+          (type == null &&
+              effect['op'] == 'DEAL_DAMAGE' &&
+              def.text.toLowerCase().contains('any target'))) {
+        players = true;
+      }
+      friendly =
+          friendly &&
+          (target['owner'] == 'SELF' ||
+              const [
+                'HEAL',
+                'BUFF',
+                'ADD_COUNTER',
+                'RENEW',
+                'GRANT_KEYWORD',
+              ].contains(effect['op']));
+    }
+    return TargetSpec(units: true, players: players, friendly: friendly);
   }
+
+  bool _ownerAllowed(Map target, PlayerId owner) => switch (target['owner']) {
+    'SELF' => owner == human,
+    'OPPONENT' => owner == enemy,
+    _ => true,
+  };
+
+  bool canTargetUnit(CardDef def, int instanceId) {
+    final unit = [
+      ...me.arena,
+      ...foe.arena,
+    ].where((c) => c.instanceId == instanceId).firstOrNull;
+    if (unit == null || unit.def.type != CardType.unit) return false;
+    return _chosenEffects(def).every((effect) {
+      final target = effect['target'] as Map;
+      final type = (target['filter'] as Map?)?['type'];
+      return _ownerAllowed(target, unit.owner) &&
+          type != 'PLAYER' &&
+          (type == null || type == 'UNIT' || type == 'UNIT_OR_PLAYER');
+    });
+  }
+
+  bool canTargetPlayer(CardDef def, PlayerId player) =>
+      targetSpec(def).players &&
+      _chosenEffects(def).every((effect) {
+        final target = effect['target'] as Map;
+        final type = (target['filter'] as Map?)?['type'];
+        return _ownerAllowed(target, player) &&
+            (type == 'PLAYER' || type == 'UNIT_OR_PLAYER' || type == null);
+      });
+
+  /// Cards with compatible chosen effects apply all of them to one selection.
+  List<EffectTarget> chosenUnitTargets(CardDef def, int instanceId) =>
+      List.filled(chooseCount(def), EffectTarget.unit(instanceId));
+
+  bool hasLegalTarget(CardDef def) =>
+      PlayerId.values.any((pid) => canTargetPlayer(def, pid)) ||
+      [
+        ...me.arena,
+        ...foe.arena,
+      ].any((card) => canTargetUnit(def, card.instanceId));
 
   void playHandCard(int instanceId) {
     if (isGameOver) return;
@@ -244,9 +303,13 @@ class DuelController extends ChangeNotifier {
       notifyListeners();
       return;
     }
+    if (!canTargetUnit(card.def, unitInstanceId)) return;
     targetingId = null;
-    _resolvePlay(card, [EffectTarget.unit(unitInstanceId)],
-        targetLabel: _unitName(unitInstanceId));
+    _resolvePlay(
+      card,
+      chosenUnitTargets(card.def, unitInstanceId),
+      targetLabel: _unitName(unitInstanceId),
+    );
   }
 
   /// Player tapped a player face while aiming.
@@ -254,10 +317,13 @@ class DuelController extends ChangeNotifier {
     final id = targetingId;
     if (id == null) return;
     final card = me.hand.where((c) => c.instanceId == id).firstOrNull;
-    if (card == null || !targetSpec(card.def).players) return;
+    if (card == null || !canTargetPlayer(card.def, pid)) return;
     targetingId = null;
-    _resolvePlay(card, [EffectTarget.player(pid)],
-        targetLabel: pid == human ? 'you' : 'the enemy');
+    _resolvePlay(
+      card,
+      List.filled(chooseCount(card.def), EffectTarget.player(pid)),
+      targetLabel: pid == human ? 'you' : 'the enemy',
+    );
   }
 
   void cancelTargeting() {
@@ -575,8 +641,9 @@ class DuelController extends ChangeNotifier {
 
   Future<List<AttackDeclaration>> _awaitPlayerBlocks(
       List<int> attackerIds) async {
-    final hasBlocker = me.arena
-        .any((c) => c.def.type == CardType.unit && !c.exerted);
+    final hasBlocker = me.arena.any((c) =>
+        c.def.type == CardType.unit &&
+        (!c.exerted || c.keywords.contains(Keyword.ambush)));
     if (!hasBlocker) {
       return [for (final id in attackerIds) AttackDeclaration(attackerId: id)];
     }
@@ -602,14 +669,15 @@ class DuelController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Toggle one of your untapped Units as a blocker of the selected attacker.
+  /// Assign a ready Unit, or an exerted Unit with live Ambush, as a blocker.
   void assignBlocker(int blockerId) {
     if (ui != DuelUiState.playerBlocking) return;
     final atk = blockingSelectedAttacker;
     if (atk == null) return;
     final blocker =
         me.arena.where((c) => c.instanceId == blockerId).firstOrNull;
-    if (blocker == null || blocker.exerted ||
+    if (blocker == null ||
+        (blocker.exerted && !blocker.keywords.contains(Keyword.ambush)) ||
         blocker.def.type != CardType.unit) {
       return;
     }

@@ -1,0 +1,1703 @@
+{
+  "matchesPerPairing": 20,
+  "seedBase": 14142135,
+  "matchCount": 3200,
+  "ai": "tactician",
+  "maxHalfTurns": 240,
+  "deckSelection": "Declared before observing results; all cross-faction cross-panel pairings; no matchup filtering.",
+  "cardsFingerprint": "5a87a8d",
+  "decks": {
+    "VERDANCE:tempo": {
+      "SF002-001": 16,
+      "SF002-002": 3,
+      "SF002-004": 3,
+      "SF002-007": 3,
+      "SF002-016": 3,
+      "SF002-019": 3,
+      "SF002-022": 3,
+      "SF002-025": 3,
+      "SF002-026": 3
+    },
+    "VERDANCE:value": {
+      "SF002-001": 16,
+      "SF002-004": 3,
+      "SF002-009": 3,
+      "SF002-013": 3,
+      "SF002-019": 3,
+      "SF002-023": 3,
+      "SF002-025": 3,
+      "SF002-026": 3,
+      "SF002-032": 3
+    },
+    "VERDANCE:rare": {
+      "SF002-001": 18,
+      "SF002-004": 2,
+      "SF002-009": 2,
+      "SF002-019": 2,
+      "SF002-023": 2,
+      "SF002-025": 2,
+      "SF002-026": 2,
+      "SF002-034": 2,
+      "SF002-035": 2,
+      "SF002-036": 2,
+      "SF002-041": 2,
+      "SF002-042": 1,
+      "SF002-043": 1
+    },
+    "VERDANCE:mixed": {
+      "SF002-001": 16,
+      "SF001-001": 3,
+      "SF001-002": 3,
+      "SF001-003": 3,
+      "SF001-004": 3,
+      "SF002-019": 3,
+      "SF002-022": 3,
+      "SF002-025": 3,
+      "SF002-026": 3
+    },
+    "PYRE:tempo": {
+      "SF002-044": 16,
+      "SF002-045": 3,
+      "SF002-047": 3,
+      "SF002-050": 3,
+      "SF002-051": 3,
+      "SF002-055": 3,
+      "SF002-057": 3,
+      "SF002-062": 3,
+      "SF002-069": 3
+    },
+    "PYRE:value": {
+      "SF002-044": 16,
+      "SF002-049": 3,
+      "SF002-052": 3,
+      "SF002-056": 3,
+      "SF002-063": 3,
+      "SF002-066": 3,
+      "SF002-067": 3,
+      "SF002-070": 3,
+      "SF002-075": 3
+    },
+    "PYRE:rare": {
+      "SF002-044": 18,
+      "SF002-049": 2,
+      "SF002-050": 2,
+      "SF002-057": 2,
+      "SF002-066": 2,
+      "SF002-067": 2,
+      "SF002-070": 2,
+      "SF002-077": 2,
+      "SF002-078": 2,
+      "SF002-079": 2,
+      "SF002-084": 2,
+      "SF002-085": 1,
+      "SF002-086": 1
+    },
+    "PYRE:mixed": {
+      "SF002-044": 16,
+      "SF001-021": 3,
+      "SF001-022": 3,
+      "SF001-023": 3,
+      "SF001-025": 3,
+      "SF002-055": 3,
+      "SF002-057": 3,
+      "SF002-062": 3,
+      "SF002-069": 3
+    },
+    "TIDE:tempo": {
+      "SF002-087": 16,
+      "SF002-091": 3,
+      "SF002-093": 3,
+      "SF002-095": 3,
+      "SF002-098": 3,
+      "SF002-102": 3,
+      "SF002-107": 3,
+      "SF002-111": 3,
+      "SF002-112": 3
+    },
+    "TIDE:value": {
+      "SF002-087": 16,
+      "SF002-090": 3,
+      "SF002-094": 3,
+      "SF002-095": 3,
+      "SF002-098": 3,
+      "SF002-107": 3,
+      "SF002-111": 3,
+      "SF002-112": 3,
+      "SF002-113": 3
+    },
+    "TIDE:rare": {
+      "SF002-087": 18,
+      "SF002-090": 2,
+      "SF002-093": 2,
+      "SF002-095": 2,
+      "SF002-107": 2,
+      "SF002-111": 2,
+      "SF002-112": 2,
+      "SF002-120": 2,
+      "SF002-121": 2,
+      "SF002-122": 2,
+      "SF002-127": 2,
+      "SF002-128": 1,
+      "SF002-129": 1
+    },
+    "TIDE:mixed": {
+      "SF002-087": 16,
+      "SF001-041": 3,
+      "SF001-042": 3,
+      "SF001-043": 3,
+      "SF001-044": 3,
+      "SF002-102": 3,
+      "SF002-107": 3,
+      "SF002-111": 3,
+      "SF002-112": 3
+    },
+    "DAWN:tempo": {
+      "SF002-130": 16,
+      "SF002-131": 3,
+      "SF002-135": 3,
+      "SF002-137": 3,
+      "SF002-140": 3,
+      "SF002-141": 3,
+      "SF002-148": 3,
+      "SF002-154": 3,
+      "SF002-155": 3
+    },
+    "DAWN:value": {
+      "SF002-130": 16,
+      "SF002-133": 3,
+      "SF002-137": 3,
+      "SF002-142": 3,
+      "SF002-149": 3,
+      "SF002-151": 3,
+      "SF002-154": 3,
+      "SF002-155": 3,
+      "SF002-158": 3
+    },
+    "DAWN:rare": {
+      "SF002-130": 18,
+      "SF002-133": 2,
+      "SF002-135": 2,
+      "SF002-137": 2,
+      "SF002-149": 2,
+      "SF002-154": 2,
+      "SF002-155": 2,
+      "SF002-163": 2,
+      "SF002-164": 2,
+      "SF002-165": 2,
+      "SF002-170": 2,
+      "SF002-171": 1,
+      "SF002-172": 1
+    },
+    "DAWN:mixed": {
+      "SF002-130": 16,
+      "SF001-061": 3,
+      "SF001-062": 3,
+      "SF001-063": 3,
+      "SF001-064": 3,
+      "SF002-141": 3,
+      "SF002-148": 3,
+      "SF002-154": 3,
+      "SF002-155": 3
+    },
+    "GLOOM:tempo": {
+      "SF002-173": 16,
+      "SF002-175": 3,
+      "SF002-176": 3,
+      "SF002-178": 3,
+      "SF002-180": 3,
+      "SF002-182": 3,
+      "SF002-189": 3,
+      "SF002-197": 3,
+      "SF002-198": 3
+    },
+    "GLOOM:value": {
+      "SF002-173": 16,
+      "SF002-176": 3,
+      "SF002-181": 3,
+      "SF002-183": 3,
+      "SF002-192": 3,
+      "SF002-195": 3,
+      "SF002-197": 3,
+      "SF002-198": 3,
+      "SF002-199": 3
+    },
+    "GLOOM:rare": {
+      "SF002-173": 18,
+      "SF002-176": 2,
+      "SF002-178": 2,
+      "SF002-182": 2,
+      "SF002-192": 2,
+      "SF002-195": 2,
+      "SF002-199": 2,
+      "SF002-206": 2,
+      "SF002-207": 2,
+      "SF002-208": 2,
+      "SF002-213": 2,
+      "SF002-214": 1,
+      "SF002-215": 1
+    },
+    "GLOOM:mixed": {
+      "SF002-173": 16,
+      "SF001-081": 3,
+      "SF001-082": 3,
+      "SF001-083": 3,
+      "SF001-084": 3,
+      "SF002-182": 3,
+      "SF002-189": 3,
+      "SF002-197": 3,
+      "SF002-198": 3
+    }
+  },
+  "pairs": [
+    {
+      "a": "VERDANCE:tempo",
+      "b": "PYRE:tempo",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "PYRE:value",
+      "aWins": 5,
+      "bWins": 15,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "PYRE:rare",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "PYRE:mixed",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "TIDE:tempo",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "TIDE:value",
+      "aWins": 8,
+      "bWins": 12,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "TIDE:rare",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "TIDE:mixed",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "DAWN:tempo",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "DAWN:value",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "DAWN:rare",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "DAWN:mixed",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "GLOOM:tempo",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "GLOOM:value",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "GLOOM:rare",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:tempo",
+      "b": "GLOOM:mixed",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "PYRE:tempo",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "PYRE:value",
+      "aWins": 5,
+      "bWins": 15,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "PYRE:rare",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "PYRE:mixed",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "TIDE:tempo",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "TIDE:value",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "TIDE:rare",
+      "aWins": 3,
+      "bWins": 17,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "TIDE:mixed",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "DAWN:tempo",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "DAWN:value",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "DAWN:rare",
+      "aWins": 8,
+      "bWins": 12,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "DAWN:mixed",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "GLOOM:tempo",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "GLOOM:value",
+      "aWins": 5,
+      "bWins": 15,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "GLOOM:rare",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:value",
+      "b": "GLOOM:mixed",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "PYRE:tempo",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "PYRE:value",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "PYRE:rare",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "PYRE:mixed",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "TIDE:tempo",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "TIDE:value",
+      "aWins": 8,
+      "bWins": 12,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "TIDE:rare",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "TIDE:mixed",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "DAWN:tempo",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "DAWN:value",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "DAWN:rare",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "DAWN:mixed",
+      "aWins": 16,
+      "bWins": 4,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "GLOOM:tempo",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "GLOOM:value",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "GLOOM:rare",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:rare",
+      "b": "GLOOM:mixed",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "PYRE:tempo",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "PYRE:value",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "PYRE:rare",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "PYRE:mixed",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "TIDE:tempo",
+      "aWins": 15,
+      "bWins": 5,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "TIDE:value",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "TIDE:rare",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "TIDE:mixed",
+      "aWins": 16,
+      "bWins": 4,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "DAWN:tempo",
+      "aWins": 15,
+      "bWins": 5,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "DAWN:value",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "DAWN:rare",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "DAWN:mixed",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "GLOOM:tempo",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "GLOOM:value",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "GLOOM:rare",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "VERDANCE:mixed",
+      "b": "GLOOM:mixed",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "TIDE:tempo",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "TIDE:value",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "TIDE:rare",
+      "aWins": 8,
+      "bWins": 12,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "TIDE:mixed",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "DAWN:tempo",
+      "aWins": 5,
+      "bWins": 15,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "DAWN:value",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "DAWN:rare",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "DAWN:mixed",
+      "aWins": 4,
+      "bWins": 16,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "GLOOM:tempo",
+      "aWins": 8,
+      "bWins": 12,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "GLOOM:value",
+      "aWins": 8,
+      "bWins": 12,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "GLOOM:rare",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:tempo",
+      "b": "GLOOM:mixed",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "TIDE:tempo",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "TIDE:value",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "TIDE:rare",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "TIDE:mixed",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "DAWN:tempo",
+      "aWins": 15,
+      "bWins": 5,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "DAWN:value",
+      "aWins": 7,
+      "bWins": 13,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "DAWN:rare",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "DAWN:mixed",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "GLOOM:tempo",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "GLOOM:value",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "GLOOM:rare",
+      "aWins": 8,
+      "bWins": 12,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:value",
+      "b": "GLOOM:mixed",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "TIDE:tempo",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "TIDE:value",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "TIDE:rare",
+      "aWins": 3,
+      "bWins": 17,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "TIDE:mixed",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "DAWN:tempo",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "DAWN:value",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "DAWN:rare",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "DAWN:mixed",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "GLOOM:tempo",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "GLOOM:value",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "GLOOM:rare",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:rare",
+      "b": "GLOOM:mixed",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "TIDE:tempo",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "TIDE:value",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "TIDE:rare",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "TIDE:mixed",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "DAWN:tempo",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "DAWN:value",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "DAWN:rare",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "DAWN:mixed",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "GLOOM:tempo",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "GLOOM:value",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "GLOOM:rare",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "PYRE:mixed",
+      "b": "GLOOM:mixed",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:tempo",
+      "b": "DAWN:tempo",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:tempo",
+      "b": "DAWN:value",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:tempo",
+      "b": "DAWN:rare",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:tempo",
+      "b": "DAWN:mixed",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:tempo",
+      "b": "GLOOM:tempo",
+      "aWins": 5,
+      "bWins": 15,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:tempo",
+      "b": "GLOOM:value",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:tempo",
+      "b": "GLOOM:rare",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:tempo",
+      "b": "GLOOM:mixed",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:value",
+      "b": "DAWN:tempo",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:value",
+      "b": "DAWN:value",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:value",
+      "b": "DAWN:rare",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:value",
+      "b": "DAWN:mixed",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:value",
+      "b": "GLOOM:tempo",
+      "aWins": 8,
+      "bWins": 12,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:value",
+      "b": "GLOOM:value",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:value",
+      "b": "GLOOM:rare",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:value",
+      "b": "GLOOM:mixed",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:rare",
+      "b": "DAWN:tempo",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:rare",
+      "b": "DAWN:value",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:rare",
+      "b": "DAWN:rare",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:rare",
+      "b": "DAWN:mixed",
+      "aWins": 18,
+      "bWins": 2,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:rare",
+      "b": "GLOOM:tempo",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:rare",
+      "b": "GLOOM:value",
+      "aWins": 16,
+      "bWins": 4,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:rare",
+      "b": "GLOOM:rare",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:rare",
+      "b": "GLOOM:mixed",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:mixed",
+      "b": "DAWN:tempo",
+      "aWins": 18,
+      "bWins": 2,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:mixed",
+      "b": "DAWN:value",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:mixed",
+      "b": "DAWN:rare",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:mixed",
+      "b": "DAWN:mixed",
+      "aWins": 9,
+      "bWins": 11,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:mixed",
+      "b": "GLOOM:tempo",
+      "aWins": 5,
+      "bWins": 15,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:mixed",
+      "b": "GLOOM:value",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:mixed",
+      "b": "GLOOM:rare",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "TIDE:mixed",
+      "b": "GLOOM:mixed",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:tempo",
+      "b": "GLOOM:tempo",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:tempo",
+      "b": "GLOOM:value",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:tempo",
+      "b": "GLOOM:rare",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:tempo",
+      "b": "GLOOM:mixed",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:value",
+      "b": "GLOOM:tempo",
+      "aWins": 14,
+      "bWins": 6,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:value",
+      "b": "GLOOM:value",
+      "aWins": 15,
+      "bWins": 5,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:value",
+      "b": "GLOOM:rare",
+      "aWins": 6,
+      "bWins": 14,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:value",
+      "b": "GLOOM:mixed",
+      "aWins": 15,
+      "bWins": 5,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:rare",
+      "b": "GLOOM:tempo",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:rare",
+      "b": "GLOOM:value",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:rare",
+      "b": "GLOOM:rare",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:rare",
+      "b": "GLOOM:mixed",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:mixed",
+      "b": "GLOOM:tempo",
+      "aWins": 13,
+      "bWins": 7,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:mixed",
+      "b": "GLOOM:value",
+      "aWins": 10,
+      "bWins": 10,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:mixed",
+      "b": "GLOOM:rare",
+      "aWins": 11,
+      "bWins": 9,
+      "stalls": 0
+    },
+    {
+      "a": "DAWN:mixed",
+      "b": "GLOOM:mixed",
+      "aWins": 12,
+      "bWins": 8,
+      "stalls": 0
+    }
+  ],
+  "stalls": 0,
+  "meanHalfTurns": 17.09875,
+  "overall": {
+    "VERDANCE": {
+      "wins": 648,
+      "games": 1280
+    },
+    "PYRE": {
+      "wins": 627,
+      "games": 1280
+    },
+    "TIDE": {
+      "wins": 717,
+      "games": 1280
+    },
+    "DAWN": {
+      "wins": 626,
+      "games": 1280
+    },
+    "GLOOM": {
+      "wins": 582,
+      "games": 1280
+    }
+  },
+  "byDeck": {
+    "VERDANCE:tempo": {
+      "wins": 130,
+      "games": 320,
+      "winPercent": 40.625,
+      "unitArenaObservations": {
+        "SF002-022": 325,
+        "SF002-002": 338,
+        "SF002-007": 197,
+        "SF002-026": 231,
+        "TOKEN-Sapling": 260,
+        "SF002-004": 322,
+        "SF002-025": 284
+      }
+    },
+    "VERDANCE:value": {
+      "wins": 142,
+      "games": 320,
+      "winPercent": 44.375,
+      "unitArenaObservations": {
+        "SF002-004": 326,
+        "SF002-009": 292,
+        "TOKEN-Sapling": 502,
+        "SF002-023": 281,
+        "SF002-025": 329,
+        "SF002-026": 265,
+        "SF002-013": 254
+      }
+    },
+    "VERDANCE:rare": {
+      "wins": 173,
+      "games": 320,
+      "winPercent": 54.0625,
+      "unitArenaObservations": {
+        "SF002-009": 204,
+        "TOKEN-Sapling": 577,
+        "SF002-025": 194,
+        "SF002-026": 180,
+        "SF002-023": 195,
+        "SF002-036": 131,
+        "SF002-004": 225,
+        "SF002-041": 102,
+        "SF002-034": 147,
+        "SF002-035": 175,
+        "SF002-043": 31,
+        "SF002-042": 62
+      }
+    },
+    "VERDANCE:mixed": {
+      "wins": 203,
+      "games": 320,
+      "winPercent": 63.4375,
+      "unitArenaObservations": {
+        "SF001-002": 271,
+        "SF001-004": 308,
+        "SF002-025": 258,
+        "SF002-026": 233,
+        "TOKEN-Sapling": 251,
+        "SF001-001": 277,
+        "SF002-022": 320,
+        "SF001-003": 296
+      }
+    },
+    "PYRE:tempo": {
+      "wins": 124,
+      "games": 320,
+      "winPercent": 38.75,
+      "unitArenaObservations": {
+        "SF002-045": 309,
+        "SF002-047": 266,
+        "SF002-050": 280,
+        "SF002-069": 110,
+        "SF002-055": 185,
+        "SF002-051": 292
+      }
+    },
+    "PYRE:value": {
+      "wins": 167,
+      "games": 320,
+      "winPercent": 52.1875,
+      "unitArenaObservations": {
+        "SF002-049": 341,
+        "SF002-052": 336,
+        "SF002-067": 305,
+        "SF002-066": 238,
+        "SF002-056": 257,
+        "SF002-070": 326,
+        "TOKEN-Cinder": 460
+      }
+    },
+    "PYRE:rare": {
+      "wins": 160,
+      "games": 320,
+      "winPercent": 50.0,
+      "unitArenaObservations": {
+        "SF002-049": 191,
+        "SF002-078": 157,
+        "SF002-085": 72,
+        "SF002-084": 79,
+        "SF002-050": 202,
+        "SF002-067": 199,
+        "SF002-079": 124,
+        "TOKEN-Cinder": 503,
+        "SF002-066": 180,
+        "SF002-070": 189,
+        "SF002-086": 23,
+        "SF002-077": 166
+      }
+    },
+    "PYRE:mixed": {
+      "wins": 176,
+      "games": 320,
+      "winPercent": 55.0,
+      "unitArenaObservations": {
+        "SF001-021": 313,
+        "SF001-025": 264,
+        "SF001-022": 209,
+        "SF001-023": 296,
+        "SF002-069": 161,
+        "SF002-055": 204
+      }
+    },
+    "TIDE:tempo": {
+      "wins": 146,
+      "games": 320,
+      "winPercent": 45.625,
+      "unitArenaObservations": {
+        "SF002-091": 334,
+        "SF002-093": 336,
+        "SF002-098": 292,
+        "SF002-095": 285,
+        "SF002-112": 303,
+        "SF002-111": 314
+      }
+    },
+    "TIDE:value": {
+      "wins": 179,
+      "games": 320,
+      "winPercent": 55.9375,
+      "unitArenaObservations": {
+        "SF002-090": 321,
+        "SF002-094": 343,
+        "SF002-095": 277,
+        "SF002-111": 332,
+        "SF002-098": 326,
+        "SF002-112": 316,
+        "SF002-113": 241
+      }
+    },
+    "TIDE:rare": {
+      "wins": 210,
+      "games": 320,
+      "winPercent": 65.625,
+      "unitArenaObservations": {
+        "SF002-111": 231,
+        "SF002-121": 241,
+        "SF002-120": 171,
+        "SF002-127": 225,
+        "SF002-128": 87,
+        "SF002-093": 245,
+        "SF002-112": 205,
+        "SF002-122": 214,
+        "SF002-090": 234,
+        "SF002-095": 200,
+        "SF002-129": 80
+      }
+    },
+    "TIDE:mixed": {
+      "wins": 182,
+      "games": 320,
+      "winPercent": 56.875,
+      "unitArenaObservations": {
+        "SF001-041": 411,
+        "SF002-111": 359,
+        "SF002-112": 328,
+        "SF001-042": 359,
+        "SF001-043": 358,
+        "SF001-044": 377
+      }
+    },
+    "DAWN:tempo": {
+      "wins": 139,
+      "games": 320,
+      "winPercent": 43.4375,
+      "unitArenaObservations": {
+        "SF002-131": 335,
+        "SF002-137": 274,
+        "SF002-155": 216,
+        "SF002-140": 174,
+        "SF002-141": 239,
+        "SF002-135": 324,
+        "SF002-154": 247
+      }
+    },
+    "DAWN:value": {
+      "wins": 173,
+      "games": 320,
+      "winPercent": 54.0625,
+      "unitArenaObservations": {
+        "SF002-133": 282,
+        "SF002-154": 324,
+        "SF002-137": 306,
+        "SF002-142": 273,
+        "SF002-151": 341,
+        "SF002-155": 262,
+        "SF002-158": 179
+      }
+    },
+    "DAWN:rare": {
+      "wins": 166,
+      "games": 320,
+      "winPercent": 51.875,
+      "unitArenaObservations": {
+        "SF002-135": 209,
+        "SF002-133": 202,
+        "SF002-155": 156,
+        "SF002-164": 174,
+        "SF002-163": 165,
+        "SF002-165": 133,
+        "SF002-137": 191,
+        "SF002-154": 190,
+        "SF002-171": 61,
+        "SF002-170": 107,
+        "SF002-172": 28,
+        "TOKEN-Lantern": 66
+      }
+    },
+    "DAWN:mixed": {
+      "wins": 148,
+      "games": 320,
+      "winPercent": 46.25,
+      "unitArenaObservations": {
+        "SF001-061": 346,
+        "SF001-062": 339,
+        "SF001-063": 311,
+        "SF002-154": 295,
+        "SF002-141": 259,
+        "SF002-155": 258,
+        "SF001-064": 361
+      }
+    },
+    "GLOOM:tempo": {
+      "wins": 153,
+      "games": 320,
+      "winPercent": 47.8125,
+      "unitArenaObservations": {
+        "SF002-178": 318,
+        "SF002-176": 343,
+        "SF002-175": 294,
+        "SF002-180": 285,
+        "SF002-197": 311,
+        "SF002-182": 290,
+        "TOKEN-Echo": 272,
+        "SF002-198": 254
+      }
+    },
+    "GLOOM:value": {
+      "wins": 141,
+      "games": 320,
+      "winPercent": 44.0625,
+      "unitArenaObservations": {
+        "SF002-181": 205,
+        "SF002-197": 235,
+        "SF002-198": 231,
+        "SF002-199": 173,
+        "SF002-183": 249,
+        "SF002-195": 246,
+        "SF002-176": 288,
+        "TOKEN-Echo": 194
+      }
+    },
+    "GLOOM:rare": {
+      "wins": 164,
+      "games": 320,
+      "winPercent": 51.25,
+      "unitArenaObservations": {
+        "SF002-195": 210,
+        "TOKEN-Echo": 361,
+        "SF002-199": 171,
+        "SF002-213": 122,
+        "SF002-215": 44,
+        "SF002-178": 235,
+        "SF002-182": 175,
+        "SF002-176": 211,
+        "SF002-206": 171,
+        "SF002-208": 110,
+        "SF002-214": 89,
+        "SF002-207": 181
+      }
+    },
+    "GLOOM:mixed": {
+      "wins": 124,
+      "games": 320,
+      "winPercent": 38.75,
+      "unitArenaObservations": {
+        "SF001-081": 350,
+        "SF001-084": 305,
+        "SF002-182": 275,
+        "SF002-198": 225,
+        "SF002-197": 301,
+        "SF001-082": 295,
+        "TOKEN-Echo": 260,
+        "SF001-083": 297
+      }
+    }
+  }
+}

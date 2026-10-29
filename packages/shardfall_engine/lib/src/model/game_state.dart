@@ -11,6 +11,9 @@ class CardInstance {
   final int plusCounters;
   final bool summonedThisTurn;
 
+  /// ON_VOW is fulfilled once per stay in the Arena, never once per turn.
+  final bool vowFulfilled;
+
   /// Temporary buff from combat tricks — cleared at end of turn.
   final int tempMight;
   final int tempGuard;
@@ -26,6 +29,7 @@ class CardInstance {
     this.damage = 0,
     this.plusCounters = 0,
     this.summonedThisTurn = false,
+    this.vowFulfilled = false,
     this.tempMight = 0,
     this.tempGuard = 0,
     this.tempKeywords = const {},
@@ -46,6 +50,7 @@ class CardInstance {
     int? damage,
     int? plusCounters,
     bool? summonedThisTurn,
+    bool? vowFulfilled,
     int? tempMight,
     int? tempGuard,
     Set<Keyword>? tempKeywords,
@@ -58,6 +63,7 @@ class CardInstance {
         damage: damage ?? this.damage,
         plusCounters: plusCounters ?? this.plusCounters,
         summonedThisTurn: summonedThisTurn ?? this.summonedThisTurn,
+        vowFulfilled: vowFulfilled ?? this.vowFulfilled,
         tempMight: tempMight ?? this.tempMight,
         tempGuard: tempGuard ?? this.tempGuard,
         tempKeywords: tempKeywords ?? this.tempKeywords,

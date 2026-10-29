@@ -1,0 +1,1280 @@
+{
+  "configuration": "frozen seven numeric corrections",
+  "seeds": [
+    {
+      "base": 41000,
+      "count": 10
+    },
+    {
+      "base": 52000,
+      "count": 10
+    },
+    {
+      "base": 63000,
+      "count": 10
+    },
+    {
+      "base": 74000,
+      "count": 10
+    }
+  ],
+  "gamesPerEncounter": 40,
+  "results": [
+    {
+      "chapter": "vow01",
+      "battle": 1,
+      "wins": 36,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "GLOOM",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow01",
+      "battle": 2,
+      "wins": 29,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 6,
+          "games": 10
+        }
+      ],
+      "player": "GLOOM",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow02",
+      "battle": 1,
+      "wins": 31,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 7,
+          "games": 10
+        }
+      ],
+      "player": "DAWN",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow02",
+      "battle": 2,
+      "wins": 31,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 9,
+          "games": 10
+        }
+      ],
+      "player": "DAWN",
+      "enemy": "PYRE"
+    },
+    {
+      "chapter": "vow03",
+      "battle": 1,
+      "wins": 25,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 6,
+          "games": 10
+        }
+      ],
+      "player": "VERDANCE",
+      "enemy": "VERDANCE"
+    },
+    {
+      "chapter": "vow03",
+      "battle": 2,
+      "wins": 36,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 9,
+          "games": 10
+        }
+      ],
+      "player": "VERDANCE",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow04",
+      "battle": 1,
+      "wins": 35,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "PYRE",
+      "enemy": "PYRE"
+    },
+    {
+      "chapter": "vow04",
+      "battle": 2,
+      "wins": 32,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 8,
+          "games": 10
+        }
+      ],
+      "player": "PYRE",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow05",
+      "battle": 1,
+      "wins": 27,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 6,
+          "games": 10
+        }
+      ],
+      "player": "TIDE",
+      "enemy": "TIDE"
+    },
+    {
+      "chapter": "vow05",
+      "battle": 2,
+      "wins": 40,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "TIDE",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow06",
+      "battle": 1,
+      "wins": 24,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 5,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 6,
+          "games": 10
+        }
+      ],
+      "player": "VERDANCE",
+      "enemy": "VERDANCE"
+    },
+    {
+      "chapter": "vow06",
+      "battle": 2,
+      "wins": 31,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "VERDANCE",
+      "enemy": "PYRE"
+    },
+    {
+      "chapter": "vow07",
+      "battle": 1,
+      "wins": 38,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 9,
+          "games": 10
+        }
+      ],
+      "player": "PYRE",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow07",
+      "battle": 2,
+      "wins": 30,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 7,
+          "games": 10
+        }
+      ],
+      "player": "PYRE",
+      "enemy": "PYRE"
+    },
+    {
+      "chapter": "vow08",
+      "battle": 1,
+      "wins": 28,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 7,
+          "games": 10
+        }
+      ],
+      "player": "TIDE",
+      "enemy": "TIDE"
+    },
+    {
+      "chapter": "vow08",
+      "battle": 2,
+      "wins": 34,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 9,
+          "games": 10
+        }
+      ],
+      "player": "TIDE",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow09",
+      "battle": 1,
+      "wins": 35,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "DAWN",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow09",
+      "battle": 2,
+      "wins": 22,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 8,
+          "games": 10
+        }
+      ],
+      "player": "DAWN",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow10",
+      "battle": 1,
+      "wins": 36,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "GLOOM",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow10",
+      "battle": 2,
+      "wins": 24,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 5,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 5,
+          "games": 10
+        }
+      ],
+      "player": "GLOOM",
+      "enemy": "TIDE"
+    },
+    {
+      "chapter": "vow11",
+      "battle": 1,
+      "wins": 29,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 7,
+          "games": 10
+        }
+      ],
+      "player": "DAWN",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow11",
+      "battle": 2,
+      "wins": 25,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 5,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 7,
+          "games": 10
+        }
+      ],
+      "player": "DAWN",
+      "enemy": "VERDANCE"
+    },
+    {
+      "chapter": "vow12",
+      "battle": 1,
+      "wins": 35,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 8,
+          "games": 10
+        }
+      ],
+      "player": "PYRE",
+      "enemy": "PYRE"
+    },
+    {
+      "chapter": "vow12",
+      "battle": 2,
+      "wins": 33,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 9,
+          "games": 10
+        }
+      ],
+      "player": "PYRE",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow13",
+      "battle": 1,
+      "wins": 33,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 6,
+          "games": 10
+        }
+      ],
+      "player": "TIDE",
+      "enemy": "TIDE"
+    },
+    {
+      "chapter": "vow13",
+      "battle": 2,
+      "wins": 13,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 1,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 4,
+          "games": 10
+        }
+      ],
+      "player": "TIDE",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow14",
+      "battle": 1,
+      "wins": 37,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 9,
+          "games": 10
+        }
+      ],
+      "player": "VERDANCE",
+      "enemy": "VERDANCE"
+    },
+    {
+      "chapter": "vow14",
+      "battle": 2,
+      "wins": 20,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 5,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 4,
+          "games": 10
+        }
+      ],
+      "player": "VERDANCE",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow15",
+      "battle": 1,
+      "wins": 39,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "GLOOM",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow15",
+      "battle": 2,
+      "wins": 21,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 7,
+          "games": 10
+        }
+      ],
+      "player": "GLOOM",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow16",
+      "battle": 1,
+      "wins": 36,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "PYRE",
+      "enemy": "PYRE"
+    },
+    {
+      "chapter": "vow16",
+      "battle": 2,
+      "wins": 24,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 6,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 5,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 6,
+          "games": 10
+        }
+      ],
+      "player": "PYRE",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow17",
+      "battle": 1,
+      "wins": 29,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 7,
+          "games": 10
+        }
+      ],
+      "player": "TIDE",
+      "enemy": "TIDE"
+    },
+    {
+      "chapter": "vow17",
+      "battle": 2,
+      "wins": 36,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "TIDE",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow18",
+      "battle": 1,
+      "wins": 34,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "DAWN",
+      "enemy": "DAWN"
+    },
+    {
+      "chapter": "vow18",
+      "battle": 2,
+      "wins": 22,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 5,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 6,
+          "games": 10
+        }
+      ],
+      "player": "DAWN",
+      "enemy": "VERDANCE"
+    },
+    {
+      "chapter": "vow19",
+      "battle": 1,
+      "wins": 37,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 8,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 10,
+          "games": 10
+        }
+      ],
+      "player": "GLOOM",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow19",
+      "battle": 2,
+      "wins": 10,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 0,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 3,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 3,
+          "games": 10
+        }
+      ],
+      "player": "GLOOM",
+      "enemy": "GLOOM"
+    },
+    {
+      "chapter": "vow20",
+      "battle": 1,
+      "wins": 38,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 9,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 10,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 9,
+          "games": 10
+        }
+      ],
+      "player": "VERDANCE",
+      "enemy": "VERDANCE"
+    },
+    {
+      "chapter": "vow20",
+      "battle": 2,
+      "wins": 20,
+      "games": 40,
+      "stalls": 0,
+      "blocks": [
+        {
+          "seed": 41000,
+          "wins": 5,
+          "games": 10
+        },
+        {
+          "seed": 52000,
+          "wins": 7,
+          "games": 10
+        },
+        {
+          "seed": 63000,
+          "wins": 4,
+          "games": 10
+        },
+        {
+          "seed": 74000,
+          "wins": 4,
+          "games": 10
+        }
+      ],
+      "player": "VERDANCE",
+      "enemy": "GLOOM"
+    }
+  ],
+  "catalogSha256": "e91ccdae42e34f3e598510e45a2185321305d1b296a2758fe5d0b2576338cc6c",
+  "sourceSha256": {
+    "app/tool/story_runner.dart": "b9daad674cc0efaecfacb13685998f598654b3731b47cbfe05c8e1cdf3647c67",
+    "app/tool/five_vows_story_sim.dart": "dbfe1d3f41d6c5b028d07098b9aa9662a6733323759e0f691c90d32c6a07c75e",
+    "app/lib/story/vow_encounters.dart": "b31baea5530efa226ec7e6c6d2a8349e01c42962c7ee8eb2353902bb7699822d",
+    "app/lib/story/chapters/vows_act_1.dart": "31fcd5495686ef4fbb87a8f105550166ebf81c09126bc97e70e6f79f49f1a9ab",
+    "app/lib/story/chapters/vows_act_2.dart": "b038f65dcb8193d201d6ee003a2e5c05c22bfe0de432e9f038dfb96ec14e8632",
+    "app/lib/story/chapters/vows_act_3.dart": "ae81fb802e02053ffe8c7c2d1ee9187af1dc248d68d0111e3f64de2b65dbc057",
+    "app/lib/story/chapters/vows_act_4.dart": "9e75aa5762122b224906c46035bb0cb41c052824a56ae5fced9ec3133ae5fc0c"
+  },
+  "totals": {
+    "wins": 1195,
+    "games": 1600,
+    "stalls": 0
+  },
+  "limitations": "The same 40 seeds are shared across encounters. Each fight has 40 distinct seeds; aggregate outcomes remain correlated. This review changes no scenarios or card balance."
+}

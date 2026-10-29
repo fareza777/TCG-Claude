@@ -137,11 +137,38 @@ class Game {
     );
     next = next.withPlayer(incomingP);
 
+    // A Vow can be answered by removing its permanent during the intervening
+    // turn. Snapshot IDs (not definitions) and recheck the Arena after each
+    // payoff so removal cannot make a later, absent source trigger.
+    final vows = incomingP.arena
+        .where((c) =>
+            !c.vowFulfilled &&
+            c.def.effects.any((b) => b['trigger'] == 'ON_VOW'))
+        .map((c) => c.instanceId)
+        .toList();
+    for (final id in vows) {
+      final live = next
+          .player(incoming)
+          .arena
+          .where((c) => c.instanceId == id)
+          .firstOrNull;
+      if (live == null || live.vowFulfilled) continue;
+      next = next.withPlayer(next.player(incoming).copyWith(arena: [
+        for (final c in next.player(incoming).arena)
+          c.instanceId == id ? c.copyWith(vowFulfilled: true) : c,
+      ]));
+      for (final block in live.def.effects) {
+        if (block['trigger'] == 'ON_VOW') {
+          next = EffectInterpreter.applyTrigger(next, live, block);
+          if (next.winner != null) return next;
+        }
+      }
+    }
+
     return next.copyWith(
       activePlayer: incoming,
       phase: Phase.refresh,
-      turnNumber:
-          incoming == s.firstPlayer ? s.turnNumber + 1 : s.turnNumber,
+      turnNumber: incoming == s.firstPlayer ? s.turnNumber + 1 : s.turnNumber,
     );
   }
 
@@ -221,7 +248,7 @@ class Game {
       throw StateError('${card.def.name} is not a Unit');
     }
     final poolAfter = payCost(card.def, p.aetherPool);
-    final placed = card.copyWith(summonedThisTurn: true);
+    final placed = card.copyWith(summonedThisTurn: true, vowFulfilled: false);
     var next = s.withPlayer(p.copyWith(
       hand: [...p.hand]..removeWhere((c) => c.instanceId == instanceId),
       arena: [...p.arena, placed],
@@ -229,8 +256,8 @@ class Game {
     ));
     for (final block in card.def.effects) {
       if (block['trigger'] == 'ON_ENTER_ARENA') {
-        next = EffectInterpreter.applyTrigger(next, placed, block,
-            chosen: chosen);
+        next =
+            EffectInterpreter.applyTrigger(next, placed, block, chosen: chosen);
         if (next.winner != null) break;
       }
     }

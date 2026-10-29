@@ -99,6 +99,11 @@ class RemoveAdsPurchaseService extends ChangeNotifier {
     if (_initialized) return;
     _initialized = true;
 
+    if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) {
+      _setUnavailable('Remove Ads is available on Android only.');
+      return;
+    }
+
     _purchaseSubscription = store.purchaseStream.listen(
       (purchases) => unawaited(_handlePurchases(purchases)),
       onError: (Object error, StackTrace stackTrace) {
@@ -107,11 +112,6 @@ class RemoveAdsPurchaseService extends ChangeNotifier {
         notifyListeners();
       },
     );
-
-    if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) {
-      _setUnavailable('Remove Ads is available on Android only.');
-      return;
-    }
 
     try {
       if (!await store.isAvailable()) {

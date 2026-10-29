@@ -1,0 +1,103 @@
+{
+  "frozenBeforeNovelHoldoutSeed": 14142135,
+  "sha256": "e91ccdae42e34f3e598510e45a2185321305d1b296a2758fe5d0b2576338cc6c",
+  "changes": [
+    {
+      "id": "SF002-047",
+      "name": "Cinder Oathling",
+      "changedFields": [
+        "guard"
+      ],
+      "before": {
+        "guard": 1
+      },
+      "after": {
+        "guard": 2
+      }
+    },
+    {
+      "id": "SF002-049",
+      "name": "Sparkscript Adept",
+      "changedFields": [
+        "might"
+      ],
+      "before": {
+        "might": 2
+      },
+      "after": {
+        "might": 3
+      }
+    },
+    {
+      "id": "SF002-051",
+      "name": "Ashwing Scavenger",
+      "changedFields": [
+        "might"
+      ],
+      "before": {
+        "might": 2
+      },
+      "after": {
+        "might": 3
+      }
+    },
+    {
+      "id": "SF002-055",
+      "name": "Bellowsback Drake",
+      "changedFields": [
+        "guard"
+      ],
+      "before": {
+        "guard": 3
+      },
+      "after": {
+        "guard": 4
+      }
+    },
+    {
+      "id": "SF002-128",
+      "name": "Neris, Keeper of the Ebb",
+      "changedFields": [
+        "cost"
+      ],
+      "before": {
+        "cost": {
+          "TIDE": 2,
+          "generic": 4
+        }
+      },
+      "after": {
+        "cost": {
+          "TIDE": 2,
+          "generic": 5
+        }
+      }
+    },
+    {
+      "id": "SF002-180",
+      "name": "Pallid Oathhound",
+      "changedFields": [
+        "guard"
+      ],
+      "before": {
+        "guard": 2
+      },
+      "after": {
+        "guard": 3
+      }
+    },
+    {
+      "id": "SF002-197",
+      "name": "Sablewing Herald",
+      "changedFields": [
+        "guard"
+      ],
+      "before": {
+        "guard": 3
+      },
+      "after": {
+        "guard": 4
+      }
+    }
+  ]
+}

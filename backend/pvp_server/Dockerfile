@@ -4,6 +4,7 @@ WORKDIR /src
 COPY packages/shardfall_engine /src/packages/shardfall_engine
 COPY backend/pvp_server /src/backend/pvp_server
 COPY app/assets/data/set01.json /src/app/assets/data/set01.json
+COPY app/assets/data/set02.json /src/app/assets/data/set02.json
 
 WORKDIR /src/backend/pvp_server
 RUN dart pub get
@@ -18,6 +19,7 @@ RUN apt-get update \
 
 COPY --from=build /out/shardfall_pvp_server /usr/local/bin/shardfall_pvp_server
 COPY --from=build /src/app/assets/data/set01.json /opt/shardfall/app/assets/data/set01.json
+COPY --from=build /src/app/assets/data/set02.json /opt/shardfall/app/assets/data/set02.json
 
 ENV SHARDFALL_CARD_DATA=/opt/shardfall/app/assets/data/set01.json
 ENV PORT=8080

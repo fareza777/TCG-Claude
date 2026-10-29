@@ -9,6 +9,7 @@ import '../services/save_service.dart';
 import '../theme.dart';
 import 'chapter_player.dart';
 import 'story_data.dart';
+import 'campaign_progress.dart';
 
 /// Chapter select. Chapters unlock in sequence.
 class StoryScreen extends StatefulWidget {
@@ -28,10 +29,7 @@ class StoryScreen extends StatefulWidget {
 }
 
 class _StoryScreenState extends State<StoryScreen> {
-  bool _unlocked(int index) {
-    if (index == 0) return true;
-    return widget.save.chapterDone(storyChapters[index - 1].id);
-  }
+  bool _unlocked(int index) => storyChapterUnlocked(index, widget.save);
 
   @override
   Widget build(BuildContext context) {

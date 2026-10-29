@@ -1,3 +1,5 @@
+import '../data/card_catalog.dart';
+import '../data/card_set_filter.dart';
 import 'package:flutter/material.dart';
 
 import '../services/ad_service.dart';
@@ -27,6 +29,7 @@ class CollectionScreen extends StatefulWidget {
 
 class _CollectionScreenState extends State<CollectionScreen> {
   Dominion? _filter;
+  CardSet? _set;
   bool _ownedOnly = false;
   String _search = '';
 
@@ -35,6 +38,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
     final q = _search.trim().toLowerCase();
     final cards = widget.library.byId.values
         .where((d) => _filter == null || d.dominions.contains(_filter))
+        .where((d) => _set == null || _set!.contains(d.id))
         .where((d) => !_ownedOnly || widget.save.copiesOf(d.id) > 0)
         .where((d) =>
             q.isEmpty ||
@@ -135,6 +139,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   ),
                 ),
               ),
+              CardSetFilter(
+                selected: _set,
+                onChanged: (set) => setState(() => _set = set),
+              ),
               SizedBox(
                 height: 44,
                 child: ListView(
@@ -189,6 +197,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                               child: CardWidget(def: def, width: 120),
                             ),
                           ),
+                          Positioned(bottom: 3, left: 3, child: CardSetBadge(cardId: def.id)),
                           if (owned)
                             Positioned(
                               top: 3,

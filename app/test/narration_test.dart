@@ -62,6 +62,6 @@ void main() {
   test('the campaign still has the narration it was written with', () {
     // A blunt regression guard: if this number drops, lines were lost.
     expect(clips.length, greaterThanOrEqualTo(400));
-    expect(storyChapters, hasLength(5));
+    expect(storyChapters, hasLength(25));
   });
 }

@@ -1,3 +1,5 @@
+import '../data/card_catalog.dart';
+import '../data/card_set_filter.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -45,6 +47,7 @@ class DeckBuilderScreen extends StatefulWidget {
 class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   final Map<String, int> _deck = {}; // cardId -> count
   Dominion? _filter;
+  CardSet? _set;
 
   static const minDeck = DeckBuilderScreen.minDeck;
   static const maxDeck = DeckBuilderScreen.maxDeck;
@@ -396,6 +399,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         .where((d) =>
             d.type == CardType.wellspring || widget.save.copiesOf(d.id) > 0)
         .where((d) => _filter == null || d.dominions.contains(_filter))
+        .where((d) => _set == null || _set!.contains(d.id))
         .toList()
       ..sort((a, b) {
         final t = a.totalCost.compareTo(b.totalCost);
@@ -418,6 +422,10 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
             children: [
               _header(valid),
               _curveStrip(),
+              CardSetFilter(
+                selected: _set,
+                onChanged: (set) => setState(() => _set = set),
+              ),
               _filterBar(),
               Expanded(
                 child: Row(
@@ -707,6 +715,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
             child: Stack(
               children: [
                 CardWidget(def: def, width: 86),
+                Positioned(bottom: 2, left: 2, child: CardSetBadge(cardId: def.id)),
                 if (inDeck > 0)
                   Positioned(
                     right: 2,

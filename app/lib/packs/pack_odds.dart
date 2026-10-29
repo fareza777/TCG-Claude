@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
 
 import '../theme.dart';
+import '../data/card_catalog.dart';
 
 /// The Shard Pack drop table.
 ///
@@ -31,52 +32,69 @@ abstract final class PackOdds {
 
 /// Player-facing odds disclosure, reachable before any pack is bought.
 class PackOddsSheet extends StatelessWidget {
-  const PackOddsSheet({super.key});
+  const PackOddsSheet({super.key, this.set = CardSet.sundering});
+  final CardSet set;
 
-  static Future<void> show(BuildContext context) {
+  static Future<void> show(
+    BuildContext context, {
+    CardSet set = CardSet.sundering,
+  }) {
     return showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       backgroundColor: AppTheme.panel,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
-      builder: (_) => const PackOddsSheet(),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) => PackOddsSheet(set: set),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 18, 20, 30),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Shard Pack odds',
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 18, 20, 30),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${set.title} · pack odds',
               style: TextStyle(
-                  color: AppTheme.textPrimary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w800)),
-          const SizedBox(height: 4),
-          Text('Every pack contains ${PackOdds.cardsPerPack} cards.',
-              style: const TextStyle(color: AppTheme.textMuted, fontSize: 12)),
-          const SizedBox(height: 14),
-          _row('Common', '${PackOdds.commonSlots} cards', 'guaranteed'),
-          _row('Uncommon', '${PackOdds.uncommonSlots} cards', 'guaranteed'),
-          const Divider(color: AppTheme.panelBorder),
-          const Text('Final card',
+                color: AppTheme.textPrimary,
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Every pack contains ${PackOdds.cardsPerPack} cards.',
+              style: const TextStyle(color: AppTheme.textMuted, fontSize: 12),
+            ),
+            const SizedBox(height: 14),
+            _row('Common', '${PackOdds.commonSlots} cards', 'guaranteed'),
+            _row('Uncommon', '${PackOdds.uncommonSlots} cards', 'guaranteed'),
+            const Divider(color: AppTheme.panelBorder),
+            const Text(
+              'Final card',
               style: TextStyle(
-                  color: AppTheme.textPrimary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700)),
-          const SizedBox(height: 6),
-          _row('Rare', PackOdds.percent(PackOdds.rareChance), ''),
-          _row('Legendary', PackOdds.percent(PackOdds.legendaryChance), ''),
-          const SizedBox(height: 12),
-          const Text(
-              'Within a rarity, every card is equally likely. Epic cards never '
+                color: AppTheme.textPrimary,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 6),
+            _row('Rare', PackOdds.percent(PackOdds.rareChance), ''),
+            _row('Legendary', PackOdds.percent(PackOdds.legendaryChance), ''),
+            const SizedBox(height: 12),
+            const Text(
+              'Only non-Wellspring cards from the selected set appear. Within a rarity, every card is equally likely. Epic cards never '
               'appear in packs — craft them in the Forge with Shards.',
-              style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
-        ],
+              style: TextStyle(color: AppTheme.textMuted, fontSize: 11),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -87,20 +105,25 @@ class PackOddsSheet extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(label,
-                style: const TextStyle(
-                    color: AppTheme.textPrimary, fontSize: 13)),
+            child: Text(
+              label,
+              style: const TextStyle(color: AppTheme.textPrimary, fontSize: 13),
+            ),
           ),
-          Text(value,
-              style: const TextStyle(
-                  color: Color(0xFFF0E4C0),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Color(0xFFF0E4C0),
+              fontSize: 13,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           if (note.isNotEmpty) ...[
             const SizedBox(width: 6),
-            Text(note,
-                style:
-                    const TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+            Text(
+              note,
+              style: const TextStyle(color: AppTheme.textMuted, fontSize: 11),
+            ),
           ],
         ],
       ),

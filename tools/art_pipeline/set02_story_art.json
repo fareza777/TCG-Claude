@@ -1,0 +1,270 @@
+{
+  "set": "SF002",
+  "title": "The Five Vows",
+  "scene_count": 20,
+  "notes": "Twenty unique chapter hero scenes; later story beats reuse individual SF002 card illustrations. Actual chapter-five ending governs continuity.",
+  "scenes": [
+    {
+      "id": "STORY-vow01-01",
+      "chapter": "vow01",
+      "title": "The Spare Lamp",
+      "dominion": "GLOOM",
+      "faction_reference": "app/assets/art/SF001-083.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A well-kept spiral stair beneath a violet city at dawn, an empty oil lamp on the top step, a fully cloaked young traveler seen from behind holding a second lamp; a great stag silhouette far below. Quiet relief after a long vigil. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow01-01.webp"
+    },
+    {
+      "id": "STORY-vow02-01",
+      "chapter": "vow02",
+      "title": "The Table with Five Edges",
+      "dominion": "DAWN",
+      "faction_reference": "app/assets/art/SF001-063.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. An unfinished five-sided stone table in a roofless marble council hall, five mismatched empty chairs and one unclaimed bowl of water. Fractured golden light, distant storm visible through the roof. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow02-01.webp"
+    },
+    {
+      "id": "STORY-vow03-01",
+      "chapter": "vow03",
+      "title": "The Orchard of Borrowed Years",
+      "dominion": "VERDANCE",
+      "faction_reference": "app/assets/art/SF001-003.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. An ancient emerald orchard with tiny lanterns hung on fruitless branches, enormous roots gently lifting a collapsed irrigation gate, a distant cloaked keeper seen from behind. New buds in blighted wood. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow03-01.webp"
+    },
+    {
+      "id": "STORY-vow04-01",
+      "chapter": "vow04",
+      "title": "The Cold Kiln",
+      "dominion": "PYRE",
+      "faction_reference": "app/assets/art/SF001-023.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A vast extinguished ceremonial forge, a small ordinary coal kiln glowing inside its monumental cold firebox, fully armored smiths with closed helmets carrying baskets of charcoal. Crimson embers against blue ash. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow04-01.webp"
+    },
+    {
+      "id": "STORY-vow05-01",
+      "chapter": "vow05",
+      "title": "The Page That Refused the Tide",
+      "dominion": "TIDE",
+      "faction_reference": "app/assets/art/SF001-043.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. An ocean archive at low tide, five water-stained treaty pages pinned beneath distinct stones on a wooden desk, cyan lantern reflections, towering shelves receding into mist. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow05-01.webp"
+    },
+    {
+      "id": "STORY-vow06-01",
+      "chapter": "vow06",
+      "title": "The Bridge of Returning Feet",
+      "dominion": "VERDANCE",
+      "faction_reference": "app/assets/art/SF001-003.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A living root bridge divided by a deliberate narrow gap, separated groups of fully cloaked refugees on either side, woven ropes connecting handrails, emerald valley far below. A bridge being repaired without closing the gap. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow06-01.webp"
+    },
+    {
+      "id": "STORY-vow07-01",
+      "chapter": "vow07",
+      "title": "The House of Unspent Heat",
+      "dominion": "PYRE",
+      "faction_reference": "app/assets/art/SF001-023.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A volcanic district communal kitchen at night, ordinary hearths lit beneath an immense dead forge chimney, ceramic soup bowls and thick gloves on a counter. At the far doorway a completely hooded ash-grey visitor holds a covered lantern. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow07-01.webp"
+    },
+    {
+      "id": "STORY-vow08-01",
+      "chapter": "vow08",
+      "title": "The Hall of Unfinished Names",
+      "dominion": "TIDE",
+      "faction_reference": "app/assets/art/SF001-043.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A flooded memorial hall of blank stone tablets, one small tablet being inscribed by a gloved hand, fully hooded archivist seen from behind, cyan water below the steps and many distinct lantern reflections. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow08-01.webp"
+    },
+    {
+      "id": "STORY-vow09-01",
+      "chapter": "vow09",
+      "title": "The Mercy Gate",
+      "dominion": "DAWN",
+      "faction_reference": "app/assets/art/SF001-063.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. An ivory gate with one wing deliberately open, radiant golden halo suspended over an empty armored chair, discarded chains neatly coiled beside the entrance, storm clouds held beyond marble walls. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow09-01.webp"
+    },
+    {
+      "id": "STORY-vow10-01",
+      "chapter": "vow10",
+      "title": "The Open Door Below",
+      "dominion": "GLOOM",
+      "faction_reference": "app/assets/art/SF001-083.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A chamber beneath a violet city, two fully veiled women in complete robes sit opposite each other across a low stone threshold; a great antlered stag tends rows of oil lamps. The stair remains visibly open behind them. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow10-01.webp"
+    },
+    {
+      "id": "STORY-vow11-01",
+      "chapter": "vow11",
+      "title": "The Bell Without a Ringer",
+      "dominion": "DAWN",
+      "faction_reference": "app/assets/art/SF001-063.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. An enormous golden bell cracked into five petals above a council plaza, separate ropes running to five distant districts, no central clapper, tiny fully hooded figures below dwarfed by architecture. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow11-01.webp"
+    },
+    {
+      "id": "STORY-vow12-01",
+      "chapter": "vow12",
+      "title": "The Ash That Remembers",
+      "dominion": "PYRE",
+      "faction_reference": "app/assets/art/SF001-023.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A coal store under Ashmar, five ceramic ash jars forming a circle around a warm pale fracture in black rock, crimson and white threads of light slipping through a smith\u2019s closed gauntlet, no visible skin. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow12-01.webp"
+    },
+    {
+      "id": "STORY-vow13-01",
+      "chapter": "vow13",
+      "title": "The Witness in the Water",
+      "dominion": "TIDE",
+      "faction_reference": "app/assets/art/SF001-043.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A still tidal cistern reflecting five separate figures as one luminous silhouette, the real figures stand far apart on distinct stepping stones, all fully cloaked with faces concealed. Cyan light, unsettling tenderness. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow13-01.webp"
+    },
+    {
+      "id": "STORY-vow14-01",
+      "chapter": "vow14",
+      "title": "The Root That Said No",
+      "dominion": "VERDANCE",
+      "faction_reference": "app/assets/art/SF001-003.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A massive ancient tree whose roots have opened an escape passage beneath a fortified nursery, small green shoots point away from a white luminous root-ring, fully hooded gardeners carrying seedlings through the opening. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow14-01.webp"
+    },
+    {
+      "id": "STORY-vow15-01",
+      "chapter": "vow15",
+      "title": "The Fifth Chair",
+      "dominion": "GLOOM",
+      "faction_reference": "app/assets/art/SF001-083.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A five-sided council table at night with four shaded lanterns and a fifth dark chair, a closed iron helm and a glove placed carefully on the table; through a high window a violet stair-lamp remains lit. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow15-01.webp"
+    },
+    {
+      "id": "STORY-vow16-01",
+      "chapter": "vow16",
+      "title": "The City of Separate Fires",
+      "dominion": "PYRE",
+      "faction_reference": "app/assets/art/SF001-023.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. Ashmar seen from a high bridge, hundreds of tiny independent hearth fires across a vast dark city, the central monumental forge remains cold, pale luminous procession approaching but divided by streets. Volcanic skyline. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow16-01.webp"
+    },
+    {
+      "id": "STORY-vow17-01",
+      "chapter": "vow17",
+      "title": "The Measure of a Voice",
+      "dominion": "TIDE",
+      "faction_reference": "app/assets/art/SF001-043.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A sea wall at dawn lined with five different-sized speaking trumpets, a solitary cyan beacon sending widely spaced pulses across rough water, separate ships answer with their own lights rather than one beam. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow17-01.webp"
+    },
+    {
+      "id": "STORY-vow18-01",
+      "chapter": "vow18",
+      "title": "The Place Left Empty",
+      "dominion": "DAWN",
+      "faction_reference": "app/assets/art/SF001-063.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. Five marble arches surrounding a deliberately empty sixth space in a garden, one golden armored sentinel with closed helmet stands outside the circle, luminous ribbons stop before touching each other. Warm late afternoon. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow18-01.webp"
+    },
+    {
+      "id": "STORY-vow19-01",
+      "chapter": "vow19",
+      "title": "The Distance Between Hands",
+      "dominion": "GLOOM",
+      "faction_reference": "app/assets/art/SF001-083.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. A Heartshard chamber transformed into a five-pointed lattice of separate colored lights, one fully armored ember-red figure walking onto a narrow outer causeway away from four distant cloaked companions, violet lamps below, hands never touching. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow19-01.webp"
+    },
+    {
+      "id": "STORY-vow20-01",
+      "chapter": "vow20",
+      "title": "The Morning They Chose Again",
+      "dominion": "VERDANCE",
+      "faction_reference": "app/assets/art/SF001-003.webp",
+      "prompt": "Epic fantasy trading card game illustration, painterly digital art, dramatic cinematic lighting, rich saturated colors, detailed brushwork, clean focal composition, atmospheric depth, landscape 5:3.2. Morning after a storm over five distant cities, five separate beacon colors answer across valleys without merging; in foreground a modest wooden guesthouse with one empty chair, a sealed pale letter and five cups, green shoots through old stone. All humanoids fully clothed with gloves and fully concealed faces under deep hoods or closed helmets; no exposed skin, no clear human face. No text, letters, watermark, border or frame. Follow approved SHARDFALL faction reference style.",
+      "asset": "app/assets/art/STORY-vow20-01.webp"
+    }
+  ],
+  "secondary_illustrations": {
+    "vow01": [
+      "SF002-177",
+      "SF002-136"
+    ],
+    "vow02": [
+      "SF002-134",
+      "SF002-056"
+    ],
+    "vow03": [
+      "SF002-005",
+      "SF002-183"
+    ],
+    "vow04": [
+      "SF002-048",
+      "SF002-170"
+    ],
+    "vow05": [
+      "SF002-099",
+      "SF002-185"
+    ],
+    "vow06": [
+      "SF002-005",
+      "SF002-050"
+    ],
+    "vow07": [
+      "SF002-213",
+      "SF002-048"
+    ],
+    "vow08": [
+      "SF002-095",
+      "SF002-138"
+    ],
+    "vow09": [
+      "SF002-134",
+      "SF002-178"
+    ],
+    "vow10": [
+      "SF002-214",
+      "SF002-127"
+    ],
+    "vow11": [
+      "SF002-137",
+      "SF002-009"
+    ],
+    "vow12": [
+      "SF002-054",
+      "SF002-184"
+    ],
+    "vow13": [
+      "SF002-090",
+      "SF002-213"
+    ],
+    "vow14": [
+      "SF002-013",
+      "SF002-183"
+    ],
+    "vow15": [
+      "SF002-170",
+      "SF002-181"
+    ],
+    "vow16": [
+      "SF002-056",
+      "SF002-215"
+    ],
+    "vow17": [
+      "SF002-127",
+      "SF002-172"
+    ],
+    "vow18": [
+      "SF002-171",
+      "SF002-041"
+    ],
+    "vow19": [
+      "SF002-213",
+      "SF002-215"
+    ],
+    "vow20": [
+      "SF002-009",
+      "SF002-214"
+    ]
+  }
+}

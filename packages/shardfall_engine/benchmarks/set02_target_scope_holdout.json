@@ -1,0 +1,184 @@
+{
+  "matchesPerPairing": 200,
+  "seedBase": 31415926,
+  "ai": "tactician",
+  "maxHalfTurns": 240,
+  "decks": {
+    "Verdance": {
+      "wellspring": "SF002-001",
+      "cards": [
+        "SF002-004",
+        "SF002-007",
+        "SF002-008",
+        "SF002-010",
+        "SF002-012",
+        "SF002-015",
+        "SF002-019",
+        "SF002-024"
+      ],
+      "copies": 3,
+      "wellsprings": 16
+    },
+    "Pyre": {
+      "wellspring": "SF002-044",
+      "cards": [
+        "SF002-049",
+        "SF002-050",
+        "SF002-051",
+        "SF002-053",
+        "SF002-055",
+        "SF002-058",
+        "SF002-062",
+        "SF002-067"
+      ],
+      "copies": 3,
+      "wellsprings": 16
+    },
+    "Tide": {
+      "wellspring": "SF002-087",
+      "cards": [
+        "SF002-090",
+        "SF002-092",
+        "SF002-094",
+        "SF002-096",
+        "SF002-098",
+        "SF002-101",
+        "SF002-105",
+        "SF002-110"
+      ],
+      "copies": 3,
+      "wellsprings": 16
+    },
+    "Dawn": {
+      "wellspring": "SF002-130",
+      "cards": [
+        "SF002-133",
+        "SF002-135",
+        "SF002-137",
+        "SF002-139",
+        "SF002-141",
+        "SF002-144",
+        "SF002-148",
+        "SF002-153"
+      ],
+      "copies": 3,
+      "wellsprings": 16
+    },
+    "Gloom": {
+      "wellspring": "SF002-173",
+      "cards": [
+        "SF002-176",
+        "SF002-178",
+        "SF002-180",
+        "SF002-182",
+        "SF002-184",
+        "SF002-187",
+        "SF002-191",
+        "SF002-196"
+      ],
+      "copies": 3,
+      "wellsprings": 16
+    }
+  },
+  "pairs": [
+    {
+      "a": "Verdance",
+      "b": "Pyre",
+      "aWins": 114,
+      "bWins": 86,
+      "stalls": 0
+    },
+    {
+      "a": "Verdance",
+      "b": "Tide",
+      "aWins": 107,
+      "bWins": 93,
+      "stalls": 0
+    },
+    {
+      "a": "Verdance",
+      "b": "Dawn",
+      "aWins": 103,
+      "bWins": 97,
+      "stalls": 0
+    },
+    {
+      "a": "Verdance",
+      "b": "Gloom",
+      "aWins": 109,
+      "bWins": 91,
+      "stalls": 0
+    },
+    {
+      "a": "Pyre",
+      "b": "Tide",
+      "aWins": 135,
+      "bWins": 65,
+      "stalls": 0
+    },
+    {
+      "a": "Pyre",
+      "b": "Dawn",
+      "aWins": 108,
+      "bWins": 92,
+      "stalls": 0
+    },
+    {
+      "a": "Pyre",
+      "b": "Gloom",
+      "aWins": 121,
+      "bWins": 79,
+      "stalls": 0
+    },
+    {
+      "a": "Tide",
+      "b": "Dawn",
+      "aWins": 87,
+      "bWins": 113,
+      "stalls": 0
+    },
+    {
+      "a": "Tide",
+      "b": "Gloom",
+      "aWins": 46,
+      "bWins": 154,
+      "stalls": 0
+    },
+    {
+      "a": "Dawn",
+      "b": "Gloom",
+      "aWins": 78,
+      "bWins": 122,
+      "stalls": 0
+    }
+  ],
+  "stalls": 0,
+  "meanHalfTurns": 17.3525,
+  "overall": {
+    "Verdance": {
+      "wins": 433,
+      "games": 800,
+      "winPercent": 54.125
+    },
+    "Pyre": {
+      "wins": 450,
+      "games": 800,
+      "winPercent": 56.25
+    },
+    "Tide": {
+      "wins": 291,
+      "games": 800,
+      "winPercent": 36.375
+    },
+    "Dawn": {
+      "wins": 380,
+      "games": 800,
+      "winPercent": 47.5
+    },
+    "Gloom": {
+      "wins": 446,
+      "games": 800,
+      "winPercent": 55.75
+    }
+  }
+}
