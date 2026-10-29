@@ -32,12 +32,12 @@ class Setup {
   });
 
   factory Setup.of(StoryBattle b) => Setup(
-        playerHealth: b.playerHealth,
-        enemyHealth: b.enemyHealth,
-        enemyBoard: [...b.enemyBoardIds],
-        playerBoard: [...b.playerBoardIds],
-        playerSecond: !b.playerFirst,
-      );
+    playerHealth: b.playerHealth,
+    enemyHealth: b.enemyHealth,
+    enemyBoard: [...b.enemyBoardIds],
+    playerBoard: [...b.playerBoardIds],
+    playerSecond: !b.playerFirst,
+  );
 
   Setup copyWith({
     int? playerHealth,
@@ -45,19 +45,43 @@ class Setup {
     List<String>? enemyBoard,
     List<String>? playerBoard,
     bool? playerSecond,
-  }) =>
-      Setup(
-        playerHealth: playerHealth ?? this.playerHealth,
-        enemyHealth: enemyHealth ?? this.enemyHealth,
-        enemyBoard: enemyBoard ?? this.enemyBoard,
-        playerBoard: playerBoard ?? this.playerBoard,
-        playerSecond: playerSecond ?? this.playerSecond,
-      );
+  }) => Setup(
+    playerHealth: playerHealth ?? this.playerHealth,
+    enemyHealth: enemyHealth ?? this.enemyHealth,
+    enemyBoard: enemyBoard ?? this.enemyBoard,
+    playerBoard: playerBoard ?? this.playerBoard,
+    playerSecond: playerSecond ?? this.playerSecond,
+  );
 }
 
 /// True if the player won, false if the foe did, null if neither within the
 /// turn guard (a stall, counted as no win).
 bool? playBattle({
+  required CardLibrary library,
+  required StoryChapter chapter,
+  required StoryBattle battle,
+  required Setup setup,
+  required AiTier playerSkill,
+  required int seed,
+}) => playBattleDetailed(
+  library: library,
+  chapter: chapter,
+  battle: battle,
+  setup: setup,
+  playerSkill: playerSkill,
+  seed: seed,
+).playerWon;
+
+/// Audit evidence uses individual turns (one player's turn), not full rounds.
+/// A guard exit remains a stall, never a fabricated loss or victory.
+class StoryBattleResult {
+  final bool? playerWon;
+  final int turns;
+  const StoryBattleResult(this.playerWon, this.turns);
+  bool get stalled => playerWon == null;
+}
+
+StoryBattleResult playBattleDetailed({
   required CardLibrary library,
   required StoryChapter chapter,
   required StoryBattle battle,
@@ -76,8 +100,18 @@ bool? playBattle({
   );
 
   var s = Game.create(
-    deckP1: storyDeck(library, chapter.playerDominion, setCode: battle.deckSetCode, variant: battle.deckVariant),
-    deckP2: storyDeck(library, battle.enemyDominion, setCode: battle.deckSetCode, variant: battle.deckVariant + 1),
+    deckP1: storyDeck(
+      library,
+      chapter.playerDominion,
+      setCode: battle.deckSetCode,
+      variant: battle.deckVariant,
+    ),
+    deckP2: storyDeck(
+      library,
+      battle.enemyDominion,
+      setCode: battle.deckSetCode,
+      variant: battle.deckVariant + 1,
+    ),
     seed: seed,
     firstPlayer: setup.playerSecond ? PlayerId.p2 : PlayerId.p1,
   );
@@ -86,19 +120,24 @@ bool? playBattle({
   }
 
   final player = AiPlayer(tier: playerSkill);
-  final foe =
-      AiPlayer(tier: battle.hardAi ? AiTier.strategist : AiTier.tactician);
+  final foe = AiPlayer(
+    tier: battle.hardAi ? AiTier.strategist : AiTier.tactician,
+  );
 
   var guard = 0;
   while (s.winner == null && guard++ < _turnGuard) {
     final mine = s.activePlayer == human;
-    s = (mine ? player : foe)
-        .playTurn(s, s.activePlayer, defenderAi: mine ? foe : player);
+    s = (mine ? player : foe).playTurn(
+      s,
+      s.activePlayer,
+      defenderAi: mine ? foe : player,
+    );
     if (s.winner != null) break;
     s = Game.nextPhase(s);
   }
-  if (s.winner == null) return null;
-  return s.winner == human;
+  final turns =
+      (s.turnNumber - 1) * 2 + (s.activePlayer == s.firstPlayer ? 1 : 2);
+  return StoryBattleResult(s.winner == null ? null : s.winner == human, turns);
 }
 
 /// Fraction of [games] seeds the player wins. A calibration and its check

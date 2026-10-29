@@ -1,0 +1,99 @@
+00:00 +0: loading test\ai_game_test.dart
+00:00 +0: test\ai_game_test.dart: AI vs AI: full game completes with a winner, deterministically
+00:00 +1: test\ai_game_test.dart: AI never aims a unit-only damage spell at the player
+00:00 +2: test\ai_game_test.dart: AI vs AI: 50 different seeds all terminate
+00:00 +3: test\ai_game_test.dart: AI vs AI: 50 different seeds all terminate
+00:00 +4: test\ai_game_test.dart: AI vs AI: 50 different seeds all terminate
+00:00 +5: test\ai_game_test.dart: AI vs AI: 50 different seeds all terminate
+00:00 +6: test\ai_game_test.dart: AI vs AI: 50 different seeds all terminate
+00:00 +7: test\ai_game_test.dart: AI vs AI: 50 different seeds all terminate
+00:00 +8: test\ai_game_test.dart: AI vs AI: 50 different seeds all terminate
+00:00 +9: test\ai_game_test.dart: AI vs AI: 50 different seeds all terminate
+00:01 +10: test\battle_decks_test.dart: mixed opponents are reproducible legal forty-card decks with a curve
+00:01 +11: test\battle_decks_test.dart: mixed opponents are reproducible legal forty-card decks with a curve
+00:01 +12: test\battle_decks_test.dart: mixed opponents are reproducible legal forty-card decks with a curve
+00:01 +13: test\battle_decks_test.dart: mixed opponents are reproducible legal forty-card decks with a curve
+00:01 +14: test\battle_decks_test.dart: mixed opponents are reproducible legal forty-card decks with a curve
+00:01 +15: test\battle_decks_test.dart: mixed opponents are reproducible legal forty-card decks with a curve
+00:01 +16: test\battle_decks_test.dart: mixed opponents are reproducible legal forty-card decks with a curve
+00:01 +17: test\battle_decks_test.dart: mixed opponents are reproducible legal forty-card decks with a curve
+00:01 +18: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +19: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +20: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +21: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +22: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +23: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +24: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +25: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +26: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +27: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +28: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +29: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:02 +30: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +31: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +32: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +33: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +34: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +35: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +36: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +37: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +38: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +39: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +40: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +41: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +42: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:03 +43: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:04 +44: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:04 +45: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:04 +46: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:04 +47: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:04 +48: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:04 +49: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:05 +50: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:05 +51: test\battle_decks_test.dart: every new non-resource card can actually enter an opponent deck
+00:05 +52: test\battle_decks_test.dart: single-set library remains supported
+00:06 +53: test\pvp_codec_test.dart: session codec preserves full authoritative state
+00:06 +54: test\pvp_codec_test.dart: player projection redacts opponent hidden information
+00:06 +55: test\pvp_engine_test.dart: both ready commands open the mulligan window, then main play
+00:06 +56: test\pvp_engine_test.dart: advancing past Main 2 lands on the next player's Main 1
+00:06 +57: test\pvp_engine_test.dart: a main action is legal on every phase reported as the main stage
+00:06 +58: test\pvp_engine_test.dart: a heartbeat publishes nothing and changes nothing
+00:06 +59: test\pvp_engine_test.dart: a real move still publishes its events
+00:06 +60: test\pvp_engine_test.dart: wrong actor and stale revision are rejected without changing state
+00:06 +61: test\pvp_engine_test.dart: resources and unit actions use the existing pure rules
+00:06 +62: test\pvp_engine_test.dart: Chain priority resolves a cast only after two passes
+00:06 +63: test\pvp_engine_test.dart: attack and block commands resolve combat then enter Main 2
+00:06 +64: test\pvp_engine_test.dart: next phase can walk refresh and draw before the opponent main phase
+00:06 +65: test\pvp_engine_test.dart: concede finishes the match and deterministic replay stays identical
+00:07 +66: test\set02_ambush_simulation_test.dart: autonomous combat permits an exerted Currentstep Crab to block
+00:07 +67: test\set02_catalog_test.dart: non-Wellspring designs do not use faction recolors as mechanical padding
+00:07 +68: test\set02_catalog_test.dart: expansion has 215 specific designs and exact faction rarity budgets
+00:07 +69: test\set02_catalog_test.dart: multiple sets merge while original starter decks remain byte-for-byte equivalent
+00:08 +70: test\set02_mechanics_test.dart: Vow rewards survival exactly once and serialization preserves its spent state
+00:08 +71: test\set02_mechanics_test.dart: opponent removal prevents Vow and bounce starts a new Arena stay
+00:08 +72: test\set02_mechanics_test.dart: Renew heals bounded damage and adds one counter only if damage removed
+00:08 +73: test\set02_mechanics_test.dart: Renew cannot affect an enemy, absent target or a player; AI chooses a wounded friend
+00:08 +74: test\set02_mechanics_test.dart: temporary Renew combat support expires but permanent counters remain
+00:08 +75: test\set02_mechanics_test.dart: expansion tokens survive PvP persistence with their full definition
+00:08 +76: test\set02_mechanics_test.dart: damage removal fires the new cards death payoff exactly once
+00:08 +77: test\set02_mechanics_test.dart: AI simulations fire combat death effects like the app and PvP paths
+00:08 +78: test\set02_mechanics_test.dart: AI respects temporary Soar and Dread granted by expansion combat tricks
+00:08 +79: test\set02_mechanics_test.dart: AI death delivery does not repeat a death caused by an attack trigger
+00:08 +80: test\set02_mechanics_test.dart: every catalog effect resolves through actual enter/cast/vow/death paths
+00:09 +81: test\set02_target_scope_test.dart: Return to the Nursery recalls the chosen enemy and leaves its ally
+00:09 +82: test\set02_target_scope_test.dart: Ivory Debtwarden destroys one chosen enemy rather than the whole board
+00:09 +83: test\set02_target_scope_test.dart: Neris retains the deliberately plural return effect on her fulfilled Vow
+00:09 +84: test\set02_target_scope_test.dart: printed rules identify actual targets without authoring null values
+00:09 +85: test\turn_flow_test.dart: game setup P1 draws 5, P2 draws 6, decks are 40
+00:09 +86: test\turn_flow_test.dart: game setup enemy on the play: P2 first, P2 draws 5 + skips first draw
+00:09 +87: test\turn_flow_test.dart: game setup same seed produces identical shuffles
+00:09 +88: test\turn_flow_test.dart: game setup different seed produces different shuffle
+00:09 +89: test\turn_flow_test.dart: wellspring and aether play wellspring, exert for aether, pay unit cost
+00:09 +90: test\turn_flow_test.dart: wellspring and aether second wellspring in one turn is rejected
+00:09 +91: test\turn_flow_test.dart: wellspring and aether cost payment consumes dominion then generic
+00:09 +92: test\turn_flow_test.dart: wellspring and aether insufficient aether throws
+00:09 +93: test\turn_flow_test.dart: turn flow phases advance and turn passes to opponent
+00:09 +94: test\turn_flow_test.dart: turn flow end of turn heals damage and clears summoning fatigue
+00:09 +95: test\turn_flow_test.dart: turn flow redraw reshuffles into a same-size hand, deterministically
+00:09 +96: test\turn_flow_test.dart: turn flow drawing from empty deck loses the game
+00:09 +97: All tests passed!

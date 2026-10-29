@@ -1,6 +1,6 @@
 # SHARDFALL — The Five Vows
 
-Pembaruan terbaru: **0.2.1+66**. Home kini menampilkan Set 2, campaign dipisah menurut set, semua kartu tersedia di mode permainan, istilah aturan memakai “in play”, dan kemampuan ekspansi telah diaudit ulang terhadap Set 1. Lihat [catatan pembaruan dan hasil balance terbaru](SET02_POLISH_0.2.1.md). Angka rilis awal di bawah disimpan sebagai riwayat 0.2.0+65.
+Pembaruan terbaru: **0.2.2+67**, dengan default arena baru, tiga Battle Rooms seharga 600 Gold, dan kurva kesulitan seluruh 140 encounter Story yang diperiksa ulang. Lihat [catatan Battle Rooms dan Story](BATTLE_ROOMS_0.2.2.md). Pembaruan 0.2.1 sebelumnya menambahkan Home Set 2, menu Story per set, integrasi kartu semua mode, istilah “in play”, dan audit balance lintas set; [bukti balance kartu](SET02_POLISH_0.2.1.md) tetap berlaku. Angka rilis awal di bawah disimpan sebagai riwayat 0.2.0+65.
 
 Ekspansi SF002 melanjutkan akhir The Sundering: Ravenna masih menjaga batu, saudari yang dibebaskannya kembali melihat pagi, dan Thornmaw memilih merawat lampu. Dua puluh chapter baru mengikuti usaha lima kota menghadapi Communion dan belajar membuat janji yang tetap merupakan pilihan.
 

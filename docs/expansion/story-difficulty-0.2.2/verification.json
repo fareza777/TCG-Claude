@@ -1,0 +1,30 @@
+{
+  "verifiedAtUtc": "2026-10-29T09:36:19.280109+00:00",
+  "setupFingerprintMatchesHoldout": true,
+  "allFrozenSourceFileHashesMatch": true,
+  "authoredBaselineHashUnchanged": true,
+  "encounterCountPerRun": 140,
+  "gamesPerEncounterPerPolicy": 100,
+  "baselineAndFinalGames": 112000,
+  "stalls": 0,
+  "storyTests": {
+    "passed": 25,
+    "failed": 0,
+    "command": "flutter test --no-pub test/story_difficulty_test.dart test/story_campaign_difficulty_test.dart test/story_second_turn_test.dart test/five_vows_story_test.dart --reporter expanded",
+    "log": "app/build/battle-rooms/story-tests.log",
+    "durableLog": "docs/expansion/story-difficulty-0.2.2/story-tests.txt"
+  },
+  "scopedAnalyzer": "No issues found",
+  "whitespaceCheck": "clean",
+  "fullAppSuite": {
+    "command": "flutter test --no-pub --reporter expanded",
+    "passed": 305,
+    "failed": 0,
+    "duration": "02:27",
+    "log": "app/build/battle-rooms/full-app-tests-story-integration.log",
+    "durableLog": "docs/expansion/story-difficulty-0.2.2/app-tests.txt"
+  },
+  "holdoutExecutedOnceAfterFreeze": true,
+  "holdoutSha256": "9e441ecc6daa18ffb38ad76c0c0aa1178b61159272257991d2cbd697bdf4d415",
+  "dartSdk": "3.12.2 stable, windows_x64"
+}

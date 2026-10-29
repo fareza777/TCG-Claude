@@ -106,7 +106,8 @@ void main() {
             [...allies, ...enemies].every((c) => c.type == CardType.unit),
             isTrue,
           );
-          expect(battle.playerHealth, greaterThanOrEqualTo(battle.enemyHealth));
+          expect(battle.playerHealth, greaterThan(0));
+          expect(battle.enemyHealth, greaterThan(0));
           expect(
             enemies.fold<int>(0, (n, c) => n + c.might!),
             lessThan(battle.playerHealth),

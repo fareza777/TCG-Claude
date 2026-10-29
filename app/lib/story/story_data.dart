@@ -14,6 +14,7 @@ import 'chapters/vows_act_1.dart';
 import 'chapters/vows_act_2.dart';
 import 'chapters/vows_act_3.dart';
 import 'chapters/vows_act_4.dart';
+import 'story_difficulty.dart';
 
 class DialogueLine {
   final String speaker; // '' for narration
@@ -103,7 +104,8 @@ class StoryChapter {
   int get battleCount => stages.where((s) => s.battle != null).length;
 }
 
-final storyChapters = <StoryChapter>[
+/// Original authored chapters are retained unchanged for audit comparison.
+final authoredStoryChapters = <StoryChapter>[
   chapterOne,
   chapterTwo,
   chapterThree,
@@ -129,4 +131,10 @@ final storyChapters = <StoryChapter>[
   vow18,
   vow19,
   vow20,
+];
+
+/// Runtime encounters use explicit fixed setups; the authored dialogue and
+/// stage positions remain the source of truth for narrative and voice IDs.
+final storyChapters = [
+  for (final chapter in authoredStoryChapters) tuneStoryChapter(chapter),
 ];

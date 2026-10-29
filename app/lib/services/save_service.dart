@@ -7,6 +7,8 @@ import 'package:shardfall_engine/shardfall_engine.dart';
 import '../season/season.dart';
 
 import 'purchase_catalog.dart';
+import '../battle_rooms/battle_room_catalog.dart';
+import '../battle_rooms/battle_room_selection.dart';
 
 /// Persistent player profile: gold, card ownership, story progress, decks.
 ///
@@ -17,6 +19,83 @@ import 'purchase_catalog.dart';
 ///   chapter clear  : +250 gold bonus (first time)
 ///   Shard Pack     : 100 gold
 class SaveService extends ChangeNotifier {
+  final Set<String> _ownedBattleRooms = {'classic'};
+  String _equippedBattleRoom = 'classic';
+  bool _roomTransactionBusy = false;
+  Set<String> get ownedBattleRooms => Set.unmodifiable(_ownedBattleRooms);
+  String get equippedBattleRoom => _equippedBattleRoom;
+  Map<String, dynamic> get _battleRoomSnapshot => {
+    'owned': _ownedBattleRooms.toList()..sort(),
+    'equipped': _equippedBattleRoom,
+  };
+
+  void _restoreBattleRooms(Object? raw) {
+    if (raw is! Map) return;
+    final ownedIds = raw['owned'];
+    if (ownedIds is List) {
+      _ownedBattleRooms.addAll(ownedIds.whereType<String>()
+          .where((id) => BattleRooms.find(id) != null));
+    }
+    final selected = raw['equipped'];
+    _equippedBattleRoom = selected is String && _ownedBattleRooms.contains(selected)
+        ? selected : 'classic';
+  }
+
+  void _publishBattleRoom() => BattleRoomSelection.active.value =
+      BattleRooms.find(_equippedBattleRoom) ?? BattleRooms.classic;
+
+  /// Purchase and equip are one guarded action. Ownership is recorded before
+  /// the legacy Gold write so interruption cannot debit an ungranted room.
+  Future<RoomPurchaseResult> purchaseBattleRoom(String id) async {
+    if (_roomTransactionBusy) return RoomPurchaseResult.busy;
+    final room = BattleRooms.find(id);
+    if (room == null) return RoomPurchaseResult.invalidRoom;
+    if (_ownedBattleRooms.contains(id)) return RoomPurchaseResult.alreadyOwned;
+    if (gold < room.goldCost) return RoomPurchaseResult.insufficientGold;
+    _roomTransactionBusy = true;
+    final previous = _equippedBattleRoom;
+    gold -= room.goldCost;
+    _ownedBattleRooms.add(id);
+    _equippedBattleRoom = id;
+    try {
+      await _persist();
+      _publishBattleRoom();
+      notifyListeners();
+      return RoomPurchaseResult.purchased;
+    } catch (_) {
+      gold += room.goldCost;
+      _ownedBattleRooms.remove(id);
+      _equippedBattleRoom = previous;
+      try { await _persist(); } catch (_) { /* Keep the restored in-memory wallet. */ }
+      notifyListeners();
+      return RoomPurchaseResult.storageFailed;
+    } finally {
+      _roomTransactionBusy = false;
+    }
+  }
+
+  Future<bool> equipBattleRoom(String id) async {
+    if (_roomTransactionBusy || !_ownedBattleRooms.contains(id) ||
+        BattleRooms.find(id) == null) {
+      return false;
+    }
+    if (_equippedBattleRoom == id) return true;
+    _roomTransactionBusy = true;
+    final previous = _equippedBattleRoom;
+    _equippedBattleRoom = id;
+    try {
+      await _persist();
+      _publishBattleRoom();
+      notifyListeners();
+      return true;
+    } catch (_) {
+      _equippedBattleRoom = previous;
+      try { await _persist(); } catch (_) { /* Keep the previous equipped room. */ }
+      return false;
+    } finally {
+      _roomTransactionBusy = false;
+    }
+  }
   static const startGold = 120;
   static const duelWinGold = 25;
   static const storyFirstClearGold = 150;
@@ -264,6 +343,12 @@ class SaveService extends ChangeNotifier {
     service.removeAds = (prefs.getBool('removeAds') ?? false) ||
         service.removeAdsPurchaseIds.isNotEmpty;
     service.arenaBestWins = prefs.getInt('arenaBestWins') ?? 0;
+    try {
+      service._restoreBattleRooms(json.decode(prefs.getString('battleRooms') ?? '{}'));
+    } catch (_) {
+      // Corrupt/older cosmetic preferences must never block profile loading.
+    }
+    service._publishBattleRoom();
     service.battlesPlayed = prefs.getInt('battlesPlayed') ?? 0;
     service.adGoldClaims = prefs.getInt('adGoldClaims') ?? 0;
     service.adGoldDate = prefs.getString('adGoldDate') ?? '';
@@ -677,6 +762,7 @@ class SaveService extends ChangeNotifier {
   /// A fresh install has none of this, which is the only case where adopting a
   /// cloud save outright is safe.
   bool get hasLocalProgress =>
+      _ownedBattleRooms.length > 1 ||
       totalWins > 0 ||
       totalPacks > 0 ||
       chaptersDone.isNotEmpty ||
@@ -689,6 +775,7 @@ class SaveService extends ChangeNotifier {
   /// settings and the purchase ledger so a restored install resumes exactly
   /// where it left off and cannot re-grant Gold it already delivered.
   Map<String, dynamic> toSnapshot() => {
+        'battleRooms': _battleRoomSnapshot,
         'gold': gold,
         'shards': shards,
         'owned': owned,
@@ -732,6 +819,7 @@ class SaveService extends ChangeNotifier {
   /// Replaces the local profile with [data]. Fields missing from the snapshot
   /// keep their current value, so an older snapshot never blanks newer state.
   Future<void> applySnapshot(Map<String, dynamic> data) async {
+    _restoreBattleRooms(data['battleRooms']);
     gold = data['gold'] as int? ?? gold;
     shards = data['shards'] as int? ?? shards;
     owned = (data['owned'] as Map<String, dynamic>? ?? {})
@@ -798,12 +886,14 @@ class SaveService extends ChangeNotifier {
       removeAds = true;
     }
     await _persist();
+    _publishBattleRoom();
     notifyListeners();
   }
 
   // ── save export / import (local backup) ───────────────────────────────
   String exportCode() {
     final data = {
+      'battleRooms': _battleRoomSnapshot,
       'gold': gold,
       'shards': shards,
       'owned': owned,
@@ -825,6 +915,7 @@ class SaveService extends ChangeNotifier {
       final raw = code.trim().replaceFirst('SFSAVE-', '');
       final data =
           json.decode(utf8.decode(base64Url.decode(raw))) as Map<String, dynamic>;
+      _restoreBattleRooms(data['battleRooms']);
       gold = data['gold'] as int? ?? gold;
       shards = data['shards'] as int? ?? shards;
       owned = (data['owned'] as Map<String, dynamic>? ?? {})
@@ -844,6 +935,7 @@ class SaveService extends ChangeNotifier {
           (data['achievements'] as List? ?? const []).cast<String>().toSet();
       loginStreak = data['loginStreak'] as int? ?? loginStreak;
       await _persist();
+      _publishBattleRoom();
       notifyListeners();
       return true;
     } catch (_) {
@@ -1097,7 +1189,12 @@ class SaveService extends ChangeNotifier {
   }
 
   Future<void> _persist() async {
-    await _prefs.setInt('gold', gold);
+    if (!await _prefs.setString('battleRooms', json.encode(_battleRoomSnapshot))) {
+      throw StateError('Could not save battle room ownership');
+    }
+    if (!await _prefs.setInt('gold', gold)) {
+      throw StateError('Could not save Gold balance');
+    }
     await _prefs.setInt('shards', shards);
     await _prefs.setStringList(
         'processedPurchaseIds', processedPurchaseIds.toList());

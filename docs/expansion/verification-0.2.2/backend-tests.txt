@@ -1,0 +1,34 @@
+00:00 +0: loading test\expansion_catalog_test.dart
+00:00 +0: test\expansion_catalog_test.dart: existing original path loads the sibling expansion too
+00:00 +1: test\http_server_test.dart: health endpoint reports service versions without secrets
+00:00 +2: test\http_server_test.dart: health endpoint reports service versions without secrets
+00:00 +3: test\http_server_test.dart: health endpoint reports service versions without secrets
+00:00 +4: test\http_server_test.dart: command endpoint rejects missing internal authentication
+00:00 +5: test\http_server_test.dart: authenticated command endpoint returns player-safe JSON
+00:00 +6: test\http_server_test.dart: authenticated initializer endpoint is idempotent
+00:00 +7: test\match_service_test.dart: accepted command persists revision, projection, and event
+00:00 +8: test\match_service_test.dart: same idempotency key returns the first response without a second transition
+00:00 +9: test\match_service_test.dart: stale revision is rejected without changing persisted state
+00:00 +10: test\match_service_test.dart: non-member cannot command or reconnect to a match
+00:00 +11: test\match_service_test.dart: reconnect returns only the requesting player projection
+00:00 +12: test\match_service_test.dart: concede finishes once and duplicate retry is harmless
+00:00 +13: test\match_service_test.dart: end turn walks the phases in one command until the seat changes
+00:00 +14: test\match_service_test.dart: end turn outside your own turn is refused, not walked
+00:00 +15: test\match_service_test.dart: a heartbeat stamps presence for the stale-match reaper
+00:00 +16: test\match_service_test.dart: a heartbeat is never stale, even after the board moved
+00:00 +17: test\match_service_test.dart: stored projections carry the clock for realtime subscribers
+00:00 +18: test\match_service_test.dart: a rejected command does not restart the decision clock
+00:00 +19: test\match_service_test.dart: initializes a queued match from validated deck IDs exactly once
+00:00 +20: test\supabase_pvp_repository_test.dart: loads a match, full runtime state, and private projections
+00:00 +21: test\supabase_pvp_repository_test.dart: the commit carries the turn deadline inside the transaction
+00:01 +22: test\supabase_pvp_repository_test.dart: initialization uses the service RPC and never puts the key in the body
+00:01 +23: test\turn_clock_enforcement_test.dart: a decision left past its deadline is forfeited by the server
+00:01 +24: test\turn_clock_enforcement_test.dart: a decision still inside its deadline is left alone
+00:01 +25: test\turn_clock_enforcement_test.dart: every committed state carries the next deadline
+00:01 +26: test\turn_clock_test.dart: every live stage has a budget and a forfeit action
+00:01 +27: test\turn_clock_test.dart: a finished match has no clock
+00:01 +28: test\turn_clock_test.dart: the clock is owed by whoever is holding things up
+00:01 +29: test\turn_clock_test.dart: the ready window can be owed by both players at once
+00:01 +30: test\turn_clock_test.dart: running out of time never attacks or blocks for the player
+00:01 +31: test\turn_clock_test.dart: the deadline carries a grace margin for the round trip
+00:01 +32: All tests passed!

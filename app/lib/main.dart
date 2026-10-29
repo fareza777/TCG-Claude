@@ -44,6 +44,9 @@ import 'tutorial/tutorial_screen.dart';
 import 'widgets/delete_account_tile.dart';
 import 'widgets/remove_ads_offer.dart';
 import 'widgets/privacy_options_tile.dart';
+import 'battle_rooms/battle_room_shop.dart';
+import 'battle_rooms/battle_room_background.dart';
+import 'battle_rooms/battle_room_selection.dart';
 
 Future<void> main() async {
   // Everything runs inside the guarded zone so an error escaping an async gap
@@ -189,6 +192,10 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
       _auth = auth;
       _cloud = cloud;
     });
+    if (mounted) {
+      unawaited(precacheImage(BattleRoomBackground.imageProvider(
+        BattleRoomSelection.active.value), context, onError: (_, _) {}));
+    }
     // The silent re-auth at startup keys off this flag; without it a Google
     // prompt could surface mid-cinematic for a player who never signed in.
     auth.accountLinked = save.accountLinked;
@@ -1325,6 +1332,15 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                                           auth: _auth!,
                                         ),
                                       ),
+                                    ),
+                                  ),
+                                  _tile(
+                                    icon: Icons.castle_outlined,
+                                    label: 'BATTLE ROOMS',
+                                    color: const Color(0xFFC9A86A),
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(builder: (_) => BattleRoomShopScreen(
+                                        library: _library!, save: _save!, adService: _ads!)),
                                     ),
                                   ),
                                   _tile(

@@ -9,6 +9,7 @@ import '../services/haptics.dart';
 import '../theme.dart';
 import '../widgets/card_zoom.dart';
 import 'duel_controller.dart';
+import '../battle_rooms/battle_room_background.dart';
 
 class DuelScreen extends StatefulWidget {
   final DuelController controller;
@@ -187,24 +188,7 @@ class _DuelScreenState extends State<DuelScreen>
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset('assets/ui/battle_bg.webp',
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => const SizedBox()),
-              // scrim: darken overall + stronger at top and bottom for text
-              const DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xCC0B0D12),
-                      Color(0x730B0D12),
-                      Color(0xE60B0D12),
-                    ],
-                    stops: [0, 0.5, 1],
-                  ),
-                ),
-              ),
+              const BattleRoomBackground(),
               SafeArea(
             child: Stack(
               children: [
@@ -259,20 +243,28 @@ class _DuelScreenState extends State<DuelScreen>
                     c.canTargetPlayer(c.targetingDef!, DuelController.enemy)),
           ),
           const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.enemyName,
-                  style: const TextStyle(
-                      color: AppTheme.textPrimary,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700)),
-              Text('Hand ${foe.hand.length} · Deck ${foe.deck.length}',
-                  style: const TextStyle(
-                      color: AppTheme.textMuted, fontSize: 11)),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Tooltip(
+                  message: widget.enemyName,
+                  child: Text(widget.enemyName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: AppTheme.textPrimary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700)),
+                ),
+                Text('Hand ${foe.hand.length} · Deck ${foe.deck.length}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        color: AppTheme.textMuted, fontSize: 11)),
+              ],
+            ),
           ),
-          const Spacer(),
           if (c.ui == DuelUiState.enemyTurn)
             const Padding(
               padding: EdgeInsets.only(right: 6),
@@ -547,53 +539,56 @@ class _DuelScreenState extends State<DuelScreen>
         border: Border.all(
             color: AppTheme.panelBorder.withValues(alpha: 0.5)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            enemyActive ? Icons.smart_toy_outlined : Icons.person_outline,
-            size: 13,
-            color: accent,
-          ),
-          const SizedBox(width: 8),
-          for (var i = 0; i < phases.length; i++) ...[
-            if (i > 0)
-              Container(
-                width: 10,
-                height: 1,
-                color: AppTheme.panelBorder.withValues(alpha: 0.6),
-              ),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                color: phases[i].$1 == current
-                    ? accent.withValues(alpha: 0.22)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: phases[i].$1 == current
-                      ? accent
-                      : Colors.transparent,
-                ),
-              ),
-              child: Text(
-                phases[i].$2,
-                style: TextStyle(
-                  fontSize: 9.5,
-                  letterSpacing: 0.4,
-                  fontWeight: phases[i].$1 == current
-                      ? FontWeight.w800
-                      : FontWeight.w500,
-                  color: phases[i].$1 == current
-                      ? Colors.white
-                      : AppTheme.textMuted.withValues(alpha: 0.7),
-                ),
-              ),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              enemyActive ? Icons.smart_toy_outlined : Icons.person_outline,
+              size: 13,
+              color: accent,
             ),
+            const SizedBox(width: 8),
+            for (var i = 0; i < phases.length; i++) ...[
+              if (i > 0)
+                Container(
+                  width: 10,
+                  height: 1,
+                  color: AppTheme.panelBorder.withValues(alpha: 0.6),
+                ),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: phases[i].$1 == current
+                      ? accent.withValues(alpha: 0.22)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: phases[i].$1 == current
+                        ? accent
+                        : Colors.transparent,
+                  ),
+                ),
+                child: Text(
+                  phases[i].$2,
+                  style: TextStyle(
+                    fontSize: 9.5,
+                    letterSpacing: 0.4,
+                    fontWeight: phases[i].$1 == current
+                        ? FontWeight.w800
+                        : FontWeight.w500,
+                    color: phases[i].$1 == current
+                        ? Colors.white
+                        : AppTheme.textMuted.withValues(alpha: 0.7),
+                  ),
+                ),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

@@ -1,0 +1,53 @@
+{
+  "generator": "built-in image_gen",
+  "date": "2026-10-29",
+  "packaging": "WebP quality85 method6; encoding conversion only, no cropping or resizing. Original PNG masters retained.",
+  "review": "All four distinct illustrations visually inspected. Free default is a simpler crafted courtyard; premium settings have richer thematic architecture. Portrait/landscape readability checked in the app.",
+  "totalShippedBytes": 1569348,
+  "assets": [
+    {
+      "id": "classic",
+      "master": "C:\\Users\\FAJAR\\.codex\\generated_images\\01a1827f-50e5-79a0-85e7-ad340a1d96f3\\exec-b1af35bf-e294-445c-ae80-f8f87794dc4d.png",
+      "masterSha256": "a20f1e6dfa8cd29340cda11ee3a9430b1f82dfd738c24a9868ad022432128ed1",
+      "asset": "app/assets/ui/battle_room_classic.webp",
+      "sha256": "865c564d9a31a5f306a1b9474ed560acfcebd017bbbd452065e27aeb3df6b438",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 432416,
+      "prompt": "Production default background illustration for SHARDFALL, an epic fantasy trading card game. Create a handsome welcoming FREE starter battle arena called Shardstone Commons. It should be clearly crafted and attractive, yet simpler and humbler than premium enchanted forest, volcanic forge and ocean observatory arenas. Square 1:1 composition, viewed almost straight down over a real physical dueling dais. A broad circular floor of worn blue-grey slate and warm limestone, beautiful subtle mineral texture, a restrained bronze-inlaid rim, gently stepped stone masonry near the outer corners, two small practical lantern niches and a few tiny muted colored shard inlays at the periphery. Soft late-evening light and a balanced charcoal, sandstone and muted teal palette. The center 65 percent is a spacious quiet matte stone playing surface with a few fine cracks and understated facing arc engravings, suitable behind many TCG cards and small labels. Peripheral crafted detail remains visible after both wide desktop and tall phone center crops. Elegant hand-painted fantasy illustration with tactile materials and atmospheric depth, cohesive, calm, no excessive ornamentation, no lavish gold sculpture, no lava, no lush enchanted foliage, no elaborate astronomical machinery, no card slots, no cards, no characters, no letters, no text, no numbers, no logos, no watermark, no UI. A refined modest public dueling courtyard, not a generic flat gradient."
+    },
+    {
+      "id": "moonroot",
+      "master": "C:\\Users\\FAJAR\\.codex\\generated_images\\01a1827f-50e5-79a0-85e7-ad340a1d96f3\\exec-f22270e5-fe93-4d6c-bde5-cb5e6d3fb47f.png",
+      "masterSha256": "e027eac659fe96f33a0d069c55980f74f094a7e8c8416251e8ead6b5177a5561",
+      "asset": "app/assets/ui/battle_room_moonroot.webp",
+      "sha256": "657c1ec51c0450c2a8417e7234cd683378f10b23aca0be28735c0c50fc7a4447",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 438204,
+      "prompt": "Production background illustration for SHARDFALL, a premium epic fantasy TCG. A real playable physical dueling surface viewed almost straight down, exquisite painterly material detail, sophisticated cinematic lighting, believable tactile craft. Square 1:1 composition, not a screenshot or UI mockup. Compose for safe center-cropping to both tall phone and wide desktop viewports: the central 65 percent is a restrained low-contrast textured playing surface, with beautiful fine thematic detail and curved architectural accents toward all four sides, some distinctive but subtle details remain within the middle horizontal and vertical bands. Two opposing zones suggested by elegant faint arcs, no rigid card slots, no cards, no characters, no text, no lettering, no numbers, no logo, no watermarks, no interface, no borders. Keep the center spacious and calm enough for dozens of small cards and tiny labels to remain readable; peripheral scenery is rich and impressive. No blinding highlights, no dense high-contrast pattern over the playing area, no glowing center orb. High-end hand-painted fantasy art, not plastic 3D. Moonroot Sanctuary: a sheltered dueling dais inside an ancient moonlit living grove. A broad matte deep-emerald slate and moss-inlaid stone surface with barely luminous root veins flowing beneath translucent jade mineral seams. Ancient carved bronze and rootwood arcs curve in from the sides, tiny pale teal flowers and delicate fern tips tucked toward the perimeter, dappled moonlight and quiet mist over the outer material. Elegant warm-bronze botanical inlay and emerald and sage shadows, restrained magical bioluminescence. A refined sanctuary, visibly a distinct crafted place for a duel."
+    },
+    {
+      "id": "emberforge",
+      "master": "C:\\Users\\FAJAR\\.codex\\generated_images\\01a1827f-50e5-79a0-85e7-ad340a1d96f3\\exec-6206261f-28f0-4934-af08-48791a2ec493.png",
+      "masterSha256": "c80e55b6e7c4d41b4e37f3861a465c48e0f779d5092264dc4c8a58ccb80a6670",
+      "asset": "app/assets/ui/battle_room_emberforge.webp",
+      "sha256": "ad3da91f2fcb5695619b39369bc4ea4b4e940f4091b6ee02a096b75a6b59b368",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 363890,
+      "prompt": "Production background illustration for SHARDFALL, a premium epic fantasy TCG. A real playable physical dueling surface viewed almost straight down, exquisite painterly material detail, sophisticated cinematic lighting, believable tactile craft. Square 1:1 composition, not a screenshot or UI mockup. Compose for safe center-cropping to both tall phone and wide desktop viewports: the central 65 percent is a restrained low-contrast textured playing surface, with beautiful fine thematic detail and curved architectural accents toward all four sides, some distinctive but subtle details remain within the middle horizontal and vertical bands. Two opposing zones suggested by elegant faint arcs, no rigid card slots, no cards, no characters, no text, no lettering, no numbers, no logo, no watermarks, no interface, no borders. Keep the center spacious and calm enough for dozens of small cards and tiny labels to remain readable; peripheral scenery is rich and impressive. No blinding highlights, no dense high-contrast pattern over the playing area, no glowing center orb. High-end hand-painted fantasy art, not plastic 3D. Emberforge Bastion: an impressive dueling dais in a monumental volcanic relief-forge. A broad matte charcoal obsidian and dark hammered iron playing surface, fine brass seam-work and softly glowing amber mineral fractures confined mainly to the edges. Sculpted black iron curved braces and cooled slagstone, a little molten-orange light reflected from tiny recessed channels at the periphery, thin drifting ash implied in the distant atmosphere, rich tactile worn metal and cinder dust. Burnt copper and antique gold details, very restrained ember reds, dark quiet center. A majestic safe forge platform, not a pool of bright lava."
+    },
+    {
+      "id": "tideglass",
+      "master": "C:\\Users\\FAJAR\\.codex\\generated_images\\01a1827f-50e5-79a0-85e7-ad340a1d96f3\\exec-c5d6b3a6-def4-4b8f-8a63-4ae3ecc7a96f.png",
+      "masterSha256": "c505a2b442331a698d3e3a7fd6c15667eba41fe18b0213b1ea736eb4a866e3f1",
+      "asset": "app/assets/ui/battle_room_tideglass.webp",
+      "sha256": "ba782346fbc45d3de4c1986947deb64dae8b9756f15037fed00b54876542be71",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 334838,
+      "prompt": "Production background illustration for SHARDFALL, a premium epic fantasy TCG. A real playable physical dueling surface viewed almost straight down, exquisite painterly material detail, sophisticated cinematic lighting, believable tactile craft. Square 1:1 composition, not a screenshot or UI mockup. Compose for safe center-cropping to both tall phone and wide desktop viewports: the central 65 percent is a restrained low-contrast textured playing surface, with beautiful fine thematic detail and curved architectural accents toward all four sides, some distinctive but subtle details remain within the middle horizontal and vertical bands. Two opposing zones suggested by elegant faint arcs, no rigid card slots, no cards, no characters, no text, no lettering, no numbers, no logo, no watermarks, no interface, no borders. Keep the center spacious and calm enough for dozens of small cards and tiny labels to remain readable; peripheral scenery is rich and impressive. No blinding highlights, no dense high-contrast pattern over the playing area, no glowing center orb. High-end hand-painted fantasy art, not plastic 3D. Tideglass Observatory: a magnificent dueling dais in a moonlit oceanic observatory. A broad matte midnight-blue tideglass and ink-dark polished stone playing surface with subtle cloudy crystalline depth, pearl and old brass astronomical arcs lightly engraved near the perimeter. Curving sea-weathered marble, a few translucent cyan glass inlays and tiny stars reflected in the outer tideglass, refined nautical astrolabe craftsmanship without readable symbols, soft silver light and deep ultramarine and petrol-teal shadows. Understated pearlescent glints, no bright central object. A luxurious observatory table suspended above a quiet dark sea."
+    }
+  ]
+}

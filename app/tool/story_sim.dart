@@ -16,11 +16,11 @@
 //
 // Two skills are reported because the real player is neither: Greedy (plays
 // its most expensive card, attacks freely) is the floor; Tactician (weighs a
-// trade before attacking) is a competent player. Measured against the
-// telemetry of real players on chapter 1, the Tactician's win rate tracks
-// theirs battle for battle, which is what makes this worth trusting.
+// trade before attacking) is the stronger policy used for calibration.
 //
-// To try a change before writing it into a chapter, use story_calibrate.dart.
+// These policies are repeatable proxies, not guaranteed human win rates.
+// For the complete SF001 + SF002 audit and current fixed tuning, use
+// campaign_difficulty_audit.dart and story_campaign_calibrate.dart.
 import 'dart:io';
 
 import 'package:shardfall/story/story_data.dart';
@@ -36,12 +36,14 @@ int _intFlag(Map<String, String> flags, String name, int fallback) =>
 void main(List<String> args) {
   final flags = <String, String>{
     for (final a in args.where((a) => a.startsWith('--')))
-      a.substring(2).split('=').first:
-          a.contains('=') ? a.split('=').skip(1).join('=') : 'true',
+      a.substring(2).split('=').first: a.contains('=')
+          ? a.split('=').skip(1).join('=')
+          : 'true',
   };
   final games = _intFlag(flags, 'games', 40);
-  final only =
-      flags.containsKey('chapter') ? _intFlag(flags, 'chapter', 0) : null;
+  final only = flags.containsKey('chapter')
+      ? _intFlag(flags, 'chapter', 0)
+      : null;
   final onlyOnboard = flags.containsKey('onboard');
   final seedBase = _intFlag(flags, 'seed', 1000);
   final skills = [
@@ -50,11 +52,14 @@ void main(List<String> args) {
   ];
 
   final library = CardLibrary.fromJsonString(
-      File('assets/data/set01.json').readAsStringSync());
+    File('assets/data/set01.json').readAsStringSync(),
+  );
 
-  final head = StringBuffer('${"ch".padLeft(3)} ${"#".padLeft(3)} '
-      '${"foeHP".padLeft(6)} ${"you".padLeft(4)} ${"foe".padLeft(4)} '
-      '${"help".padLeft(5)} ${"boss".padLeft(5)} ${"2nd".padLeft(4)} ');
+  final head = StringBuffer(
+    '${"ch".padLeft(3)} ${"#".padLeft(3)} '
+    '${"foeHP".padLeft(6)} ${"you".padLeft(4)} ${"foe".padLeft(4)} '
+    '${"help".padLeft(5)} ${"boss".padLeft(5)} ${"2nd".padLeft(4)} ',
+  );
   for (final s in skills) {
     head.write(s.name.substring(0, 6).padLeft(8));
   }
@@ -102,13 +107,15 @@ void main(List<String> args) {
           ),
       };
 
-      final row = StringBuffer('${"${c + 1}".padLeft(3)} ${"$n".padLeft(3)} '
-          '${"${battle.enemyHealth}".padLeft(6)} '
-          '${"${battle.playerHealth}".padLeft(4)} '
-          '${"${battle.enemyBoardIds.length}".padLeft(4)} '
-          '${"${battle.playerBoardIds.length}".padLeft(5)} '
-          '${(battle.hardAi ? "yes" : "").padLeft(5)} '
-          '${(battle.playerFirst ? "" : "yes").padLeft(4)} ');
+      final row = StringBuffer(
+        '${"${c + 1}".padLeft(3)} ${"$n".padLeft(3)} '
+        '${"${battle.enemyHealth}".padLeft(6)} '
+        '${"${battle.playerHealth}".padLeft(4)} '
+        '${"${battle.enemyBoardIds.length}".padLeft(4)} '
+        '${"${battle.playerBoardIds.length}".padLeft(5)} '
+        '${(battle.hardAi ? "yes" : "").padLeft(5)} '
+        '${(battle.playerFirst ? "" : "yes").padLeft(4)} ',
+      );
       for (final s in skills) {
         row.write(_pct(rates[s]!).padLeft(8));
       }
@@ -122,13 +129,16 @@ void main(List<String> args) {
     stdout.writeln();
   }
 
-  final label =
-      skills.contains(AiTier.tactician) ? 'tactician' : skills.first.name;
+  final label = skills.contains(AiTier.tactician)
+      ? 'tactician'
+      : skills.first.name;
   stdout.writeln('average win rate by band ($label):');
   for (final e in bands.entries) {
     if (e.value.isEmpty) continue;
     final avg = e.value.reduce((a, b) => a + b) / e.value.length;
-    stdout.writeln('  ${e.key.padRight(34)} ${_pct(avg).padLeft(5)}'
-        '   (${e.value.map(_pct).join(" ")})');
+    stdout.writeln(
+      '  ${e.key.padRight(34)} ${_pct(avg).padLeft(5)}'
+      '   (${e.value.map(_pct).join(" ")})',
+    );
   }
 }

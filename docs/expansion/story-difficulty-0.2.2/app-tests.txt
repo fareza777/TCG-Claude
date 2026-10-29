@@ -1,0 +1,322 @@
+00:00 +0: loading C:/TCG Claude/app/test/accessibility_test.dart
+00:00 +0: C:/TCG Claude/app/test/accessibility_test.dart: a card announces its name, stats, keywords and rules text
+00:00 +1: C:/TCG Claude/app/test/accessibility_test.dart: damage is announced as remaining guard, not the printed number
+00:00 +2: C:/TCG Claude/app/test/accessibility_test.dart: a face-down card gives nothing away
+00:02 +3: C:/TCG Claude/app/test/ad_banner_test.dart: a banner in bottomNavigationBar leaves the body its height
+00:02 +4: C:/TCG Claude/app/test/ad_banner_test.dart: a banner in bottomNavigationBar leaves the body its height
+00:02 +5: C:/TCG Claude/app/test/ad_banner_test.dart: banner disappears immediately after Remove Ads is granted
+00:03 +6: C:/TCG Claude/app/test/ad_banner_test.dart: Remove Ads offer shows price, progress, and Restore states
+00:05 +7: C:/TCG Claude/app/test/ad_result_flow_test.dart: post-result hook is a no-op when ads are unavailable
+00:05 +8: C:/TCG Claude/app/test/ad_result_flow_test.dart: post-result hook delegates to a ready interstitial once
+00:05 +9: C:/TCG Claude/app/test/ad_service_test.dart: a new player finishes their first fights without an interstitial
+00:06 +10: C:/TCG Claude/app/test/ad_service_test.dart: a loaded rewarded ad notifies listeners so offers can appear
+00:06 +11: C:/TCG Claude/app/test/ad_service_test.dart: rewarded offers survive Remove Ads
+00:06 +12: C:/TCG Claude/app/test/ad_service_test.dart: policy skips banners and interstitials when Remove Ads is owned
+00:06 +13: C:/TCG Claude/app/test/ad_service_test.dart: initializes, loads a banner, and shows a ready interstitial
+00:06 +14: C:/TCG Claude/app/test/ad_service_test.dart: does not load or show ads after Remove Ads is granted
+00:06 +15: C:/TCG Claude/app/test/ad_service_test.dart: load failures are soft and cooldown prevents repeated shows
+00:06 +16: C:/TCG Claude/app/test/ad_service_test.dart: an interstitial show error is disposed and never blocks the caller
+Interstitial display skipped: Bad state: ad failed
+00:06 +17: C:/TCG Claude/app/test/ad_service_test.dart: does not initialize or request ads before consent allows it
+00:06 +18: C:/TCG Claude/app/test/ad_service_test.dart: a hung consent prompt fails soft instead of blocking the game
+Ad consent timed out; ads stay off for this session.
+00:06 +19: C:/TCG Claude/app/test/ad_service_test.dart: exposes required privacy options and presents them on request
+00:07 +20: C:/TCG Claude/app/test/arena_draft_test.dart: a roll offers two single colours and four pairs, none repeated
+00:07 +21: C:/TCG Claude/app/test/arena_draft_test.dart: every one of the fifteen colour choices can come up
+00:07 +22: C:/TCG Claude/app/test/arena_draft_test.dart: every offer holds three distinct cards until the draft ends
+00:07 +23: C:/TCG Claude/app/test/arena_draft_test.dart: the draft ends after exactly twenty-four picks
+00:07 +24: C:/TCG Claude/app/test/arena_draft_test.dart: every sixth offer contains a rare or better
+00:07 +25: C:/TCG Claude/app/test/arena_draft_test.dart: the finished deck is a legal forty cards with sixteen Wellsprings
+00:07 +26: C:/TCG Claude/app/test/arena_draft_test.dart: no drafted card demands Aether the run cannot produce
+00:07 +27: C:/TCG Claude/app/test/arena_draft_test.dart: a dominion the deck actually uses always gets Wellsprings
+00:07 +28: C:/TCG Claude/app/test/arena_draft_test.dart: a single-colour run verdance drafts a legal deck it can always cast
+00:07 +29: C:/TCG Claude/app/test/arena_draft_test.dart: a single-colour run pyre drafts a legal deck it can always cast
+00:07 +30: C:/TCG Claude/app/test/arena_draft_test.dart: a single-colour run tide drafts a legal deck it can always cast
+00:07 +31: C:/TCG Claude/app/test/arena_draft_test.dart: a single-colour run dawn drafts a legal deck it can always cast
+00:07 +32: C:/TCG Claude/app/test/arena_draft_test.dart: a single-colour run gloom drafts a legal deck it can always cast
+00:07 +33: C:/TCG Claude/app/test/arena_draft_test.dart: a single-colour run the Wellsprings are all sixteen of that one colour
+00:07 +34: C:/TCG Claude/app/test/arena_draft_test.dart: a single-colour run the pool is deep enough that picks are choices, not repeats
+00:07 +35: C:/TCG Claude/app/test/arena_draft_test.dart: a single-colour run golden picks still find a rare in a single colour
+00:09 +36: C:/TCG Claude/app/test/arena_run_choice_test.dart: (setUpAll)
+00:09 +36: C:/TCG Claude/app/test/arena_run_choice_test.dart: single colours and pairs sit under their own headings
+00:10 +37: C:/TCG Claude/app/test/arena_run_choice_test.dart: single colours and pairs sit under their own headings
+00:10 +38: C:/TCG Claude/app/test/arena_run_choice_test.dart: each heading says what the choice costs
+00:11 +39: C:/TCG Claude/app/test/arena_run_choice_test.dart: a colour name is never cut off, at any phone width
+00:11 +40: C:/TCG Claude/app/test/arena_run_choice_test.dart: choosing a single colour starts a draft in that colour
+00:12 +41: C:/TCG Claude/app/test/arena_run_choice_test.dart: (tearDownAll)
+00:12 +41: C:/TCG Claude/app/test/backend_config_test.dart: Google sign-in uses the production Web OAuth client by default
+00:59 +42: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +43: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +44: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +45: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +46: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +47: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +48: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +49: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +50: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +51: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:00 +52: C:/TCG Claude/app/test/banner_placement_test.dart: every browsing screen carries exactly one banner
+01:01 +53: C:/TCG Claude/app/test/banner_placement_test.dart: the banner never swallows the screen it sits on
+01:02 +54: C:/TCG Claude/app/test/banner_placement_test.dart: buying Remove Ads takes the banner away everywhere
+01:04 +55: C:/TCG Claude/app/test/battle_room_ui_test.dart: (setUpAll)
+01:04 +55: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+01:05 +56: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+01:05 +57: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+01:06 +58: C:/TCG Claude/app/test/campaign_sets_test.dart: 320px story tabs separate campaigns and keep Set 2 locked
+01:06 +59: C:/TCG Claude/app/test/campaign_sets_test.dart: 320px story tabs separate campaigns and keep Set 2 locked
+01:07 +60: C:/TCG Claude/app/test/battle_room_ui_test.dart: real duel uses the selected room with no rules-state change or extra background paints
+01:08 +61: C:/TCG Claude/app/test/battle_room_ui_test.dart: real duel uses the selected room with no rules-state change or extra background paints
+01:10 +62: C:/TCG Claude/app/test/battle_room_ui_test.dart: real duel uses the selected room with no rules-state change or extra background paints
+01:12 +63: C:/TCG Claude/app/test/battle_room_ui_test.dart: real duel uses the selected room with no rules-state change or extra background paints
+01:12 +64: loading C:/TCG Claude/app/test/card_widget_test.dart
+01:12 +64: C:/TCG Claude/app/test/battle_room_ui_test.dart: (tearDownAll)
+01:14 +64: C:/TCG Claude/app/test/card_widget_test.dart: card face renders name, type line and stats
+01:15 +65: C:/TCG Claude/app/test/card_widget_test.dart: counters and damage shift the stat plaque
+01:15 +66: C:/TCG Claude/app/test/card_widget_test.dart: face down hides the name
+01:15 +67: C:/TCG Claude/app/test/cloud_sync_entitlement_test.dart: restores an active Remove Ads entitlement idempotently
+01:16 +68: C:/TCG Claude/app/test/cloud_sync_entitlement_test.dart: a refunded Remove Ads row revokes only its own active identifiers
+01:16 +69: C:/TCG Claude/app/test/cloud_sync_entitlement_test.dart: restores Gold separately and reports only new Gold grants
+01:16 +70: C:/TCG Claude/app/test/cloud_sync_entitlement_test.dart: a refunded row that was never delivered remains blocked locally
+01:17 +71: C:/TCG Claude/app/test/daily_gauntlet_test.dart: a year of days all build without throwing
+01:17 +72: C:/TCG Claude/app/test/daily_gauntlet_test.dart: every day deals a legal deck
+01:17 +73: C:/TCG Claude/app/test/daily_gauntlet_test.dart: every deck can pay for itself
+01:18 +74: C:/TCG Claude/app/test/daily_gauntlet_test.dart: no deck strays outside its two Dominions
+01:18 +75: C:/TCG Claude/app/test/daily_gauntlet_test.dart: every day has something to do on turn two
+01:18 +76: C:/TCG Claude/app/test/daily_gauntlet_test.dart: the opponent is never the same colour as the loan deck
+01:18 +77: C:/TCG Claude/app/test/daily_gauntlet_test.dart: the fight is hard but not hopeless
+01:18 +78: C:/TCG Claude/app/test/daily_gauntlet_test.dart: the same date always builds the same day
+01:18 +79: C:/TCG Claude/app/test/daily_gauntlet_test.dart: different dates build genuinely different days
+01:18 +80: C:/TCG Claude/app/test/daily_gauntlet_test.dart: the briefing always says something
+01:18 +81: C:/TCG Claude/app/test/decks_screen_test.dart: saved decks are actually listed
+01:20 +82: C:/TCG Claude/app/test/decks_screen_test.dart: a deck too small to play says so
+01:20 +83: C:/TCG Claude/app/test/decks_screen_test.dart: deleting asks first, and then really deletes
+01:20 +84: C:/TCG Claude/app/test/decks_screen_test.dart: deleting asks first, and then really deletes
+01:20 +85: C:/TCG Claude/app/test/deck_size_rules_test.dart: no screen hard-codes the deck size instead of sharing it
+01:20 +86: C:/TCG Claude/app/test/deck_size_rules_test.dart: no screen hard-codes the deck size instead of sharing it
+01:21 +87: C:/TCG Claude/app/test/deck_size_rules_test.dart: no screen hard-codes the deck size instead of sharing it
+01:21 +88: C:/TCG Claude/app/test/deck_size_rules_test.dart: no screen hard-codes the deck size instead of sharing it
+01:21 +89: C:/TCG Claude/app/test/deck_size_rules_test.dart: no screen hard-codes the deck size instead of sharing it
+01:21 +90: C:/TCG Claude/app/test/decks_screen_test.dart: saving a new deck leaves the others alone
+01:21 +91: C:/TCG Claude/app/test/decks_screen_test.dart: saving deletes survive a reload
+01:21 +92: loading C:/TCG Claude/app/test/deck_suggester_test.dart
+01:23 +92: C:/TCG Claude/app/test/deck_suggester_test.dart: builds a full, legal deck from an ordinary collection
+01:23 +93: C:/TCG Claude/app/test/deck_suggester_test.dart: the deck can pay for itself
+01:23 +94: C:/TCG Claude/app/test/deck_suggester_test.dart: never suggests more copies than the player owns
+01:23 +95: C:/TCG Claude/app/test/deck_suggester_test.dart: respects the one-copy limit on legendaries
+01:23 +96: C:/TCG Claude/app/test/deck_suggester_test.dart: says so instead of building an illegal deck
+01:23 +97: C:/TCG Claude/app/test/deck_suggester_test.dart: an empty collection is refused politely
+01:23 +98: C:/TCG Claude/app/test/deck_suggester_test.dart: on the real card set a fresh VERDANCE player gets a legal 40-card deck
+01:23 +99: C:/TCG Claude/app/test/deck_suggester_test.dart: on the real card set a fresh PYRE player gets a legal 40-card deck
+01:23 +100: C:/TCG Claude/app/test/deck_suggester_test.dart: on the real card set a fresh TIDE player gets a legal 40-card deck
+01:23 +101: C:/TCG Claude/app/test/deck_suggester_test.dart: on the real card set a fresh DAWN player gets a legal 40-card deck
+01:23 +102: C:/TCG Claude/app/test/deck_suggester_test.dart: on the real card set a fresh GLOOM player gets a legal 40-card deck
+01:23 +103: C:/TCG Claude/app/test/deck_suggester_test.dart: leans on the cheap end of the curve
+01:23 +104: C:/TCG Claude/app/test/delete_account_tile_test.dart: requires explicit confirmation before deleting the account
+01:25 +105: C:/TCG Claude/app/test/delete_account_tile_test.dart: keeps the dialog open and reports a deletion failure
+01:25 +106: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: (setUpAll)
+01:25 +106: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: printed Ambush state controls the actual prompt and lethal block
+01:26 +107: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: printed Ambush state controls assignment of an exerted unit
+01:26 +108: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: printed Ambush state controls tapping the exerted arena card
+01:27 +109: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: temporary Ambush state controls the actual prompt and lethal block
+01:27 +110: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: temporary Ambush state controls assignment of an exerted unit
+01:27 +111: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: temporary Ambush state controls tapping the exerted arena card
+01:27 +112: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: ordinary Ambush state controls the actual prompt and lethal block
+01:27 +113: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: ordinary Ambush state controls assignment of an exerted unit
+01:27 +114: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: ordinary Ambush state controls tapping the exerted arena card
+01:27 +115: C:/TCG Claude/app/test/expansion_ambush_blocking_test.dart: (tearDownAll)
+01:28 +115: C:/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+01:29 +116: C:/TCG Claude/app/test/expansion_booster_ui_test.dart: selected pack labels, odds, double tap and pulls agree on narrow phone
+01:29 +117: C:/TCG Claude/app/test/expansion_catalog_test.dart: packaged catalog adds 215 definitions and preserves old starter decks
+01:30 +118: loading C:/TCG Claude/app/test/expansion_filters_test.dart
+01:31 +118: C:/TCG Claude/app/test/expansion_filters_test.dart: set filters isolate actual collection, deckbuilder and Forge cards on 320px
+01:33 +119: C:/TCG Claude/app/test/expansion_filters_test.dart: set filters isolate actual collection, deckbuilder and Forge cards on 320px
+01:34 +120: C:/TCG Claude/app/test/expansion_filters_test.dart: set filters isolate actual collection, deckbuilder and Forge cards on 320px
+01:34 +121: C:/TCG Claude/app/test/expansion_filters_test.dart: set filters isolate actual collection, deckbuilder and Forge cards on 320px
+01:36 +122: C:/TCG Claude/app/test/expansion_packs_test.dart: sundering actual pulls keep their set and disclosed distribution
+01:37 +123: C:/TCG Claude/app/test/expansion_packs_test.dart: fiveVows actual pulls keep their set and disclosed distribution
+01:37 +124: C:/TCG Claude/app/test/expansion_packs_test.dart: missing common pool fails before buying
+01:37 +125: C:/TCG Claude/app/test/expansion_packs_test.dart: missing uncommon pool fails before buying
+01:37 +126: C:/TCG Claude/app/test/expansion_packs_test.dart: missing rare pool fails before buying
+01:37 +127: C:/TCG Claude/app/test/expansion_packs_test.dart: missing legendary pool fails before buying
+01:37 +128: C:/TCG Claude/app/test/expansion_packs_test.dart: an empty selected set cannot borrow original cards
+01:38 +129: C:/TCG Claude/app/test/expansion_pvp_tokens_test.dart: unknown summoned tokens retain definition, keywords, Vow and modifiers across swapped seats
+01:38 +130: C:/TCG Claude/app/test/expansion_pvp_tokens_test.dart: old projections default to unfulfilled Vow and no temporary modifiers
+01:38 +131: C:/TCG Claude/app/test/expansion_pvp_tokens_test.dart: a remote embedded definition cannot replace a catalog definition
+01:39 +132: C:/TCG Claude/app/test/expansion_save_test.dart: expansion pack duplicates preserve limits, price and shard conversion
+01:39 +133: C:/TCG Claude/app/test/expansion_save_test.dart: expansion ownership cannot substitute for original completion
+01:39 +134: C:/TCG Claude/app/test/expansion_save_test.dart: vow chapters never substitute for the original five chapters
+01:39 +135: C:/TCG Claude/app/test/expansion_save_test.dart: existing saved ids, decks, chapter progress and entitlements survive
+01:40 +136: C:/TCG Claude/app/test/expansion_targeting_test.dart: Renew only aims at friendly units and rejects wrong-side clicks
+01:40 +137: C:/TCG Claude/app/test/expansion_targeting_test.dart: an enemy board cannot make a friendly Renew castable without allies
+01:40 +138: C:/TCG Claude/app/test/expansion_targeting_test.dart: one selected ally receives both compatible chosen effects
+01:42 +139: C:/TCG Claude/app/test/five_vows_animation_test.dart: new scene moves, crossfades and releases tickers on exit
+01:43 +140: C:/TCG Claude/app/test/five_vows_animation_test.dart: app and operating-system reduced motion remove camera movement
+01:43 +141: C:/TCG Claude/app/test/five_vows_media_test.dart: all 215 collectible cards and their runtime tokens have real art
+01:45 +142: C:/TCG Claude/app/test/five_vows_media_test.dart: every expansion illustration ships as a real WebP
+01:46 +143: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:47 +144: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:47 +145: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:47 +146: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:47 +147: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:47 +148: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:49 +149: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:49 +150: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:50 +151: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:50 +152: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:50 +153: C:/TCG Claude/app/test/five_vows_media_test.dart: every new spoken line ships as nonempty MP3 audio
+01:50 +154: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: the streak counts a loss as a day played
+01:50 +155: loading C:/TCG Claude/app/test/gold_purchase_service_test.dart
+01:50 +155: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: the streak resets after a missed day
+01:50 +156: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: the streak cannot be farmed twice in one day
+01:50 +157: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: the streak survives a month boundary
+01:50 +158: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: scoring a loss still pays for turning up
+01:50 +159: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: scoring a win pays more than a loss
+01:50 +160: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: scoring the thresholds stack, and only on a win
+01:50 +161: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: scoring milestones land only on their exact day
+01:50 +162: C:/TCG Claude/app/test/gauntlet_attempt_test.dart: scoring the next milestone is always ahead, until there are none
+01:52 +163: C:/TCG Claude/app/test/gold_purchase_service_test.dart: exposes the closed-test Play product catalog
+01:52 +164: C:/TCG Claude/app/test/gold_purchase_service_test.dart: queries unconsumed purchases once the catalog is ready
+01:53 +165: C:/TCG Claude/app/test/gold_purchase_service_test.dart: stays usable when the restore query fails
+01:53 +166: C:/TCG Claude/app/test/gold_purchase_service_test.dart: delivers Gold for a purchase that was never consumed
+01:53 +167: C:/TCG Claude/app/test/gold_purchase_service_test.dart: never grants the same purchase twice across a restore
+01:53 +168: C:/TCG Claude/app/test/gold_purchase_service_test.dart: records a delivered purchase with the backend
+01:53 +169: C:/TCG Claude/app/test/gold_purchase_service_test.dart: keeps a purchase queued when the backend cannot record it
+01:53 +170: C:/TCG Claude/app/test/gold_purchase_service_test.dart: a failing verifier never costs the player their Gold
+Purchase verification deferred: Bad state: network down
+01:53 +171: C:/TCG Claude/app/test/gold_purchase_service_test.dart: ignores restored purchases for other products
+01:53 +172: C:/TCG Claude/app/test/haptics_test.dart: each level reaches the platform
+01:53 +173: C:/TCG Claude/app/test/haptics_test.dart: turning it off silences every level
+01:56 +174: C:/TCG Claude/app/test/interstitial_seam_test.dart: nothing shows an interstitial except the post-result seam
+01:56 +175: C:/TCG Claude/app/test/header_titles_test.dart: titles are never truncated, at any phone width
+01:56 +176: C:/TCG Claude/app/test/header_titles_test.dart: titles are never truncated, at any phone width
+02:00 +177: C:/TCG Claude/app/test/login_screen_test.dart: the guest and account choices are remembered, not asked again
+02:00 +178: C:/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+02:01 +179: C:/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+02:01 +180: C:/TCG Claude/app/test/login_screen_test.dart: the login screen offers Google and guest, and guest pops false
+02:01 +181: C:/TCG Claude/app/test/narration_test.dart: every line has a generated audio clip
+02:02 +182: C:/TCG Claude/app/test/narration_test.dart: no orphaned clips are shipping in the APK
+02:02 +183: C:/TCG Claude/app/test/narration_test.dart: the campaign still has the narration it was written with
+02:02 +184: loading C:/TCG Claude/app/test/pack_odds_test.dart
+02:04 +184: C:/TCG Claude/app/test/pack_odds_test.dart: the disclosed slots account for every card in a pack
+02:04 +185: C:/TCG Claude/app/test/pack_odds_test.dart: the final slot odds are exhaustive
+02:04 +186: C:/TCG Claude/app/test/pack_odds_test.dart: odds are shown to two decimals
+02:04 +187: C:/TCG Claude/app/test/pack_odds_test.dart: Epic is declared unobtainable from packs
+02:05 +188: C:/TCG Claude/app/test/privacy_options_tile_test.dart: shows the privacy entry point only when Google requires it
+02:08 +189: C:/TCG Claude/app/test/pvp_controller_test.dart: join queue reports queued state
+02:08 +190: C:/TCG Claude/app/test/pvp_controller_test.dart: resumes a match left running by a previous session
+02:08 +191: C:/TCG Claude/app/test/pvp_controller_test.dart: reports nothing to resume when no match is live
+02:08 +192: C:/TCG Claude/app/test/pvp_controller_test.dart: an already-in-match rejection rejoins instead of erroring
+02:08 +193: C:/TCG Claude/app/test/pvp_controller_test.dart: queued player attaches when realtime reports a paired match
+02:08 +194: C:/TCG Claude/app/test/pvp_controller_test.dart: matched queue reconnects and starts the projection stream
+02:08 +195: C:/TCG Claude/app/test/pvp_controller_test.dart: command uses current revision and projection updates from gateway
+02:08 +196: C:/TCG Claude/app/test/pvp_controller_test.dart: realtime projection advances the visible state
+02:08 +197: C:/TCG Claude/app/test/pvp_controller_test.dart: match events from the realtime stream queue for animation
+02:08 +198: C:/TCG Claude/app/test/pvp_controller_test.dart: commands leave one at a time, each stamped with the fresh revision
+02:08 +199: C:/TCG Claude/app/test/pvp_controller_test.dart: a stale ready is retried once against the fresh board
+02:08 +200: C:/TCG Claude/app/test/pvp_controller_test.dart: a rejected heartbeat never surfaces as an error
+02:09 +201: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: the ladder records a win for the player who actually won
+02:09 +202: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: the ladder records a loss from the loser's own seat
+02:09 +203: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: the ladder banks the result once, however many projections follow
+02:09 +204: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: the ladder an unfinished match writes nothing
+02:09 +205: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: a player seated as p2 still sees themselves as the local player
+02:09 +206: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: the board is drawn straight for a player seated as p1
+02:09 +207: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: input is enabled only on this player's decision
+02:09 +208: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: the defender is the one who assigns blocks
+02:09 +209: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: holding priority opens the response window
+02:09 +210: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: a finished match reports the winner from the viewer's side
+02:09 +211: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: the mulligan window is offered before play starts
+02:09 +212: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: server events become the cues the battle screen animates
+02:09 +213: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: playing a card costs exactly one round trip
+02:09 +214: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: a tapped card leaves the hand and animates before the server replies
+02:09 +215: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: the turn banner announces turns, not every phase
+02:09 +216: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: ending the turn is one command, expanded on the server
+02:09 +217: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: a confirmed attack lunges on the tap, not on the server echo
+02:09 +218: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: a second confirm is held while the first waits on the server
+02:09 +219: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: confirming blocks declares every attacker, blocked or not
+02:09 +220: C:/TCG Claude/app/test/pvp_duel_controller_test.dart: conceding sends the command rather than ending locally
+02:09 +221: C:/TCG Claude/app/test/pvp_game_state_test.dart: the viewer is always mapped to p1
+02:09 +222: C:/TCG Claude/app/test/pvp_game_state_test.dart: a swapped seat swaps the active player with it
+02:09 +223: C:/TCG Claude/app/test/pvp_game_state_test.dart: a swapped seat swaps the winner with it
+02:09 +224: C:/TCG Claude/app/test/pvp_game_state_test.dart: an unswapped seat is left alone
+02:09 +225: C:/TCG Claude/app/test/pvp_game_state_test.dart: the opponent hand is filled with face-down placeholders
+02:09 +226: C:/TCG Claude/app/test/pvp_game_state_test.dart: placeholder ids cannot collide with real card ids
+02:09 +227: C:/TCG Claude/app/test/pvp_game_state_test.dart: a card missing from this build still renders
+02:09 +228: C:/TCG Claude/app/test/pvp_game_state_test.dart: board state survives the mapping
+02:11 +229: C:/TCG Claude/app/test/pvp_models_test.dart: projection decodes the viewer hand and redacted opponent hand
+02:11 +230: C:/TCG Claude/app/test/pvp_models_test.dart: command envelope serializes the server intent
+02:11 +231: C:/TCG Claude/app/test/remove_ads_entitlement_test.dart: catalog exposes a non-consumable remove ads product
+02:11 +232: C:/TCG Claude/app/test/remove_ads_entitlement_test.dart: grants remove ads once and persists it
+02:11 +233: C:/TCG Claude/app/test/remove_ads_entitlement_test.dart: treats the order id and token as one remove ads grant
+02:11 +234: C:/TCG Claude/app/test/remove_ads_entitlement_test.dart: revoking one entitlement token does not revoke another active token
+02:11 +235: C:/TCG Claude/app/test/remove_ads_entitlement_test.dart: a refund blocks a later restore of the same token
+02:11 +236: C:/TCG Claude/app/test/remove_ads_entitlement_test.dart: snapshot round-trips the entitlement and old snapshots keep it
+02:11 +237: C:/TCG Claude/app/test/remove_ads_entitlement_test.dart: rejects unknown products and empty identifiers
+02:13 +238: C:/TCG Claude/app/test/remove_ads_purchase_service_test.dart: loads the Remove Ads product and restores purchases
+02:13 +239: C:/TCG Claude/app/test/remove_ads_purchase_service_test.dart: starts a non-consumable purchase with the product details
+02:13 +240: C:/TCG Claude/app/test/remove_ads_purchase_service_test.dart: delivers a purchased token once and completes it
+02:13 +241: C:/TCG Claude/app/test/remove_ads_purchase_service_test.dart: does not grant the same restored purchase twice
+02:13 +242: C:/TCG Claude/app/test/remove_ads_purchase_service_test.dart: keeps local ownership when backend verification is unavailable
+02:13 +243: C:/TCG Claude/app/test/remove_ads_purchase_service_test.dart: handles pending and canceled states without granting access
+02:13 +244: C:/TCG Claude/app/test/remove_ads_purchase_service_test.dart: ignores Gold and unknown products
+02:13 +245: C:/TCG Claude/app/test/remove_ads_purchase_service_test.dart: stays usable when restore fails
+02:13 +246: C:/TCG Claude/app/test/rewarded_gold_test.dart: pays out up to the daily cap and not one claim further
+02:13 +247: C:/TCG Claude/app/test/rewarded_gold_test.dart: the cap survives a reload — it is not just in memory
+02:13 +248: C:/TCG Claude/app/test/rewarded_gold_test.dart: a fresh profile is inside the new-player grace period
+02:13 +249: C:/TCG Claude/app/test/rewarded_gold_test.dart: the post-result hook counts the battle even when no ad shows
+02:14 +250: loading C:/TCG Claude/app/test/save_service_purchase_test.dart
+02:15 +250: C:/TCG Claude/app/test/save_service_purchase_test.dart: grants 500 Gold once for a valid product
+02:15 +251: C:/TCG Claude/app/test/save_service_purchase_test.dart: rejects an unknown product and empty purchase id
+02:15 +252: C:/TCG Claude/app/test/save_service_purchase_test.dart: treats the order id and the purchase token as one grant
+02:15 +253: C:/TCG Claude/app/test/save_service_purchase_test.dart: recognises a grant first seen under its order id
+02:15 +254: C:/TCG Claude/app/test/save_service_purchase_test.dart: queues a purchase for verification until the backend confirms
+02:15 +255: C:/TCG Claude/app/test/save_service_purchase_test.dart: a refund takes the Gold back exactly once
+02:15 +256: C:/TCG Claude/app/test/save_service_purchase_test.dart: a refund cannot push the balance negative
+02:15 +257: C:/TCG Claude/app/test/save_service_purchase_test.dart: a refunded purchase is never granted again by a restore
+02:15 +258: C:/TCG Claude/app/test/save_service_purchase_test.dart: a refund from another device blocks a first delivery here
+02:15 +259: C:/TCG Claude/app/test/save_service_purchase_test.dart: restores processed purchase ids after reload
+02:16 +260: C:/TCG Claude/app/test/save_service_snapshot_test.dart: a fresh profile has nothing a cloud restore could destroy
+02:16 +261: C:/TCG Claude/app/test/save_service_snapshot_test.dart: a played profile is protected from being overwritten
+02:16 +262: C:/TCG Claude/app/test/save_service_snapshot_test.dart: a snapshot round-trips the profile
+02:16 +263: C:/TCG Claude/app/test/save_service_snapshot_test.dart: applying a snapshot keeps purchases this device already knew
+02:17 +264: C:/TCG Claude/app/test/season_test.dart: the track is monotonic and reaches its end
+02:17 +265: C:/TCG Claude/app/test/season_test.dart: every tier pays something
+02:17 +266: C:/TCG Claude/app/test/season_test.dart: milestones land every fifth rung and pay a pack
+02:17 +267: C:/TCG Claude/app/test/season_test.dart: tier is earned, never overshot
+02:17 +268: C:/TCG Claude/app/test/season_test.dart: the bar cannot run past the end of the track
+02:17 +269: C:/TCG Claude/app/test/season_test.dart: progress within a tier is a real fraction
+02:17 +270: C:/TCG Claude/app/test/season_test.dart: a season is the calendar month it falls in
+02:17 +271: C:/TCG Claude/app/test/season_test.dart: a season ends when the next one starts
+02:17 +272: C:/TCG Claude/app/test/season_test.dart: every XP event is actually emitted by the app
+02:17 +273: C:/TCG Claude/app/test/season_test.dart: a loss pays, and pays less than a win
+02:17 +274: C:/TCG Claude/app/test/season_test.dart: the whole track is reachable by an ordinary player
+02:18 +275: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: the audit records reproducible completed turns and a real winner
+02:18 +276: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: calibration preserves stage positions, narrative and enemy identity
+02:18 +277: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: every encounter briefing states actual health, boards and first seat
+02:18 +278: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: an unaided Pyre opening does not become a campaign wall
+02:18 +279: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: the ongoing Five Vows campaign requires a contested duel
+02:18 +280: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +281: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +282: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +283: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +284: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +285: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +286: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +287: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +288: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +289: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:20 +290: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:22 +291: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:22 +292: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:22 +293: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +294: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +295: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +296: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +297: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +298: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +299: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +300: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +301: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+02:25 +302: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: each original chapter finale is measurably harder than its tutorial
+02:27 +303: C:/TCG Claude/app/test/unsupported_store_startup_test.dart: Gold initialization skips the plugin on unsupported platforms
+02:27 +304: C:/TCG Claude/app/test/unsupported_store_startup_test.dart: Remove Ads initialization skips the plugin on unsupported platforms
+02:27 +305: All tests passed!

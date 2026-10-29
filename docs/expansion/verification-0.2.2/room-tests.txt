@@ -1,0 +1,18 @@
+00:00 +0: loading C:/TCG Claude/app/test/battle_room_ui_test.dart
+00:00 +0: C:/TCG Claude/app/test/battle_room_ui_test.dart: (setUpAll)
+00:00 +0: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +1: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +2: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +3: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +4: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +5: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +6: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +7: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +8: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +9: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:00 +10: C:/TCG Claude/app/test/battle_room_ui_test.dart: 320px shop previews without spending, confirms purchase, equips and reverts
+00:02 +11: C:/TCG Claude/app/test/battle_room_ui_test.dart: unaffordable rooms show their Gold shortfall and remain previewable
+00:02 +12: C:/TCG Claude/app/test/battle_room_ui_test.dart: long enemy names keep battle-header controls visible on a small phone
+00:02 +13: C:/TCG Claude/app/test/battle_room_ui_test.dart: real duel uses the selected room with no rules-state change or extra background paints
+00:05 +14: C:/TCG Claude/app/test/battle_room_ui_test.dart: (tearDownAll)
+00:05 +14: All tests passed!

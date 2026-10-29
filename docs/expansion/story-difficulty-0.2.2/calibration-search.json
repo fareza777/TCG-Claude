@@ -1,0 +1,7231 @@
+{
+  "referenceSeed": 2026102907,
+  "validationSeed": 2026102908,
+  "coarseGamesPerSeedSet": 24,
+  "finalGamesPerSeedSet": 100,
+  "plan": [
+    {
+      "id": "ch1.1",
+      "band": "onboarding",
+      "playerHealth": 20,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-003"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.89,
+      "validation": 0.91
+    },
+    {
+      "id": "ch1.2",
+      "band": "onboarding",
+      "playerHealth": 30,
+      "enemyHealth": 29,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.82,
+      "validation": 0.83
+    },
+    {
+      "id": "ch1.3",
+      "band": "onboarding",
+      "playerHealth": 20,
+      "enemyHealth": 15,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.82,
+      "validation": 0.83
+    },
+    {
+      "id": "ch1.4",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.6,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.5",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.61,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.6",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.6,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.7",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.61,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.8",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.6,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.9",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.6,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.10",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.11",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.61,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.12",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.61
+    },
+    {
+      "id": "ch1.13",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [
+        "SF001-081"
+      ],
+      "reference": 0.64,
+      "validation": 0.62
+    },
+    {
+      "id": "ch1.14",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 35,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ],
+      "reference": 0.64,
+      "validation": 0.6
+    },
+    {
+      "id": "ch1.15",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 28,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ],
+      "reference": 0.66,
+      "validation": 0.61
+    },
+    {
+      "id": "ch1.16",
+      "band": "challenge",
+      "playerHealth": 25,
+      "enemyHealth": 17,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-001"
+      ],
+      "enemyBoardIds": [
+        "SF001-081",
+        "SF001-083"
+      ],
+      "reference": 0.48,
+      "validation": 0.51
+    },
+    {
+      "id": "ch1.17",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 37,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-082",
+        "SF001-084"
+      ],
+      "reference": 0.51,
+      "validation": 0.5
+    },
+    {
+      "id": "ch1.18",
+      "band": "challenge",
+      "playerHealth": 25,
+      "enemyHealth": 46,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ],
+      "reference": 0.52,
+      "validation": 0.48
+    },
+    {
+      "id": "ch1.19",
+      "band": "challenge",
+      "playerHealth": 25,
+      "enemyHealth": 42,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-002",
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ],
+      "reference": 0.52,
+      "validation": 0.49
+    },
+    {
+      "id": "ch1.20",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 21,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-001"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ],
+      "reference": 0.49,
+      "validation": 0.52
+    },
+    {
+      "id": "ch2.1",
+      "band": "onboarding",
+      "playerHealth": 25,
+      "enemyHealth": 32,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-023"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.85,
+      "validation": 0.81
+    },
+    {
+      "id": "ch2.2",
+      "band": "onboarding",
+      "playerHealth": 20,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-021"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.88,
+      "validation": 0.77
+    },
+    {
+      "id": "ch2.3",
+      "band": "onboarding",
+      "playerHealth": 30,
+      "enemyHealth": 13,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.83,
+      "validation": 0.82
+    },
+    {
+      "id": "ch2.4",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.6
+    },
+    {
+      "id": "ch2.5",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.6
+    },
+    {
+      "id": "ch2.6",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.62
+    },
+    {
+      "id": "ch2.7",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.62
+    },
+    {
+      "id": "ch2.8",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.6
+    },
+    {
+      "id": "ch2.9",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "ch2.10",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 33,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.67,
+      "validation": 0.58
+    },
+    {
+      "id": "ch2.11",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.66,
+      "validation": 0.59
+    },
+    {
+      "id": "ch2.12",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.6
+    },
+    {
+      "id": "ch2.13",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 49,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-025"
+      ],
+      "enemyBoardIds": [
+        "SF001-081"
+      ],
+      "reference": 0.64,
+      "validation": 0.6
+    },
+    {
+      "id": "ch2.14",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 21,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-021"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ],
+      "reference": 0.63,
+      "validation": 0.62
+    },
+    {
+      "id": "ch2.15",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 26,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-022"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ],
+      "reference": 0.62,
+      "validation": 0.63
+    },
+    {
+      "id": "ch2.16",
+      "band": "challenge",
+      "playerHealth": 25,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-023",
+        "SF001-021"
+      ],
+      "enemyBoardIds": [
+        "SF001-043"
+      ],
+      "reference": 0.52,
+      "validation": 0.49
+    },
+    {
+      "id": "ch2.17",
+      "band": "challenge",
+      "playerHealth": 20,
+      "enemyHealth": 18,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-021"
+      ],
+      "enemyBoardIds": [
+        "SF001-082",
+        "SF001-084"
+      ],
+      "reference": 0.49,
+      "validation": 0.5
+    },
+    {
+      "id": "ch2.18",
+      "band": "challenge",
+      "playerHealth": 25,
+      "enemyHealth": 39,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-023",
+        "SF001-021",
+        "SF001-022"
+      ],
+      "enemyBoardIds": [
+        "SF001-026"
+      ],
+      "reference": 0.5,
+      "validation": 0.48
+    },
+    {
+      "id": "ch2.19",
+      "band": "challenge",
+      "playerHealth": 25,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-021",
+        "SF001-022"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ],
+      "reference": 0.54,
+      "validation": 0.48
+    },
+    {
+      "id": "ch2.20",
+      "band": "challenge",
+      "playerHealth": 25,
+      "enemyHealth": 23,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-025"
+      ],
+      "enemyBoardIds": [
+        "SF001-027"
+      ],
+      "reference": 0.53,
+      "validation": 0.48
+    },
+    {
+      "id": "ch3.1",
+      "band": "onboarding",
+      "playerHealth": 30,
+      "enemyHealth": 22,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-043"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.85,
+      "validation": 0.81
+    },
+    {
+      "id": "ch3.2",
+      "band": "onboarding",
+      "playerHealth": 25,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-041"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.84,
+      "validation": 0.82
+    },
+    {
+      "id": "ch3.3",
+      "band": "onboarding",
+      "playerHealth": 30,
+      "enemyHealth": 21,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.87,
+      "validation": 0.78
+    },
+    {
+      "id": "ch3.4",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.68,
+      "validation": 0.57
+    },
+    {
+      "id": "ch3.5",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 37,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.62,
+      "validation": 0.63
+    },
+    {
+      "id": "ch3.6",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 12,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.6
+    },
+    {
+      "id": "ch3.7",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 12,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.6
+    },
+    {
+      "id": "ch3.8",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.68,
+      "validation": 0.57
+    },
+    {
+      "id": "ch3.9",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 37,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.62,
+      "validation": 0.63
+    },
+    {
+      "id": "ch3.10",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.69,
+      "validation": 0.57
+    },
+    {
+      "id": "ch3.11",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.69,
+      "validation": 0.57
+    },
+    {
+      "id": "ch3.12",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 17,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.59
+    },
+    {
+      "id": "ch3.13",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 45,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-042",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-081"
+      ],
+      "reference": 0.68,
+      "validation": 0.56
+    },
+    {
+      "id": "ch3.14",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 36,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ],
+      "reference": 0.64,
+      "validation": 0.61
+    },
+    {
+      "id": "ch3.15",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 18,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-042",
+        "SF001-042"
+      ],
+      "enemyBoardIds": [
+        "SF001-065"
+      ],
+      "reference": 0.62,
+      "validation": 0.61
+    },
+    {
+      "id": "ch3.16",
+      "band": "challenge",
+      "playerHealth": 25,
+      "enemyHealth": 24,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-041",
+        "SF001-042"
+      ],
+      "enemyBoardIds": [
+        "SF001-082",
+        "SF001-084"
+      ],
+      "reference": 0.52,
+      "validation": 0.49
+    },
+    {
+      "id": "ch3.17",
+      "band": "challenge",
+      "playerHealth": 30,
+      "enemyHealth": 30,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-085",
+        "SF001-083"
+      ],
+      "reference": 0.52,
+      "validation": 0.5
+    },
+    {
+      "id": "ch3.18",
+      "band": "challenge",
+      "playerHealth": 40,
+      "enemyHealth": 31,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-043",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-084"
+      ],
+      "reference": 0.52,
+      "validation": 0.48
+    },
+    {
+      "id": "ch3.19",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 37,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-042",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ],
+      "reference": 0.51,
+      "validation": 0.5
+    },
+    {
+      "id": "ch3.20",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 26,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ],
+      "reference": 0.45,
+      "validation": 0.55
+    },
+    {
+      "id": "ch4.1",
+      "band": "onboarding",
+      "playerHealth": 20,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-063"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.84,
+      "validation": 0.81
+    },
+    {
+      "id": "ch4.2",
+      "band": "onboarding",
+      "playerHealth": 30,
+      "enemyHealth": 26,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.83,
+      "validation": 0.82
+    },
+    {
+      "id": "ch4.3",
+      "band": "onboarding",
+      "playerHealth": 30,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.83,
+      "validation": 0.82
+    },
+    {
+      "id": "ch4.4",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 35,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.59
+    },
+    {
+      "id": "ch4.5",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.62,
+      "validation": 0.63
+    },
+    {
+      "id": "ch4.6",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 35,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.59
+    },
+    {
+      "id": "ch4.7",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 26,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.62,
+      "validation": 0.63
+    },
+    {
+      "id": "ch4.8",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.62,
+      "validation": 0.63
+    },
+    {
+      "id": "ch4.9",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 35,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.59
+    },
+    {
+      "id": "ch4.10",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 29,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "ch4.11",
+      "band": "ordinary",
+      "playerHealth": 20,
+      "enemyHealth": 29,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "ch4.12",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.62
+    },
+    {
+      "id": "ch4.13",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 39,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-062"
+      ],
+      "enemyBoardIds": [
+        "SF001-081"
+      ],
+      "reference": 0.63,
+      "validation": 0.6
+    },
+    {
+      "id": "ch4.14",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 43,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-064"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ],
+      "reference": 0.64,
+      "validation": 0.62
+    },
+    {
+      "id": "ch4.15",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-061",
+        "SF001-062"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ],
+      "reference": 0.64,
+      "validation": 0.62
+    },
+    {
+      "id": "ch4.16",
+      "band": "challenge",
+      "playerHealth": 20,
+      "enemyHealth": 21,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-063",
+        "SF001-065"
+      ],
+      "enemyBoardIds": [
+        "SF001-082",
+        "SF001-084"
+      ],
+      "reference": 0.49,
+      "validation": 0.52
+    },
+    {
+      "id": "ch4.17",
+      "band": "challenge",
+      "playerHealth": 30,
+      "enemyHealth": 23,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-062",
+        "SF001-064"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-083"
+      ],
+      "reference": 0.52,
+      "validation": 0.49
+    },
+    {
+      "id": "ch4.18",
+      "band": "challenge",
+      "playerHealth": 40,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-063",
+        "SF001-065"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-084"
+      ],
+      "reference": 0.5,
+      "validation": 0.5
+    },
+    {
+      "id": "ch4.19",
+      "band": "challenge",
+      "playerHealth": 30,
+      "enemyHealth": 19,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-062",
+        "SF001-064"
+      ],
+      "enemyBoardIds": [
+        "SF001-067"
+      ],
+      "reference": 0.51,
+      "validation": 0.48
+    },
+    {
+      "id": "ch4.20",
+      "band": "challenge",
+      "playerHealth": 40,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-064"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ],
+      "reference": 0.53,
+      "validation": 0.47
+    },
+    {
+      "id": "ch5.1",
+      "band": "onboarding",
+      "playerHealth": 20,
+      "enemyHealth": 23,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-084"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.82,
+      "validation": 0.83
+    },
+    {
+      "id": "ch5.2",
+      "band": "onboarding",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.82,
+      "validation": 0.82
+    },
+    {
+      "id": "ch5.3",
+      "band": "onboarding",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.82,
+      "validation": 0.82
+    },
+    {
+      "id": "ch5.4",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 13,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "ch5.5",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 32,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.6,
+      "validation": 0.64
+    },
+    {
+      "id": "ch5.6",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 13,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "ch5.7",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.61
+    },
+    {
+      "id": "ch5.8",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.6,
+      "validation": 0.66
+    },
+    {
+      "id": "ch5.9",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 13,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "ch5.10",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.61
+    },
+    {
+      "id": "ch5.11",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.61
+    },
+    {
+      "id": "ch5.12",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 32,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.6,
+      "validation": 0.64
+    },
+    {
+      "id": "ch5.13",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 45,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-082",
+        "SF001-082"
+      ],
+      "enemyBoardIds": [
+        "SF001-081"
+      ],
+      "reference": 0.61,
+      "validation": 0.64
+    },
+    {
+      "id": "ch5.14",
+      "band": "ordinary",
+      "playerHealth": 40,
+      "enemyHealth": 46,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-082"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ],
+      "reference": 0.62,
+      "validation": 0.62
+    },
+    {
+      "id": "ch5.15",
+      "band": "ordinary",
+      "playerHealth": 40,
+      "enemyHealth": 35,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-081",
+        "SF001-082"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ],
+      "reference": 0.63,
+      "validation": 0.63
+    },
+    {
+      "id": "ch5.16",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 12,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-082"
+      ],
+      "reference": 0.5,
+      "validation": 0.52
+    },
+    {
+      "id": "ch5.17",
+      "band": "challenge",
+      "playerHealth": 40,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-082",
+        "SF001-084"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-084"
+      ],
+      "reference": 0.48,
+      "validation": 0.5
+    },
+    {
+      "id": "ch5.18",
+      "band": "challenge",
+      "playerHealth": 40,
+      "enemyHealth": 28,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-084"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-085"
+      ],
+      "reference": 0.49,
+      "validation": 0.5
+    },
+    {
+      "id": "ch5.19",
+      "band": "challenge",
+      "playerHealth": 45,
+      "enemyHealth": 22,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-081"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-085"
+      ],
+      "reference": 0.5,
+      "validation": 0.49
+    },
+    {
+      "id": "ch5.20",
+      "band": "challenge",
+      "playerHealth": 45,
+      "enemyHealth": 38,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-084",
+        "SF001-081",
+        "SF001-082"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ],
+      "reference": 0.48,
+      "validation": 0.51
+    },
+    {
+      "id": "vow01.1",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 29,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-179"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.62
+    },
+    {
+      "id": "vow01.2",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 28,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-174"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.6,
+      "validation": 0.66
+    },
+    {
+      "id": "vow02.1",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 17,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-131"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "vow02.2",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 47,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-137"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.67,
+      "validation": 0.58
+    },
+    {
+      "id": "vow03.1",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-003"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "vow03.2",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 28,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-002"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "vow04.1",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 32,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045",
+        "SF002-045"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.61
+    },
+    {
+      "id": "vow04.2",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 17,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.62
+    },
+    {
+      "id": "vow05.1",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-091"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.65,
+      "validation": 0.6
+    },
+    {
+      "id": "vow05.2",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-091"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.62
+    },
+    {
+      "id": "vow06.1",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 41,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-003",
+        "SF002-003"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.63
+    },
+    {
+      "id": "vow06.2",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 26,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-002",
+        "SF002-007"
+      ],
+      "enemyBoardIds": [
+        "SF002-047"
+      ],
+      "reference": 0.62,
+      "validation": 0.62
+    },
+    {
+      "id": "vow07.1",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 35,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.63,
+      "validation": 0.62
+    },
+    {
+      "id": "vow07.2",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-048"
+      ],
+      "enemyBoardIds": [
+        "SF002-047"
+      ],
+      "reference": 0.62,
+      "validation": 0.63
+    },
+    {
+      "id": "vow08.1",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 28,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-091"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.61
+    },
+    {
+      "id": "vow08.2",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [
+        "SF002-133"
+      ],
+      "reference": 0.61,
+      "validation": 0.63
+    },
+    {
+      "id": "vow09.1",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 43,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-134"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.62,
+      "validation": 0.63
+    },
+    {
+      "id": "vow09.2",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-136"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ],
+      "reference": 0.6,
+      "validation": 0.63
+    },
+    {
+      "id": "vow10.1",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 26,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-179"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.61
+    },
+    {
+      "id": "vow10.2",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 23,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-176"
+      ],
+      "enemyBoardIds": [
+        "SF002-090"
+      ],
+      "reference": 0.64,
+      "validation": 0.62
+    },
+    {
+      "id": "vow11.1",
+      "band": "ordinary",
+      "playerHealth": 25,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-133",
+        "SF002-133"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.62,
+      "validation": 0.62
+    },
+    {
+      "id": "vow11.2",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [
+        "SF002-004"
+      ],
+      "reference": 0.5,
+      "validation": 0.49
+    },
+    {
+      "id": "vow12.1",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-048"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.61,
+      "validation": 0.64
+    },
+    {
+      "id": "vow12.2",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ],
+      "reference": 0.54,
+      "validation": 0.47
+    },
+    {
+      "id": "vow13.1",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 37,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-093"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.62,
+      "validation": 0.62
+    },
+    {
+      "id": "vow13.2",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 19,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-088",
+        "SF002-090"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ],
+      "reference": 0.5,
+      "validation": 0.5
+    },
+    {
+      "id": "vow14.1",
+      "band": "ordinary",
+      "playerHealth": 35,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-005"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.61,
+      "validation": 0.64
+    },
+    {
+      "id": "vow14.2",
+      "band": "challenge",
+      "playerHealth": 30,
+      "enemyHealth": 35,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-003",
+        "SF002-008"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ],
+      "reference": 0.5,
+      "validation": 0.5
+    },
+    {
+      "id": "vow15.1",
+      "band": "ordinary",
+      "playerHealth": 30,
+      "enemyHealth": 36,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-177"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.64,
+      "validation": 0.61
+    },
+    {
+      "id": "vow15.2",
+      "band": "challenge",
+      "playerHealth": 30,
+      "enemyHealth": 22,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-176",
+        "SF002-176"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ],
+      "reference": 0.48,
+      "validation": 0.52
+    },
+    {
+      "id": "vow16.1",
+      "band": "challenge",
+      "playerHealth": 30,
+      "enemyHealth": 43,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045",
+        "SF002-045"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.53,
+      "validation": 0.47
+    },
+    {
+      "id": "vow16.2",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 33,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-048"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ],
+      "reference": 0.51,
+      "validation": 0.49
+    },
+    {
+      "id": "vow17.1",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 32,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.53,
+      "validation": 0.47
+    },
+    {
+      "id": "vow17.2",
+      "band": "challenge",
+      "playerHealth": 40,
+      "enemyHealth": 23,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [
+        "SF002-133"
+      ],
+      "reference": 0.52,
+      "validation": 0.48
+    },
+    {
+      "id": "vow18.1",
+      "band": "challenge",
+      "playerHealth": 30,
+      "enemyHealth": 25,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [],
+      "reference": 0.52,
+      "validation": 0.5
+    },
+    {
+      "id": "vow18.2",
+      "band": "challenge",
+      "playerHealth": 30,
+      "enemyHealth": 33,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-133"
+      ],
+      "enemyBoardIds": [
+        "SF002-004"
+      ],
+      "reference": 0.51,
+      "validation": 0.5
+    },
+    {
+      "id": "vow19.1",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 30,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-174",
+        "SF002-174"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.48,
+      "validation": 0.52
+    },
+    {
+      "id": "vow19.2",
+      "band": "challenge",
+      "playerHealth": 35,
+      "enemyHealth": 28,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-174",
+        "SF002-176",
+        "SF002-179"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ],
+      "reference": 0.49,
+      "validation": 0.5
+    },
+    {
+      "id": "vow20.1",
+      "band": "challenge",
+      "playerHealth": 40,
+      "enemyHealth": 20,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-005"
+      ],
+      "enemyBoardIds": [],
+      "reference": 0.49,
+      "validation": 0.49
+    },
+    {
+      "id": "vow20.2",
+      "band": "challenge",
+      "playerHealth": 40,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-005"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ],
+      "reference": 0.49,
+      "validation": 0.5
+    }
+  ],
+  "search": [
+    {
+      "id": "ch1.1",
+      "goal": 0.9,
+      "coarseCandidates": 12,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "20/22/true/SF001-001,SF001-003",
+          "reference": 0.89,
+          "validation": 0.91,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/25/true/SF001-001,SF001-003",
+          "reference": 0.91,
+          "validation": 0.89,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/27/true/SF001-001,SF001-003",
+          "reference": 0.89,
+          "validation": 0.91,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "25/25/true/SF001-001,SF001-003",
+          "reference": 0.9,
+          "validation": 0.91,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/12/false/SF001-001,SF001-003",
+          "reference": 0.92,
+          "validation": 0.89,
+          "changeCost": 0.6
+        }
+      ]
+    },
+    {
+      "id": "ch1.2",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/29/true/SF001-001",
+          "reference": 0.82,
+          "validation": 0.83,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/21/true/SF001-001",
+          "reference": 0.81,
+          "validation": 0.84,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/26/true/SF001-001",
+          "reference": 0.81,
+          "validation": 0.84,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "20/18/true/SF001-001",
+          "reference": 0.81,
+          "validation": 0.83,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/23/true/SF001-001",
+          "reference": 0.82,
+          "validation": 0.84,
+          "changeCost": 3.4
+        }
+      ]
+    },
+    {
+      "id": "ch1.3",
+      "goal": 0.825,
+      "coarseCandidates": 14,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/15/true/SF001-001",
+          "reference": 0.82,
+          "validation": 0.83,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/21/true/SF001-001",
+          "reference": 0.81,
+          "validation": 0.84,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/26/true/SF001-001",
+          "reference": 0.81,
+          "validation": 0.84,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "20/20/true/SF001-001",
+          "reference": 0.82,
+          "validation": 0.82,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "20/18/true/SF001-001",
+          "reference": 0.81,
+          "validation": 0.83,
+          "changeCost": 3.0
+        }
+      ]
+    },
+    {
+      "id": "ch1.4",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/30/true/",
+          "reference": 0.6,
+          "validation": 0.62,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "20/25/true/",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/33/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/32/true/",
+          "reference": 0.61,
+          "validation": 0.59,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/37/true/",
+          "reference": 0.63,
+          "validation": 0.57,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "ch1.5",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "30/34/true/",
+          "reference": 0.61,
+          "validation": 0.62,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "25/30/true/",
+          "reference": 0.6,
+          "validation": 0.62,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "20/25/true/",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "25/32/true/",
+          "reference": 0.61,
+          "validation": 0.59,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/37/true/",
+          "reference": 0.63,
+          "validation": 0.57,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "ch1.6",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "25/30/true/",
+          "reference": 0.6,
+          "validation": 0.62,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/31/true/",
+          "reference": 0.6,
+          "validation": 0.61,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "20/26/true/",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/33/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/36/true/",
+          "reference": 0.61,
+          "validation": 0.58,
+          "changeCost": 5.6
+        }
+      ]
+    },
+    {
+      "id": "ch1.7",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 36,
+      "top": [
+        {
+          "setup": "30/34/true/",
+          "reference": 0.61,
+          "validation": 0.62,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/31/true/",
+          "reference": 0.6,
+          "validation": 0.61,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/32/true/",
+          "reference": 0.61,
+          "validation": 0.59,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/37/true/",
+          "reference": 0.63,
+          "validation": 0.57,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/36/true/",
+          "reference": 0.61,
+          "validation": 0.58,
+          "changeCost": 5.4
+        }
+      ]
+    },
+    {
+      "id": "ch1.8",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/30/true/",
+          "reference": 0.6,
+          "validation": 0.62,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "20/25/true/",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/33/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/32/true/",
+          "reference": 0.61,
+          "validation": 0.59,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/37/true/",
+          "reference": 0.63,
+          "validation": 0.57,
+          "changeCost": 5.4
+        }
+      ]
+    },
+    {
+      "id": "ch1.9",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/30/true/",
+          "reference": 0.6,
+          "validation": 0.62,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "20/25/true/",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/33/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/32/true/",
+          "reference": 0.61,
+          "validation": 0.59,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/37/true/",
+          "reference": 0.63,
+          "validation": 0.57,
+          "changeCost": 5.4
+        }
+      ]
+    },
+    {
+      "id": "ch1.10",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/36/true/",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/41/true/",
+          "reference": 0.63,
+          "validation": 0.61,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "20/28/true/",
+          "reference": 0.66,
+          "validation": 0.6,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/38/true/",
+          "reference": 0.63,
+          "validation": 0.64,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "25/39/true/",
+          "reference": 0.63,
+          "validation": 0.64,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "ch1.11",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "30/34/true/",
+          "reference": 0.61,
+          "validation": 0.62,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/31/true/",
+          "reference": 0.6,
+          "validation": 0.61,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "20/26/true/",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/33/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/36/true/",
+          "reference": 0.61,
+          "validation": 0.58,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "ch1.12",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/27/true/",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "20/15/true/",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/35/true/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "20/17/true/",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/25/true/",
+          "reference": 0.66,
+          "validation": 0.6,
+          "changeCost": 2.4
+        }
+      ]
+    },
+    {
+      "id": "ch1.13",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/25/true/",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/17/false/SF001-002",
+          "reference": 0.66,
+          "validation": 0.6,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/17/false/SF001-002",
+          "reference": 0.64,
+          "validation": 0.59,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/29/true/",
+          "reference": 0.64,
+          "validation": 0.64,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "30/19/false/SF001-002",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "ch1.14",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/35/false/SF001-004",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "35/31/false/SF001-001,SF001-001,SF001-002",
+          "reference": 0.67,
+          "validation": 0.59,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/31/false/SF001-001,SF001-001,SF001-002",
+          "reference": 0.68,
+          "validation": 0.58,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "35/13/false/SF001-002",
+          "reference": 0.68,
+          "validation": 0.56,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "35/28/true/",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "ch1.15",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/28/false/SF001-001,SF001-004",
+          "reference": 0.66,
+          "validation": 0.61,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/41/true/SF001-001,SF001-002,SF001-004",
+          "reference": 0.59,
+          "validation": 0.64,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "30/35/true/SF001-002,SF001-002",
+          "reference": 0.57,
+          "validation": 0.67,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "30/12/false/SF001-001,SF001-002",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 7.2
+        },
+        {
+          "setup": "25/26/false/SF001-001,SF001-004",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 3.4
+        }
+      ]
+    },
+    {
+      "id": "ch1.16",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/17/false/SF001-001",
+          "reference": 0.48,
+          "validation": 0.51,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/19/false/SF001-001",
+          "reference": 0.52,
+          "validation": 0.47,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "25/34/false/SF001-004",
+          "reference": 0.5,
+          "validation": 0.48,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/29/false/SF001-001,SF001-001",
+          "reference": 0.53,
+          "validation": 0.49,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/26/true/",
+          "reference": 0.46,
+          "validation": 0.52,
+          "changeCost": 7.6
+        }
+      ]
+    },
+    {
+      "id": "ch1.17",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/37/false/SF001-001,SF001-004",
+          "reference": 0.51,
+          "validation": 0.5,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/28/true/SF001-001,SF001-001",
+          "reference": 0.51,
+          "validation": 0.48,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/33/false/SF001-001,SF001-004",
+          "reference": 0.47,
+          "validation": 0.52,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/45/false/SF001-001,SF001-002,SF001-004",
+          "reference": 0.48,
+          "validation": 0.5,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "25/15/false/SF001-001,SF001-001,SF001-002",
+          "reference": 0.52,
+          "validation": 0.5,
+          "changeCost": 7.0
+        }
+      ]
+    },
+    {
+      "id": "ch1.18",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/46/true/SF001-001,SF001-004",
+          "reference": 0.52,
+          "validation": 0.48,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "25/41/false/SF001-001,SF001-004",
+          "reference": 0.5,
+          "validation": 0.51,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/48/true/SF001-001,SF001-004",
+          "reference": 0.51,
+          "validation": 0.47,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "25/36/false/SF001-004",
+          "reference": 0.49,
+          "validation": 0.47,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/31/false/SF001-003,SF001-001",
+          "reference": 0.55,
+          "validation": 0.49,
+          "changeCost": 1.0
+        }
+      ]
+    },
+    {
+      "id": "ch1.19",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/42/false/SF001-001,SF001-002,SF001-004",
+          "reference": 0.52,
+          "validation": 0.49,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/19/true/SF001-002",
+          "reference": 0.5,
+          "validation": 0.51,
+          "changeCost": 9.6
+        },
+        {
+          "setup": "25/30/true/SF001-002,SF001-002",
+          "reference": 0.48,
+          "validation": 0.53,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/29/false/SF001-001,SF001-001,SF001-002",
+          "reference": 0.48,
+          "validation": 0.49,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "25/15/true/SF001-002",
+          "reference": 0.43,
+          "validation": 0.57,
+          "changeCost": 9.4
+        }
+      ]
+    },
+    {
+      "id": "ch1.20",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/21/true/SF001-001,SF001-001",
+          "reference": 0.49,
+          "validation": 0.52,
+          "changeCost": 8.6
+        },
+        {
+          "setup": "30/34/false/SF001-001,SF001-002,SF001-004",
+          "reference": 0.52,
+          "validation": 0.51,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/29/true/SF001-001,SF001-001,SF001-002",
+          "reference": 0.47,
+          "validation": 0.5,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/36/false/SF001-001,SF001-002,SF001-004",
+          "reference": 0.48,
+          "validation": 0.48,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/27/true/SF001-002,SF001-002",
+          "reference": 0.52,
+          "validation": 0.52,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.1",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/32/false/SF001-021,SF001-023",
+          "reference": 0.85,
+          "validation": 0.81,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "20/30/false/SF001-021,SF001-023",
+          "reference": 0.86,
+          "validation": 0.8,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/33/false/SF001-021,SF001-023",
+          "reference": 0.86,
+          "validation": 0.81,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "20/28/false/SF001-021,SF001-023",
+          "reference": 0.86,
+          "validation": 0.83,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/32/false/SF001-021,SF001-023",
+          "reference": 0.86,
+          "validation": 0.83,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.2",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "20/24/true/SF001-021",
+          "reference": 0.88,
+          "validation": 0.77,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "30/14/false/SF001-021",
+          "reference": 0.81,
+          "validation": 0.81,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "30/12/false/SF001-021",
+          "reference": 0.84,
+          "validation": 0.84,
+          "changeCost": 1.8
+        },
+        {
+          "setup": "25/28/true/SF001-021",
+          "reference": 0.87,
+          "validation": 0.77,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "20/23/true/SF001-021",
+          "reference": 0.88,
+          "validation": 0.78,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.3",
+      "goal": 0.825,
+      "coarseCandidates": 14,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/13/false/SF001-021",
+          "reference": 0.83,
+          "validation": 0.82,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/12/false/SF001-021",
+          "reference": 0.84,
+          "validation": 0.84,
+          "changeCost": 2.2
+        },
+        {
+          "setup": "25/28/true/SF001-021",
+          "reference": 0.87,
+          "validation": 0.77,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "20/23/true/SF001-021",
+          "reference": 0.88,
+          "validation": 0.78,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "20/25/true/SF001-021",
+          "reference": 0.87,
+          "validation": 0.77,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.4",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 1.2
+        },
+        {
+          "setup": "20/32/true/",
+          "reference": 0.65,
+          "validation": 0.62,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "25/13/false/",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "25/35/true/",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/37/true/",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 5.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.5",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 1.6
+        },
+        {
+          "setup": "30/39/true/",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "20/32/true/",
+          "reference": 0.65,
+          "validation": 0.62,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/35/true/",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/37/true/",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "ch2.6",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 36,
+      "top": [
+        {
+          "setup": "30/16/true/",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "25/14/true/",
+          "reference": 0.6,
+          "validation": 0.65,
+          "changeCost": 3.8
+        },
+        {
+          "setup": "30/15/true/",
+          "reference": 0.62,
+          "validation": 0.64,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/13/true/",
+          "reference": 0.6,
+          "validation": 0.67,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "20/12/true/",
+          "reference": 0.6,
+          "validation": 0.6,
+          "changeCost": 5.2
+        }
+      ]
+    },
+    {
+      "id": "ch2.7",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 33,
+      "top": [
+        {
+          "setup": "30/16/true/",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/14/true/",
+          "reference": 0.6,
+          "validation": 0.65,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "20/12/true/",
+          "reference": 0.6,
+          "validation": 0.6,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/14/true/",
+          "reference": 0.64,
+          "validation": 0.66,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/17/true/",
+          "reference": 0.59,
+          "validation": 0.6,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.8",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 2.2
+        },
+        {
+          "setup": "20/32/true/",
+          "reference": 0.65,
+          "validation": 0.62,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "25/13/false/",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "25/35/true/",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/37/true/",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.9",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "20/27/true/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/33/true/",
+          "reference": 0.67,
+          "validation": 0.58,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/37/true/",
+          "reference": 0.67,
+          "validation": 0.59,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/38/true/",
+          "reference": 0.66,
+          "validation": 0.58,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/35/true/",
+          "reference": 0.64,
+          "validation": 0.58,
+          "changeCost": 4.0
+        }
+      ]
+    },
+    {
+      "id": "ch2.10",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/33/true/",
+          "reference": 0.67,
+          "validation": 0.58,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/38/true/",
+          "reference": 0.66,
+          "validation": 0.58,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/36/true/",
+          "reference": 0.68,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/34/true/",
+          "reference": 0.64,
+          "validation": 0.58,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/39/true/",
+          "reference": 0.65,
+          "validation": 0.56,
+          "changeCost": 5.6
+        }
+      ]
+    },
+    {
+      "id": "ch2.11",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "25/36/true/",
+          "reference": 0.66,
+          "validation": 0.59,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/39/true/",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "20/33/true/",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "20/34/true/",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "ch2.12",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/39/true/",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "20/32/true/",
+          "reference": 0.65,
+          "validation": 0.62,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/35/true/",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "25/37/true/",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 4.0
+        }
+      ]
+    },
+    {
+      "id": "ch2.13",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/49/false/SF001-025",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "25/47/true/SF001-021",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "30/49/true/SF001-021",
+          "reference": 0.66,
+          "validation": 0.58,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "25/47/false/SF001-025",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "25/29/false/SF001-021,SF001-021",
+          "reference": 0.62,
+          "validation": 0.66,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.14",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/21/false/SF001-021,SF001-021",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/15/false/SF001-022",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "25/50/false/SF001-025",
+          "reference": 0.67,
+          "validation": 0.58,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "25/13/false/SF001-022",
+          "reference": 0.66,
+          "validation": 0.6,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/40/false/SF001-021,SF001-021,SF001-022",
+          "reference": 0.62,
+          "validation": 0.61,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.15",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/26/false/SF001-021,SF001-022",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/30/false/SF001-021,SF001-022",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "20/48/false/SF001-025",
+          "reference": 0.66,
+          "validation": 0.59,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "25/40/true/SF001-021,SF001-022",
+          "reference": 0.59,
+          "validation": 0.64,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "25/50/false/SF001-025",
+          "reference": 0.69,
+          "validation": 0.58,
+          "changeCost": 7.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.16",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/22/true/SF001-023,SF001-021",
+          "reference": 0.52,
+          "validation": 0.49,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "25/12/false/SF001-023,SF001-021",
+          "reference": 0.49,
+          "validation": 0.52,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "25/24/true/SF001-023,SF001-021",
+          "reference": 0.52,
+          "validation": 0.46,
+          "changeCost": 1.0
+        },
+        {
+          "setup": "25/17/true/SF001-023,SF001-021",
+          "reference": 0.52,
+          "validation": 0.46,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "20/12/false/SF001-023,SF001-021",
+          "reference": 0.46,
+          "validation": 0.51,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.17",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/18/false/SF001-021,SF001-021",
+          "reference": 0.49,
+          "validation": 0.5,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "20/28/false/SF001-023,SF001-021,SF001-021",
+          "reference": 0.5,
+          "validation": 0.52,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "30/42/true/SF001-021,SF001-022",
+          "reference": 0.52,
+          "validation": 0.47,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "30/42/true/SF001-021,SF001-021",
+          "reference": 0.52,
+          "validation": 0.47,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "25/23/false/SF001-022,SF001-022",
+          "reference": 0.5,
+          "validation": 0.48,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.18",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/39/true/SF001-023,SF001-021,SF001-022",
+          "reference": 0.5,
+          "validation": 0.48,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/28/false/SF001-021,SF001-021,SF001-022",
+          "reference": 0.48,
+          "validation": 0.55,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "25/41/false/SF001-021,SF001-022,SF001-025",
+          "reference": 0.53,
+          "validation": 0.51,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/41/true/SF001-023,SF001-021,SF001-022",
+          "reference": 0.49,
+          "validation": 0.46,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/43/false/SF001-021,SF001-022,SF001-025",
+          "reference": 0.49,
+          "validation": 0.46,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch2.19",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/27/true/SF001-021,SF001-021,SF001-022",
+          "reference": 0.54,
+          "validation": 0.48,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/39/true/SF001-021,SF001-022,SF001-025",
+          "reference": 0.56,
+          "validation": 0.43,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "25/22/false/SF001-025",
+          "reference": 0.54,
+          "validation": 0.49,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "25/24/false/SF001-025",
+          "reference": 0.49,
+          "validation": 0.46,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/27/true/SF001-021,SF001-025",
+          "reference": 0.59,
+          "validation": 0.45,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "ch2.20",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/23/true/SF001-025",
+          "reference": 0.53,
+          "validation": 0.48,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "30/30/true/SF001-025",
+          "reference": 0.52,
+          "validation": 0.5,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "30/27/false/SF001-021,SF001-025",
+          "reference": 0.53,
+          "validation": 0.49,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/25/true/SF001-021,SF001-021,SF001-022",
+          "reference": 0.44,
+          "validation": 0.55,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/32/true/SF001-025",
+          "reference": 0.49,
+          "validation": 0.48,
+          "changeCost": 7.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.1",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/22/false/SF001-041,SF001-043",
+          "reference": 0.85,
+          "validation": 0.81,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/23/false/SF001-041,SF001-043",
+          "reference": 0.85,
+          "validation": 0.79,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "20/17/false/SF001-041,SF001-043",
+          "reference": 0.83,
+          "validation": 0.8,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "25/25/true/SF001-041,SF001-043",
+          "reference": 0.84,
+          "validation": 0.84,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/30/true/SF001-041,SF001-043",
+          "reference": 0.85,
+          "validation": 0.83,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "ch3.2",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/24/true/SF001-041",
+          "reference": 0.84,
+          "validation": 0.82,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/21/false/SF001-041",
+          "reference": 0.87,
+          "validation": 0.78,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/28/true/SF001-041",
+          "reference": 0.84,
+          "validation": 0.8,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/29/true/SF001-041",
+          "reference": 0.84,
+          "validation": 0.8,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/18/false/SF001-041",
+          "reference": 0.87,
+          "validation": 0.79,
+          "changeCost": 0.4
+        }
+      ]
+    },
+    {
+      "id": "ch3.3",
+      "goal": 0.825,
+      "coarseCandidates": 14,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/21/false/SF001-041",
+          "reference": 0.87,
+          "validation": 0.78,
+          "changeCost": 1.6
+        },
+        {
+          "setup": "30/28/true/SF001-041",
+          "reference": 0.84,
+          "validation": 0.8,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/18/false/SF001-041",
+          "reference": 0.87,
+          "validation": 0.79,
+          "changeCost": 0.0
+        },
+        {
+          "setup": "20/16/false/SF001-041",
+          "reference": 0.87,
+          "validation": 0.79,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "25/25/true/SF001-041",
+          "reference": 0.84,
+          "validation": 0.79,
+          "changeCost": 3.4
+        }
+      ]
+    },
+    {
+      "id": "ch3.4",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/25/true/",
+          "reference": 0.68,
+          "validation": 0.57,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/20/false/",
+          "reference": 0.66,
+          "validation": 0.61,
+          "changeCost": 0.0
+        },
+        {
+          "setup": "30/35/true/",
+          "reference": 0.69,
+          "validation": 0.58,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "25/30/true/",
+          "reference": 0.68,
+          "validation": 0.55,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/23/false/",
+          "reference": 0.69,
+          "validation": 0.61,
+          "changeCost": 1.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.5",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/37/true/",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "25/20/true/",
+          "reference": 0.66,
+          "validation": 0.59,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/42/true/",
+          "reference": 0.63,
+          "validation": 0.61,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "25/24/true/",
+          "reference": 0.68,
+          "validation": 0.57,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/39/true/",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "ch3.6",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "20/12/true/",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 5.2
+        },
+        {
+          "setup": "20/14/true/",
+          "reference": 0.64,
+          "validation": 0.59,
+          "changeCost": 4.8
+        },
+        {
+          "setup": "25/14/true/",
+          "reference": 0.67,
+          "validation": 0.61,
+          "changeCost": 3.8
+        },
+        {
+          "setup": "25/13/true/",
+          "reference": 0.67,
+          "validation": 0.61,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/16/true/",
+          "reference": 0.65,
+          "validation": 0.57,
+          "changeCost": 3.4
+        }
+      ]
+    },
+    {
+      "id": "ch3.7",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 36,
+      "top": [
+        {
+          "setup": "20/12/true/",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/17/true/",
+          "reference": 0.68,
+          "validation": 0.58,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "20/14/true/",
+          "reference": 0.64,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/14/true/",
+          "reference": 0.67,
+          "validation": 0.61,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/16/true/",
+          "reference": 0.65,
+          "validation": 0.57,
+          "changeCost": 3.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.8",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/25/true/",
+          "reference": 0.68,
+          "validation": 0.57,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/20/false/",
+          "reference": 0.66,
+          "validation": 0.61,
+          "changeCost": 1.0
+        },
+        {
+          "setup": "30/35/true/",
+          "reference": 0.69,
+          "validation": 0.58,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/30/true/",
+          "reference": 0.68,
+          "validation": 0.55,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/23/false/",
+          "reference": 0.69,
+          "validation": 0.61,
+          "changeCost": 1.4
+        }
+      ]
+    },
+    {
+      "id": "ch3.9",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/37/true/",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/28/true/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/33/true/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/20/true/",
+          "reference": 0.66,
+          "validation": 0.59,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/32/true/",
+          "reference": 0.63,
+          "validation": 0.61,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch3.10",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/24/true/",
+          "reference": 0.69,
+          "validation": 0.57,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/21/false/",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 1.0
+        },
+        {
+          "setup": "20/16/false/",
+          "reference": 0.68,
+          "validation": 0.6,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/29/true/",
+          "reference": 0.7,
+          "validation": 0.59,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/23/false/",
+          "reference": 0.69,
+          "validation": 0.61,
+          "changeCost": 1.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.11",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/24/true/",
+          "reference": 0.69,
+          "validation": 0.57,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/21/false/",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 1.0
+        },
+        {
+          "setup": "20/16/false/",
+          "reference": 0.68,
+          "validation": 0.6,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/29/true/",
+          "reference": 0.7,
+          "validation": 0.59,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/23/false/",
+          "reference": 0.69,
+          "validation": 0.61,
+          "changeCost": 1.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.12",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/17/false/",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "20/25/true/",
+          "reference": 0.68,
+          "validation": 0.57,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/20/false/",
+          "reference": 0.66,
+          "validation": 0.61,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "30/24/false/",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 1.6
+        },
+        {
+          "setup": "30/35/true/",
+          "reference": 0.69,
+          "validation": 0.58,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.13",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/45/true/SF001-041,SF001-042,SF001-044",
+          "reference": 0.68,
+          "validation": 0.56,
+          "changeCost": 10.6
+        },
+        {
+          "setup": "30/39/true/SF001-041,SF001-041",
+          "reference": 0.68,
+          "validation": 0.55,
+          "changeCost": 9.4
+        },
+        {
+          "setup": "30/39/true/SF001-041,SF001-044",
+          "reference": 0.68,
+          "validation": 0.55,
+          "changeCost": 9.4
+        },
+        {
+          "setup": "30/39/true/SF001-041,SF001-042",
+          "reference": 0.68,
+          "validation": 0.55,
+          "changeCost": 9.4
+        },
+        {
+          "setup": "25/40/true/SF001-042,SF001-042",
+          "reference": 0.7,
+          "validation": 0.58,
+          "changeCost": 8.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.14",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/36/false/SF001-044",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "35/21/false/",
+          "reference": 0.66,
+          "validation": 0.6,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "35/40/false/SF001-044",
+          "reference": 0.65,
+          "validation": 0.62,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "35/28/true/",
+          "reference": 0.71,
+          "validation": 0.56,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "35/48/true/SF001-042,SF001-042",
+          "reference": 0.68,
+          "validation": 0.6,
+          "changeCost": 10.0
+        }
+      ]
+    },
+    {
+      "id": "ch3.15",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/18/true/SF001-042,SF001-042",
+          "reference": 0.62,
+          "validation": 0.61,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "35/13/false/SF001-041,SF001-041,SF001-042",
+          "reference": 0.67,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "35/13/false/SF001-041,SF001-041",
+          "reference": 0.67,
+          "validation": 0.59,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "40/20/true/SF001-042,SF001-042",
+          "reference": 0.64,
+          "validation": 0.64,
+          "changeCost": 7.6
+        },
+        {
+          "setup": "35/20/true/SF001-044",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 7.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.16",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/24/false/SF001-041,SF001-041,SF001-042",
+          "reference": 0.52,
+          "validation": 0.49,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/39/false/SF001-041,SF001-042,SF001-044",
+          "reference": 0.51,
+          "validation": 0.47,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/24/false/SF001-044",
+          "reference": 0.53,
+          "validation": 0.51,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/29/false/SF001-042,SF001-042",
+          "reference": 0.53,
+          "validation": 0.52,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "25/29/false/SF001-041,SF001-044",
+          "reference": 0.47,
+          "validation": 0.47,
+          "changeCost": 2.0
+        }
+      ]
+    },
+    {
+      "id": "ch3.17",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/30/false/SF001-041,SF001-044",
+          "reference": 0.52,
+          "validation": 0.5,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/25/false/SF001-044",
+          "reference": 0.46,
+          "validation": 0.53,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/30/false/SF001-042,SF001-042",
+          "reference": 0.52,
+          "validation": 0.51,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/32/false/SF001-041,SF001-044",
+          "reference": 0.49,
+          "validation": 0.48,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "35/37/true/SF001-043,SF001-044",
+          "reference": 0.57,
+          "validation": 0.45,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch3.18",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/31/false/SF001-043,SF001-044",
+          "reference": 0.52,
+          "validation": 0.48,
+          "changeCost": 0.0
+        },
+        {
+          "setup": "40/21/false/SF001-042,SF001-042",
+          "reference": 0.52,
+          "validation": 0.48,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "40/29/true/SF001-043,SF001-044",
+          "reference": 0.51,
+          "validation": 0.51,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "40/28/false/SF001-044",
+          "reference": 0.48,
+          "validation": 0.53,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "35/34/false/SF001-041,SF001-042,SF001-044",
+          "reference": 0.47,
+          "validation": 0.51,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "ch3.19",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/37/false/SF001-041,SF001-042,SF001-044",
+          "reference": 0.51,
+          "validation": 0.5,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "35/27/false/SF001-044",
+          "reference": 0.48,
+          "validation": 0.51,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "40/29/false/SF001-044",
+          "reference": 0.51,
+          "validation": 0.53,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "40/39/false/SF001-041,SF001-042,SF001-044",
+          "reference": 0.54,
+          "validation": 0.51,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "35/27/true/SF001-041,SF001-044",
+          "reference": 0.42,
+          "validation": 0.54,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "ch3.20",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/26/true/SF001-041,SF001-044",
+          "reference": 0.45,
+          "validation": 0.55,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "35/21/true/SF001-041,SF001-042",
+          "reference": 0.48,
+          "validation": 0.53,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "40/23/false/SF001-042,SF001-042",
+          "reference": 0.51,
+          "validation": 0.47,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "35/21/false/SF001-042,SF001-042",
+          "reference": 0.48,
+          "validation": 0.49,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "35/26/false/SF001-044",
+          "reference": 0.53,
+          "validation": 0.51,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.1",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "20/22/true/SF001-061,SF001-063",
+          "reference": 0.84,
+          "validation": 0.81,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "25/27/true/SF001-061,SF001-063",
+          "reference": 0.84,
+          "validation": 0.81,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/32/true/SF001-061,SF001-063",
+          "reference": 0.83,
+          "validation": 0.83,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "25/28/true/SF001-061,SF001-063",
+          "reference": 0.83,
+          "validation": 0.81,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/25/true/SF001-061,SF001-063",
+          "reference": 0.84,
+          "validation": 0.8,
+          "changeCost": 4.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.2",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "30/26/true/SF001-061",
+          "reference": 0.83,
+          "validation": 0.82,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/23/true/SF001-061",
+          "reference": 0.82,
+          "validation": 0.82,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/24/true/SF001-061",
+          "reference": 0.82,
+          "validation": 0.82,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "20/21/true/SF001-061",
+          "reference": 0.85,
+          "validation": 0.81,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/24/true/SF001-061",
+          "reference": 0.82,
+          "validation": 0.81,
+          "changeCost": 3.6
+        }
+      ]
+    },
+    {
+      "id": "ch4.3",
+      "goal": 0.825,
+      "coarseCandidates": 14,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "30/25/true/SF001-061",
+          "reference": 0.83,
+          "validation": 0.82,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/26/true/SF001-061",
+          "reference": 0.83,
+          "validation": 0.82,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "30/23/true/SF001-061",
+          "reference": 0.82,
+          "validation": 0.82,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "20/21/true/SF001-061",
+          "reference": 0.85,
+          "validation": 0.81,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/30/true/SF001-061",
+          "reference": 0.83,
+          "validation": 0.8,
+          "changeCost": 5.4
+        }
+      ]
+    },
+    {
+      "id": "ch4.4",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/35/true/",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/37/true/",
+          "reference": 0.65,
+          "validation": 0.64,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "30/38/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "20/30/true/",
+          "reference": 0.62,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/40/true/",
+          "reference": 0.62,
+          "validation": 0.59,
+          "changeCost": 7.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.5",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/25/true/",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/27/true/",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/25/true/",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/19/true/",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "20/25/true/",
+          "reference": 0.62,
+          "validation": 0.62,
+          "changeCost": 3.6
+        }
+      ]
+    },
+    {
+      "id": "ch4.6",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "25/35/true/",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/38/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/40/true/",
+          "reference": 0.62,
+          "validation": 0.59,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "30/12/false/",
+          "reference": 0.67,
+          "validation": 0.55,
+          "changeCost": 3.2
+        },
+        {
+          "setup": "25/33/true/",
+          "reference": 0.67,
+          "validation": 0.63,
+          "changeCost": 4.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.7",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 36,
+      "top": [
+        {
+          "setup": "25/26/true/",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/21/true/",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/26/true/",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/19/true/",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/24/true/",
+          "reference": 0.62,
+          "validation": 0.64,
+          "changeCost": 3.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.8",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/25/true/",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/27/true/",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/23/true/",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/25/true/",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "20/25/true/",
+          "reference": 0.62,
+          "validation": 0.62,
+          "changeCost": 3.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.9",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/35/true/",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/37/true/",
+          "reference": 0.65,
+          "validation": 0.64,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/38/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "20/30/true/",
+          "reference": 0.62,
+          "validation": 0.59,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/40/true/",
+          "reference": 0.62,
+          "validation": 0.59,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.10",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "20/29/true/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/39/true/",
+          "reference": 0.66,
+          "validation": 0.59,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/34/true/",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/38/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/12/false/",
+          "reference": 0.67,
+          "validation": 0.55,
+          "changeCost": 3.8
+        }
+      ]
+    },
+    {
+      "id": "ch4.11",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "20/29/true/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/39/true/",
+          "reference": 0.66,
+          "validation": 0.59,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/34/true/",
+          "reference": 0.67,
+          "validation": 0.6,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/38/true/",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/12/false/",
+          "reference": 0.67,
+          "validation": 0.55,
+          "changeCost": 3.8
+        }
+      ]
+    },
+    {
+      "id": "ch4.12",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/27/true/",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/25/true/",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/25/true/",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "20/25/true/",
+          "reference": 0.62,
+          "validation": 0.62,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/19/true/",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "ch4.13",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/39/true/SF001-061,SF001-062",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "25/39/true/SF001-061,SF001-064",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "25/39/true/SF001-061,SF001-061",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "25/47/true/SF001-062,SF001-062",
+          "reference": 0.67,
+          "validation": 0.59,
+          "changeCost": 10.0
+        },
+        {
+          "setup": "25/49/true/SF001-062,SF001-062",
+          "reference": 0.64,
+          "validation": 0.58,
+          "changeCost": 10.4
+        }
+      ]
+    },
+    {
+      "id": "ch4.14",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/43/true/SF001-061,SF001-064",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "30/43/true/SF001-061,SF001-061,SF001-062",
+          "reference": 0.65,
+          "validation": 0.61,
+          "changeCost": 9.0
+        },
+        {
+          "setup": "30/46/true/SF001-062,SF001-062",
+          "reference": 0.66,
+          "validation": 0.62,
+          "changeCost": 8.6
+        },
+        {
+          "setup": "30/38/true/SF001-064",
+          "reference": 0.64,
+          "validation": 0.65,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/40/true/SF001-064",
+          "reference": 0.62,
+          "validation": 0.59,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "ch4.15",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/25/true/SF001-061,SF001-061,SF001-062",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "25/26/true/SF001-065",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "25/21/false/SF001-061,SF001-064",
+          "reference": 0.66,
+          "validation": 0.62,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "25/28/true/SF001-062,SF001-062",
+          "reference": 0.69,
+          "validation": 0.55,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/33/true/SF001-061,SF001-062,SF001-064",
+          "reference": 0.67,
+          "validation": 0.61,
+          "changeCost": 7.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.16",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/21/false/SF001-063,SF001-065",
+          "reference": 0.49,
+          "validation": 0.52,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "25/37/true/SF001-061,SF001-062,SF001-064",
+          "reference": 0.51,
+          "validation": 0.48,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "25/27/true/SF001-064",
+          "reference": 0.52,
+          "validation": 0.52,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "25/12/true/SF001-061",
+          "reference": 0.46,
+          "validation": 0.57,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "25/14/true/SF001-061",
+          "reference": 0.43,
+          "validation": 0.52,
+          "changeCost": 8.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.17",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/23/false/SF001-061,SF001-062,SF001-064",
+          "reference": 0.52,
+          "validation": 0.49,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "35/25/false/SF001-061,SF001-062,SF001-064",
+          "reference": 0.53,
+          "validation": 0.48,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "40/27/true/SF001-062",
+          "reference": 0.51,
+          "validation": 0.51,
+          "changeCost": 7.6
+        },
+        {
+          "setup": "40/25/true/SF001-062",
+          "reference": 0.54,
+          "validation": 0.47,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "35/20/false/SF001-061,SF001-064",
+          "reference": 0.54,
+          "validation": 0.48,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.18",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/34/true/SF001-063,SF001-065",
+          "reference": 0.5,
+          "validation": 0.5,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "45/28/true/SF001-061,SF001-062",
+          "reference": 0.5,
+          "validation": 0.51,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "40/31/true/SF001-062,SF001-062",
+          "reference": 0.51,
+          "validation": 0.47,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "40/14/false/SF001-062,SF001-062",
+          "reference": 0.45,
+          "validation": 0.52,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "40/21/true/SF001-061,SF001-062",
+          "reference": 0.56,
+          "validation": 0.47,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "ch4.19",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/19/true/SF001-061,SF001-062,SF001-064",
+          "reference": 0.51,
+          "validation": 0.48,
+          "changeCost": 8.6
+        },
+        {
+          "setup": "30/17/true/SF001-061,SF001-062,SF001-064",
+          "reference": 0.53,
+          "validation": 0.48,
+          "changeCost": 9.0
+        },
+        {
+          "setup": "30/15/true/SF001-061,SF001-062,SF001-064",
+          "reference": 0.53,
+          "validation": 0.48,
+          "changeCost": 9.4
+        },
+        {
+          "setup": "30/15/true/SF001-063,SF001-065",
+          "reference": 0.57,
+          "validation": 0.4,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "30/25/true/SF001-061,SF001-062,SF001-064",
+          "reference": 0.49,
+          "validation": 0.44,
+          "changeCost": 7.4
+        }
+      ]
+    },
+    {
+      "id": "ch4.20",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/24/true/SF001-064",
+          "reference": 0.53,
+          "validation": 0.47,
+          "changeCost": 8.6
+        },
+        {
+          "setup": "40/29/true/SF001-061,SF001-064",
+          "reference": 0.54,
+          "validation": 0.46,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "30/24/false/SF001-063,SF001-065",
+          "reference": 0.52,
+          "validation": 0.5,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "40/34/true/SF001-062,SF001-062",
+          "reference": 0.54,
+          "validation": 0.49,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "40/29/true/SF001-061,SF001-061,SF001-062",
+          "reference": 0.56,
+          "validation": 0.47,
+          "changeCost": 7.6
+        }
+      ]
+    },
+    {
+      "id": "ch5.1",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "20/23/false/SF001-081,SF001-084",
+          "reference": 0.82,
+          "validation": 0.83,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/32/false/SF001-081,SF001-084",
+          "reference": 0.81,
+          "validation": 0.84,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "25/27/false/SF001-081,SF001-084",
+          "reference": 0.81,
+          "validation": 0.82,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "25/33/true/SF001-081,SF001-084",
+          "reference": 0.85,
+          "validation": 0.79,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/37/true/SF001-081,SF001-084",
+          "reference": 0.84,
+          "validation": 0.85,
+          "changeCost": 7.4
+        }
+      ]
+    },
+    {
+      "id": "ch5.2",
+      "goal": 0.825,
+      "coarseCandidates": 12,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "25/14/false/SF001-081",
+          "reference": 0.82,
+          "validation": 0.82,
+          "changeCost": 0.4
+        },
+        {
+          "setup": "25/23/true/SF001-081",
+          "reference": 0.82,
+          "validation": 0.82,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/16/false/SF001-081",
+          "reference": 0.82,
+          "validation": 0.84,
+          "changeCost": 1.0
+        },
+        {
+          "setup": "20/12/false/SF001-081",
+          "reference": 0.81,
+          "validation": 0.82,
+          "changeCost": 1.8
+        },
+        {
+          "setup": "25/24/true/SF001-081",
+          "reference": 0.82,
+          "validation": 0.8,
+          "changeCost": 3.6
+        }
+      ]
+    },
+    {
+      "id": "ch5.3",
+      "goal": 0.825,
+      "coarseCandidates": 14,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "25/14/false/SF001-081",
+          "reference": 0.82,
+          "validation": 0.82,
+          "changeCost": 0.8
+        },
+        {
+          "setup": "25/23/true/SF001-081",
+          "reference": 0.82,
+          "validation": 0.82,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/16/false/SF001-081",
+          "reference": 0.82,
+          "validation": 0.84,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "20/12/false/SF001-081",
+          "reference": 0.81,
+          "validation": 0.82,
+          "changeCost": 2.2
+        },
+        {
+          "setup": "25/13/false/SF001-081",
+          "reference": 0.83,
+          "validation": 0.85,
+          "changeCost": 1.0
+        }
+      ]
+    },
+    {
+      "id": "ch5.4",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/13/false/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "30/32/true/",
+          "reference": 0.6,
+          "validation": 0.64,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/15/false/",
+          "reference": 0.65,
+          "validation": 0.63,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/17/false/",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 1.6
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 1.2
+        }
+      ]
+    },
+    {
+      "id": "ch5.5",
+      "goal": 0.625,
+      "coarseCandidates": 14,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/32/true/",
+          "reference": 0.6,
+          "validation": 0.64,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/27/true/",
+          "reference": 0.58,
+          "validation": 0.66,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/15/false/",
+          "reference": 0.65,
+          "validation": 0.63,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/17/false/",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 1.6
+        }
+      ]
+    },
+    {
+      "id": "ch5.6",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "25/13/false/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/15/false/",
+          "reference": 0.65,
+          "validation": 0.63,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 1.8
+        },
+        {
+          "setup": "25/26/true/",
+          "reference": 0.58,
+          "validation": 0.7,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/31/true/",
+          "reference": 0.61,
+          "validation": 0.68,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "ch5.7",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 36,
+      "top": [
+        {
+          "setup": "30/16/false/",
+          "reference": 0.63,
+          "validation": 0.61,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/32/true/",
+          "reference": 0.6,
+          "validation": 0.64,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/27/true/",
+          "reference": 0.58,
+          "validation": 0.66,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/31/true/",
+          "reference": 0.61,
+          "validation": 0.68,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch5.8",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/22/true/",
+          "reference": 0.6,
+          "validation": 0.66,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "25/17/true/",
+          "reference": 0.58,
+          "validation": 0.65,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "20/12/true/",
+          "reference": 0.57,
+          "validation": 0.62,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/20/true/",
+          "reference": 0.62,
+          "validation": 0.7,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/15/true/",
+          "reference": 0.63,
+          "validation": 0.7,
+          "changeCost": 4.0
+        }
+      ]
+    },
+    {
+      "id": "ch5.9",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "25/13/false/",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/32/true/",
+          "reference": 0.6,
+          "validation": 0.64,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/15/false/",
+          "reference": 0.65,
+          "validation": 0.63,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/17/false/",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 2.2
+        }
+      ]
+    },
+    {
+      "id": "ch5.10",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "30/16/false/",
+          "reference": 0.63,
+          "validation": 0.61,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/26/true/",
+          "reference": 0.58,
+          "validation": 0.7,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/31/true/",
+          "reference": 0.61,
+          "validation": 0.68,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/12/false/",
+          "reference": 0.69,
+          "validation": 0.61,
+          "changeCost": 2.8
+        }
+      ]
+    },
+    {
+      "id": "ch5.11",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "30/16/false/",
+          "reference": 0.63,
+          "validation": 0.61,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/26/true/",
+          "reference": 0.58,
+          "validation": 0.7,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "30/31/true/",
+          "reference": 0.61,
+          "validation": 0.68,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/12/false/",
+          "reference": 0.69,
+          "validation": 0.61,
+          "changeCost": 2.8
+        }
+      ]
+    },
+    {
+      "id": "ch5.12",
+      "goal": 0.625,
+      "coarseCandidates": 16,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/32/true/",
+          "reference": 0.6,
+          "validation": 0.64,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/27/true/",
+          "reference": 0.58,
+          "validation": 0.66,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/15/false/",
+          "reference": 0.65,
+          "validation": 0.63,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/17/false/",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/14/false/",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 2.6
+        }
+      ]
+    },
+    {
+      "id": "ch5.13",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/45/true/SF001-082,SF001-082",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 9.6
+        },
+        {
+          "setup": "25/24/false/SF001-082",
+          "reference": 0.59,
+          "validation": 0.66,
+          "changeCost": 0.6
+        },
+        {
+          "setup": "20/20/false/SF001-082",
+          "reference": 0.63,
+          "validation": 0.64,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "25/22/false/SF001-084",
+          "reference": 0.63,
+          "validation": 0.67,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/47/true/SF001-082,SF001-082",
+          "reference": 0.6,
+          "validation": 0.58,
+          "changeCost": 10.0
+        }
+      ]
+    },
+    {
+      "id": "ch5.14",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/46/true/SF001-081,SF001-082",
+          "reference": 0.62,
+          "validation": 0.62,
+          "changeCost": 8.6
+        },
+        {
+          "setup": "40/12/false/",
+          "reference": 0.63,
+          "validation": 0.61,
+          "changeCost": 8.2
+        },
+        {
+          "setup": "30/33/false/SF001-082,SF001-082",
+          "reference": 0.62,
+          "validation": 0.6,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "40/38/true/SF001-081,SF001-081",
+          "reference": 0.59,
+          "validation": 0.6,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "40/13/false/",
+          "reference": 0.6,
+          "validation": 0.59,
+          "changeCost": 8.0
+        }
+      ]
+    },
+    {
+      "id": "ch5.15",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/35/true/SF001-081,SF001-081,SF001-082",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "40/43/true/SF001-081,SF001-082,SF001-084",
+          "reference": 0.61,
+          "validation": 0.63,
+          "changeCost": 9.0
+        },
+        {
+          "setup": "35/36/true/SF001-082,SF001-082",
+          "reference": 0.59,
+          "validation": 0.67,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "35/26/true/SF001-081,SF001-084",
+          "reference": 0.62,
+          "validation": 0.66,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "35/31/true/SF001-081,SF001-081,SF001-082",
+          "reference": 0.56,
+          "validation": 0.64,
+          "changeCost": 5.6
+        }
+      ]
+    },
+    {
+      "id": "ch5.16",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/12/false/SF001-081",
+          "reference": 0.5,
+          "validation": 0.52,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "35/14/false/SF001-081",
+          "reference": 0.47,
+          "validation": 0.5,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "30/22/false/SF001-081,SF001-081",
+          "reference": 0.49,
+          "validation": 0.47,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/22/false/SF001-081,SF001-084",
+          "reference": 0.49,
+          "validation": 0.47,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "35/24/false/SF001-081,SF001-081",
+          "reference": 0.53,
+          "validation": 0.52,
+          "changeCost": 4.0
+        }
+      ]
+    },
+    {
+      "id": "ch5.17",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/25/true/SF001-081,SF001-082,SF001-084",
+          "reference": 0.48,
+          "validation": 0.5,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "40/23/true/SF001-082,SF001-082",
+          "reference": 0.46,
+          "validation": 0.55,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "35/15/false/SF001-084",
+          "reference": 0.5,
+          "validation": 0.47,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "35/15/false/SF001-081",
+          "reference": 0.5,
+          "validation": 0.47,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "40/17/false/SF001-081",
+          "reference": 0.53,
+          "validation": 0.53,
+          "changeCost": 6.6
+        }
+      ]
+    },
+    {
+      "id": "ch5.18",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/28/false/SF001-081,SF001-084",
+          "reference": 0.49,
+          "validation": 0.5,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "40/28/false/SF001-081,SF001-081",
+          "reference": 0.49,
+          "validation": 0.5,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "45/31/false/SF001-081,SF001-084",
+          "reference": 0.5,
+          "validation": 0.52,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "40/29/false/SF001-081,SF001-084",
+          "reference": 0.49,
+          "validation": 0.47,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "45/33/false/SF001-081,SF001-084",
+          "reference": 0.47,
+          "validation": 0.49,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "ch5.19",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "45/22/false/SF001-081,SF001-081",
+          "reference": 0.5,
+          "validation": 0.49,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "45/22/false/SF001-081,SF001-084",
+          "reference": 0.5,
+          "validation": 0.49,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "40/34/false/SF001-084,SF001-081,SF001-081",
+          "reference": 0.53,
+          "validation": 0.5,
+          "changeCost": 0.4
+        },
+        {
+          "setup": "45/17/false/SF001-081,SF001-082,SF001-084",
+          "reference": 0.49,
+          "validation": 0.48,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "40/20/false/SF001-081,SF001-084",
+          "reference": 0.51,
+          "validation": 0.45,
+          "changeCost": 5.4
+        }
+      ]
+    },
+    {
+      "id": "ch5.20",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "45/38/true/SF001-084,SF001-081,SF001-082",
+          "reference": 0.48,
+          "validation": 0.51,
+          "changeCost": 1.0
+        },
+        {
+          "setup": "45/38/true/SF001-081,SF001-082,SF001-084",
+          "reference": 0.47,
+          "validation": 0.5,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "40/23/false/SF001-084,SF001-081,SF001-082",
+          "reference": 0.5,
+          "validation": 0.47,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "45/25/false/SF001-084,SF001-081,SF001-082",
+          "reference": 0.47,
+          "validation": 0.5,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "40/33/false/SF001-081,SF001-081",
+          "reference": 0.54,
+          "validation": 0.51,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "vow01.1",
+      "goal": 0.625,
+      "coarseCandidates": 154,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/29/false/SF002-179",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "30/20/false/SF002-174,SF002-174",
+          "reference": 0.65,
+          "validation": 0.62,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/22/false/SF002-174,SF002-174",
+          "reference": 0.62,
+          "validation": 0.6,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/27/false/SF002-179",
+          "reference": 0.6,
+          "validation": 0.61,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/39/false/SF002-174,SF002-174,SF002-176",
+          "reference": 0.68,
+          "validation": 0.6,
+          "changeCost": 9.4
+        }
+      ]
+    },
+    {
+      "id": "vow01.2",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/28/true/SF002-174",
+          "reference": 0.6,
+          "validation": 0.66,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/30/true/SF002-174",
+          "reference": 0.59,
+          "validation": 0.65,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "35/30/true/SF002-174",
+          "reference": 0.59,
+          "validation": 0.67,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "25/28/true/SF002-174",
+          "reference": 0.57,
+          "validation": 0.67,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "35/23/false/SF002-176",
+          "reference": 0.61,
+          "validation": 0.61,
+          "changeCost": 5.4
+        }
+      ]
+    },
+    {
+      "id": "vow02.1",
+      "goal": 0.625,
+      "coarseCandidates": 154,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/17/true/SF002-131",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/20/true/SF002-134,SF002-133",
+          "reference": 0.66,
+          "validation": 0.6,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "30/32/true/SF002-131,SF002-133,SF002-134",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "35/24/false/SF002-133,SF002-133",
+          "reference": 0.62,
+          "validation": 0.61,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "25/22/true/SF002-134,SF002-133",
+          "reference": 0.64,
+          "validation": 0.59,
+          "changeCost": 1.0
+        }
+      ]
+    },
+    {
+      "id": "vow02.2",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/47/false/SF002-137",
+          "reference": 0.67,
+          "validation": 0.58,
+          "changeCost": 9.4
+        },
+        {
+          "setup": "35/25/false/SF002-132",
+          "reference": 0.66,
+          "validation": 0.58,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "35/30/false/SF002-133",
+          "reference": 0.69,
+          "validation": 0.56,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/28/false/SF002-132,SF002-132",
+          "reference": 0.68,
+          "validation": 0.56,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "35/35/false/SF002-132,SF002-133",
+          "reference": 0.68,
+          "validation": 0.59,
+          "changeCost": 8.0
+        }
+      ]
+    },
+    {
+      "id": "vow03.1",
+      "goal": 0.625,
+      "coarseCandidates": 154,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/27/true/SF002-003",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/40/true/SF002-003,SF002-003",
+          "reference": 0.63,
+          "validation": 0.64,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "25/30/false/SF002-003,SF002-004",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 7.6
+        },
+        {
+          "setup": "35/42/false/SF002-003,SF002-003,SF002-004",
+          "reference": 0.67,
+          "validation": 0.59,
+          "changeCost": 11.0
+        },
+        {
+          "setup": "30/32/false/SF002-003,SF002-004",
+          "reference": 0.64,
+          "validation": 0.59,
+          "changeCost": 7.0
+        }
+      ]
+    },
+    {
+      "id": "vow03.2",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/28/false/SF002-002",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/40/false/SF002-002,SF002-002",
+          "reference": 0.67,
+          "validation": 0.59,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "35/30/false/SF002-005",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "35/28/false/SF002-005",
+          "reference": 0.66,
+          "validation": 0.64,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/35/false/SF002-002",
+          "reference": 0.64,
+          "validation": 0.57,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "vow04.1",
+      "goal": 0.625,
+      "coarseCandidates": 126,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/32/false/SF002-045,SF002-045",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "25/22/false/SF002-048",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/27/false/SF002-045,SF002-045",
+          "reference": 0.66,
+          "validation": 0.61,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "30/44/true/",
+          "reference": 0.64,
+          "validation": 0.64,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "25/40/true/",
+          "reference": 0.61,
+          "validation": 0.61,
+          "changeCost": 7.6
+        }
+      ]
+    },
+    {
+      "id": "vow04.2",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/17/false/SF002-045",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "30/33/true/SF002-048",
+          "reference": 0.61,
+          "validation": 0.63,
+          "changeCost": 1.6
+        },
+        {
+          "setup": "35/37/true/SF002-048",
+          "reference": 0.61,
+          "validation": 0.63,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/15/false/SF002-048",
+          "reference": 0.62,
+          "validation": 0.64,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "35/27/true/",
+          "reference": 0.61,
+          "validation": 0.63,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "vow05.1",
+      "goal": 0.625,
+      "coarseCandidates": 154,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/27/true/SF002-091",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/32/true/SF002-091",
+          "reference": 0.66,
+          "validation": 0.6,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/34/true/SF002-091",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 2.4
+        },
+        {
+          "setup": "35/32/true/SF002-091",
+          "reference": 0.65,
+          "validation": 0.63,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/32/false/SF002-090,SF002-090",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 8.0
+        }
+      ]
+    },
+    {
+      "id": "vow05.2",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/30/false/SF002-091",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "35/43/true/",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 7.6
+        },
+        {
+          "setup": "35/47/true/",
+          "reference": 0.6,
+          "validation": 0.65,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "25/32/false/SF002-091",
+          "reference": 0.61,
+          "validation": 0.63,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "25/38/false/SF002-094",
+          "reference": 0.62,
+          "validation": 0.64,
+          "changeCost": 7.6
+        }
+      ]
+    },
+    {
+      "id": "vow06.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/41/true/SF002-003,SF002-003",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "30/21/true/",
+          "reference": 0.62,
+          "validation": 0.61,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/40/true/SF002-003,SF002-003",
+          "reference": 0.63,
+          "validation": 0.64,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "35/28/true/",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "35/26/true/",
+          "reference": 0.65,
+          "validation": 0.63,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "vow06.2",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/26/false/SF002-002,SF002-007",
+          "reference": 0.62,
+          "validation": 0.62,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/36/false/SF002-002,SF002-002,SF002-004",
+          "reference": 0.65,
+          "validation": 0.62,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "30/38/false/SF002-002,SF002-002,SF002-004",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "30/18/false/SF002-004",
+          "reference": 0.66,
+          "validation": 0.61,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/24/false/SF002-002,SF002-007",
+          "reference": 0.65,
+          "validation": 0.63,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "vow07.1",
+      "goal": 0.625,
+      "coarseCandidates": 144,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/35/false/SF002-045",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "35/35/false/",
+          "reference": 0.63,
+          "validation": 0.62,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "30/38/false/SF002-048",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/30/false/",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "30/28/false/",
+          "reference": 0.66,
+          "validation": 0.63,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "vow07.2",
+      "goal": 0.625,
+      "coarseCandidates": 160,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/24/true/SF002-048",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 0.4
+        },
+        {
+          "setup": "35/12/false/SF002-048",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 5.8
+        },
+        {
+          "setup": "30/24/false/SF002-052",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "35/28/true/SF002-048",
+          "reference": 0.6,
+          "validation": 0.64,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "35/26/false/SF002-052",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "vow08.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/28/true/SF002-091",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "30/28/true/SF002-091",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 1.0
+        },
+        {
+          "setup": "25/21/false/SF002-088,SF002-088",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "25/26/true/SF002-091",
+          "reference": 0.63,
+          "validation": 0.63,
+          "changeCost": 1.6
+        },
+        {
+          "setup": "30/23/false/SF002-088,SF002-088",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "vow08.2",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/36/true/",
+          "reference": 0.61,
+          "validation": 0.63,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "35/21/false/SF002-089",
+          "reference": 0.68,
+          "validation": 0.58,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "35/34/true/",
+          "reference": 0.6,
+          "validation": 0.62,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "25/39/true/SF002-090",
+          "reference": 0.63,
+          "validation": 0.59,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/41/true/SF002-090",
+          "reference": 0.67,
+          "validation": 0.65,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "vow09.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/43/false/SF002-134",
+          "reference": 0.62,
+          "validation": 0.63,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "30/20/false/SF002-134",
+          "reference": 0.65,
+          "validation": 0.6,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "30/30/false/SF002-134",
+          "reference": 0.62,
+          "validation": 0.62,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "25/30/false/SF002-132,SF002-132",
+          "reference": 0.62,
+          "validation": 0.61,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "35/30/false/SF002-134",
+          "reference": 0.6,
+          "validation": 0.63,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "vow09.2",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/36/true/SF002-136",
+          "reference": 0.6,
+          "validation": 0.63,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "35/36/true/SF002-136",
+          "reference": 0.67,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "30/14/true/",
+          "reference": 0.66,
+          "validation": 0.62,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "35/38/true/SF002-136",
+          "reference": 0.66,
+          "validation": 0.57,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "30/33/true/SF002-131,SF002-133",
+          "reference": 0.67,
+          "validation": 0.61,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "vow10.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/26/false/SF002-179",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "35/30/false/SF002-179",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "35/35/false/SF002-174,SF002-176",
+          "reference": 0.66,
+          "validation": 0.6,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "30/40/true/SF002-177",
+          "reference": 0.58,
+          "validation": 0.66,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "30/33/true/",
+          "reference": 0.57,
+          "validation": 0.67,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "vow10.2",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "35/23/true/SF002-176",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "35/14/false/SF002-177",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "35/43/true/SF002-174,SF002-176,SF002-179",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "30/39/true/SF002-174,SF002-176,SF002-179",
+          "reference": 0.65,
+          "validation": 0.58,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "30/14/true/SF002-174",
+          "reference": 0.61,
+          "validation": 0.6,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "vow11.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "25/34/true/SF002-133,SF002-133",
+          "reference": 0.62,
+          "validation": 0.62,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/19/true/SF002-133",
+          "reference": 0.66,
+          "validation": 0.59,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "25/24/true/SF002-131,SF002-131",
+          "reference": 0.65,
+          "validation": 0.61,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "25/19/true/SF002-131,SF002-134",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "30/34/true/SF002-133,SF002-133",
+          "reference": 0.64,
+          "validation": 0.64,
+          "changeCost": 4.0
+        }
+      ]
+    },
+    {
+      "id": "vow11.2",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/22/true/",
+          "reference": 0.5,
+          "validation": 0.49,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "35/30/true/SF002-134",
+          "reference": 0.53,
+          "validation": 0.46,
+          "changeCost": 1.6
+        },
+        {
+          "setup": "25/20/false/SF002-132,SF002-132,SF002-133",
+          "reference": 0.5,
+          "validation": 0.48,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "30/24/false/SF002-132,SF002-132,SF002-133",
+          "reference": 0.49,
+          "validation": 0.48,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "35/24/true/",
+          "reference": 0.5,
+          "validation": 0.47,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "vow12.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/36/true/SF002-048",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 3.4
+        },
+        {
+          "setup": "35/37/true/SF002-048",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/32/true/SF002-048",
+          "reference": 0.6,
+          "validation": 0.66,
+          "changeCost": 1.6
+        },
+        {
+          "setup": "25/12/false/",
+          "reference": 0.65,
+          "validation": 0.59,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "35/34/true/SF002-048",
+          "reference": 0.63,
+          "validation": 0.65,
+          "changeCost": 3.0
+        }
+      ]
+    },
+    {
+      "id": "vow12.2",
+      "goal": 0.5,
+      "coarseCandidates": 144,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "35/14/false/SF002-045",
+          "reference": 0.54,
+          "validation": 0.47,
+          "changeCost": 7.6
+        },
+        {
+          "setup": "25/15/false/SF002-045,SF002-045",
+          "reference": 0.53,
+          "validation": 0.46,
+          "changeCost": 8.4
+        },
+        {
+          "setup": "30/19/false/SF002-048",
+          "reference": 0.57,
+          "validation": 0.43,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/12/false/SF002-045",
+          "reference": 0.54,
+          "validation": 0.45,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "30/17/false/SF002-045,SF002-045",
+          "reference": 0.53,
+          "validation": 0.45,
+          "changeCost": 7.0
+        }
+      ]
+    },
+    {
+      "id": "vow13.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/37/false/SF002-093",
+          "reference": 0.62,
+          "validation": 0.62,
+          "changeCost": 7.6
+        },
+        {
+          "setup": "30/29/false/SF002-091",
+          "reference": 0.59,
+          "validation": 0.65,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "30/42/false/SF002-088,SF002-093",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 8.6
+        },
+        {
+          "setup": "35/44/false/SF002-088,SF002-093",
+          "reference": 0.65,
+          "validation": 0.61,
+          "changeCost": 10.0
+        },
+        {
+          "setup": "25/27/false/SF002-091",
+          "reference": 0.6,
+          "validation": 0.63,
+          "changeCost": 3.6
+        }
+      ]
+    },
+    {
+      "id": "vow13.2",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "35/19/true/SF002-088,SF002-090",
+          "reference": 0.5,
+          "validation": 0.5,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "30/25/true/SF002-091,SF002-090",
+          "reference": 0.49,
+          "validation": 0.51,
+          "changeCost": 1.4
+        },
+        {
+          "setup": "30/17/true/SF002-088,SF002-090",
+          "reference": 0.49,
+          "validation": 0.51,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "35/24/true/SF002-090,SF002-090",
+          "reference": 0.51,
+          "validation": 0.5,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "35/12/true/SF002-088,SF002-088",
+          "reference": 0.5,
+          "validation": 0.49,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "vow14.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/34/true/SF002-005",
+          "reference": 0.61,
+          "validation": 0.64,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "35/37/true/SF002-002",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "35/12/false/SF002-005",
+          "reference": 0.64,
+          "validation": 0.62,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "35/29/true/",
+          "reference": 0.64,
+          "validation": 0.63,
+          "changeCost": 5.0
+        },
+        {
+          "setup": "35/27/true/",
+          "reference": 0.65,
+          "validation": 0.62,
+          "changeCost": 4.6
+        }
+      ]
+    },
+    {
+      "id": "vow14.2",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 39,
+      "top": [
+        {
+          "setup": "30/35/false/SF002-003,SF002-008",
+          "reference": 0.5,
+          "validation": 0.5,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "35/32/true/SF002-005",
+          "reference": 0.51,
+          "validation": 0.5,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "35/34/false/SF002-008",
+          "reference": 0.52,
+          "validation": 0.49,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "30/30/true/SF002-005",
+          "reference": 0.5,
+          "validation": 0.48,
+          "changeCost": 0.6
+        },
+        {
+          "setup": "35/34/true/SF002-005",
+          "reference": 0.51,
+          "validation": 0.47,
+          "changeCost": 2.4
+        }
+      ]
+    },
+    {
+      "id": "vow15.1",
+      "goal": 0.625,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/36/false/SF002-177",
+          "reference": 0.64,
+          "validation": 0.61,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "30/37/false/SF002-177",
+          "reference": 0.63,
+          "validation": 0.61,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "25/42/false/SF002-176",
+          "reference": 0.65,
+          "validation": 0.61,
+          "changeCost": 8.6
+        },
+        {
+          "setup": "25/44/false/SF002-176",
+          "reference": 0.64,
+          "validation": 0.6,
+          "changeCost": 9.0
+        },
+        {
+          "setup": "30/24/false/",
+          "reference": 0.63,
+          "validation": 0.6,
+          "changeCost": 5.0
+        }
+      ]
+    },
+    {
+      "id": "vow15.2",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 42,
+      "top": [
+        {
+          "setup": "30/22/false/SF002-176,SF002-176",
+          "reference": 0.48,
+          "validation": 0.52,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "35/24/false/SF002-176,SF002-176",
+          "reference": 0.49,
+          "validation": 0.52,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "30/17/false/SF002-174,SF002-174,SF002-176",
+          "reference": 0.48,
+          "validation": 0.51,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "30/12/false/SF002-174,SF002-176",
+          "reference": 0.51,
+          "validation": 0.51,
+          "changeCost": 8.0
+        },
+        {
+          "setup": "25/15/false/SF002-174,SF002-174,SF002-176",
+          "reference": 0.47,
+          "validation": 0.52,
+          "changeCost": 9.4
+        }
+      ]
+    },
+    {
+      "id": "vow16.1",
+      "goal": 0.5,
+      "coarseCandidates": 144,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/43/false/SF002-045,SF002-045",
+          "reference": 0.53,
+          "validation": 0.47,
+          "changeCost": 9.6
+        },
+        {
+          "setup": "30/45/false/SF002-045,SF002-045",
+          "reference": 0.52,
+          "validation": 0.47,
+          "changeCost": 10.0
+        },
+        {
+          "setup": "30/25/false/",
+          "reference": 0.52,
+          "validation": 0.5,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/38/false/SF002-048",
+          "reference": 0.49,
+          "validation": 0.48,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/27/false/",
+          "reference": 0.48,
+          "validation": 0.48,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "vow16.2",
+      "goal": 0.5,
+      "coarseCandidates": 160,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/33/true/SF002-048",
+          "reference": 0.51,
+          "validation": 0.49,
+          "changeCost": 1.0
+        },
+        {
+          "setup": "35/25/true/",
+          "reference": 0.51,
+          "validation": 0.49,
+          "changeCost": 3.6
+        },
+        {
+          "setup": "35/23/true/",
+          "reference": 0.51,
+          "validation": 0.49,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "35/38/true/SF002-045",
+          "reference": 0.53,
+          "validation": 0.47,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "35/43/true/SF002-045,SF002-045",
+          "reference": 0.53,
+          "validation": 0.47,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "vow17.1",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/32/true/",
+          "reference": 0.53,
+          "validation": 0.47,
+          "changeCost": 4.4
+        },
+        {
+          "setup": "35/30/true/",
+          "reference": 0.54,
+          "validation": 0.47,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "35/25/false/SF002-091",
+          "reference": 0.55,
+          "validation": 0.46,
+          "changeCost": 2.0
+        },
+        {
+          "setup": "40/37/true/",
+          "reference": 0.49,
+          "validation": 0.53,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "35/27/false/SF002-091",
+          "reference": 0.52,
+          "validation": 0.46,
+          "changeCost": 2.4
+        }
+      ]
+    },
+    {
+      "id": "vow17.2",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/23/false/",
+          "reference": 0.52,
+          "validation": 0.48,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "35/41/false/SF002-090",
+          "reference": 0.54,
+          "validation": 0.47,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "35/43/false/SF002-090",
+          "reference": 0.53,
+          "validation": 0.45,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "35/33/false/SF002-091",
+          "reference": 0.51,
+          "validation": 0.46,
+          "changeCost": 3.0
+        },
+        {
+          "setup": "35/31/false/SF002-091",
+          "reference": 0.55,
+          "validation": 0.48,
+          "changeCost": 2.6
+        }
+      ]
+    },
+    {
+      "id": "vow18.1",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/25/false/",
+          "reference": 0.52,
+          "validation": 0.5,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/40/false/",
+          "reference": 0.46,
+          "validation": 0.53,
+          "changeCost": 9.0
+        },
+        {
+          "setup": "30/38/false/",
+          "reference": 0.5,
+          "validation": 0.53,
+          "changeCost": 8.6
+        },
+        {
+          "setup": "30/27/false/",
+          "reference": 0.52,
+          "validation": 0.52,
+          "changeCost": 6.4
+        },
+        {
+          "setup": "30/23/false/",
+          "reference": 0.51,
+          "validation": 0.54,
+          "changeCost": 6.4
+        }
+      ]
+    },
+    {
+      "id": "vow18.2",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "30/33/true/SF002-133",
+          "reference": 0.51,
+          "validation": 0.5,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "35/40/true/SF002-131,SF002-133",
+          "reference": 0.53,
+          "validation": 0.46,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "35/25/false/SF002-131,SF002-136",
+          "reference": 0.51,
+          "validation": 0.47,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/36/true/SF002-131,SF002-133",
+          "reference": 0.49,
+          "validation": 0.48,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "30/41/true/SF002-136",
+          "reference": 0.51,
+          "validation": 0.52,
+          "changeCost": 5.6
+        }
+      ]
+    },
+    {
+      "id": "vow19.1",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/30/false/SF002-174,SF002-174",
+          "reference": 0.48,
+          "validation": 0.52,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/28/false/SF002-174,SF002-174",
+          "reference": 0.48,
+          "validation": 0.52,
+          "changeCost": 6.6
+        },
+        {
+          "setup": "30/37/false/SF002-176",
+          "reference": 0.52,
+          "validation": 0.49,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "35/45/true/",
+          "reference": 0.47,
+          "validation": 0.54,
+          "changeCost": 7.0
+        },
+        {
+          "setup": "35/20/false/",
+          "reference": 0.53,
+          "validation": 0.49,
+          "changeCost": 6.0
+        }
+      ]
+    },
+    {
+      "id": "vow19.2",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "35/28/false/SF002-174,SF002-176,SF002-179",
+          "reference": 0.49,
+          "validation": 0.5,
+          "changeCost": 6.0
+        },
+        {
+          "setup": "30/26/false/SF002-174,SF002-176,SF002-179",
+          "reference": 0.51,
+          "validation": 0.48,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "30/18/false/SF002-174,SF002-174,SF002-176",
+          "reference": 0.47,
+          "validation": 0.52,
+          "changeCost": 9.0
+        },
+        {
+          "setup": "35/25/false/SF002-176,SF002-176",
+          "reference": 0.48,
+          "validation": 0.49,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "40/30/false/SF002-174,SF002-176,SF002-179",
+          "reference": 0.51,
+          "validation": 0.52,
+          "changeCost": 7.4
+        }
+      ]
+    },
+    {
+      "id": "vow20.1",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/20/false/SF002-005",
+          "reference": 0.49,
+          "validation": 0.49,
+          "changeCost": 4.0
+        },
+        {
+          "setup": "40/37/false/SF002-007",
+          "reference": 0.48,
+          "validation": 0.53,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "35/33/false/SF002-007",
+          "reference": 0.51,
+          "validation": 0.52,
+          "changeCost": 5.6
+        },
+        {
+          "setup": "40/18/false/",
+          "reference": 0.49,
+          "validation": 0.48,
+          "changeCost": 7.4
+        },
+        {
+          "setup": "35/27/false/SF002-002",
+          "reference": 0.48,
+          "validation": 0.48,
+          "changeCost": 4.4
+        }
+      ]
+    },
+    {
+      "id": "vow20.2",
+      "goal": 0.5,
+      "coarseCandidates": 176,
+      "finalCandidates": 45,
+      "top": [
+        {
+          "setup": "40/36/true/SF002-005",
+          "reference": 0.49,
+          "validation": 0.5,
+          "changeCost": 2.6
+        },
+        {
+          "setup": "40/31/true/",
+          "reference": 0.53,
+          "validation": 0.47,
+          "changeCost": 4.6
+        },
+        {
+          "setup": "40/40/true/SF002-003",
+          "reference": 0.51,
+          "validation": 0.5,
+          "changeCost": 5.4
+        },
+        {
+          "setup": "35/31/true/SF002-005",
+          "reference": 0.52,
+          "validation": 0.49,
+          "changeCost": 0.6
+        },
+        {
+          "setup": "40/33/true/SF002-005",
+          "reference": 0.51,
+          "validation": 0.51,
+          "changeCost": 2.0
+        }
+      ]
+    }
+  ]
+}

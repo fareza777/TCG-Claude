@@ -1,0 +1,11 @@
+✔ prefix selects expansion without selecting old chapters (2.646ms)
+✔ resume rejects JSON, empty and truncated audio (0.3011ms)
+✔ explicit provider never silently changes the cast (3.9263ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1619.5724

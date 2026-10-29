@@ -1,0 +1,27 @@
+00:00 +0: loading C:/TCG Claude/app/test/story_difficulty_test.dart
+00:00 +0: C:/TCG Claude/app/test/story_difficulty_test.dart: every chapter runs twenty battles
+00:00 +1: C:/TCG Claude/app/test/story_difficulty_test.dart: the opening five battles keep empty enemy boards and gentle AI
+00:00 +2: C:/TCG Claude/app/test/story_difficulty_test.dart: the first battle is a pure tutorial
+00:00 +3: C:/TCG Claude/app/test/story_difficulty_test.dart: help tapers off, and only returns to answer a board
+00:00 +4: C:/TCG Claude/app/test/story_difficulty_test.dart: the briefing text agrees with the scenario it describes
+00:00 +5: C:/TCG Claude/app/test/story_difficulty_test.dart: the player is never sent in empty against two
+00:00 +6: C:/TCG Claude/app/test/story_difficulty_test.dart: every kind of help a fight gives is announced, and agrees
+00:00 +7: C:/TCG Claude/app/test/story_difficulty_test.dart: every number a briefing quotes is the number the fight uses
+00:00 +8: C:/TCG Claude/app/test/story_difficulty_test.dart: every original finale retains its boss AI and authored opening threat
+00:00 +9: C:/TCG Claude/app/test/story_difficulty_test.dart: every story beat points at art that ships with the app
+00:00 +10: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: the audit records reproducible completed turns and a real winner
+00:00 +11: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: calibration preserves stage positions, narrative and enemy identity
+00:00 +12: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: every encounter briefing states actual health, boards and first seat
+00:00 +13: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: an unaided Pyre opening does not become a campaign wall
+00:00 +14: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: the ongoing Five Vows campaign requires a contested duel
+00:00 +15: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:03 +16: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:03 +17: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:03 +18: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:05 +19: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:05 +20: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:05 +21: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:05 +22: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:05 +23: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: all 140 runtime encounters avoid trivial or punishing seeded outcomes
+00:07 +24: C:/TCG Claude/app/test/story_campaign_difficulty_test.dart: each original chapter finale is measurably harder than its tutorial
+00:08 +25: All tests passed!

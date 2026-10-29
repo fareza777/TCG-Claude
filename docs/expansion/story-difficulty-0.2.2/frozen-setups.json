@@ -1,0 +1,1486 @@
+{
+  "setupSha256": "06058df8e9ed9a5dcacfa0d86c69dd80b28fde5f193084fd0605d893aca36da3",
+  "setups": [
+    {
+      "id": "ch1.1",
+      "playerHealth": 20,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-003"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.2",
+      "playerHealth": 30,
+      "enemyHealth": 29,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.3",
+      "playerHealth": 20,
+      "enemyHealth": 15,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.4",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.5",
+      "playerHealth": 30,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.6",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.7",
+      "playerHealth": 30,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.8",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.9",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.10",
+      "playerHealth": 25,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.11",
+      "playerHealth": 30,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.12",
+      "playerHealth": 25,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch1.13",
+      "playerHealth": 25,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [
+        "SF001-081"
+      ]
+    },
+    {
+      "id": "ch1.14",
+      "playerHealth": 35,
+      "enemyHealth": 35,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch1.15",
+      "playerHealth": 30,
+      "enemyHealth": 28,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ]
+    },
+    {
+      "id": "ch1.16",
+      "playerHealth": 25,
+      "enemyHealth": 17,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-001"
+      ],
+      "enemyBoardIds": [
+        "SF001-081",
+        "SF001-083"
+      ]
+    },
+    {
+      "id": "ch1.17",
+      "playerHealth": 35,
+      "enemyHealth": 37,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-082",
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch1.18",
+      "playerHealth": 25,
+      "enemyHealth": 46,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch1.19",
+      "playerHealth": 25,
+      "enemyHealth": 42,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-002",
+        "SF001-004"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ]
+    },
+    {
+      "id": "ch1.20",
+      "playerHealth": 35,
+      "enemyHealth": 21,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-001",
+        "SF001-001"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ]
+    },
+    {
+      "id": "ch2.1",
+      "playerHealth": 25,
+      "enemyHealth": 32,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-023"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.2",
+      "playerHealth": 20,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-021"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.3",
+      "playerHealth": 30,
+      "enemyHealth": 13,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.4",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.5",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.6",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.7",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.8",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.9",
+      "playerHealth": 20,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.10",
+      "playerHealth": 25,
+      "enemyHealth": 33,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.11",
+      "playerHealth": 25,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.12",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch2.13",
+      "playerHealth": 25,
+      "enemyHealth": 49,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-025"
+      ],
+      "enemyBoardIds": [
+        "SF001-081"
+      ]
+    },
+    {
+      "id": "ch2.14",
+      "playerHealth": 20,
+      "enemyHealth": 21,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-021"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch2.15",
+      "playerHealth": 20,
+      "enemyHealth": 26,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-022"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ]
+    },
+    {
+      "id": "ch2.16",
+      "playerHealth": 25,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-023",
+        "SF001-021"
+      ],
+      "enemyBoardIds": [
+        "SF001-043"
+      ]
+    },
+    {
+      "id": "ch2.17",
+      "playerHealth": 20,
+      "enemyHealth": 18,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-021"
+      ],
+      "enemyBoardIds": [
+        "SF001-082",
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch2.18",
+      "playerHealth": 25,
+      "enemyHealth": 39,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-023",
+        "SF001-021",
+        "SF001-022"
+      ],
+      "enemyBoardIds": [
+        "SF001-026"
+      ]
+    },
+    {
+      "id": "ch2.19",
+      "playerHealth": 25,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-021",
+        "SF001-021",
+        "SF001-022"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ]
+    },
+    {
+      "id": "ch2.20",
+      "playerHealth": 25,
+      "enemyHealth": 23,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-025"
+      ],
+      "enemyBoardIds": [
+        "SF001-027"
+      ]
+    },
+    {
+      "id": "ch3.1",
+      "playerHealth": 30,
+      "enemyHealth": 22,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-043"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.2",
+      "playerHealth": 25,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-041"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.3",
+      "playerHealth": 30,
+      "enemyHealth": 21,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.4",
+      "playerHealth": 20,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.5",
+      "playerHealth": 30,
+      "enemyHealth": 37,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.6",
+      "playerHealth": 20,
+      "enemyHealth": 12,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.7",
+      "playerHealth": 20,
+      "enemyHealth": 12,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.8",
+      "playerHealth": 20,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.9",
+      "playerHealth": 30,
+      "enemyHealth": 37,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.10",
+      "playerHealth": 20,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.11",
+      "playerHealth": 20,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.12",
+      "playerHealth": 20,
+      "enemyHealth": 17,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch3.13",
+      "playerHealth": 25,
+      "enemyHealth": 45,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-042",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-081"
+      ]
+    },
+    {
+      "id": "ch3.14",
+      "playerHealth": 30,
+      "enemyHealth": 36,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch3.15",
+      "playerHealth": 35,
+      "enemyHealth": 18,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-042",
+        "SF001-042"
+      ],
+      "enemyBoardIds": [
+        "SF001-065"
+      ]
+    },
+    {
+      "id": "ch3.16",
+      "playerHealth": 25,
+      "enemyHealth": 24,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-041",
+        "SF001-042"
+      ],
+      "enemyBoardIds": [
+        "SF001-082",
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch3.17",
+      "playerHealth": 30,
+      "enemyHealth": 30,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-085",
+        "SF001-083"
+      ]
+    },
+    {
+      "id": "ch3.18",
+      "playerHealth": 40,
+      "enemyHealth": 31,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-043",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch3.19",
+      "playerHealth": 35,
+      "enemyHealth": 37,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-042",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ]
+    },
+    {
+      "id": "ch3.20",
+      "playerHealth": 35,
+      "enemyHealth": 26,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-041",
+        "SF001-044"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ]
+    },
+    {
+      "id": "ch4.1",
+      "playerHealth": 20,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-063"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.2",
+      "playerHealth": 30,
+      "enemyHealth": 26,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.3",
+      "playerHealth": 30,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.4",
+      "playerHealth": 25,
+      "enemyHealth": 35,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.5",
+      "playerHealth": 30,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.6",
+      "playerHealth": 25,
+      "enemyHealth": 35,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.7",
+      "playerHealth": 25,
+      "enemyHealth": 26,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.8",
+      "playerHealth": 30,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.9",
+      "playerHealth": 25,
+      "enemyHealth": 35,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.10",
+      "playerHealth": 20,
+      "enemyHealth": 29,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.11",
+      "playerHealth": 20,
+      "enemyHealth": 29,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.12",
+      "playerHealth": 30,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch4.13",
+      "playerHealth": 25,
+      "enemyHealth": 39,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-062"
+      ],
+      "enemyBoardIds": [
+        "SF001-081"
+      ]
+    },
+    {
+      "id": "ch4.14",
+      "playerHealth": 30,
+      "enemyHealth": 43,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-064"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch4.15",
+      "playerHealth": 25,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-061",
+        "SF001-062"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ]
+    },
+    {
+      "id": "ch4.16",
+      "playerHealth": 20,
+      "enemyHealth": 21,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-063",
+        "SF001-065"
+      ],
+      "enemyBoardIds": [
+        "SF001-082",
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch4.17",
+      "playerHealth": 30,
+      "enemyHealth": 23,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-062",
+        "SF001-064"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-083"
+      ]
+    },
+    {
+      "id": "ch4.18",
+      "playerHealth": 40,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-063",
+        "SF001-065"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch4.19",
+      "playerHealth": 30,
+      "enemyHealth": 19,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-061",
+        "SF001-062",
+        "SF001-064"
+      ],
+      "enemyBoardIds": [
+        "SF001-067"
+      ]
+    },
+    {
+      "id": "ch4.20",
+      "playerHealth": 40,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-064"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ]
+    },
+    {
+      "id": "ch5.1",
+      "playerHealth": 20,
+      "enemyHealth": 23,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-084"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.2",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.3",
+      "playerHealth": 25,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.4",
+      "playerHealth": 25,
+      "enemyHealth": 13,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.5",
+      "playerHealth": 30,
+      "enemyHealth": 32,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.6",
+      "playerHealth": 25,
+      "enemyHealth": 13,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.7",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.8",
+      "playerHealth": 30,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.9",
+      "playerHealth": 25,
+      "enemyHealth": 13,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.10",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.11",
+      "playerHealth": 30,
+      "enemyHealth": 16,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.12",
+      "playerHealth": 30,
+      "enemyHealth": 32,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "ch5.13",
+      "playerHealth": 30,
+      "enemyHealth": 45,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-082",
+        "SF001-082"
+      ],
+      "enemyBoardIds": [
+        "SF001-081"
+      ]
+    },
+    {
+      "id": "ch5.14",
+      "playerHealth": 40,
+      "enemyHealth": 46,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-082"
+      ],
+      "enemyBoardIds": [
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch5.15",
+      "playerHealth": 40,
+      "enemyHealth": 35,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-081",
+        "SF001-082"
+      ],
+      "enemyBoardIds": [
+        "SF001-085"
+      ]
+    },
+    {
+      "id": "ch5.16",
+      "playerHealth": 35,
+      "enemyHealth": 12,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-082"
+      ]
+    },
+    {
+      "id": "ch5.17",
+      "playerHealth": 40,
+      "enemyHealth": 25,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-082",
+        "SF001-084"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-084"
+      ]
+    },
+    {
+      "id": "ch5.18",
+      "playerHealth": 40,
+      "enemyHealth": 28,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-084"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-085"
+      ]
+    },
+    {
+      "id": "ch5.19",
+      "playerHealth": 45,
+      "enemyHealth": 22,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF001-081",
+        "SF001-081"
+      ],
+      "enemyBoardIds": [
+        "SF001-086",
+        "SF001-085"
+      ]
+    },
+    {
+      "id": "ch5.20",
+      "playerHealth": 45,
+      "enemyHealth": 38,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF001-084",
+        "SF001-081",
+        "SF001-082"
+      ],
+      "enemyBoardIds": [
+        "SF001-086"
+      ]
+    },
+    {
+      "id": "vow01.1",
+      "playerHealth": 35,
+      "enemyHealth": 29,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-179"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow01.2",
+      "playerHealth": 30,
+      "enemyHealth": 28,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-174"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow02.1",
+      "playerHealth": 25,
+      "enemyHealth": 17,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-131"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow02.2",
+      "playerHealth": 35,
+      "enemyHealth": 47,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-137"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow03.1",
+      "playerHealth": 30,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-003"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow03.2",
+      "playerHealth": 25,
+      "enemyHealth": 28,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-002"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow04.1",
+      "playerHealth": 30,
+      "enemyHealth": 32,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045",
+        "SF002-045"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow04.2",
+      "playerHealth": 35,
+      "enemyHealth": 17,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow05.1",
+      "playerHealth": 25,
+      "enemyHealth": 27,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-091"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow05.2",
+      "playerHealth": 25,
+      "enemyHealth": 30,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-091"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow06.1",
+      "playerHealth": 30,
+      "enemyHealth": 41,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-003",
+        "SF002-003"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow06.2",
+      "playerHealth": 25,
+      "enemyHealth": 26,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-002",
+        "SF002-007"
+      ],
+      "enemyBoardIds": [
+        "SF002-047"
+      ]
+    },
+    {
+      "id": "vow07.1",
+      "playerHealth": 30,
+      "enemyHealth": 35,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow07.2",
+      "playerHealth": 30,
+      "enemyHealth": 24,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-048"
+      ],
+      "enemyBoardIds": [
+        "SF002-047"
+      ]
+    },
+    {
+      "id": "vow08.1",
+      "playerHealth": 25,
+      "enemyHealth": 28,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-091"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow08.2",
+      "playerHealth": 35,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [
+        "SF002-133"
+      ]
+    },
+    {
+      "id": "vow09.1",
+      "playerHealth": 35,
+      "enemyHealth": 43,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-134"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow09.2",
+      "playerHealth": 25,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-136"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ]
+    },
+    {
+      "id": "vow10.1",
+      "playerHealth": 30,
+      "enemyHealth": 26,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-179"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow10.2",
+      "playerHealth": 35,
+      "enemyHealth": 23,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-176"
+      ],
+      "enemyBoardIds": [
+        "SF002-090"
+      ]
+    },
+    {
+      "id": "vow11.1",
+      "playerHealth": 25,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-133",
+        "SF002-133"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow11.2",
+      "playerHealth": 35,
+      "enemyHealth": 22,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": [
+        "SF002-004"
+      ]
+    },
+    {
+      "id": "vow12.1",
+      "playerHealth": 35,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-048"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow12.2",
+      "playerHealth": 35,
+      "enemyHealth": 14,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ]
+    },
+    {
+      "id": "vow13.1",
+      "playerHealth": 35,
+      "enemyHealth": 37,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-093"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow13.2",
+      "playerHealth": 35,
+      "enemyHealth": 19,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-088",
+        "SF002-090"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ]
+    },
+    {
+      "id": "vow14.1",
+      "playerHealth": 35,
+      "enemyHealth": 34,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-005"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow14.2",
+      "playerHealth": 30,
+      "enemyHealth": 35,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-003",
+        "SF002-008"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ]
+    },
+    {
+      "id": "vow15.1",
+      "playerHealth": 30,
+      "enemyHealth": 36,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-177"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow15.2",
+      "playerHealth": 30,
+      "enemyHealth": 22,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-176",
+        "SF002-176"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ]
+    },
+    {
+      "id": "vow16.1",
+      "playerHealth": 30,
+      "enemyHealth": 43,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-045",
+        "SF002-045"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow16.2",
+      "playerHealth": 35,
+      "enemyHealth": 33,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-048"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ]
+    },
+    {
+      "id": "vow17.1",
+      "playerHealth": 35,
+      "enemyHealth": 32,
+      "playerFirst": false,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow17.2",
+      "playerHealth": 40,
+      "enemyHealth": 23,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": [
+        "SF002-133"
+      ]
+    },
+    {
+      "id": "vow18.1",
+      "playerHealth": 30,
+      "enemyHealth": 25,
+      "playerFirst": true,
+      "playerBoardIds": [],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow18.2",
+      "playerHealth": 30,
+      "enemyHealth": 33,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-133"
+      ],
+      "enemyBoardIds": [
+        "SF002-004"
+      ]
+    },
+    {
+      "id": "vow19.1",
+      "playerHealth": 35,
+      "enemyHealth": 30,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-174",
+        "SF002-174"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow19.2",
+      "playerHealth": 35,
+      "enemyHealth": 28,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-174",
+        "SF002-176",
+        "SF002-179"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ]
+    },
+    {
+      "id": "vow20.1",
+      "playerHealth": 40,
+      "enemyHealth": 20,
+      "playerFirst": true,
+      "playerBoardIds": [
+        "SF002-005"
+      ],
+      "enemyBoardIds": []
+    },
+    {
+      "id": "vow20.2",
+      "playerHealth": 40,
+      "enemyHealth": 36,
+      "playerFirst": false,
+      "playerBoardIds": [
+        "SF002-005"
+      ],
+      "enemyBoardIds": [
+        "SF002-176"
+      ]
+    }
+  ]
+}

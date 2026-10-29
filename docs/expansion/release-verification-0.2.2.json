@@ -1,0 +1,137 @@
+{
+  "version": "0.2.2+67",
+  "builtOn": "2026-10-29",
+  "sourceBaseRevision": "bbd7b57152b456f7bf7c9f1a3523fb5de069c039",
+  "platforms": [
+    "Android APK",
+    "Android App Bundle",
+    "Web"
+  ],
+  "artifacts": [
+    {
+      "file": "shardfall-five-vows-0.2.2+67.apk",
+      "bytes": 225172284,
+      "sha256": "f67f30cc88e11202202f43d1f9909a3f535f87f82a6b220e7ef43166ad613792",
+      "matchedSourceAssets": 1181
+    },
+    {
+      "file": "shardfall-five-vows-0.2.2+67.aab",
+      "bytes": 225330400,
+      "sha256": "1c2b81648d1b82cb2b97fe8de3e4849a70b3162db1d7e7f057d9ca54fc953e6a",
+      "matchedSourceAssets": 1181
+    }
+  ],
+  "web": {
+    "directory": "C:\\TCG Claude\\app\\build\\releases\\five-vows-0.2.2+67\\web",
+    "files": 1537,
+    "matchedSourceAssets": 1181,
+    "version": {
+      "app_name": "shardfall",
+      "version": "0.2.2",
+      "build_number": "67",
+      "package_name": "shardfall"
+    }
+  },
+  "signing": {
+    "sameProductionCertificate": true,
+    "certificateSha256": "fead9fa6ccaca1ed91f08175d394378df0e7edbba219564ce472b6578d448d6b",
+    "apkVerified": true,
+    "aabVerified": true,
+    "apkPackage": "package: name='com.shardfall.shardfall' versionCode='67' versionName='0.2.2' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'"
+  },
+  "catalogs": {
+    "set02Sha256": "337f044c308c58f21c286af0e980a32dbbbc180365fb187ef45198eed0a18f63",
+    "sourceAndAppIdentical": true,
+    "packagedCopiesVerified": true,
+    "collectibles": 215,
+    "unchangedFrom021": true
+  },
+  "tests": {
+    "app": 306,
+    "engine": 97,
+    "backend": 32,
+    "voicePipeline": 3,
+    "abilityAudit": 7,
+    "total": 445,
+    "additionalVisualCaptureTask": 1
+  },
+  "staticAnalysis": {
+    "errors": 0,
+    "warnings": 0,
+    "appExistingInfos": 2,
+    "engineExistingInfos": 2
+  },
+  "assets": {
+    "collectibleArt": 215,
+    "chapterArt": 20,
+    "tokenArt": 4,
+    "voiceClips": 936,
+    "sourceArtVoiceAndCatalogsUnchangedFrom021": true,
+    "battleRoomImages": 4,
+    "battleRoomTotalBytes": 1569348,
+    "battleRoomDecodeWidth": 1024
+  },
+  "performance": {
+    "staticRoomImages": true,
+    "newBackgroundTickers": 0,
+    "healthUpdatesTested": 100,
+    "backgroundPictureRetained": true,
+    "additionalBackgroundPaints": 0,
+    "deviceFpsMeasured": false
+  },
+  "visualVerification": {
+    "method": "Actual Flutter widgets, bundled project fonts/assets, headless rendering",
+    "screenshots": 7,
+    "sizes": [
+      "390x844",
+      "1120x1180",
+      "1280x720"
+    ],
+    "longNameRegressionWidth": 320,
+    "overflowErrors": 0,
+    "browserVerifiedThisRelease": false,
+    "browserLimitation": "Host access restricted by session policy",
+    "fontLimitation": "Existing Unicode sword renders as a square in widget-test font fallback"
+  },
+  "story": {
+    "encounters": 140,
+    "baselineGames": 28000,
+    "finalAuditGames": 84000,
+    "allStalls": 0,
+    "frozenSourceHashesMatched": 33,
+    "setupSha256": "06058df8e9ed9a5dcacfa0d86c69dd80b28fde5f193084fd0605d893aca36da3",
+    "holdoutSeedBase": 2026102947,
+    "tacticianHoldout": {
+      "onboarding": [
+        72,
+        89
+      ],
+      "ordinary": [
+        59,
+        73
+      ],
+      "challenge": [
+        40,
+        64
+      ]
+    },
+    "pointEstimateOutliers": 6,
+    "humanWinRateClaimed": false,
+    "evidenceDirectory": "docs/expansion/story-difficulty-0.2.2"
+  },
+  "providerCredentials": {
+    "knownKeysChecked": 2,
+    "matchesInProductSourcesOrReleases": 0
+  },
+  "localUserGeneratedPluginsEditPreservedByteForByte": true,
+  "checks": [
+    "Purchase/equip/save/cloud/backup/rapid-tap/failure paths tested",
+    "Every mode shares the cosmetic DuelScreen background",
+    "No card/engine/VO/narrative changes after Story audit freeze",
+    "Independent feature review and final responsive-layout review clean",
+    "All 1181 selected assets match in APK, AAB and Web",
+    "APK and AAB match existing production signing certificate",
+    "No remote deployment or store publication"
+  ],
+  "verificationLogsDirectory": "docs/expansion/verification-0.2.2"
+}
