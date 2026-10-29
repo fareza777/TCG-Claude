@@ -41,16 +41,16 @@ Review engine dan balance dilakukan secara terpisah. Reviewer tambahan untuk sel
 - [Provenance dan seluruh prompt art](../../tools/art_pipeline/set02_art_ledger.json): generator, prompt, referensi, lokasi master lokal, dimensi, dan hash setiap ilustrasi.
 - Art terpasang: `app/assets/art/SF002-*.webp`, `STORY-vow*.webp`, dan `TOKEN-*.webp`.
 - VO terpasang: `app/assets/vo/vow*.mp3`; [catatan produksi](../../tools/voice_pipeline/production_ledger.json).
-- Android APK: `app/build/app/outputs/flutter-apk/app-release.apk`.
-- Android App Bundle: `app/build/app/outputs/bundle/release/app-release.aab`.
-- Web: `app/build/web/`.
+- Android APK: `app/build/releases/five-vows-0.2.0+65/shardfall-five-vows-0.2.0+65.apk`.
+- Android App Bundle: `app/build/releases/five-vows-0.2.0+65/shardfall-five-vows-0.2.0+65.aab`.
+- Web: `app/build/releases/five-vows-0.2.0+65/web/`.
 - [Bukti tampilan cerita](previews/five-vows-story.png).
 - [Bukti booster di dalam game](previews/five-vows-booster.png).
 - [Hash, tanda tangan, dan kecocokan aset pada ketiga build](release-verification.json).
 
 APK dan App Bundle dibangun memakai konfigurasi tanda tangan rilis yang sudah ada pada proyek asli. Konfigurasi tersebut tetap lokal dan diabaikan Git. Kunci ElevenLabs/Deepgram tidak ditulis ke sumber atau aplikasi.
 
-Hasil ini disiapkan di branch `codex/shardfall-five-vows`. Perubahan lain pada checkout asli dipertahankan. Belum ada publikasi ke server atau toko aplikasi; backend PvP harus memakai katalog dan kode server yang baru ketika rilis dilakukan.
+Hasil ini dibuat di branch `codex/shardfall-five-vows`, lalu digabung ke `main` secara lokal atas pilihan pengguna pada 29 Oktober 2026. Seluruh 406 tes dijalankan ulang pada proyek utama dan lulus. Satu perubahan lokal serta 958 berkas yang belum masuk Git tetap dipertahankan. Paket rilis disalin dan diperiksa di direktori versi di atas. Worktree cadangan tetap tersedia karena aplikasi menandainya sebagai checkout utama tugas dan menolak pengarsipan. Belum ada publikasi ke server atau toko aplikasi; backend PvP harus memakai katalog dan kode server yang baru ketika rilis dilakukan.
 
 ## Mengulangi pemeriksaan
 

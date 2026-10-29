@@ -46,4 +46,8 @@ Delivery notes: [THE_FIVE_VOWS.md](../../expansion/THE_FIVE_VOWS.md).
 
 The engine/balance reviewer completed a separate review. The fresh whole-branch reviewer could not run after the account usage limit; the controller performed the final boundary review and verification directly. No claim is made that the unavailable reviewer approved the branch.
 
-No remote push, merge, server rollout or store publication was performed. The new backend must be released alongside clients before live PvP accepts SF002 IDs. The attached checkout and runnable local artifacts remain available for review.
+On the user's explicit choice, the two expansion commits were fast-forwarded into local `main` at `C:\TCG Claude`. All 406 tests and analyses were repeated successfully on that merged checkout. The original one tracked modification and 958 untracked files were verified unchanged. Signed APK/App Bundle and all 1,533 web files were copied and hash-checked under `app/build/releases/five-vows-0.2.0+65`; the ignored production art cache was preserved in the main checkout as well.
+
+Native worktree archival was attempted after verification, but Codex refused with "The task's primary checkout cannot be removed." The worktree and its already-merged branch were retained; no filesystem or Git workaround was used to remove that protected checkout.
+
+No remote push, server rollout or store publication was performed. The new backend must be released alongside clients before live PvP accepts SF002 IDs.

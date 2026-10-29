@@ -11,12 +11,12 @@
   },
   "builds": {
     "apk": {
-      "path": "app/build/app/outputs/flutter-apk/app-release.apk",
+      "path": "app/build/releases/five-vows-0.2.0+65/shardfall-five-vows-0.2.0+65.apk",
       "bytes": 222994594,
       "sha256": "a1ecb938c6350949a1d65e6734c51bb06858ee4515eab0d05534380f3ae608b0"
     },
     "appbundle": {
-      "path": "app/build/app/outputs/bundle/release/app-release.aab",
+      "path": "app/build/releases/five-vows-0.2.0+65/shardfall-five-vows-0.2.0+65.aab",
       "bytes": 223216630,
       "sha256": "e0e3ba6f308952fe6d1ff5b0f22f3ff7ac5e2cd453c5c816e28b8658542981e2"
     }
@@ -35,5 +35,21 @@
   "voice": {
     "clips": 521,
     "seconds": 2122.2
+  },
+  "integration": {
+    "branch": "main",
+    "source_branch": "codex/shardfall-five-vows",
+    "merged_commit": "a5859e493ed47b41e534ea2eb77ad586a5e49457",
+    "method": "fast-forward",
+    "tests_repeated_on_main": {
+      "app": 277,
+      "engine": 94,
+      "backend": 32,
+      "voice_pipeline": 3
+    },
+    "original_local_changes_preserved": 1,
+    "original_untracked_files_preserved": 958,
+    "temporary_worktree": "retained: Codex identifies it as the task primary checkout and refuses archival",
+    "web_preview_path": "app/build/releases/five-vows-0.2.0+65/web"
   }
 }
