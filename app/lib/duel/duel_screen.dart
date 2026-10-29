@@ -642,7 +642,7 @@ class _DuelScreenState extends State<DuelScreen>
             child: units.isEmpty
                 ? Center(
                     child: Text(
-                      enemySide ? '' : 'Empty arena — summon a Unit',
+                      enemySide ? '' : 'No units in play — summon a Unit',
                       style: const TextStyle(
                           color: Color(0x33FFFFFF), fontSize: 11),
                     ),

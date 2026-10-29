@@ -60,7 +60,7 @@ class CardWidget extends StatelessWidget {
     if (def.keywords.isNotEmpty) {
       parts.add(def.keywords.map((k) => k.name).join(', '));
     }
-    if (def.text.isNotEmpty) parts.add(def.text);
+    if (def.text.isNotEmpty) parts.add(def.text.replaceAll('{name}', def.name));
     if (exerted) parts.add('exerted');
     return parts.join('. ');
   }

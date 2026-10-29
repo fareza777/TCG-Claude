@@ -27,7 +27,7 @@ const _pages = [
   ], art: 'SF001-043'),
   _TutorialPage(Icons.style, 'Playing cards', [
     'Tap a glowing card in your hand to play it.',
-    'Units stay in the Arena and fight. Rites are fast (instant-speed); Rituals are slower, main-phase-only.',
+    'Units remain in play and fight. Rites are fast (instant-speed); Rituals are slower, main-phase-only.',
     'If a spell needs a target, the game enters aiming mode — tap a Unit or a player face. Long-press any card to inspect it.',
   ], art: 'SF001-221'),
   _TutorialPage(Icons.sports_kabaddi, 'Combat, like the classics', [

@@ -1,0 +1,22 @@
+{
+  "revision": "07",
+  "frozenBeforeHoldout": true,
+  "holdoutSeed": 2026102931,
+  "set02Sha256": "337f044c308c58f21c286af0e980a32dbbbc180365fb187ef45198eed0a18f63",
+  "set01Sha256": "7e93751856f76d63a6b1ce7f796cb8cb4195a747d2def37c0050d4c87aef46f5",
+  "version": "0.2.1+66",
+  "sourceCommitBeforeChanges": "7ac542ce4323726cf70398bc2d054b11d0e5dd40",
+  "originalSetGameplaySha256": "f9b6cc67c3f8c409f1d86d37feb8e3235f32e5ece7b1dd1d7382575d97020c97",
+  "comparison": "No reprinted cross-set ability packages, including a stricter comparison ignoring Rite/Ritual type; stats, cost, names, art and colors cannot conceal reprints. Basic Wellsprings exempt.",
+  "tuning": "Seven local tuning revisions; only reference2026102901 and validation2026102902 consulted. Trials retained in ignored app/build/set02-followup. Holdout2026102931 first run after freezing revision07.",
+  "engineSources": {
+    "packages/shardfall_engine/bin/author_set02.py": "7d225f534ceed4c18cd4bfd160c77cfde50eb022847e8d61f233adae61255326",
+    "packages/shardfall_engine/bin/expansion_archetypes.dart": "8f6b5c433b49eab076e403a0d54aeda87d64132a4cdd88d36c9652d2ca60bea4",
+    "packages/shardfall_engine/bin/mode_balance.dart": "bd9c497685f27be8a7511cba82be45316a8e0312d5039681d10e199c1a173acc",
+    "packages/shardfall_engine/lib/src/data/battle_decks.dart": "ca1613ea0d52c6a3a38bd4f7fd9b8e13e3b8fe7facd333abd940d8e0524a3626",
+    "packages/shardfall_engine/lib/src/ai/ai_player.dart": "3f8a5bcd2c9982ec7b73b8df14f088de3ed9acce6aed87e36aa6ec41e39402b6",
+    "data/cards/set02_revisions.json": "8d1e9fd40d200a37af2c4675a981de9ab4277d33fad4960a79ee27e035917148"
+  },
+  "set02GameplaySha256": "5f7f3474c7efb3898c40e3fb7497c4fbeff9304325a3c903b7bb5f478d5e6a1a",
+  "lineEndings": "Byte hashes describe packaged Windows files; gameplay hashes use canonical JSON and are portable across line endings."
+}

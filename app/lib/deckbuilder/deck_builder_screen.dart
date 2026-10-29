@@ -8,6 +8,7 @@ import '../services/ad_service.dart';
 import '../widgets/ad_banner.dart';
 import 'package:flutter/services.dart';
 import 'package:shardfall_engine/shardfall_engine.dart';
+import '../data/deck_rules.dart';
 
 import '../card_render/card_widget.dart';
 import '../services/audio_manager.dart';
@@ -23,9 +24,9 @@ import '../widgets/card_zoom.dart';
 class DeckBuilderScreen extends StatefulWidget {
   /// Deck-size rules, public because PvP and the arena must agree with them.
   /// They were duplicated as a bare 40 in PvP once, and the two drifted.
-  static const minDeck = 40;
-  static const maxDeck = 60;
-  static const maxWellspring = 20;
+  static const minDeck = DeckRules.minimum;
+  static const maxDeck = DeckRules.maximum;
+  static const maxWellspring = DeckRules.maximumWellsprings;
 
   final CardLibrary library;
   final SaveService save;

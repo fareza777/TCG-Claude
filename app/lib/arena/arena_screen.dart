@@ -149,9 +149,11 @@ class _ArenaScreenState extends State<ArenaScreen> {
     if (_deck == null) return;
     AudioManager.instance.attack();
     final foeKey = _nextFoe.name.toUpperCase();
-    final foeDeck = widget.library.buildStarterDeck(foeKey);
+    final foeDeck = BattleDecks.build(widget.library, foeKey,
+        seed: _rng.nextInt(0x7fffffff));
     final foeUnits = [
-      for (final c in foeDeck)
+      // Preserve the existing opening-board difficulty budget.
+      for (final c in widget.library.buildStarterDeck(foeKey))
         if (c.type == CardType.unit) c,
     ];
     final scenario = BattleScenario(
@@ -170,7 +172,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
     );
     final controller = DuelController(
       playerDeck: _deck!,
-      enemyDeck: widget.library.buildStarterDeck(foeKey),
+      enemyDeck: foeDeck,
       scenario: scenario,
       aiTier: _foeTier,
     );

@@ -1,0 +1,8 @@
+{
+  "set02NonResources": 210,
+  "crossSetDuplicates": [],
+  "set02InternalDuplicates": [],
+  "crossSetIgnoringCardTypeDuplicates": [],
+  "resourceException": "Basic Wellsprings share the established Aether ability.",
+  "comparison": "Full ordered ability package, normalized defaults and colors; ignores costs, unit stats and presentation."
+}

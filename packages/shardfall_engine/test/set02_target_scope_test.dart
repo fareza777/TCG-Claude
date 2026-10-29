@@ -50,7 +50,7 @@ void main() {
           reason: card.id);
     }
     expect(library.card('SF002-165').text,
-        'When this enters the Arena: Destroy target enemy unit.');
+        'When {name} enters play, destroy target enemy unit.');
     expect(library.card('SF002-128').text, contains('each enemy unit'));
   });
 }

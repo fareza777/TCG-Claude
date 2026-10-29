@@ -9,7 +9,15 @@ void main() {
     final state = GameState(
       p1: PlayerState(id: PlayerId.p1, arena: [
         CardInstance(
-            instanceId: 1, def: lib.card('SF002-045'), owner: PlayerId.p1),
+            instanceId: 1,
+            def: const CardDef(
+                id: 'TEST-ATTACKER',
+                name: 'Attacker',
+                dominions: [Dominion.pyre],
+                type: CardType.unit,
+                might: 2,
+                guard: 1),
+            owner: PlayerId.p1),
       ]),
       p2: PlayerState(id: PlayerId.p2, health: 2, arena: [
         CardInstance(

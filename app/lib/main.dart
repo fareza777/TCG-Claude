@@ -844,7 +844,8 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
     if (!mounted) return;
     final controller = DuelController(
       playerDeck: playerDeck,
-      enemyDeck: _library!.buildStarterDeck(enemyKey),
+      enemyDeck: BattleDecks.build(_library!, enemyKey,
+          seed: math.Random().nextInt(0x7fffffff)),
       firstPlayer: firstPlayer,
     );
     final won = await Navigator.of(context).push<bool>(
@@ -1038,7 +1039,7 @@ class _MenuScreenState extends State<MenuScreen> with WidgetsBindingObserver {
                         ),
                         const SizedBox(height: 4),
                         const Text(
-                          'SET I — THE SUNDERING',
+                                    'SET 2 — THE FIVE VOWS',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0xFFD8CCAE),

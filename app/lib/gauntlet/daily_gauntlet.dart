@@ -79,8 +79,7 @@ class DailyGauntlet {
   static int seedFor(String dayId) =>
       int.tryParse(dayId.replaceAll('-', '')) ?? 0;
 
-  static int _maxCopies(CardDef def) =>
-      def.rarity == Rarity.legendary ? 1 : 3;
+  static int _maxCopies(CardDef def) => def.rarity == Rarity.legendary ? 1 : 3;
 
   /// Builds the challenge for [dayId].
   ///
@@ -94,7 +93,7 @@ class DailyGauntlet {
 
     final colours = _pickDominions(all, rng);
     final deck = _buildDeck(all, colours, rng);
-    _addWellsprings(all, colours, deck);
+    _addWellsprings(all, colours, deck, rng);
 
     final foeDominion = _pickFoe(all, colours, rng);
 
@@ -141,11 +140,9 @@ class DailyGauntlet {
         playable[d] = (playable[d] ?? 0) + 1;
       }
     }
-    final viable = playable.entries
-        .where((e) => e.value >= 8)
-        .map((e) => e.key)
-        .toList()
-      ..sort((a, b) => a.index.compareTo(b.index));
+    final viable =
+        playable.entries.where((e) => e.value >= 8).map((e) => e.key).toList()
+          ..sort((a, b) => a.index.compareTo(b.index));
     if (viable.length < 2) {
       throw StateError('fewer than two Dominions can field a deck');
     }
@@ -158,7 +155,10 @@ class DailyGauntlet {
 
   /// The spells and units, filled to the curve then topped up cheapest-first.
   static Map<String, int> _buildDeck(
-      List<CardDef> all, List<Dominion> colours, Random rng) {
+    List<CardDef> all,
+    List<Dominion> colours,
+    Random rng,
+  ) {
     bool inPool(CardDef d) =>
         d.type != CardType.wellspring &&
         (d.dominions.any(colours.contains) ||
@@ -188,7 +188,9 @@ class DailyGauntlet {
       var want = entry.value;
       for (final def in pool) {
         if (want <= 0 || taken >= spellCount) break;
-        if (def.totalCost != entry.key) continue;
+        if (entry.key == 6 ? def.totalCost < 6 : def.totalCost != entry.key) {
+          continue;
+        }
         final n = room(def) < want ? room(def) : want;
         take(def, n);
         want -= n;
@@ -216,7 +218,11 @@ class DailyGauntlet {
   /// and Wellsprings disagree cannot pay for itself, and the player would find
   /// out four turns into the one attempt they get.
   static void _addWellsprings(
-      List<CardDef> all, List<Dominion> colours, Map<String, int> deck) {
+    List<CardDef> all,
+    List<Dominion> colours,
+    Map<String, int> deck,
+    Random rng,
+  ) {
     final demand = {for (final d in colours) d: 0};
     deck.forEach((id, count) {
       final def = all.firstWhere((c) => c.id == id);
@@ -244,8 +250,12 @@ class DailyGauntlet {
     }
     var sum = split.values.fold(0, (a, b) => a + b);
     while (sum != wellspringCount) {
-      final biggest = split.entries.reduce((a, b) => a.value >= b.value ? a : b);
-      final smallest = split.entries.reduce((a, b) => a.value <= b.value ? a : b);
+      final biggest = split.entries.reduce(
+        (a, b) => a.value >= b.value ? a : b,
+      );
+      final smallest = split.entries.reduce(
+        (a, b) => a.value <= b.value ? a : b,
+      );
       if (sum > wellspringCount) {
         split[biggest.key] = biggest.value - 1;
         sum -= 1;
@@ -256,37 +266,49 @@ class DailyGauntlet {
     }
 
     for (final d in colours) {
-      final well = all.firstWhere(
-        (c) => c.type == CardType.wellspring && c.dominions.contains(d),
-        orElse: () => throw StateError('no Wellspring exists for ${d.name}'),
-      );
+      final options = all
+          .where(
+            (c) => c.type == CardType.wellspring && c.dominions.contains(d),
+          )
+          .toList();
+      if (options.isEmpty) {
+        throw StateError('no Wellspring exists for ${d.name}');
+      }
+      final well = options[rng.nextInt(options.length)];
       deck[well.id] = (deck[well.id] ?? 0) + split[d]!;
     }
   }
 
   static Dominion _pickFoe(
-      List<CardDef> all, List<Dominion> colours, Random rng) {
+    List<CardDef> all,
+    List<Dominion> colours,
+    Random rng,
+  ) {
     final others = <Dominion>{
       for (final def in all)
         for (final d in def.dominions)
           if (d != Dominion.neutral && !colours.contains(d)) d,
-    }.toList()
-      ..sort((a, b) => a.index.compareTo(b.index));
+    }.toList()..sort((a, b) => a.index.compareTo(b.index));
     if (others.isEmpty) return colours.first;
     return others[rng.nextInt(others.length)];
   }
 
   /// Up to two cheap units the opponent starts with.
   static List<CardDef> _openingBoard(
-      List<CardDef> all, Dominion dominion, Random rng) {
+    List<CardDef> all,
+    Dominion dominion,
+    Random rng,
+  ) {
     final size = const [0, 0, 1, 2][rng.nextInt(4)];
     if (size == 0) return const [];
 
     final cheap = all
-        .where((d) =>
-            d.type == CardType.unit &&
-            d.dominions.contains(dominion) &&
-            d.totalCost <= 3)
+        .where(
+          (d) =>
+              d.type == CardType.unit &&
+              d.dominions.contains(dominion) &&
+              d.totalCost <= 3,
+        )
         .toList();
     if (cheap.isEmpty) return const [];
     return [for (var i = 0; i < size; i++) cheap[rng.nextInt(cheap.length)]];

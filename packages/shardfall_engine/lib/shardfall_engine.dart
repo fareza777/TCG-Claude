@@ -6,6 +6,7 @@ export 'src/model/enums.dart';
 export 'src/model/game_state.dart';
 export 'src/ai/ai_player.dart';
 export 'src/data/library.dart';
+export 'src/data/battle_decks.dart';
 export 'src/effects/interpreter.dart';
 export 'src/rules/chain.dart';
 export 'src/rules/combat.dart';

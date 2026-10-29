@@ -1,5 +1,7 @@
 # SHARDFALL — The Five Vows
 
+Pembaruan terbaru: **0.2.1+66**. Home kini menampilkan Set 2, campaign dipisah menurut set, semua kartu tersedia di mode permainan, istilah aturan memakai “in play”, dan kemampuan ekspansi telah diaudit ulang terhadap Set 1. Lihat [catatan pembaruan dan hasil balance terbaru](SET02_POLISH_0.2.1.md). Angka rilis awal di bawah disimpan sebagai riwayat 0.2.0+65.
+
 Ekspansi SF002 melanjutkan akhir The Sundering: Ravenna masih menjaga batu, saudari yang dibebaskannya kembali melihat pagi, dan Thornmaw memilih merawat lampu. Dua puluh chapter baru mengikuti usaha lima kota menghadapi Communion dan belajar membuat janji yang tetap merupakan pilihan.
 
 ## Isi ekspansi
@@ -16,7 +18,7 @@ Menu utama menyediakan pintasan **The Five Vows**. Booster ekspansi dijual terpi
 
 Collection, Deck Builder, dan Forge mempunyai filter set. Kartu baru dapat dicampur dengan kartu lama. Deck, progres, starter, dan definisi kartu The Sundering tetap dipertahankan.
 
-**Vow** memberi hasil sekali pada awal giliran pengendalinya berikutnya jika kartu masih berada di Arena. Mengeluarkannya lebih awal mencegah hasil tersebut. Mengembalikannya ke tangan lalu memainkannya kembali memulai Vow baru dan tetap memerlukan biaya bermain.
+**Vow** memberi hasil sekali pada awal giliran pengendalinya berikutnya jika kartu masih berada dalam permainan (*in play*). Mengeluarkannya lebih awal mencegah hasil tersebut. Mengembalikannya ke tangan lalu memainkannya kembali memulai Vow baru dan tetap memerlukan biaya bermain.
 
 **Renew N** menghapus paling banyak N damage yang benar-benar ada pada unit hidup. Jika ada damage yang dihapus, unit memperoleh satu counter +1/+1. Unit yang tidak terluka tidak memperoleh counter gratis.
 

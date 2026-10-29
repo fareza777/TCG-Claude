@@ -1,6 +1,21 @@
 import '../services/save_service.dart';
 import 'story_data.dart';
 
+enum StoryCampaign {
+  sundering('SET 1', 'The Sundering'),
+  fiveVows('SET 2', 'The Five Vows');
+
+  final String label;
+  final String title;
+  const StoryCampaign(this.label, this.title);
+  bool contains(StoryChapter chapter) =>
+      chapter.id.startsWith('vow') == (this == fiveVows);
+  List<int> get chapterIndices => [
+    for (var i = 0; i < storyChapters.length; i++)
+      if (contains(storyChapters[i])) i,
+  ];
+}
+
 /// Shared by the campaign map and progression checks. The first expansion
 /// chapter follows ch5; no special-case unlock can bypass that boundary.
 bool storyChapterUnlocked(int index, SaveService save) =>

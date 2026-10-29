@@ -73,7 +73,8 @@ class _GauntletScreenState extends State<GauntletScreen> {
 
     final controller = DuelController(
       playerDeck: _loanDeck,
-      enemyDeck: widget.library.buildStarterDeck(_day.foeDominion.name.toUpperCase()),
+      enemyDeck: BattleDecks.build(widget.library,
+          _day.foeDominion.name.toUpperCase(), seed: _day.seed),
       scenario: BattleScenario(
         playerHealth: _day.playerHealth,
         enemyHealth: _day.foeHealth,

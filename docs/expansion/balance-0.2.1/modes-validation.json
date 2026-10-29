@@ -1,0 +1,150 @@
+{
+  "seed": 2026102902,
+  "source": "both",
+  "samplesPerPair": 200,
+  "ai": "tactician",
+  "maxHalfTurns": 240,
+  "generated": {
+    "games": 4000,
+    "stalls": 0,
+    "pairs": [
+      {
+        "a": "VERDANCE",
+        "b": "PYRE",
+        "aWins": 198,
+        "bWins": 202,
+        "stalls": 0
+      },
+      {
+        "a": "VERDANCE",
+        "b": "TIDE",
+        "aWins": 189,
+        "bWins": 211,
+        "stalls": 0
+      },
+      {
+        "a": "VERDANCE",
+        "b": "DAWN",
+        "aWins": 157,
+        "bWins": 243,
+        "stalls": 0
+      },
+      {
+        "a": "VERDANCE",
+        "b": "GLOOM",
+        "aWins": 206,
+        "bWins": 194,
+        "stalls": 0
+      },
+      {
+        "a": "PYRE",
+        "b": "TIDE",
+        "aWins": 187,
+        "bWins": 213,
+        "stalls": 0
+      },
+      {
+        "a": "PYRE",
+        "b": "DAWN",
+        "aWins": 183,
+        "bWins": 217,
+        "stalls": 0
+      },
+      {
+        "a": "PYRE",
+        "b": "GLOOM",
+        "aWins": 221,
+        "bWins": 179,
+        "stalls": 0
+      },
+      {
+        "a": "TIDE",
+        "b": "DAWN",
+        "aWins": 165,
+        "bWins": 235,
+        "stalls": 0
+      },
+      {
+        "a": "TIDE",
+        "b": "GLOOM",
+        "aWins": 216,
+        "bWins": 184,
+        "stalls": 0
+      },
+      {
+        "a": "DAWN",
+        "b": "GLOOM",
+        "aWins": 214,
+        "bWins": 186,
+        "stalls": 0
+      }
+    ],
+    "overall": {
+      "VERDANCE": {
+        "wins": 750,
+        "games": 1600,
+        "winPercent": 46.875
+      },
+      "PYRE": {
+        "wins": 793,
+        "games": 1600,
+        "winPercent": 49.5625
+      },
+      "TIDE": {
+        "wins": 805,
+        "games": 1600,
+        "winPercent": 50.3125
+      },
+      "DAWN": {
+        "wins": 909,
+        "games": 1600,
+        "winPercent": 56.8125
+      },
+      "GLOOM": {
+        "wins": 743,
+        "games": 1600,
+        "winPercent": 46.4375
+      }
+    }
+  },
+  "originalStarterVersusMixed": [
+    {
+      "faction": "VERDANCE",
+      "wins": 575,
+      "games": 1000,
+      "stalls": 0,
+      "winPercent": 57.5
+    },
+    {
+      "faction": "PYRE",
+      "wins": 517,
+      "games": 1000,
+      "stalls": 0,
+      "winPercent": 51.7
+    },
+    {
+      "faction": "TIDE",
+      "wins": 666,
+      "games": 1000,
+      "stalls": 0,
+      "winPercent": 66.6
+    },
+    {
+      "faction": "DAWN",
+      "wins": 605,
+      "games": 1000,
+      "stalls": 0,
+      "winPercent": 60.5
+    },
+    {
+      "faction": "GLOOM",
+      "wins": 514,
+      "games": 1000,
+      "stalls": 0,
+      "winPercent": 51.4
+    }
+  ],
+  "method": "Actual BattleDecks.build decks; independently generated per seed and faction; all faction pairs, mirrored first player. Fixed original starters also face every faction as a difficulty check.",
+  "inputVersion": "0.2.1+66",
+  "set02Sha256": "337f044c308c58f21c286af0e980a32dbbbc180365fb187ef45198eed0a18f63"
+}

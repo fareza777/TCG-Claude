@@ -40,7 +40,16 @@ void main() {
             arena: [
               CardInstance(
                 instanceId: 2001,
-                def: library.card('SF002-045'), // Actual 2/1 Coalnest Skitter.
+                // A stable vanilla attack isolates Ambush from card tuning
+                // and death payoffs; the defending SF002 units remain real.
+                def: const CardDef(
+                  id: 'TEST-ATTACKER',
+                  name: 'Attacker',
+                  dominions: [Dominion.pyre],
+                  type: CardType.unit,
+                  might: 2,
+                  guard: 1,
+                ),
                 owner: PlayerId.p2,
               ),
             ],

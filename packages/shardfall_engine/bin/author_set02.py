@@ -15,6 +15,7 @@ PALETTES = [
 FACTIONS = ['VERDANCE','PYRE','TIDE','DAWN','GLOOM']
 cards=[]
 faction=0
+REVISIONS = json.loads((ROOT/'data/cards/set02_revisions.json').read_text(encoding='utf-8'))['cards']
 
 def target(kind):
  if kind=='self': return {'select':'SELF'}
@@ -33,10 +34,13 @@ def ops(code):
   who=parts[1] if op in ('bounce','destroy') else parts[2] if len(parts)>2 else None
   label={'self':'this unit','friend':'target friendly unit','enemy':'target enemy unit','any':'any target','you':'you','opponent':'your opponent','allies':'each friendly unit','others':'each other friendly unit','enemies':'each enemy unit'}.get(who,who)
   if op=='draw': e={'op':'DRAW','amount':n}; t=f'Draw {n} card'+('s' if n!=1 else '')+'.'
-  elif op=='heal': e={'op':'HEAL','amount':n,'target':target('you')}; t=f'You gain {n} health.'
-  elif op=='burn': e={'op':'DEAL_DAMAGE','amount':n,'target':target(who)}; t=f'Deal {n} damage to {label}.'
+  elif op=='heal':
+   recipient=who or 'you'; e={'op':'HEAL','amount':n,'target':target(recipient)}; t=f'{"Your opponent gains" if recipient=="opponent" else "You gain"} {n} health.'
+  elif op=='burn': e={'op':'DEAL_DAMAGE','amount':n,'target':target(who)}; t=f'You take {n} damage.' if who=='you' else f'Deal {n} damage to {label}.'
   elif op=='grow': e={'op':'ADD_COUNTER','amount':n,'target':target(who)}; t=f'Put {n} +1/+1 counter'+('s' if n!=1 else '')+f' on {label}.'
-  elif op=='renew': e={'op':'RENEW','amount':n,'target':target(who)}; t=f'Renew {n} {label} (remove up to {n} damage from it; if any is removed, put a +1/+1 counter on it).'
+  elif op=='renew':
+   e={'op':'RENEW','amount':n,'target':target(who)}
+   t=f'Renew {n} on {label} '+(f'(remove up to {n} damage from each; put a +1/+1 counter on each unit that had damage removed).' if who in ('allies','others','enemies') else f'(remove up to {n} damage from it; if any damage is removed, put a +1/+1 counter on it).')
   elif op=='buff':
    m,g=parts[1].split('/'); e={'op':'BUFF','might':int(m),'guard':int(g),'target':target(who)}; t=f'{label.capitalize()} gets +{m}/+{g} until end of turn.'
   elif op=='grant': e={'op':'GRANT_KEYWORD','keyword':parts[1].upper(),'target':target(who)}; t=f'{label.capitalize()} gains {parts[1].capitalize()} until end of turn.'
@@ -53,14 +57,19 @@ def ops(code):
  return result,' '.join(text)
 
 def add(name,cost,might=None,guard=None,keywords='',enter='',vow='',death='',scene='',spell=False,rite=False):
+ revision=REVISIONS.get(f'SF002-{len(cards)+1:03}',{})
+ cost=revision.get('cost',cost); might=revision.get('might',might); guard=revision.get('guard',guard)
+ keywords=revision.get('keywords',keywords); enter=revision.get('enter',enter); vow=revision.get('vow',vow); death=revision.get('death',death)
  local=len(cards)-faction*43
  rarity='COMMON' if local<21 else 'UNCOMMON' if local<33 else 'RARE' if local<40 else 'EPIC' if local==40 else 'LEGENDARY'
  c={'id':f'SF002-{len(cards)+1:03}','name':name,'dominion':[FACTIONS[faction]],'type':'RITE' if rite else 'RITUAL' if spell else 'UNIT','rarity':rarity,'cost':{FACTIONS[faction]:min(2,cost),'generic':max(0,cost-2)},'keywords':keywords.upper().split(',') if keywords else [],'effects':[]}
  text=[k.replace('_',' ').capitalize()+'.' for k in c['keywords']]
  if not spell and not rite: c.update(might=might,guard=guard,subtype='Vowbound '+('Guardian' if guard>might else 'Vanguard'))
- for code,trigger,prefix in [(enter,'ON_CAST' if spell or rite else 'ON_ENTER_ARENA','' if spell or rite else 'When this enters the Arena: '),(vow,'ON_VOW','Vow — At the start of your next turn, if this remains in the Arena, once per Arena stay: '),(death,'ON_DEATH','When this dies: ')]:
+ for code,trigger,prefix in [(enter,'ON_CAST' if spell or rite else 'ON_ENTER_ARENA','' if spell or rite else 'When {name} enters play, '),(vow,'ON_VOW','Vow — At the start of your next turn, if this unit is still in play: '),(death,'ON_DEATH','When this unit dies: ')]:
   if code:
-   effects,t=ops(code); c['effects'].append({'trigger':trigger,'effects':effects}); text.append(prefix+t)
+   effects,t=ops(code)
+   if trigger=='ON_ENTER_ARENA': t=t[0].lower()+t[1:]
+   c['effects'].append({'trigger':trigger,'effects':effects}); text.append(prefix+t)
  c['text']=' '.join(text)
  c['flavor']=f'The {name.lower()} keeps a promise where the old world broke.'
  c['art_prompt']=f'{ANCHOR}, {scene}, one distinct focal subject, panoramic landscape 5:3, all humanoids fully clothed in layered robes and full armor, closed helmets or faces entirely hidden inside dark hoods, no exposed skin, {PALETTES[faction]}'
@@ -598,7 +607,7 @@ for f, block in enumerate(ART_ACTIONS):
   c['art_narrative']=f'{c["name"]} is a {c.get("subtype",c["type"].lower())} of {FACTIONS[f].title()} in The Five Vows. {LORE[f]} This depicted moment belongs to the card because: {action} '+ ' '.join(mechanical)+f' Rules context (semantic only, never image lettering): {rules} Flavor context: {c["flavor"]} '+identity
   # Keep the original individual subject/location, then articulate what happens.
   c['art_prompt']+=f'. NARRATIVE EVENT: {action} CINEMATOGRAPHY: {composition}. STORY AND MECHANICAL MEANING: {c["art_narrative"]} Dynamic physical action and environmental consequences; no generic character lineup, no repeated studio portrait backdrop. All rules, names and flavor are semantic guidance only: absolutely no typography, lettering, numerals or UI in the image.'
-document={'set':{'code':'SF002','name':'The Five Vows','total':215,'mechanics':{'Vow':'Once per Arena stay, at the start of your next turn if the permanent survives.','Renew':'Remove up to N damage from the specified unit; if any is removed, add one +1/+1 counter.'}},'cards':cards}
+document={'set':{'code':'SF002','name':'The Five Vows','total':215,'mechanics':{'Vow':'Once each time this unit enters play, at the start of your next turn if it is still in play.','Renew':'Remove up to N damage from the specified unit; if any is removed, add one +1/+1 counter.'}},'cards':cards}
 output=json.dumps(document,indent=2,ensure_ascii=False)+'\n'
 for path in ('data/cards/set02.json','app/assets/data/set02.json'):
  destination=ROOT/path

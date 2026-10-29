@@ -93,7 +93,7 @@
         "RAMPAGE"
       ],
       "rarity": "RARE",
-      "text": "Rampage. When {name} enters, put a +1/+1 counter on each other Unit you control.",
+      "text": "Rampage. When {name} enters play, put a +1/+1 counter on each other Unit you control.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -324,7 +324,7 @@
         "RAMPAGE"
       ],
       "rarity": "LEGENDARY",
-      "text": "Alert, Rampage. When {name} enters, put a +1/+1 counter on each other Unit you control.",
+      "text": "Alert, Rampage. When {name} enters play, put a +1/+1 counter on each other Unit you control.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -364,7 +364,7 @@
       "guard": 3,
       "keywords": [],
       "rarity": "COMMON",
-      "text": "When {name} enters, add 1 Verdance Aether this turn.",
+      "text": "When {name} enters play, add 1 Verdance Aether this turn.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -416,7 +416,7 @@
         "INTERCEPT"
       ],
       "rarity": "COMMON",
-      "text": "Intercept. When {name} enters, deal 1 damage to any target.",
+      "text": "Intercept. When {name} enters play, deal 1 damage to any target.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -741,7 +741,7 @@
       "guard": 2,
       "keywords": [],
       "rarity": "COMMON",
-      "text": "When {name} enters, deal 1 damage to any target.",
+      "text": "When {name} enters play, deal 1 damage to any target.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -776,7 +776,7 @@
         "RUSH"
       ],
       "rarity": "UNCOMMON",
-      "text": "Rush. When {name} enters, deal 1 damage to any target.",
+      "text": "Rush. When {name} enters play, deal 1 damage to any target.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -1003,7 +1003,7 @@
         "SWIFTSTRIKE"
       ],
       "rarity": "LEGENDARY",
-      "text": "Rush, Swiftstrike. When {name} enters, deal 2 damage to any target.",
+      "text": "Rush, Swiftstrike. When {name} enters play, deal 2 damage to any target.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -1035,7 +1035,7 @@
       "guard": 2,
       "keywords": [],
       "rarity": "COMMON",
-      "text": "When {name} enters, add 1 Pyre Aether this turn.",
+      "text": "When {name} enters play, add 1 Pyre Aether this turn.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -1383,7 +1383,7 @@
       "guard": 3,
       "keywords": [],
       "rarity": "COMMON",
-      "text": "When {name} enters, draw a card.",
+      "text": "When {name} enters play, draw a card.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -1500,7 +1500,7 @@
         "AEGIS_2"
       ],
       "rarity": "LEGENDARY",
-      "text": "Aegis 2. When {name} enters, return target enemy Unit to its owner's hand.",
+      "text": "Aegis 2. When {name} enters play, return target enemy Unit to its owner's hand.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -1655,7 +1655,7 @@
       "guard": 5,
       "keywords": [],
       "rarity": "LEGENDARY",
-      "text": "When {name} enters, draw 2 cards.",
+      "text": "When {name} enters play, draw 2 cards.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -1685,7 +1685,7 @@
       "guard": 2,
       "keywords": [],
       "rarity": "UNCOMMON",
-      "text": "When {name} enters, target opponent discards a card.",
+      "text": "When {name} enters play, target opponent discards a card.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -1841,7 +1841,7 @@
       "guard": 3,
       "keywords": [],
       "rarity": "UNCOMMON",
-      "text": "When {name} enters, return target enemy Unit to its owner's hand.",
+      "text": "When {name} enters play, return target enemy Unit to its owner's hand.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -2037,7 +2037,7 @@
         "ALERT"
       ],
       "rarity": "COMMON",
-      "text": "Alert. When {name} enters, restore 2 Health to you.",
+      "text": "Alert. When {name} enters play, restore 2 Health to you.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -2355,7 +2355,7 @@
       "guard": 3,
       "keywords": [],
       "rarity": "UNCOMMON",
-      "text": "When {name} enters, put a +1/+1 counter on each other Unit you control.",
+      "text": "When {name} enters play, put a +1/+1 counter on each other Unit you control.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -2760,7 +2760,7 @@
         "DREAD"
       ],
       "rarity": "RARE",
-      "text": "Venom, Dread. When {name} enters, target opponent discards a card.",
+      "text": "Venom, Dread. When {name} enters play, target opponent discards a card.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -2968,7 +2968,7 @@
         "VENOM"
       ],
       "rarity": "LEGENDARY",
-      "text": "Dread, Venom. When {name} enters, target opponent discards 2 cards.",
+      "text": "Dread, Venom. When {name} enters play, target opponent discards 2 cards.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -3330,7 +3330,7 @@
       "guard": 1,
       "keywords": [],
       "rarity": "COMMON",
-      "text": "When {name} enters, add 1 Verdance Aether this turn.",
+      "text": "When {name} enters play, add 1 Verdance Aether this turn.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -3361,7 +3361,7 @@
       "guard": 3,
       "keywords": [],
       "rarity": "COMMON",
-      "text": "When {name} enters, restore 3 Health to you.",
+      "text": "When {name} enters play, restore 3 Health to you.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -3531,7 +3531,7 @@
         "INTERCEPT"
       ],
       "rarity": "RARE",
-      "text": "Intercept. When {name} enters, put a +1/+1 counter on each other Unit you control.",
+      "text": "Intercept. When {name} enters play, put a +1/+1 counter on each other Unit you control.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -3617,7 +3617,7 @@
         "RAMPAGE"
       ],
       "rarity": "EPIC",
-      "text": "Intercept, Rampage. When {name} enters, put a +2/+2 counter on each other Unit you control.",
+      "text": "Intercept, Rampage. When {name} enters play, put a +2/+2 counter on each other Unit you control.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -3660,7 +3660,7 @@
         "INTERCEPT"
       ],
       "rarity": "LEGENDARY",
-      "text": "Alert, Intercept. When {name} enters, put a +1/+1 counter on each other Unit you control and restore 3 Health to you.",
+      "text": "Alert, Intercept. When {name} enters play, put a +1/+1 counter on each other Unit you control and restore 3 Health to you.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -3910,7 +3910,7 @@
         "SWIFTSTRIKE"
       ],
       "rarity": "RARE",
-      "text": "Swiftstrike. When {name} enters, deal 2 damage to any target.",
+      "text": "Swiftstrike. When {name} enters play, deal 2 damage to any target.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -3946,7 +3946,7 @@
         "RAMPAGE"
       ],
       "rarity": "EPIC",
-      "text": "Rush, Rampage. When {name} enters, deal 3 damage to any target.",
+      "text": "Rush, Rampage. When {name} enters play, deal 3 damage to any target.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -3982,7 +3982,7 @@
         "SWIFTSTRIKE"
       ],
       "rarity": "LEGENDARY",
-      "text": "Rush, Swiftstrike. When {name} enters, deal 4 damage to any target.",
+      "text": "Rush, Swiftstrike. When {name} enters play, deal 4 damage to any target.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4035,7 +4035,7 @@
       "guard": 3,
       "keywords": [],
       "rarity": "COMMON",
-      "text": "When {name} enters, draw a card.",
+      "text": "When {name} enters play, draw a card.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4119,7 +4119,7 @@
       "guard": 3,
       "keywords": [],
       "rarity": "UNCOMMON",
-      "text": "When {name} enters, draw a card. Target opponent discards a card.",
+      "text": "When {name} enters play, draw a card. Target opponent discards a card.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4192,7 +4192,7 @@
       "guard": 4,
       "keywords": [],
       "rarity": "UNCOMMON",
-      "text": "When {name} enters, draw 2 cards.",
+      "text": "When {name} enters play, draw 2 cards.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4320,7 +4320,7 @@
         "AEGIS_2"
       ],
       "rarity": "LEGENDARY",
-      "text": "Aegis 2. When {name} enters, draw 2 cards and return target enemy Unit to its owner's hand.",
+      "text": "Aegis 2. When {name} enters play, draw 2 cards and return target enemy Unit to its owner's hand.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4355,7 +4355,7 @@
       "guard": 2,
       "keywords": [],
       "rarity": "COMMON",
-      "text": "When {name} enters, restore 2 Health to you.",
+      "text": "When {name} enters play, restore 2 Health to you.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4520,7 +4520,7 @@
         "ALERT"
       ],
       "rarity": "UNCOMMON",
-      "text": "Alert. When {name} enters, target opponent discards a card.",
+      "text": "Alert. When {name} enters play, target opponent discards a card.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4649,7 +4649,7 @@
         "ALERT"
       ],
       "rarity": "LEGENDARY",
-      "text": "Soar, Leech, Alert. When {name} enters, restore 4 Health to you and put a +1/+1 counter on each other Unit you control.",
+      "text": "Soar, Leech, Alert. When {name} enters play, restore 4 Health to you and put a +1/+1 counter on each other Unit you control.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4791,7 +4791,7 @@
         "VENOM"
       ],
       "rarity": "UNCOMMON",
-      "text": "Venom. When {name} enters, target opponent discards a card.",
+      "text": "Venom. When {name} enters play, target opponent discards a card.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",
@@ -4982,7 +4982,7 @@
         "LEECH"
       ],
       "rarity": "LEGENDARY",
-      "text": "Dread, Venom, Leech. When {name} enters, target opponent discards 2 cards and {name} deals 3 damage to any target.",
+      "text": "Dread, Venom, Leech. When {name} enters play, target opponent discards 2 cards and {name} deals 3 damage to any target.",
       "effects": [
         {
           "trigger": "ON_ENTER_ARENA",

@@ -10,6 +10,7 @@ import '../theme.dart';
 import 'chapter_player.dart';
 import 'story_data.dart';
 import 'campaign_progress.dart';
+import '../data/playable_decks.dart';
 
 /// Chapter select. Chapters unlock in sequence.
 class StoryScreen extends StatefulWidget {
@@ -29,10 +30,21 @@ class StoryScreen extends StatefulWidget {
 }
 
 class _StoryScreenState extends State<StoryScreen> {
+  late StoryCampaign _campaign;
+  @override
+  void initState() {
+    super.initState();
+    final next = nextStoryChapter(widget.save);
+    _campaign = next != null && StoryCampaign.sundering.contains(next)
+        ? StoryCampaign.sundering
+        : StoryCampaign.fiveVows;
+  }
+
   bool _unlocked(int index) => storyChapterUnlocked(index, widget.save);
 
   @override
   Widget build(BuildContext context) {
+    final indices = _campaign.chapterIndices;
     return Scaffold(
       bottomNavigationBar: AdBanner(adService: widget.adService),
       body: Container(
@@ -52,25 +64,106 @@ class _StoryScreenState extends State<StoryScreen> {
                   children: [
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back,
-                          color: AppTheme.textPrimary),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: AppTheme.textPrimary,
+                      ),
                     ),
-                    const Text('Story Campaign',
+                    const Expanded(
+                      child: Text(
+                        'Story Campaign',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            color: AppTheme.textPrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: 1)),
+                          color: AppTheme.textPrimary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+                child: Row(
+                  children: [
+                    for (final campaign in StoryCampaign.values) ...[
+                      if (campaign != StoryCampaign.values.first)
+                        const SizedBox(width: 10),
+                      Expanded(child: _setSelector(campaign)),
+                    ],
                   ],
                 ),
               ),
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.all(16),
-                  itemCount: storyChapters.length,
-                  itemBuilder: (_, i) =>
-                      _chapterCard(storyChapters[i], i, _unlocked(i)),
+                  itemCount: indices.length,
+                  itemBuilder: (_, i) {
+                    final index = indices[i];
+                    return _chapterCard(
+                      storyChapters[index],
+                      index,
+                      _unlocked(index),
+                    );
+                  },
                 ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _setSelector(StoryCampaign campaign) {
+    final selected = _campaign == campaign;
+    final indices = campaign.chapterIndices;
+    final done = indices
+        .where((i) => widget.save.chapterDone(storyChapters[i].id))
+        .length;
+    const gold = Color(0xFFC9A86A);
+    return Semantics(
+      selected: selected,
+      button: true,
+      child: InkWell(
+        key: ValueKey('story-${campaign.name}'),
+        borderRadius: BorderRadius.circular(12),
+        onTap: () => setState(() => _campaign = campaign),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: selected ? gold.withValues(alpha: 0.13) : AppTheme.panel,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: selected ? gold : AppTheme.panelBorder),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                campaign.label,
+                style: TextStyle(
+                  color: selected ? gold : AppTheme.textMuted,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 2,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                campaign.title,
+                style: const TextStyle(
+                  color: AppTheme.textPrimary,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                '$done / ${indices.length} chapters complete',
+                style: const TextStyle(color: AppTheme.textMuted, fontSize: 10),
               ),
             ],
           ),
@@ -92,14 +185,17 @@ class _StoryScreenState extends State<StoryScreen> {
         onTap: unlocked
             ? () async {
                 AudioManager.instance.tap();
-                await Navigator.of(context).push(MaterialPageRoute<void>(
-                  builder: (_) => ChapterMapScreen(
+                await Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => ChapterMapScreen(
                       chapter: ch,
                       library: widget.library,
                       save: widget.save,
-                      adService: widget.adService),
-                ));
-                setState(() {});
+                      adService: widget.adService,
+                    ),
+                  ),
+                );
+                if (mounted) setState(() {});
               }
             : null,
         child: Container(
@@ -113,29 +209,38 @@ class _StoryScreenState extends State<StoryScreen> {
             ),
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-                color: unlocked
-                    ? style.glow.withValues(alpha: 0.6)
-                    : AppTheme.panelBorder),
+              color: unlocked
+                  ? style.glow.withValues(alpha: 0.6)
+                  : AppTheme.panelBorder,
+            ),
           ),
           child: Row(
             children: [
-              Icon(unlocked ? style.icon : Icons.lock,
-                  color: unlocked ? style.glow : AppTheme.textMuted,
-                  size: 32),
+              Icon(
+                unlocked ? style.icon : Icons.lock,
+                color: unlocked ? style.glow : AppTheme.textMuted,
+                size: 32,
+              ),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(ch.title,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w800)),
-                    Text(ch.subtitle,
-                        style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.7),
-                            fontSize: 11)),
+                    Text(
+                      ch.title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text(
+                      ch.subtitle,
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.7),
+                        fontSize: 11,
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     if (unlocked)
                       ClipRRect(
@@ -149,17 +254,23 @@ class _StoryScreenState extends State<StoryScreen> {
                       )
                     else
                       Text(
-                          'Complete ${storyChapters[index - 1].title.split('—').first.trim()} to unlock',
-                          style: const TextStyle(
-                              color: AppTheme.textMuted, fontSize: 10)),
+                        'Complete ${storyChapters[index - 1].title.split('—').first.trim()} to unlock',
+                        style: const TextStyle(
+                          color: AppTheme.textMuted,
+                          fontSize: 10,
+                        ),
+                      ),
                   ],
                 ),
               ),
               if (done)
                 const Padding(
                   padding: EdgeInsets.only(left: 8),
-                  child: Icon(Icons.check_circle,
-                      color: Color(0xFF7FE0A8), size: 22),
+                  child: Icon(
+                    Icons.check_circle,
+                    color: Color(0xFF7FE0A8),
+                    size: 22,
+                  ),
                 ),
             ],
           ),
@@ -190,6 +301,7 @@ class ChapterMapScreen extends StatefulWidget {
 }
 
 class _ChapterMapScreenState extends State<ChapterMapScreen> {
+  String? _deckName;
   StoryChapter get ch => widget.chapter;
 
   /// Furthest stage the player may enter: the whole chapter once cleared,
@@ -200,16 +312,22 @@ class _ChapterMapScreenState extends State<ChapterMapScreen> {
 
   Future<void> _play({required int stage, required bool freePlay}) async {
     AudioManager.instance.tap();
-    await Navigator.of(context).push(MaterialPageRoute<void>(
-      builder: (_) => ChapterPlayerScreen(
-        chapter: ch,
-        library: widget.library,
-        save: widget.save,
-        adService: widget.adService,
-        startStage: stage,
-        freePlay: freePlay,
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => ChapterPlayerScreen(
+          chapter: ch,
+          library: widget.library,
+          save: widget.save,
+          adService: widget.adService,
+          startStage: stage,
+          freePlay: freePlay,
+          playerDeck: playableOwnedDecks(
+            widget.library,
+            widget.save,
+          )[_deckName],
+        ),
       ),
-    ));
+    );
     if (mounted) setState(() {});
   }
 
@@ -218,8 +336,7 @@ class _ChapterMapScreenState extends State<ChapterMapScreen> {
     final dom = Dominion.values.byName(ch.playerDominion.toLowerCase());
     final style = DominionStyle.of(dom);
     final furthest = _furthest;
-    final resume =
-        widget.save.stageOf(ch.id).clamp(0, ch.stages.length - 1);
+    final resume = widget.save.stageOf(ch.id).clamp(0, ch.stages.length - 1);
     final done = widget.save.chapterDone(ch.id);
     var battleNo = 0;
 
@@ -241,23 +358,32 @@ class _ChapterMapScreenState extends State<ChapterMapScreen> {
                   children: [
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back,
-                          color: AppTheme.textPrimary),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: AppTheme.textPrimary,
+                      ),
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(ch.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  color: AppTheme.textPrimary,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800)),
-                          Text('${ch.battleCount} battles · ${ch.subtitle}',
-                              style: const TextStyle(
-                                  color: AppTheme.textMuted, fontSize: 11)),
+                          Text(
+                            ch.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: AppTheme.textPrimary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          Text(
+                            '${ch.battleCount} battles · ${ch.subtitle}',
+                            style: const TextStyle(
+                              color: AppTheme.textMuted,
+                              fontSize: 11,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -266,41 +392,52 @@ class _ChapterMapScreenState extends State<ChapterMapScreen> {
               ),
               // Continue / Start button.
               Padding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+                child: _deckSelector(),
+              ),
+              Padding(
                 padding: const EdgeInsets.fromLTRB(16, 6, 16, 10),
                 child: GestureDetector(
                   onTap: () => _play(stage: resume, freePlay: false),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 13),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                        style.glow.withValues(alpha: 0.85),
-                        style.frame[1],
-                      ]),
+                      gradient: LinearGradient(
+                        colors: [
+                          style.glow.withValues(alpha: 0.85),
+                          style.frame[1],
+                        ],
+                      ),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                            color: style.glow.withValues(alpha: 0.4),
-                            blurRadius: 16),
+                          color: style.glow.withValues(alpha: 0.4),
+                          blurRadius: 16,
+                        ),
                       ],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(done ? Icons.replay : Icons.play_arrow,
-                            color: Colors.black.withValues(alpha: 0.8),
-                            size: 20),
+                        Icon(
+                          done ? Icons.replay : Icons.play_arrow,
+                          color: Colors.black.withValues(alpha: 0.8),
+                          size: 20,
+                        ),
                         const SizedBox(width: 8),
                         Text(
-                            done
-                                ? 'REPLAY FROM START'
-                                : resume == 0
-                                    ? 'BEGIN CHAPTER'
-                                    : 'CONTINUE STORY',
-                            style: TextStyle(
-                                color: Colors.black.withValues(alpha: 0.85),
-                                fontSize: 14,
-                                letterSpacing: 2,
-                                fontWeight: FontWeight.w900)),
+                          done
+                              ? 'REPLAY FROM START'
+                              : resume == 0
+                              ? 'BEGIN CHAPTER'
+                              : 'CONTINUE STORY',
+                          style: TextStyle(
+                            color: Colors.black.withValues(alpha: 0.85),
+                            fontSize: 14,
+                            letterSpacing: 2,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -336,6 +473,33 @@ class _ChapterMapScreenState extends State<ChapterMapScreen> {
     );
   }
 
+  Widget _deckSelector() {
+    final decks = playableOwnedDecks(widget.library, widget.save);
+    final names = decks.keys.toList()..sort();
+    final selected = decks.containsKey(_deckName) ? _deckName! : '';
+    return DropdownButtonFormField<String>(
+      key: const ValueKey('story-deck-selector'),
+      initialValue: selected,
+      isExpanded: true,
+      dropdownColor: AppTheme.panel,
+      style: const TextStyle(color: AppTheme.textPrimary, fontSize: 13),
+      decoration: const InputDecoration(
+        labelText: 'Battle deck',
+        labelStyle: TextStyle(color: AppTheme.textMuted),
+        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      ),
+      items: [
+        const DropdownMenuItem(value: '', child: Text('Story loan deck')),
+        for (final name in names)
+          DropdownMenuItem(
+            value: name,
+            child: Text(name, overflow: TextOverflow.ellipsis),
+          ),
+      ],
+      onChanged: (name) => setState(() => _deckName = name == '' ? null : name),
+    );
+  }
+
   Widget _stageRow({
     required int index,
     required StoryStage stage,
@@ -367,12 +531,13 @@ class _ChapterMapScreenState extends State<ChapterMapScreen> {
             color: Colors.black.withValues(alpha: isCurrent ? 0.5 : 0.28),
             borderRadius: BorderRadius.circular(11),
             border: Border.all(
-                color: isCurrent
-                    ? color
-                    : unlocked
-                        ? AppTheme.panelBorder
-                        : AppTheme.panelBorder.withValues(alpha: 0.4),
-                width: isCurrent ? 1.6 : 1),
+              color: isCurrent
+                  ? color
+                  : unlocked
+                  ? AppTheme.panelBorder
+                  : AppTheme.panelBorder.withValues(alpha: 0.4),
+              width: isCurrent ? 1.6 : 1,
+            ),
           ),
           child: Row(
             children: [
@@ -386,43 +551,52 @@ class _ChapterMapScreenState extends State<ChapterMapScreen> {
                   border: Border.all(color: color.withValues(alpha: 0.7)),
                 ),
                 child: Icon(
-                    unlocked
-                        ? (isBattle
+                  unlocked
+                      ? (isBattle
                             ? Icons.local_fire_department
                             : Icons.menu_book)
-                        : Icons.lock,
-                    size: 16,
-                    color: unlocked ? color : AppTheme.textMuted),
+                      : Icons.lock,
+                  size: 16,
+                  color: unlocked ? color : AppTheme.textMuted,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(subtitle.toUpperCase(),
-                        style: TextStyle(
-                            color: color.withValues(alpha: 0.9),
-                            fontSize: 9.5,
-                            letterSpacing: 1.5,
-                            fontWeight: FontWeight.w800)),
-                    Text(title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: AppTheme.textPrimary,
-                            fontSize: 13.5,
-                            fontWeight: FontWeight.w700)),
+                    Text(
+                      subtitle.toUpperCase(),
+                      style: TextStyle(
+                        color: color.withValues(alpha: 0.9),
+                        fontSize: 9.5,
+                        letterSpacing: 1.5,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: AppTheme.textPrimary,
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ],
                 ),
               ),
               if (cleared)
-                const Icon(Icons.check_circle,
-                    color: Color(0xFF7FE0A8), size: 18)
+                const Icon(
+                  Icons.check_circle,
+                  color: Color(0xFF7FE0A8),
+                  size: 18,
+                )
               else if (isCurrent)
                 Icon(Icons.play_circle_fill, color: color, size: 20)
               else if (unlocked)
-                Icon(Icons.chevron_right,
-                    color: AppTheme.textMuted, size: 20),
+                Icon(Icons.chevron_right, color: AppTheme.textMuted, size: 20),
             ],
           ),
         ),

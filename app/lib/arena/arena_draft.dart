@@ -37,11 +37,8 @@ class ArenaDraft {
 
   late final List<CardDef> _pool;
 
-  ArenaDraft({
-    required this.library,
-    required this.dominions,
-    Random? rng,
-  }) : _rng = rng ?? Random() {
+  ArenaDraft({required this.library, required this.dominions, Random? rng})
+    : _rng = rng ?? Random() {
     _pool = [
       for (final def in library.byId.values)
         if (def.type != CardType.wellspring && _isDraftable(def)) def,
@@ -91,12 +88,12 @@ class ArenaDraft {
   bool get _isGoldenPick => pickNumber % goldenPickEvery == 0;
 
   int _weightOf(Rarity r) => switch (r) {
-        Rarity.common => 40,
-        Rarity.uncommon => 18,
-        Rarity.rare => 6,
-        Rarity.epic => 2,
-        Rarity.legendary => 1,
-      };
+    Rarity.common => 40,
+    Rarity.uncommon => 18,
+    Rarity.rare => 6,
+    Rarity.epic => 2,
+    Rarity.legendary => 1,
+  };
 
   CardDef _weightedDraw(List<CardDef> from) {
     var total = 0;
@@ -167,8 +164,10 @@ class ArenaDraft {
     for (final d in dominions) {
       split[d] = demand[d] == 0
           ? 0
-          : max(_minWellsprings,
-              (wellspringCount * demand[d]! / total).round());
+          : max(
+              _minWellsprings,
+              (wellspringCount * demand[d]! / total).round(),
+            );
     }
     // Rounding and the floor can push the total off sixteen; settle the
     // difference against the dominion the deck leans on hardest.
@@ -184,16 +183,21 @@ class ArenaDraft {
     return split;
   }
 
-  CardDef _wellspringFor(Dominion d) => library.byId.values.firstWhere(
-        (c) => c.type == CardType.wellspring && c.dominions.contains(d),
-      );
+  List<CardDef> _wellspringsFor(Dominion d) =>
+      library.byId.values
+          .where(
+            (c) => c.type == CardType.wellspring && c.dominions.contains(d),
+          )
+          .toList()
+        ..sort((a, b) => a.id.compareTo(b.id));
 
   /// The finished 40-card list: everything picked, plus the Wellsprings.
   List<CardDef> buildDeck() {
     final deck = <CardDef>[...picked];
     wellspringSplit().forEach((dominion, count) {
+      final basics = _wellspringsFor(dominion);
       for (var i = 0; i < count; i++) {
-        deck.add(_wellspringFor(dominion));
+        deck.add(basics[i % basics.length]);
       }
     });
     return deck;

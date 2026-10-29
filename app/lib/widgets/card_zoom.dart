@@ -8,7 +8,7 @@ import '../theme.dart';
 const Map<String, String> keywordGlossary = {
   'Soar': 'Can only be blocked by Units with Soar or Intercept.',
   'Intercept': 'Can block attackers with Soar.',
-  'Rush': 'Can attack the turn it enters the Arena.',
+  'Rush': 'Can attack the turn it enters play.',
   'Alert': 'Attacking does not exert this Unit.',
   'Swiftstrike': 'Deals its combat damage before Units without Swiftstrike.',
   'Venom': 'Any damage this deals to a Unit destroys that Unit.',
@@ -22,6 +22,8 @@ const Map<String, String> keywordGlossary = {
   'Rite': 'Instant spell (⚡). Cast at any time — even on the enemy\'s turn, in response.',
   'Ritual': 'Slow spell (hourglass). Cast only in your own Main phase, when the chain is empty.',
   'Wellspring': 'Your Aether source. You may place one per turn.',
+  'Vow': 'Once each time this unit enters play: at the start of your next turn, if it is still in play, resolve its Vow.',
+  'Renew': 'Renew N removes up to N damage from a living unit. If any damage is removed, put one +1/+1 counter on it. Use after combat in your second Main phase.',
 };
 
 String _titleCase(String s) =>
@@ -63,7 +65,7 @@ Widget _codexPanel(CardDef def) {
                 color: rarityColor(def.rarity), fontSize: 11, letterSpacing: 0.4)),
         if (def.text.isNotEmpty) ...[
           const SizedBox(height: 8),
-          Text(def.text,
+          Text(def.text.replaceAll('{name}', def.name),
               style: const TextStyle(
                   color: AppTheme.textPrimary, fontSize: 12, height: 1.35)),
         ],

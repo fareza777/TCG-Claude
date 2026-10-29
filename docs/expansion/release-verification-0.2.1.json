@@ -1,0 +1,82 @@
+{
+  "version": "0.2.1+66",
+  "builtOn": "2026-10-29",
+  "platforms": [
+    "Android APK",
+    "Android App Bundle",
+    "Web"
+  ],
+  "artifacts": [
+    {
+      "file": "shardfall-five-vows-0.2.1+66.apk",
+      "bytes": 223405326,
+      "sha256": "86e78d5970c613ba7799fc97d820de730ba9aab5951a17f76ba0fc24eea25bf4",
+      "matchedSourceAssets": 1177
+    },
+    {
+      "file": "shardfall-five-vows-0.2.1+66.aab",
+      "bytes": 223601637,
+      "sha256": "875ec2ddd9ecbd2faa0a17840028e14a38da1869c063d68c136880d5314cfe77",
+      "matchedSourceAssets": 1177
+    }
+  ],
+  "web": {
+    "directory": "C:\\TCG Claude\\app\\build\\releases\\five-vows-0.2.1+66\\web",
+    "files": 1533,
+    "matchedSourceAssets": 1177
+  },
+  "signing": {
+    "sameProductionCertificate": true,
+    "certificateSha256": "fead9fa6ccaca1ed91f08175d394378df0e7edbba219564ce472b6578d448d6b",
+    "apkVerified": true,
+    "aabVerified": true,
+    "apkPackage": "package: name='com.shardfall.shardfall' versionCode='66' versionName='0.2.1' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'"
+  },
+  "catalogs": {
+    "set02Sha256": "337f044c308c58f21c286af0e980a32dbbbc180365fb187ef45198eed0a18f63",
+    "set02GameplaySha256": "5f7f3474c7efb3898c40e3fb7497c4fbeff9304325a3c903b7bb5f478d5e6a1a",
+    "sourceAndAppIdentical": true,
+    "packagedCopiesVerified": true,
+    "collectibles": 215
+  },
+  "tests": {
+    "app": 286,
+    "engine": 97,
+    "backend": 32,
+    "voicePipeline": 3,
+    "abilityAudit": 7,
+    "total": 425
+  },
+  "staticAnalysis": {
+    "errors": 0,
+    "warnings": 0,
+    "existingInfos": 4
+  },
+  "assets": {
+    "collectibleArt": 215,
+    "chapterArt": 20,
+    "tokenArt": 4,
+    "voiceClips": 936,
+    "sourceArtAndVoiceUnchanged": true
+  },
+  "providerCredentials": {
+    "knownKeysChecked": 2,
+    "matchesInProductSourcesOrReleases": 0
+  },
+  "balance": {
+    "primaryHoldoutGames": 6400,
+    "generatedModeHoldoutGames": 8000,
+    "starterDifficultyHoldoutGames": 10000,
+    "storyGames": 1600,
+    "allStalls": 0,
+    "evidenceDirectory": "docs/expansion/balance-0.2.1"
+  },
+  "checks": [
+    "Home Set 2 and campaign tabs verified in real browser",
+    "Every expansion card available in Daily, Arena and PvP paths",
+    "Original Set 1 gameplay digest unchanged",
+    "All 239 illustration masters decoded",
+    "APK certificate matches existing production release",
+    "No remote deployment or store publication"
+  ]
+}

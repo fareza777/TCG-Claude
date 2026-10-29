@@ -24,6 +24,7 @@ class ChapterPlayerScreen extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
   final AdService adService;
+  final List<CardDef>? playerDeck;
 
   /// Stage to start at. Null → resume from saved progress.
   final int? startStage;
@@ -38,6 +39,7 @@ class ChapterPlayerScreen extends StatefulWidget {
     required this.library,
     required this.save,
     required this.adService,
+    this.playerDeck,
     this.startStage,
     this.freePlay = false,
   });
@@ -62,8 +64,10 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    _stage = (widget.startStage ?? widget.save.stageOf(ch.id))
-        .clamp(0, ch.stages.length - 1);
+    _stage = (widget.startStage ?? widget.save.stageOf(ch.id)).clamp(
+      0,
+      ch.stages.length - 1,
+    );
   }
 
   Future<void> _advance() async {
@@ -81,10 +85,12 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
       if (bonus > 0) AudioManager.instance.reward();
       if (mounted) {
         if (bonus > 0) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('Chapter complete! +$bonus gold'),
-            duration: const Duration(seconds: 2),
-          ));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Chapter complete! +$bonus gold'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
         }
         Navigator.of(context).pop();
       }
@@ -122,6 +128,7 @@ class _ChapterPlayerScreenState extends State<ChapterPlayerScreen> {
                   library: widget.library,
                   save: widget.save,
                   adService: widget.adService,
+                  playerDeck: widget.playerDeck,
                   stageIndex: _stage,
                   onVictory: _advance,
                   onExit: () => Navigator.of(context).pop(),
@@ -174,12 +181,14 @@ class _BeatViewState extends State<_BeatView> {
   /// Voice the line currently on screen. Tapping ahead cuts the previous line
   /// off rather than letting two narrators overlap.
   void _speak() {
-    AudioManager.instance.speak(Narration.clipId(
-      widget.chapter.id,
-      widget.stageIndex,
-      Narration.slotBeat,
-      _line,
-    ));
+    AudioManager.instance.speak(
+      Narration.clipId(
+        widget.chapter.id,
+        widget.stageIndex,
+        Narration.slotBeat,
+        _line,
+      ),
+    );
   }
 
   void _next() {
@@ -206,22 +215,33 @@ class _BeatViewState extends State<_BeatView> {
         children: [
           _topBar(),
           if (widget.chapter.id.startsWith('vow'))
-            Padding(padding: const EdgeInsets.only(bottom: 8),
-                child: Text(widget.chapter.subtitle,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: Color(0xFFC9A86A),
-                        fontSize: 10, letterSpacing: 1.2))),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                widget.chapter.subtitle,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Color(0xFFC9A86A),
+                  fontSize: 10,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ),
           Expanded(
             child: Stack(
               fit: StackFit.expand,
               children: [
                 if (widget.chapter.id.startsWith('vow'))
-                  StoryScene(artAsset: widget.beat.artAsset,
-                      previousArtAsset: widget.previousArtAsset)
+                  StoryScene(
+                    artAsset: widget.beat.artAsset,
+                    previousArtAsset: widget.previousArtAsset,
+                  )
                 else
-                  Image.asset('assets/art/${widget.beat.artAsset}.webp',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => Container(color: AppTheme.panel)),
+                  Image.asset(
+                    'assets/art/${widget.beat.artAsset}.webp',
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => Container(color: AppTheme.panel),
+                  ),
                 Positioned.fill(
                   child: DecoratedBox(
                     decoration: BoxDecoration(
@@ -242,23 +262,26 @@ class _BeatViewState extends State<_BeatView> {
                   left: 16,
                   right: 16,
                   top: 12,
-                  child: Text(widget.beat.title,
-                      style: const TextStyle(
-                          fontFamily: 'Cinzel',
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          shadows: [
-                            Shadow(color: Colors.black, blurRadius: 10)
-                          ])),
+                  child: Text(
+                    widget.beat.title,
+                    style: const TextStyle(
+                      fontFamily: 'Cinzel',
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      shadows: [Shadow(color: Colors.black, blurRadius: 10)],
+                    ),
+                  ),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: widget.chapter.id.startsWith('vow')
-                        ? StoryDialogueTransition(identity: _line,
-                            child: _dialogueBox(line, narration))
+                        ? StoryDialogueTransition(
+                            identity: _line,
+                            child: _dialogueBox(line, narration),
+                          )
                         : _dialogueBox(line, narration),
                   ),
                 ),
@@ -280,14 +303,17 @@ class _BeatViewState extends State<_BeatView> {
             icon: const Icon(Icons.close, color: AppTheme.textMuted, size: 20),
           ),
           Expanded(
-            child: Text(widget.chapter.title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    color: AppTheme.textMuted, fontSize: 12)),
+            child: Text(
+              widget.chapter.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(color: AppTheme.textMuted, fontSize: 12),
+            ),
           ),
-          Text('${widget.stageIndex + 1}/${widget.chapter.stages.length}',
-              style: const TextStyle(color: AppTheme.textMuted, fontSize: 12)),
+          Text(
+            '${widget.stageIndex + 1}/${widget.chapter.stages.length}',
+            style: const TextStyle(color: AppTheme.textMuted, fontSize: 12),
+          ),
         ],
       ),
     );
@@ -301,9 +327,10 @@ class _BeatViewState extends State<_BeatView> {
         color: Colors.black.withValues(alpha: 0.82),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-            color: narration
-                ? AppTheme.panelBorder
-                : const Color(0xFFC9A86A).withValues(alpha: 0.7)),
+          color: narration
+              ? AppTheme.panelBorder
+              : const Color(0xFFC9A86A).withValues(alpha: 0.7),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,32 +339,35 @@ class _BeatViewState extends State<_BeatView> {
           if (!narration)
             Padding(
               padding: const EdgeInsets.only(bottom: 6),
-              child: Text(line.speaker.toUpperCase(),
-                  style: const TextStyle(
-                      color: Color(0xFFE6CE96),
-                      fontSize: 13,
-                      letterSpacing: 1.5,
-                      fontWeight: FontWeight.w800)),
+              child: Text(
+                line.speaker.toUpperCase(),
+                style: const TextStyle(
+                  color: Color(0xFFE6CE96),
+                  fontSize: 13,
+                  letterSpacing: 1.5,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
             ),
-          Text(line.text,
-              style: TextStyle(
-                  fontFamily: 'EBGaramond',
-                  color: narration
-                      ? AppTheme.textMuted
-                      : AppTheme.textPrimary,
-                  fontStyle:
-                      narration ? FontStyle.italic : FontStyle.normal,
-                  fontSize: 16,
-                  height: 1.45)),
+          Text(
+            line.text,
+            style: TextStyle(
+              fontFamily: 'EBGaramond',
+              color: narration ? AppTheme.textMuted : AppTheme.textPrimary,
+              fontStyle: narration ? FontStyle.italic : FontStyle.normal,
+              fontSize: 16,
+              height: 1.45,
+            ),
+          ),
           const SizedBox(height: 8),
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-                _line < widget.beat.dialogue.length - 1
-                    ? 'tap to continue  ▸'
-                    : 'tap to proceed  ▸▸',
-                style: const TextStyle(
-                    color: Color(0x88C9A86A), fontSize: 11)),
+              _line < widget.beat.dialogue.length - 1
+                  ? 'tap to continue  ▸'
+                  : 'tap to proceed  ▸▸',
+              style: const TextStyle(color: Color(0x88C9A86A), fontSize: 11),
+            ),
           ),
         ],
       ),
@@ -353,6 +383,7 @@ class _BattleIntro extends StatefulWidget {
   final CardLibrary library;
   final SaveService save;
   final AdService adService;
+  final List<CardDef>? playerDeck;
   final int stageIndex;
   final VoidCallback onVictory;
   final VoidCallback onExit;
@@ -365,6 +396,7 @@ class _BattleIntro extends StatefulWidget {
     required this.library,
     required this.save,
     required this.adService,
+    this.playerDeck,
     required this.stageIndex,
     required this.onVictory,
     required this.onExit,
@@ -379,6 +411,13 @@ class _BattleIntroState extends State<_BattleIntro> {
   bool _launching = false;
 
   StoryBattle get b => widget.battle;
+  List<String> get _specialRules => [
+    for (final rule in b.specialRules)
+      if (widget.playerDeck != null && rule.startsWith('Both sides use'))
+        'Your collection deck faces The Five Vows loan deck.'
+      else
+        rule,
+  ];
 
   bool get _preDone => _preLine >= b.preBattle.length;
 
@@ -395,12 +434,14 @@ class _BattleIntroState extends State<_BattleIntro> {
   }
 
   void _speakPre(int line) {
-    AudioManager.instance.speak(Narration.clipId(
-      widget.chapter.id,
-      widget.stageIndex,
-      Narration.slotPre,
-      line,
-    ));
+    AudioManager.instance.speak(
+      Narration.clipId(
+        widget.chapter.id,
+        widget.stageIndex,
+        Narration.slotPre,
+        line,
+      ),
+    );
   }
 
   void _tapPre() {
@@ -423,47 +464,69 @@ class _BattleIntroState extends State<_BattleIntro> {
       enemyBoard: [for (final id in b.enemyBoardIds) widget.library.card(id)],
       playerBoard: [for (final id in b.playerBoardIds) widget.library.card(id)],
       objective: b.objective,
-      specialRules: b.specialRules,
+      specialRules: _specialRules,
     );
     final controller = DuelController(
-      playerDeck: storyDeck(widget.library, widget.chapter.playerDominion,
-          setCode: b.deckSetCode, variant: b.deckVariant),
-      enemyDeck: storyDeck(widget.library, b.enemyDominion,
-          setCode: b.deckSetCode, variant: b.deckVariant + 1),
+      playerDeck:
+          widget.playerDeck ??
+          storyDeck(
+            widget.library,
+            widget.chapter.playerDominion,
+            setCode: b.deckSetCode,
+            variant: b.deckVariant,
+          ),
+      enemyDeck: storyDeck(
+        widget.library,
+        b.enemyDominion,
+        setCode: b.deckSetCode,
+        variant: b.deckVariant + 1,
+      ),
       scenario: scenario,
       aiTier: b.hardAi ? AiTier.strategist : AiTier.tactician,
       firstPlayer: b.playerFirst ? PlayerId.p1 : PlayerId.p2,
     );
-    final won = await Navigator.of(context).push<bool>(MaterialPageRoute(
-      builder: (_) =>
-          DuelScreen(controller: controller, enemyName: b.enemyName),
-    ));
+    final won = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) =>
+            DuelScreen(controller: controller, enemyName: b.enemyName),
+      ),
+    );
     if (!mounted) return;
     setState(() => _launching = false);
     if (won == true) {
-      final reward = await rewardCampaignBattle(widget.save,
-          widget.chapter.id, widget.stageIndex, freePlay: !widget.grantRewards);
+      final reward = await rewardCampaignBattle(
+        widget.save,
+        widget.chapter.id,
+        widget.stageIndex,
+        freePlay: !widget.grantRewards,
+      );
       AudioManager.instance.reward();
-      unawaited(TelemetryService.instance.track('story_battle_won', {
-        'chapter': widget.chapter.id,
-        'stage': widget.stageIndex,
-      }));
+      unawaited(
+        TelemetryService.instance.track('story_battle_won', {
+          'chapter': widget.chapter.id,
+          'stage': widget.stageIndex,
+        }),
+      );
       await _showVictory(reward);
       if (!mounted) return;
       await showPostResultInterstitial(widget.adService);
       if (mounted) widget.onVictory();
     } else {
-      unawaited(TelemetryService.instance.track('story_battle_lost', {
-        'chapter': widget.chapter.id,
-        'stage': widget.stageIndex,
-      }));
+      unawaited(
+        TelemetryService.instance.track('story_battle_lost', {
+          'chapter': widget.chapter.id,
+          'stage': widget.stageIndex,
+        }),
+      );
       // Not awaited: the message below needs this frame's context, and the
       // season write has no reason to hold it up.
       unawaited(widget.save.trackQuest('battle_loss'));
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Defeated. Steel yourself and try again.'),
-        duration: Duration(seconds: 2),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Defeated. Steel yourself and try again.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
       await showPostResultInterstitial(widget.adService);
     }
   }
@@ -485,7 +548,8 @@ class _BattleIntroState extends State<_BattleIntro> {
   @override
   Widget build(BuildContext context) {
     final style = DominionStyle.of(
-        Dominion.values.byName(b.enemyDominion.toLowerCase()));
+      Dominion.values.byName(b.enemyDominion.toLowerCase()),
+    );
     return Column(
       children: [
         Padding(
@@ -493,18 +557,28 @@ class _BattleIntroState extends State<_BattleIntro> {
           child: Row(
             children: [
               IconButton(
-                  onPressed: widget.onExit,
-                  icon: const Icon(Icons.close,
-                      color: AppTheme.textMuted, size: 20)),
+                onPressed: widget.onExit,
+                icon: const Icon(
+                  Icons.close,
+                  color: AppTheme.textMuted,
+                  size: 20,
+                ),
+              ),
               Expanded(
-                  child: Text(widget.chapter.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          color: AppTheme.textMuted, fontSize: 12))),
-              Text('${widget.stageIndex + 1}/${widget.chapter.stages.length}',
+                child: Text(
+                  widget.chapter.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                      color: AppTheme.textMuted, fontSize: 12)),
+                    color: AppTheme.textMuted,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              Text(
+                '${widget.stageIndex + 1}/${widget.chapter.stages.length}',
+                style: const TextStyle(color: AppTheme.textMuted, fontSize: 12),
+              ),
             ],
           ),
         ),
@@ -519,29 +593,37 @@ class _BattleIntroState extends State<_BattleIntro> {
                   height: 92,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: RadialGradient(colors: [
-                      style.glow.withValues(alpha: 0.4),
-                      Colors.transparent
-                    ]),
+                    gradient: RadialGradient(
+                      colors: [
+                        style.glow.withValues(alpha: 0.4),
+                        Colors.transparent,
+                      ],
+                    ),
                     border: Border.all(color: style.glow, width: 2),
                   ),
                   child: Icon(style.icon, color: style.glow, size: 44),
                 ),
                 const SizedBox(height: 14),
-                const Text('BATTLE',
-                    style: TextStyle(
-                        color: AppTheme.danger,
-                        fontSize: 13,
-                        letterSpacing: 5,
-                        fontWeight: FontWeight.w900)),
+                const Text(
+                  'BATTLE',
+                  style: TextStyle(
+                    color: AppTheme.danger,
+                    fontSize: 13,
+                    letterSpacing: 5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
                 const SizedBox(height: 6),
-                Text(b.enemyName,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontFamily: 'Cinzel',
-                        color: AppTheme.textPrimary,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700)),
+                Text(
+                  b.enemyName,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'Cinzel',
+                    color: AppTheme.textPrimary,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 const SizedBox(height: 16),
                 _objectiveCard(),
                 const SizedBox(height: 14),
@@ -552,32 +634,40 @@ class _BattleIntroState extends State<_BattleIntro> {
                     onTap: _fight,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 52, vertical: 15),
+                        horizontal: 52,
+                        vertical: 15,
+                      ),
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                          AppTheme.danger,
-                          AppTheme.danger.withValues(alpha: 0.6)
-                        ]),
+                        gradient: LinearGradient(
+                          colors: [
+                            AppTheme.danger,
+                            AppTheme.danger.withValues(alpha: 0.6),
+                          ],
+                        ),
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                              color:
-                                  AppTheme.danger.withValues(alpha: 0.45),
-                              blurRadius: 20)
+                            color: AppTheme.danger.withValues(alpha: 0.45),
+                            blurRadius: 20,
+                          ),
                         ],
                       ),
-                      child: const Text('FIGHT',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              letterSpacing: 5,
-                              fontWeight: FontWeight.w900)),
+                      child: const Text(
+                        'FIGHT',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          letterSpacing: 5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
                     ),
                   )
                 else
-                  const Text('tap the dialogue to continue',
-                      style: TextStyle(
-                          color: AppTheme.textMuted, fontSize: 11)),
+                  const Text(
+                    'tap the dialogue to continue',
+                    style: TextStyle(color: AppTheme.textMuted, fontSize: 11),
+                  ),
                 const SizedBox(height: 24),
               ],
             ),
@@ -604,17 +694,20 @@ class _BattleIntroState extends State<_BattleIntro> {
               const Icon(Icons.flag, size: 15, color: Color(0xFFE6CE96)),
               const SizedBox(width: 7),
               Expanded(
-                child: Text(b.objective,
-                    style: const TextStyle(
-                        color: AppTheme.textPrimary,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700)),
+                child: Text(
+                  b.objective,
+                  style: const TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
             ],
           ),
-          if (b.specialRules.isNotEmpty) ...[
+          if (_specialRules.isNotEmpty) ...[
             const SizedBox(height: 10),
-            for (final rule in b.specialRules)
+            for (final rule in _specialRules)
               Padding(
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Row(
@@ -622,16 +715,22 @@ class _BattleIntroState extends State<_BattleIntro> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.only(top: 2),
-                      child: Icon(Icons.bolt,
-                          size: 13, color: Color(0xFFB48AD1)),
+                      child: Icon(
+                        Icons.bolt,
+                        size: 13,
+                        color: Color(0xFFB48AD1),
+                      ),
                     ),
                     const SizedBox(width: 7),
                     Expanded(
-                      child: Text(rule,
-                          style: const TextStyle(
-                              color: AppTheme.textMuted,
-                              fontSize: 12,
-                              height: 1.35)),
+                      child: Text(
+                        rule,
+                        style: const TextStyle(
+                          color: AppTheme.textMuted,
+                          fontSize: 12,
+                          height: 1.35,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -643,8 +742,11 @@ class _BattleIntroState extends State<_BattleIntro> {
               children: [
                 _hpPill('You', b.playerHealth, AppTheme.health),
                 const SizedBox(width: 10),
-                _hpPill('Enemy', b.enemyHealth,
-                    DominionStyle.of(Dominion.pyre).glow),
+                _hpPill(
+                  'Enemy',
+                  b.enemyHealth,
+                  DominionStyle.of(Dominion.pyre).glow,
+                ),
               ],
             ),
           ],
@@ -661,9 +763,14 @@ class _BattleIntroState extends State<_BattleIntro> {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: color.withValues(alpha: 0.6)),
       ),
-      child: Text('$who  $hp HP',
-          style: TextStyle(
-              color: color, fontSize: 11, fontWeight: FontWeight.w700)),
+      child: Text(
+        '$who  $hp HP',
+        style: TextStyle(
+          color: color,
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
 
@@ -678,7 +785,8 @@ class _BattleIntroState extends State<_BattleIntro> {
           color: Colors.black.withValues(alpha: 0.55),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-              color: const Color(0xFFC9A86A).withValues(alpha: 0.5)),
+            color: const Color(0xFFC9A86A).withValues(alpha: 0.5),
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -690,31 +798,39 @@ class _BattleIntroState extends State<_BattleIntro> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (line.speaker.isNotEmpty)
-                      Text(line.speaker.toUpperCase(),
-                          style: const TextStyle(
-                              color: Color(0xFFE6CE96),
-                              fontSize: 11,
-                              letterSpacing: 1.2,
-                              fontWeight: FontWeight.w800)),
-                    Text(line.text,
-                        style: TextStyle(
-                            fontFamily: 'EBGaramond',
-                            color: line.speaker.isEmpty
-                                ? AppTheme.textMuted
-                                : AppTheme.textPrimary,
-                            fontStyle: line.speaker.isEmpty
-                                ? FontStyle.italic
-                                : FontStyle.normal,
-                            fontSize: 14,
-                            height: 1.4)),
+                      Text(
+                        line.speaker.toUpperCase(),
+                        style: const TextStyle(
+                          color: Color(0xFFE6CE96),
+                          fontSize: 11,
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    Text(
+                      line.text,
+                      style: TextStyle(
+                        fontFamily: 'EBGaramond',
+                        color: line.speaker.isEmpty
+                            ? AppTheme.textMuted
+                            : AppTheme.textPrimary,
+                        fontStyle: line.speaker.isEmpty
+                            ? FontStyle.italic
+                            : FontStyle.normal,
+                        fontSize: 14,
+                        height: 1.4,
+                      ),
+                    ),
                   ],
                 ),
               ),
             if (!_preDone)
               const Align(
                 alignment: Alignment.centerRight,
-                child: Text('tap to continue  ▸',
-                    style: TextStyle(color: Color(0x88C9A86A), fontSize: 11)),
+                child: Text(
+                  'tap to continue  ▸',
+                  style: TextStyle(color: Color(0x88C9A86A), fontSize: 11),
+                ),
               ),
           ],
         ),
@@ -756,12 +872,14 @@ class _VictoryDialogState extends State<_VictoryDialog> {
   }
 
   void _speak() {
-    AudioManager.instance.speak(Narration.clipId(
-      widget.chapterId,
-      widget.stageIndex,
-      Narration.slotVictory,
-      _i,
-    ));
+    AudioManager.instance.speak(
+      Narration.clipId(
+        widget.chapterId,
+        widget.stageIndex,
+        Narration.slotVictory,
+        _i,
+      ),
+    );
   }
 
   @override
@@ -776,45 +894,60 @@ class _VictoryDialogState extends State<_VictoryDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('VICTORY',
-                style: TextStyle(
-                    color: Color(0xFFE3B341),
-                    fontSize: 18,
-                    letterSpacing: 4,
-                    fontWeight: FontWeight.w900)),
+            const Text(
+              'VICTORY',
+              style: TextStyle(
+                color: Color(0xFFE3B341),
+                fontSize: 18,
+                letterSpacing: 4,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
             const SizedBox(height: 14),
             if (line.speaker.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
-                child: Text(line.speaker.toUpperCase(),
-                    style: const TextStyle(
-                        color: Color(0xFFE6CE96),
-                        fontSize: 12,
-                        letterSpacing: 1.2,
-                        fontWeight: FontWeight.w800)),
+                child: Text(
+                  line.speaker.toUpperCase(),
+                  style: const TextStyle(
+                    color: Color(0xFFE6CE96),
+                    fontSize: 12,
+                    letterSpacing: 1.2,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
               ),
-            Text(line.text,
-                style: TextStyle(
-                    fontFamily: 'EBGaramond',
-                    color: line.speaker.isEmpty
-                        ? AppTheme.textMuted
-                        : AppTheme.textPrimary,
-                    fontStyle: line.speaker.isEmpty
-                        ? FontStyle.italic
-                        : FontStyle.normal,
-                    fontSize: 15,
-                    height: 1.45)),
+            Text(
+              line.text,
+              style: TextStyle(
+                fontFamily: 'EBGaramond',
+                color: line.speaker.isEmpty
+                    ? AppTheme.textMuted
+                    : AppTheme.textPrimary,
+                fontStyle: line.speaker.isEmpty
+                    ? FontStyle.italic
+                    : FontStyle.normal,
+                fontSize: 15,
+                height: 1.45,
+              ),
+            ),
             const SizedBox(height: 16),
             Row(
               children: [
-                const Icon(Icons.monetization_on,
-                    color: Color(0xFFE3B341), size: 16),
+                const Icon(
+                  Icons.monetization_on,
+                  color: Color(0xFFE3B341),
+                  size: 16,
+                ),
                 const SizedBox(width: 5),
-                Text('+${widget.reward} gold',
-                    style: const TextStyle(
-                        color: Color(0xFFF0E4C0),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700)),
+                Text(
+                  '+${widget.reward} gold',
+                  style: const TextStyle(
+                    color: Color(0xFFF0E4C0),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
@@ -831,17 +964,23 @@ class _VictoryDialogState extends State<_VictoryDialog> {
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 9),
+                      horizontal: 20,
+                      vertical: 9,
+                    ),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                          colors: [Color(0xFFC9A86A), Color(0xFF8A713A)]),
+                        colors: [Color(0xFFC9A86A), Color(0xFF8A713A)],
+                      ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text(last ? 'CONTINUE' : 'NEXT  ▸',
-                        style: const TextStyle(
-                            color: Color(0xFF1C1508),
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 1)),
+                    child: Text(
+                      last ? 'CONTINUE' : 'NEXT  ▸',
+                      style: const TextStyle(
+                        color: Color(0xFF1C1508),
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1,
+                      ),
+                    ),
                   ),
                 ),
               ],
