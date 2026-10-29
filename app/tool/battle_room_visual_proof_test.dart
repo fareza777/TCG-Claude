@@ -30,6 +30,11 @@ class _NoAds implements AdPlatform {
   Future<AdRewardedHandle?> loadRewarded(String id) async => null;
 }
 
+const proofVersion = String.fromEnvironment(
+  'PROOF_VERSION',
+  defaultValue: '0.2.3',
+);
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() async {
@@ -153,12 +158,12 @@ void main() {
     await capture(
       BattleRoomShopScreen(library: library, save: save, adService: ads),
       const Size(1120, 1180),
-      'battle-room-shop-0.2.2',
+      'battle-room-shop-$proofVersion',
     );
     await capture(
       BattleRoomShopScreen(library: library, save: save, adService: ads),
       const Size(390, 844),
-      'battle-room-shop-phone-0.2.2',
+      'battle-room-shop-phone-$proofVersion',
     );
     for (final room in BattleRooms.premium) {
       expect(
@@ -199,13 +204,13 @@ void main() {
       await capture(
         DuelScreen(controller: controller, enemyName: 'Tideglass Keeper'),
         const Size(390, 844),
-        'battle-room-${room.id}-0.2.2',
+        'battle-room-${room.id}-$proofVersion',
       );
       if (room.id == 'tideglass') {
         await capture(
           DuelScreen(controller: controller, enemyName: 'Tideglass Keeper'),
           const Size(1280, 720),
-          'battle-room-wide-0.2.2',
+          'battle-room-wide-$proofVersion',
         );
       }
       await tester.pumpWidget(const SizedBox.shrink());

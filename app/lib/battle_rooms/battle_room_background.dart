@@ -43,11 +43,11 @@ class BattleRoomBackground extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    const Color(0x990B0D12),
+                    const Color(0x6B0B0D12),
                     const Color(
                       0xFF0B0D12,
                     ).withValues(alpha: selected.centerShade),
-                    const Color(0xB80B0D12),
+                    const Color(0x8C0B0D12),
                   ],
                   stops: const [0, 0.5, 1],
                 ),

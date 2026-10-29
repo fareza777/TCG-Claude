@@ -1,0 +1,153 @@
+{
+  "version": "0.2.3+68",
+  "builtOn": "2026-10-29",
+  "sourceBaseRevision": "3fa5845a93cc7d225845e96600a67a4633523eb1",
+  "platforms": [
+    "Android APK",
+    "Android App Bundle",
+    "Web"
+  ],
+  "artifacts": [
+    {
+      "file": "shardfall-five-vows-0.2.3+68.apk",
+      "bytes": 225172284,
+      "sha256": "f32fef4170ec8887aab54c2466b44d4c57d266f4c2dc7ed13317b149cf377df2",
+      "matchedSourceAssets": 1181
+    },
+    {
+      "file": "shardfall-five-vows-0.2.3+68.aab",
+      "bytes": 225311603,
+      "sha256": "9f2be2aaab6ce1f441979a063928b0522995f7de2a28643ab857f8682fcce707",
+      "matchedSourceAssets": 1181
+    }
+  ],
+  "web": {
+    "directory": "C:\\TCG Claude\\app\\build\\releases\\five-vows-0.2.3+68\\web",
+    "files": 1537,
+    "matchedSourceAssets": 1181,
+    "version": {
+      "app_name": "shardfall",
+      "version": "0.2.3",
+      "build_number": "68",
+      "package_name": "shardfall"
+    }
+  },
+  "signing": {
+    "sameProductionCertificate": true,
+    "certificateSha256": "fead9fa6ccaca1ed91f08175d394378df0e7edbba219564ce472b6578d448d6b",
+    "apkVerified": true,
+    "aabVerified": true,
+    "apkPackage": "package: name='com.shardfall.shardfall' versionCode='68' versionName='0.2.3' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'"
+  },
+  "catalogs": {
+    "set02Sha256": "337f044c308c58f21c286af0e980a32dbbbc180365fb187ef45198eed0a18f63",
+    "sourceAndAppIdentical": true,
+    "packagedCopiesVerified": true,
+    "collectibles": 215,
+    "unchangedFrom021": true
+  },
+  "tests": {
+    "app": 307,
+    "engine": 97,
+    "backend": 32,
+    "voicePipeline": 3,
+    "abilityAudit": 7,
+    "total": 446,
+    "additionalVisualCaptureTask": 1,
+    "unchangedComponentResultsFrom022": [
+      "engine",
+      "backend",
+      "voicePipeline",
+      "abilityAudit"
+    ]
+  },
+  "staticAnalysis": {
+    "errors": 0,
+    "warnings": 0,
+    "appExistingInfos": 2,
+    "engineExistingInfos": 2
+  },
+  "assets": {
+    "collectibleArt": 215,
+    "chapterArt": 20,
+    "tokenArt": 4,
+    "voiceClips": 936,
+    "sourceArtVoiceAndCatalogsUnchangedFrom021": true,
+    "battleRoomImages": 4,
+    "battleRoomTotalBytes": 1569348,
+    "battleRoomDecodeWidth": 1024
+  },
+  "performance": {
+    "staticRoomImages": true,
+    "newBackgroundTickers": 0,
+    "healthUpdatesTested": 100,
+    "backgroundPictureRetained": true,
+    "additionalBackgroundPaints": 0,
+    "deviceFpsMeasured": false
+  },
+  "visualVerification": {
+    "method": "Actual Flutter widgets, bundled project fonts/assets, headless rendering",
+    "screenshots": 7,
+    "sizes": [
+      "390x844",
+      "1120x1180",
+      "1280x720"
+    ],
+    "longNameRegressionWidth": 320,
+    "overflowErrors": 0,
+    "browserVerifiedThisRelease": false,
+    "browserLimitation": "Not repeated for this Android-focused visual correction",
+    "fontLimitation": "Existing Unicode sword renders as a square in widget-test font fallback"
+  },
+  "story": {
+    "encounters": 140,
+    "baselineGames": 28000,
+    "finalAuditGames": 84000,
+    "allStalls": 0,
+    "frozenSourceHashesMatched": 33,
+    "setupSha256": "06058df8e9ed9a5dcacfa0d86c69dd80b28fde5f193084fd0605d893aca36da3",
+    "holdoutSeedBase": 2026102947,
+    "tacticianHoldout": {
+      "onboarding": [
+        72,
+        89
+      ],
+      "ordinary": [
+        59,
+        73
+      ],
+      "challenge": [
+        40,
+        64
+      ]
+    },
+    "pointEstimateOutliers": 6,
+    "humanWinRateClaimed": false,
+    "evidenceDirectory": "docs/expansion/story-difficulty-0.2.2",
+    "auditFrom022WithUnchangedSources": true
+  },
+  "providerCredentials": {
+    "knownKeysChecked": 2,
+    "matchesInProductSourcesOrReleases": 0
+  },
+  "localUserGeneratedPluginsEditPreservedByteForByte": true,
+  "checks": [
+    "Purchase/equip/save/cloud/backup/rapid-tap/failure paths tested",
+    "Every mode shares the cosmetic DuelScreen background",
+    "No card/engine/VO/narrative changes after Story audit freeze",
+    "Independent feature review and final responsive-layout review clean",
+    "All 1181 selected assets match in APK, AAB and Web",
+    "APK and AAB match existing production signing certificate",
+    "No remote deployment or store publication"
+  ],
+  "verificationLogsDirectory": "docs/expansion/verification-0.2.3",
+  "phone": {
+    "model": "2201117TY",
+    "installedVersion": "0.2.3",
+    "installedVersionCode": 68,
+    "installSucceeded": true,
+    "versionVerifiedViaPackageManager": true,
+    "visualQaStoppedAtUserRequest": true,
+    "furtherDeviceActions": false
+  }
+}

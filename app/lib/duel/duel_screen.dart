@@ -595,26 +595,21 @@ class _DuelScreenState extends State<DuelScreen>
 
   // ── middle: both arenas ──────────────────────────────────────────────
   Widget _battlefield() {
-    return Stack(
+    return Column(
       children: [
-        Positioned.fill(child: CustomPaint(painter: _BoardPainter())),
-        Column(
-          children: [
-            Expanded(child: _arenaRow(c.foe, enemySide: true)),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24),
-              height: 1,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Colors.transparent,
-                  AppTheme.panelBorder.withValues(alpha: 0.9),
-                  Colors.transparent,
-                ]),
-              ),
-            ),
-            Expanded(child: _arenaRow(c.me, enemySide: false)),
-          ],
+        Expanded(child: _arenaRow(c.foe, enemySide: true)),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 24),
+          height: 1,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Colors.transparent,
+              AppTheme.panelBorder.withValues(alpha: 0.5),
+              Colors.transparent,
+            ]),
+          ),
         ),
+        Expanded(child: _arenaRow(c.me, enemySide: false)),
       ],
     );
   }
@@ -1733,53 +1728,4 @@ class _DiscardFly {
   final int id;
   final bool fromTop;
   _DiscardFly(this.id, this.fromTop);
-}
-
-/// Subtle procedural battle mat: two facing arena rings with faint runes.
-class _BoardPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final cx = size.width / 2;
-    final cy = size.height / 2;
-
-    // central seam glow
-    final seam = Paint()
-      ..shader = const LinearGradient(
-        colors: [
-          Colors.transparent,
-          Color(0x22C9A86A),
-          Colors.transparent,
-        ],
-      ).createShader(Rect.fromLTWH(0, cy - 30, size.width, 60));
-    canvas.drawRect(Rect.fromLTWH(0, cy - 30, size.width, 60), seam);
-
-    // two facing elliptical arenas (enemy top, player bottom)
-    for (final sign in [-1.0, 1.0]) {
-      final zoneY = cy + sign * size.height * 0.24;
-      for (var i = 0; i < 3; i++) {
-        final rx = size.width * (0.30 - i * 0.06);
-        final ry = size.height * (0.11 - i * 0.02);
-        final ring = Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1
-          ..color = const Color(0xFFC9A86A)
-              .withValues(alpha: 0.06 - i * 0.015);
-        canvas.drawOval(
-            Rect.fromCenter(
-                center: Offset(cx, zoneY), width: rx * 2, height: ry * 2),
-            ring);
-      }
-    }
-
-    // faint radial vignette to focus the center
-    final vignette = Paint()
-      ..shader = RadialGradient(
-        colors: [Colors.transparent, Colors.black.withValues(alpha: 0.28)],
-        stops: const [0.6, 1],
-      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
-    canvas.drawRect(Offset.zero & size, vignette);
-  }
-
-  @override
-  bool shouldRepaint(covariant _BoardPainter oldDelegate) => false;
 }

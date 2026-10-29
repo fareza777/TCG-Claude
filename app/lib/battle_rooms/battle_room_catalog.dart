@@ -23,7 +23,7 @@ abstract final class BattleRooms {
     asset: 'assets/ui/battle_room_classic.webp',
     goldCost: 0,
     accent: 0xFFC9A86A,
-    centerShade: 0.29,
+    centerShade: 0.20,
   );
   static const premium = [
     BattleRoom(
@@ -33,7 +33,7 @@ abstract final class BattleRooms {
       asset: 'assets/ui/battle_room_moonroot.webp',
       goldCost: 600,
       accent: 0xFF8BC8AD,
-      centerShade: 0.18,
+      centerShade: 0.14,
     ),
     BattleRoom(
       id: 'emberforge',

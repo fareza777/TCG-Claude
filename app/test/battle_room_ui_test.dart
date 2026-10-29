@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -199,6 +200,78 @@ void main() {
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.text('Battle log'), findsOneWidget);
       await tester.pumpWidget(const SizedBox.shrink());
+    },
+  );
+  testWidgets(
+    'battle preserves the illustrated room pixels used by preview in portrait and landscape',
+    (tester) async {
+      for (final family in ['Cinzel', 'EBGaramond', 'serif', 'Georgia']) {
+        final asset = family == 'Cinzel' ? 'Cinzel' : 'EBGaramond';
+        await (FontLoader(
+          family,
+        )..addFont(rootBundle.load('assets/fonts/$asset.ttf'))).load();
+      }
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      const captureKey = ValueKey('room-pixel-proof');
+      Future<List<int>> pixels(Widget child) async {
+        await tester.pumpWidget(
+          RepaintBoundary(
+            key: captureKey,
+            child: MaterialApp(theme: AppTheme.build(), home: child),
+          ),
+        );
+        await tester.runAsync(() async {
+          final context = tester.element(find.byKey(captureKey));
+          await Future.wait(
+            tester
+                .widgetList<Image>(find.byType(Image))
+                .map((image) => precacheImage(image.image, context)),
+          );
+        });
+        await tester.pumpAndSettle();
+        final boundary = tester.renderObject<RenderRepaintBoundary>(
+          find.byKey(captureKey),
+        );
+        return (await tester.runAsync(() async {
+          final image = await boundary.toImage(pixelRatio: 1);
+          final data = await image.toByteData(
+            format: ui.ImageByteFormat.rawRgba,
+          );
+          image.dispose();
+          return data!.buffer.asUint8List();
+        }))!;
+      }
+
+      for (final size in [const Size(390, 844), const Size(1280, 720)]) {
+        await tester.binding.setSurfaceSize(size);
+        for (final room in BattleRooms.all) {
+          BattleRoomSelection.active.value = room;
+          final reference = await pixels(
+            Scaffold(body: BattleRoomBackground(room: room)),
+          );
+          final controller = _RefreshingDuel(
+            library.buildStarterDeck('VERDANCE'),
+          );
+          controller.awaitingMulligan = false;
+          final state = controller.state;
+          final actual = await pixels(DuelScreen(controller: controller));
+          // Empty enemy-side playing surface, away from cards and HUD. Extra
+          // battle-only shading used to flatten the illustrated room here.
+          for (final y in [125, 140, 155]) {
+            final x = size.width ~/ 2;
+            final offset = (y * size.width.toInt() + x) * 4;
+            expect(
+              actual.sublist(offset, offset + 4),
+              reference.sublist(offset, offset + 4),
+              reason: '${room.id} ${size.width}x${size.height} at $x,$y',
+            );
+          }
+          expect(controller.state, same(state));
+          await tester.pumpWidget(const SizedBox.shrink());
+          controller.dispose();
+        }
+      }
+      expect(tester.takeException(), isNull);
     },
   );
   testWidgets(
